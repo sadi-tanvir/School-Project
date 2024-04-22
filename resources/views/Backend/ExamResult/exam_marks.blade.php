@@ -233,7 +233,7 @@ $totalMarksSum = 0; // Initialize a variable to hold the sum
         </td>
         @foreach($shortCode as $code)
         <td class="px-6 py-4">
-            <input type="number" value=0 class="mark-input md:w-[120px] md:h-[30px] px-2 rounded-md" data-total="{{$code->total_mark}}" data-pass=" {{$code->pass_mark}}">
+            <input type="number" value=0 class="mark-input md:w-[120px] md:h-[30px] px-2 rounded-md" data-total="{{$code->total_mark}}" data-pass=" {{$code->pass_mark}}"  data-acceptance=" {{$code->acceptance}}">
         </td>
         @endforeach
         <td class="px-6 py-4">
@@ -411,11 +411,12 @@ $totalMarksSum = 0; // Initialize a variable to hold the sum
         var gradeSetupData = JSON.parse("{!! addslashes($gradeSetupData) !!}");
 
         $('.mark-input').on('input', function() {
-            var totalMarks = parseInt($(this).attr('data-total')) || 0;
-            var passMarks = parseInt($(this).attr('data-pass')) || 0;
-            var enteredMark = parseInt($(this).val()) || 0;
+            var totalMarks = parseFloat($(this).attr('data-total')) || 0;
             var totalMarksRow = 0;
+            var enteredMark = parseFloat($(this).val()) || 0;
+            //var mark = parseInt($(this).val()) || 0;
             var allMarksAbovePass = true;
+
             // Check if entered mark exceeds total marks
             if (enteredMark > totalMarks) {
                 $(this).val(0); // Reset input value to 0
@@ -423,23 +424,28 @@ $totalMarksSum = 0; // Initialize a variable to hold the sum
             }
 
 
-
-            // Iterate over all mark-input elements in the same row
+            // // Iterate over all mark-input elements in the same row
             $(this).closest('tr').find('.mark-input').each(function() {
-                var mark = parseInt($(this).val()) || 0;
+                var passMarks = parseFloat($(this).attr('data-pass')) || 0;
+                var mark = parseFloat($(this).val()) || 0;
                 totalMarksRow += mark;
+                console.log(passMarks);
+                console.log(mark);
 
                 // Check if any mark is below pass mark
                 if (mark < passMarks) {
                     allMarksAbovePass = false;
-                     // Exit the loop if any mark is below pass mark
+
+                    // Exit the loop if any mark is below pass mark
                 }
             });
 
             // If all marks are above or equal to pass mark, calculate grade
             if (allMarksAbovePass) {
+
                 calculateGrade($(this)); // Calculate grade
             } else {
+               
                 $(this).closest('tr').find('.grade').text('F');
                 $(this).closest('tr').find('.gpa').text('0');
             }
@@ -452,15 +458,23 @@ $totalMarksSum = 0; // Initialize a variable to hold the sum
         function calculateGrade(input) {
             var totalMarksRow = 0;
             input.closest('tr').find('.mark-input').each(function() {
-                totalMarksRow += parseInt($(this).val()) || 0;
+                
+                var dataacceptance = parseFloat($(this).attr('data-acceptance'));
+                console.log('acc',dataacceptance);
+                var mark=parseFloat($(this).val()) || 0;
+                mark=mark*dataacceptance;
+                totalMarksRow += mark;
+                console.log('acc',totalMarksRow);
+
             });
 
             var letterGrade = 'F'; // Initialize letter grade
             var GPA = 0; // Initialize GPA
-
+           
             // Compare totalMarksRow with mark_point_1st and mark_point_2nd from gradeSetupData
             gradeSetupData.forEach(function(gradeSetup) {
-                if (totalMarksRow >= gradeSetup.mark_point_1st && totalMarksRow < gradeSetup.mark_point_2nd) {
+                //console.log(totalMarksRow >= gradeSetup.mark_point_1st);
+                if (totalMarksRow >= gradeSetup.mark_point_1st && totalMarksRow <= gradeSetup.mark_point_2nd) {
                     letterGrade = gradeSetup.latter_grade;
                     GPA = gradeSetup.grade_point;
                 }
@@ -471,7 +485,7 @@ $totalMarksSum = 0; // Initialize a variable to hold the sum
             // Display the calculated GPA
             input.closest('tr').find('.gpa').text(GPA);
 
-            
+
         }
     });
 </script>

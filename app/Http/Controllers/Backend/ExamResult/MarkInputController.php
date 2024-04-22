@@ -140,7 +140,7 @@ class MarkInputController extends Controller
         if($data){
             return redirect()->back()->with('error', 'Exam already published');
         }
-        $student=Student::where('school_code', $school_code)->where('Class_name',$selectedClassName)->get();
+        $student=Student::where('school_code', $school_code)->where('Class_name',$selectedClassName)->where('group',$selectedGroupName)->where('section',$selectedSectionName)->where('shift',$selectedShiftName)->where('year',$selectedYear)->get();
         $classData = AddClass::where('action', 'approved')->where('school_code', $school_code)->get();
         $groupData = AddGroup::where('action', 'approved')->where('school_code', $school_code)->get();
         $sectionData = AddSection::where('action', 'approved')->where('school_code', $school_code)->get();

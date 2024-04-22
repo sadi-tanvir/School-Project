@@ -233,7 +233,7 @@ $totalMarksSum = 0; // Initialize a variable to hold the sum
         </td>
         @foreach($shortCode as $code)
         <td class="px-6 py-4">
-            <input type="number" class="mark-input md:w-[120px] md:h-[30px] px-2 rounded-md" data-total="{{$code->total_mark}} data-pass=" {{$code->pass_mark}}">
+            <input type="number" value=0 class="mark-input md:w-[120px] md:h-[30px] px-2 rounded-md" data-total="{{$code->total_mark}}" data-pass=" {{$code->pass_mark}}">
         </td>
         @endforeach
         <td class="px-6 py-4">
@@ -406,79 +406,74 @@ $totalMarksSum = 0; // Initialize a variable to hold the sum
 </script>
 
 <script>
-  $(document).ready(function() {
-    // Fetch GradeSetup data from PHP and store it in a JavaScript variable
-    var gradeSetupData = JSON.parse("{!! addslashes($gradeSetupData) !!}");
+    $(document).ready(function() {
+        // Fetch GradeSetup data from PHP and store it in a JavaScript variable
+        var gradeSetupData = JSON.parse("{!! addslashes($gradeSetupData) !!}");
 
-    $('.mark-input').on('input', function() {
-        var totalMarks = parseInt($(this).attr('data-total')) || 0;
+        $('.mark-input').on('input', function() {
+            var totalMarks = parseInt($(this).attr('data-total')) || 0;
             var passMarks = parseInt($(this).attr('data-pass')) || 0;
-        // Get the entered mark value
-        var enteredMark = parseInt($(this).val()) || 0;
-
-        // Check if entered mark exceeds total marks
-        if (enteredMark > totalMarks) {
-            $(this).val(0); // Reset input value to 0
-            enteredMark = 0;
-        }
-
-        // Check if entered mark is below pass mark
-       
-        input.closest('tr').find('.mark-input').each(function() {
             var enteredMark = parseInt($(this).val()) || 0;
-            if(enteredMark<passMarks){
-                var totalMarksRow = 0;
-        input.closest('tr').find('.mark-input').each(function() {
-            totalMarksRow += parseInt($(this).val()) || 0;
-        });
+            var totalMarksRow = 0;
+            var allMarksAbovePass = true;
+            // Check if entered mark exceeds total marks
+            if (enteredMark > totalMarks) {
+                $(this).val(0); // Reset input value to 0
+                enteredMark = 0;
+            }
 
-        // Display total marks for the current row
-        input.closest('tr').find('.total-marks').text(totalMarksRow);
+
+
+            // Iterate over all mark-input elements in the same row
+            $(this).closest('tr').find('.mark-input').each(function() {
+                var mark = parseInt($(this).val()) || 0;
+                totalMarksRow += mark;
+
+                // Check if any mark is below pass mark
+                if (mark < passMarks) {
+                    allMarksAbovePass = false;
+                     // Exit the loop if any mark is below pass mark
+                }
+            });
+
+            // If all marks are above or equal to pass mark, calculate grade
+            if (allMarksAbovePass) {
+                calculateGrade($(this)); // Calculate grade
+            } else {
+                $(this).closest('tr').find('.grade').text('F');
+                $(this).closest('tr').find('.gpa').text('0');
+            }
 
             // Display total marks for the current row
-            input.closest('tr').find('.total-marks').text(totalMarksRow);
+            $(this).closest('tr').find('.total-marks').text(totalMarksRow);
+        });
+
+
+        function calculateGrade(input) {
+            var totalMarksRow = 0;
+            input.closest('tr').find('.mark-input').each(function() {
+                totalMarksRow += parseInt($(this).val()) || 0;
+            });
+
+            var letterGrade = 'F'; // Initialize letter grade
+            var GPA = 0; // Initialize GPA
+
+            // Compare totalMarksRow with mark_point_1st and mark_point_2nd from gradeSetupData
+            gradeSetupData.forEach(function(gradeSetup) {
+                if (totalMarksRow >= gradeSetup.mark_point_1st && totalMarksRow < gradeSetup.mark_point_2nd) {
+                    letterGrade = gradeSetup.latter_grade;
+                    GPA = gradeSetup.grade_point;
+                }
+            });
+
+            // Display the calculated grade
             input.closest('tr').find('.grade').text(letterGrade);
             // Display the calculated GPA
             input.closest('tr').find('.gpa').text(GPA);
-    
-            }
-            else {
-    
-                calculateGrade($(this)); 
+
             
-            }
-        });
-
-         
+        }
     });
-
-    function calculateGrade(input) {
-        var totalMarksRow = 0;
-        input.closest('tr').find('.mark-input').each(function() {
-            totalMarksRow += parseInt($(this).val()) || 0;
-        });
-
-        // Display total marks for the current row
-        input.closest('tr').find('.total-marks').text(totalMarksRow);
-
-        var letterGrade = 'F'; // Initialize letter grade
-        var GPA = 0; // Initialize GPA
-
-        // Compare totalMarksRow with mark_point_1st and mark_point_2nd from gradeSetupData
-        gradeSetupData.forEach(function(gradeSetup) {
-            if (totalMarksRow >= gradeSetup.mark_point_1st && totalMarksRow < gradeSetup.mark_point_2nd) {
-                letterGrade = gradeSetup.latter_grade;
-                GPA = gradeSetup.grade_point;
-            }
-        });
-
-        // Display the calculated grade
-        input.closest('tr').find('.grade').text(letterGrade);
-        // Display the calculated GPA
-        input.closest('tr').find('.gpa').text(GPA);
-    }
-});
-
 </script>
 
 

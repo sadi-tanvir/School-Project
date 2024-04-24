@@ -154,6 +154,9 @@ Exam Marks
 @php
 $totalMarksSum = 0; // Initialize a variable to hold the sum
 @endphp
+ <form action="{{ route('exam.marks') }}" method="post" >
+
+@csrf
 <table class="w-full text-sm text-left rtl:text-right text-black dark:text-blue-100">
     <thead class="text-xs text-white uppercase bg-blue-600 border-b border-blue-400 dark:text-white">
         <tr>
@@ -207,50 +210,70 @@ $totalMarksSum = 0; // Initialize a variable to hold the sum
             </th>
         </tr>
     </thead>
+   
     @foreach($student as $key=>$data)
 
     <tbody>
         <th scope="row" class="px-6 py-4 font-medium  text-black whitespace-nowrap ">
             {{$key + 1}}
+            <input class="hidden" value="{{$data->id}}" name="key[{{ $data->id }}]" type="text">
         </th>
         <td class="px-6 py-4">
+            <input type="text" class="hidden" name="name[{{ $data->id }}]" value="{{$data->name}}">
             {{$data->name}}
         </td>
         <td class="px-6 py-4">
             {{$data->student_id}}
+            <input type="text" class="hidden" name="student_id[{{ $data->id }}]" value=" {{$data->student_id}}">
         </td>
         <td class="px-6 py-4">
             {{$data->Class_name}}
+           
         </td>
         <td class="px-6 py-4">
             {{$data->student_roll}}
+            <input type="text" class="hidden" name="student_roll[{{ $data->id }}]" value="{{$data->student_roll}}">
         </td>
         <td class="px-6 py-4">
             {{$selectedSubjectName}}
+            <input type="text" class="hidden" name="subject" value="{{$selectedSubjectName}}">
         </td>
         <td class="px-6 py-4">
             {{$totalMarksSum}}
+            <input type="text" class="hidden" name="full_marks[{{ $data->id }}]" value="{{$totalMarksSum}}">
         </td>
         @foreach($shortCode as $code)
         <td class="px-6 py-4">
-            <input type="number" value=0 class="mark-input md:w-[120px] md:h-[30px] px-2 rounded-md" data-total="{{$code->total_mark}}" data-pass=" {{$code->pass_mark}}"  data-acceptance=" {{$code->acceptance}}">
+            <input type="number" name="short_marks[{{$code->short_code}}][{{$data->id}}]" value=0 class="mark-input md:w-[120px] md:h-[30px] px-2 rounded-md" data-total="{{$code->total_mark}}" data-pass=" {{$code->pass_mark}}"  data-acceptance=" {{$code->acceptance}}">
+            
         </td>
         @endforeach
         <td class="px-6 py-4">
             <span class="total-marks">0</span>
+            <input type="text" class="hidden total-marks" value="0" name="total_marks[{{$data->id}}]" >
         </td>
 
         <td class="px-6 py-4  ">
             <!-- <input type="number" class="mark-input row-input md:w-[120px] md:h-[30px] px-2 rounded-md" data-total="{{$code->total_mark}}" data-pass="{{$code->pass_mark}}"> -->
 
-            <span class="grade">F</span>
+            <span class="grade" >F</span>
+            <input type="text" class="hidden grade-input" value="F" name="grade[{{ $data->id }}]" >
+            
         </td>
         <td class="px-6 py-4 ">
             <span class="gpa">0</span>
+            <input type="text" class="hidden gpa-input" value="0" name="gpa[{{ $data->id }}]" >
         </td>
 
         <td class="px-6 py-4">
-            <input type="checkbox" name="id[{{ $data->id }}]" value="{{ $data->id }}" class="row-checkbox" data-row-id="{{ $data->id }}">
+            <input type="checkbox" name="status[{{ $data->id }}]"  value="absent" class="row-checkbox" >
+            <input type="text" class="hidden "  value="{{$selectedGroupName}}"  name="group" >
+            <input type="text" class="hidden "  value="{{$selectedClassName}}"  name="class" >
+            <input type="text" class="hidden"  value="{{$selectedSectionName}}" name="section" >
+            <input type="text" class="hidden "  value="{{$selectedShiftName}}" name="shift" >
+            <input type="text" class="hidden "  value="{{$selectedExamName}}" name="exam" >
+            <input type="text" class="hidden"  value="{{$selectedYear}}" name="year" >
+            <input type="text" class="hidden"  value="{{$school_code}}" name="school_code" >
         </td>
 
 
@@ -272,13 +295,14 @@ $totalMarksSum = 0; // Initialize a variable to hold the sum
             </div>
 
             <div class=" flex justify-between gap-5">
-                <input class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="submit" value="Save">
+                <input class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="submit">
                 <a class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" href="/dashboard/{{$school_code}}"><i class="fa fa-times"></i> Close</a>
             </div>
 
         </div>
     </div>
 </div>
+</form>
 <script>
     document.getElementById('generateExcelForm').addEventListener('submit', function(event) {
         event.preventDefault();
@@ -429,8 +453,8 @@ $totalMarksSum = 0; // Initialize a variable to hold the sum
                 var passMarks = parseFloat($(this).attr('data-pass')) || 0;
                 var mark = parseFloat($(this).val()) || 0;
                 totalMarksRow += mark;
-                console.log(passMarks);
-                console.log(mark);
+                // console.log(passMarks);
+                // console.log(mark);
 
                 // Check if any mark is below pass mark
                 if (mark < passMarks) {
@@ -447,11 +471,14 @@ $totalMarksSum = 0; // Initialize a variable to hold the sum
             } else {
                
                 $(this).closest('tr').find('.grade').text('F');
+                $(this).closest('tr').find('.grade-input').val('F');
                 $(this).closest('tr').find('.gpa').text('0');
+                $(this).closest('tr').find('.gpa-input').val('0');
             }
 
             // Display total marks for the current row
             $(this).closest('tr').find('.total-marks').text(totalMarksRow);
+            $(this).closest('tr').find('.total-marks').val(totalMarksRow);
         });
 
 
@@ -478,12 +505,16 @@ $totalMarksSum = 0; // Initialize a variable to hold the sum
                     letterGrade = gradeSetup.latter_grade;
                     GPA = gradeSetup.grade_point;
                 }
+            
             });
 
             // Display the calculated grade
             input.closest('tr').find('.grade').text(letterGrade);
             // Display the calculated GPA
             input.closest('tr').find('.gpa').text(GPA);
+            //var gpaValue = GPA; // Use the calculated GPA directly
+    input.closest('tr').find('.gpa-input').val(GPA);
+    input.closest('tr').find('.grade-input').val(letterGrade);
 
 
         }

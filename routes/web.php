@@ -285,6 +285,7 @@ Route::get('/monthlyPaidDetails/{schoolCode}', [MonthlyPaidDetailsController::cl
     Route::post('/exam-marks/get-exams/{schoolCode}', [MarkInputController::class, 'classExam'])->name('exam-marks.get-exams');
     Route::post('/exam-marks/get-subjects/{schoolCode}', [MarkInputController::class, 'subject'])->name('exam-marks.get-subjects');
     Route::get('/findData/{schoolCode}', [MarkInputController::class, 'finData'])->name('findData');
+    Route::post('/exam-marks', [MarkInputController::class, 'marksInput'])->name('exam.marks');
 
     Route::get('/exam_process/{schoolCode}', [ExamProcessController::class, 'exam_process']);
     Route::get('/getStudents/{schoolCode}/{class}/{group}/{section}', [ExamProcessController::class, 'getStudents']);

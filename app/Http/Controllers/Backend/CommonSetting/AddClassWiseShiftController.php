@@ -77,7 +77,7 @@ class AddClassWiseShiftController extends Controller
         $classWiseShift->save();
 
         // return redirect()->back()->with('success', 'class wise shift added successfully!');
-        return redirect()->route('add.class.wise.shift')->with('success', 'Class wise shift added successfully!')->with('class_name', $request->class_name);
+        return redirect()->route('add.class.wise.shift',$schoolCode)->with('success', 'Class wise shift added successfully!')->with('class_name', $request->class_name);
     }
 
     public function delete_add_class_wise_shift($id)

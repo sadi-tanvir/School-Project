@@ -281,8 +281,7 @@ Exam Marks
                             <div class="w-full ">
                                 <div class="flex justify-around">
                                     <div class=" flex justify-between gap-5 ">
-                                        <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Blank
-                                            Page</button>
+                                    
                                         <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Print
                                             Mark Page</button>
         
@@ -297,6 +296,11 @@ Exam Marks
                             </div>
                         </div>
                     </form>
+                    <form action="{{ route('downloadExcel.mark') }}" method="post">
+                                        @csrf
+                                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Blank
+                                            Page</button>
+                                    </form>
                 @endif
 
  @else
@@ -411,7 +415,7 @@ Exam Marks
                                     <input type="text" class="hidden grade-input" value="F" name="grade[{{ $data->id }}]" >
                                 </td>
                                 <td class="px-6 py-4 ">
-                                    <span class="gpa">0</span>
+                                    <span class="gpa">{{$data->gpa}}</span>
                                     <input type="text" class="hidden gpa-input" value="0" name="gpa[{{ $data->id }}]" >
                                 </td>
         
@@ -423,6 +427,7 @@ Exam Marks
                                     <input type="text" class="hidden "  value="{{$selectedShiftName}}" name="shift" >
                                     <input type="text" class="hidden "  value="{{$selectedExamName}}" name="exam" >
                                     <input type="text" class="hidden"  value="{{$selectedYear}}" name="year" >
+                                   
                                     <input type="text" class="hidden"  value="{{$school_code}}" name="school_code" >
                                 </td>
                             </tr>
@@ -437,8 +442,7 @@ Exam Marks
         <div class="w-full ">
             <div class="flex justify-around">
                 <div class=" flex justify-between gap-5 ">
-                    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Blank
-                        Page</button>
+                
                     <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Print
                         Mark Page</button>
 
@@ -453,9 +457,22 @@ Exam Marks
         </div>
         </div>
  </form>
-            
-        
-        
+
+                                <form action="{{ route('exam_mark_print',$school_code) }}">
+                                        @csrf
+                                    <input type="text" class="hidden "  value="{{$selectedSubjectName}}"  name="subject" >
+                                    <input type="text" class="hidden "  value="{{$selectedGroupName}}"  name="group" >
+                                    <input type="text" class="hidden "  value="{{$selectedClassName}}"  name="class_name" >
+                                    <input type="text" class="hidden"  value="{{$selectedSectionName}}" name="section" >
+                                    <input type="text" class="hidden "  value="{{$selectedShiftName}}" name="shift" >
+                                    <input type="text" class="hidden "  value="{{$selectedExamName}}" name="exam" >
+                                    <input type="text" class="hidden"  value="{{$selectedYear}}" name="year" >
+                                    <input type="text" class="hidden"  value="{{$school_code}}" name="school_code" >
+                                    <input type="text" class="hidden" name="full_marks" value="{{$totalMarksSum}}">
+                                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Blank
+                                            Page</button>
+                                </form>
+    
 @endif
  
 

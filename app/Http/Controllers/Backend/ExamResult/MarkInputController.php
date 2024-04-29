@@ -46,6 +46,7 @@ class MarkInputController extends Controller
         return view('/Backend/ExamResult/exam_marks', compact('classData', 'groupData', 'sectionData', 'shiftData', 'subjectData', 'classExamData', 'academicYearData', 'student', 'gradeSetupData', 'markInputData', 'markInputs'));
     }
 
+
     public function getGroups(Request $request, $school_code)
     {
         $class = $request->class;
@@ -217,8 +218,8 @@ class MarkInputController extends Controller
     }
 
 
-    public function printBlankExam(Request $request,$school_code)
-    {
+
+    public function printBlankExam(Request $request,$school_code){
     $selectedClassName = $request->input('class_name');
     $selectedGroupName = $request->input('group');
     $selectedSectionName = $request->input('section');
@@ -245,68 +246,69 @@ return view('/Backend/ExamResult/exam_marks_print',compact('selectedClassName','
 
 
     
-    public function downloadExcel(Request $request)
-    {
-        // Retrieve inputs from the request
-        $selectedClassName = $request->input('class_name');
-        $selectedGroupName = $request->input('group');
-        $selectedSectionName = $request->input('section');
-        $selectedShiftName = $request->input('shift');
-        $selectedSubjectName = $request->input('subject');
-        $selectedExamName = $request->input('exam');
-        $selectedYear = $request->input('year');
-        $shortCodes = $request->input('shortCode');
-        $fullMarks = $request->input('full_marks');
-        $totalMarks = $request->input('total_mark');
-        $passMarks = $request->input('pass_mark');
-        // dd($passMarks);
-        if ($shortCodes === null || empty($shortCodes) ||
-            $totalMarks === null || empty($totalMarks) ||
-            $passMarks === null || empty($passMarks)) {
-            return response()->json(['error' => 'Short codes, total marks, or pass marks are missing or empty.']);
-        }
-        // Instantiate the Spreadsheet object
-        $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
+public function downloadExcel(Request $request)
+{
+    // Retrieve inputs from the request
+    $selectedClassName = $request->input('class_name');
+    $selectedGroupName = $request->input('group');
+    $selectedSectionName = $request->input('section');
+    $selectedShiftName = $request->input('shift');
+    $selectedSubjectName = $request->input('subject');
+    $selectedExamName = $request->input('exam');
+    $selectedYear = $request->input('year');
+    $shortCodes = $request->input('shortCode');
+    $fullMarks = $request->input('full_marks');
+    $totalMarks = $request->input('total_mark');
+    $passMarks = $request->input('pass_mark');
+    // dd($passMarks);
+    if ($shortCodes === null || empty($shortCodes) ||
+        $totalMarks === null || empty($totalMarks) ||
+        $passMarks === null || empty($passMarks)) {
+        return response()->json(['error' => 'Short codes, total marks, or pass marks are missing or empty.']);
+    }
+    // Instantiate the Spreadsheet object
+    $spreadsheet = new Spreadsheet();
+    $sheet = $spreadsheet->getActiveSheet();
 
-        // Set headers
-        $sheet->setCellValue('A1', 'SL');
-        $sheet->setCellValue('B1', 'Student Name');
-        $sheet->setCellValue('C1', 'Student ID');
-        $sheet->setCellValue('D1', 'Full Marks');
-        $sheet->setCellValue('E1', 'T.Marks');
+    // Set headers
+    $sheet->setCellValue('A1', 'SL');
+    $sheet->setCellValue('B1', 'Student Name');
+    $sheet->setCellValue('C1', 'Student ID');
+    $sheet->setCellValue('D1', 'Full Marks');
+    $sheet->setCellValue('E1', 'T.Marks');
+    $columnIndex = 6;
+    foreach ($shortCodes as $index => $code) {
+        $columnLetter = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($columnIndex);
+        $sheet->setCellValue($columnLetter . '1', $code . '=' . $totalMarks[$index] . '/' . $passMarks[$index]);
+        $columnIndex++;
+    }
+    $students = Student::where('Class_name', $selectedClassName)
+                        ->where('group', $selectedGroupName)
+                        ->where('section', $selectedSectionName)
+                        ->where('shift', $selectedShiftName)
+                        ->where('year', $selectedYear)
+                        ->get();
+    $row = 2;
+    foreach ($students as $key => $student) {
+        $sheet->setCellValue('A' . $row, $key + 1);
+        $sheet->setCellValue('B' . $row, $student->name);
+        $sheet->setCellValue('C' . $row, $student->student_id);
+        $sheet->setCellValue('D' . $row, $fullMarks);
         $columnIndex = 6;
         foreach ($shortCodes as $index => $code) {
             $columnLetter = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($columnIndex);
-            $sheet->setCellValue($columnLetter . '1', $code . '=' . $totalMarks[$index] . '/' . $passMarks[$index]);
+            $studentMarks = ''; 
+            $sheet->setCellValue($columnLetter . $row, $studentMarks);
             $columnIndex++;
         }
-        $students = Student::where('Class_name', $selectedClassName)
-                            ->where('group', $selectedGroupName)
-                            ->where('section', $selectedSectionName)
-                            ->where('shift', $selectedShiftName)
-                            ->where('year', $selectedYear)
-                            ->get();
-        $row = 2;
-        foreach ($students as $key => $student) {
-            $sheet->setCellValue('A' . $row, $key + 1);
-            $sheet->setCellValue('B' . $row, $student->name);
-            $sheet->setCellValue('C' . $row, $student->student_id);
-            $sheet->setCellValue('D' . $row, $fullMarks);
-            $columnIndex = 6;
-            foreach ($shortCodes as $index => $code) {
-                $columnLetter = \PhpOffice\PhpSpreadsheet\Cell\Coordinate::stringFromColumnIndex($columnIndex);
-                $studentMarks = ''; 
-                $sheet->setCellValue($columnLetter . $row, $studentMarks);
-                $columnIndex++;
-            }
-            $row++;
-        }
-        $fileName = 'Mark_input.xlsx';
-        $writer = new Xlsx($spreadsheet);
-        $writer->save($fileName);
-        return response()->download($fileName)->deleteFileAfterSend(true);
+        $row++;
     }
+    $fileName = 'Mark_input.xlsx';
+    $writer = new Xlsx($spreadsheet);
+    $writer->save($fileName);
+    return response()->download($fileName)->deleteFileAfterSend(true);
+}
 
 
 }
+

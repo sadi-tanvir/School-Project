@@ -47,12 +47,6 @@ class MarkInputController extends Controller
     }
 
 
-
-
-
-
-    //Asma
-
     public function getGroups(Request $request, $school_code)
     {
         $class = $request->class;
@@ -224,6 +218,7 @@ class MarkInputController extends Controller
     }
 
 
+
     public function printBlankExam(Request $request,$school_code){
     $selectedClassName = $request->input('class_name');
     $selectedGroupName = $request->input('group');
@@ -316,3 +311,4 @@ public function downloadExcel(Request $request)
 
 
 }
+

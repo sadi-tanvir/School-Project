@@ -64,6 +64,7 @@ use App\Http\Controllers\Backend\Teacher\TeacherController;
 use App\Http\Controllers\Frontend\Auth\AuthController;
 use App\Http\Controllers\Backend\ExamResult\ExamResultController;
 use App\Http\Controllers\Backend\ExamResult\ExamProcessController;
+use App\Http\Controllers\Backend\ExamResult\ExamMarksDeleteController;
 
 use App\Http\Controllers\Backend\ExamSetting\AddGradePointController;
 use App\Http\Controllers\Backend\ExamSetting\AddShortCodeController;
@@ -286,13 +287,15 @@ Route::get('/monthlyPaidDetails/{schoolCode}', [MonthlyPaidDetailsController::cl
     Route::post('/exam-marks/get-subjects/{schoolCode}', [MarkInputController::class, 'subject'])->name('exam-marks.get-subjects');
     Route::get('/findData/{schoolCode}', [MarkInputController::class, 'finData'])->name('findData');
     Route::post('/exam-marks', [MarkInputController::class, 'marksInput'])->name('exam.marks');
+    Route::put('/update-mark-input', [MarkInputController::class,'updateMarkInput'])->name('update.mark.input');
 
     Route::get('/exam_process/{schoolCode}', [ExamProcessController::class, 'exam_process']);
     Route::get('/getStudents/{schoolCode}/{class}/{group}/{section}', [ExamProcessController::class, 'getStudents']);
     Route::get('/exam_excel/{schoolCode}', [ExamResultController::class, 'exam_excel']);
-    Route::get('/exam_marks_delete/{schoolCode}', [ExamResultController::class, 'exam_marks_delete']);
+    Route::get('/exam_marks_delete/{schoolCode}', [ExamMarksDeleteController::class, 'exam_marks_delete']);
+    Route::put('/deleteMarks/{schoolCode}', [ExamMarksDeleteController::class, 'deleteMarks'])->name('exam-marks.delete');
+    Route::get('/getData/{schoolCode}', [ExamMarksDeleteController::class, 'finData'])->name('getData');
     Route::get('/exam_sms/{schoolCode}', [ExamResultController::class, 'exam_sms']);
-
     // exam-report
     Route::get('/progressReport/{schoolCode}', [ReportsExamsReportsController::class, 'progressReport']);
     Route::get('/exam-failList/{schoolCode}', [ReportsExamsReportsController::class, 'failList1']);

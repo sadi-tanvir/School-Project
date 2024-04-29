@@ -149,160 +149,342 @@ Exam Marks
 
 
 <hr>
+@if(!$markInputData)
+@if($student != null)
+<form action="{{ route('exam.marks') }}" method="post">
+    @csrf
+    <table class="w-full text-sm text-left rtl:text-right text-black dark:text-blue-100">
+        <thead class="text-xs text-white uppercase bg-blue-600 border-b border-blue-400 dark:text-white">
+            <tr>
+                <th scope="col" class="px-6 py-3 bg-blue-500">
+                    SL
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Student Name
+                </th>
+                <th scope="col" class="px-6 py-3 bg-blue-500">
+                    Student ID
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Class
+                </th>
+                <th scope="col" class="px-6 py-3 bg-blue-500">
+                    Roll
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Subject
+                </th>
+                <th scope="col" class="px-6 py-3 bg-blue-500">
+                    Full Marks
+                </th>
+                @php
+                $totalMarksSum = 0;
+                @endphp
 
-@if($student!=null)
-@php
-$totalMarksSum = 0; // Initialize a variable to hold the sum
-@endphp
- <form action="{{ route('exam.marks') }}" method="post" >
+                @foreach($shortCode as $code)
+                @php
+                $totalMarksSum += $code->total_mark; // Add each total mark to the sum
+                @endphp
 
-@csrf
-<table class="w-full text-sm text-left rtl:text-right text-black dark:text-blue-100">
-    <thead class="text-xs text-white uppercase bg-blue-600 border-b border-blue-400 dark:text-white">
-        <tr>
-            <th scope="col" class="px-6 py-3 bg-blue-500">
-                SL
-            </th>
-            <th scope="col" class="px-6 py-3">
-                Student Name
-            </th>
-            <th scope="col" class="px-6 py-3 bg-blue-500">
-                Student ID
-            </th>
-            <th scope="col" class="px-6 py-3">
-                Class
-            </th>
-            <th scope="col" class="px-6 py-3 bg-blue-500">
-                Roll
-            </th>
-            <th scope="col" class="px-6 py-3">
-                Subject
-            </th>
-            <th scope="col" class="px-6 py-3 bg-blue-500">
-                Full Marks
-            </th>
-            @php
-            $totalMarksSum = 0;
-            @endphp
+                <th scope="col" class="px-6 py-3">
+                    {{$code->short_code}} = {{$code->total_mark}}/{{$code->pass_mark}}
+                </th>
+                @endforeach
 
+                <th scope="col" class="px-6 py-3 bg-blue-500">
+                    T. Marks
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Grade
+                </th>
+                <th scope="col" class="px-6 py-3 bg-blue-500">
+                    GPA
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Absent
+                </th>
+            </tr>
+        </thead>
+
+        @foreach($student as $key => $data)
+
+        <tbody>
+            <th scope="row" class="px-6 py-4 font-medium  text-black whitespace-nowrap ">
+                {{$key + 1}}
+                <input class="hidden" value="{{$data->id}}" name="key[{{ $data->id }}]" type="text">
+            </th>
+            <td class="px-6 py-4">
+                <input type="text" class="hidden" name="name[{{ $data->id }}]" value="{{$data->name}}">
+                {{$data->name}}
+            </td>
+            <td class="px-6 py-4">
+                {{$data->student_id}}
+                <input type="text" class="hidden" name="student_id[{{ $data->id }}]" value=" {{$data->student_id}}">
+            </td>
+            <td class="px-6 py-4">
+                {{$data->Class_name}}
+            </td>
+            <td class="px-6 py-4">
+                {{$data->student_roll}}
+                <input type="text" class="hidden" name="student_roll[{{ $data->id }}]" value="{{$data->student_roll}}">
+            </td>
+            <td class="px-6 py-4">
+                {{$selectedSubjectName}}
+                <input type="text" class="hidden" name="subject" value="{{$selectedSubjectName}}">
+            </td>
+            <td class="px-6 py-4">
+                {{$totalMarksSum}}
+                <input type="text" class="hidden" name="full_marks[{{ $data->id }}]" value="{{$totalMarksSum}}">
+            </td>
             @foreach($shortCode as $code)
-            @php
-            $totalMarksSum += $code->total_mark; // Add each total mark to the sum
+            <td class="px-6 py-4">
+                <input type="number" name="short_marks[{{$code->short_code}}][{{$data->id}}]" value=0 class="mark-input md:w-[120px] md:h-[30px] px-2 rounded-md" data-total="{{$code->total_mark}}" data-pass=" {{$code->pass_mark}}" data-acceptance=" {{$code->acceptance}}">
 
-            @endphp
-
-            <th scope="col" class="px-6 py-3">
-                {{$code->short_code}} = {{$code->total_mark}}/{{$code->pass_mark}}
-            </th>
+            </td>
             @endforeach
+            <td class="px-6 py-4">
+                <span class="total-marks">0</span>
+                <input type="text" class="hidden total-marks" value="0" name="total_marks[{{$data->id}}]">
+            </td>
 
-            <th scope="col" class="px-6 py-3 bg-blue-500">
-                T. Marks
-            </th>
-            <th scope="col" class="px-6 py-3">
-                Grade
-            </th>
-            <th scope="col" class="px-6 py-3 bg-blue-500">
-                GPA
-            </th>
-            <th scope="col" class="px-6 py-3">
-                Absent
-            </th>
-        </tr>
-    </thead>
-   
-    @foreach($student as $key=>$data)
+            <td class="px-6 py-4  ">
+                <!-- <input type="number" class="mark-input row-input md:w-[120px] md:h-[30px] px-2 rounded-md" data-total="{{$code->total_mark}}" data-pass="{{$code->pass_mark}}"> -->
 
-    <tbody>
-        <th scope="row" class="px-6 py-4 font-medium  text-black whitespace-nowrap ">
-            {{$key + 1}}
-            <input class="hidden" value="{{$data->id}}" name="key[{{ $data->id }}]" type="text">
-        </th>
-        <td class="px-6 py-4">
-            <input type="text" class="hidden" name="name[{{ $data->id }}]" value="{{$data->name}}">
-            {{$data->name}}
-        </td>
-        <td class="px-6 py-4">
-            {{$data->student_id}}
-            <input type="text" class="hidden" name="student_id[{{ $data->id }}]" value=" {{$data->student_id}}">
-        </td>
-        <td class="px-6 py-4">
-            {{$data->Class_name}}
-           
-        </td>
-        <td class="px-6 py-4">
-            {{$data->student_roll}}
-            <input type="text" class="hidden" name="student_roll[{{ $data->id }}]" value="{{$data->student_roll}}">
-        </td>
-        <td class="px-6 py-4">
-            {{$selectedSubjectName}}
-            <input type="text" class="hidden" name="subject" value="{{$selectedSubjectName}}">
-        </td>
-        <td class="px-6 py-4">
-            {{$totalMarksSum}}
-            <input type="text" class="hidden" name="full_marks[{{ $data->id }}]" value="{{$totalMarksSum}}">
-        </td>
-        @foreach($shortCode as $code)
-        <td class="px-6 py-4">
-            <input type="number" name="short_marks[{{$code->short_code}}][{{$data->id}}]" value=0 class="mark-input md:w-[120px] md:h-[30px] px-2 rounded-md" data-total="{{$code->total_mark}}" data-pass=" {{$code->pass_mark}}"  data-acceptance=" {{$code->acceptance}}">
-            
-        </td>
+                <span class="grade">F</span>
+                <input type="text" class="hidden grade-input" value="F" name="grade[{{ $data->id }}]">
+
+            </td>
+            <td class="px-6 py-4 ">
+                <span class="gpa">0</span>
+                <input type="text" class="hidden gpa-input" value="0" name="gpa[{{ $data->id }}]">
+            </td>
+
+            <td class="px-6 py-4">
+                <input type="checkbox" name="status[{{ $data->id }}]" value="absent" class="row-checkbox">
+                <input type="text" class="hidden " value="{{$selectedGroupName}}" name="group">
+                <input type="text" class="hidden " value="{{$selectedClassName}}" name="class">
+                <input type="text" class="hidden" value="{{$selectedSectionName}}" name="section">
+                <input type="text" class="hidden " value="{{$selectedShiftName}}" name="shift">
+                <input type="text" class="hidden " value="{{$selectedExamName}}" name="exam">
+                <input type="text" class="hidden" value="{{$selectedYear}}" name="year">
+                <input type="text" class="hidden" value="{{$school_code}}" name="school_code">
+            </td>
+
+
+        </tbody>
         @endforeach
-        <td class="px-6 py-4">
-            <span class="total-marks">0</span>
-            <input type="text" class="hidden total-marks" value="0" name="total_marks[{{$data->id}}]" >
-        </td>
+    </table>
 
-        <td class="px-6 py-4  ">
-            <!-- <input type="number" class="mark-input row-input md:w-[120px] md:h-[30px] px-2 rounded-md" data-total="{{$code->total_mark}}" data-pass="{{$code->pass_mark}}"> -->
+    <div class="mt-5">
 
-            <span class="grade" >F</span>
-            <input type="text" class="hidden grade-input" value="F" name="grade[{{ $data->id }}]" >
-            
-        </td>
-        <td class="px-6 py-4 ">
-            <span class="gpa">0</span>
-            <input type="text" class="hidden gpa-input" value="0" name="gpa[{{ $data->id }}]" >
-        </td>
+        <div class="w-full ">
+            <div class="flex justify-around">
+                <div class=" flex justify-between gap-5 ">
 
-        <td class="px-6 py-4">
-            <input type="checkbox" name="status[{{ $data->id }}]"  value="absent" class="row-checkbox" >
-            <input type="text" class="hidden "  value="{{$selectedGroupName}}"  name="group" >
-            <input type="text" class="hidden "  value="{{$selectedClassName}}"  name="class" >
-            <input type="text" class="hidden"  value="{{$selectedSectionName}}" name="section" >
-            <input type="text" class="hidden "  value="{{$selectedShiftName}}" name="shift" >
-            <input type="text" class="hidden "  value="{{$selectedExamName}}" name="exam" >
-            <input type="text" class="hidden"  value="{{$selectedYear}}" name="year" >
-            <input type="text" class="hidden"  value="{{$school_code}}" name="school_code" >
-        </td>
+                    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Print
+                        Mark Page</button>
 
+                </div>
 
-    </tbody>
-    @endforeach
-</table>
-@endif
-
-<div class="mt-5">
-
-    <div class="w-full ">
-        <div class="flex justify-around">
-            <div class=" flex justify-between gap-5 ">
-                <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Blank
-                    Page</button>
-                <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Print
-                    Mark Page</button>
+                <div class=" flex justify-between gap-5">
+                    <input class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="submit">
+                    <a class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" href="/dashboard/{{$school_code}}"><i class="fa fa-times"></i> Close</a>
+                </div>
 
             </div>
-
-            <div class=" flex justify-between gap-5">
-                <input class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="submit">
-                <a class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" href="/dashboard/{{$school_code}}"><i class="fa fa-times"></i> Close</a>
-            </div>
-
         </div>
     </div>
-</div>
 </form>
+<form action="{{ route('exam_mark_print',$school_code) }}">
+    @csrf
+    <input type="text" class="hidden " value="{{$selectedSubjectName}}" name="subject">
+    <input type="text" class="hidden " value="{{$selectedGroupName}}" name="group">
+    <input type="text" class="hidden " value="{{$selectedClassName}}" name="class_name">
+    <input type="text" class="hidden" value="{{$selectedSectionName}}" name="section">
+    <input type="text" class="hidden " value="{{$selectedShiftName}}" name="shift">
+    <input type="text" class="hidden " value="{{$selectedExamName}}" name="exam">
+    <input type="text" class="hidden" value="{{$selectedYear}}" name="year">
+    <input type="text" class="hidden" value="{{$school_code}}" name="school_code">
+    <input type="text" class="hidden" name="full_marks" value="{{$totalMarksSum}}">
+    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Blank Page<button>
+</form>
+@endif
+
+@else
+
+<form action="{{route('update.mark.input')}}" method="post">
+    @csrf
+    @method('PUT')
+
+    <table class="w-full text-sm text-left rtl:text-right text-black dark:text-blue-100">
+        <thead class="text-xs text-white uppercase bg-blue-600 border-b border-blue-400 dark:text-white">
+            <tr>
+                <th scope="col" class="px-6 py-3 bg-blue-500">
+                    SL
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Student Name
+                </th>
+                <th scope="col" class="px-6 py-3 bg-blue-500">
+                    Student ID
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Class
+                </th>
+                <th scope="col" class="px-6 py-3 bg-blue-500">
+                    Roll
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Subject
+                </th>
+                <th scope="col" class="px-6 py-3 bg-blue-500">
+                    Full Marks
+                </th>
+                @php
+                $totalMarksSum = 0;
+                @endphp
+
+                @foreach($shortCode as $code)
+                @php
+                $totalMarksSum += $code->total_mark; // Add each total mark to the sum
+
+                @endphp
+
+                <th scope="col" class="px-6 py-3">
+                    {{$code->short_code}} = {{$code->total_mark}}/{{$code->pass_mark}}
+                </th>
+                @endforeach
+                <th scope="col" class="px-6 py-3 bg-blue-500">
+                    T. Marks
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Grade
+                </th>
+                <th scope="col" class="px-6 py-3 bg-blue-500">
+                    GPA
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Absent
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if($markInputs != null)
+            @foreach($markInputs as $key => $data)
+            <tr>
+                <th scope="row" class="px-6 py-4 font-medium  text-black whitespace-nowrap ">
+                    {{$key + 1}}
+                    <input class="hidden" value="{{$data->id}}" name="key[{{ $data->id }}]" type="text">
+                </th>
+                <td class="px-6 py-4">
+                    {{$data->name}}
+                    <input type="text" class="hidden" name="name[{{ $data->id }}]" value="{{$data->name}}">
+
+                </td>
+                <td class="px-6 py-4">
+                    {{$data->student_id}}
+                    <input type="text" class="hidden" name="student_id[{{ $data->id }}]" value=" {{$data->student_id}}">
+                </td>
+                <td class="px-6 py-4">
+
+                    {{$selectedClassName}}
+                </td>
+                <td class="px-6 py-4">
+                    <input type="text" class="hidden" name="student_roll[{{ $data->id }}]" value="{{$data->student_roll}}">
+                    {{$data->student_roll}}
+                </td>
+                <td class="px-6 py-4">
+                    <input type="text" class="hidden" name="subject" value="{{$selectedSubjectName}}">
+                    {{$selectedSubjectName}}
+                </td>
+                <td class="px-6 py-4">
+                    {{$totalMarksSum}}
+                    <input type="text" class="hidden" name="full_marks[{{ $data->id }}]" value="{{$totalMarksSum}}">
+                </td>
+                @foreach($shortCode as $code)
+                @php
+                $shortMarksArray = json_decode($data->short_marks, true);
+                @endphp
+
+                <td class="px-6 py-4">
+                    <input type="number" name="short_marks[{{$code->short_code}}][{{$data->id}}]" value="{{$shortMarksArray[$code->short_code]}}" class="mark-input md:w-[120px] md:h-[30px] px-2 rounded-md" data-total="{{$code->total_mark}}" data-pass=" {{$code->pass_mark}}" data-acceptance=" {{$code->acceptance}}">
+                </td>
+
+                @endforeach
+                <td class="px-6 py-4">
+                    <span class="total-marks">{{$data->total_marks}}</span>
+                    <input type="text" class="hidden total-marks" value="0" name="total_marks[{{$data->id}}]">
+                </td>
+
+                <td class="px-6 py-4  ">
+                    <span class="grade">{{$data->grade}}</span>
+                    <input type="text" class="hidden grade-input" value="F" name="grade[{{ $data->id }}]">
+                </td>
+                <td class="px-6 py-4 ">
+                    <span class="gpa">{{$data->gpa}}</span>
+                    <input type="text" class="hidden gpa-input" value="0" name="gpa[{{ $data->id }}]">
+                </td>
+
+                <td class="px-6 py-4">
+                    <input type="checkbox" name="status[{{ $data->id }}]" value="absent" class="row-checkbox">
+                    <input type="text" class="hidden " value="{{$selectedGroupName}}" name="group">
+                    <input type="text" class="hidden " value="{{$selectedClassName}}" name="class">
+                    <input type="text" class="hidden" value="{{$selectedSectionName}}" name="section">
+                    <input type="text" class="hidden " value="{{$selectedShiftName}}" name="shift">
+                    <input type="text" class="hidden " value="{{$selectedExamName}}" name="exam">
+                    <input type="text" class="hidden" value="{{$selectedYear}}" name="year">
+
+                    <input type="text" class="hidden" value="{{$school_code}}" name="school_code">
+                </td>
+            </tr>
+            @endforeach
+            @endif
+
+        </tbody>
+    </table>
+
+    <div class="mt-5">
+
+        <div class="w-full ">
+            <div class="flex justify-around">
+                <div class=" flex justify-between gap-5 ">
+
+                    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Print
+                        Mark Page</button>
+
+                </div>
+
+                <div class=" flex justify-between gap-5">
+                    <input class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="submit">
+                    <a class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" href="/dashboard/{{$school_code}}"><i class="fa fa-times"></i> Close</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+<form action="{{ route('exam_mark_print',$school_code) }}">
+    @csrf
+    <input type="text" class="hidden " value="{{$selectedSubjectName}}" name="subject">
+    <input type="text" class="hidden " value="{{$selectedGroupName}}" name="group">
+    <input type="text" class="hidden " value="{{$selectedClassName}}" name="class_name">
+    <input type="text" class="hidden" value="{{$selectedSectionName}}" name="section">
+    <input type="text" class="hidden " value="{{$selectedShiftName}}" name="shift">
+    <input type="text" class="hidden " value="{{$selectedExamName}}" name="exam">
+    <input type="text" class="hidden" value="{{$selectedYear}}" name="year">
+    <input type="text" class="hidden" value="{{$school_code}}" name="school_code">
+    <input type="text" class="hidden" name="full_marks" value="{{$totalMarksSum}}">
+    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Blank Page<button>
+</form>
+
+@endif
+
+
+
+
+
 <script>
     document.getElementById('generateExcelForm').addEventListener('submit', function(event) {
         event.preventDefault();
@@ -333,7 +515,7 @@ $totalMarksSum = 0; // Initialize a variable to hold the sum
         $('#class').change(function() {
             var class_name = $(this).val();
             $.ajax({
-                url: "{{ route('exam-marks.get-groups',$school_code) }}",
+                url: "{{ route('exam-marks.get-groups', $school_code) }}",
                 method: 'post',
                 data: {
                     class: class_name,
@@ -352,7 +534,7 @@ $totalMarksSum = 0; // Initialize a variable to hold the sum
         $('#class').change(function() {
             var class_name = $(this).val();
             $.ajax({
-                url: "{{ route('exam-marks.get-sections',$school_code) }}",
+                url: "{{ route('exam-marks.get-sections', $school_code) }}",
                 method: 'post',
                 data: {
                     class: class_name,
@@ -371,7 +553,7 @@ $totalMarksSum = 0; // Initialize a variable to hold the sum
         $('#class').change(function() {
             var class_name = $(this).val();
             $.ajax({
-                url: "{{ route('exam-marks.get-shifts',$school_code) }}",
+                url: "{{ route('exam-marks.get-shifts', $school_code) }}",
                 method: 'post',
                 data: {
                     class: class_name,
@@ -390,7 +572,7 @@ $totalMarksSum = 0; // Initialize a variable to hold the sum
         $('#class').change(function() {
             var class_name = $(this).val();
             $.ajax({
-                url: "{{ route('exam-marks.get-subjects',$school_code) }}",
+                url: "{{ route('exam-marks.get-subjects', $school_code) }}",
                 method: 'post',
                 data: {
                     class: class_name,
@@ -409,7 +591,7 @@ $totalMarksSum = 0; // Initialize a variable to hold the sum
         $('#class').change(function() {
             var class_name = $(this).val();
             $.ajax({
-                url: "{{ route('exam-marks.get-exams',$school_code) }}",
+                url: "{{ route('exam-marks.get-exams', $school_code) }}",
                 method: 'post',
                 data: {
                     class: class_name,
@@ -431,19 +613,16 @@ $totalMarksSum = 0; // Initialize a variable to hold the sum
 
 <script>
     $(document).ready(function() {
-        // Fetch GradeSetup data from PHP and store it in a JavaScript variable
         var gradeSetupData = JSON.parse("{!! addslashes($gradeSetupData) !!}");
 
         $('.mark-input').on('input', function() {
             var totalMarks = parseFloat($(this).attr('data-total')) || 0;
             var totalMarksRow = 0;
             var enteredMark = parseFloat($(this).val()) || 0;
-            //var mark = parseInt($(this).val()) || 0;
             var allMarksAbovePass = true;
 
-            // Check if entered mark exceeds total marks
             if (enteredMark > totalMarks) {
-                $(this).val(0); // Reset input value to 0
+                $(this).val(0);
                 enteredMark = 0;
             }
 
@@ -469,7 +648,7 @@ $totalMarksSum = 0; // Initialize a variable to hold the sum
 
                 calculateGrade($(this)); // Calculate grade
             } else {
-               
+
                 $(this).closest('tr').find('.grade').text('F');
                 $(this).closest('tr').find('.grade-input').val('F');
                 $(this).closest('tr').find('.gpa').text('0');
@@ -485,19 +664,19 @@ $totalMarksSum = 0; // Initialize a variable to hold the sum
         function calculateGrade(input) {
             var totalMarksRow = 0;
             input.closest('tr').find('.mark-input').each(function() {
-                
+
                 var dataacceptance = parseFloat($(this).attr('data-acceptance'));
-                console.log('acc',dataacceptance);
-                var mark=parseFloat($(this).val()) || 0;
-                mark=mark*dataacceptance;
+                console.log('acc', dataacceptance);
+                var mark = parseFloat($(this).val()) || 0;
+                mark = mark * dataacceptance;
                 totalMarksRow += mark;
-                console.log('acc',totalMarksRow);
+                console.log('acc', totalMarksRow);
 
             });
 
             var letterGrade = 'F'; // Initialize letter grade
             var GPA = 0; // Initialize GPA
-           
+
             // Compare totalMarksRow with mark_point_1st and mark_point_2nd from gradeSetupData
             gradeSetupData.forEach(function(gradeSetup) {
                 //console.log(totalMarksRow >= gradeSetup.mark_point_1st);
@@ -505,7 +684,7 @@ $totalMarksSum = 0; // Initialize a variable to hold the sum
                     letterGrade = gradeSetup.latter_grade;
                     GPA = gradeSetup.grade_point;
                 }
-            
+
             });
 
             // Display the calculated grade
@@ -513,8 +692,8 @@ $totalMarksSum = 0; // Initialize a variable to hold the sum
             // Display the calculated GPA
             input.closest('tr').find('.gpa').text(GPA);
             //var gpaValue = GPA; // Use the calculated GPA directly
-    input.closest('tr').find('.gpa-input').val(GPA);
-    input.closest('tr').find('.grade-input').val(letterGrade);
+            input.closest('tr').find('.gpa-input').val(GPA);
+            input.closest('tr').find('.grade-input').val(letterGrade);
 
 
         }

@@ -24,7 +24,7 @@
                     <div class="col-span-2">
                         <select id="countries" name="class"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:border-blue-500 block w-full p-2.5 ">
-                            <option selected>Select Class</option>
+                            <option selected></option>
                             @foreach($classes as $class)
                                 <option >{{$class->class_name}}</option>
                             @endforeach
@@ -41,9 +41,9 @@
                     <div class="col-span-2">
                         <select id="countries" name="year"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-0 focus:border-blue-500 block w-full p-2.5 ">
-                            <option selected>Select Year</option>
-                            @foreach($year as $year)
-                                  <option >{{$year->academic_year_name}}</option>
+                           
+                            @foreach($year as $data)
+                                  <option >{{$data->academic_year_name}}</option>
                             @endforeach
                         </select>
                     </div>

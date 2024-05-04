@@ -163,6 +163,7 @@ Exam Marks
 
 <hr>
 @if(!$markInputData)
+
                 @if($student != null)
                     <form action="{{ route('exam.marks') }}" method="post" >
                         @csrf
@@ -515,10 +516,6 @@ Exam Marks
     
 @endif
  
-
-
-
-
 <script>
     document.getElementById('generateExcelForm').addEventListener('submit', function(event) {
         event.preventDefault();
@@ -656,6 +653,7 @@ Exam Marks
             var allMarksAbovePass = true;
 
             if (enteredMark > totalMarks) {
+
                 $(this).val(0); 
                 enteredMark = 0;
             }
@@ -674,7 +672,7 @@ Exam Marks
 
                 calculateGrade($(this)); 
             } else {
-               
+
                 $(this).closest('tr').find('.grade').text('F');
                 $(this).closest('tr').find('.grade-input').val('F');
                 $(this).closest('tr').find('.gpa').text('0');
@@ -688,32 +686,33 @@ Exam Marks
         function calculateGrade(input) {
             var totalMarksRow = 0;
             input.closest('tr').find('.mark-input').each(function() {
-                
+
                 var dataacceptance = parseFloat($(this).attr('data-acceptance'));
-                console.log('acc',dataacceptance);
-                var mark=parseFloat($(this).val()) || 0;
-                mark=mark*dataacceptance;
+                console.log('acc', dataacceptance);
+                var mark = parseFloat($(this).val()) || 0;
+                mark = mark * dataacceptance;
                 totalMarksRow += mark;
-                console.log('acc',totalMarksRow);
+                console.log('acc', totalMarksRow);
 
             });
 
             var letterGrade = 'F'; 
             var GPA = 0; 
-           
-           
+          
             gradeSetupData.forEach(function(gradeSetup) {
                 if (totalMarksRow >= gradeSetup.mark_point_1st && totalMarksRow <= gradeSetup.mark_point_2nd) {
                     letterGrade = gradeSetup.latter_grade;
                     GPA = gradeSetup.grade_point;
                 }
-            
+
             });
 
             input.closest('tr').find('.grade').text(letterGrade);
-            input.closest('tr').find('.gpa').text(GPA);S
+
+            input.closest('tr').find('.gpa').text(GPA);
             input.closest('tr').find('.gpa-input').val(GPA);
             input.closest('tr').find('.grade-input').val(letterGrade);
+
         }
     });
 </script>

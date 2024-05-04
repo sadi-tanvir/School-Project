@@ -65,17 +65,17 @@ class UploadExcelFileController extends Controller
             }
 
             if (
-                is_null($studentData[1]) || // student_roll
-                is_null($studentData[2]) || // first_name
-                is_null($studentData[3]) || // group
-                is_null($studentData[4]) || // category
-                is_null($studentData[5]) || // gender
-                is_null($studentData[7]) || // religious
-                is_null($studentData[8]) || // father_name
-                is_null($studentData[9]) || // mother_name
-                is_null($studentData[10])   // father_mobile
+                is_null($studentData[1]) || 
+                is_null($studentData[2]) || 
+                is_null($studentData[3]) || 
+                is_null($studentData[4]) || 
+                is_null($studentData[5]) || 
+                is_null($studentData[7]) || 
+                is_null($studentData[8]) || 
+                is_null($studentData[9]) || 
+                is_null($studentData[10])   
             ) {
-                continue; // Skip this student if any essential field is null
+                continue; 
             }
             
             $student = new Student();
@@ -154,10 +154,8 @@ class UploadExcelFileController extends Controller
     
         $newStudentId = 'STU' . $currentYear . str_pad($newId, 4, '0', STR_PAD_LEFT);
     
-        // Check if the generated ID already exists
         $existingStudent = Student::where('nedubd_student_id', $newStudentId)->first();
         if ($existingStudent) {
-            // If it exists, increment the ID until a unique one is found
             do {
                 $newId++;
                 $newStudentId = 'STU' . $currentYear . str_pad($newId, 4, '0', STR_PAD_LEFT);
@@ -170,30 +168,17 @@ class UploadExcelFileController extends Controller
     private function readExcel($filePath)
 {
     $data = [];
-    
-   
     $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader('Xlsx');
     $spreadsheet = $reader->load($filePath);
-    
-
     $worksheet = $spreadsheet->getActiveSheet();
-    
- 
     foreach ($worksheet->getRowIterator() as $row) {
         $rowData = [];
-        
-
         foreach ($row->getCellIterator() as $cell) {
             $rowData[] = $cell->getValue();
         }
-        
-       
-
         $data[] = $rowData;
     }
-    
     array_shift($data);
-    // dd($data);
     return $data;
 }
 

@@ -127,22 +127,35 @@ Exam Marks
 
                 </div>
 
-                <div>
-
-
-                    <div class="col-span-3">
-                        <div class="md:mt-5">
-                            <input type="file" class="file-input border file-input-primary w-full max-w-xs" />
-                            <br>
-                            <button class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-green-800 mt-3">Upload</button>
-                        </div>
-                    </div>
-                </div>
+               
 
 
             </div>
         </form>
     </div>
+
+    <div>
+
+
+<div class="col-span-3 flex justify-end">
+    <div class="md:mt-5">
+       <form action="{{route('mark.input.excel.upload')}}" method="post" enctype="multipart/form-data">
+       @csrf
+       <input type="text" class="hidden "  value="{{$selectedSubjectName}}"  name="subject" >
+        <input type="text" class="hidden "  value="{{$selectedGroupName}}"  name="group" >
+        <input type="text" class="hidden "  value="{{$selectedClassName}}"  name="class_name" >
+        <input type="text" class="hidden"  value="{{$selectedSectionName}}" name="section" >
+        <input type="text" class="hidden "  value="{{$selectedShiftName}}" name="shift" >
+        <input type="text" class="hidden "  value="{{$selectedExamName}}" name="exam" >
+        <input type="text" class="hidden"  value="{{$selectedYear}}" name="year" >
+        <input type="text" class="hidden"  value="{{$school_code}}" name="school_code" >
+        <input accept=".xlsx, .xls" name="file"  type="file" class="file-input border file-input-primary w-full max-w-xs" />
+        <br>
+        <button type="submit" class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-green-800 mt-3">Upload</button>
+       </form>
+    </div>
+</div>
+</div>
     
     
 </div>
@@ -179,13 +192,12 @@ Exam Marks
                                         Full Marks
                                     </th>
                                     @php
-        $totalMarksSum = 0;
+                                         $totalMarksSum = 0;
                                     @endphp
         
                                     @foreach($shortCode as $code)
                                     @php
-            $totalMarksSum += $code->total_mark; // Add each total mark to the sum
-        
+                                         $totalMarksSum += $code->total_mark; 
                                     @endphp
         
                                     <th scope="col" class="px-6 py-3">
@@ -239,10 +251,11 @@ Exam Marks
                                     <input type="text" class="hidden" name="full_marks[{{ $data->id }}]" value="{{$totalMarksSum}}">
                                 </td>
                                 @foreach($shortCode as $code)
+                               
                                 <td class="px-6 py-4">
-                                    <input type="number" name="short_marks[{{$code->short_code}}][{{$data->id}}]" value=0 class="mark-input md:w-[120px] md:h-[30px] px-2 rounded-md" data-total="{{$code->total_mark}}" data-pass=" {{$code->pass_mark}}"  data-acceptance=" {{$code->acceptance}}">
-                                    
+                                    <input type="number" name="short_marks[{{$code->short_code}}][{{$data->id}}]" value=0 class="mark-input md:w-[120px] md:h-[30px] px-2 rounded-md" data-total="{{$code->total_mark}}" data-pass="{{$code->pass_mark}}" data-acceptance="{{$code->acceptance}}">
                                 </td>
+
                                 @endforeach
                                 <td class="px-6 py-4">
                                     <span class="total-marks">0</span>
@@ -283,8 +296,7 @@ Exam Marks
                                 <div class="flex justify-around">
                                     <div class=" flex justify-between gap-5 ">
                                     
-                                        <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Print
-                                            Mark Page</button>
+                                       
         
                                     </div>
         
@@ -297,20 +309,41 @@ Exam Marks
                             </div>
                         </div>
                     </form>
-                    <form action="{{ route('downloadExcel.mark') }}" method="post">
-                                        @csrf
-                                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Blank
-                                            Page</button>
-                                    </form>
-                @endif
+<div class="flex">
+ <form action="{{ route('exam_mark_print', $school_code) }}" class="mx-10">
+     @csrf
+     <input type="text" class="hidden "  value="{{$selectedSubjectName}}"  name="subject" >
+    <input type="text" class="hidden "  value="{{$selectedGroupName}}"  name="group" >
+    <input type="text" class="hidden "  value="{{$selectedClassName}}"  name="class_name" >
+    <input type="text" class="hidden"  value="{{$selectedSectionName}}" name="section" >
+    <input type="text" class="hidden "  value="{{$selectedShiftName}}" name="shift" >
+    <input type="text" class="hidden "  value="{{$selectedExamName}}" name="exam" >
+    <input type="text" class="hidden"  value="{{$selectedYear}}" name="year" >
+    <input type="text" class="hidden"  value="{{$school_code}}" name="school_code" >
+    <input type="text" class="hidden" name="full_marks" value="{{$totalMarksSum}}">
+    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Blank Page<button>                                
+</form>
+<form action="{{route('full_marks_print', $school_code)}}" class="mx-10">
+     @csrf
+    <input type="text" class="hidden"  value="{{$selectedSubjectName}}"  name="subject" >
+    <input type="text" class="hidden"  value="{{$selectedGroupName}}"  name="group" >
+    <input type="text" class="hidden"  value="{{$selectedClassName}}"  name="class_name" >
+    <input type="text" class="hidden"  value="{{$selectedSectionName}}" name="section" >
+    <input type="text" class="hidden"  value="{{$selectedShiftName}}" name="shift" >
+    <input type="text" class="hidden"  value="{{$selectedExamName}}" name="exam" >
+    <input type="text" class="hidden"  value="{{$selectedYear}}" name="year" >
+    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Print Mark Page</button>
+</form>              
+</div>
+@endif
 
  @else
        
  <form action="{{route('update.mark.input')}}" method="post">
- @csrf
- @method('PUT')
+    @csrf
+    @method('PUT')
 
- <table class="w-full text-sm text-left rtl:text-right text-black dark:text-blue-100">
+    <table class="w-full text-sm text-left rtl:text-right text-black dark:text-blue-100">
                         <thead class="text-xs text-white uppercase bg-blue-600 border-b border-blue-400 dark:text-white">
                             <tr>
                                 <th scope="col" class="px-6 py-3 bg-blue-500">
@@ -334,14 +367,13 @@ Exam Marks
                                 <th scope="col" class="px-6 py-3 bg-blue-500">
                                     Full Marks
                                 </th>
-                                @php
-                                    $totalMarksSum = 0;
+                                    @php
+                                        $totalMarksSum = 0;
                                     @endphp
         
                                     @foreach($shortCode as $code)
                                     @php
-                                     $totalMarksSum += $code->total_mark; // Add each total mark to the sum
-        
+                                        $totalMarksSum += $code->total_mark; 
                                     @endphp
         
                                     <th scope="col" class="px-6 py-3">
@@ -396,24 +428,25 @@ Exam Marks
                                 {{$totalMarksSum}}
                                 <input type="text" class="hidden" name="full_marks[{{ $data->id }}]" value="{{$totalMarksSum}}">
                                 </td>
-                                @foreach($shortCode as $code)
-                                    @php
-                                        $shortMarksArray = json_decode($data->short_marks, true);
-                                    @endphp
+                                @php
+                                    $shortMarksArray = json_decode($data->short_marks, true);
+                                @endphp
 
+                                @foreach($shortMarksArray as $codes => $short_marks)
                                     <td class="px-6 py-4">
-                                        <input type="number" name="short_marks[{{$code->short_code}}][{{$data->id}}]" value="{{$shortMarksArray[$code->short_code]}}" class="mark-input md:w-[120px] md:h-[30px] px-2 rounded-md" data-total="{{$code->total_mark}}" data-pass=" {{$code->pass_mark}}"  data-acceptance=" {{$code->acceptance}}">
+
+                                        <input type="number" name="short_marks[{{ $code->short_code }}][{{ $data->id }}]" value="{{ $short_marks }}" class="mark-input md:w-[120px] md:h-[30px] px-2 rounded-md" data-total="{{ $code->total_mark }}" data-pass="{{ $code->pass_mark }}" data-acceptance="{{$code->acceptance}}">
                                     </td>
-                
-                                 @endforeach
+                                @endforeach
                                 <td class="px-6 py-4">
                                 <span class="total-marks">{{$data->total_marks}}</span>
                                     <input type="text" class="hidden total-marks" value="0" name="total_marks[{{$data->id}}]" >
                                 </td>
 
                                 <td class="px-6 py-4  ">
-                                <span class="grade" >{{$data->grade}}</span>
+                                    <span class="grade" >{{$data->grade}}</span>
                                     <input type="text" class="hidden grade-input" value="F" name="grade[{{ $data->id }}]" >
+                                    
                                 </td>
                                 <td class="px-6 py-4 ">
                                     <span class="gpa">{{$data->gpa}}</span>
@@ -436,18 +469,13 @@ Exam Marks
                             @endif
                             
                         </tbody>
-        </table> 
+    </table> 
 
         <div class="mt-5">
         
         <div class="w-full ">
             <div class="flex justify-around">
-                <div class=" flex justify-between gap-5 ">
                 
-                    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Print
-                        Mark Page</button>
-
-                </div>
 
                 <div class=" flex justify-between gap-5">
                     <input class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="submit">
@@ -459,20 +487,32 @@ Exam Marks
         </div>
  </form>
 
-                                <form action="{{ route('exam_mark_print',$school_code) }}">
-                                        @csrf
-                                    <input type="text" class="hidden "  value="{{$selectedSubjectName}}"  name="subject" >
-                                    <input type="text" class="hidden "  value="{{$selectedGroupName}}"  name="group" >
-                                    <input type="text" class="hidden "  value="{{$selectedClassName}}"  name="class_name" >
-                                    <input type="text" class="hidden"  value="{{$selectedSectionName}}" name="section" >
-                                    <input type="text" class="hidden "  value="{{$selectedShiftName}}" name="shift" >
-                                    <input type="text" class="hidden "  value="{{$selectedExamName}}" name="exam" >
-                                    <input type="text" class="hidden"  value="{{$selectedYear}}" name="year" >
-                                    <input type="text" class="hidden"  value="{{$school_code}}" name="school_code" >
-                                    <input type="text" class="hidden" name="full_marks" value="{{$totalMarksSum}}">
-                                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Blank
-                                            Page</button>
-                                </form>
+ <div class="flex">
+ <form action="{{ route('exam_mark_print', $school_code) }}" class="mx-10">
+     @csrf
+     <input type="text" class="hidden "  value="{{$selectedSubjectName}}"  name="subject" >
+    <input type="text" class="hidden "  value="{{$selectedGroupName}}"  name="group" >
+    <input type="text" class="hidden "  value="{{$selectedClassName}}"  name="class_name" >
+    <input type="text" class="hidden"  value="{{$selectedSectionName}}" name="section" >
+    <input type="text" class="hidden "  value="{{$selectedShiftName}}" name="shift" >
+    <input type="text" class="hidden "  value="{{$selectedExamName}}" name="exam" >
+    <input type="text" class="hidden"  value="{{$selectedYear}}" name="year" >
+    <input type="text" class="hidden"  value="{{$school_code}}" name="school_code" >
+    <input type="text" class="hidden" name="full_marks" value="{{$totalMarksSum}}">
+    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Blank Page<button>                                
+</form>
+<form action="{{route('full_marks_print', $school_code)}}" class="mx-10">
+     @csrf
+    <input type="text" class="hidden"  value="{{$selectedSubjectName}}"  name="subject" >
+    <input type="text" class="hidden"  value="{{$selectedGroupName}}"  name="group" >
+    <input type="text" class="hidden"  value="{{$selectedClassName}}"  name="class_name" >
+    <input type="text" class="hidden"  value="{{$selectedSectionName}}" name="section" >
+    <input type="text" class="hidden"  value="{{$selectedShiftName}}" name="shift" >
+    <input type="text" class="hidden"  value="{{$selectedExamName}}" name="exam" >
+    <input type="text" class="hidden"  value="{{$selectedYear}}" name="year" >
+    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Print Mark Page</button>
+</form>              
+ </div>
     
 @endif
  
@@ -617,28 +657,20 @@ Exam Marks
                 $(this).val(0); 
                 enteredMark = 0;
             }
-
-
-            // // Iterate over all mark-input elements in the same row
+            
             $(this).closest('tr').find('.mark-input').each(function() {
                 var passMarks = parseFloat($(this).attr('data-pass')) || 0;
                 var mark = parseFloat($(this).val()) || 0;
                 totalMarksRow += mark;
-                // console.log(passMarks);
-                // console.log(mark);
-
-                // Check if any mark is below pass mark
                 if (mark < passMarks) {
                     allMarksAbovePass = false;
 
-                    // Exit the loop if any mark is below pass mark
                 }
             });
 
-            // If all marks are above or equal to pass mark, calculate grade
             if (allMarksAbovePass) {
 
-                calculateGrade($(this)); // Calculate grade
+                calculateGrade($(this)); 
             } else {
 
                 $(this).closest('tr').find('.grade').text('F');
@@ -646,8 +678,6 @@ Exam Marks
                 $(this).closest('tr').find('.gpa').text('0');
                 $(this).closest('tr').find('.gpa-input').val('0');
             }
-
-            // Display total marks for the current row
             $(this).closest('tr').find('.total-marks').text(totalMarksRow);
             $(this).closest('tr').find('.total-marks').val(totalMarksRow);
         });
@@ -666,12 +696,10 @@ Exam Marks
 
             });
 
-            var letterGrade = 'F'; // Initialize letter grade
-            var GPA = 0; // Initialize GPA
-
-            // Compare totalMarksRow with mark_point_1st and mark_point_2nd from gradeSetupData
+            var letterGrade = 'F'; 
+            var GPA = 0; 
+          
             gradeSetupData.forEach(function(gradeSetup) {
-                //console.log(totalMarksRow >= gradeSetup.mark_point_1st);
                 if (totalMarksRow >= gradeSetup.mark_point_1st && totalMarksRow <= gradeSetup.mark_point_2nd) {
                     letterGrade = gradeSetup.latter_grade;
                     GPA = gradeSetup.grade_point;
@@ -679,18 +707,19 @@ Exam Marks
 
             });
 
-            // Display the calculated grade
             input.closest('tr').find('.grade').text(letterGrade);
-            // Display the calculated GPA
+
             input.closest('tr').find('.gpa').text(GPA);
-            //var gpaValue = GPA; // Use the calculated GPA directly
             input.closest('tr').find('.gpa-input').val(GPA);
             input.closest('tr').find('.grade-input').val(letterGrade);
-
 
         }
     });
 </script>
+
+
+
+
 
 
 

@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('gpa')->nullable();
             $table->string('school_code');
             $table->enum('action', ['pending', 'approved', 'delete', 'edit'])->nullable()->default('approved');
-            $table->enum('status', ['absent', 'present'])->default('absent');
+            $table->enum('status', ['absent', 'present'])->default('present');
 
             $table->timestamps();
         });

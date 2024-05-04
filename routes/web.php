@@ -290,6 +290,8 @@ Route::get('/monthlyPaidDetails/{schoolCode}', [MonthlyPaidDetailsController::cl
     Route::put('/update-mark-input', [MarkInputController::class,'updateMarkInput'])->name('update.mark.input');
     Route::get('/exam_mark_print/{schoolCode}', [MarkInputController::class,'printBlankExam'])->name('exam_mark_print');
     Route::post('/download-mark-excel', [MarkInputController::class, 'downloadExcel'])->name('downloadExcel.mark');
+    Route::get('/full_marks_print/{schoolCode}',[MarkInputController::class,'full_marks_print'])->name('full_marks_print');
+    Route::post('/mark-input-excel-upload',[MarkInputController::class,'mark_input_excel_uplaod'])->name('mark.input.excel.upload');
 
     Route::get('/exam_process/{schoolCode}', [ExamProcessController::class, 'exam_process']);
     Route::get('/getStudents/{schoolCode}/{class}/{group}/{section}', [ExamProcessController::class, 'getStudents']);

@@ -21,13 +21,13 @@
 </head>
 
 <body>
-    <div class=" w-[1500px] px-[120px] mx-auto" id="page" >
-        <div class="flex w-full justify-between items-center p-5">
+    <div class=" md:w-[1500px] px-[120px] mx-auto" id="page" >
+        <div class=" p-5">
             @foreach($schoolInfo as $schoolData)
-            <div class="flex items-center justify-between  w-full px-5">
-                <div>
-                    <img src="{{$schoolData->logo}}" alt="School Logo" class="pr-4" />
-                </div>
+            <div class=" flex justify-center ">
+                <img src="{{ asset($schoolData->logo) }}" alt="School Logo" class="w-[200px] h-[200px]"/>
+            </div>
+            <div class="md:flex justify-center  w-full px-5">
                 <div class="text-center">
                     <h1 class="text-2xl font-bold ">{{$schoolData->school_name}}</h1>
                     <p class="text-sm ">Contact: {{$schoolData->school_phone}}</p>
@@ -35,12 +35,13 @@
                     <p class="text-sm ">Website: {{$schoolData->website}}</p>
                     <p class="text-sm ">Print date: {{$date}}</p>
                 </div>
-                <div>
-                </div>
+                <!-- <div>
+                </div> -->
             </div>
             @endforeach
            
         </div>
+        <p class="font-bold font-semi-bold text-center text-xl">Student Total Summary</p>
         <div>
             {{-- --}}
         </div>
@@ -60,7 +61,7 @@
     <div class="flex flex-col overflow-x-auto bg-white">
         <div class="">
        
-       <p class="font-bold font-semi-bold text-center text-xl">Student Total Summary</p>
+     
   
             <div class="inline-block min-w-full py-2">
                 <div class="">

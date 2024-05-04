@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class SendMSGController extends Controller
 {
     public function message($school_code){
-        $contacts=Contact::where('school_code',$school_code)->where('action','approved')->get();
+        $contacts=Contact::orderBy('created_at', 'desc')->where('school_code',$school_code)->where('action','approved')->get();
         $messages = AddMsg::where('school_code',$school_code)->where('action','approved')->get();
         return view ('Backend.Messaging.sendMessage',compact('contacts','messages'));
        }
@@ -67,5 +67,14 @@ class SendMSGController extends Controller
         return response()->json(['error' => 'Failed to delete contact'], 500);
     }
 }
+
+public function deleteSelectedContacts(Request $request)
+{
+    $selectedContacts = $request->input('selectedContacts');
+    Contact::whereIn('id', $selectedContacts)->delete();
+
+    return response()->json(['message' => 'Selected contacts deleted successfully']);
+}
+
 
 }

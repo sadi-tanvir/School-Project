@@ -430,27 +430,32 @@ Exam Marks
                                 </td>
                                 @php
                                     $shortMarksArray = json_decode($data->short_marks, true);
+                                   
                                 @endphp
 
-                                @foreach($shortMarksArray as $codes => $short_marks)
-                                    <td class="px-6 py-4">
-
-                                        <input type="number" name="short_marks[{{ $code->short_code }}][{{ $data->id }}]" value="{{ $short_marks }}" class="mark-input md:w-[120px] md:h-[30px] px-2 rounded-md" data-total="{{ $code->total_mark }}" data-pass="{{ $code->pass_mark }}" data-acceptance="{{$code->acceptance}}">
+                                @foreach($shortCode as $code)
+                                 <td class="px-6 py-4">
+                                        @php
+                                            $shortMarkValue = isset($shortMarksArray[$code->short_code]) ? $shortMarksArray[$code->short_code] : ''; 
+                                            
+                                        @endphp
+                                        <input type="number" name="short_marks[{{ $code->short_code }}][{{ $data->id }}]" value="{{ $shortMarkValue }}" class="mark-input md:w-[120px] md:h-[30px] px-2 rounded-md" data-total="{{ $code->total_mark }}" data-pass="{{ $code->pass_mark }}" data-acceptance="{{ $code->acceptance }}">
                                     </td>
+                                    
                                 @endforeach
                                 <td class="px-6 py-4">
                                 <span class="total-marks">{{$data->total_marks}}</span>
-                                    <input type="text" class="hidden total-marks" value="0" name="total_marks[{{$data->id}}]" >
+                                    <input type="text" class="hidden total-marks" value="{{$data->total_marks}}" name="total_marks[{{$data->id}}]" >
                                 </td>
 
                                 <td class="px-6 py-4  ">
                                     <span class="grade" >{{$data->grade}}</span>
-                                    <input type="text" class="hidden grade-input" value="F" name="grade[{{ $data->id }}]" >
+                                    <input type="text" class="hidden grade-input" value="{{$data->grade}}" name="grade[{{ $data->id }}]" >
                                     
                                 </td>
                                 <td class="px-6 py-4 ">
                                     <span class="gpa">{{$data->gpa}}</span>
-                                    <input type="text" class="hidden gpa-input" value="0" name="gpa[{{ $data->id }}]" >
+                                    <input type="text" class="hidden gpa-input" value="{{$data->gpa}}" name="gpa[{{ $data->id }}]" >
                                 </td>
         
                                 <td class="px-6 py-4">
@@ -716,7 +721,6 @@ Exam Marks
         }
     });
 </script>
-
 
 
 

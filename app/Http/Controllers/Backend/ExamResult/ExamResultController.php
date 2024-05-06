@@ -30,10 +30,7 @@ class ExamResultController extends Controller
     {
         return view('/Backend/ExamResult/exam_excel');
     }
-    public function exam_marks_delete()
-    {
-        return view('/Backend/ExamResult/exam_marks_delete');
-    }
+  
     public function exam_sms()
     {
         return view('/Backend/ExamResult/exam_sms');

@@ -26,9 +26,10 @@ class ExamProcessController extends Controller
     public function getStudents(Request $request, $schoolCode,$classValue,$groupValue,$sectionValue)
     {
         // $class_name = $request->input('class');
-        // $group_name = $request->input('group');
+        //  $group_name = $request->input('groupValue');
         // $section_name = $request->input('section');
-    
+       
+
         // Fetch students based on the selected class, group, and section
         $students = Student::where('class_name', $classValue)
             ->where('group', $groupValue)

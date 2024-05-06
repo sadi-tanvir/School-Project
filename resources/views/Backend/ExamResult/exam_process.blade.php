@@ -53,10 +53,8 @@
 
                 <div class="flex justify-between items-center mb-5">
                     <label for="student" class="text-gray-700 font-bold w-[150px] mr-2">STUDENT ROLL:</label>
-                    <select id="student-select"
-
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
-                        <option disabled selected value="">Select</option>
+                    <select id="student-select" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
+                        <option disabled selected >Select</option>
 
                     </select>
                 </div>
@@ -103,7 +101,7 @@
                     <input type="text" value="{{ $school_code }}" id="schoolCode">
                 </div>
                 <div class="row form-group">
-                    <div class="offset-md-8 col-md-2" style="">
+                    <div class="offset-md-8 col-md-2">
                         <button style="width: 100%;"
                             class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  "
                             id="feesCollectSaved">Print</button>
@@ -124,13 +122,13 @@
                 var className = $('#class-select').val();
                 var groupName = $('#group-select').val();
                 var sectionName = $('#section-select').val();
-
+               
 
                 var schoolCode = $('#schoolCode').val();
                 console.log(schoolCode);
                 // Make an AJAX request to fetch students
                 $.ajax({
-                    url: '/dashboard/getStudents/' + schoolCode + '/' + className + '/' + groupName + '/' +
+                    url: '/dashboard/getStudents/' + schoolCode + '/' + groupName + '/' + groupValue + '/' +
                         sectionName,
                     type: 'GET',
                     success: function(data) {

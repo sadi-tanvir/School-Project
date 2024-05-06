@@ -53,6 +53,7 @@ class MarkInputController extends Controller
         return view('/Backend/ExamResult/exam_marks', compact('classData', 'groupData', 'sectionData', 'shiftData', 'subjectData', 'classExamData', 'academicYearData', 'student', 'gradeSetupData', 'markInputData', 'markInputs', 'selectedSubjectName', 'selectedGroupName', 'selectedClassName', 'selectedSectionName', 'selectedShiftName', 'selectedExamName', 'selectedYear'));
     }
 
+
     public function getGroups(Request $request, $school_code)
     {
         $class = $request->class;
@@ -225,6 +226,7 @@ class MarkInputController extends Controller
     }
 
 
+
     public function printBlankExam(Request $request, $school_code)
     {
         $selectedClassName = $request->input('class_name');
@@ -249,6 +251,7 @@ class MarkInputController extends Controller
         $shortCodes = SetClassExamMark::where('class_name', $selectedClassName)->where('school_code', $school_code)->where('subject_name', $selectedSubjectName)->where('exam_name', $selectedExamName)->get();
 
         return view('/Backend/ExamResult/exam_marks_print', compact('selectedClassName', 'selectedGroupName', 'selectedSectionName', 'selectedShiftName', 'selectedSubjectName', 'selectedExamName', 'selectedYear', 'shortCodes', 'fullMarks', 'totalMarks', 'passMarks', 'students', 'schoolInfo', 'date'));
+
     }
 
 
@@ -585,3 +588,4 @@ class MarkInputController extends Controller
 
 
 }
+

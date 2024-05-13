@@ -11,7 +11,7 @@
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-10 md:my-10">
 
         <hr>
-        <form action="{{ route('studentData', $school_code) }}" method="GET">
+        <form action="{{ route('findData', $school_code) }}" method="GET">
             @csrf
 
             <div class="grid gap-6 mb-6 md:grid-cols-9 mt-2">

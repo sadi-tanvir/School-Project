@@ -28,30 +28,56 @@
         <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
             {{--  left--}}
             <div class="md:col-span-3">
-                <div class="bg-green-200 py-2 px-5 backgroound gap-2 flex flex-col justify-center items-center">
-                    <img class="w-28 object-cover" src="https://i.pinimg.com/564x/c4/57/bd/c457bd9496170bfa3845b7cee775df65.jpg" alt="">
-                    <p class="text-white font-bold">User Name</p>
+                <div class="bg-green-200 py-5 px-5 backgroound gap-2 flex flex-col justify-center items-center">
+                @foreach ($student as $data)
+                    <img src="{{ asset($data->image) }}" alt="Sign Image" class="w-40 object-cover"/>
+                    <p class="text-white font-bold">
+              
+                        {{$data->name}}
+                        @endforeach
+                    </p>
                 </div>
                 <div class="bg-white w-full border-2 space-y-2 border-green-200 p-1">
                     <div class="flex justify-between border-b-2">
                         <p>Student Id </p>
-                        <p>skjdhjksdhsjhs</p>
+                        @foreach ($student as $data)
+                        <p>{{$data->student_id}}</p>
+                        @endforeach
                     </div>
                     <div class="flex justify-between border-b-2">
-                        <p>Student Id </p>
-                        <p>skjdhjksdhsjhs</p>
+                        <p>Class Name </p>
+                        @foreach ($student as $data)
+                        <p>{{$data->Class_name}}</p>
+                        @endforeach
                     </div>
                     <div class="flex justify-between border-b-2">
-                        <p>Student Id </p>
-                        <p>skjdhjksdhsjhs</p>
+                        <p>Group Name </p>
+                        @foreach ($student as $data)
+                        <p>{{$data->group}}</p>
+                        @endforeach
                     </div>
                     <div class="flex justify-between border-b-2">
-                        <p>Student Id </p>
-                        <p>skjdhjksdhsjhs</p>
+                        <p>Section Name</p>
+                        @foreach ($student as $data)
+                        <p>{{$data->section}}</p>
+                        @endforeach
                     </div>
                     <div class="flex justify-between border-b-2">
-                        <p>Student Id </p>
-                        <p>skjdhjksdhsjhs</p>
+                        <p>Roll No. </p>
+                        @foreach ($student as $data)
+                        <p>{{$data->student_roll}}</p>
+                        @endforeach
+                    </div>
+                    <div class="flex justify-between border-b-2">
+                        <p>Session </p>
+                        @foreach ($student as $data)
+                        <p>{{$data->session}}</p>
+                        @endforeach
+                      
+                    </div>
+                    <div class="flex justify-between border-b-2">
+                        <p>Hall Name </p>
+                    
                     </div>
                     <!-- More student info here -->
                 </div>
@@ -79,58 +105,154 @@
                         <div class="border p-2 border-white font-bold col-span-12">Student Details</div>
 
                         <div class="border p-2 border-white col-span-2">Studnet's Name</div>
-                        <div class="border p-2 border-white col-span-4"></div>
+                        <div class="border p-2 border-white col-span-4">
+                        @foreach ($student as $data)
+                        <p>{{$data->name}}</p>
+                        @endforeach
+                        </div>
                         <div class="border p-2 border-white col-span-2">Mobile No</div>
-                        <div class="border p-2 border-white col-span-4">26-9-9999</div>
+                        <div class="border p-2 border-white col-span-4">
+                        @foreach ($student as $data)
+                        <p>{{$data->mobile_no}}</p>
+                        @endforeach
+                        </div>
                     
                         <div class="border p-2 border-white col-span-2">Date of Birth</div>
-                        <div class="border p-2 border-white col-span-2">26-9-9999</div>
-                        <div class="border p-2 border-white col-span-2">Nationality</div>
-                        <div class="border p-2 border-white col-span-2">26-9-9999</div>
+                        <div class="border p-2 border-white col-span-2">
+                        @foreach ($student as $data)
+                        <p>{{$data->birth_date}}</p>
+                        @endforeach
+                        </div>
+                        <div class="border p-2 border-white col-span-2">
+                        Nationality
+                        </div>
+                        <div class="border p-2 border-white col-span-2">
+                        @foreach ($student as $data)
+                        <p>{{$data->nationality}}</p>
+                        @endforeach
+                        </div>
                         <div class="border p-2 border-white col-span-2">Blood Group</div>
-                        <div class="border p-2 border-white col-span-2">26-9-9999</div>
+                        <div class="border p-2 border-white col-span-2">
+                        @foreach ($student as $data)
+                        <p>{{$data->blood_group}}</p>
+                        @endforeach
+                        </div>
                     
                         <div class="border p-2 border-white col-span-2">Father's Name</div>
-                        <div class="border p-2 border-white col-span-4">26-9-9999</div>
+                        <div class="border p-2 border-white col-span-4">
+                        @foreach ($student as $data)
+                        <p>{{$data->father_name}}</p>
+                        @endforeach
+                        </div>
                         <div class="border p-2 border-white col-span-2">Mother's Name</div>
-                        <div class="border p-2 border-white col-span-4">26-9-9999</div>
+                        <div class="border p-2 border-white col-span-4">
+                        @foreach ($student as $data)
+                        <p>{{$data->mother_name}}</p>
+                        @endforeach
+                        </div>
                     
                         <div class="border p-2 border-white col-span-2">Father Proffession</div>
-                        <div class="border p-2 border-white col-span-4">26-9-9999</div>
+                        <div class="border p-2 border-white col-span-4">
+                        @foreach ($student as $data)
+                        <p>{{$data->father_occupation}}</p>
+                        @endforeach
+                        </div>
                         <div class="border p-2 border-white col-span-2">Mother Proffession</div>
-                        <div class="border p-2 border-white col-span-4">26-9-9999</div>
+                        <div class="border p-2 border-white col-span-4">
+                        @foreach ($student as $data)
+                        <p>{{$data->mother_occupation}}</p>
+                        @endforeach
+                        </div>
                      
                         <div class="border p-2 border-white col-span-2">Father mobile</div>
-                        <div class="border p-2 border-white col-span-4">26-9-9999</div>
+                        <div class="border p-2 border-white col-span-4">
+                        @foreach ($student as $data)
+                        <p>{{$data->father_mobile}}</p>
+                        @endforeach
+                        </div>
                         <div class="border p-2 border-white col-span-2">Mother mobile</div>
-                        <div class="border p-2 border-white col-span-4">26-9-9999</div>
+                        <div class="border p-2 border-white col-span-4">
+                        @foreach ($student as $data)
+                        <p>{{$data->mother_number}}</p>
+                        @endforeach
+                        </div>
                         <div class="border p-2 border-white col-span-2">Father email</div>
-                        <div class="border p-2 border-white col-span-4">26-9-9999</div>
+                        <div class="border p-2 border-white col-span-4">
+                       
+                        </div>
                         <div class="border p-2 border-white col-span-2">Mother email</div>
-                        <div class="border p-2 border-white col-span-4">26-9-9999</div>
+                        <div class="border p-2 border-white col-span-4">
+                      
+                        </div>
                       
                         <div class="border p-2 border-white font-bold col-span-12">Present Address </div>
-                        <div class="border p-2 border-white col-span-12">Village</div>
+                     
+                        <div class="border p-2 border-white col-span-4">Village</div>
+                        <div class="border p-2 border-white col-span-8">
+                        @foreach ($student as $data)
+                        <p>{{$data->present_village}}</p>
+                        @endforeach
+                      
+                      </div>
                         <div class="border p-2 border-white col-span-2">POst Office</div>
-                        <div class="border p-2 border-white col-span-4"></div>
+                        <div class="border p-2 border-white col-span-4">
+                        @foreach ($student as $data)
+                        <p>{{$data->present_post_office}}</p>
+                        @endforeach
+                        </div>
                         <div class="border p-2 border-white col-span-2">Post Code</div>
-                        <div class="border p-2 border-white col-span-4">26-9-9999</div>
+                        <div class="border p-2 border-white col-span-4">
+                        @foreach ($student as $data)
+                        <p>{{$data->present_zip_code}}</p>
+                        @endforeach
+                        </div>
                         <div class="border p-2 border-white col-span-2">Thana</div>
-                        <div class="border p-2 border-white col-span-4">26-9-9999</div>
+                        <div class="border p-2 border-white col-span-4">
+                        @foreach ($student as $data)
+                        <p>{{$data->present_police_station}}</p>
+                        @endforeach
+                        </div>
                         <div class="border p-2 border-white col-span-2">District</div>
-                        <div class="border p-2 border-white col-span-4">26-9-9999</div>
+                        <div class="border p-2 border-white col-span-4">
+                        @foreach ($student as $data)
+                        <p>{{$data->present_district}}</p>
+                        @endforeach
+                        </div>
                     
                     
                         <div class="border p-2 border-white font-bold col-span-12">Permanent Address </div>
-                        <div class="border p-2 border-white col-span-12">Village</div>
+                        <div class="border p-2 border-white col-span-4">Village</div>
+                        <div class="border p-2 border-white col-span-8">
+                        @foreach ($student as $data)
+                        <p>{{$data->parmanent_village}}</p>
+                        @endforeach
+                      
+                      </div>
+                   
                         <div class="border p-2 border-white col-span-2">POst Office</div>
-                        <div class="border p-2 border-white col-span-4"></div>
+                        <div class="border p-2 border-white col-span-4">
+                        @foreach ($student as $data)
+                        <p>{{$data->parmanent_post_office}}</p>
+                        @endforeach
+                        </div>
                         <div class="border p-2 border-white col-span-2">Post Code</div>
-                        <div class="border p-2 border-white col-span-4">26-9-9999</div>
+                        <div class="border p-2 border-white col-span-4">
+                        @foreach ($student as $data)
+                        <p>{{$data->parmanent_zip_code}}</p>
+                        @endforeach
+                        </div>
                         <div class="border p-2 border-white col-span-2">Thana</div>
-                        <div class="border p-2 border-white col-span-4">26-9-9999</div>
+                        <div class="border p-2 border-white col-span-4">
+                        @foreach ($student as $data)
+                        <p>{{$data->parmanent_police_station}}</p>
+                        @endforeach
+                        </div>
                         <div class="border p-2 border-white col-span-2">District</div>
-                        <div class="border p-2 border-white col-span-4">26-9-9999</div>
+                        <div class="border p-2 border-white col-span-4">
+                        @foreach ($student as $data)
+                        <p>{{$data->parmanent_district}}</p>
+                        @endforeach
+                        </div>
                     </div>
                     {{-- table --}}
                     <div class="flex flex-col overflow-x-auto bg-white">
@@ -140,7 +262,6 @@
                                     <table class="min-w-full text-left text-sm font-light">
                                         <thead class="border-b font-medium">
                                             <tr>
-                                                <th scope="col" class="min-w-16 max-w-32 p-3">sl</th>
                                                 <th scope="col" class="min-w-16 max-w-32 p-3">Exam Name</th>
                                                 <th scope="col" class="min-w-16 max-w-32 p-3">Institution Name</th>
                                                 <th scope="col" class="min-w-16 max-w-32 p-3">Division</th>
@@ -152,17 +273,40 @@
                                         </thead>
                                         <tbody>
                                             <tr class="border-b table_row">
-                                                <td class="min-w-16 max-w-32 p-3 font-medium">1</td>
-                                                <td class="min-w-16 max-w-32 p-3">Cell Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident ame.</td>
-                                                <td class="min-w-16 max-w-32 p-3">Cell</td>
-                                                <td class="min-w-16 max-w-32 p-3">Cell</td>
-                                                <td class="min-w-16 max-w-32 p-3">Cell</td>
-                                                <td class="min-w-16 max-w-32 p-3">Cell</td>
-                                                <td class="min-w-16 max-w-32 p-3">Cell</td>
-                                                <td class="min-w-16 max-w-32 p-3">Cell</td>
-                                            </tr>
+                                                
+                                                <td class="min-w-16 max-w-32 p-3"></td>
+                                                <td class="min-w-16 max-w-32 p-3"></td>
+                                                <td class="min-w-16 max-w-32 p-3"></td>
+                                                <td class="min-w-16 max-w-32 p-3"></td>
+                                                <td class="min-w-16 max-w-32 p-3"></td>
+                                                <td class="min-w-16 max-w-32 p-3"></td>
+                                                <td class="min-w-16 max-w-32 p-3"></td>
+                                            </tr> 
                                             <!-- More rows here -->
                                         </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    
+                    <div class="flex flex-col overflow-x-auto bg-white">
+                        <div class="">
+                            <div class="inline-block min-w-full py-2">
+                                <div class="">
+                                    <table class="min-w-full text-left text-sm font-light">
+                                        <thead class="border-b font-medium">
+                                            <tr>
+                                                <th scope="col" class="min-w-16 max-w-32 p-3">Additional Subject</th>
+                                                <th scope="col" class="min-w-16 max-w-32 p-3"></th>
+                                                <th scope="col" class="min-w-16 max-w-32 p-3">	Optional Subject</th>
+                                                <th scope="col" class="min-w-16 max-w-32 p-3"></th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        
                                     </table>
                                 </div>
                             </div>

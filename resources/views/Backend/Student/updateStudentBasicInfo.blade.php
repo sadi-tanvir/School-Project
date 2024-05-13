@@ -39,7 +39,7 @@
             </a>
         </div>
         <hr>
-        <form action="{{ route('getData', $school_code) }}" method="GET">
+        <form action="{{ route('getStudentData',$school_code) }}" method="GET">
             @csrf
 
             <div class="grid gap-6 mb-6 md:grid-cols-7 mt-2">

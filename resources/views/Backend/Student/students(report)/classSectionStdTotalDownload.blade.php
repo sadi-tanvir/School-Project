@@ -21,26 +21,32 @@
 </head>
 
 <body>
-    <div class=" w-[1500px] px-[120px] mx-auto">
-        <div class="flex w-full justify-between items-center p-5">
-            <div>
-                <img src="https://i.pinimg.com/originals/82/c6/5b/82c65b9bb0a75026fc4c82a438b4cc9b.jpg" class="rounded-full w-28 h-28" alt="">
+    <div class=" md:w-[1500px] px-[120px] mx-auto" id="page" >
+        <div class=" p-5">
+            @foreach($schoolInfo as $schoolData)
+            <div class=" flex justify-center ">
+                <img src="{{ asset($schoolData->logo) }}" alt="School Logo" class="w-[200px] h-[200px]"/>
             </div>
-            <div class="text-center">
-                <h3 class="text-2xl text-blue-400 font-bold">Pallabi Mazedul Islam Model High School</h3>
-                <p class="text-sm">13/14, Pallabi, Dhaka - 1216. <br>
-                    Contact No: 01309108183 <br>
-                    Email: mimodelschool1978@gmail.com <br>
-                    Website: <a href="http://pmimhs.edu.bd/" class="text-blue-500">pmimhs.edu.bd</a> <br>
-                    <span class="text-red-500"> Print date:14-03-2024</span>
-                </p>
-                <p class="font-bold font-semi-bold text-center text-xl">Student Information</p>
+            <div class="md:flex justify-center  w-full px-5">
+                <div class="text-center">
+                    <h1 class="text-2xl font-bold ">{{$schoolData->school_name}}</h1>
+                    <p class="text-sm ">Contact: {{$schoolData->school_phone}}</p>
+                    <p class="text-sm ">Email: {{$schoolData->school_email}}</p>
+                    <p class="text-sm ">Website: {{$schoolData->website}}</p>
+                    <p class="text-sm ">Print date: {{$date}}</p>
+                </div>
+                <!-- <div>
+                </div> -->
             </div>
-            <div>
-                {{-- --}}
-            </div>
+            @endforeach
+           
         </div>
-        <!-- <div class="grid grid-cols-12 ">
+        <p class="font-bold font-semi-bold text-center text-xl">Student Total Summary</p>
+        <div>
+            {{-- --}}
+        </div>
+    
+    <!-- <div class="grid grid-cols-12 ">
             <div class="border p-1 col-span-1">class</div>
             <div class="border p-1 col-span-5">1</div>
             <div class="border p-1 col-span-1">class</div>
@@ -51,98 +57,123 @@
             <div class="border p-1 col-span-10">1</div>
         </div> -->
 
-        {{-- --}}
-        <div class="flex flex-col overflow-x-auto bg-white">
-            <div class="">
-                <div class="inline-block min-w-full py-2">
-                    <div class="">
-                        <table class="min-w-full text-left text-sm font-light">
-                            <thead class="border font-medium">
-                                <tr>
-                                    <th scope="col" class="min-w-16 max-w-32 p-3">SL</th>
-                                    <th scope="col" class="min-w-16 max-w-32 p-3">Class</th>
-                                    <th scope="col" class="min-w-16 max-w-32 p-3">Section</th>
-                                    <th scope="col" class="min-w-16 max-w-32 p-3">Section Student</th>
-                                    <th scope="col" class="min-w-16 max-w-32 p-3">Class Total Student</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+    {{-- --}}
+    <div class="flex flex-col overflow-x-auto bg-white">
+        <div class="">
+       
+     
+  
+            <div class="inline-block min-w-full py-2">
+                <div class="">
+                    <table class="min-w-full text-left text-sm font-light">
+                        <thead class="border font-medium">
+                            <tr>
+                                <th scope="col" class="min-w-16 max-w-32 p-3">SL</th>
+                                <th scope="col" class="min-w-16 max-w-32 p-3">Class</th>
+                                <th scope="col" class="min-w-16 max-w-32 p-3">Section</th>
+                                <th scope="col" class="min-w-16 max-w-32 p-3">Section Student</th>
+                                <th scope="col" class="min-w-16 max-w-32 p-3">Class Total Student</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                            $stu=0;
+                            @endphp
+                            @if($class===null)
 
-                                @foreach($classes as $key => $class)
-                                <tr class="border table_row">
-                                    <td class="min-w-16 max-w-32 p-3 font-medium">{{ $key + 1 }}</td>
-                                    <td class="min-w-16 max-w-32 p-3 font-medium">{{ $class->class_name }}</td>
-                                    @php
-                                    $sec = $sections->where('class_name', $class->class_name);
-                                    $totalStudents = 0;
-                                    @endphp
-                                    <td class="min-w-16 max-w-32 p-3 font-medium">
-                                        @foreach($sec as $data)
-                                        <div>
-                                            {{$data->section_name}}
+                            @foreach($classes as $key => $class)
+                            <tr class="border table_row">
+                                <td class="min-w-16 max-w-32 p-3 font-medium">{{ $key + 1 }}</td>
+                                <td class="min-w-16 max-w-32 p-3 font-medium">{{ $class->class_name }}</td>
+                                @php
+                                $sec = $sections->where('class_name', $class->class_name)->where('school_code',$school_code);
+                                $totalStudents = 0;
+
+                                @endphp
+                                <td class="min-w-16 max-w-32 p-3 font-medium">
+                                    @foreach($sec as $data)
+                                    <div>
+                                        {{$data->section_name}}
 
 
-                                        </div>
+                                    </div>
 
 
 
-                                        @endforeach
+                                    @endforeach
 
-                                    </td>
-                                    <td class="min-w-16 max-w-32 p-3 font-medium">
-
-                                        @foreach($sec as $data)
-                                        <div>
-                                          
-                                            @php
-                                            
-                                            $sectionStudents = $students->where('Class_name', $class->class_name)->where('section', $data->section_name);
-                                            dd($sectionStudents);
-                                            @endphp
-
-                                        </div>
-
-{{$sectionStudents}}
-
-                                        @endforeach
-
-                                        
-                                    </td>
-                                    <td class="min-w-16 max-w-32 p-3 font-medium">
+                                </td>
+                                <td class="min-w-16 max-w-32 p-3 font-medium">
+                                    @foreach($sec as $data)
+                                    <div>
                                         @php
-                                        $totalStudents += $sectionStudents;
+                                        // Filter students based on class name and section name
+                                        $sectionStudents = $students->where('Class_name', $class->class_name)->where('section', $data->section_name);
+                                        // Count the number of students in the section
+                                        $sectionStudentCount = $sectionStudents->count();
+                                        $totalStudents =$totalStudents+ $sectionStudentCount;
                                         @endphp
-                                        {{$totalStudents}}
-                                    </td>
-                                </tr>
-                                @endforeach
+                                        {{ $sectionStudentCount }}
+                                    </div>
+                                    @endforeach
 
-                            </tbody>
-                        </table>
 
+
+                                </td>
+                                <td class="min-w-16 max-w-32 p-3 font-medium">
+
+                                    {{$totalStudents}}
+
+                                </td>
+
+                                @php
+                                $stu=$stu+$totalStudents;
+
+
+                                @endphp
+
+                            </tr>
+
+                            @endforeach
+                            @endif
+
+
+                        </tbody>
+                    </table>
+
+                    <div class="flex justify-end">
+                        <h3 class="mr-5">
+                            Total Student:
+                        </h3>
+                        <input type="text" value="{{$stu}}">
                     </div>
                 </div>
             </div>
         </div>
 
+    </div>
 
 
 
-        <button id="btn" type="button" class="text-white bg-rose-700 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Download</button>
-        <script>
-            let btn = document.getElementById('btn');
-            let page = document.getElementById('page');
 
-            btn.addEventListener('click', function() {
-                html2PDF(page, {
-                    jsPDF: {
-                        format: 'a4',
-                    },
-                    imageType: 'image/jpeg',
-                    output: './pdf/generate.pdf'
-                });
+
+    <button id="btn" type="button"
+                class="text-white bg-rose-700 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Download</button>
+    </div>
+    <script>
+        let btn = document.getElementById('btn');
+        let page = document.getElementById('page');
+
+        btn.addEventListener('click', function() {
+            html2PDF(page, {
+                jsPDF: {
+                    format: 'a4',
+                },
+                imageType: 'image/jpeg',
+                output: './pdf/generate.pdf'
             });
-        </script>
+        });
+    </script>
 </body>
 
 </html>

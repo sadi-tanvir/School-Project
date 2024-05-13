@@ -60,18 +60,18 @@
 </style>
 
 <aside id="logo-sidebar"
-    class="fixed top-0 left-0 z-40 w-72 h-screen transition-transform -translate-x-full sm:translate-x-0 duration-1000"
+    class="fixed top-12 left-0 z-40 w-72 h-screen transition-transform -translate-x-full sm:translate-x-0 duration-1000"
     aria-label="logo-sidebar">
     <div class="h-full px-3 py-4 overflow-y-auto scrollbar gradient-bg">
         <ul class="space-y-2  font-medium ">
 
 
 
-            <li class="">
+            <!-- <li class="">
                 <a href="/dashboard/{{ $school_code }}" class=" flex items-center p-2 rounded-lg text-white group">
                     <span class="ms-3 text-white ">Dashboard</span>
                 </a>
-            </li>
+            </li> -->
             <!-- dashboard  -->
             <li>
                 <a href="/dashboard/{{ $school_code }}" class="flex items-center p-2 text-white  group">

@@ -26,7 +26,7 @@ class UpdateStudentBasicInfoController extends Controller
         $sectionData = AddSection::where('action', 'approved')->where('school_code', $schoolCode)->get();
         return view('Backend.Student.updateStudentBasicInfo', compact('classData', 'groupData', 'sectionData', 'Year', 'Session', 'student'));
     }
-    public function getData(Request $request, $schoolCode)
+    public function getStudentData(Request $request, $schoolCode)
     {
         $student = null;
         $selectedClassName = $request->input('class_name');

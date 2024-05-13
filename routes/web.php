@@ -145,10 +145,10 @@ Route::prefix('dashboard')->group(function () {
 
 
 
-    //Update Student Basdic Info
+    //Update Student Basic Info
 
     Route::get('/updateStudentBasicInfo/{schoolCode}', [UpdateStudentBasicInfoController::class, 'updateStudentBasicInfo'])->name('updateStudentBasicInfo');
-    Route::get('/getData/{schoolCode}', [UpdateStudentBasicInfoController::class, 'getData'])->name('getData');
+    Route::get('/getStudentData/{schoolCode}', [UpdateStudentBasicInfoController::class, 'getStudentData'])->name('getStudentData');
     Route::put('/updateData/{schoolCode}', [UpdateStudentBasicInfoController::class, 'updateStudentBasic'])->name('updateStudent');
 
 
@@ -161,7 +161,7 @@ Route::prefix('dashboard')->group(function () {
 
     //update student profile
     Route::get('/studentProfileUpdate/{schoolCode}', [StudentProfileUpdateController::class, 'studentProfileUpdate'])->name('studentProfileUpdate');
-    Route::get('/findData/{schoolCode}', [StudentProfileUpdateController::class, 'findData'])->name('studentData');
+    Route::get('/findData/{schoolCode}', [StudentProfileUpdateController::class, 'findData'])->name('findData');
     
     //Update Student ->Add Student
     Route::get('/getStudent/{schoolCode}', [BasicAddStudentController::class, 'getStudent'])->name('getStudent');
@@ -231,8 +231,11 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/studentListWithPhoto/{schoolCode}', [StudentListWithPhotoController::class, 'studentListWithPhoto'])->name('studentListWithPhoto');
     Route::post('/listStudent', [StudentListWithPhotoController::class,'viewStudentListPhoto'])->name('viewStudentListPhoto');
 
-
-    Route::get('/studentProfile/{schoolCode}', [StudentProfileController::class, 'student_profile']);
+//student profile
+    Route::get('/search/{schoolCode}', [StudentProfileController::class, 'search']);
+    Route::get('/studentProfile/{schoolCode}', [StudentProfileController::class, 'student_profileInfo']);
+    Route::post('/studentid/{schoolCode}',[StudentProfileController::class, 'studentid'])->name('studentid');
+    Route::get('/student_ProfileReport/{schoolCode}', [StudentProfileController::class, 'student_ProfileReport'])->name('student_ProfileReport');
     Route::get('/studentShortList/{schoolCode}', [addShortListController::class, 'studentShortList']);
     Route::post('/viewStudentShortList',[addShortListController::class,'viewStudentShortList'])->name('viewStudentShortList');
     Route::get('/testimonial/{schoolCode}', [testimonialController::class, 'testimonial']);
@@ -327,10 +330,18 @@ Route::get('/monthlyPaidDetails/{schoolCode}', [MonthlyPaidDetailsController::cl
     //Message
     Route::get('/contact/{schoolCode}', [AddContactController::class, 'Contact'])->name('contact');
     Route::post('/addContact', [AddContactController::class, 'addContact'])->name('addContact');
+   
     
     Route::get('/message/{schoolCode}', [SendMSGController::class, 'message'])->name('message');
+    Route::post('/getContact', [SendMSGController::class, 'getContact'])->name('getContact');
+    Route::post('/messages/get-groups/{schoolCode}',[SendMSGController::class, 'getGroups'])->name('messages.get-groups');
+    Route::post('/messages/get-sections/{schoolCode}',[SendMSGController::class, 'getSections'])->name('messages.get-sections');
+    Route::post('/messages/get-shifts/{schoolCode}', [SendMSGController::class, 'getShifts'])->name('messages.get-shifts');
     Route::post('/sendMessage', [SendMSGController::class, 'sendMessage'])->name('sendMessage');
     Route::delete('/delete_contact/{id}', [SendMSGController::class, 'delete_add_contact'])->name('delete.contact');
+    Route::delete('/delete_selected_contacts', [SendMSGController::class, 'deleteSelectedContacts']);
+
+
     
     
     Route::get('/excelmsg/{schoolCode}', [ExcelMSGController::class, 'excelMsg'])->name('excelmsg');

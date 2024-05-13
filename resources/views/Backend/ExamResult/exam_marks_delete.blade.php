@@ -11,7 +11,7 @@ Exam Marks Delete
 <div>
     <div class=" mb-10">
         <div class="card-body p-2">
-            <form action="{{ route('getData',$school_code) }}" method="GEt">
+            <form action="{{ route('get.Data',$school_code) }}" method="Get">
                 @csrf
                 <div class="grid grid-cols-7 gap-4">
                     <!-- Class Name -->

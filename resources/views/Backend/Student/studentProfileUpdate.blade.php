@@ -11,7 +11,7 @@
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-10 md:my-10">
 
         <hr>
-        <form action="{{ route('studentData', $school_code) }}" method="GET">
+        <form action="{{ route('student.Data', $school_code) }}" method="post">
             @csrf
 
             <div class="grid gap-6 mb-6 md:grid-cols-9 mt-2">
@@ -92,6 +92,7 @@
                 </div>
             </div>
         </form>
+
         <table class="w-full  rtl:text-right text-black dark:text-blue-100 text-center">
             <thead class="text-xs text-white uppercase bg-blue-600 border-b border-blue-400 dark:text-white">
                 <tr>

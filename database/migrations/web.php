@@ -22,16 +22,6 @@ use App\Http\Controllers\Backend\CommonSetting\InstituteInfoController;
 use App\Http\Controllers\Backend\Dashboard\DashboardController;
 use App\Http\Controllers\Backend\ExamResult\MarkInputController;
 use App\Http\Controllers\Backend\ExamSetting\FourthSubjectController;
-use App\Http\Controllers\Backend\FeesSetting\AddFeeTypeController;
-use App\Http\Controllers\Backend\FeesSetting\AddPaySlipTypeController;
-use App\Http\Controllers\Backend\FeesSetting\FeesSetupController;
-use App\Http\Controllers\Backend\FeesSetting\PaySlipSetupController;
-use App\Http\Controllers\Backend\FeesSetting\ReportFeesSettings\AllFeesController;
-use App\Http\Controllers\Backend\FeesSetting\ReportFeesSettings\AllPaySlipController;
-use App\Http\Controllers\Backend\FeesSetting\ReportFeesSettings\IndividualPaySlipController;
-use App\Http\Controllers\Backend\FeesSetting\ReportFeesSettings\IndividualWaiverController;
-use App\Http\Controllers\Backend\FeesSetting\WaiverSetupController;
-use App\Http\Controllers\Backend\FeesSetting\WaiverTypeController;
 use App\Http\Controllers\Backend\NEDUBD\NEDUBDController;
 use App\Http\Controllers\Backend\NEDUBD\SchoolAdminController;
 use App\Http\Controllers\Backend\Student\StudentController;
@@ -48,21 +38,29 @@ use App\Http\Controllers\Backend\Student\studentReports\StudentListWithPhotoCont
 use App\Http\Controllers\Backend\Student\studentReports\EsifListController;
 use App\Http\Controllers\Backend\Student\UploadExcelFileController;
 
+// Online Application
+use App\Http\Controllers\Backend\OnlineApplication\ListOfApplicantController;
+
+
+// student accounts
+use App\Http\Controllers\Backend\Student_Account\PaySlipCollectionController;
+use App\Http\Controllers\Backend\Student_Account\PrintUnpaidPaySlipController;
 use App\Http\Controllers\Backend\Student_Account\CollectUnpaidPaySlipController;
 use App\Http\Controllers\Backend\Student_Account\DeletePaySlipController;
+use App\Http\Controllers\Backend\Student_Account\NewStdAddPaySlipController;
+use App\Http\Controllers\Backend\Student_Account\NewOldStdAddPaySlipController;
+// generate pay slips
+use App\Http\Controllers\Backend\Student_Account\GeneratePayslipController;
+
 use App\Http\Controllers\Backend\Student_Account\EditGeneratedPayslipController;
 use App\Http\Controllers\Backend\Student_Account\GenerateMultiplePayslipController;
-use App\Http\Controllers\Backend\Student_Account\GeneratePayslipController;
-use App\Http\Controllers\Backend\Student_Account\NewOldStdAddPaySlipController;
-use App\Http\Controllers\Backend\Student_Account\NewStdAddPaySlipController;
+use App\Http\Controllers\Backend\Student_Account\QuickCollectionController;
+// Student Accounts => Others
 use App\Http\Controllers\Backend\Student_Account\Others\FromFeeController;
 use App\Http\Controllers\Backend\Student_Account\Others\DonationController;
 use App\Http\Controllers\Backend\Student_Account\Others\OthersFeeController;
 use App\Http\Controllers\Backend\Student_Account\Others\FineFailController;
-
-use App\Http\Controllers\Backend\Student_Account\PaySlipCollectionController;
-use App\Http\Controllers\Backend\Student_Account\PrintUnpaidPaySlipController;
-use App\Http\Controllers\Backend\Student_Account\QuickCollectionController;
+// Student Accounts => Others
 use App\Http\Controllers\Backend\Student_Account\Reports\DailyCollectionReportController;
 use App\Http\Controllers\Backend\Student_Account\Reports\geneTranferInquiriController;
 use App\Http\Controllers\Backend\Student_Account\Reports\DuePaySummaryController;
@@ -84,8 +82,20 @@ use App\Http\Controllers\Backend\Teacher\TeacherController;
 use App\Http\Controllers\Frontend\Auth\AuthController;
 use App\Http\Controllers\Backend\ExamResult\ExamResultController;
 use App\Http\Controllers\Backend\ExamResult\ExamProcessController;
-use App\Http\Controllers\Backend\ExamResult\ExamMarksDeleteController;
 
+
+// Basic Setting => Fees Setting
+use App\Http\Controllers\Backend\FeesSetting\AddFeeTypeController;
+use App\Http\Controllers\Backend\FeesSetting\FeesSetupController;
+use App\Http\Controllers\Backend\FeesSetting\AddPaySlipTypeController;
+use App\Http\Controllers\Backend\FeesSetting\PaySlipSetupController;
+use App\Http\Controllers\Backend\FeesSetting\WaiverTypeController;
+use App\Http\Controllers\Backend\FeesSetting\WaiverSetupController;
+use App\Http\Controllers\Backend\FeesSetting\ReportFeesSettings\AllFeesController;
+use App\Http\Controllers\Backend\FeesSetting\ReportFeesSettings\AllPaySlipController;
+use App\Http\Controllers\Backend\FeesSetting\ReportFeesSettings\IndividualPaySlipController;
+use App\Http\Controllers\Backend\FeesSetting\ReportFeesSettings\IndividualWaiverController;
+// Basic Setting => Exam Setting
 use App\Http\Controllers\Backend\ExamSetting\AddGradePointController;
 use App\Http\Controllers\Backend\ExamSetting\AddShortCodeController;
 use App\Http\Controllers\Backend\ExamSetting\GradeSetupController;
@@ -126,6 +136,50 @@ use App\Http\Controllers\Backend\Student\StudentReports\StudentProfileController
 use App\Http\Controllers\Backend\Student\StudentReports\testimonialController;
 use App\Http\Controllers\Backend\Student\StudentReports\trasnferCertificateController;
 use App\Http\Controllers\Backend\Student\StudentReports\trasnferCertificateListController;
+
+
+// General Accounts
+use App\Http\Controllers\Backend\GeneralAccounts\CashPaymentVoucherController;
+use App\Http\Controllers\Backend\GeneralAccounts\CashReceiptVoucherController;
+use App\Http\Controllers\Backend\GeneralAccounts\BankPaymentVoucherController;
+use App\Http\Controllers\Backend\GeneralAccounts\BankReceiptVoucherController;
+use App\Http\Controllers\Backend\GeneralAccounts\JournalVoucherController;
+use App\Http\Controllers\Backend\GeneralAccounts\ContraVoucherController;
+use App\Http\Controllers\Backend\GeneralAccounts\VoucherPostingController;
+// General Accounts => Reports (General Accounts)
+use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\AccountsVoucherController;
+use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\CashBookController;
+use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\BankBookController;
+use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\JournalBookController;
+use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\IncomeExpenseSummaryController;
+use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\TrialBalanceController;
+use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\BalanceSheetController;
+use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\IncomeStatementController;
+// General Accounts => MyAccount
+use App\Http\Controllers\Backend\GeneralAccounts\MyAccount\CurrentBalanceController;
+use App\Http\Controllers\Backend\GeneralAccounts\MyAccount\PersonalStatementController;
+use App\Http\Controllers\Backend\GeneralAccounts\MyAccount\AllStatementController;
+
+
+// Assessment
+use App\Http\Controllers\Backend\Assessment\AssessmentInputController;
+// Assessment => Basic Setting
+use App\Http\Controllers\Backend\Assessment\BasicSetting\ParadarsitaSuchokController;
+use App\Http\Controllers\Backend\Assessment\BasicSetting\ParadarsitaSuchokExcelController;
+use App\Http\Controllers\Backend\Assessment\BasicSetting\ParadarsitaSuchokMatraController;
+use App\Http\Controllers\Backend\Assessment\BasicSetting\ParadarsitaSuchokMatra_2_Controller;
+use App\Http\Controllers\Backend\Assessment\BasicSetting\AddNoipunnoNameController;
+use App\Http\Controllers\Backend\Assessment\BasicSetting\SetupAssParadarsitaNoipunnoController;
+use App\Http\Controllers\Backend\Assessment\BasicSetting\ParadarsitaSuchokExamController;
+// Assessment => Assessment Reports
+use App\Http\Controllers\Backend\Assessment\AssessmentReports\SubjectWiseReportController;
+use App\Http\Controllers\Backend\Assessment\AssessmentReports\AllSubjectWiseController;
+use App\Http\Controllers\Backend\Assessment\AssessmentReports\NoipunnoReportController;
+use App\Http\Controllers\Backend\Assessment\AssessmentReports\NoipunnoAllSubjectController;
+use App\Http\Controllers\Backend\Assessment\AssessmentReports\NoipunnoMullaonPrintController;
+use App\Http\Controllers\Backend\Assessment\AssessmentReports\NoipunnoBIController;
+
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -151,12 +205,19 @@ Route::get('/login-user', [AuthController::class, 'loginUser'])->name('login-use
 
 Route::prefix('dashboard')->group(function () {
     Route::get('/{schoolCode}', [DashboardController::class, 'index'])->name('dashboard.index');
-    // NEDUBD Module 
+    // NEDUBD Module
     Route::get('/addAdmin/{schoolCode}', [NEDUBDController::class, 'addAdmin']);
     Route::post('/create-admin', [NEDUBDController::class, 'createAdmin'])->name('admin.add');
     Route::get('/addSchoolInfo/{schoolCode}', [NEDUBDController::class, 'addSchoolInfo']);
     Route::post('/create-schoolInfo', [NEDUBDController::class, 'createSchoolInfo'])->name('schoolInfo.add');
 
+
+
+    // Online Application
+    Route::get('/onlineApplication/listOfApplicant/{schoolCode}', [ListOfApplicantController::class, 'ListOfApplicantView'])->name("listOfApplicant.view");
+    Route::get('/onlineApplication/onlineApplicationForm/{schoolCode}', [ListOfApplicantController::class, 'OnlineApplicationForm'])->name("onlineApplicationForm.view");
+    Route::get('/onlineApplication/blankApplicationForm/{schoolCode}', [ListOfApplicantController::class, 'BlankApplicationForm'])->name("blankApplicationForm.view");
+    Route::get('/onlineApplication/reportApplication/{schoolCode}', [ListOfApplicantController::class, 'ReportApplicationView'])->name("reportApplication.view");
 
 
     // student module
@@ -181,14 +242,14 @@ Route::prefix('dashboard')->group(function () {
 
     //update student profile
     Route::get('/studentProfileUpdate/{schoolCode}', [StudentProfileUpdateController::class, 'studentProfileUpdate'])->name('studentProfileUpdate');
-    Route::post('/find-Data/{schoolCode}', [StudentProfileUpdateController::class, 'findData'])->name('student.Data');
+    Route::get('/findData/{schoolCode}', [StudentProfileUpdateController::class, 'findData'])->name('studentData');
 
     //Update Student ->Add Student
     Route::get('/getStudent/{schoolCode}', [BasicAddStudentController::class, 'getStudent'])->name('getStudent');
     Route::post('/postStudent', [BasicAddStudentController::class, 'postStudent'])->name('postStudent');
 
 
-    //update student 
+    //update student
     Route::get('/student_update/{id}/{schoolCode}', [UpdateStudentController::class, 'student_update'])->name('student_update');
     Route::put('/students/{id}', [UpdateStudentController::class, 'updateStudent'])->name('students.update');
 
@@ -259,7 +320,10 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/transferCertificate/{schoolCode}', [trasnferCertificateController::class, 'trasnfer_certificate']);
     Route::get('/transferCertificateList/{schoolCode}', [trasnferCertificateListController::class, 'trasnfer_certificate_list']);
 
-   //Students Accounts
+
+
+
+    //Students Accounts
     // Payslip Collection
     Route::get("/studentAccounts/paySlipCollection/{schoolCode}", [PaySlipCollectionController::class, "PaySlipForm"])->name("paySlipCollection.view");
     Route::get("/studentAccounts/paySlipCollection/getStudentRoll/{schoolCode}", [PaySlipCollectionController::class, "GetStudentRoll"])->name("StudentRoll.get");
@@ -312,8 +376,7 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/addLeaveType/{schoolCode}', [AttendenceController::class, "add_leave_type"])->name('addLeaveType');
 
 
-
-    // report Student Attendence 
+    // report Student Attendence
     Route::get('/attendenceReport/{schoolCode}', [ReportStudentAttendenceController::class, "attendence_report"])->name('attendenceReport');
     Route::get('/attendenceBlankReport/{schoolCode}', [ReportStudentAttendenceController::class, "attendence_blank_report"])->name('attendenceBlankReport');
     Route::get('/dateWiseReport/{schoolCode}', [ReportStudentAttendenceController::class, "date_wise_report"])->name('dateWiseReport');
@@ -327,24 +390,14 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/marksInput/{schoolCode}', [MarkInputController::class, 'exam_marks']);
     Route::post('/exam-marks/get-groups/{schoolCode}', [MarkInputController::class, 'getGroups'])->name('exam-marks.get-groups');
     Route::post('/exam-marks/get-sections/{schoolCode}', [MarkInputController::class, 'getSections'])->name('exam-marks.get-sections');
-    Route::post('/exam-marks/get-shifts/{schoolCode}', [MarkInputController::class, 'getShifts'])->name('exam-marks.get-shifts');
-    Route::post('/exam-marks/get-exams/{schoolCode}', [MarkInputController::class, 'classExam'])->name('exam-marks.get-exams');
-    Route::post('/exam-marks/get-subjects/{schoolCode}', [MarkInputController::class, 'subject'])->name('exam-marks.get-subjects');
-    Route::get('/findData/{schoolCode}', [MarkInputController::class, 'finData'])->name('findData');
-    Route::post('/exam-marks', [MarkInputController::class, 'marksInput'])->name('exam.marks');
-    Route::put('/update-mark-input', [MarkInputController::class, 'updateMarkInput'])->name('update.mark.input');
-    Route::get('/exam_mark_print/{schoolCode}', [MarkInputController::class, 'printBlankExam'])->name('exam_mark_print');
-    Route::post('/download-mark-excel', [MarkInputController::class, 'downloadExcel'])->name('downloadExcel.mark');
-    Route::get('/full_marks_print/{schoolCode}', [MarkInputController::class, 'full_marks_print'])->name('full_marks_print');
-    Route::post('/mark-input-excel-upload', [MarkInputController::class, 'mark_input_excel_uplaod'])->name('mark.input.excel.upload');
+    Route::post('/exam-marks/get-shifts', [MarkInputController::class, 'getShifts'])->name('exam-marks.get-shifts');
 
     Route::get('/exam_process/{schoolCode}', [ExamProcessController::class, 'exam_process']);
     Route::get('/getStudents/{schoolCode}/{class}/{group}/{section}', [ExamProcessController::class, 'getStudents']);
     Route::get('/exam_excel/{schoolCode}', [ExamResultController::class, 'exam_excel']);
-    Route::get('/exam_marks_delete/{schoolCode}', [ExamMarksDeleteController::class, 'exam_marks_delete']);
-    Route::put('/deleteMarks/{schoolCode}', [ExamMarksDeleteController::class, 'deleteMarks'])->name('exam-marks.delete');
-    Route::get('/get-data/{schoolCode}', [ExamMarksDeleteController::class, 'finData'])->name('get.Data');
+    Route::get('/exam_marks_delete/{schoolCode}', [ExamResultController::class, 'exam_marks_delete']);
     Route::get('/exam_sms/{schoolCode}', [ExamResultController::class, 'exam_sms']);
+
     // exam-report
     Route::get('/progressReport/{schoolCode}', [ReportsExamsReportsController::class, 'progressReport']);
     Route::get('/exam-failList/{schoolCode}', [ReportsExamsReportsController::class, 'failList1']);
@@ -516,13 +569,6 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/getExamMarks/{schoolCode}', [SetExamMarksController::class, 'store_exam_marks'])->name('get.exam.marks');
     Route::post('/setExamMarks/{schoolCode}', [SetExamMarksController::class, 'set_exam_marks'])->name('store.set.exam.marks');
     Route::post('/saveSetExamMarks/{schoolCode}', [SetExamMarksController::class, 'saveSetExamMarks'])->name('saveSetExamMarks');
-    Route::get('/mark-config-view/{schoolCode}', [SetExamMarksController::class, 'markConfigView'])->name('mark.config.view');
-    Route::post('/getMarkConfig/{schoolCode}', [SetExamMarksController::class, 'getMarkConfig'])->name('getMarkConfig');
-    Route::post('/exam-marks/get-groups/{schoolCode}', [SetExamMarksController::class, 'getGroups'])->name('exam-marks.get-groups');
-    Route::post('/exam-marks/get-exams/{schoolCode}', [SetExamMarksController::class, 'classExam'])->name('exam-marks.get-exams');
-    Route::delete('/exam-mark-delete/{id}', [SetExamMarksController::class, 'deleteExamMarks'])->name('delete.exam.marks');
-    Route::get('/view-update-form/{schoolCode}/{id}', [SetExamMarksController::class, 'viewUpdateForm'])->name('view.update.form');
-    Route::put('/update-exam-marks', [SetExamMarksController::class, 'updateExamMarks'])->name('update-marks');
 
     //forth subject
 
@@ -548,7 +594,7 @@ Route::prefix('dashboard')->group(function () {
 
     Route::get('/listSignature/{schoolCode}', [AddSignatureController::class, 'listSignature']);
 
-    //Add Exam Publish 
+    //Add Exam Publish
     Route::get('/ExamPublish/{schoolCode}', [ExamPublishController::class, 'ExamPublish']);
     Route::post('/addExamPublish/{schoolCode}', [ExamPublishController::class, 'store_add_exam_publish'])->name('store.exampublish');
     Route::delete('/delete_exam/{id}', [ViewExamPublishController::class, 'delete_add_exam'])->name('delete.report');
@@ -559,10 +605,10 @@ Route::prefix('dashboard')->group(function () {
     Route::put('/store_grandFinal/{schoolCode}', [SetGrandFinalController::class, 'store_grandFinal'])->name('store.grandfinal');
     Route::get('/viewExamMarkSetup/{schoolCode}', [ViewExamMarkSetUpController::class, 'viewExamMarkSetup']);
 
-    //sequential wise exam 
+    //sequential wise exam
     Route::get('/SequentialExam/{schoolCode}', [SequentialWiseExamController::class, 'SequentialExam'])->name('sequentialExam');
     Route::put('/SetExamMarks/{schoolCode}', [SequentialWiseExamController::class, 'store_sequential_exam'])->name('store.sequentialExam');
-    //sequential wise exam 
+    //sequential wise exam
     Route::get('/SetExamMarks', [SetExamMarksController::class, 'SetExamMarks']);
 
     //Set signature
@@ -575,11 +621,8 @@ Route::prefix('dashboard')->group(function () {
 
 
 
-    // Exam Setting End .............................................................................................................
 
-
-
-     // Fees Setting Start .............................................................................................................
+    // Fees Setting Start .............................................................................................................
 
     // Basic Setting => Fees Setting
     // add fee type
@@ -632,8 +675,6 @@ Route::prefix('dashboard')->group(function () {
 
 
 
-
-
     //teacher module start
 
     Route::get('/add-teacher', [TeacherController::class, 'addTeacher']);
@@ -675,7 +716,51 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/ExamBlankSheet/{schoolCode}', [ExamBlankSheetController::class, "ExamBlankSheet"]);
 
 
-    // NEDUBD Add School Admin 
+    // NEDUBD Add School Admin
     Route::get('/addSchoolAdmin/{schoolCode}', [SchoolAdminController::class, "addSchoolAdmin"]);
     Route::post('/createSchoolAdmin', [SchoolAdminController::class, "createSchoolAdmin"])->name('schoolAdmin.create');
+
+
+
+    // General Accounts
+    Route::get("/generalAccounts/cashPaymentVoucher/{schoolCode}", [CashPaymentVoucherController::class, "CashPaymentVoucherView"])->name("cashPaymentVoucher.view");
+    Route::get("/generalAccounts/cashReceiptVoucher/{schoolCode}", [CashReceiptVoucherController::class, "CashReceiptVoucherView"])->name("cashReceiptVoucher.view");
+    Route::get("/generalAccounts/bankPaymentVoucher/{schoolCode}", [BankPaymentVoucherController::class, "BankPaymentVoucherView"])->name("bankPaymentVoucher.view");
+    Route::get("/generalAccounts/bankReceiptVoucher/{schoolCode}", [BankReceiptVoucherController::class, "BankReceiptVoucherView"])->name("bankReceiptVoucher.view");
+    Route::get("/generalAccounts/journalVoucher/{schoolCode}", [JournalVoucherController::class, "JournalVoucherView"])->name("journalVoucher.view");
+    Route::get("/generalAccounts/contraVoucher/{schoolCode}", [ContraVoucherController::class, "ContraVoucherView"])->name("contraVoucher.view");
+    Route::get("/generalAccounts/voucherPosting/{schoolCode}", [VoucherPostingController::class, "VoucherPostingView"])->name("voucherPosting.view");
+    // General Accounts => Reports (General Accounts)
+    Route::get("/generalAccounts/Reports_GeneralAccounts/accountsVoucher/{schoolCode}", [AccountsVoucherController::class, "AccountsVoucherView"])->name("accountsVoucher.view");
+    Route::get("/generalAccounts/Reports_GeneralAccounts/cashBook/{schoolCode}", [CashBookController::class, "CashBookView"])->name("cashBook.view");
+    Route::get("/generalAccounts/Reports_GeneralAccounts/bankBook/{schoolCode}", [BankBookController::class, "BankBookView"])->name("bankBook.view");
+    Route::get("/generalAccounts/Reports_GeneralAccounts/journalBook/{schoolCode}", [JournalBookController::class, "JournalBookView"])->name("journalBook.view");
+    Route::get("/generalAccounts/Reports_GeneralAccounts/incomeExpenseSummary/{schoolCode}", [IncomeExpenseSummaryController::class, "IncomeExpenseSummaryView"])->name("incomeExpenseSummary.view");
+    Route::get("/generalAccounts/Reports_GeneralAccounts/trialBalance/{schoolCode}", [TrialBalanceController::class, "TrialBalanceView"])->name("trialBalance.view");
+    Route::get("/generalAccounts/Reports_GeneralAccounts/balanceSheet/{schoolCode}", [BalanceSheetController::class, "BalanceSheetView"])->name("balanceSheet.view");
+    Route::get("/generalAccounts/Reports_GeneralAccounts/incomeStatement/{schoolCode}", [IncomeStatementController::class, "IncomeStatementView"])->name("incomeStatement.view");
+    // General Accounts => My Account
+    Route::get("/generalAccounts/myAccount/currentBalance/{schoolCode}", [CurrentBalanceController::class, "CurrentBalanceView"])->name("currentBalance.view");
+    Route::get("/generalAccounts/myAccount/personalStatement/{schoolCode}", [PersonalStatementController::class, "PersonalStatementView"])->name("personalStatement.view");
+    Route::get("/generalAccounts/myAccount/allStatement/{schoolCode}", [AllStatementController::class, "AllStatementView"])->name("allStatement.view");
+
+
+
+    // Assessment
+    Route::get("/assessment/assessmentInput/{schoolCode}", [AssessmentInputController::class, "AssessmentInputView"])->name("assessmentInput.view");
+    // Assessment => Basic Setting
+    Route::get("/assessment/basicSetting/paradarsitaSuchok/{schoolCode}", [ParadarsitaSuchokController::class, "ParadarsitaSuchokView"])->name("paradarsitaSuchok.view");
+    Route::get("/assessment/basicSetting/paradarsitaSuchokExcel/{schoolCode}", [ParadarsitaSuchokExcelController::class, "ParadarsitaSuchokExcelView"])->name("paradarsitaSuchokExcel.view");
+    Route::get("/assessment/basicSetting/paradarsitaSuchokMatra/{schoolCode}", [ParadarsitaSuchokMatraController::class, "ParadarsitaSuchokMatraView"])->name("paradarsitaSuchokMatra.view");
+    Route::get("/assessment/basicSetting/paradarsitaSuchokMatra_2/{schoolCode}", [ParadarsitaSuchokMatra_2_Controller::class, "ParadarsitaSuchokMatra_2_View"])->name("paradarsitaSuchokMatra_2.view");
+    Route::get("/assessment/basicSetting/addNoipunnoName/{schoolCode}", [AddNoipunnoNameController::class, "AddNoipunnoNameView"])->name("addNoipunnoName.view");
+    Route::get("/assessment/basicSetting/setupAssParadarsitaNoipunno/{schoolCode}", [SetupAssParadarsitaNoipunnoController::class, "SetupAssParadarsitaNoipunnoView"])->name("setupAssParadarsitaNoipunno.view");
+    Route::get("/assessment/basicSetting/paradarsitaSuchokExam/{schoolCode}", [ParadarsitaSuchokExamController::class, "ParadarsitaSuchokExamView"])->name("paradarsitaSuchokExam.view");
+    // Assessment => Assessment Reports
+    Route::get("/assessment/assessmentReports/subjectWiseReport/{schoolCode}", [SubjectWiseReportController::class, "SubjectWiseReportView"])->name("subjectWiseReport.view");
+    Route::get("/assessment/assessmentReports/allSubjectWise/{schoolCode}", [AllSubjectWiseController::class, "AllSubjectWiseView"])->name("allSubjectWise.view");
+    Route::get("/assessment/assessmentReports/noipunnoReport/{schoolCode}", [NoipunnoReportController::class, "NoipunnoReportView"])->name("noipunnoReport.view");
+    Route::get("/assessment/assessmentReports/noipunnoAllSubject/{schoolCode}", [NoipunnoAllSubjectController::class, "NoipunnoAllSubjectView"])->name("noipunnoAllSubject.view");
+    Route::get("/assessment/assessmentReports/noipunnoMullaonPrint/{schoolCode}", [NoipunnoMullaonPrintController::class, "NoipunnoMullaonPrintView"])->name("noipunnoMullaonPrint.view");
+    Route::get("/assessment/assessmentReports/noipunnoBI/{schoolCode}", [NoipunnoBIController::class, "NoipunnoBIView"])->name("noipunnoBI.view");
 });

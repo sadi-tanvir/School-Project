@@ -107,8 +107,6 @@ Exam Marks
                             <label for="class" class="text-gray-700">Year:</label>
 
                             <select name="year" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-
-                                <option disabled selected value="">Select</option>
                                 @foreach ($academicYearData as $data)
                                 <option value="{{ $data->academic_year_name }}">{{ $data->academic_year_name }}</option>
                                 @endforeach
@@ -516,7 +514,7 @@ Exam Marks
     <input type="text" class="hidden"  value="{{$selectedExamName}}" name="exam" >
     <input type="text" class="hidden"  value="{{$selectedYear}}" name="year" >
     <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Print Mark Page</button>
-</form>              
+</form>             
  </div>
     
 @endif

@@ -328,8 +328,13 @@ Route::get('/monthlyPaidDetails/{schoolCode}', [MonthlyPaidDetailsController::cl
     //Message
     Route::get('/contact/{schoolCode}', [AddContactController::class, 'Contact'])->name('contact');
     Route::post('/addContact', [AddContactController::class, 'addContact'])->name('addContact');
+   
     
     Route::get('/message/{schoolCode}', [SendMSGController::class, 'message'])->name('message');
+    Route::post('/getContact', [SendMSGController::class, 'getContact'])->name('getContact');
+    Route::post('/messages/get-groups/{schoolCode}',[SendMSGController::class, 'getGroups'])->name('messages.get-groups');
+    Route::post('/messages/get-sections/{schoolCode}',[SendMSGController::class, 'getSections'])->name('messages.get-sections');
+    Route::post('/messages/get-shifts/{schoolCode}', [SendMSGController::class, 'getShifts'])->name('messages.get-shifts');
     Route::post('/sendMessage', [SendMSGController::class, 'sendMessage'])->name('sendMessage');
     Route::delete('/delete_contact/{id}', [SendMSGController::class, 'delete_add_contact'])->name('delete.contact');
     Route::delete('/delete_selected_contacts', [SendMSGController::class, 'deleteSelectedContacts']);

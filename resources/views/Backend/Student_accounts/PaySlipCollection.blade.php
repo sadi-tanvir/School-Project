@@ -217,7 +217,9 @@
                                 <div class="">
                                     <p class="text-sm font-medium text-gray-700 ">
                                         S.ID:
-                                        <span id="printable_student_id" class="font-bold"></span>
+                                        <input id="printable_student_id" type="text" value=""
+                                            name="printable_student_id"
+                                            class="bg-transparent border-none focus:ring-0 h-0 w-fit" readonly>
                                     </p>
                                 </div>
                                 <div class="">
@@ -327,7 +329,7 @@
                                         placeholder="" readonly />
                                 </div>
                             </div>
-                            <div class="mt-24 space-y-3">
+                            {{-- <div class="mt-24 space-y-3">
                                 <div class="flex gap-2">
                                     <label for="fine" class="mb-2 text-sm font-medium text-gray-600 ">Fine:</label>
                                     <input type="text" value="" name="fine" id="fine"
@@ -357,27 +359,39 @@
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full"
                                         placeholder="" readonly />
                                 </div>
+                            </div> --}}
+                        </div>
+
+                        <div class="my-5 flex flex-col font-bold">
+                            <label for="">Note:</label>
+                            <textarea name="note" id="" cols="30" rows="4" class="rounded-lg w-96 p-2"></textarea>
+                        </div>
+
+                        <div class="flex gap-3">
+                            <div class="">
+                                <label for="changed" class="mb-2 text-sm font-medium text-gray-600 ">Changed:</label>
+                                <input type="text" value="" name="changeAmount" id="changeAmount"
+                                    class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full px-1"
+                                    placeholder="" />
                             </div>
-                            <div class="flex gap-3">
-                                <div class="">
-                                    <label for="changed" class="mb-2 text-sm font-medium text-gray-600 ">Changed:</label>
-                                    <input type="text" value="" name="changeAmount" id="changeAmount"
-                                        class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full px-1"
-                                        placeholder="" />
-                                </div>
-                                <div class="mt-5">
-                                    <input type="text" value="" name="returnAmount" id="returnAmount"
-                                        class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full px-1"
-                                        placeholder="" />
-                                </div>
+                            <div class="mt-5">
+                                <input type="text" value="" name="returnAmount" id="returnAmount"
+                                    class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full px-1"
+                                    placeholder="" />
                             </div>
                         </div>
 
-                        <div class="w-full flex">
-                            <button id="getPaySlipData" type="submit"
-                                class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mt-10 text-center mx-auto">Collect
+
+                        <div class="w-full flex items-center justify-center gap-5">
+                            <button id="collect_fees" type="submit"
+                                class="text-white hover:bg-gradient-to-bl focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 mt-10 text-center">Collect
                                 Fees
                             </button>
+                            {{-- <button id="collect_fees" type="submit"
+                                class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mt-10 text-center">Collect
+                                Fees
+                            </button> --}}
+
                         </div>
                     </div>
                 </form>
@@ -399,8 +413,11 @@
         const table_body = document.getElementById('table_body');
         const PrintReadyBtn = document.getElementById('PrintReadyBtn');
         const collect_amount = document.getElementById('collect_amount');
+        const collect_fees = document.getElementById('collect_fees');
 
-
+        // collect fees null initially
+        collect_fees.disabled = true;
+        collect_fees.classList.add("bg-gray-500", "not-allowed");
 
         // get student information
         classId.addEventListener('change', async (e) => {
@@ -645,7 +662,7 @@
                 // showing data in the UI
                 voucher_id.innerText = data.voucher_number;
                 voucher_number.value = data.voucher_number;
-                printable_student_id.innerText = data.student_information.nedubd_student_id;
+                printable_student_id.value = data.student_information.nedubd_student_id;
                 printable_student_roll.innerText = data.student_information.student_roll;
                 printable_student_name.innerText = data.student_information.name;
                 printable_student_class.innerText = data.student_information.Class_name;
@@ -697,7 +714,7 @@
                 payslipTypeNameTD.style.maxWidth = "160px";
                 const payslipTypeInputBox = document.createElement('input');
                 payslipTypeInputBox.type = 'text'
-                payslipTypeInputBox.name = `input_payslip_type[${slip.id}]`;
+                payslipTypeInputBox.name = `input_fee_type[${slip.id}]`;
                 payslipTypeInputBox.value = slip.pay_slip_type + " (" + slip.month + "," + slip.year +
                     ")";
                 payslipTypeInputBox.classList.add('border-0', 'w-fit',
@@ -729,6 +746,8 @@
                     'overflow-hidden')
                 payslipWaiverTD.style.width = "10px";
                 const payslipWaiverInputBox = document.createElement('input');
+                payslipWaiverInputBox.readOnly = slip.due_amount ? true : false;
+                payslipWaiverInputBox.classList.add(slip.due_amount ? "bg-gray-200" : "bg-white")
                 payslipWaiverInputBox.style.width = "90px"
                 payslipWaiverInputBox.type = 'text'
                 payslipWaiverInputBox.name = `input_waiver[${slip.id}]`;
@@ -803,6 +822,11 @@
                 // calculate with current pay
                 let preValueOfCurrentPay = parseInt(currentPayInputBox.value) || 0;
                 currentPayInputBox.addEventListener('change', (event) => {
+                    // collect fees null initially
+                    collect_fees.disabled = false;
+                    collect_fees.classList.add("bg-gradient-to-br", "from-blue-600",
+                        "to-blue-500", "focus:ring-blue-300");
+
                     const value = parseInt(event.target.value);
                     if (value >= 0) {
                         const dueAmount = payableInputBox.value - value;
@@ -862,6 +886,11 @@
                 collect_amount.addEventListener('change', (event) => {
                     const value = parseInt(event.target.value);
 
+                    // collect fees null initially
+                    collect_fees.disabled = false;
+                    collect_fees.classList.add("bg-gradient-to-br", "from-blue-600",
+                        "to-blue-500", "focus:ring-blue-300");
+
                     // make readonly the input field after enter the value once
                     collect_amount.readOnly = true;
                     collect_amount.classList.add("bg-gray-200")
@@ -920,12 +949,16 @@
 
         let resetVoucher = document.getElementById('resetVoucher');
         resetVoucher.addEventListener('click', () => {
+            // collect fees null
+            collect_fees.disabled = true;
+            collect_fees.classList.add("bg-gray-500", "not-allowed");
+
             collect_amount.value = 0;
             PrintReadyBtn.click();
 
             // make readable the input field after click on the reset
             collect_amount.readOnly = false;
-            collect_amount.classList.remove("bg-gray-200")
+            collect_amount.classList.remove("bg-gray-200");
         })
     })
 </script>

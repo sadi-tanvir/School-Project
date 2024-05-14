@@ -22,6 +22,16 @@ use App\Http\Controllers\Backend\CommonSetting\InstituteInfoController;
 use App\Http\Controllers\Backend\Dashboard\DashboardController;
 use App\Http\Controllers\Backend\ExamResult\MarkInputController;
 use App\Http\Controllers\Backend\ExamSetting\FourthSubjectController;
+use App\Http\Controllers\Backend\FeesSetting\AddFeeTypeController;
+use App\Http\Controllers\Backend\FeesSetting\AddPaySlipTypeController;
+use App\Http\Controllers\Backend\FeesSetting\FeesSetupController;
+use App\Http\Controllers\Backend\FeesSetting\PaySlipSetupController;
+use App\Http\Controllers\Backend\FeesSetting\ReportFeesSettings\AllFeesController;
+use App\Http\Controllers\Backend\FeesSetting\ReportFeesSettings\AllPaySlipController;
+use App\Http\Controllers\Backend\FeesSetting\ReportFeesSettings\IndividualPaySlipController;
+use App\Http\Controllers\Backend\FeesSetting\ReportFeesSettings\IndividualWaiverController;
+use App\Http\Controllers\Backend\FeesSetting\WaiverSetupController;
+use App\Http\Controllers\Backend\FeesSetting\WaiverTypeController;
 use App\Http\Controllers\Backend\NEDUBD\NEDUBDController;
 use App\Http\Controllers\Backend\NEDUBD\SchoolAdminController;
 use App\Http\Controllers\Backend\Student\StudentController;
@@ -38,11 +48,21 @@ use App\Http\Controllers\Backend\Student\studentReports\StudentListWithPhotoCont
 use App\Http\Controllers\Backend\Student\studentReports\EsifListController;
 use App\Http\Controllers\Backend\Student\UploadExcelFileController;
 
+use App\Http\Controllers\Backend\Student_Account\CollectUnpaidPaySlipController;
+use App\Http\Controllers\Backend\Student_Account\DeletePaySlipController;
+use App\Http\Controllers\Backend\Student_Account\EditGeneratedPayslipController;
+use App\Http\Controllers\Backend\Student_Account\GenerateMultiplePayslipController;
+use App\Http\Controllers\Backend\Student_Account\GeneratePayslipController;
+use App\Http\Controllers\Backend\Student_Account\NewOldStdAddPaySlipController;
+use App\Http\Controllers\Backend\Student_Account\NewStdAddPaySlipController;
 use App\Http\Controllers\Backend\Student_Account\Others\FromFeeController;
 use App\Http\Controllers\Backend\Student_Account\Others\DonationController;
 use App\Http\Controllers\Backend\Student_Account\Others\OthersFeeController;
 use App\Http\Controllers\Backend\Student_Account\Others\FineFailController;
 
+use App\Http\Controllers\Backend\Student_Account\PaySlipCollectionController;
+use App\Http\Controllers\Backend\Student_Account\PrintUnpaidPaySlipController;
+use App\Http\Controllers\Backend\Student_Account\QuickCollectionController;
 use App\Http\Controllers\Backend\Student_Account\Reports\DailyCollectionReportController;
 use App\Http\Controllers\Backend\Student_Account\Reports\geneTranferInquiriController;
 use App\Http\Controllers\Backend\Student_Account\Reports\DuePaySummaryController;
@@ -242,28 +262,54 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/transferCertificate/{schoolCode}', [trasnferCertificateController::class, 'trasnfer_certificate']);
     Route::get('/transferCertificateList/{schoolCode}', [trasnferCertificateListController::class, 'trasnfer_certificate_list']);
 
-//Students Accounts
-//others
-Route::get('/FeeCollection/{schoolCode}', [FromFeeController::class, 'AddFromFee'])->name('feeCollection');
-Route::get('/donation/{schoolCode}', [DonationController::class, 'AddDonationFee'])->name('donation');
-Route::get('/othersFee/{schoolCode}', [OthersFeeController::class, 'AddOthersFee'])->name('othersFee');
-Route::get('/addFineFail/{schoolCode}', [FineFailController::class, 'AddFineFail'])->name('addFineFail');
-//reports
-Route::get('/DailyCollectionReport/{schoolCode}', [DailyCollectionReportController::class, 'DailyCollectionReport'])->name('DailyCollectionReport');
-Route::get('/geneTransferInquiri/{schoolCode}', [geneTranferInquiriController::class, 'geneTransferInquiri'])->name('geneTransferInquiri');
-Route::get('/DuepaySummary/{schoolCode}', [DuePaySummaryController::class, 'DuepaySummary'])->name('DuepaySummary');
-Route::get('/headwiseSummary/{schoolCode}', [HeadWiseSummaryController::class, 'headwiseSummary'])->name('headwiseSummary');
-Route::get('/transferToAccounts/{schoolCode}', [TransferToAccountsController::class, 'transferToAccounts'])->name('transferToAccounts');
-Route::get('/paidInvoice/{schoolCode}', [PaidInvoiceController::class, 'paidInvoice'])->name('paidInvoice');
-Route::get('/othTransInquiry/{schoolCode}', [OuthTransInquiryController::class, 'othTransInquiry'])->name('othTransInquiry');
-Route::get('/ListOfdueOrPay/{schoolCode}', [ListOfDueOrPayController::class, 'ListOfdueOrPay'])->name('ListOfdueOrPay');
-Route::get('/listOfHeadWise/{schoolCode}', [ListOfHeadWiseController::class, 'listOfHeadWise'])->name('listOfHeadWise');
-Route::get('/listOfMonthWiseFees/{schoolCode}', [ListOfMonthWiseFeesController::class, 'listOfMonthWiseFees'])->name('listOfMonthWiseFees');
-Route::get('/listOfSpecialDiscount/{schoolCode}', [ListOfSepecialDiscountController::class, 'listOfSpecialDiscount'])->name('listOfSpecialDiscount');
-Route::get('/listOfFineOrFailOrAbsent/{schoolCode}', [ListOfFineOrFailOrAbsentController::class, 'listOfFineOrFailOrAbsent'])->name('listOfFineOrFailOrAbsent');
-Route::get('/listOfDonation/{schoolCode}', [ListOfDonationController::class, 'listOfDonation'])->name('listOfDonation');
-Route::get('/listOfFormFees/{schoolCode}', [ListOfFormFeesController::class, 'listOfFormFees'])->name('listOfFormFees');
-Route::get('/monthlyPaidDetails/{schoolCode}', [MonthlyPaidDetailsController::class, 'monthlyPaidDetails'])->name('monthlyPaidDetails');
+
+    //Students Accounts
+    // Payslip Collection
+    Route::get("/studentAccounts/paySlipCollection/{schoolCode}", [PaySlipCollectionController::class, "PaySlipForm"])->name("paySlipCollection.view");
+    Route::get("/studentAccounts/paySlipCollection/getStudentRoll/{schoolCode}", [PaySlipCollectionController::class, "GetStudentRoll"])->name("StudentRoll.get");
+    Route::get("/studentAccounts/paySlipCollection/studentWisePaySlips/{schoolCode}", [PaySlipCollectionController::class, "StudentWisePaySlips"])->name("sutentPaySlips.get");
+    Route::post("/studentAccounts/paySlipCollection/storePaySlipData/{schoolCode}", [PaySlipCollectionController::class, "StorePaySlipData"])->name("paySlipData.store");
+
+    Route::get("/studentAccounts/quickCollection/{schoolCode}", [QuickCollectionController::class, "QuickCollectionView"])->name("quickCollection.view");
+    Route::get("/studentAccounts/printUnpaidPaySlip/{schoolCode}", [PrintUnpaidPaySlipController::class, "PrintUnpaidPaySlipForm"])->name("printUnpaidPaySlip.view");
+    Route::get("/studentAccounts/collectUnpaidPaySlip/{schoolCode}", [CollectUnpaidPaySlipController::class, "CollectUnpaidPaySlipView"])->name("collectUnpaidPaySlip.view");
+    Route::get("/studentAccounts/deletePaySlip/{schoolCode}", [DeletePaySlipController::class, "DeletePaySlipView"])->name("deletePaySlip.view");
+    Route::get("/studentAccounts/newStdAddPaySlip/{schoolCode}", [NewStdAddPaySlipController::class, "NewStdAddPaySlipView"])->name("newStdAddPaySlip.view");
+    Route::get("/studentAccounts/newOldStdAddPaySlip/{schoolCode}", [NewOldStdAddPaySlipController::class, "NewOldStdAddPaySlipView"])->name("newOldStdAddPaySlip.view");
+    // Generate payslips
+    Route::get("/studentAccounts/generatePayslip/{schoolCode}", [GeneratePayslipController::class, "GeneratePayslipView"])->name("generatePayslip.view");
+    Route::get("/studentAccounts/getPaySlipData/{schoolCode}", [GeneratePayslipController::class, "GetPaySlipData"])->name("PaySlipData.get");
+    Route::get("/studentAccounts/getFeeDataTypes/{schoolCode}", [GeneratePayslipController::class, "GetFeeDataTypes"])->name("feeDataTypes.get");
+    Route::get("/studentAccounts/getAllInformation/{schoolCode}", [GeneratePayslipController::class, "GetAllInformation"])->name("AllInformation.get");
+    Route::post("/studentAccounts/storeGeneratePaySlip/{schoolCode}", [GeneratePayslipController::class, "StoreGeneratePaySlip"])->name("generatePaySlip.store");
+
+    Route::get("/studentAccounts/editGeneratedPayslip/{schoolCode}", [EditGeneratedPayslipController::class, "EditGeneratedPayslipView"])->name("editGeneratedPayslip.view");
+    // Generate multiple payslips
+    Route::get("/studentAccounts/generateMultiplePayslip/{schoolCode}", [GenerateMultiplePayslipController::class, "GenerateMultiplePayslipView"])->name("generateMultiplePayslip.view");
+    Route::get("/studentAccounts/getStudentInformation/{schoolCode}", [GenerateMultiplePayslipController::class, "GetStudentInformation"])->name("studentInformation.get");
+    Route::get("/studentAccounts/storeMultiplePayslipData/{schoolCode}", [GenerateMultiplePayslipController::class, "StoreMultiplePayslipData"])->name("multiplePayslipData.store");
+    //others
+    Route::get('/FeeCollection/{schoolCode}', [FromFeeController::class, 'AddFromFee'])->name('feeCollection');
+    Route::get('/donation/{schoolCode}', [DonationController::class, 'AddDonationFee'])->name('donation');
+    Route::get('/othersFee/{schoolCode}', [OthersFeeController::class, 'AddOthersFee'])->name('othersFee');
+    Route::get('/addFineFail/{schoolCode}', [FineFailController::class, 'AddFineFail'])->name('addFineFail');
+    //reports
+    Route::get('/DailyCollectionReport/{schoolCode}', [DailyCollectionReportController::class, 'DailyCollectionReport'])->name('DailyCollectionReport');
+    Route::get('/geneTransferInquiri/{schoolCode}', [geneTranferInquiriController::class, 'geneTransferInquiri'])->name('geneTransferInquiri');
+    Route::get('/DuepaySummary/{schoolCode}', [DuePaySummaryController::class, 'DuepaySummary'])->name('DuepaySummary');
+    Route::get('/headwiseSummary/{schoolCode}', [HeadWiseSummaryController::class, 'headwiseSummary'])->name('headwiseSummary');
+    Route::get('/transferToAccounts/{schoolCode}', [TransferToAccountsController::class, 'transferToAccounts'])->name('transferToAccounts');
+    Route::get('/paidInvoice/{schoolCode}', [PaidInvoiceController::class, 'paidInvoice'])->name('paidInvoice');
+    Route::get('/othTransInquiry/{schoolCode}', [OuthTransInquiryController::class, 'othTransInquiry'])->name('othTransInquiry');
+    Route::get('/ListOfdueOrPay/{schoolCode}', [ListOfDueOrPayController::class, 'ListOfdueOrPay'])->name('ListOfdueOrPay');
+    Route::get('/listOfHeadWise/{schoolCode}', [ListOfHeadWiseController::class, 'listOfHeadWise'])->name('listOfHeadWise');
+    Route::get('/listOfMonthWiseFees/{schoolCode}', [ListOfMonthWiseFeesController::class, 'listOfMonthWiseFees'])->name('listOfMonthWiseFees');
+    Route::get('/listOfSpecialDiscount/{schoolCode}', [ListOfSepecialDiscountController::class, 'listOfSpecialDiscount'])->name('listOfSpecialDiscount');
+    Route::get('/listOfFineOrFailOrAbsent/{schoolCode}', [ListOfFineOrFailOrAbsentController::class, 'listOfFineOrFailOrAbsent'])->name('listOfFineOrFailOrAbsent');
+    Route::get('/listOfDonation/{schoolCode}', [ListOfDonationController::class, 'listOfDonation'])->name('listOfDonation');
+    Route::get('/listOfFormFees/{schoolCode}', [ListOfFormFeesController::class, 'listOfFormFees'])->name('listOfFormFees');
+    Route::get('/monthlyPaidDetails/{schoolCode}', [MonthlyPaidDetailsController::class, 'monthlyPaidDetails'])->name('monthlyPaidDetails');
+
 
     // sayem - student attendence 
     Route::get('/addStudentAttendence/{schoolCode}', [AttendenceController::class, "add_student_attence"])->name('addStudentAttendence');
@@ -534,10 +580,56 @@ Route::get('/monthlyPaidDetails/{schoolCode}', [MonthlyPaidDetailsController::cl
 
 
 
-    // Exam Setting End .............................................................................................................
+   
+
+    // Fees Setting Start .............................................................................................................
+
+    // Basic Setting => Fees Setting
+    // add fee type
+    Route::get('/basicSettings/feesSettings/addFeeType/{schoolCode}', [AddFeeTypeController::class, 'FeeTypeView'])->name('addFeeType.view');
+    Route::post('/basicSettings/feesSettings/addFeeType/{schoolCode}', [AddFeeTypeController::class, 'FeeTypeStore'])->name('addFeeType.store');
+    Route::delete('/basicSettings/feesSettings/addFeeType/{schoolCode}/{id}', [AddFeeTypeController::class, 'FeeTypeDelete'])->name('addFeeType.delete');
+    Route::put('/basicSettings/feesSettings/addFeeType/{schoolCode}/{id}', [AddFeeTypeController::class, 'FeeTypeUpdate'])->name('addFeeType.update');
+    Route::get('/basicSettings/feesSettings/addFeeType/{schoolCode}/print', [AddFeeTypeController::class, 'FeeTypePrint'])->name('addFeeType.print');
+    // fees Setup
+    Route::get('/basicSettings/feesSettings/feesSetup/{schoolCode}', [FeesSetupController::class, 'FeesSetupView'])->name('feesSetup.view');
+    Route::post('feesSetup/viewFeeTypesData/{schoolCode}', [FeesSetupController::class, 'ViewFeeTypesData'])->name('feesSetup.FeeTypesData.view');
+    Route::post('/add_fees_setup/{schoolCode}', [FeesSetupController::class, 'add_fees_setup'])->name('add_fees_setup');
+    // add pay slip type
+    Route::get('/basicSettings/feesSettings/addPaySlipType/{schoolCode}', [AddPaySlipTypeController::class, 'AddPaySlipTypeView'])->name('addPaySlipType.view');
+    Route::post('/addPaySlipType/store/{schoolCode}', [AddPaySlipTypeController::class, 'StorePaySlipType'])->name('addPaySlipType.store');
+    Route::delete('/addPaySlipType/delete/{schoolCode}/{id}', [AddPaySlipTypeController::class, 'deletePaySlipType'])->name('PaySlipType.delete');
+    Route::put('/addPaySlipType/update/{schoolCode}/{id}', [AddPaySlipTypeController::class, 'updatePaySlipType'])->name('PaySlipType.update');
+    // pay slip setup
+    Route::get('/basicSettings/feesSettings/paySlipSetup/{schoolCode}', [PaySlipSetupController::class, 'PaySlipSetupView'])->name('paySlipSetup.view');
+    Route::post('paySlipSetup/getData/{schoolCode}', [PaySlipSetupController::class, 'PaySlipSetupGetData'])->name('paySlipSetup.getData');
+    Route::post('paySlipSetup/store/{schoolCode}', [PaySlipSetupController::class, 'StorePaySlipSetup'])->name('paySlipSetup.store');
+    // waiver type
+    Route::get('/basicSettings/feesSettings/waiverType/{schoolCode}', [WaiverTypeController::class, 'WaiverTypeView'])->name('waiverType.view');
+    Route::post('/basicSettings/feesSettings/waiverType/{schoolCode}', [WaiverTypeController::class, 'StoreWaiverType'])->name('waiverType.store');
+    Route::delete('/basicSettings/feesSettings/waiverType/{schoolCode}/{id}', [WaiverTypeController::class, 'DeleteWaiverType'])->name('waiverType.delete');
+    Route::put('/basicSettings/feesSettings/waiverType/{schoolCode}/{id}', [WaiverTypeController::class, 'UpdateWaiverType'])->name('waiverType.update');
+    // waiver setup
+    Route::get('/basicSettings/feesSettings/waiverSetup/{schoolCode}', [WaiverSetupController::class, 'WaiverSetupView'])->name('waiverSetup.view');
+    Route::get('/waiverSetup/getStudents/{schoolCode}', [WaiverSetupController::class, 'GetStudents'])->name('GetStudent.data');
+    Route::get('/waiverSetup/getData/{schoolCode}', [WaiverSetupController::class, 'WaiverSetupGetData'])->name('waiverSetup.getData');
+    Route::post('/waiverSetup/storeWaiberStudent/{schoolCode}', [WaiverSetupController::class, 'WaiverStudentListSetup'])->name('studentListWaiverSetup.store');
+    // Report (Fees Setting) => All Fees
+    Route::get('/reportFeesSettings/allFees/{schoolCode}', [AllFeesController::class, 'AllFeesView'])->name('allFeesReport.view');
+    Route::get('/allFees/getData/{schoolCode}', [AllFeesController::class, 'GetAllFeesReportData'])->name('allFeesReport.getData');
+    Route::get('/allFees/print/{schoolCode}', [AllFeesController::class, 'FeesReportDataPrint'])->name('allFeesReport.print');
+    // Report (Fees Setting) => All Pay Slip
+    Route::get('/reportFeesSettings/allPaySlip/{schoolCode}', [AllPaySlipController::class, 'AllPaySlipView'])->name('allPaySlipReport.view');
+    Route::get('/allPaySlip/print/{schoolCode}', [AllPaySlipController::class, 'AllPaySlipPrint'])->name('allPaySlip.print');
+    // Report (Fees Setting) => Individual Pay Slip
+    Route::get('/reportFeesSettings/individualPaySlip/{schoolCode}', [IndividualPaySlipController::class, 'IndividualPaySlipView'])->name('individualPaySlipReport.view');
+    Route::get('reportFeesSettings/PrintindividualPaySlip/{schoolCode}', [IndividualPaySlipController::class, 'PrintIndividualPaySlip'])->name('individualPaySlipReport.print');
+    // Report (Fees Setting) => Individual Waiver
+    Route::get('/reportFeesSettings/individualWaiver/{schoolCode}', [IndividualWaiverController::class, 'IndividualWaiverView'])->name('individualWaiverReport.view');
+    Route::get('/individualWaiver/getData/{schoolCode}', [IndividualWaiverController::class, 'GetDataIndividualWaiver'])->name('individualWaiverReport.getData');
 
 
-
+    // Fees Setting End .............................................................................................................
 
 
 

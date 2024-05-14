@@ -1,6 +1,20 @@
 <?php
 
 use App\Http\Controllers\Backend\AdmitCard\AddAdmitCardController;
+use App\Http\Controllers\Backend\Assessment\AssessmentInputController;
+use App\Http\Controllers\Backend\Assessment\AssessmentReports\AllSubjectWiseController;
+use App\Http\Controllers\Backend\Assessment\AssessmentReports\NoipunnoAllSubjectController;
+use App\Http\Controllers\Backend\Assessment\AssessmentReports\NoipunnoBIController;
+use App\Http\Controllers\Backend\Assessment\AssessmentReports\NoipunnoMullaonPrintController;
+use App\Http\Controllers\Backend\Assessment\AssessmentReports\NoipunnoReportController;
+use App\Http\Controllers\Backend\Assessment\AssessmentReports\SubjectWiseReportController;
+use App\Http\Controllers\Backend\Assessment\BasicSetting\AddNoipunnoNameController;
+use App\Http\Controllers\Backend\Assessment\BasicSetting\ParadarsitaSuchokController;
+use App\Http\Controllers\Backend\Assessment\BasicSetting\ParadarsitaSuchokExamController;
+use App\Http\Controllers\Backend\Assessment\BasicSetting\ParadarsitaSuchokExcelController;
+use App\Http\Controllers\Backend\Assessment\BasicSetting\ParadarsitaSuchokMatra_2_Controller;
+use App\Http\Controllers\Backend\Assessment\BasicSetting\ParadarsitaSuchokMatraController;
+use App\Http\Controllers\Backend\Assessment\BasicSetting\SetupAssParadarsitaNoipunnoController;
 use App\Http\Controllers\Backend\CommonSetting\AddAcademicSessionController;
 use App\Http\Controllers\Backend\CommonSetting\AddAcademicYearController;
 use App\Http\Controllers\Backend\CommonSetting\AddBoardExamController;
@@ -32,6 +46,24 @@ use App\Http\Controllers\Backend\FeesSetting\ReportFeesSettings\IndividualPaySli
 use App\Http\Controllers\Backend\FeesSetting\ReportFeesSettings\IndividualWaiverController;
 use App\Http\Controllers\Backend\FeesSetting\WaiverSetupController;
 use App\Http\Controllers\Backend\FeesSetting\WaiverTypeController;
+use App\Http\Controllers\Backend\GeneralAccounts\BankPaymentVoucherController;
+use App\Http\Controllers\Backend\GeneralAccounts\BankReceiptVoucherController;
+use App\Http\Controllers\Backend\GeneralAccounts\CashPaymentVoucherController;
+use App\Http\Controllers\Backend\GeneralAccounts\CashReceiptVoucherController;
+use App\Http\Controllers\Backend\GeneralAccounts\ContraVoucherController;
+use App\Http\Controllers\Backend\GeneralAccounts\JournalVoucherController;
+use App\Http\Controllers\Backend\GeneralAccounts\MyAccount\AllStatementController;
+use App\Http\Controllers\Backend\GeneralAccounts\MyAccount\CurrentBalanceController;
+use App\Http\Controllers\Backend\GeneralAccounts\MyAccount\PersonalStatementController;
+use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\AccountsVoucherController;
+use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\BalanceSheetController;
+use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\BankBookController;
+use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\CashBookController;
+use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\IncomeExpenseSummaryController;
+use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\IncomeStatementController;
+use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\JournalBookController;
+use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\TrialBalanceController;
+use App\Http\Controllers\Backend\GeneralAccounts\VoucherPostingController;
 use App\Http\Controllers\Backend\NEDUBD\NEDUBDController;
 use App\Http\Controllers\Backend\NEDUBD\SchoolAdminController;
 use App\Http\Controllers\Backend\Student\StudentController;
@@ -309,6 +341,50 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/listOfDonation/{schoolCode}', [ListOfDonationController::class, 'listOfDonation'])->name('listOfDonation');
     Route::get('/listOfFormFees/{schoolCode}', [ListOfFormFeesController::class, 'listOfFormFees'])->name('listOfFormFees');
     Route::get('/monthlyPaidDetails/{schoolCode}', [MonthlyPaidDetailsController::class, 'monthlyPaidDetails'])->name('monthlyPaidDetails');
+
+
+    
+    // General Accounts
+    Route::get("/generalAccounts/cashPaymentVoucher/{schoolCode}", [CashPaymentVoucherController::class, "CashPaymentVoucherView"])->name("cashPaymentVoucher.view");
+    Route::get("/generalAccounts/cashReceiptVoucher/{schoolCode}", [CashReceiptVoucherController::class, "CashReceiptVoucherView"])->name("cashReceiptVoucher.view");
+    Route::get("/generalAccounts/bankPaymentVoucher/{schoolCode}", [BankPaymentVoucherController::class, "BankPaymentVoucherView"])->name("bankPaymentVoucher.view");
+    Route::get("/generalAccounts/bankReceiptVoucher/{schoolCode}", [BankReceiptVoucherController::class, "BankReceiptVoucherView"])->name("bankReceiptVoucher.view");
+    Route::get("/generalAccounts/journalVoucher/{schoolCode}", [JournalVoucherController::class, "JournalVoucherView"])->name("journalVoucher.view");
+    Route::get("/generalAccounts/contraVoucher/{schoolCode}", [ContraVoucherController::class, "ContraVoucherView"])->name("contraVoucher.view");
+    Route::get("/generalAccounts/voucherPosting/{schoolCode}", [VoucherPostingController::class, "VoucherPostingView"])->name("voucherPosting.view");
+    // General Accounts => Reports (General Accounts)
+    Route::get("/generalAccounts/Reports_GeneralAccounts/accountsVoucher/{schoolCode}", [AccountsVoucherController::class, "AccountsVoucherView"])->name("accountsVoucher.view");
+    Route::get("/generalAccounts/Reports_GeneralAccounts/cashBook/{schoolCode}", [CashBookController::class, "CashBookView"])->name("cashBook.view");
+    Route::get("/generalAccounts/Reports_GeneralAccounts/bankBook/{schoolCode}", [BankBookController::class, "BankBookView"])->name("bankBook.view");
+    Route::get("/generalAccounts/Reports_GeneralAccounts/journalBook/{schoolCode}", [JournalBookController::class, "JournalBookView"])->name("journalBook.view");
+    Route::get("/generalAccounts/Reports_GeneralAccounts/incomeExpenseSummary/{schoolCode}", [IncomeExpenseSummaryController::class, "IncomeExpenseSummaryView"])->name("incomeExpenseSummary.view");
+    Route::get("/generalAccounts/Reports_GeneralAccounts/trialBalance/{schoolCode}", [TrialBalanceController::class, "TrialBalanceView"])->name("trialBalance.view");
+    Route::get("/generalAccounts/Reports_GeneralAccounts/balanceSheet/{schoolCode}", [BalanceSheetController::class, "BalanceSheetView"])->name("balanceSheet.view");
+    Route::get("/generalAccounts/Reports_GeneralAccounts/incomeStatement/{schoolCode}", [IncomeStatementController::class, "IncomeStatementView"])->name("incomeStatement.view");
+    // General Accounts => My Account
+    Route::get("/generalAccounts/myAccount/currentBalance/{schoolCode}", [CurrentBalanceController::class, "CurrentBalanceView"])->name("currentBalance.view");
+    Route::get("/generalAccounts/myAccount/personalStatement/{schoolCode}", [PersonalStatementController::class, "PersonalStatementView"])->name("personalStatement.view");
+    Route::get("/generalAccounts/myAccount/allStatement/{schoolCode}", [AllStatementController::class, "AllStatementView"])->name("allStatement.view");
+
+
+
+    // Assessment
+    Route::get("/assessment/assessmentInput/{schoolCode}", [AssessmentInputController::class, "AssessmentInputView"])->name("assessmentInput.view");
+    // Assessment => Basic Setting
+    Route::get("/assessment/basicSetting/paradarsitaSuchok/{schoolCode}", [ParadarsitaSuchokController::class, "ParadarsitaSuchokView"])->name("paradarsitaSuchok.view");
+    Route::get("/assessment/basicSetting/paradarsitaSuchokExcel/{schoolCode}", [ParadarsitaSuchokExcelController::class, "ParadarsitaSuchokExcelView"])->name("paradarsitaSuchokExcel.view");
+    Route::get("/assessment/basicSetting/paradarsitaSuchokMatra/{schoolCode}", [ParadarsitaSuchokMatraController::class, "ParadarsitaSuchokMatraView"])->name("paradarsitaSuchokMatra.view");
+    Route::get("/assessment/basicSetting/paradarsitaSuchokMatra_2/{schoolCode}", [ParadarsitaSuchokMatra_2_Controller::class, "ParadarsitaSuchokMatra_2_View"])->name("paradarsitaSuchokMatra_2.view");
+    Route::get("/assessment/basicSetting/addNoipunnoName/{schoolCode}", [AddNoipunnoNameController::class, "AddNoipunnoNameView"])->name("addNoipunnoName.view");
+    Route::get("/assessment/basicSetting/setupAssParadarsitaNoipunno/{schoolCode}", [SetupAssParadarsitaNoipunnoController::class, "SetupAssParadarsitaNoipunnoView"])->name("setupAssParadarsitaNoipunno.view");
+    Route::get("/assessment/basicSetting/paradarsitaSuchokExam/{schoolCode}", [ParadarsitaSuchokExamController::class, "ParadarsitaSuchokExamView"])->name("paradarsitaSuchokExam.view");
+    // Assessment => Assessment Reports
+    Route::get("/assessment/assessmentReports/subjectWiseReport/{schoolCode}", [SubjectWiseReportController::class, "SubjectWiseReportView"])->name("subjectWiseReport.view");
+    Route::get("/assessment/assessmentReports/allSubjectWise/{schoolCode}", [AllSubjectWiseController::class, "AllSubjectWiseView"])->name("allSubjectWise.view");
+    Route::get("/assessment/assessmentReports/noipunnoReport/{schoolCode}", [NoipunnoReportController::class, "NoipunnoReportView"])->name("noipunnoReport.view");
+    Route::get("/assessment/assessmentReports/noipunnoAllSubject/{schoolCode}", [NoipunnoAllSubjectController::class, "NoipunnoAllSubjectView"])->name("noipunnoAllSubject.view");
+    Route::get("/assessment/assessmentReports/noipunnoMullaonPrint/{schoolCode}", [NoipunnoMullaonPrintController::class, "NoipunnoMullaonPrintView"])->name("noipunnoMullaonPrint.view");
+    Route::get("/assessment/assessmentReports/noipunnoBI/{schoolCode}", [NoipunnoBIController::class, "NoipunnoBIView"])->name("noipunnoBI.view");
 
 
     // sayem - student attendence 

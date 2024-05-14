@@ -630,8 +630,8 @@
                     </li>
                 </ul>
             </li>
-            <!-- student accounts  -->
-            <li class="dropdown">
+              <!-- student accounts  -->
+              <li class="dropdown">
                 <button type="button"
                     class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-slate-100/20"
                     aria-controls="dropdown-student-Accounts" data-collapse-toggle="dropdown-student-Accounts">

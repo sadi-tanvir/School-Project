@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->string('student_id');
             $table->string('class');
             $table->string('group');
+            $table->string('section')->nullable();
             $table->string('pay_slip_type');
             $table->integer('amount');
             $table->integer('waiver');
@@ -30,6 +31,9 @@ return new class extends Migration {
             $table->integer('paid_amount')->nullable();
             $table->string('waiver_approaved_by')->nullable();
             $table->string('note')->nullable();
+            $table->string('collected_by_name')->nullable();
+            $table->string('collected_by_email')->nullable();
+            $table->string('collected_by_phone')->nullable();
             $table->enum('payment_status', ['paid', 'unpaid'])->default('unpaid');
             $table->string('school_code');
             $table->enum('action', ['approved', 'pending'])->default('approved');

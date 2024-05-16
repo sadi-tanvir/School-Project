@@ -185,7 +185,7 @@ Route::prefix('dashboard')->group(function () {
 
     //Update Student ->Add Student
     Route::get('/getStudent/{schoolCode}', [BasicAddStudentController::class, 'getStudent'])->name('getStudent');
-    Route::post('/postStudent', [BasicAddStudentController::class,'postStudent'])->name('postStudent');
+    Route::post('/postStudent', [BasicAddStudentController::class, 'postStudent'])->name('postStudent');
 
 
     //update student
@@ -249,15 +249,15 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/studentIdCard/{schoolCode}', [studentIdCardController::class, 'student_id_card']);
 
     Route::get('/studentListWithPhoto/{schoolCode}', [StudentListWithPhotoController::class, 'studentListWithPhoto'])->name('studentListWithPhoto');
-    Route::post('/listStudent', [StudentListWithPhotoController::class,'viewStudentListPhoto'])->name('viewStudentListPhoto');
+    Route::post('/listStudent', [StudentListWithPhotoController::class, 'viewStudentListPhoto'])->name('viewStudentListPhoto');
 
-//student profile
+    //student profile
     Route::get('/search/{schoolCode}', [StudentProfileController::class, 'search']);
     Route::get('/studentProfile/{schoolCode}', [StudentProfileController::class, 'student_profileInfo']);
-    Route::post('/studentid/{schoolCode}',[StudentProfileController::class, 'studentid'])->name('studentid');
+    Route::post('/studentid/{schoolCode}', [StudentProfileController::class, 'studentid'])->name('studentid');
     Route::get('/student_ProfileReport/{schoolCode}', [StudentProfileController::class, 'student_ProfileReport'])->name('student_ProfileReport');
     Route::get('/studentShortList/{schoolCode}', [addShortListController::class, 'studentShortList']);
-    Route::post('/viewStudentShortList',[addShortListController::class,'viewStudentShortList'])->name('viewStudentShortList');
+    Route::post('/viewStudentShortList', [addShortListController::class, 'viewStudentShortList'])->name('viewStudentShortList');
     Route::get('/testimonial/{schoolCode}', [testimonialController::class, 'testimonial']);
     Route::get('/transferCertificate/{schoolCode}', [trasnferCertificateController::class, 'trasnfer_certificate']);
     Route::get('/transferCertificateList/{schoolCode}', [trasnferCertificateListController::class, 'trasnfer_certificate_list']);
@@ -268,6 +268,7 @@ Route::prefix('dashboard')->group(function () {
     Route::get("/studentAccounts/paySlipCollection/{schoolCode}", [PaySlipCollectionController::class, "PaySlipForm"])->name("paySlipCollection.view");
     Route::get("/studentAccounts/paySlipCollection/getStudentRoll/{schoolCode}", [PaySlipCollectionController::class, "GetStudentRoll"])->name("StudentRoll.get");
     Route::get("/studentAccounts/paySlipCollection/studentWisePaySlips/{schoolCode}", [PaySlipCollectionController::class, "StudentWisePaySlips"])->name("sutentPaySlips.get");
+    Route::get("/studentAccounts/paySlipCollection/deletePaySlip/{schoolCode}", [PaySlipCollectionController::class, "DeletePaySlip"])->name("paySlipData.delete");
     Route::post("/studentAccounts/paySlipCollection/storePaySlipData/{schoolCode}", [PaySlipCollectionController::class, "StorePaySlipData"])->name("paySlipData.store");
 
     Route::get("/studentAccounts/quickCollection/{schoolCode}", [QuickCollectionController::class, "QuickCollectionView"])->name("quickCollection.view");
@@ -329,18 +330,18 @@ Route::prefix('dashboard')->group(function () {
     // exam-Result --------------------------------------
 
     Route::get('/marksInput/{schoolCode}', [MarkInputController::class, 'exam_marks']);
-    Route::post('/exam-marks/get-groups/{schoolCode}',[MarkInputController::class, 'getGroups'])->name('exam-marks.get-groups');
-    Route::post('/exam-marks/get-sections/{schoolCode}',[MarkInputController::class, 'getSections'])->name('exam-marks.get-sections');
+    Route::post('/exam-marks/get-groups/{schoolCode}', [MarkInputController::class, 'getGroups'])->name('exam-marks.get-groups');
+    Route::post('/exam-marks/get-sections/{schoolCode}', [MarkInputController::class, 'getSections'])->name('exam-marks.get-sections');
     Route::post('/exam-marks/get-shifts/{schoolCode}', [MarkInputController::class, 'getShifts'])->name('exam-marks.get-shifts');
     Route::post('/exam-marks/get-exams/{schoolCode}', [MarkInputController::class, 'classExam'])->name('exam-marks.get-exams');
     Route::post('/exam-marks/get-subjects/{schoolCode}', [MarkInputController::class, 'subject'])->name('exam-marks.get-subjects');
     Route::get('/findData/{schoolCode}', [MarkInputController::class, 'finData'])->name('findData');
     Route::post('/exam-marks', [MarkInputController::class, 'marksInput'])->name('exam.marks');
-    Route::put('/update-mark-input', [MarkInputController::class,'updateMarkInput'])->name('update.mark.input');
-    Route::get('/exam_mark_print/{schoolCode}', [MarkInputController::class,'printBlankExam'])->name('exam_mark_print');
+    Route::put('/update-mark-input', [MarkInputController::class, 'updateMarkInput'])->name('update.mark.input');
+    Route::get('/exam_mark_print/{schoolCode}', [MarkInputController::class, 'printBlankExam'])->name('exam_mark_print');
     Route::post('/download-mark-excel', [MarkInputController::class, 'downloadExcel'])->name('downloadExcel.mark');
-    Route::get('/full_marks_print/{schoolCode}',[MarkInputController::class,'full_marks_print'])->name('full_marks_print');
-    Route::post('/mark-input-excel-upload',[MarkInputController::class,'mark_input_excel_uplaod'])->name('mark.input.excel.upload');
+    Route::get('/full_marks_print/{schoolCode}', [MarkInputController::class, 'full_marks_print'])->name('full_marks_print');
+    Route::post('/mark-input-excel-upload', [MarkInputController::class, 'mark_input_excel_uplaod'])->name('mark.input.excel.upload');
 
     Route::get('/exam_process/{schoolCode}', [ExamProcessController::class, 'exam_process']);
     Route::get('/getStudents/{schoolCode}/{class}/{group}/{section}', [ExamProcessController::class, 'getStudents']);
@@ -380,8 +381,8 @@ Route::prefix('dashboard')->group(function () {
 
     Route::get('/message/{schoolCode}', [SendMSGController::class, 'message'])->name('message');
     Route::post('/getContact', [SendMSGController::class, 'getContact'])->name('getContact');
-    Route::post('/messages/get-groups/{schoolCode}',[SendMSGController::class, 'getGroups'])->name('messages.get-groups');
-    Route::post('/messages/get-sections/{schoolCode}',[SendMSGController::class, 'getSections'])->name('messages.get-sections');
+    Route::post('/messages/get-groups/{schoolCode}', [SendMSGController::class, 'getGroups'])->name('messages.get-groups');
+    Route::post('/messages/get-sections/{schoolCode}', [SendMSGController::class, 'getSections'])->name('messages.get-sections');
     Route::post('/messages/get-shifts/{schoolCode}', [SendMSGController::class, 'getShifts'])->name('messages.get-shifts');
     Route::post('/sendMessage', [SendMSGController::class, 'sendMessage'])->name('sendMessage');
     Route::delete('/delete_contact/{id}', [SendMSGController::class, 'delete_add_contact'])->name('delete.contact');

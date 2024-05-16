@@ -88,9 +88,6 @@
                         <select id="section" name="section"
                             class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5">
                             <option selected>Select</option>
-                            {{-- @foreach ($sections as $section)
-                                <option value="{{ $section->section_name }}">{{ $section->section_name }}</option>
-                            @endforeach --}}
                         </select>
                     </div>
 
@@ -152,6 +149,11 @@
                             class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500  focus:ring-2 dark:bg-gray-700">
                         <label for="deleteCheckBox" class="ml-1 text-sm font-medium text-gray-900 ">Delete</label>
                     </div>
+
+                    <button id="deletePayslip" type="button"
+                        class="text-white  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-auto">Delete
+                    </button>
+
 
                     <button id="PrintReadyBtn" type="button"
                         class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-1.5 text-center">
@@ -362,8 +364,8 @@
                             </div> --}}
                         </div>
 
-                        <div class="my-5 flex flex-col font-bold">
-                            <label for="">Note:</label>
+                        <div class="my-5 flex flex-col">
+                            <label class="font-semibold" for="">Note:</label>
                             <textarea name="note" id="" cols="30" rows="4" class="rounded-lg w-96 p-2"></textarea>
                         </div>
 
@@ -381,17 +383,19 @@
                             </div>
                         </div>
 
+                        {{-- hidden inputs --}}
+                        <input class="hidden" type="text" name="collected_by_name"
+                            value="{{ $schoolAdminData->name }}">
+                        <input class="hidden" type="text" name="collected_by_email"
+                            value="{{ $schoolAdminData->email }}">
+                        <input class="hidden" type="text" name="collected_by_phone"
+                            value="{{ $schoolAdminData->mobile_number }}">
 
                         <div class="w-full flex items-center justify-center gap-5">
                             <button id="collect_fees" type="submit"
                                 class="text-white hover:bg-gradient-to-bl focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 mt-10 text-center">Collect
                                 Fees
                             </button>
-                            {{-- <button id="collect_fees" type="submit"
-                                class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mt-10 text-center">Collect
-                                Fees
-                            </button> --}}
-
                         </div>
                     </div>
                 </form>
@@ -411,13 +415,20 @@
         const getPaySlipData = document.getElementById('getPaySlipData');
         const student_roll = document.getElementById('student_roll');
         const table_body = document.getElementById('table_body');
+        const deleteCheckBox = document.getElementById('deleteCheckBox');
+        const deletePayslip = document.getElementById('deletePayslip');
         const PrintReadyBtn = document.getElementById('PrintReadyBtn');
         const collect_amount = document.getElementById('collect_amount');
         const collect_fees = document.getElementById('collect_fees');
-
+        // ("bg-gradient-to-br", "from-red-600", "to-red-500", "hover:bg-gradient-to-bl", "focus:ring-red-300")
         // collect fees null initially
         collect_fees.disabled = true;
-        collect_fees.classList.add("bg-gray-500", "not-allowed");
+        collect_fees.style.cursor = "not-allowed"
+        collect_fees.classList.add("bg-gray-500");
+
+        deletePayslip.disabled = true;
+        deletePayslip.style.cursor = "not-allowed"
+        deletePayslip.classList.add("bg-gray-500");
 
         // get student information
         classId.addEventListener('change', async (e) => {
@@ -439,6 +450,11 @@
         // update section options
         function UpdateSectionOption(sections) {
             sectionId.innerHTML = "";
+            const defaultOption = document.createElement('option');
+            defaultOption.value = "Select";
+            defaultOption.textContent = "Select";
+            defaultOption.slected = true;
+            sectionId.appendChild(defaultOption);
             sections.forEach(section => {
                 const sectionOption = document.createElement('option');
                 sectionOption.value = section.section;
@@ -510,17 +526,21 @@
 
 
         // get student wise pay slip inforamtion
-        getPaySlipData.addEventListener('click', async () => {
+        async function getPaySlipDataFunction() {
             try {
                 const res = await fetch(
-                    `/dashboard/studentAccounts/paySlipCollection/studentWisePaySlips/${schoolCode}?class_name=${classId.value}&student_id=${student_roll.value}&year=${year.value}`
+                    `/dashboard/studentAccounts/paySlipCollection/studentWisePaySlips/${schoolCode}?class_name=${classId.value}&section=${sectionId.value}&student_id=${student_roll.value}&year=${year.value}`
                 )
                 if (!res.ok) throw new Error('Network response was not ok');
                 const data = await res.json();
+                console.log(data);
                 DisplayUserPaySlip(data)
             } catch (error) {
                 console.error('Error:', error);
             }
+        }
+        getPaySlipData.addEventListener('click', async () => {
+            getPaySlipDataFunction()
         })
 
 
@@ -647,6 +667,47 @@
                         }
                     });
                 });
+            });
+
+            // delete payslip
+            deleteCheckBox.addEventListener("change", (event) => {
+                deletePayslip.disabled = false;
+                deletePayslip.style.cursor = "pointer"
+                deletePayslip.classList.remove("bg-gray-500");
+                deletePayslip.classList.add("bg-gradient-to-br", "from-red-600", "to-red-500",
+                    "hover:bg-gradient-to-bl", "focus:ring-red-300");
+            })
+            let filteredPaySlipForDelete = [];
+            deletePayslip.addEventListener("click", (event) => {
+                // filtering checked data for money receiving
+                filteredPaySlipForDelete = data.paySlips.filter((slip2) => selectedCheckboxes.includes(
+                    slip2.id.toString()));
+                if (filteredPaySlipForDelete.length > 0) {
+                    filteredPaySlipForDelete.forEach(async payslip => {
+                        try {
+                            const res = await fetch(
+                                `/dashboard/studentAccounts/paySlipCollection/deletePaySlip/${schoolCode}?payslipId=${payslip.id}`
+                            )
+                            if (!res.ok) throw new Error('Network response was not ok');
+                            const data = await res.json();
+                            // re fetch payslip data
+                            if (res.ok) getPaySlipDataFunction();
+                            console.log('from payslip delete', data);
+                        } catch (error) {
+                            console.error('Error:', error);
+                        }
+                    });
+                }
+
+                // again uncheck the delete checkbox
+                deleteCheckBox.checked = false;
+                // again disable the delete funciton
+                deletePayslip.disabled = true;
+                deletePayslip.style.cursor = "not-allowed"
+                deletePayslip.classList.remove("bg-gradient-to-br", "from-red-600", "to-red-500",
+                    "hover:bg-gradient-to-bl", "focus:ring-red-300");
+                deletePayslip.classList.add("bg-gray-500");
+
             });
 
             // print ready btn
@@ -824,6 +885,7 @@
                 currentPayInputBox.addEventListener('change', (event) => {
                     // collect fees null initially
                     collect_fees.disabled = false;
+                    collect_fees.style.cursor = "pointer"
                     collect_fees.classList.add("bg-gradient-to-br", "from-blue-600",
                         "to-blue-500", "focus:ring-blue-300");
 
@@ -888,6 +950,7 @@
 
                     // collect fees null initially
                     collect_fees.disabled = false;
+                    collect_fees.style.cursor = "pointer"
                     collect_fees.classList.add("bg-gradient-to-br", "from-blue-600",
                         "to-blue-500", "focus:ring-blue-300");
 
@@ -949,12 +1012,15 @@
 
         let resetVoucher = document.getElementById('resetVoucher');
         resetVoucher.addEventListener('click', () => {
-            // collect fees null
-            collect_fees.disabled = true;
-            collect_fees.classList.add("bg-gray-500", "not-allowed");
-
             collect_amount.value = 0;
             PrintReadyBtn.click();
+
+            // collect fees null
+            collect_fees.disabled = true;
+            collect_fees.style.cursor = "not-allowed"
+            collect_fees.classList.remove("bg-gradient-to-br", "from-blue-600",
+                "to-blue-500", "focus:ring-blue-300");
+            collect_fees.classList.add('bg-gray-500');
 
             // make readable the input field after click on the reset
             collect_amount.readOnly = false;

@@ -68,12 +68,16 @@ class PaySlipCollectionController extends Controller
     {
         $class_name = $request->query('class_name');
         $student_id = $request->query('student_id');
+        $section = $request->query('section');
         $year = $request->query('year');
 
         $paySlips = GeneratePayslip::where('school_code', $school_code)
             ->where('action', 'approved')
             ->where('class', $class_name)
             ->where('student_id', $student_id)
+            ->when($section !== "Select", function ($query) use ($section) {
+                return $query->where('section', $section);
+            })
             ->where('payment_status', 'unpaid')
             ->get();
 
@@ -94,9 +98,29 @@ class PaySlipCollectionController extends Controller
             "student_information" => $studentInformation
         ]);
     }
+
+    public function DeletePaySlip(Request $request, $school_code)
+    {
+        $paySlipId = $request->query('payslipId');
+
+        $deletedPaySlip = GeneratePayslip::where('school_code', $school_code)
+            ->where('id', $paySlipId)
+            ->delete();
+
+        if ($deletedPaySlip) {
+            return response()->json([
+                "message" => "Pay slip deleted successfully"
+            ]);
+        }
+    }
+
+
     public function StorePaySlipData(Request $request, $school_code)
     {
         $note = $request->input('note');
+        $collected_by_name = $request->input('collected_by_name');
+        $collected_by_email = $request->input('collected_by_email');
+        $collected_by_phone = $request->input('collected_by_phone');
         $printable_student_id = $request->input('printable_student_id');
         $school_info = SchoolInfo::where('school_code', $school_code)->first();
         $student_info = Student::where('school_code', $school_code)
@@ -144,6 +168,10 @@ class PaySlipCollectionController extends Controller
                     "collect_date" => $collection_date,
                     "due_amount" => $input_due_amounts[$payslip_id],
                     "paid_amount" => $input_current_pay[$payslip_id],
+                    "note" => $note,
+                    "collected_by_name" => $collected_by_name,
+                    "collected_by_email" => $collected_by_email,
+                    "collected_by_phone" => $collected_by_phone,
                     "payment_status" => $input_due_amounts[$payslip_id] == 0 ? 'paid' : 'unpaid',
                 ]);
         }
@@ -151,6 +179,7 @@ class PaySlipCollectionController extends Controller
         return view(
             'Backend.Student_accounts.PaySlipInvoice',
             compact(
+                'school_code',
                 'student_info',
                 'school_info',
                 'voucher_number',
@@ -163,7 +192,8 @@ class PaySlipCollectionController extends Controller
                 'input_waivers',
                 'input_payable_amounts',
                 'note',
-                'totalCurrentPay'
+                'totalCurrentPay',
+                'collected_by_name'
             )
         );
     }

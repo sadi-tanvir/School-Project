@@ -82,7 +82,7 @@
                                 $stu=0;
                                 @endphp
 
-                                @if($class===null)
+                                @if($classData === null)
                                 @foreach($classes as $key => $class)
                                 <tr class="border table_row">
                                     <td class="min-w-16 max-w-32 p-3 font-medium">{{ $key + 1 }}</td>
@@ -153,7 +153,7 @@
                                 @endforeach
                                 @else
 
-                                @foreach($classes as $key => $class)
+                                @foreach($classData as $key => $class)
                                 <tr class="border table_row">
                                     <td class="min-w-16 max-w-32 p-3 font-medium">{{ $key + 1 }}</td>
                                     <td class="min-w-16 max-w-32 p-3 font-medium">{{ $class->class_name }}</td>

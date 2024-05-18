@@ -111,7 +111,7 @@ class StudentProfileUpdateController extends Controller
             $groups=AddGroup::where("action", "approved")->where("school_code",$schoolCode)->get();
             $sessions=AddAcademicSession::where("action", "approved")->where("school_code",$schoolCode)->get();
             $years=AddAcademicYear::where("action", "approved")->where("school_code",$schoolCode)->get();
-           // dd($student);
+          
 
         if ($student->isNotEmpty()) {
             return view('Backend.Student.studentProfileUpdate', compact('classes','sections','groups','sessions','years','student'))->with([

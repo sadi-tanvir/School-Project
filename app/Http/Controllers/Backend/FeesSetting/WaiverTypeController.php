@@ -23,7 +23,7 @@ class WaiverTypeController extends Controller
                 ->orWhere('status', 'like', '%' . $searchTerm . '%');
         }
 
-        $waiverTypes = $query->get();
+        $waiverTypes = $query->where("school_code", $school_code)->get();
 
 
         return view('Backend.BasicInfo.FeesSetting.WaiverType', compact('school_code', 'waiverTypes'));

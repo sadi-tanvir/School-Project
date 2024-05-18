@@ -88,9 +88,6 @@
                         <select id="section" name="section"
                             class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5">
                             <option selected>Select</option>
-                            {{-- @foreach ($sections as $section)
-                                <option value="{{ $section->section_name }}">{{ $section->section_name }}</option>
-                            @endforeach --}}
                         </select>
                     </div>
 
@@ -152,6 +149,11 @@
                             class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500  focus:ring-2 dark:bg-gray-700">
                         <label for="deleteCheckBox" class="ml-1 text-sm font-medium text-gray-900 ">Delete</label>
                     </div>
+
+                    <button id="deletePayslip" type="button"
+                        class="text-white  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-auto">Delete
+                    </button>
+
 
                     <button id="PrintReadyBtn" type="button"
                         class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-1.5 text-center">
@@ -217,7 +219,9 @@
                                 <div class="">
                                     <p class="text-sm font-medium text-gray-700 ">
                                         S.ID:
-                                        <span id="printable_student_id" class="font-bold"></span>
+                                        <input id="printable_student_id" type="text" value=""
+                                            name="printable_student_id"
+                                            class="bg-transparent border-none focus:ring-0 h-0 w-fit" readonly>
                                     </p>
                                 </div>
                                 <div class="">
@@ -327,7 +331,7 @@
                                         placeholder="" readonly />
                                 </div>
                             </div>
-                            <div class="mt-24 space-y-3">
+                            {{-- <div class="mt-24 space-y-3">
                                 <div class="flex gap-2">
                                     <label for="fine" class="mb-2 text-sm font-medium text-gray-600 ">Fine:</label>
                                     <input type="text" value="" name="fine" id="fine"
@@ -357,25 +361,39 @@
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full"
                                         placeholder="" readonly />
                                 </div>
+                            </div> --}}
+                        </div>
+
+                        <div class="my-5 flex flex-col">
+                            <label class="font-semibold" for="">Note:</label>
+                            <textarea name="note" id="" cols="30" rows="4" class="rounded-lg w-96 p-2"></textarea>
+                        </div>
+
+                        <div class="flex gap-3">
+                            <div class="">
+                                <label for="changed" class="mb-2 text-sm font-medium text-gray-600 ">Changed:</label>
+                                <input type="text" value="" name="changeAmount" id="changeAmount"
+                                    class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full px-1"
+                                    placeholder="" />
                             </div>
-                            <div class="flex gap-3">
-                                <div class="">
-                                    <label for="changed" class="mb-2 text-sm font-medium text-gray-600 ">Changed:</label>
-                                    <input type="text" value="" name="changeAmount" id="changeAmount"
-                                        class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full px-1"
-                                        placeholder="" />
-                                </div>
-                                <div class="mt-5">
-                                    <input type="text" value="" name="returnAmount" id="returnAmount"
-                                        class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full px-1"
-                                        placeholder="" />
-                                </div>
+                            <div class="mt-5">
+                                <input type="text" value="" name="returnAmount" id="returnAmount"
+                                    class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full px-1"
+                                    placeholder="" />
                             </div>
                         </div>
 
-                        <div class="w-full flex">
-                            <button id="getPaySlipData" type="submit"
-                                class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mt-10 text-center mx-auto">Collect
+                        {{-- hidden inputs --}}
+                        <input class="hidden" type="text" name="collected_by_name"
+                            value="{{ $schoolAdminData->name }}">
+                        <input class="hidden" type="text" name="collected_by_email"
+                            value="{{ $schoolAdminData->email }}">
+                        <input class="hidden" type="text" name="collected_by_phone"
+                            value="{{ $schoolAdminData->mobile_number }}">
+
+                        <div class="w-full flex items-center justify-center gap-5">
+                            <button id="collect_fees" type="submit"
+                                class="text-white hover:bg-gradient-to-bl focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 mt-10 text-center">Collect
                                 Fees
                             </button>
                         </div>
@@ -397,10 +415,20 @@
         const getPaySlipData = document.getElementById('getPaySlipData');
         const student_roll = document.getElementById('student_roll');
         const table_body = document.getElementById('table_body');
+        const deleteCheckBox = document.getElementById('deleteCheckBox');
+        const deletePayslip = document.getElementById('deletePayslip');
         const PrintReadyBtn = document.getElementById('PrintReadyBtn');
         const collect_amount = document.getElementById('collect_amount');
+        const collect_fees = document.getElementById('collect_fees');
+        // ("bg-gradient-to-br", "from-red-600", "to-red-500", "hover:bg-gradient-to-bl", "focus:ring-red-300")
+        // collect fees null initially
+        collect_fees.disabled = true;
+        collect_fees.style.cursor = "not-allowed"
+        collect_fees.classList.add("bg-gray-500");
 
-
+        deletePayslip.disabled = true;
+        deletePayslip.style.cursor = "not-allowed"
+        deletePayslip.classList.add("bg-gray-500");
 
         // get student information
         classId.addEventListener('change', async (e) => {
@@ -422,6 +450,11 @@
         // update section options
         function UpdateSectionOption(sections) {
             sectionId.innerHTML = "";
+            const defaultOption = document.createElement('option');
+            defaultOption.value = "Select";
+            defaultOption.textContent = "Select";
+            defaultOption.slected = true;
+            sectionId.appendChild(defaultOption);
             sections.forEach(section => {
                 const sectionOption = document.createElement('option');
                 sectionOption.value = section.section;
@@ -493,17 +526,21 @@
 
 
         // get student wise pay slip inforamtion
-        getPaySlipData.addEventListener('click', async () => {
+        async function getPaySlipDataFunction() {
             try {
                 const res = await fetch(
-                    `/dashboard/studentAccounts/paySlipCollection/studentWisePaySlips/${schoolCode}?class_name=${classId.value}&student_id=${student_roll.value}&year=${year.value}`
+                    `/dashboard/studentAccounts/paySlipCollection/studentWisePaySlips/${schoolCode}?class_name=${classId.value}&section=${sectionId.value}&student_id=${student_roll.value}&year=${year.value}`
                 )
                 if (!res.ok) throw new Error('Network response was not ok');
                 const data = await res.json();
+                console.log(data);
                 DisplayUserPaySlip(data)
             } catch (error) {
                 console.error('Error:', error);
             }
+        }
+        getPaySlipData.addEventListener('click', async () => {
+            getPaySlipDataFunction()
         })
 
 
@@ -632,6 +669,47 @@
                 });
             });
 
+            // delete payslip
+            deleteCheckBox.addEventListener("change", (event) => {
+                deletePayslip.disabled = false;
+                deletePayslip.style.cursor = "pointer"
+                deletePayslip.classList.remove("bg-gray-500");
+                deletePayslip.classList.add("bg-gradient-to-br", "from-red-600", "to-red-500",
+                    "hover:bg-gradient-to-bl", "focus:ring-red-300");
+            })
+            let filteredPaySlipForDelete = [];
+            deletePayslip.addEventListener("click", (event) => {
+                // filtering checked data for money receiving
+                filteredPaySlipForDelete = data.paySlips.filter((slip2) => selectedCheckboxes.includes(
+                    slip2.id.toString()));
+                if (filteredPaySlipForDelete.length > 0) {
+                    filteredPaySlipForDelete.forEach(async payslip => {
+                        try {
+                            const res = await fetch(
+                                `/dashboard/studentAccounts/paySlipCollection/deletePaySlip/${schoolCode}?payslipId=${payslip.id}`
+                            )
+                            if (!res.ok) throw new Error('Network response was not ok');
+                            const data = await res.json();
+                            // re fetch payslip data
+                            if (res.ok) getPaySlipDataFunction();
+                            console.log('from payslip delete', data);
+                        } catch (error) {
+                            console.error('Error:', error);
+                        }
+                    });
+                }
+
+                // again uncheck the delete checkbox
+                deleteCheckBox.checked = false;
+                // again disable the delete funciton
+                deletePayslip.disabled = true;
+                deletePayslip.style.cursor = "not-allowed"
+                deletePayslip.classList.remove("bg-gradient-to-br", "from-red-600", "to-red-500",
+                    "hover:bg-gradient-to-bl", "focus:ring-red-300");
+                deletePayslip.classList.add("bg-gray-500");
+
+            });
+
             // print ready btn
             PrintReadyBtn.addEventListener('click', () => {
                 const voucher_id = document.getElementById('voucher_id');
@@ -645,7 +723,7 @@
                 // showing data in the UI
                 voucher_id.innerText = data.voucher_number;
                 voucher_number.value = data.voucher_number;
-                printable_student_id.innerText = data.student_information.nedubd_student_id;
+                printable_student_id.value = data.student_information.nedubd_student_id;
                 printable_student_roll.innerText = data.student_information.student_roll;
                 printable_student_name.innerText = data.student_information.name;
                 printable_student_class.innerText = data.student_information.Class_name;
@@ -697,7 +775,7 @@
                 payslipTypeNameTD.style.maxWidth = "160px";
                 const payslipTypeInputBox = document.createElement('input');
                 payslipTypeInputBox.type = 'text'
-                payslipTypeInputBox.name = `input_payslip_type[${slip.id}]`;
+                payslipTypeInputBox.name = `input_fee_type[${slip.id}]`;
                 payslipTypeInputBox.value = slip.pay_slip_type + " (" + slip.month + "," + slip.year +
                     ")";
                 payslipTypeInputBox.classList.add('border-0', 'w-fit',
@@ -729,6 +807,8 @@
                     'overflow-hidden')
                 payslipWaiverTD.style.width = "10px";
                 const payslipWaiverInputBox = document.createElement('input');
+                payslipWaiverInputBox.readOnly = slip.due_amount ? true : false;
+                payslipWaiverInputBox.classList.add(slip.due_amount ? "bg-gray-200" : "bg-white")
                 payslipWaiverInputBox.style.width = "90px"
                 payslipWaiverInputBox.type = 'text'
                 payslipWaiverInputBox.name = `input_waiver[${slip.id}]`;
@@ -803,6 +883,12 @@
                 // calculate with current pay
                 let preValueOfCurrentPay = parseInt(currentPayInputBox.value) || 0;
                 currentPayInputBox.addEventListener('change', (event) => {
+                    // collect fees null initially
+                    collect_fees.disabled = false;
+                    collect_fees.style.cursor = "pointer"
+                    collect_fees.classList.add("bg-gradient-to-br", "from-blue-600",
+                        "to-blue-500", "focus:ring-blue-300");
+
                     const value = parseInt(event.target.value);
                     if (value >= 0) {
                         const dueAmount = payableInputBox.value - value;
@@ -861,6 +947,12 @@
                 // calculate & distribute collect amount
                 collect_amount.addEventListener('change', (event) => {
                     const value = parseInt(event.target.value);
+
+                    // collect fees null initially
+                    collect_fees.disabled = false;
+                    collect_fees.style.cursor = "pointer"
+                    collect_fees.classList.add("bg-gradient-to-br", "from-blue-600",
+                        "to-blue-500", "focus:ring-blue-300");
 
                     // make readonly the input field after enter the value once
                     collect_amount.readOnly = true;
@@ -923,9 +1015,16 @@
             collect_amount.value = 0;
             PrintReadyBtn.click();
 
+            // collect fees null
+            collect_fees.disabled = true;
+            collect_fees.style.cursor = "not-allowed"
+            collect_fees.classList.remove("bg-gradient-to-br", "from-blue-600",
+                "to-blue-500", "focus:ring-blue-300");
+            collect_fees.classList.add('bg-gray-500');
+
             // make readable the input field after click on the reset
             collect_amount.readOnly = false;
-            collect_amount.classList.remove("bg-gray-200")
+            collect_amount.classList.remove("bg-gray-200");
         })
     })
 </script>

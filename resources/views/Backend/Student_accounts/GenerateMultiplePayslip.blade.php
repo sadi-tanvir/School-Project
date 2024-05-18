@@ -514,7 +514,7 @@
                         showError('There is no data found')
                         return;
                     }
-                    console.log(data);
+                    console.log('from multiple', data);
                     updateTableContent(data)
                 })
                 .catch(error => {
@@ -718,20 +718,31 @@
 
 
                                 // hidden input fields
+                                // student groups
                                 const studentGroup_TD = document.createElement('td');
-                                studentGroup_TD.style.maxWidth = "100px";
-                                studentGroup_TD.classList.add("px-6", "py-4", 'hidden')
+                                studentGroup_TD.classList.add('hidden')
                                 const studentGroupInputBox = document.createElement(
                                     'input');
                                 studentGroupInputBox.type = 'text'
                                 studentGroupInputBox.name =
                                     `input_group[${student.nedubd_student_id}]`;
                                 studentGroupInputBox.value = student.group;
-                                studentGroupInputBox.classList.add('border-0', 'w-fit',
-                                    'hidden')
-                                studentGroupInputBox.readOnly = true;
+                                studentGroupInputBox.classList.add('hidden')
                                 studentGroup_TD.appendChild(studentGroupInputBox);
                                 tr.appendChild(studentGroup_TD);
+
+                                // student sections
+                                const studentSection_TD = document.createElement('td');
+                                studentSection_TD.classList.add('hidden')
+                                const studentSectionInputBox = document.createElement(
+                                    'input');
+                                studentSectionInputBox.type = 'text'
+                                studentSectionInputBox.name =
+                                    `input_section[${student.nedubd_student_id}]`;
+                                studentSectionInputBox.value = student.section;
+                                studentSectionInputBox.classList.add('hidden')
+                                studentSection_TD.appendChild(studentSectionInputBox);
+                                tr.appendChild(studentSection_TD);
 
 
 
@@ -765,71 +776,3 @@
         document.getElementById('last_pay_date').value = lastPayDate.toISOString().slice(0, 10);
     });
 </script>
-
-{{--
-function updateTableContent(data) {
-    // table header content
-    const th = document.createElement('th');
-    th.classList.add('px-6', 'py-3', 'bg-blue-500');
-    th.textContent = 'SL';
-    table_header_row.appendChild(th);
-    const dynamicHeading = data[selectedMonths[0]][0].students[0];
-    Object.keys(dynamicHeading).forEach(item => {
-        const th = document.createElement('th');
-        th.scope = "col"
-        th.classList.add('px-2', 'py-3', 'bg-blue-500');
-        th.textContent = item;
-        table_header_row.appendChild(th);
-    })
-
-    // create dynamic row
-
-    // table_body.innerHTML = "";
-    monthList.forEach((month) => {
-        data[month].forEach(element => {
-            if (element.students.length > 0) {
-                element.students.forEach((item, index) => {
-                    // console.log(element2.Class_name, element2.month_year);
-                    console.log(item);
-                    const tr = document.createElement('tr');
-                    tr.classList.add('odd:bg-white', 'odd:dark:bg-gray-900',
-                        'even:bg-gray-50',
-                        'even:dark:bg-gray-800', 'border-b',
-                        'dark:border-gray-700');
-
-
-                    // create serial index column
-                    const td = document.createElement('td');
-                    td.classList.add('px-6', 'py-4');
-                    td.textContent = index + 1;
-                    tr.appendChild(td);
-
-                    // creating rest columns
-                    Object.values(item).forEach((element, index) => {
-                        let currentKey = "";
-                        for (const key in student) {
-                            if (student[key] === element) {
-                                currentKey = key;
-                                break;
-                            }
-                        }
-                        const td = document.createElement('td');
-                        td.classList.add("px-6", "py-4", 'overflow-hidden')
-                        const inputBox = document.createElement(
-                            'input');
-                        inputBox.type = 'text'
-                        inputBox.name =
-                            `input_${currentKey}[${student.student_id}]`;
-                        inputBox.value = element;
-                        inputBox.classList.add('border-0', 'w-fit', 'focus:ring-0')
-                        inputBox.readOnly = true;
-                        td.appendChild(inputBox);
-                        tr.appendChild(td);
-                    });
-
-                    table_body.appendChild(tr);
-                })
-            }
-        });
-    })
-} --}}

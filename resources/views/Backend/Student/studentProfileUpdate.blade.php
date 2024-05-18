@@ -11,7 +11,7 @@
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-10 md:my-10">
 
         <hr>
-        <form action="{{ route('findData', $school_code) }}" method="GET">
+        <form action="{{ route('find.Data', $school_code) }}" method="post">
             @csrf
 
             <div class="grid gap-6 mb-6 md:grid-cols-9 mt-2">
@@ -96,40 +96,40 @@
             <thead class="text-xs text-white uppercase bg-blue-600 border-b border-blue-400 dark:text-white">
                 <tr>
 
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-3 py-1">
                         SL
                     </th>
-                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                    <th scope="col" class="px-3 py-1 bg-blue-500">
                         Student ID
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-3 py-1">
                         Name
                     </th>
-                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                    <th scope="col" class="px-3 py-1 bg-blue-500">
                         Class
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-3 py-1">
                         Section
                     </th>
-                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                    <th scope="col" class="px-3 py-1 bg-blue-500">
                         Group
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-3 py-1">
                         Roll
                     </th>
-                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                    <th scope="col" class="px-3 py-1 bg-blue-500">
                         Mobile
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-3 py-1">
                         Birthdate
                     </th>
-                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                    <th scope="col" class="px-3 py-1 bg-blue-500">
                         BG
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-3 py-1">
                         Status
                     </th>
-                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                    <th scope="col" class="px-3 py-1 bg-blue-500">
                         Action
                     </th>
 
@@ -140,24 +140,24 @@
                     {{-- @dd($student) <!-- Add this line to inspect the value --> --}}
                     @foreach ($student as $key => $data)
                         <tr>
-                            <td scope="col" class="px-6 py-3">{{ $key + 1 }}</td>
-                            <td scope="col" class="px-6 py-3">{{ $data->student_id }}</td>
-                            <td scope="col" class="px-6 py-3">{{ $data->name }}</td>
-                            <td scope="col" class="px-6 py-3">{{ $data->Class_name }}</td>
-                            <td scope="col" class="px-6 py-3">{{ $data->section }}</td>
-                            <td scope="col" class="px-6 py-3">{{ $data->group }}</td>
-                            <td scope="col" class="px-6 py-3">{{ $data->student_roll }}</td>
-                            <td scope="col" class="px-6 py-3">{{ $data->mobile_no }}</td>
-                            <td scope="col" class="px-6 py-3">{{ $data->birth_date }}</td>
-                            <td scope="col" class="px-6 py-3">{{ $data->blood_group }}</td>
-                            <td scope="col" class="px-6 py-3">{{ $data->status }}</td>
-                            <td scope="col" class="px-6 py-3">
+                            <td scope="col" class="px-3 py-1">{{ $key + 1 }}</td>
+                            <td scope="col" class="px-3 py-1">{{ $data->student_id }}</td>
+                            <td scope="col" class="px-3 py-1">{{ $data->name }}</td>
+                            <td scope="col" class="px-3 py-1">{{ $data->Class_name }}</td>
+                            <td scope="col" class="px-3 py-1">{{ $data->section }}</td>
+                            <td scope="col" class="px-3 py-1">{{ $data->group }}</td>
+                            <td scope="col" class="px-3 py-1">{{ $data->student_roll }}</td>
+                            <td scope="col" class="px-3 py-1">{{ $data->mobile_no }}</td>
+                            <td scope="col" class="px-3 py-1">{{ $data->birth_date }}</td>
+                            <td scope="col" class="px-3 py-1">{{ $data->blood_group }}</td>
+                            <td scope="col" class="px-3 py-1">{{ $data->status }}</td>
+                            <td scope="col" class="px-3 py-1">
                                <div class="flex justify-center">
                                 <a class="mr-2 edit-button" href="{{ route('student_update', ['id' => $data->id, 'schoolCode' => $school_code]) }}">
                                     <i class="fa fa-edit" style="color:green;"></i>
                                 </a>
                                 
-                                <a class="mr-2 edit-button"><i class="fa fa-eye" style="color:green;"></i></a>
+                                <!-- <a class="mr-2 edit-button"><i class="fa fa-eye" style="color:green;"></i></a> -->
                                </div>
                             </td>
                         </tr>

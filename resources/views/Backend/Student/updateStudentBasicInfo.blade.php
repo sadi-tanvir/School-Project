@@ -9,7 +9,7 @@
             Student Basic Info
         </h3>
     </div>
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-10 md:my-10">
+    <div class="  shadow-md sm:rounded-lg  md:my-10">
         <div class="md:flex justify-end  ">
 
             <a href="{{ route('updateStudentBasicInfo', $school_code) }}">
@@ -44,7 +44,7 @@
 
             <div class="grid gap-6 mb-6 md:grid-cols-7 mt-2">
                 <div>
-                    <select id="class_name" name="class_name"
+                    <select id="class" name="class_name"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                         <option selected>Choose a class</option>
                         @foreach ($classData as $data)
@@ -74,7 +74,6 @@
                 <div>
                     <select id="section" name="year"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                        <option selected>Choose a year</option>
                         @foreach ($Year as $year)
                             <option value="{{ $year->academic_year_name }}">{{ $year->academic_year_name }}</option>
                         @endforeach
@@ -114,45 +113,45 @@
             <table class="w-full text-sm text-left rtl:text-right text-black ">
                 <thead class="text-xs text-white uppercase bg-blue-600 border-b border-blue-400 ">
                     <tr>
-                        <th scope="col" class="px-6 py-3 bg-blue-500">
+                        <th scope="col" class="px-3 py-1 bg-blue-500">
                             {{-- <input type="checkbox" id="select-all-checkbox"
                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 "> --}}
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-3 py-1">
                             Roll
                         </th>
-                        <th scope="col" class="px-6 py-3 bg-blue-500">
+                        <th scope="col" class="px-3 py-1 bg-blue-500">
                             Student ID
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-3 py-1">
                              Name
                         </th>
                         
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-3 py-1">
                             Father Name
                         </th>
-                        <th scope="col" class="px-6 py-3  bg-blue-500">
+                        <th scope="col" class="px-3 py-1  bg-blue-500">
                             Father NID
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-3 py-1">
                             Mother Name
                         </th>
-                        <th scope="col" class="px-6 py-3  bg-blue-500">
+                        <th scope="col" class="px-3 py-1  bg-blue-500">
                             Mother NID
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-3 py-1">
                             BirthDate
                         </th>
-                        <th scope="col" class="px-6 py-3  bg-blue-500">
+                        <th scope="col" class="px-3 py-1  bg-blue-500">
                             Gender
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-3 py-1">
                             Religion
                         </th>
-                        <th scope="col" class="px-6 py-3  bg-blue-500">
+                        <th scope="col" class="px-3 py-1  bg-blue-500">
                             BG
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-3 py-1">
                             Mobile
                         </th>
 
@@ -164,71 +163,71 @@
                         {{-- @dd($student) <!-- Add this line to inspect the value --> --}}
                         @foreach ($student as $key => $data)
                             <tr>
-                                <td scope="col" class="px-6 py-3">
+                                <td scope="col" class="px-3 py-1">
                                     <input type="checkbox" value="{{ $data->id }}" name="id[]" class="row-checkbox"
                                         data-row-index="{{ $key }}">
 
                                 </td>
-                                <td scope="col" class="px-6 py-3">
+                                <td scope="col" class="px-3 py-1">
                                     <span class="row-data">{{ $data->student_roll }}</span>
                                     <input type="text" name="student_roll[{{ $data->id }}]"
-                                        class="form-control row-input hidden md:w-[120px] md:h-[30px] px-2" value="{{ $data->student_roll }}">
+                                        class="form-control row-input hidden md:w-[100px] md:h-[20px] px-2" value="{{ $data->student_roll }}">
                                 </td>
-                                <td scope="col" class="px-6 py-3">
+                                <td scope="col" class="px-3 py-1">
                                     <span class="row-data">{{ $data->student_id }}</span>
                                     <input type="text" name="student_id[{{ $data->id }}]"
-                                        class="form-control row-input hidden md:w-[120px] md:h-[30px] px-2" value="{{ $data->student_id }}">
+                                        class="form-control row-input hidden md:w-[100px] md:h-[20px] px-2" value="{{ $data->student_id }}">
                                 </td>
-                                <td scope="col" class="px-6 py-3">
+                                <td scope="col" class="px-3 py-1">
                                     <span class="row-data">{{ $data->name }} </span>
                                     <input type="text" name="name[{{ $data->id }}]"
-                                        class="form-control row-input hidden md:w-[120px] md:h-[30px] px-2" value="{{ $data->name }} ">
+                                        class="form-control row-input hidden md:w-[100px] md:h-[20px] px-2" value="{{ $data->name }} ">
                                 </td>
                                
-                                <td scope="col" class="px-6 py-3">
+                                <td scope="col" class="px-3 py-1">
                                     <span class="row-data">{{ $data->father_name }}</span>
                                     <input type="text" name="father_name[{{ $data->id }}]"
-                                        class="form-control row-input hidden md:w-[120px] md:h-[30px] px-2" value="{{ $data->father_name }}">
+                                        class="form-control row-input hidden md:w-[100px] md:h-[20px] px-2" value="{{ $data->father_name }}">
                                 </td>
-                                <td scope="col" class="px-6 py-3">
+                                <td scope="col" class="px-3 py-1">
                                     <span class="row-data">{{ $data->father_nid }}</span>
                                     <input type="text" name="father_nid[{{ $data->id }}]"
-                                        class="form-control row-input hidden md:w-[120px] md:h-[30px] px-2" value="{{ $data->father_nid }}">
+                                        class="form-control row-input hidden md:w-[100px] md:h-[20px] px-2" value="{{ $data->father_nid }}">
                                 </td>
-                                <td scope="col" class="px-6 py-3">
+                                <td scope="col" class="px-3 py-1">
                                     <span class="row-data">{{ $data->mother_name }}</span>
                                     <input type="text" name="mother_name[{{ $data->id }}]"
-                                        class="form-control row-input hidden md:w-[120px] md:h-[30px] px-2" value=" {{ $data->mother_name }}">
+                                        class="form-control row-input hidden md:w-[100px] md:h-[20px] px-2" value=" {{ $data->mother_name }}">
                                 </td>
-                                <td scope="col" class="px-6 py-3">
+                                <td scope="col" class="px-3 py-1">
                                     <span class="row-data">{{ $data->mother_nid }}</span>
                                     <input type="text" name="mother_nid[{{ $data->id }}]"
-                                        class="form-control row-input hidden md:w-[120px] md:h-[30px] px-2" value="{{ $data->mother_nid }}">
+                                        class="form-control row-input hidden md:w-[100px] md:h-[30px] px-2" value="{{ $data->mother_nid }}">
                                 </td>
-                                <td scope="col" class="px-6 py-3">
+                                <td scope="col" class="px-3 py-1">
                                     <span class="row-data">{{ $data->birth_date }}</span>
                                     <input type="text" name="birth_date[{{ $data->id }}]"
-                                        class="form-control row-input hidden md:w-[120px] md:h-[30px] px-2" value="{{ $data->birth_date }}">
+                                        class="form-control row-input hidden md:w-[100px] md:h-[20px] px-2" value="{{ $data->birth_date }}">
                                 </td>
-                                <td scope="col" class="px-6 py-3">
+                                <td scope="col" class="px-3 py-1">
                                     <span class="row-data"> {{ $data->gender }}</span>
                                     <input type="text" name="gender[{{ $data->id }}]"
-                                        class="form-control row-input hidden md:w-[120px] md:h-[30px] px-2" value=" {{ $data->gender }}">
+                                        class="form-control row-input hidden md:w-[100px] md:h-[20px] px-2" value=" {{ $data->gender }}">
                                 </td>
-                                <td scope="col" class="px-6 py-3">
+                                <td scope="col" class="px-3 py-1">
                                     <span class="row-data">{{ $data->religious }}</span>
                                     <input type="text" name="religious[{{ $data->id }}]"
-                                        class="form-control row-input hidden md:w-[120px] md:h-[30px] px-2" value=" {{ $data->religious }}">
+                                        class="form-control row-input hidden md:w-[100px] md:h-[20px] px-2" value=" {{ $data->religious }}">
                                 </td>
-                                <td scope="col" class="px-6 py-3">
+                                <td scope="col" class="px-3 py-1">
                                     <span class="row-data">{{ $data->blood_group }}</span>
                                     <input type="text" name="blood_group[{{ $data->id }}]"
-                                        class="form-control row-input hidden md:w-[120px] md:h-[30px] px-2" value="{{ $data->blood_group }}">
+                                        class="form-control row-input hidden md:w-[100px] md:h-[20px] px-2" value="{{ $data->blood_group }}">
                                 </td>
-                                <td scope="col" class="px-6 py-3">
+                                <td scope="col" class="px-3 py-1">
                                     <span class="row-data">{{ $data->mobile_no }}</span>
                                     <input type="text" name="mobile_no[{{ $data->id }}]"
-                                        class="form-control row-input hidden md:w-[120px] md:h-[30px] px-2" value=" {{ $data->mobile_no }}">
+                                        class="form-control row-input hidden md:w-[100px] md:h-[20px] px-2" value=" {{ $data->mobile_no }}">
                                 </td>
 
                             </tr>
@@ -282,6 +281,50 @@
             });
         });
     </script>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#class').change(function() {
+            var class_name = $(this).val();
+            $.ajax({
+                url: "{{ route('basic.info.get-groups', $school_code) }}",
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(result) {
+                    $('#group').empty();
+                    $('#group').append('<option disabled selected value="">Select</option>');
+                    $.each(result, function(key, value) {
+                        $('#group').append('<option value="' + value.group_name + '">' + value.group_name + '</option>');
+                    });
+                }
+            });
+        });
+        //section
+        $('#class').change(function() {
+            var class_name = $(this).val();
+            $.ajax({
+                url: "{{ route('basic.info.get-sections', $school_code) }}",
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(result) {
+                    $('#section').empty();
+                    $('#section').append('<option disabled selected value="">Select</option>');
+                    $.each(result, function(key, value) {
+                        $('#section').append('<option value="' + value.section_name + '">' + value.section_name + '</option>');
+                    });
+                }
+            });
+        });
+      
+    });
+</script>
 
 
 @endsection

@@ -8,6 +8,7 @@ use App\Models\AddAcademicYear;
 use App\Models\AddClass;
 use App\Models\AddClassWiseGroup;
 use App\Models\AddClassWiseSection;
+use App\Models\AddClassWiseShift;
 use App\Models\AddGroup;
 use App\Models\AddSection;
 use App\Models\Student;
@@ -36,14 +37,45 @@ class UpdateStudentBasicInfoController extends Controller
         $selectedSesion = $request->input('session');
 
 
-
-        $student = Student::where('action', 'approved')
+        if ($selectedClassName) {
+            $student = Student::where('action', 'approved')
+            ->where('school_code', $schoolCode)
+            ->where('class_name', $selectedClassName)->get();
+        }else if($selectedGroupName){
+            $student = Student::where('action', 'approved')
+            ->where('school_code', $schoolCode)
+            ->where('class_name', $selectedClassName)
+            ->where('group', $selectedGroupName)
+            ->get();
+        }else if($selectedSectionName){
+            $student = Student::where('action', 'approved')
+            ->where('school_code', $schoolCode)
+            ->where('class_name', $selectedClassName)
+            ->where('group', $selectedGroupName)
+            ->where('section', $selectedSectionName)
+            ->get();
+        }
+        else if($selectedYear){
+            $student = Student::where('action', 'approved')
             ->where('school_code', $schoolCode)
             ->where('class_name', $selectedClassName)
             ->where('group', $selectedGroupName)
             ->where('section', $selectedSectionName)
             ->where('year', $selectedYear)
             ->get();
+        }
+        else{
+            $student = Student::where('action', 'approved')
+            ->where('school_code', $schoolCode)
+            ->where('class_name', $selectedClassName)
+            ->where('group', $selectedGroupName)
+            ->where('section', $selectedSectionName)
+            ->where('year', $selectedYear)
+            ->get();
+        }
+       
+
+       
         $Year = AddAcademicYear::where('action', 'approved')->where('school_code', $schoolCode)->get();
         $Session = AddAcademicSession::where('action', 'approved')->where('school_code', $schoolCode)->get();
         $classData = AddClass::where('action', 'approved')->where('school_code', $schoolCode)->get();
@@ -66,7 +98,27 @@ class UpdateStudentBasicInfoController extends Controller
             return redirect()->route('updateStudentBasicInfo',$schoolCode)->with('error','Student Data Not Found');
     }
 
-    
+    public function getGroups(Request $request, $school_code)
+    {
+        $class = $request->class;
+
+        $groups = AddClassWiseGroup::where('class_name', $class)->where('school_code', $school_code)->get();
+        return response()->json($groups);
+    }
+
+    public function getSections(Request $request, $school_code)
+    {
+        $class = $request->class;
+        $sections = AddClassWiseSection::where('class_name', $class)->where('school_code', $school_code)->get();
+        return response()->json($sections);
+    }
+
+    public function getShifts(Request $request, $school_code)
+    {
+        $class = $request->class;
+        $shifts = AddClassWiseShift::where('class_name', $class)->where('school_code', $school_code)->get();
+        return response()->json($shifts);
+    }
 
     public function updateStudentBasic(Request $request, $schoolCode)
 {

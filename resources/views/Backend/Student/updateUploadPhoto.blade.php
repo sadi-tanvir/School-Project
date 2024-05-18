@@ -43,11 +43,11 @@
         <form action="{{route('updatePhoto',$school_code)}}" method="POST">
         @csrf 
 
-            <div class="grid gap-6 mb-6 md:grid-cols-3 mt-2 p-3">
+            <div class="grid gap-6 mb-6 md:grid-cols-7 mt-2 p-3">
                 <div>
                 <label class="block mb-2 text-sm font-medium text-gray-900 " for="user_avatar">Class
                 </label>
-                    <select id="" name="class"
+                    <select id="class" name="class"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option disabled selected>Choose class</option>
                     @foreach($classes as $class)
@@ -59,7 +59,7 @@
                 <div>
                 <label class="block mb-2 text-sm font-medium text-gray-900 " for="user_avatar">Group
                 </label>
-                <select id="" name="group"
+                <select id="group" name="group"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
                     <option disabled selected>Choose group</option>
                     @foreach($groups as $group)
@@ -70,7 +70,7 @@
                 <div>
                 <label class="block mb-2 text-sm font-medium text-gray-900 " for="user_avatar">Section
                 </label>
-                <select id="" name="section"
+                <select id="section" name="section"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
                     <option disabled selected>Choose section</option>
                     @foreach($sections as $section)
@@ -95,28 +95,17 @@
                 </label>
                 <select id="" name="academic_year"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
-                    <option disabled selected>Choose Academic Year</option>
                     @foreach($years as $year)
                     <option value="{{$year->academic_year_name}}">{{$year->academic_year_name}}</option>
                     @endforeach
 
                 </select>
+                <input class="hidden" name="school_code" value="{{$school_code}}" type="text">
                 </div>
 
-                
-    
-              <!-- <div>
-              <input type="text"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Search student " />
-              </div> -->
-              <div>
-                    <input class="hidden" name="school_code" value="{{$school_code}}" type="text">
-                </div>
-    
                 <div class="">
                     <button type="submit "
-                    class=" w-full text-white bg-blue-700 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Search
+                    class=" w-full text-white bg-blue-700 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mt-6 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Search
                 </button>
                 </div>
             </div>
@@ -187,5 +176,69 @@
             document.getElementById('uploadForm' + this.dataset.studentId).submit();
         });
     });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#class').change(function() {
+            var class_name = $(this).val();
+            $.ajax({
+                url: "{{ route('upload.photo.get-groups', $school_code) }}",
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(result) {
+                    $('#group').empty();
+                    $('#group').append('<option disabled selected value="">Select</option>');
+                    $.each(result, function(key, value) {
+                        $('#group').append('<option value="' + value.group_name + '">' + value.group_name + '</option>');
+                    });
+                }
+            });
+        });
+        //section
+        $('#class').change(function() {
+            var class_name = $(this).val();
+            $.ajax({
+                url: "{{ route('upload.photo.get-sections', $school_code) }}",
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(result) {
+                    $('#section').empty();
+                    $('#section').append('<option disabled selected value="">Select</option>');
+                    $.each(result, function(key, value) {
+                        $('#section').append('<option value="' + value.section_name + '">' + value.section_name + '</option>');
+                    });
+                }
+            });
+        });
+      
+    });
+        //shift
+        $('#class').change(function() {
+            var class_name = $(this).val();
+            $.ajax({
+                url: "{{ route('upload.photo.get-shifts', $school_code) }}",
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(result) {
+                    $('#shift').empty();
+                    $('#shift').append('<option disabled selected value="">Select</option>');
+                    $.each(result, function(key, value) {
+                        $('#shift').append('<option value="' + value.shift_name + '">' + value.shift_name + '</option>');
+                    });
+                }
+            });
+        });
+      
 </script>
 @endsection

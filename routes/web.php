@@ -66,7 +66,11 @@ use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\TrialBa
 use App\Http\Controllers\Backend\GeneralAccounts\VoucherPostingController;
 use App\Http\Controllers\Backend\NEDUBD\NEDUBDController;
 use App\Http\Controllers\Backend\NEDUBD\SchoolAdminController;
+use App\Http\Controllers\Backend\Student\addShortListController;
+use App\Http\Controllers\Backend\Student\classSectionSTdTotalController;
 use App\Http\Controllers\Backend\Student\StudentController;
+use App\Http\Controllers\Backend\Student\StudentDetailsController;
+use App\Http\Controllers\Backend\Student\StudentListWithPhotoController;
 use App\Http\Controllers\Backend\Student\UpdateStudentBasicInfoController;
 use App\Http\Controllers\Backend\Student\UpdateStudentClassInfoController;
 use App\Http\Controllers\Backend\Student\StudentProfileUpdateController;
@@ -74,9 +78,7 @@ use App\Http\Controllers\Backend\Student\UploadPhotoController;
 use App\Http\Controllers\Backend\Student\MigrateStudentController;
 use App\Http\Controllers\Backend\Student\UpdateStudentController;
 use App\Http\Controllers\Backend\Student\BasicAddStudentController;
-use App\Http\Controllers\Backend\Student\studentReports\StudentDetailsController;
-use App\Http\Controllers\Backend\Student\studentReports\addShortListController;
-use App\Http\Controllers\Backend\Student\studentReports\StudentListWithPhotoController;
+
 use App\Http\Controllers\Backend\Student\studentReports\EsifListController;
 use App\Http\Controllers\Backend\Student\UploadExcelFileController;
 
@@ -150,7 +152,7 @@ use App\Http\Controllers\Backend\AdmitCard\ExamBlankSheetController;
 use App\Http\Controllers\Backend\StudentAttendence\AttendenceController;
 use App\Http\Controllers\Backend\ReportStudentAttendence\ReportStudentAttendenceController;
 use App\Http\Controllers\Backend\Student\StudentReports\admissionSummaryController;
-use App\Http\Controllers\Backend\Student\StudentReports\classSectionSTdTotalController;
+
 use App\Http\Controllers\Backend\Student\StudentReports\listOfMigrateStudentListController;
 use App\Http\Controllers\Backend\Student\StudentReports\religionWiseStudentSummaryController;
 use App\Http\Controllers\Backend\Student\StudentReports\studentIdCardController;
@@ -202,6 +204,9 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/updateStudentBasicInfo/{schoolCode}', [UpdateStudentBasicInfoController::class, 'updateStudentBasicInfo'])->name('updateStudentBasicInfo');
     Route::get('/getStudentData/{schoolCode}', [UpdateStudentBasicInfoController::class, 'getStudentData'])->name('getStudentData');
     Route::put('/updateData/{schoolCode}', [UpdateStudentBasicInfoController::class, 'updateStudentBasic'])->name('updateStudent');
+    Route::post('/basic-info/get-groups/{schoolCode}',[UpdateStudentBasicInfoController::class, 'getGroups'])->name('basic.info.get-groups');
+    Route::post('/basic-info/get-sections/{schoolCode}',[UpdateStudentBasicInfoController::class, 'getSections'])->name('basic.info.get-sections');
+    Route::post('/basic-info/get-shifts/{schoolCode}', [UpdateStudentBasicInfoController::class, 'getShifts'])->name('basic.info.get-shifts');
 
 
     //Update student Student Class Info
@@ -209,11 +214,15 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/getStudentClassData/{schoolCode}', [UpdateStudentClassInfoController::class, 'getStudentClassData'])->name('getStudentClassData');
     Route::put('/updateStudentClass/{schoolCode}', [UpdateStudentClassInfoController::class, 'updateStudentClass'])->name('updateStudentClass');
     Route::delete('/deleteStudent/{schoolCode}/{ids}', [UpdateStudentClassInfoController::class, 'delete'])->name('deleteStudent');
+    Route::post('/class-info/get-groups/{schoolCode}',[UpdateStudentClassInfoController::class, 'getGroups'])->name('class.info.get-groups');
+    Route::post('/class-info/get-sections/{schoolCode}',[UpdateStudentClassInfoController::class, 'getSections'])->name('class.info.get-sections');
+    Route::post('/class-info/get-shifts/{schoolCode}', [UpdateStudentClassInfoController::class, 'getShifts'])->name('class.info.get-shifts');
+
 
 
     //update student profile
     Route::get('/studentProfileUpdate/{schoolCode}', [StudentProfileUpdateController::class, 'studentProfileUpdate'])->name('studentProfileUpdate');
-    Route::get('/findData/{schoolCode}', [StudentProfileUpdateController::class, 'findData'])->name('findData');
+    Route::post('/find-Data/{schoolCode}', [StudentProfileUpdateController::class, 'findData'])->name('find.Data');
     
     //Update Student ->Add Student
     Route::get('/getStudent/{schoolCode}', [BasicAddStudentController::class, 'getStudent'])->name('getStudent');
@@ -235,6 +244,9 @@ Route::prefix('dashboard')->group(function () {
     Route::post('/updatePhoto/{schoolCode}', [UploadPhotoController::class, 'updatePhoto'])->name('updatePhoto');
     Route::post('/update-student-image/{schoolCode}/{id}', [UploadPhotoController::class, 'updateImage'])->name('update.student.image');
     Route::get('/uploadPhoto/{schoolCode}', [UploadPhotoController::class, 'uploadPhoto'])->name('uploadPhoto');
+    Route::post('/upload-photo/get-groups/{schoolCode}',[UpdateStudentClassInfoController::class, 'getGroups'])->name('upload.photo.get-groups');
+    Route::post('/upload-photo/get-sections/{schoolCode}',[UpdateStudentClassInfoController::class, 'getSections'])->name('upload.photo.get-sections');
+    Route::post('/upload-photo/get-shifts/{schoolCode}', [UpdateStudentClassInfoController::class, 'getShifts'])->name('upload.photo.get-shifts');
 
 
 

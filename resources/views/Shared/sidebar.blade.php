@@ -1,6 +1,6 @@
 <style>
     .scrollbar::-webkit-scrollbar {
-        width: 6px;
+        width: 10px;
     }
 
     .scrollbar::-webkit-scrollbar-track {
@@ -9,12 +9,12 @@
     }
 
     .scrollbar::-webkit-scrollbar-thumb {
-        background: #124076;
+        background: #007BFF;
         border-radius: 10px;
     }
 
     .scrollbar::-webkit-scrollbar-thumb:hover {
-        background: #0766AD;
+        background: #007BFF;
     }
 
     /*
@@ -60,9 +60,9 @@
 </style>
 
 <aside id="logo-sidebar"
-    class="fixed top-12 left-0 z-40 w-72 h-screen transition-transform -translate-x-full sm:translate-x-0 duration-1000"
+    class="fixed top-12 left-0 z-40 w-72 h-screen  transition-transform -translate-x-full sm:translate-x-0 duration-1000"
     aria-label="logo-sidebar">
-    <div class="h-full px-3 py-4 overflow-y-auto scrollbar gradient-bg">
+    <div class="h-full  overflow-y-auto scrollbar  px-3 pt-5 pb-20   gradient-bg">
         <ul class="space-y-2  font-medium ">
 
 

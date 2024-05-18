@@ -106,8 +106,6 @@ class StudentProfileUpdateController extends Controller
         }
 
 
-
-        
             $classes=AddClass::where("action", "approved")->where("school_code",$schoolCode)->get();
             $sections=AddSection::where("action", "approved")->where("school_code",$schoolCode)->get();
             $groups=AddGroup::where("action", "approved")->where("school_code",$schoolCode)->get();

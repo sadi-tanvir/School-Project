@@ -116,7 +116,7 @@
             </table>
             <div class="md:flex justify-end mb-6 mt-10">
                 <div class="md:mr-10">
-                    <select id="class_name" name="class_name"
+                    <select id="class" name="class_name"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                         <option selected>Choose a class</option>
                         @foreach ($classes as $data)
@@ -143,6 +143,16 @@
                         @endforeach
                     </select>
                 </div>
+                
+                <div class="md:mr-10">
+                    <select id="shift" name="shift"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                        <option selected>Choose a Shift</option>
+                        @foreach ($shift as $shift)
+                            <option value="{{ $shift->shift_name }}">{{ $shift->shift_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="md:mr-10">
                     <select id="" name="category"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
@@ -152,15 +162,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="md:mr-10">
-                    <select id="" name="shift"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                        <option selected>Choose a Shift</option>
-                        @foreach ($shift as $shift)
-                            <option value="{{ $shift->shift_name }}">{{ $shift->shift_name }}</option>
-                        @endforeach
-                    </select>
-                </div>
+                
 
                 <div>
                     <input class="hidden" name="action" value="approved" type="text">
@@ -203,56 +205,67 @@
         }
     </script>
 
-    {{-- <script>
-
-        function generateUniqueStudentId() {
-            $lastStudent = Student::latest() - > first();
-            $currentYear = date('Y');
-            $newId = 1;
-
-            if ($lastStudent) {
-                $lastId = intval(substr($lastStudent - > nedubd_student_id, -4));
-                $newId = $lastId + 1;
-            }
-
-            $newStudentId = 'STU'.$currentYear.str_pad($newId, 4, '0', STR_PAD_LEFT);
-
-            $existingStudent = Student::where('nedubd_student_id', $newStudentId) - > first();
-            if ($existingStudent) {
-                do {
-                    $newId++;
-                    $newStudentId = 'STU'.$currentYear.str_pad($newId, 4, '0', STR_PAD_LEFT);
-                    $existingStudent = Student::where('nedubd_student_id', $newStudentId) - > first();
-                } while ($existingStudent);
-            }
-
-            return $newStudentId;
-        }
-
-        function generateRows() {
-            var rowCount = document.getElementById('row-amount').value;
-            var idType = document.getElementById('studentID').value;
-            var tableBody = document.querySelector('#student-table tbody');
-            tableBody.innerHTML = '';
-
-            for (var i = 0; i < rowCount; i++) {
-                var row = document.createElement('tr');
-                var idInput = '';
-               
-                row.innerHTML = `
-                    <td>${idInput}</td>
-                    <td><input type="text" name="name[]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "></td>
-                    <td><input type="text" name="roll[]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "></td>
-                    <td><input type="text" name="father_name[]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "></td>
-                    <td><input type="text" name="mother_name[]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "></td>
-                    <td><input type="text" name="mobile[]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "></td>
-                    <td><input type="text" name="birthdate[]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "></td>
-                    <td><input type="text" name="gender[]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "></td>
-                    <td><input type="text" name="religion[]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "></td>
-                    <td><input type="text" name="bg[]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "></td>
-                `;
-                tableBody.appendChild(row);
-            }
-        }
-    </script> --}}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#class').change(function() {
+            var class_name = $(this).val();
+            $.ajax({
+                url: "{{ route('add.student.get-groups', $school_code) }}",
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(result) {
+                    $('#group').empty();
+                    $('#group').append('<option disabled selected value="">Select</option>');
+                    $.each(result, function(key, value) {
+                        $('#group').append('<option value="' + value.group_name + '">' + value.group_name + '</option>');
+                    });
+                }
+            });
+        });
+        //section
+        $('#class').change(function() {
+            var class_name = $(this).val();
+            $.ajax({
+                url: "{{ route('add.student.get-sections', $school_code) }}",
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(result) {
+                    $('#section').empty();
+                    $('#section').append('<option disabled selected value="">Select</option>');
+                    $.each(result, function(key, value) {
+                        $('#section').append('<option value="' + value.section_name + '">' + value.section_name + '</option>');
+                    });
+                }
+            });
+        });
+      
+    });
+        //shift
+        $('#class').change(function() {
+            var class_name = $(this).val();
+            $.ajax({
+                url: "{{ route('add.student.get-shifts', $school_code) }}",
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(result) {
+                    $('#shift').empty();
+                    $('#shift').append('<option disabled selected value="">Select</option>');
+                    $.each(result, function(key, value) {
+                        $('#shift').append('<option value="' + value.shift_name + '">' + value.shift_name + '</option>');
+                    });
+                }
+            });
+        });
+      
+</script>
 @endsection

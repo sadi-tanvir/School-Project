@@ -61,22 +61,49 @@ class StudentProfileUpdateController extends Controller
     {
         // dd($request);
         
-        $student = null;
+        $student = [];
         $selectedClassName = $request->input('class_name');
         $selectedGroupName = $request->input('group');
         $selectedSectionName = $request->input('section');
         $selectedYear = $request->input('year');
         $selectedSesion = $request->input('session');
 
+        if($selectedClassName){
+            $student = Student::where('action', 'approved')
+            ->where('school_code', $schoolCode)
+            ->where('class_name', $selectedClassName)
+            ->get();
+        }
+        else if($selectedGroupName){
+            $student = Student::where('action', 'approved')
+            ->where('school_code', $schoolCode)
+            ->where('class_name', $selectedClassName)
+            ->where('group', $selectedGroupName)
+            ->get();
+        }
+        elseif ($selectedSectionName) {
+            $student = Student::where('action', 'approved')
+            ->where('school_code', $schoolCode)
+            ->where('class_name', $selectedClassName)
+            ->where('section', $selectedSectionName)
+            ->get();
+        }
+        else if($selectedYear){
 
-
-        $student = Student::where('action', 'approved')
+        }
+        else{
+            $student = Student::where('action', 'approved')
             ->where('school_code', $schoolCode)
             ->where('class_name', $selectedClassName)
             ->where('group', $selectedGroupName)
             ->where('section', $selectedSectionName)
             ->where('year', $selectedYear)
             ->get();
+        }
+
+
+
+        
             $classes=AddClass::where("action", "approved")->where("school_code",$schoolCode)->get();
             $sections=AddSection::where("action", "approved")->where("school_code",$schoolCode)->get();
             $groups=AddGroup::where("action", "approved")->where("school_code",$schoolCode)->get();

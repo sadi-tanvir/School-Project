@@ -196,7 +196,9 @@ Route::prefix('dashboard')->group(function () {
     // student module
     Route::post('/create-student', [StudentController::class, 'addStudent'])->name('student.add');
     Route::get('/add-student/{schoolCode}', [StudentController::class, 'AddStudentForm'])->name('AddStudentForm');
-
+    Route::post('/add-student/get-groups/{schoolCode}', [StudentController::class, 'getGroups'])->name('add.get-groups');
+    Route::post('/add-student/get-sections/{schoolCode}', [StudentController::class, 'getSections'])->name('add.get-sections');
+    Route::post('/add-student/get-shifts/{schoolCode}', [StudentController::class, 'getShifts'])->name('add.get-shifts');
 
 
     //Update Student Basic Info
@@ -204,8 +206,8 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/updateStudentBasicInfo/{schoolCode}', [UpdateStudentBasicInfoController::class, 'updateStudentBasicInfo'])->name('updateStudentBasicInfo');
     Route::get('/getStudentData/{schoolCode}', [UpdateStudentBasicInfoController::class, 'getStudentData'])->name('getStudentData');
     Route::put('/updateData/{schoolCode}', [UpdateStudentBasicInfoController::class, 'updateStudentBasic'])->name('updateStudent');
-    Route::post('/basic-info/get-groups/{schoolCode}',[UpdateStudentBasicInfoController::class, 'getGroups'])->name('basic.info.get-groups');
-    Route::post('/basic-info/get-sections/{schoolCode}',[UpdateStudentBasicInfoController::class, 'getSections'])->name('basic.info.get-sections');
+    Route::post('/basic-info/get-groups/{schoolCode}', [UpdateStudentBasicInfoController::class, 'getGroups'])->name('basic.info.get-groups');
+    Route::post('/basic-info/get-sections/{schoolCode}', [UpdateStudentBasicInfoController::class, 'getSections'])->name('basic.info.get-sections');
     Route::post('/basic-info/get-shifts/{schoolCode}', [UpdateStudentBasicInfoController::class, 'getShifts'])->name('basic.info.get-shifts');
 
 
@@ -214,8 +216,8 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/getStudentClassData/{schoolCode}', [UpdateStudentClassInfoController::class, 'getStudentClassData'])->name('getStudentClassData');
     Route::put('/updateStudentClass/{schoolCode}', [UpdateStudentClassInfoController::class, 'updateStudentClass'])->name('updateStudentClass');
     Route::delete('/deleteStudent/{schoolCode}/{ids}', [UpdateStudentClassInfoController::class, 'delete'])->name('deleteStudent');
-    Route::post('/class-info/get-groups/{schoolCode}',[UpdateStudentClassInfoController::class, 'getGroups'])->name('class.info.get-groups');
-    Route::post('/class-info/get-sections/{schoolCode}',[UpdateStudentClassInfoController::class, 'getSections'])->name('class.info.get-sections');
+    Route::post('/class-info/get-groups/{schoolCode}', [UpdateStudentClassInfoController::class, 'getGroups'])->name('class.info.get-groups');
+    Route::post('/class-info/get-sections/{schoolCode}', [UpdateStudentClassInfoController::class, 'getSections'])->name('class.info.get-sections');
     Route::post('/class-info/get-shifts/{schoolCode}', [UpdateStudentClassInfoController::class, 'getShifts'])->name('class.info.get-shifts');
 
 
@@ -224,7 +226,7 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/studentProfileUpdate/{schoolCode}', [StudentProfileUpdateController::class, 'studentProfileUpdate'])->name('studentProfileUpdate');
 
     Route::post('/find-Data/{schoolCode}', [StudentProfileUpdateController::class, 'findData'])->name('find.Data');
-    
+
 
     //Update Student ->Add Student
     Route::get('/getStudent/{schoolCode}', [BasicAddStudentController::class, 'getStudent'])->name('getStudent');
@@ -246,8 +248,8 @@ Route::prefix('dashboard')->group(function () {
     Route::post('/updatePhoto/{schoolCode}', [UploadPhotoController::class, 'updatePhoto'])->name('updatePhoto');
     Route::post('/update-student-image/{schoolCode}/{id}', [UploadPhotoController::class, 'updateImage'])->name('update.student.image');
     Route::get('/uploadPhoto/{schoolCode}', [UploadPhotoController::class, 'uploadPhoto'])->name('uploadPhoto');
-    Route::post('/upload-photo/get-groups/{schoolCode}',[UpdateStudentClassInfoController::class, 'getGroups'])->name('upload.photo.get-groups');
-    Route::post('/upload-photo/get-sections/{schoolCode}',[UpdateStudentClassInfoController::class, 'getSections'])->name('upload.photo.get-sections');
+    Route::post('/upload-photo/get-groups/{schoolCode}', [UpdateStudentClassInfoController::class, 'getGroups'])->name('upload.photo.get-groups');
+    Route::post('/upload-photo/get-sections/{schoolCode}', [UpdateStudentClassInfoController::class, 'getSections'])->name('upload.photo.get-sections');
     Route::post('/upload-photo/get-shifts/{schoolCode}', [UpdateStudentClassInfoController::class, 'getShifts'])->name('upload.photo.get-shifts');
 
 
@@ -359,7 +361,7 @@ Route::prefix('dashboard')->group(function () {
 
 
 
-    
+
     // General Accounts
     Route::get("/generalAccounts/cashPaymentVoucher/{schoolCode}", [CashPaymentVoucherController::class, "CashPaymentVoucherView"])->name("cashPaymentVoucher.view");
     Route::get("/generalAccounts/cashReceiptVoucher/{schoolCode}", [CashReceiptVoucherController::class, "CashReceiptVoucherView"])->name("cashReceiptVoucher.view");

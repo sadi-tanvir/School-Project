@@ -25,7 +25,7 @@
                 </div>
                 <div>
 
-                    <select id="" name="class_name"
+                    <select id="class" name="class_name"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
                         <option selected>Choose a class</option>
@@ -36,7 +36,7 @@
                 </div>
 
                 <div>
-                    <select id="" name="group"
+                    <select id="group" name="group"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                         <option selected>Choose a Group</option>
                         @foreach ($groups as $group)
@@ -45,7 +45,7 @@
                     </select>
                 </div>
                 <div>
-                    <select id="" name="section"
+                    <select id="section" name="section"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                         <option selected>Choose a section</option>
                         @foreach ($sections as $section)
@@ -56,7 +56,6 @@
                 <div>
                     <select id="" name="year"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                        <option selected>Choose a year</option>
                         @foreach ($years as $year)
                             <option>{{ $year->academic_year_name }}</option>
                         @endforeach
@@ -174,4 +173,69 @@
 
         </div>
     </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#class').change(function() {
+            var class_name = $(this).val();
+            $.ajax({
+                url: "{{ route('student.profile.get-groups', $school_code) }}",
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(result) {
+                    $('#group').empty();
+                    $('#group').append('<option disabled selected value="">Select</option>');
+                    $.each(result, function(key, value) {
+                        $('#group').append('<option value="' + value.group_name + '">' + value.group_name + '</option>');
+                    });
+                }
+            });
+        });
+        //section
+        $('#class').change(function() {
+            var class_name = $(this).val();
+            $.ajax({
+                url: "{{ route('student.profile.get-sections', $school_code) }}",
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(result) {
+                    $('#section').empty();
+                    $('#section').append('<option disabled selected value="">Select</option>');
+                    $.each(result, function(key, value) {
+                        $('#section').append('<option value="' + value.section_name + '">' + value.section_name + '</option>');
+                    });
+                }
+            });
+        });
+      
+    });
+        //shift
+        $('#class').change(function() {
+            var class_name = $(this).val();
+            $.ajax({
+                url: "{{ route('student.profile.get-shifts', $school_code) }}",
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(result) {
+                    $('#shift').empty();
+                    $('#shift').append('<option disabled selected value="">Select</option>');
+                    $.each(result, function(key, value) {
+                        $('#shift').append('<option value="' + value.shift_name + '">' + value.shift_name + '</option>');
+                    });
+                }
+            });
+        });
+      
+</script>
 @endsection

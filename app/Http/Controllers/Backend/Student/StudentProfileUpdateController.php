@@ -89,7 +89,11 @@ class StudentProfileUpdateController extends Controller
             ->get();
         }
         else if($selectedYear){
-
+            $student = Student::where('action', 'approved')
+            ->where('school_code', $schoolCode)
+            ->where('class_name', $selectedClassName)
+            ->where('year', $selectedYear)
+            ->get();
         }
         else{
             $student = Student::where('action', 'approved')

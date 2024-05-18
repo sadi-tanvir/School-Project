@@ -17,12 +17,13 @@ class AddFeeTypeController extends Controller
         $query = AddFeeType::query();
 
         if ($searchTerm) {
-            $query->where('fee_type_name', 'like', '%' . $searchTerm . '%')
+            $query->where("school_code", $schoolCode)
+                ->where('fee_type_name', 'like', '%' . $searchTerm . '%')
                 ->orWhere('position', 'like', '%' . $searchTerm . '%')
                 ->orWhere('status', 'like', '%' . $searchTerm . '%');
         }
 
-        $feeTypes = $query->get();
+        $feeTypes = $query->where("school_code", $schoolCode)->orderBy('position', 'asc')->get();
 
         return view('Backend.BasicInfo.FeesSetting.AddFeeType', compact('schoolCode', 'feeTypes'));
     }

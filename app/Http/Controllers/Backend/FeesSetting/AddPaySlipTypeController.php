@@ -21,7 +21,7 @@ class AddPaySlipTypeController extends Controller
                 ->orWhere('status', 'like', '%' . $searchTerm . '%');
         }
 
-        $allPaySlipTypes = $query->get();
+        $allPaySlipTypes = $query->where("school_code", $school_code)->get();
 
         return view('Backend.BasicInfo.FeesSetting.AddPaySlipType', compact('school_code', 'allPaySlipTypes'));
     }

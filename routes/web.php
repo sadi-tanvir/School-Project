@@ -294,8 +294,14 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/donation/{schoolCode}', [DonationController::class, 'AddDonationFee'])->name('donation');
     Route::get('/othersFee/{schoolCode}', [OthersFeeController::class, 'AddOthersFee'])->name('othersFee');
     Route::get('/addFineFail/{schoolCode}', [FineFailController::class, 'AddFineFail'])->name('addFineFail');
+
     //reports
+    // DailyCollectionReport
     Route::get('/DailyCollectionReport/{schoolCode}', [DailyCollectionReportController::class, 'DailyCollectionReport'])->name('DailyCollectionReport');
+    Route::get('/DailyCollectionReport/getStudentRoll/{schoolCode}', [DailyCollectionReportController::class, 'GetStudentRoll'])->name('DailyCollectionReport.studentRoll');
+    Route::get('/DailyCollectionReport/getReports/{schoolCode}', [DailyCollectionReportController::class, 'GetPaySlipReport'])->name('DailyCollectionReport.getReports');
+    // Route::get('/DailyCollectionReport/printReports/{schoolCode}', [DailyCollectionReportController::class, 'PrintPaySlipReport'])->name('DailyCollectionReport.print');
+
     Route::get('/geneTransferInquiri/{schoolCode}', [geneTranferInquiriController::class, 'geneTransferInquiri'])->name('geneTransferInquiri');
     Route::get('/DuepaySummary/{schoolCode}', [DuePaySummaryController::class, 'DuepaySummary'])->name('DuepaySummary');
     Route::get('/headwiseSummary/{schoolCode}', [HeadWiseSummaryController::class, 'headwiseSummary'])->name('headwiseSummary');

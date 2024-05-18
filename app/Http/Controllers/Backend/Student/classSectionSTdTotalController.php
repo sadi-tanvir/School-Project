@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Student\StudentReports;
+namespace App\Http\Controllers\Backend\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\AddClassWiseGroup;
 use Illuminate\Http\Request;
 use App\Models\AddAcademicYear;
 use App\Models\AddClass;
@@ -31,9 +32,11 @@ class classSectionSTdTotalController extends Controller
         $classes=AddClass::where('action', 'approved')->where('school_code',$schoolCode)->get();
         $sections=AddClassWiseSection::where('action', 'approved')->where('school_code',$schoolCode)->get();
         $students=Student::where('action', 'approved')->where('school_code',$schoolCode)->where('year',$year)->get();
+        $groups=AddClassWiseGroup::where('action', 'approved')->where('school_code',$schoolCode)->get();
+// dd($classes);
         $schoolInfo=SchoolInfo::where('school_code',$schoolCode)->get();
         $date = date('d-m-Y');
-        return view('Backend.Student.students(report).classSectionSTdTotalDownload', compact( 'class','classes','sections','students','schoolInfo','date'));
+        return view('Backend.Student.classSectionSTdTotalDownload', compact( 'class','classes','sections','groups','students','schoolInfo','date'));
     }
 
 
@@ -49,8 +52,9 @@ class classSectionSTdTotalController extends Controller
         $sections=AddClassWiseSection::where('action', 'approved')->where('school_code',$schoolCode)->get();
         $students=Student::where('action', 'approved')->where('school_code',$schoolCode)->where('year',$year)->get();
         $schoolInfo=SchoolInfo::where('school_code',$schoolCode)->get();
+      
         $date = date('d-m-Y');
-        $pdf = PDF::loadView('Backend.Student.students(report).pdf.classSectionStdtotalDownload', compact( 'class','classes','sections','students','schoolInfo','date'));
+        $pdf = PDF::loadView('Backend.Student.classSectionStdtotalDownload', compact( 'class','classes','sections','students','schoolInfo','date'));
         return $pdf->download('student-class-section-total.pdf');
     }
 }

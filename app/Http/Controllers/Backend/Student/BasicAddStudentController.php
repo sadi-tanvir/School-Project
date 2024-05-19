@@ -7,6 +7,9 @@ use App\Models\AddAcademicSession;
 use App\Models\AddAcademicYear;
 use App\Models\AddCategory;
 use App\Models\AddClass;
+use App\Models\AddClassWiseGroup;
+use App\Models\AddClassWiseSection;
+use App\Models\AddClassWiseShift;
 use App\Models\AddGroup;
 use App\Models\AddSection;
 use App\Models\AddShift;
@@ -58,6 +61,28 @@ class BasicAddStudentController extends Controller
         $student->save();
     }
     return redirect()->back()->with('success', 'Students added successfully!');
+}
+
+public function getGroups(Request $request, $school_code)
+{
+    $class = $request->class;
+
+    $groups = AddClassWiseGroup::where('class_name', $class)->where('school_code', $school_code)->get();
+    return response()->json($groups);
+}
+
+public function getSections(Request $request, $school_code)
+{
+    $class = $request->class;
+    $sections = AddClassWiseSection::where('class_name', $class)->where('school_code', $school_code)->get();
+    return response()->json($sections);
+}
+
+public function getShifts(Request $request, $school_code)
+{
+    $class = $request->class;
+    $shifts = AddClassWiseShift::where('class_name', $class)->where('school_code', $school_code)->get();
+    return response()->json($shifts);
 }
    private function generateUniqueStudentId()
    {

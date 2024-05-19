@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Student;
 
+use App\Models\AddClassWiseShift;
 use App\Models\AddGroup;
 use App\Models\AddSection;
 use Illuminate\Support\Facades\DB;
@@ -33,7 +34,7 @@ class UpdateStudentClassInfoController extends Controller
     }
     public function getStudentClassData(Request $request, $schoolCode)
     {
-        $student = null;
+        $student = [];
         $selectedClassName = $request->input('class_name');
         $selectedGroupName = $request->input('group');
         $selectedSectionName = $request->input('section');
@@ -43,17 +44,45 @@ class UpdateStudentClassInfoController extends Controller
         $selectedShift = $request->input('shift');
         $selectedStatus = $request->input('status');
 
-
-
-        $student = Student::where('action', 'approved')
+        if ($selectedClassName) {
+            $student = Student::where('action', 'approved')
+            ->where('school_code', $schoolCode)
+            ->where('class_name', $selectedClassName)->get();
+        }else if($selectedGroupName){
+            $student = Student::where('action', 'approved')
+            ->where('school_code', $schoolCode)
+            ->where('class_name', $selectedClassName)
+            ->where('group', $selectedGroupName)
+            ->get();
+        }else if($selectedSectionName){
+            $student = Student::where('action', 'approved')
+            ->where('school_code', $schoolCode)
+            ->where('class_name', $selectedClassName)
+            ->where('group', $selectedGroupName)
+            ->where('section', $selectedSectionName)
+            ->get();
+        }
+        else if($selectedYear){
+            $student = Student::where('action', 'approved')
             ->where('school_code', $schoolCode)
             ->where('class_name', $selectedClassName)
             ->where('group', $selectedGroupName)
             ->where('section', $selectedSectionName)
             ->where('year', $selectedYear)
-            ->where('category', $selectedCategory)
+            ->get();
+        }
+        else if($selectedShift){
+            $student = Student::where('action', 'approved')
+            ->where('school_code', $schoolCode)
+            ->where('class_name', $selectedClassName)
+            ->where('group', $selectedGroupName)
+            ->where('section', $selectedSectionName)
+            ->where('year', $selectedYear)
             ->where('shift', $selectedShift)
             ->get();
+        }
+
+        
         //dd($student);
 
 
@@ -76,6 +105,29 @@ class UpdateStudentClassInfoController extends Controller
         
 
         return redirect()->route('studentClassInfo',$schoolCode)->with('error','Student Data Not Found');
+    }
+
+
+    public function getGroups(Request $request, $school_code)
+    {
+        $class = $request->class;
+
+        $groups = AddClassWiseGroup::where('class_name', $class)->where('school_code', $school_code)->get();
+        return response()->json($groups);
+    }
+
+    public function getSections(Request $request, $school_code)
+    {
+        $class = $request->class;
+        $sections = AddClassWiseSection::where('class_name', $class)->where('school_code', $school_code)->get();
+        return response()->json($sections);
+    }
+
+    public function getShifts(Request $request, $school_code)
+    {
+        $class = $request->class;
+        $shifts = AddClassWiseShift::where('class_name', $class)->where('school_code', $school_code)->get();
+        return response()->json($shifts);
     }
 
     public function updateStudentClass(Request $request,$schoolCode)

@@ -82,7 +82,7 @@
                                 $stu=0;
                                 @endphp
 
-                                @if($classData === null)
+                                @if($class===null)
                                 @foreach($classes as $key => $class)
                                 <tr class="border table_row">
                                     <td class="min-w-16 max-w-32 p-3 font-medium">{{ $key + 1 }}</td>

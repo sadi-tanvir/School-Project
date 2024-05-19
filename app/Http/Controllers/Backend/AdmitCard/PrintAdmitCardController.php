@@ -25,9 +25,9 @@ class PrintAdmitCardController extends Controller
         $groups = AddGroup::where("action", "approved")->where("school_code", $schoolCode)->get();
         $studentId = Student::where("action", "approved")->where("school_code", $schoolCode)->get();
         $examName = AddClassExam::where("action", "approved")->where("school_code", $schoolCode)->get();
-        $year = AddAcademicYear::where("action", "approved")->where("school_code", $schoolCode)->get();
+        $years = AddAcademicYear::where("action", "approved")->where("school_code", $schoolCode)->get();
 
-        return view('Backend/AdmitCard/Report(admitCards)/printAdmitCard', compact('classes', 'sections', 'groups', 'studentId', 'examName', 'year'));
+        return view('Backend/AdmitCard/Report(admitCards)/printAdmitCard', compact('classes', 'sections', 'groups', 'studentId', 'examName', 'years'));
     }
 
     public function downloadAdmit(Request $request, $schoolCode)

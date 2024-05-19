@@ -143,6 +143,7 @@ use App\Http\Controllers\Backend\Message\ExcelMSGController;
 use App\Http\Controllers\Backend\Message\AddMsgController;
 
 use App\Http\Controllers\Backend\ReportsExamsReports\ReportsExamsReportsController;
+use App\Http\Controllers\Backend\ReportsExamsReports\ProgressReportController;
 use App\Http\Controllers\Backend\AdmitCard\SetAdmitCardController;
 use App\Http\Controllers\Backend\AdmitCard\PrintAdmitCardController;
 use App\Http\Controllers\Backend\AdmitCard\PrintSeatPlanController;
@@ -231,9 +232,9 @@ Route::prefix('dashboard')->group(function () {
     //Update Student ->Add Student
     Route::get('/getStudent/{schoolCode}', [BasicAddStudentController::class, 'getStudent'])->name('getStudent');
 
-    Route::post('/postStudent', [BasicAddStudentController::class,'postStudent'])->name('postStudent');
-    Route::post('/student-profile/get-groups/{schoolCode}',[UpdateStudentClassInfoController::class, 'getGroups'])->name('student.profile.get-groups');
-    Route::post('/student-profile/get-sections/{schoolCode}',[UpdateStudentClassInfoController::class, 'getSections'])->name('student.profile.get-sections');
+    Route::post('/postStudent', [BasicAddStudentController::class, 'postStudent'])->name('postStudent');
+    Route::post('/student-profile/get-groups/{schoolCode}', [UpdateStudentClassInfoController::class, 'getGroups'])->name('student.profile.get-groups');
+    Route::post('/student-profile/get-sections/{schoolCode}', [UpdateStudentClassInfoController::class, 'getSections'])->name('student.profile.get-sections');
     Route::post('/student-profile/get-shifts/{schoolCode}', [UpdateStudentClassInfoController::class, 'getShifts'])->name('student.profile.get-shifts');
 
 
@@ -450,7 +451,9 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/getData/{schoolCode}', [ExamMarksDeleteController::class, 'finData'])->name('getData');
     Route::get('/exam_sms/{schoolCode}', [ExamResultController::class, 'exam_sms']);
     // exam-report
-    Route::get('/progressReport/{schoolCode}', [ReportsExamsReportsController::class, 'progressReport']);
+    Route::get('/progressReport/{schoolCode}', [ProgressReportController::class, 'progressReport']);
+    Route::get('/downloadProgressReport/{schoolCode}', [ProgressReportController::class, 'downloadProgressReport']);
+
     Route::get('/exam-failList/{schoolCode}', [ReportsExamsReportsController::class, 'failList1']);
     Route::get('/tebular-format1/{schoolCode}', [ReportsExamsReportsController::class, 'format1']);
     Route::get('/tebular-format2/{schoolCode}', [ReportsExamsReportsController::class, 'format2']);

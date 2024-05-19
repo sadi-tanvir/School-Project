@@ -142,13 +142,13 @@
                                     <td class="px-6 py-4">
                                     </td>
                                     <td class="px-6 py-4 font-bold text-lg">
-
-                                    </td>
-                                    <td class="px-6 py-4 font-bold text-lg">
                                         Total =
                                     </td>
                                     <td class="px-6 py-4 font-bold text-lg">
                                         {{ $TotalAmount }}
+                                    </td>
+                                    <td class="px-6 py-4 font-bold text-lg">
+
                                     </td>
                                 </tr>
                             </tbody>

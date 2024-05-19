@@ -227,14 +227,18 @@ Route::prefix('dashboard')->group(function () {
 
     Route::post('/find-Data/{schoolCode}', [StudentProfileUpdateController::class, 'findData'])->name('find.Data');
 
+    Route::post('/student-profile/get-groups/{schoolCode}',[UpdateStudentClassInfoController::class, 'getGroups'])->name('student.profile.get-groups');
+    Route::post('/student-profile/get-sections/{schoolCode}',[UpdateStudentClassInfoController::class, 'getSections'])->name('student.profile.get-sections');
+    Route::post('/student-profile/get-shifts/{schoolCode}', [UpdateStudentClassInfoController::class, 'getShifts'])->name('student.profile.get-shifts');
+
 
     //Update Student ->Add Student
     Route::get('/getStudent/{schoolCode}', [BasicAddStudentController::class, 'getStudent'])->name('getStudent');
 
     Route::post('/postStudent', [BasicAddStudentController::class,'postStudent'])->name('postStudent');
-    Route::post('/student-profile/get-groups/{schoolCode}',[UpdateStudentClassInfoController::class, 'getGroups'])->name('student.profile.get-groups');
-    Route::post('/student-profile/get-sections/{schoolCode}',[UpdateStudentClassInfoController::class, 'getSections'])->name('student.profile.get-sections');
-    Route::post('/student-profile/get-shifts/{schoolCode}', [UpdateStudentClassInfoController::class, 'getShifts'])->name('student.profile.get-shifts');
+    Route::post('/add-students/get-groups/{schoolCode}',[UpdateStudentClassInfoController::class, 'getGroups'])->name('add.student.get-groups');
+    Route::post('/add-students/get-sections/{schoolCode}',[UpdateStudentClassInfoController::class, 'getSections'])->name('add.student.get-sections');
+    Route::post('/add-students/get-shifts/{schoolCode}', [UpdateStudentClassInfoController::class, 'getShifts'])->name('add.student.get-shifts');
 
 
 
@@ -628,12 +632,17 @@ Route::prefix('dashboard')->group(function () {
     // Set Short Code
     Route::get('/setShortCode/{schoolCode}', [SetShortCodeController::class, 'set_short_code'])->name('set.short.code');
     Route::put('/setShortCode/{schoolCode}', [SetShortCodeController::class, 'store_set_short_code'])->name('store.set.short.code');
+    
 
 
     // set exam marks
     Route::get('/getExamMarks/{schoolCode}', [SetExamMarksController::class, 'store_exam_marks'])->name('get.exam.marks');
     Route::post('/setExamMarks/{schoolCode}', [SetExamMarksController::class, 'set_exam_marks'])->name('store.set.exam.marks');
     Route::post('/saveSetExamMarks/{schoolCode}', [SetExamMarksController::class, 'saveSetExamMarks'])->name('saveSetExamMarks');
+    Route::get('/view-set-exam-marks/{schoolCode}',[SetExamMarksController::class,'viewSetExamMarks'])->name('view.set.exam.marks');
+    Route::post('/get-set-exam-marks-data/{schoolCode}', [SetExamMarksController::class,'getSetExamMarksData'])->name('get.set.class.exam.marks.data');
+    Route::post('/set-exam-marks/get-groups/{schoolCode}', [SetExamMarksController::class, 'getGroups'])->name('set.exam.marks.get-groups');
+    Route::delete('/delete-exam-marks/{id}/{schoolCode}', [SetExamMarksController::class, 'deleteExamMarks'])->name('delete.set.exam.marks');
 
     //forth subject
 
@@ -668,7 +677,7 @@ Route::prefix('dashboard')->group(function () {
     //Add Grand Final
     Route::get('/GrandFinal/{schoolCode}', [SetGrandFinalController::class, 'GrandFinal'])->name('grandfinal');
     Route::put('/store_grandFinal/{schoolCode}', [SetGrandFinalController::class, 'store_grandFinal'])->name('store.grandfinal');
-    Route::get('/viewExamMarkSetup/{schoolCode}', [ViewExamMarkSetUpController::class, 'viewExamMarkSetup']);
+    // Route::get('/viewExamMarkSetup/{schoolCode}', [ViewExamMarkSetUpController::class, 'viewExamMarkSetup']);
 
     //sequential wise exam
     Route::get('/SequentialExam/{schoolCode}', [SequentialWiseExamController::class, 'SequentialExam'])->name('sequentialExam');

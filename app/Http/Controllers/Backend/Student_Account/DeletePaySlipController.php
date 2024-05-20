@@ -47,9 +47,13 @@ class DeletePaySlipController extends Controller
 
     public function DeletePaySlipData(Request $request, $school_code)
     {
-        $voucher_number = $request->query('selectedVouchers');
+        $voucherId = $request->query('voucherId');
+
+        $deletePaySlip = GeneratePayslip::where('voucher_number', '#' . $voucherId)->delete();
+
+
         return response()->json([
-            'pay_slips' => $voucher_number
+            'status' => $deletePaySlip
         ]);
     }
 }

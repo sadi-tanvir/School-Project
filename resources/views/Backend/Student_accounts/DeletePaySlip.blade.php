@@ -5,14 +5,15 @@
 
 
 @section('Dashboard')
-    <div>
-        <h1>Payslip Deleted</h1>
+    {{-- alert message --}}
+    <div id="success-alert"
+        class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 absolute top-20 right-10 z-50 w-96 shadow-xl"
+        role="alert">
+        <span class="font-medium">Pay slip voucher deleted successfully.</span>
     </div>
 
-
     <div class="w-full border mx-auto p-5 space-y-10">
-        {{-- <form action="{{ url('') }}" method="POST"> --}}
-        {{-- @csrf --}}
+        <h1 class="text-center text-3xl font-semibold text-gray-500">Delete Payslip</h1>
         <div class="w-full flex justify-between items-center gap-5">
             <div class="space-y-2 mt-6 flex space-x-3">
                 <div>
@@ -59,7 +60,6 @@
                 </div>
             </div>
         </div>
-        {{-- </form> --}}
 
         <div class="space-y-1">
             <div class="bg-blue-200 text-center">
@@ -105,17 +105,14 @@
                     </table>
                 </div>
 
-                <div class="mt-32">
+                <div class="mt-32 mr-32">
                     <div class="flex space-x-16 justify-end">
                         <button id="delete_payslip" type=""
                             class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 text-center">
                             Delete
                         </button>
-                        <h1>
-                            Total =
-                            <input readonly type="number" value="" name="student_roll" id="student_roll"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 mr-10"
-                                placeholder="" />
+                        <h1 class="">
+                            Total = <span id="total_payslip_count">0</span>
                         </h1>
                     </div>
                 </div>
@@ -128,50 +125,55 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const schoolCode = {!! json_encode($school_code) !!};
+        const successAlert = document.getElementById('success-alert');
         const voucher_number = document.getElementById('voucher_number');
         const get_payslip_using_voucherNo = document.getElementById('get_payslip_using_voucherNo');
         const date_from = document.getElementById('date_from');
         const date_to = document.getElementById('date_to');
         const get_payslip_using_date = document.getElementById('get_payslip_using_date');
         const delete_payslip = document.getElementById('delete_payslip');
+        const total_payslip_count = document.getElementById('total_payslip_count');
+
+        // make alert message hidden initially
+        successAlert.style.display = 'none';
 
         // get payslips using voucher number
         get_payslip_using_voucherNo.addEventListener('click', async function(e) {
             e.preventDefault();
-            try {
-                if (voucher_number.value.charAt(0) == '#') {
-                    voucher_number.value = voucher_number.value.slice(1);
-                }
-                const res = await fetch(
-                    `/dashboard/studentAccounts/deletePaySlip/getPaySlipData/${schoolCode}?voucherNumber=${voucher_number.value}`
-                )
-                if (!res.ok) throw new Error('Network response was not ok');
-                const data = await res.json();
-                console.log(data);
-                // update payslip into the table
-                updateTableContent(data.pay_slips)
-            } catch (error) {
-                console.error('Error:', error);
-            }
+            if (voucher_number.value.length > 0) getPaySlipData();
         });
-
 
         // get payslips using date
         get_payslip_using_date.addEventListener('click', async function(e) {
             e.preventDefault();
+            getPaySlipData();
+        });
+        // common function to get payslip data
+        async function getPaySlipData() {
             try {
-                const res = await fetch(
-                    `/dashboard/studentAccounts/deletePaySlip/getPaySlipData/${schoolCode}?date_from=${date_from.value}&date_to=${date_to.value}`
-                )
+                let res;
+                if (voucher_number.value.length > 0) {
+                    res = await fetch(
+                        `/dashboard/studentAccounts/deletePaySlip/getPaySlipData/${schoolCode}?voucherNumber=${voucher_number.value.charAt(0) == '#' ? voucher_number.value.slice(1) : voucher_number.value}`
+                    )
+                    voucher_number.value = "";
+                } else {
+                    res = await fetch(
+                        `/dashboard/studentAccounts/deletePaySlip/getPaySlipData/${schoolCode}?date_from=${date_from.value}&date_to=${date_to.value}`
+                    )
+                }
+
                 if (!res.ok) throw new Error('Network response was not ok');
                 const data = await res.json();
-                console.log(data);
                 // update payslip into the table
-                updateTableContent(data.pay_slips)
+                updateTableContent(data.pay_slips);
+                total_payslip_count.innerText = data.pay_slips.length;
             } catch (error) {
                 console.error('Error:', error);
             }
-        });
+        }
+
+
 
         let selectedCheckbox;
         // update table content with payslip
@@ -179,10 +181,7 @@
             selectedCheckbox = [];
             // create dynamic row
             table_body.innerHTML = "";
-            let slColumn = 1;
-
             payslips.forEach(slip => {
-                console.log('slip', slip);
                 const tr = document.createElement('tr');
                 tr.classList.add('odd:bg-white', 'odd:dark:bg-gray-900',
                     'even:bg-gray-50',
@@ -207,7 +206,6 @@
                         selectedCheckbox = selectedCheckbox.filter(item => item !== slip
                             .voucher_number);
                     }
-                    console.log('selectedCheckbox', selectedCheckbox);
                 });
                 // create student_id column
                 const studentId_TD = document.createElement('td');
@@ -377,7 +375,6 @@
                     rowCheckboxes.forEach(function(checkbox) {
                         checkbox.checked = headerCheckbox.checked;
                         if (checkbox.checked) {
-                            console.log(checkbox.name);
                             const checkboxName = checkbox.name.split("_")[1];
                             if (!selectedCheckbox.includes(checkboxName)) {
                                 selectedCheckbox.push(checkboxName);
@@ -390,25 +387,45 @@
                             }
                         }
                     });
-
-                    console.log('selectedCheckbox', selectedCheckbox);
                 });
             });
         }
 
 
         // delete payslip
-        delete_payslip.addEventListener('click', async function(e) {
+        delete_payslip.addEventListener('click', function(e) {
             e.preventDefault();
             try {
-                const res = await fetch(
-                    `/dashboard/studentAccounts/deletePaySlip/deletePaySlipData/${schoolCode}?selectedVouchers=${selectedCheckbox.join(",")}`
-                )
-                if (!res.ok) throw new Error('Network response was not ok');
-                const data = await res.json();
-                console.log(data);
-                // update payslip into the table
-                // updateTableContent(data.pay_slips)
+                selectedCheckbox.forEach(async voucherId => {
+                    const res = await fetch(
+                        `/dashboard/studentAccounts/deletePaySlip/deletePaySlipData/${schoolCode}?voucherId=${voucherId.charAt(0) == '#' ? voucherId.slice(1) : voucherId}`
+                    )
+                    if (!res.ok) throw new Error('Network response was not ok');
+                    if (res.ok) {
+                        let timeOut;
+                        clearTimeout(timeOut);
+                        successAlert.style.display = 'block';
+                        timeOut = setTimeout(() => {
+                            successAlert.style.display = 'none';
+                        }, 3000);
+                    }
+                    const data = await res.json();
+
+                    // remove the row from the table
+                    const rows = table_body.getElementsByTagName('tr');
+                    for (i = 0; i < rows.length; i++) {
+                        const td = rows[i].getElementsByTagName('td');
+                        const input = td[4].getElementsByTagName('input')[0];
+                        if (input.value === voucherId) {
+                            table_body.removeChild(rows[i]);
+                            selectedCheckbox = selectedCheckbox.filter(item => item !==
+                                voucherId);
+                            break;
+                        }
+                    }
+
+                    total_payslip_count.innerText = parseInt(total_payslip_count.innerText) - 1;
+                });
             } catch (error) {
                 console.error('Error:', error);
             }

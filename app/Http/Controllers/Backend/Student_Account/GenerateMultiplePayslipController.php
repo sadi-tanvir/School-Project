@@ -57,8 +57,6 @@ class GenerateMultiplePayslipController extends Controller
         $academic_session = $request->query("academic_session");
         $academic_year = $request->query("academic_year");
 
-        $test = $monthQuery;
-
         $allStudents = [];
         $classesArray = explode(',', $classQuery);
         $monthsArray = explode(',', $monthQuery);
@@ -72,7 +70,7 @@ class GenerateMultiplePayslipController extends Controller
                 $studentsForClass = Student::where("school_code", $school_code)
                     ->where('action', 'approved')
                     ->where("class_name", $class)
-                    ->select("id", "nedubd_student_id", "student_roll", "name", "Class_name", "group")
+                    ->select("id", "nedubd_student_id", "student_roll", "name", "Class_name", "group", "section")
                     ->get();
 
                 $allStudents = array_merge($allStudents, [$class => $studentsForClass->toArray()]);
@@ -177,6 +175,7 @@ class GenerateMultiplePayslipController extends Controller
             $studentIds = $request->input("input_nedubd_student_id", []);
             // $studentNames = $request->input("input_name", []);
             $studentClasses = $request->input("input_Class_name", []);
+            $studentSections = $request->input("input_section", []);
             // $studentRoles = $request->input("input_student_roll", []);
             $studentPaySlipAmounts = $request->input("input_pay_slip_amount", []);
             $studentWaiver = $request->input("input_waiver", []);
@@ -204,6 +203,7 @@ class GenerateMultiplePayslipController extends Controller
                             [
                                 'last_pay_date' => $IndividualLastPayDate,
                                 'group' => $studentGroups[$studentId],
+                                'section' => $studentSections[$studentId],
                                 'amount' => $studentPaySlipAmounts[$studentId],
                                 'waiver' => $studentWaiver[$studentId],
                                 'payable' => $studentPayable[$studentId],

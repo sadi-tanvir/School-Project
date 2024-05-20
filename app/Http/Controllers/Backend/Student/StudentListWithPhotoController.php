@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Student\StudentReports;
+namespace App\Http\Controllers\Backend\Student;
 
 use App\Http\Controllers\Controller;
 use App\Models\AddAcademicYear;

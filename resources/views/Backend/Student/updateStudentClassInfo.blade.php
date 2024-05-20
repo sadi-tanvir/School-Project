@@ -9,7 +9,6 @@
             Student Class Info
         </h3>
     </div>
-    di
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-10 md:my-10">
         <div class="md:flex justify-end  ">
             <a href="{{ route('updateStudentBasicInfo', $school_code) }}">
@@ -43,12 +42,12 @@
         <form action="{{ route('getStudentClassData', $school_code) }}" method="GET">
             @csrf
 
-            <div class="grid gap-6 mb-6 md:grid-cols-10 mt-2">
+            <div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-7 mt-2">
                 <div>
                 <label for="class" class="text-gray-700">Class:</label>
-                    <select id="class_name" name="class_name"
+                    <select id="class" name="class_name"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                        <option selected>Choose a class</option>
+                        <option disabled selected>Choose a class</option>
                         @foreach ($classData as $data)
                             <option value="{{ $data->class_name }}">{{ $data->class_name }}</option>
                         @endforeach
@@ -59,37 +58,28 @@
                 <label for="class" class="text-gray-700">Group:</label>
                     <select id="group" name="group"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                        <option selected>Choose a Group</option>
+                        <option disabled selected>Choose a Group</option>
                         @foreach ($groupData as $group)
                             <option value="{{ $group->group_name }}">{{ $group->group_name }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div>
-                <label for="class" class="text-gray-700">Ssection:</label>
+                <label for="class" class="text-gray-700">Section:</label>
                     <select id="section" name="section"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                        <option selected>Choose a Section</option>
+                        <option disabled selected>Choose a Section</option>
                         @foreach ($sectionData as $section)
                             <option value="{{ $section->section_name }}">{{ $section->section_name }}</option>
                         @endforeach
                     </select>
                 </div>
-                <div>
-                <label for="class" class="text-gray-700">category:</label>
-                    <select id="category" name="category"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                        <option selected>Choose a Category</option>
-                        @foreach ($categoryData as $category)
-                            <option value="{{ $category->category_name }}">{{ $category->category_name }}</option>
-                        @endforeach
-                    </select>
-                </div>
+               
                 <div>
                 <label for="class" class="text-gray-700">Shift:</label>
                     <select id="shift" name="shift"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                        <option selected>Choose a Shift</option>
+                        <option disabled selected>Choose a Shift</option>
                         @foreach ($shiftData as $shift)
                             <option value="{{ $shift->shift_name }}">{{ $shift->shift_name }}</option>
                         @endforeach
@@ -99,7 +89,6 @@
                 <label for="class" class="text-gray-700">Year:</label>
                     <select id="year" name="year"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                        <option selected>Choose a year</option>
                         @foreach ($Year as $year)
                             <option value="{{ $year->academic_year_name }}">{{ $year->academic_year_name }}</option>
                         @endforeach
@@ -110,27 +99,14 @@
                 <label for="class" class="text-gray-700">Session:</label>
                     <select id="" name="session"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                        <option selected>Choose a session</option>
+                        <option disabled selected>Choose a session</option>
                         @foreach ($Session as $session)
                             <option value="{{ $session->academic_session_name }}">{{ $session->academic_session_name }}
                             </option>
                         @endforeach
                     </select>
                 </div>
-                <div>
-                <label for="class" class="text-gray-700">Status:</label>
-                    <select id="" name="status"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                        <option selected>Choose a Status</option>
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
-
-                    </select>
-                </div>
-
-                <!-- <input type="text"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                    placeholder="" /> -->
+               
 
                 <div class="flex justify-end">
                     <button type="submit"
@@ -303,6 +279,70 @@
 
     </div>
 
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#class').change(function() {
+            var class_name = $(this).val();
+            $.ajax({
+                url: "{{ route('class.info.get-groups', $school_code) }}",
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(result) {
+                    $('#group').empty();
+                    $('#group').append('<option disabled selected value="">Select</option>');
+                    $.each(result, function(key, value) {
+                        $('#group').append('<option value="' + value.group_name + '">' + value.group_name + '</option>');
+                    });
+                }
+            });
+        });
+        //section
+        $('#class').change(function() {
+            var class_name = $(this).val();
+            $.ajax({
+                url: "{{ route('class.info.get-sections', $school_code) }}",
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(result) {
+                    $('#section').empty();
+                    $('#section').append('<option disabled selected value="">Select</option>');
+                    $.each(result, function(key, value) {
+                        $('#section').append('<option value="' + value.section_name + '">' + value.section_name + '</option>');
+                    });
+                }
+            });
+        });
+      
+    });
+        //shift
+        $('#class').change(function() {
+            var class_name = $(this).val();
+            $.ajax({
+                url: "{{ route('class.info.get-shifts', $school_code) }}",
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(result) {
+                    $('#shift').empty();
+                    $('#shift').append('<option disabled selected value="">Select</option>');
+                    $.each(result, function(key, value) {
+                        $('#shift').append('<option value="' + value.shift_name + '">' + value.shift_name + '</option>');
+                    });
+                }
+            });
+        });
+      
+</script>
     
     <script>
       // Define a global variable to store selected student IDs

@@ -116,6 +116,7 @@ class GeneratePayslipController extends Controller
                 'student_id' => $student->nedubd_student_id,
                 'student_name' => $student->name,
                 'class' => $student->Class_name,
+                'section' => $student->section,
                 'student_roll' => $student->student_roll,
                 'pay_slip_type' => $pay_slip_type,
                 'fees_amount' => $amountOfPaySlip,
@@ -134,11 +135,12 @@ class GeneratePayslipController extends Controller
 
     public function StoreGeneratePaySlip(Request $request, $school_code)
     {
-        // dd($request->all());
         $month = $request->input('month');
         $year = $request->input('year');
         $last_pay_date = $request->input('last_pay_date');
         $class = $request->input('class');
+        $input_sections = $request->input('input_section', []);
+        // dd($sections);
         $group = $request->input('group');
         $pay_slip_type = $request->input('pay_slip_type');
         $selected_students = $request->input('select', []);
@@ -173,6 +175,7 @@ class GeneratePayslipController extends Controller
                     [
                         'last_pay_date' => $last_pay_date,
                         'group' => $group,
+                        'section' => $input_sections[$student_id],
                         'amount' => $input_fees_amount[$student_id],
                         'waiver' => $input_waiver[$student_id],
                         'payable' => $input_fees_amount[$student_id] - $input_waiver[$student_id],

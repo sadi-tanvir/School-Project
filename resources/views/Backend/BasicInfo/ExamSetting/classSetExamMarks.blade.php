@@ -112,7 +112,7 @@
                     @if($searchClassses->count() > 0)
                     @foreach($searchClassses as $key=> $class)
                     <div>
-                    <input id="bordered-checkbox-1" type="checkbox" value="{{$class->subject_name}}" name="subject[{{$class->subject_name}}]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500   focus:ring-2  ">
+                    <input id="bordered-checkbox-1" checked type="checkbox" value="{{$class->subject_name}}" name="subject[{{$class->subject_name}}]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500   focus:ring-2  ">
                         <label for="bordered-checkbox-1" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 ">{{$class->subject_name}}</label>
                     </div>
                     @endforeach

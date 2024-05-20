@@ -596,6 +596,7 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/addSubjectSetup/{schoolCode}', [AddSubjectSetupController::class, 'add_subject_setup'])->name('add.subject.setup');
     Route::put('/addSubjectSetup/{schoolCode}', [AddSubjectSetupController::class, 'store_add_subject_setup'])->name('store.subject.setup');
     Route::put('/updateSubjectSetup/{schoolCode}', [AddSubjectSetupController::class, 'updateSubjectSetup'])->name('update.setSubject');
+    Route::post('/add-subject/get-groups/{schoolCode}', [AddSubjectSetupController::class, 'getGroups'])->name('add.subject.get-groups');
 
 
     // Common Setting End .............................................................................................................

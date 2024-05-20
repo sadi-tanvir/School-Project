@@ -40,13 +40,13 @@
             {{-- student info --}}
 
             <div class="grid grid-cols-12  ">
-                <div class="border-t  border-b border-l  border-black p-1.5 col-span-2">ছাত্রের নাম(বাংলায়)</div>
+                <div class="border-t  border-b border-l  border-black p-1.5 col-span-2">ছাত্র বা ছাত্রীর নাম(বাংলায়)</div>
                 <div class="border border-black p-1.5 col-span-6"></div>
                 <div class="border-t  border-b border-r border-black p-1.5 col-span-2">আইডি নং</div>
                 <div class="border-t  border-b border-r  border-black p-1.5 col-span-2">{{$Data->student_id}}</div>
             </div>
             <div class="grid grid-cols-12  ">
-                <div class="border-l border-b border-black p-1.5 col-span-2">ছাত্রের নাম(ইঙ্গরেজিতে)</div>
+                <div class="border-l border-b border-black p-1.5 col-span-2">ছাত্র বা ছাত্রীর নাম (ইংরেজিতে)</div>
                 <div class="border-l border-b border-black p-1.5 col-span-6">{{$Data->name}}</div>
                 <div class="border-l border-b border-black p-1.5 col-span-2">মোবাইল নং</div>
                 <div class="border-l border-b border-r border-black p-1.5 col-span-2"></div>

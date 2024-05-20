@@ -35,44 +35,17 @@ class UpdateStudentBasicInfoController extends Controller
         $selectedSectionName = $request->input('section');
         $selectedYear = $request->input('year');
         $selectedSesion = $request->input('session');
+        $selectedGender= $request->input('gender');
 
 
-        if ($selectedClassName) {
-            $student = Student::where('action', 'approved')
-            ->where('school_code', $schoolCode)
-            ->where('class_name', $selectedClassName)->get();
-        }else if($selectedGroupName){
-            $student = Student::where('action', 'approved')
-            ->where('school_code', $schoolCode)
-            ->where('class_name', $selectedClassName)
-            ->where('group', $selectedGroupName)
-            ->get();
-        }else if($selectedSectionName){
-            $student = Student::where('action', 'approved')
+        $student = Student::where('action', 'approved')
             ->where('school_code', $schoolCode)
             ->where('class_name', $selectedClassName)
             ->where('group', $selectedGroupName)
             ->where('section', $selectedSectionName)
-            ->get();
-        }
-        else if($selectedYear){
-            $student = Student::where('action', 'approved')
-            ->where('school_code', $schoolCode)
-            ->where('class_name', $selectedClassName)
-            ->where('group', $selectedGroupName)
-            ->where('section', $selectedSectionName)
+            ->where('gender', $selectedGender)
             ->where('year', $selectedYear)
             ->get();
-        }
-        else{
-            $student = Student::where('action', 'approved')
-            ->where('school_code', $schoolCode)
-            ->where('class_name', $selectedClassName)
-            ->where('group', $selectedGroupName)
-            ->where('section', $selectedSectionName)
-            ->where('year', $selectedYear)
-            ->get();
-        }
        
 
        

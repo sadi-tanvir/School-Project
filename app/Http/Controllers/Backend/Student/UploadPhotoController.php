@@ -42,36 +42,17 @@ class UploadPhotoController extends Controller
         $category = $request->category;
         $academic_year = $request->academic_year;
         $school_code = $request->school_code;
+        $selectedGender=$request->gender;
         $students = [];
-        if ($class) {
-            $students = Student::where('school_code', $school_code)
-                ->where('action', 'approved')
-                ->where('class_name', $class)->get();
-        }else if($group){
-            $students = Student::where('school_code', $school_code)
-            ->where('action', 'approved')
-            ->where('class_name', $class)
-            ->where('group', $group)
-            ->get();
-        }else if($category){
-            $students = Student::where('school_code', $school_code)
-            ->where('action', 'approved')
-            ->where('class_name', $class)
-            ->where('group', $group)
-            ->where('section', $section)
-            ->where('category', $category)
-            ->get();
-        }
-        else if($academic_year){
-            $students = Student::where('school_code', $school_code)
+        $students = Student::where('school_code', $school_code)
             ->where('action', 'approved')
             ->where('class_name', $class)
             ->where('group', $group)
             ->where('section', $section)
             ->where('category', $category)
             ->where('year', $academic_year)
+            ->where('gender',$selectedGender)
             ->get();
-        }
        
 
         $classes = AddClass::where('school_code', $school_code)->where('action', 'approved')->get();

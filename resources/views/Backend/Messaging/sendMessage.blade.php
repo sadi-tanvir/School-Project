@@ -129,10 +129,10 @@ Send Message
                                 </th>
 
                                 <th scope="col" class=" text-sm px-6 py-3 bg-blue-500">
-                                    SL
+                                    Name
                                 </th>
                                 <th scope="col" class=" text-sm px-6 py-3 bg-blue-500">
-                                    Name
+                                    Contact
                                 </th>
                                 <th scope="col" class=" text-sm px-6 py-3 bg-blue-500">
                                     Class

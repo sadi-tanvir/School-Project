@@ -19,6 +19,7 @@ class SchoolInfo extends Model
         'website',
         'logo',
         'school_code',
+        'number_of_print_page',
     ];
 
 

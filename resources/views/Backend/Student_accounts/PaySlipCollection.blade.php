@@ -159,13 +159,6 @@
                         class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-1.5 text-center">
                         >>
                     </button>
-
-                    <h1>
-                        Total =
-                        <input readonly type="number" value="" name="student_roll" id="student_roll"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1"
-                            placeholder="" />
-                    </h1>
                 </div>
             </div>
         </div>
@@ -331,37 +324,6 @@
                                         placeholder="" readonly />
                                 </div>
                             </div>
-                            {{-- <div class="mt-24 space-y-3">
-                                <div class="flex gap-2">
-                                    <label for="fine" class="mb-2 text-sm font-medium text-gray-600 ">Fine:</label>
-                                    <input type="text" value="" name="fine" id="fine"
-                                        class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full"
-                                        placeholder="" readonly />
-                                    <input type="text" value="" name="fine2" id="fine2"
-                                        class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full"
-                                        placeholder="" readonly />
-                                </div>
-
-                                <div class="flex gap-2">
-                                    <label for="fail" class="mb-2 text-sm font-medium text-gray-600 ">Fail:</label>
-                                    <input type="text" value="" name="fail" id="fail"
-                                        class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full"
-                                        placeholder="" readonly />
-                                    <input type="text" value="" name="fail2" id="fail2"
-                                        class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full"
-                                        placeholder="" readonly />
-                                </div>
-
-                                <div class="flex gap-2">
-                                    <label for="absent" class="mb-2 text-sm font-medium text-gray-600 ">Absent:</label>
-                                    <input type="text" value="" name="absent" id="absent"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full"
-                                        placeholder="" readonly />
-                                    <input type="text" value="" name="absent2" id="absent2"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full"
-                                        placeholder="" readonly />
-                                </div>
-                            </div> --}}
                         </div>
 
                         <div class="my-5 flex flex-col">
@@ -383,19 +345,49 @@
                             </div>
                         </div>
 
-                        {{-- hidden inputs --}}
+                        {{-- hidden inputs starts --}}
                         <input class="hidden" type="text" name="collected_by_name"
                             value="{{ $schoolAdminData->name }}">
                         <input class="hidden" type="text" name="collected_by_email"
                             value="{{ $schoolAdminData->email }}">
                         <input class="hidden" type="text" name="collected_by_phone"
                             value="{{ $schoolAdminData->mobile_number }}">
+                        {{-- hidden inputs end --}}
 
-                        <div class="w-full flex items-center justify-center gap-5">
+                        <div class="w-full grid grid-cols-3 items-center mt-10">
+                            <div></div>
                             <button id="collect_fees" type="submit"
-                                class="text-white hover:bg-gradient-to-bl focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 mt-10 text-center">Collect
+                                class="w-fit mx-auto h-fit text-white hover:bg-gradient-to-bl focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">Collect
                                 Fees
                             </button>
+
+                            <div class="w-full ml-auto flex justify-between">
+                                <div class="flex items-center gap-2">
+                                    <label for="full_paid" class="ml-1 text-sm font-medium text-gray-900 ">Full
+                                        Paid</label>
+                                    <input id="full_paid" name="full_paid" type="checkbox" value=""
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 dark:bg-gray-700">
+                                </div>
+
+                                <div>
+                                    <label for="print_page"
+                                        class="block mb-2 text-sm font-medium whitespace-noWrap ">Print
+                                        Page
+                                        :</label>
+                                    <select id="print_page" name="print_page"
+                                        class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-32 p-1">
+                                        <option {{ $schoolInfo->number_of_print_page == 1 ? 'selected' : '' }}
+                                            class="text-center" value="1">
+                                            One Page</option>
+                                        <option {{ $schoolInfo->number_of_print_page == 2 ? 'selected' : '' }}
+                                            class="text-center" value="2">
+                                            Two Page</option>
+                                        <option {{ $schoolInfo->number_of_print_page == 3 ? 'selected' : '' }}
+                                            class="text-center" value="3">
+                                            Three Page</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -430,6 +422,10 @@
         deletePayslip.style.cursor = "not-allowed"
         deletePayslip.classList.add("bg-gray-500");
 
+        // make unckeck the full paid checkbox
+        full_paid.checked = false;
+        full_paid.disabled = true;
+
         // get student information
         classId.addEventListener('change', async (e) => {
             try {
@@ -445,6 +441,7 @@
                 console.error('Error:', error);
             }
         });
+
 
 
         // update section options
@@ -720,6 +717,10 @@
                 const printable_student_group = document.getElementById('printable_student_group');
                 const printable_student_mobile = document.getElementById('printable_student_mobile');
 
+                // make clickable the full paid checkbox
+                full_paid.checked = false;
+                full_paid.disabled = false;
+
                 // showing data in the UI
                 voucher_id.innerText = data.voucher_number;
                 voucher_number.value = data.voucher_number;
@@ -945,9 +946,7 @@
 
 
                 // calculate & distribute collect amount
-                collect_amount.addEventListener('change', (event) => {
-                    const value = parseInt(event.target.value);
-
+                function distributeAmount(value) {
                     // collect fees null initially
                     collect_fees.disabled = false;
                     collect_fees.style.cursor = "pointer"
@@ -988,10 +987,39 @@
                     // make readonly waver amount after distributing the collect_amount
                     payslipWaiverInputBox.readOnly = true;
                     payslipWaiverInputBox.classList.add("bg-gray-200")
+                }
+
+                // collect amount
+                collect_amount.addEventListener('change', (event) => {
+                    const value = parseInt(event.target.value);
+                    distributeAmount(value);
                 })
+
+                // make operation on full paid checkbox
+                full_paid.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        collect_amount.value = t_payable.value;
+                        distributeAmount(parseInt(collect_amount.value));
+                        collect_fees.disabled = false;
+                        collect_fees.style.cursor = "pointer"
+                        collect_fees.classList.remove("bg-gray-500");
+                        collect_fees.classList.add("bg-gradient-to-br", "from-blue-600",
+                            "to-blue-500",
+                            "hover:bg-gradient-to-bl", "focus:ring-blue-300");
+                    } else {
+                        collect_amount.value = "";
+                        collect_fees.disabled = true;
+                        collect_fees.style.cursor = "not-allowed"
+                        collect_fees.classList.remove("bg-gradient-to-br", "from-blue-600",
+                            "to-blue-500",
+                            "hover:bg-gradient-to-bl", "focus:ring-blue-300");
+                        collect_fees.classList.add("bg-gray-500");
+                    }
+                });
 
                 payablePaySlips.appendChild(tr);
             })
+
 
             // update content of the totalAmount, totalWaiver, totalPayable
             t_amount.value = totalAmount;
@@ -1025,6 +1053,22 @@
             // make readable the input field after click on the reset
             collect_amount.readOnly = false;
             collect_amount.classList.remove("bg-gray-200");
+
+            // make unckeck the full paid checkbox
+            full_paid.checked = false;
+        })
+
+
+        // update print page
+        const print_page = document.getElementById('print_page');
+        print_page.addEventListener('change', async (event) => {
+            const printPage = event.target.value;
+            console.log(printPage);
+            const res = await fetch(
+                `/dashboard/studentAccounts/paySlipCollection/updatePrintPage/${schoolCode}?printPage=${printPage}`
+            )
+            if (!res.ok) throw new Error('Network response was not ok');
+            const data = await res.json();
         })
     })
 </script>

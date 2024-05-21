@@ -45,10 +45,9 @@ class FourthSubjectController extends Controller
                 ->get();
         }
 
-        $fourthSubjectStudents=FourthSubject::all();
+        $fourthSubjectStudents = FourthSubject::all();
 
-        return view('Backend/BasicInfo/ExamSetting/setForthSubject', compact('classes', 'groups', 'sections', 'years', 'students','fourthSubjectStudents'));
-
+        return view('Backend/BasicInfo/ExamSetting/setForthSubject', compact('classes', 'groups', 'sections', 'years', 'students', 'fourthSubjectStudents'));
     }
 
 
@@ -60,7 +59,6 @@ class FourthSubjectController extends Controller
             'section_name' => $request->section_name,
             'year' => $request->year
         ]);
-
     }
 
     public function saveFourthSubject(Request $request)
@@ -72,22 +70,22 @@ class FourthSubjectController extends Controller
 
 
 
-           
+
 
             foreach ($students as $student) {
                 $existingData = FourthSubject::where('action', 'approved')
-                ->where('school_code', $request->input('school_code'))
-                ->where('class_name', $request->class_name)
-                ->where('group', $request->group)
-                ->where('section', $request->section)
-                ->where('year', $request->year)
-                ->where('shift', $request->shift)
-                ->where('student_id', $student)
-                ->get();
+                    ->where('school_code', $request->input('school_code'))
+                    ->where('class_name', $request->class_name)
+                    ->where('group', $request->group)
+                    ->where('section', $request->section)
+                    ->where('year', $request->year)
+                    ->where('shift', $request->shift)
+                    ->where('student_id', $student)
+                    ->get();
 
-                if($existingData){
+                if ($existingData) {
                     return redirect()->back()->with('error', 'fouth Subject have already added!');
-                }else{
+                } else {
                     $fouthSubject = new FourthSubject();
                     $fouthSubject->optional_subject = $request->optional_subject;
                     $fouthSubject->compulsory_subject = $request->compulsory_subject;
@@ -104,7 +102,6 @@ class FourthSubjectController extends Controller
                 }
             }
             return redirect()->back()->with('success', 'fouth Subject added successfully!');
-
         }
     }
 
@@ -149,7 +146,6 @@ class FourthSubjectController extends Controller
             'section_name' => $request->section_name,
             'year' => $request->year
         ]);
-
     }
 
     public function deleteFourthSubject($id)
@@ -157,7 +153,5 @@ class FourthSubjectController extends Controller
         $fourthSubject = FourthSubject::findOrFail($id);
         $fourthSubject->delete();
         return redirect()->back()->with('success', 'fourthSubject deleted successfully!');
-
     }
-
 }

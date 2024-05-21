@@ -143,6 +143,7 @@ use App\Http\Controllers\Backend\Message\ExcelMSGController;
 use App\Http\Controllers\Backend\Message\AddMsgController;
 
 use App\Http\Controllers\Backend\ReportsExamsReports\ReportsExamsReportsController;
+use App\Http\Controllers\Backend\ReportsExamsReports\ProgressReportController;
 use App\Http\Controllers\Backend\AdmitCard\SetAdmitCardController;
 use App\Http\Controllers\Backend\AdmitCard\PrintAdmitCardController;
 use App\Http\Controllers\Backend\AdmitCard\PrintSeatPlanController;
@@ -235,10 +236,12 @@ Route::prefix('dashboard')->group(function () {
     //Update Student ->Add Student
     Route::get('/getStudent/{schoolCode}', [BasicAddStudentController::class, 'getStudent'])->name('getStudent');
 
-    Route::post('/postStudent', [BasicAddStudentController::class,'postStudent'])->name('postStudent');
-    Route::post('/add-students/get-groups/{schoolCode}',[UpdateStudentClassInfoController::class, 'getGroups'])->name('add.student.get-groups');
-    Route::post('/add-students/get-sections/{schoolCode}',[UpdateStudentClassInfoController::class, 'getSections'])->name('add.student.get-sections');
-    Route::post('/add-students/get-shifts/{schoolCode}', [UpdateStudentClassInfoController::class, 'getShifts'])->name('add.student.get-shifts');
+
+    Route::post('/postStudent', [BasicAddStudentController::class, 'postStudent'])->name('postStudent');
+    Route::post('/student-profile/get-groups/{schoolCode}', [UpdateStudentClassInfoController::class, 'getGroups'])->name('student.profile.get-groups');
+    Route::post('/student-profile/get-sections/{schoolCode}', [UpdateStudentClassInfoController::class, 'getSections'])->name('student.profile.get-sections');
+    Route::post('/student-profile/get-shifts/{schoolCode}', [UpdateStudentClassInfoController::class, 'getShifts'])->name('student.profile.get-shifts');
+
 
 
 
@@ -455,7 +458,9 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/getData/{schoolCode}', [ExamMarksDeleteController::class, 'finData'])->name('getData');
     Route::get('/exam_sms/{schoolCode}', [ExamResultController::class, 'exam_sms']);
     // exam-report
-    Route::get('/progressReport/{schoolCode}', [ReportsExamsReportsController::class, 'progressReport']);
+    Route::get('/progressReport/{schoolCode}', [ProgressReportController::class, 'progressReport']);
+    Route::get('/downloadProgressReport/{schoolCode}', [ProgressReportController::class, 'downloadProgressReport']);
+
     Route::get('/exam-failList/{schoolCode}', [ReportsExamsReportsController::class, 'failList1']);
     Route::get('/tebular-format1/{schoolCode}', [ReportsExamsReportsController::class, 'format1']);
     Route::get('/tebular-format2/{schoolCode}', [ReportsExamsReportsController::class, 'format2']);
@@ -597,7 +602,9 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/addSubjectSetup/{schoolCode}', [AddSubjectSetupController::class, 'add_subject_setup'])->name('add.subject.setup');
     Route::put('/addSubjectSetup/{schoolCode}', [AddSubjectSetupController::class, 'store_add_subject_setup'])->name('store.subject.setup');
     Route::put('/updateSubjectSetup/{schoolCode}', [AddSubjectSetupController::class, 'updateSubjectSetup'])->name('update.setSubject');
+    Route::delete('/delete_class_wise_subject/{id}', [AddSubjectSetupController::class, 'delete_add_class_wise_subject'])->name('delete.class.wise.subject');
     Route::post('/add-subject/get-groups/{schoolCode}', [AddSubjectSetupController::class, 'getGroups'])->name('add.subject.get-groups');
+
 
 
     // Common Setting End .............................................................................................................

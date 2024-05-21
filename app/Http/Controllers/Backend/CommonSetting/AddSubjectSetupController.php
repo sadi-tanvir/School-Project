@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\CommonSetting;
 
+use App\Models\AddClassWiseGroup;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\AddClass;
@@ -159,5 +160,13 @@ class AddSubjectSetupController extends Controller
                 'group_name' => $request->group_name
             ]);
         }
+    }
+
+    public function getGroups(Request $request, $school_code)
+    {
+        $class = $request->class;
+
+        $groups = AddClassWiseGroup::where('class_name', $class)->where('school_code', $school_code)->get();
+        return response()->json($groups);
     }
 }

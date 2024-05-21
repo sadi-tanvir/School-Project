@@ -29,33 +29,46 @@ class UpdateStudentBasicInfoController extends Controller
     }
     public function getStudentData(Request $request, $schoolCode)
     {
-        $student = null;
+        $student =[];
         $selectedClassName = $request->input('class_name');
         $selectedGroupName = $request->input('group');
         $selectedSectionName = $request->input('section');
         $selectedYear = $request->input('year');
         $selectedSesion = $request->input('session');
+        $selectedGender= $request->input('gender');
 
 
-        if ($selectedClassName) {
-            $student = Student::where('action', 'approved')
-            ->where('school_code', $schoolCode)
-            ->where('class_name', $selectedClassName)->get();
-        }else if($selectedGroupName){
-            $student = Student::where('action', 'approved')
-            ->where('school_code', $schoolCode)
-            ->where('class_name', $selectedClassName)
-            ->where('group', $selectedGroupName)
-            ->get();
-        }else if($selectedSectionName){
+        if($selectedClassName &&  $selectedGroupName && $selectedSectionName && $selectedYear && $selectedSesion && $selectedGender){
             $student = Student::where('action', 'approved')
             ->where('school_code', $schoolCode)
             ->where('class_name', $selectedClassName)
             ->where('group', $selectedGroupName)
             ->where('section', $selectedSectionName)
+            ->where('gender', $selectedGender)
+            ->where('year', $selectedYear)
             ->get();
         }
-        else if($selectedYear){
+        else if($selectedClassName &&  $selectedGroupName && $selectedSectionName && $selectedYear  && $selectedGender){
+            $student = Student::where('action', 'approved')
+            ->where('school_code', $schoolCode)
+            ->where('class_name', $selectedClassName)
+            ->where('group', $selectedGroupName)
+            ->where('section', $selectedSectionName)
+            ->where('session',$selectedSesion)
+            ->where('year', $selectedYear)
+            ->get();
+        }
+        else if($selectedClassName &&  $selectedGroupName && $selectedSectionName   && $selectedGender  && $selectedYear ){
+            $student = Student::where('action', 'approved')
+            ->where('school_code', $schoolCode)
+            ->where('class_name', $selectedClassName)
+            ->where('group', $selectedGroupName)
+            ->where('section', $selectedSectionName)
+            ->where('session',$selectedSesion)
+            ->where('year', $selectedYear)
+            ->get();
+        }
+        else if($selectedClassName &&  $selectedGroupName  && $selectedGender  ){
             $student = Student::where('action', 'approved')
             ->where('school_code', $schoolCode)
             ->where('class_name', $selectedClassName)
@@ -64,15 +77,22 @@ class UpdateStudentBasicInfoController extends Controller
             ->where('year', $selectedYear)
             ->get();
         }
-        else{
+        else if($selectedClassName && $selectedGender   ){
             $student = Student::where('action', 'approved')
             ->where('school_code', $schoolCode)
             ->where('class_name', $selectedClassName)
-            ->where('group', $selectedGroupName)
-            ->where('section', $selectedSectionName)
+            ->where('gender', $selectedGender)
             ->where('year', $selectedYear)
             ->get();
         }
+        else if($selectedClassName){
+            $student = Student::where('action', 'approved')
+            ->where('school_code', $schoolCode)
+            ->where('class_name', $selectedClassName)
+            ->where('year', $selectedYear)
+            ->get();
+        }
+       
        
 
        

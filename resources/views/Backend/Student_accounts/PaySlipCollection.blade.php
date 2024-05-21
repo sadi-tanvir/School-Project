@@ -863,7 +863,7 @@
                 currentPayInputBox.name = `input_current_pay[${slip.id}]`;
                 // currentPayInputBox.value = 0;
                 currentPayInputBox.placeholder = 0;
-                currentPayInputBox.classList.add('w-fit', 'rounded-lg');
+                currentPayInputBox.classList.add('w-fit', 'rounded-lg')
                 // currentPayInputBox.readOnly = true;
                 currentPayAmountTD.appendChild(currentPayInputBox);
                 tr.appendChild(currentPayAmountTD);

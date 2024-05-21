@@ -21,7 +21,7 @@ class classSectionSTdTotalController extends Controller
 
         $classes = AddClass::where("action", "approved")->where("school_code", $school_code)->get();
         $year = AddAcademicYear::where("action", "approved")->where("school_code", $school_code)->get();
-        return view('Backend.Student.students(report).classSectionSTdTotal', compact('classes', 'year'));
+        return view('Backend.Student.classSectionSTdTotal', compact('classes', 'year'));
     }
 
     public function classSectionStdTotalDownloadpdf(Request $request, $schoolCode)
@@ -37,7 +37,7 @@ class classSectionSTdTotalController extends Controller
         // dd($classes);
         $schoolInfo = SchoolInfo::where('school_code', $schoolCode)->get();
         $date = date('d-m-Y');
-        return view('Backend.Student.classSectionSTdTotalDownload', compact('class', 'classData', 'classes', 'sections', 'groups', 'students', 'schoolInfo', 'date'));
+        return view('Backend.Student.classSectionStdTotalDownload', compact('class', 'classData', 'classes', 'sections', 'groups', 'students', 'schoolInfo', 'date'));
     }
 
 

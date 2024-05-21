@@ -13,7 +13,7 @@
 
     <form action="{{ route('getGradeSetup',$school_code) }}" method="POST">
         @csrf
-        <div class="md:flex my-10 ">
+        <div class="md:flex my-10">
             <div class="mr-5">
                 <label for="session" class="block mb-2 text-sm font-medium text-gray-900 ">Exam Name :</label>
             </div>

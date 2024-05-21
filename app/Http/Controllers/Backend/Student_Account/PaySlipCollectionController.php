@@ -209,7 +209,7 @@ class PaySlipCollectionController extends Controller
                 'input_payable_amounts',
                 'note',
                 'totalCurrentPay',
-                'collected_by_name'
+                'collected_by_name',
             )
         );
     }

@@ -39,39 +39,12 @@ class UpdateStudentClassInfoController extends Controller
         $selectedGroupName = $request->input('group');
         $selectedSectionName = $request->input('section');
         $selectedYear = $request->input('year');
-        $selectedSesion = $request->input('session');
-        $selectedCategory = $request->input('category');
+        
         $selectedShift = $request->input('shift');
-        $selectedStatus = $request->input('status');
+       
+        $selectedGender= $request->input('gender');
 
-        if ($selectedClassName) {
-            $student = Student::where('action', 'approved')
-            ->where('school_code', $schoolCode)
-            ->where('class_name', $selectedClassName)->get();
-        }else if($selectedGroupName){
-            $student = Student::where('action', 'approved')
-            ->where('school_code', $schoolCode)
-            ->where('class_name', $selectedClassName)
-            ->where('group', $selectedGroupName)
-            ->get();
-        }else if($selectedSectionName){
-            $student = Student::where('action', 'approved')
-            ->where('school_code', $schoolCode)
-            ->where('class_name', $selectedClassName)
-            ->where('group', $selectedGroupName)
-            ->where('section', $selectedSectionName)
-            ->get();
-        }
-        else if($selectedYear){
-            $student = Student::where('action', 'approved')
-            ->where('school_code', $schoolCode)
-            ->where('class_name', $selectedClassName)
-            ->where('group', $selectedGroupName)
-            ->where('section', $selectedSectionName)
-            ->where('year', $selectedYear)
-            ->get();
-        }
-        else if($selectedShift){
+        if($selectedClassName && $selectedGroupName && $selectedSectionName &&  $selectedYear  &&  $selectedShift   &&  $selectedGender ){
             $student = Student::where('action', 'approved')
             ->where('school_code', $schoolCode)
             ->where('class_name', $selectedClassName)
@@ -79,8 +52,63 @@ class UpdateStudentClassInfoController extends Controller
             ->where('section', $selectedSectionName)
             ->where('year', $selectedYear)
             ->where('shift', $selectedShift)
+            ->where('gender',$selectedGender)
             ->get();
         }
+        else if($selectedClassName && $selectedGroupName && $selectedSectionName &&  $selectedYear  &&  $selectedGender  ){
+            $student = Student::where('action', 'approved')
+            ->where('school_code', $schoolCode)
+            ->where('class_name', $selectedClassName)
+            ->where('group', $selectedGroupName)
+            ->where('section', $selectedSectionName)
+            ->where('year', $selectedYear)
+            ->where('shift', $selectedShift)
+            ->where('gender',$selectedGender)
+            ->get();
+        }
+        else if($selectedClassName && $selectedGroupName && $selectedSectionName  &&  $selectedGender  ){
+            $student = Student::where('action', 'approved')
+            ->where('school_code', $schoolCode)
+            ->where('class_name', $selectedClassName)
+            ->where('group', $selectedGroupName)
+            ->where('section', $selectedSectionName)
+            ->where('gender',$selectedGender)
+            ->where('year', $selectedYear)
+            ->get();
+        }
+        else if($selectedClassName && $selectedGroupName  &&  $selectedGender ){
+            $student = Student::where('action', 'approved')
+            ->where('school_code', $schoolCode)
+            ->where('class_name', $selectedClassName)
+            ->where('group', $selectedGroupName)
+            ->where('gender',$selectedGender)
+            ->where('year', $selectedYear)
+            ->get();
+        }
+        else if($selectedClassName  &&  $selectedGender ){
+            $student = Student::where('action', 'approved')
+            ->where('school_code', $schoolCode)
+            ->where('class_name', $selectedClassName)
+            ->where('gender',$selectedGender)
+            ->where('year', $selectedYear)
+            ->get();
+        }
+        else if($selectedClassName && $selectedGroupName   ){
+            $student = Student::where('action', 'approved')
+            ->where('school_code', $schoolCode)
+            ->where('class_name', $selectedClassName)
+            ->where('group', $selectedGroupName)
+            ->where('year', $selectedYear)
+            ->get();
+        }
+        else if($selectedClassName  ){
+            $student = Student::where('action', 'approved')
+            ->where('school_code', $schoolCode)
+            ->where('class_name', $selectedClassName)
+            ->where('year', $selectedYear)
+            ->get();
+        }
+        
 
         
         //dd($student);

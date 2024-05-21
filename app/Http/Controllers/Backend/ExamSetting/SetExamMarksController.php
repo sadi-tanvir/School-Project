@@ -7,7 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Models\AddAcademicYear;
 use App\Models\AddClass;
 use App\Models\AddClassExam;
+use App\Models\AddClassWiseGroup;
 use App\Models\AddClassWiseSubject;
+use App\Models\AddGroup;
+use App\Models\AddSection;
+use App\Models\AddShift;
 use App\Models\SetClassExamMark;
 use App\Models\SetShortCode;
 use Illuminate\Http\Request;
@@ -121,5 +125,57 @@ class SetExamMarksController extends Controller
 
             }
             return redirect()->route('get.exam.marks',$school_code)->with('success', "Class Exam Marks set successfully");
+        }
+
+        public function viewSetExamMarks($school_code)
+        {
+            $setClassExamData=[];
+            $classData = AddClass::where('action', 'approved')->where('school_code', $school_code)->get();
+            $groupData = AddGroup::where('action', 'approved')->where('school_code', $school_code)->get();
+            $sectionData = AddSection::where('action', 'approved')->where('school_code', $school_code)->get();
+            $academicYearData = AddAcademicYear::where('action', 'approved')->where('school_code', $school_code)->get();
+            $classExamData=AddClassExam::where('action', 'approved')->where('school_code',$school_code)->get();
+            return view("Backend.BasicInfo.ExamSetting.viewExamMarkSetUp",compact("classData","groupData","academicYearData","classExamData"));
+        }
+        public function getGroups(Request $request, $school_code)
+        {
+            $class = $request->class;
+    
+            $groups = AddClassWiseGroup::where('class_name', $class)->where('school_code', $school_code)->get();
+            return response()->json($groups);
+        }
+
+        public function getSetExamMarksData(Request $request,$school_code)
+        {
+            $class= $request->class;
+            $group= $request->group;
+            $exam = $request->exam;
+            $year= $request->year;
+
+            $setClassExamData=SetClassExamMark::where('school_code',$school_code)->where('action','approved')->where('class_name', $class)->where('academic_year_name',$year)->where('exam_name',$exam)->get();
+           
+
+            $classData = AddClass::where('action', 'approved')->where('school_code', $school_code)->get();
+            $groupData = AddGroup::where('action', 'approved')->where('school_code', $school_code)->get();
+            $sectionData = AddSection::where('action', 'approved')->where('school_code', $school_code)->get();
+            $academicYearData = AddAcademicYear::where('action', 'approved')->where('school_code', $school_code)->get();
+            $classExamData=AddClassExam::where('action', 'approved')->where('school_code',$school_code)->get();
+
+            return view("Backend.BasicInfo.ExamSetting.viewExamMarkSetUp",compact("classData","groupData","academicYearData","classExamData","setClassExamData"));
+
+        }
+
+        public function deleteExamMarks($id, $school_code)
+        {
+            $deletedData = SetClassExamMark::findOrFail($id)->delete();
+            
+            $classData = AddClass::where('action', 'approved')->where('school_code', $school_code)->get();
+            $groupData = AddGroup::where('action', 'approved')->where('school_code', $school_code)->get();
+            $academicYearData = AddAcademicYear::where('action', 'approved')->where('school_code', $school_code)->get();
+            $classExamData = AddClassExam::where('action', 'approved')->where('school_code', $school_code)->get();
+            $setClassExamData = SetClassExamMark::where('school_code', $school_code)->where('action', 'approved')->get();
+    
+            return view("Backend.BasicInfo.ExamSetting.viewExamMarkSetUp", compact("classData", "groupData", "academicYearData", "classExamData", "setClassExamData"))
+                ->with('success', $deletedData ? 'Exam Deleted Successfully' : 'Failed to delete exam');
         }
 }

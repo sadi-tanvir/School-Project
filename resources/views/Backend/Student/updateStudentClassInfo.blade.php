@@ -42,7 +42,7 @@
         <form action="{{ route('getStudentClassData', $school_code) }}" method="GET">
             @csrf
 
-            <div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-7 mt-2">
+            <div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-8 mt-2">
                 <div>
                 <label for="class" class="text-gray-700">Class:</label>
                     <select id="class" name="class_name"
@@ -84,6 +84,15 @@
                             <option value="{{ $shift->shift_name }}">{{ $shift->shift_name }}</option>
                         @endforeach
                     </select>
+                </div>
+                <div>
+                <label for="gender" class="text-gray-700">Gender:</label>
+                <select id="gender" name="gender"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                    <option selected disabled>Selected Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="female">Female</option>
+                </select>
                 </div>
                 <div>
                 <label for="class" class="text-gray-700">Year:</label>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\CommonSetting;
 
+use App\Models\AddClassWiseGroup;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\AddClass;
@@ -161,6 +162,7 @@ class AddSubjectSetupController extends Controller
         }
     }
 
+
     public function delete_add_class_wise_subject($id)
     {
         try {
@@ -172,5 +174,13 @@ class AddSubjectSetupController extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => 'Subject could not be deleted.']);
         }
+
+    public function getGroups(Request $request, $school_code)
+    {
+        $class = $request->class;
+
+        $groups = AddClassWiseGroup::where('class_name', $class)->where('school_code', $school_code)->get();
+        return response()->json($groups);
+
     }
 }

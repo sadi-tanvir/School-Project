@@ -112,7 +112,7 @@
                     @if($searchClassses->count() > 0)
                     @foreach($searchClassses as $key=> $class)
                     <div>
-                    <input id="bordered-checkbox-1" type="checkbox" value="{{$class->subject_name}}" name="subject[{{$class->subject_name}}]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500   focus:ring-2  ">
+                    <input id="bordered-checkbox-1" checked type="checkbox" value="{{$class->subject_name}}" name="subject[{{$class->subject_name}}]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500   focus:ring-2  ">
                         <label for="bordered-checkbox-1" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 ">{{$class->subject_name}}</label>
                     </div>
                     @endforeach
@@ -187,7 +187,7 @@
                                 <td class="px-4 py-3"><input name="marge[{{$key}}]" value="0" class="border-0 w-[100px]" type="text"></td>
                                 <td class="px-4 py-3">
                                     <div>
-                                        <select class="p-2" name="status[{{$key}}]" id="">
+                                        <select class="p-2 rounded-xl" name="status[{{$key}}]" id="">
                                             <option selected value="active">Active</option>
                                             <option value="in_active">In Active</option>
                                         </select>
@@ -205,6 +205,7 @@
             <div class="md:flex justify-center">
                 <div class="mr-10">
                     <a
+                    href="{{route('view.set.exam.marks',$school_code)}}"
                         class="text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  ">Mark
                         Config View</a>
                 </div>

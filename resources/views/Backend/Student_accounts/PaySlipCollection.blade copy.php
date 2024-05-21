@@ -322,7 +322,7 @@
                                     <label for="t_current_pay" class="mb-2 text-sm font-medium text-gray-600 ">Total
                                         Current
                                         Pay:</label>
-                                    <input type="number" value="0" name="t_current_pay" id="t_current_pay"
+                                    <input type="text" value="" name="t_current_pay" id="t_current_pay"
                                         class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full"
                                         placeholder="" readonly />
                                 </div>
@@ -840,23 +840,7 @@
                 tr.appendChild(payableAmountTD);
 
 
-                // create previous Due Amount column
-                const previousDueAmountTD = document.createElement('td');
-                previousDueAmountTD.classList.add("px-1", "py-2",
-                    'overflow-hidden')
-                previousDueAmountTD.style.maxWidth = "80px";
-                const previousDueAmountInputBox = document.createElement('input');
-                previousDueAmountInputBox.style.width = "100%"
-                previousDueAmountInputBox.type = 'text'
-                previousDueAmountInputBox.name = `input_due_amount[${slip.id}]`;
-                previousDueAmountInputBox.value = slip.due_amount > 0 ? slip.due_amount : 0;
-                previousDueAmountInputBox.classList.add('border-0', 'w-fit',
-                    'focus:ring-0')
-                previousDueAmountInputBox.readOnly = true;
-                previousDueAmountTD.appendChild(previousDueAmountInputBox);
-                tr.appendChild(previousDueAmountTD);
-
-                // create current Due Amount column
+                // create Due Amount column
                 const dueAmountTD = document.createElement('td');
                 dueAmountTD.classList.add("px-1", "py-2",
                     'overflow-hidden')
@@ -883,7 +867,7 @@
                 currentPayInputBox.name = `input_current_pay[${slip.id}]`;
                 // currentPayInputBox.value = 0;
                 currentPayInputBox.placeholder = 0;
-                currentPayInputBox.classList.add('w-fit', 'rounded-lg')
+                currentPayInputBox.classList.add('w-fit', 'rounded-lg');
                 // currentPayInputBox.readOnly = true;
                 currentPayAmountTD.appendChild(currentPayInputBox);
                 tr.appendChild(currentPayAmountTD);
@@ -910,30 +894,21 @@
                     collect_fees.classList.add("bg-gradient-to-br", "from-blue-600",
                         "to-blue-500", "focus:ring-blue-300");
 
-                    // make readonly the input field
-                    collect_amount.readOnly = true;
-                    collect_amount.classList.add("bg-gray-200");
-
                     const value = parseInt(event.target.value);
                     if (value >= 0) {
-                        const dueAmount = parseInt(payableInputBox.value) - value;
+                        const dueAmount = payableInputBox.value - value;
                         dueAmountInputBox.value = dueAmount;
 
-                        // t_current_pay.value = t_current_pay.value >= 0 ? parseInt(t_current_pay
-                        //     .value) + value : value;
-
-                        if (value > parseInt(payableInputBox.value)) {
+                        if (value > payableInputBox.value) {
                             alert("Invalid Amount");
-                            const dueAmount = parseInt(payableInputBox.value)
+                            const dueAmount = payableInputBox.value
                             dueAmountInputBox.value = dueAmount;
                             currentPayInputBox.value = "";
                         }
                     } else {
-                        const dueAmount = parseInt(payableInputBox.value)
+                        const dueAmount = payableInputBox.value
                         dueAmountInputBox.value = dueAmount;
                     }
-
-                    calculateTotalCurrentPay();
                 });
 
                 // calculate with waiver
@@ -1027,7 +1002,6 @@
                 // make operation on full paid checkbox
                 full_paid.addEventListener('change', (e) => {
                     if (e.target.checked) {
-                        full_paid.disabled = true;
                         collect_amount.value = t_payable.value;
                         distributeAmount(parseInt(collect_amount.value));
                         collect_fees.disabled = false;
@@ -1057,17 +1031,6 @@
             t_payable.value = totalPayable;
         }
 
-        // calculating total current pay
-        function calculateTotalCurrentPay() {
-            console.log('calculating');
-            const currentPayAmounts = document.querySelectorAll('input[name^="input_current_pay"]');
-            let totalCurrentPay = 0;
-            currentPayAmounts.forEach((input) => {
-                totalCurrentPay += parseInt(input.value) || 0;
-            });
-            t_current_pay.value = totalCurrentPay;
-        }
-
 
         // note change
         let changeAmount = document.getElementById('changeAmount');
@@ -1094,8 +1057,6 @@
             // make readable the input field after click on the reset
             collect_amount.readOnly = false;
             collect_amount.classList.remove("bg-gray-200");
-
-            t_current_pay.value = 0;
 
             // make unckeck the full paid checkbox
             full_paid.checked = false;

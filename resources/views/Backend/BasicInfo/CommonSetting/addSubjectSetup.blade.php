@@ -22,7 +22,7 @@ Suject Setup
                     :</label>
             </div>
             <div class="mr-5">
-                <select id="class_name" name="class_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
+                <select id="class" name="class_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
                     <!-- <option disabled selected>Choose a class</option> -->
                     @if ($selectedClassName === null)
                     <option disabled selected>Choose a class</option>
@@ -41,7 +41,7 @@ Suject Setup
                     :</label>
             </div>
             <div class="mr-5">
-                <select id="group_name" name="group_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
+                <select id="group" name="group_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
                     @if ($selectedGroupName === null)
                     <option disabled selected>Choose a group</option>
                     @elseif($selectedGroupName)
@@ -154,9 +154,19 @@ Suject Setup
                     </td>
 
                     <td class="px-6 py-4  text-xl flex justify-center">
-                        <button class="btn delete-button" data-id="{{$data->id}}">
-                            <i class="fa fa-trash" aria-hidden="true" style="color:red;"></i>
-                        </button>
+
+
+                        <!-- <a class="mr-2 edit-button"><i class="fa fa-edit" style="color:green;"></i></a> -->
+
+                        <form method="POST" action="">
+                            {{-- @csrf
+                        @method('DELETE') --}}
+                            <button class="btn ">
+                                <a href=""><i class="fa fa-trash" aria-hidden="true" style="color:red;"></i></a>
+                            </button>
+                        </form>
+
+
 
                     </td>
                 </tr>
@@ -187,6 +197,7 @@ Suject Setup
         </div>
     </form>
 </div>
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -290,6 +301,7 @@ Suject Setup
         sortTable();
     });
 </script>
+
 
 
 

@@ -56,8 +56,6 @@ class PaySlipCollectionController extends Controller
             ->select('student_roll', 'name', 'nedubd_student_id')
             ->get();
 
-        //  ->select('nedubd_student_id', 'student_id', 'student_roll', 'name')
-
         return response()->json([
             "section" => $studentsSection,
             "student_info" => $student_info
@@ -99,6 +97,8 @@ class PaySlipCollectionController extends Controller
         ]);
     }
 
+
+
     public function DeletePaySlip(Request $request, $school_code)
     {
         $paySlipId = $request->query('payslipId');
@@ -112,6 +112,22 @@ class PaySlipCollectionController extends Controller
                 "message" => "Pay slip deleted successfully"
             ]);
         }
+    }
+
+
+
+    public function UpdatePrintPage(Request $request, $school_code)
+    {
+        $printPage = $request->query('printPage');
+
+        $updatePrintPage = SchoolInfo::where('school_code', $school_code)
+            ->update([
+                "number_of_print_page" => intval($printPage)
+            ]);
+
+        return response()->json([
+            "status" => $updatePrintPage
+        ]);
     }
 
 

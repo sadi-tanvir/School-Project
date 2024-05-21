@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 
 class AddSubjectSetupController extends Controller
 {
-    public function add_subject_setup(Request $request,$schoolCode)
+    public function add_subject_setup(Request $request, $schoolCode)
     {
 
         //$school_code = '100';
@@ -31,7 +31,7 @@ class AddSubjectSetupController extends Controller
                 ->where('group_name', $selectedGroupName)
                 ->get();
         } elseif ($request->session()->get('class_name')) {
-                    //  dd($request);
+            //  dd($request);
             $selectedClassName = $request->session()->get('class_name');
             $selectedGroupName = $request->session()->get('group_name');
             // dd($selectedGroupName, $selectedClassName);
@@ -54,7 +54,7 @@ class AddSubjectSetupController extends Controller
         return view('Backend/BasicInfo/CommonSetting/addSubjectSetup', compact('classWiseSubjectData', 'selectedClassName', 'selectedGroupName', 'classData', 'groupData', 'subjectData'));
     }
 
-    public function store_add_subject_setup(Request $request,$schoolCode)
+    public function store_add_subject_setup(Request $request, $schoolCode)
     {
         // dd($request);
         // Validate form data
@@ -65,11 +65,11 @@ class AddSubjectSetupController extends Controller
 
         //$school_code = '100';
         $generateId = AddClassWiseSubject::count() + 1;
-        $generatedId = sprintf('%02d', $generateId);
+        // $generatedId = sprintf('%02d', $generateId);
         $subjectNames = $request->subject_name;
 
         if ($subjectNames === null) {
-            return redirect()->route('add.subject.setup',$schoolCode)->with([
+            return redirect()->route('add.subject.setup', $schoolCode)->with([
                 'error' => 'Please select subject name!',
                 'class_name' => $request->class_name,
                 'group_name' => $request->group_name
@@ -84,7 +84,7 @@ class AddSubjectSetupController extends Controller
             ->get();
 
         if ($existingData->isNotEmpty()) {
-            return redirect()->route('add.subject.setup',$schoolCode)->with([
+            return redirect()->route('add.subject.setup', $schoolCode)->with([
                 'error' => 'All Ready Added',
                 'class_name' => $request->class_name,
                 'group_name' => $request->group_name
@@ -95,16 +95,16 @@ class AddSubjectSetupController extends Controller
         // dd($existingData);
 
         if (is_array($subjectNames)) {
-            
+
 
             foreach ($subjectNames as $subject) {
-                
+
                 $addClassSubject = new AddClassWiseSubject();
                 $addClassSubject->class_name = $request->class_name;
                 $addClassSubject->subject_name = $subject;
                 $addClassSubject->subject_type = 'select';
                 $addClassSubject->group_name = $request->group_name;
-                $addClassSubject->subject_serial = $generatedId;
+                $addClassSubject->subject_serial = '0';
                 $addClassSubject->status = 'active';
                 $addClassSubject->subject_marge = '0';
                 $addClassSubject->action = 'approved';
@@ -113,7 +113,6 @@ class AddSubjectSetupController extends Controller
 
                 $addClassSubject->save();
             }
-          
         } else {
             // Handle the case when only a single subject is received
             $addClassSubject = new AddClassWiseSubject();
@@ -121,7 +120,7 @@ class AddSubjectSetupController extends Controller
             $addClassSubject->subject_name = $subjectNames;
             $addClassSubject->subject_type = 'select';
             $addClassSubject->group_name = $request->group_name;
-            $addClassSubject->subject_serial = $generatedId;
+            $addClassSubject->subject_serial = '0';
             $addClassSubject->status = 'active';
             $addClassSubject->subject_marge = '0';
             $addClassSubject->action = 'approved';
@@ -132,14 +131,14 @@ class AddSubjectSetupController extends Controller
             $addClassSubject->save();
         }
 
-        return redirect()->route('add.subject.setup',$schoolCode)->with([
+        return redirect()->route('add.subject.setup', $schoolCode)->with([
             'success' => 'Subject setup added successfully!',
             'class_name' => $request->class_name,
             'group_name' => $request->group_name
         ]);
     }
 
-    public function updateSubjectSetup(Request $request,$schoolCode)
+    public function updateSubjectSetup(Request $request, $schoolCode)
     {
         // dd($request);
         foreach ($request->id as $id) {
@@ -147,17 +146,31 @@ class AddSubjectSetupController extends Controller
                 ->update([
                     'subject_type' => $request->subject_type[$id],
                     'subject_marge' => $request->subject_marge[$id],
+                    'subject_serial' => $request->subject_serial[$id],
                 ]);
         }
 
         // dd($resulf);
 
         if ($resulf) {
-            return redirect()->route('add.subject.setup',$schoolCode)->with([
+            return redirect()->route('add.subject.setup', $schoolCode)->with([
                 'success' => 'Subject update added successfully!',
                 'class_name' => $request->class_name,
                 'group_name' => $request->group_name
             ]);
+        }
+    }
+
+    public function delete_add_class_wise_subject($id)
+    {
+        try {
+            // Assuming you have a Subject model and your subject's table has an 'id' column
+            $subject = AddClassWiseSubject::findOrFail($id);
+            $subject->delete();
+
+            return response()->json(['success' => true, 'message' => 'Subject deleted successfully.']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Subject could not be deleted.']);
         }
     }
 }

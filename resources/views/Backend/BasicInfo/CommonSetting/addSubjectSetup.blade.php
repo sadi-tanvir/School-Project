@@ -53,11 +53,9 @@ Suject Setup
                 </select>
             </div>
             <div class="hidden">
-                <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">School Code 
+                <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">School Code
                 </label>
-                <input type="text" value="{{$school_code}}" name="school_code" id="last_name"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     "
-                    placeholder="Enter The Police Station Name" />
+                <input type="text" value="{{$school_code}}" name="school_code" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     " placeholder="Enter The Police Station Name" />
             </div>
             <div>
                 <button onclick="submitForm()" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  ">GET
@@ -84,46 +82,8 @@ Suject Setup
 
     </form>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const checkboxes = document.querySelectorAll('.shift-checkbox');
-
-            checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    document.getElementById('dataForm').submit();
-                });
-            });
-        });
-    </script>
-    <script>
-        function submitForm() {
-            // Get the selected values
-            var className = document.getElementById('class_name').value;
-            var groupName = document.getElementById('group_name').value;
-            var subjectName = document.getElementById('subject_name').value;
 
 
-
-            // Send data via AJAX
-            var formData = {
-                class_name: className,
-                group_name: groupName,
-                subject_name: subjectName
-            };
-
-            // console.log('hi', formData)
-            // Send an AJAX request
-            axios.post('{{ route('add.subject.setup',$school_code)}}', formData)
-                .then(function(response) {
-                    // Handle success response
-                    console.log(response.data);
-                })
-                .catch(function(error) {
-                    // Handle error
-                    console.error(error);
-                });
-        }
-    </script>
 
 
 
@@ -163,7 +123,7 @@ Suject Setup
             <tbody>
                 @if ($classWiseSubjectData !== null)
                 @foreach ($classWiseSubjectData as $key => $data)
-                <tr class=" border-b capitalize text-lg">
+                <tr id="row-{{ $data->id }}" class="border-b capitalize text-lg" data-serial="{{ $data->subject_serial }}">
                     <th scope="row" class="px-6 py-4 font-medium  text-black whitespace-nowrap ">
                         {{ $key + 1 }}
                     </th>
@@ -185,8 +145,8 @@ Suject Setup
                             <option value="uncountable">Uncountable</option>
                         </select>
                     </td>
-                    <td class="px-6 py-4 ">
-                        {{ $key + 1 }}
+                    <td class="px-6 py-4">
+                        <input type="number" name="subject_serial[{{ $data->id }}]" class="serial-input" value="{{ $data->subject_serial }}">
                     </td>
                     <td class="px-6 py-4 ">
 
@@ -194,28 +154,14 @@ Suject Setup
                     </td>
 
                     <td class="px-6 py-4  text-xl flex justify-center">
-
-                        <a class="mr-2 edit-button"><i class="fa fa-edit" style="color:green;"></i></a>
-
-                        <form method="POST" action="">
-                            {{-- @csrf
-                        @method('DELETE') --}}
-                            <button class="btn ">
-                                <a href=""><i class="fa fa-trash" aria-hidden="true" style="color:red;"></i></a>
-                            </button>
-                        </form>
-
+                        <button class="btn delete-button" data-id="{{$data->id}}">
+                            <i class="fa fa-trash" aria-hidden="true" style="color:red;"></i>
+                        </button>
 
                     </td>
-
                 </tr>
                 @endforeach
                 @endif
-
-
-
-
-
             </tbody>
         </table>
 
@@ -241,4 +187,110 @@ Suject Setup
         </div>
     </form>
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Attach click event listener to all delete buttons
+        document.querySelectorAll('.delete-button').forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default button action
+
+                var rowId = this.getAttribute('data-id');
+                console.log(rowId);
+                var routeUrl = '/dashboard/delete_class_wise_subject/' + rowId;
+                console.log(routeUrl);
+                if (confirm('Are you sure you want to delete this subject?')) {
+
+                    axios.delete(routeUrl)
+                        .then(function(response) {
+                            if (response.data.success) {
+                                var row = document.getElementById('row-' + rowId);
+                                if (row) {
+                                    row.parentNode.removeChild(row);
+                                } else {
+                                    console.error('Row not found: ' + 'row-' + rowId);
+                                }
+                            } else {
+                                alert('Error: ' + response.data.message);
+                            }
+                        })
+                        .catch(function(error) {
+                            console.log(error);
+                            alert('An error occurred while deleting the subject.');
+                        });
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const checkboxes = document.querySelectorAll('.shift-checkbox');
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                document.getElementById('dataForm').submit();
+            });
+        });
+    });
+</script>
+
+<script>
+    // Generate the route URL and store it in a JavaScript variable
+    var routeUrl = "{{ route('add.subject.setup', $school_code) }}";
+
+    function submitForm() {
+        // Get the selected values
+        var className = document.getElementById('class_name').value;
+        var groupName = document.getElementById('group_name').value;
+        var subjectName = document.getElementById('subject_name').value;
+
+        // Prepare form data
+        var formData = {
+            class_name: className,
+            group_name: groupName,
+            subject_name: subjectName
+        };
+
+        // Send an AJAX request using Axios
+        axios.post(routeUrl, formData)
+            .then(function(response) {
+                // Handle success response
+                console.log(response.data);
+            })
+            .catch(function(error) {
+                // Handle error response
+                console.log(error);
+            });
+    }
+</script>
+
+<script>
+    function sortTable() {
+        var tbody = document.querySelector('tbody');
+        var rows = Array.from(tbody.querySelectorAll('tr'));
+
+        rows.sort(function(a, b) {
+            var serialA = parseInt(a.getAttribute('data-serial'));
+            var serialB = parseInt(b.getAttribute('data-serial'));
+            return serialA - serialB;
+        });
+
+        rows.forEach(function(row) {
+            tbody.appendChild(row);
+        });
+    }
+</script>
+<script>
+    // Call sortTable function after DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', function() {
+        sortTable();
+    });
+</script>
+
+
+
 @endsection

@@ -110,9 +110,6 @@ class UploadPhotoController extends Controller
             ->get();
         }
        
-        
-       
-
         $classes = AddClass::where('school_code', $school_code)->where('action', 'approved')->get();
         $sections = AddSection::where('school_code', $school_code)->where('action', 'approved')->get();
         $groups = AddGroup::where('school_code', $school_code)->where('action', 'approved')->get();

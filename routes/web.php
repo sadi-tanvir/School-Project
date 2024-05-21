@@ -228,8 +228,8 @@ Route::prefix('dashboard')->group(function () {
 
     Route::post('/find-Data/{schoolCode}', [StudentProfileUpdateController::class, 'findData'])->name('find.Data');
 
-    Route::post('/student-profile/get-groups/{schoolCode}',[UpdateStudentClassInfoController::class, 'getGroups'])->name('student.profile.get-groups');
-    Route::post('/student-profile/get-sections/{schoolCode}',[UpdateStudentClassInfoController::class, 'getSections'])->name('student.profile.get-sections');
+    Route::post('/student-profile/get-groups/{schoolCode}', [UpdateStudentClassInfoController::class, 'getGroups'])->name('student.profile.get-groups');
+    Route::post('/student-profile/get-sections/{schoolCode}', [UpdateStudentClassInfoController::class, 'getSections'])->name('student.profile.get-sections');
     Route::post('/student-profile/get-shifts/{schoolCode}', [UpdateStudentClassInfoController::class, 'getShifts'])->name('student.profile.get-shifts');
 
 
@@ -335,7 +335,10 @@ Route::prefix('dashboard')->group(function () {
     Route::get("/studentAccounts/quickCollection/{schoolCode}", [QuickCollectionController::class, "QuickCollectionView"])->name("quickCollection.view");
     Route::get("/studentAccounts/printUnpaidPaySlip/{schoolCode}", [PrintUnpaidPaySlipController::class, "PrintUnpaidPaySlipForm"])->name("printUnpaidPaySlip.view");
     Route::get("/studentAccounts/collectUnpaidPaySlip/{schoolCode}", [CollectUnpaidPaySlipController::class, "CollectUnpaidPaySlipView"])->name("collectUnpaidPaySlip.view");
+    // Delete Payslip
     Route::get("/studentAccounts/deletePaySlip/{schoolCode}", [DeletePaySlipController::class, "DeletePaySlipView"])->name("deletePaySlip.view");
+    Route::get("/studentAccounts/deletePaySlip/getPaySlipData/{schoolCode}", [DeletePaySlipController::class, "GetPaySlipData"]);
+    Route::get("/studentAccounts/deletePaySlip/deletePaySlipData/{schoolCode}", [DeletePaySlipController::class, "DeletePaySlipData"]);
     Route::get("/studentAccounts/newStdAddPaySlip/{schoolCode}", [NewStdAddPaySlipController::class, "NewStdAddPaySlipView"])->name("newStdAddPaySlip.view");
     Route::get("/studentAccounts/newOldStdAddPaySlip/{schoolCode}", [NewOldStdAddPaySlipController::class, "NewOldStdAddPaySlipView"])->name("newOldStdAddPaySlip.view");
     // Generate payslips
@@ -356,7 +359,11 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/othersFee/{schoolCode}', [OthersFeeController::class, 'AddOthersFee'])->name('othersFee');
     Route::get('/addFineFail/{schoolCode}', [FineFailController::class, 'AddFineFail'])->name('addFineFail');
     //reports
+    // DailyCollectionReport
     Route::get('/DailyCollectionReport/{schoolCode}', [DailyCollectionReportController::class, 'DailyCollectionReport'])->name('DailyCollectionReport');
+    Route::get('/DailyCollectionReport/getStudentRoll/{schoolCode}', [DailyCollectionReportController::class, 'GetStudentRoll'])->name('DailyCollectionReport.studentRoll');
+    Route::get('/DailyCollectionReport/getReports/{schoolCode}', [DailyCollectionReportController::class, 'GetPaySlipReport'])->name('DailyCollectionReport.getReports');
+    // Route::get('/DailyCollectionReport/printReports/{schoolCode}', [DailyCollectionReportController::class, 'PrintPaySlipReport'])->name('DailyCollectionReport.print');
     Route::get('/geneTransferInquiri/{schoolCode}', [geneTranferInquiriController::class, 'geneTransferInquiri'])->name('geneTransferInquiri');
     Route::get('/DuepaySummary/{schoolCode}', [DuePaySummaryController::class, 'DuepaySummary'])->name('DuepaySummary');
     Route::get('/headwiseSummary/{schoolCode}', [HeadWiseSummaryController::class, 'headwiseSummary'])->name('headwiseSummary');
@@ -418,7 +425,7 @@ Route::prefix('dashboard')->group(function () {
     Route::get("/assessment/assessmentReports/noipunnoBI/{schoolCode}", [NoipunnoBIController::class, "NoipunnoBIView"])->name("noipunnoBI.view");
 
 
-    // sayem - student attendence 
+    // sayem - student attendence
 
     Route::get('/addStudentAttendence/{schoolCode}', [AttendenceController::class, "add_student_attence"])->name('addStudentAttendence');
     Route::get('/studentLeaveForm/{schoolCode}', [AttendenceController::class, "student_leave_form"])->name('studentLeaveForm');
@@ -635,15 +642,15 @@ Route::prefix('dashboard')->group(function () {
     // Set Short Code
     Route::get('/setShortCode/{schoolCode}', [SetShortCodeController::class, 'set_short_code'])->name('set.short.code');
     Route::put('/setShortCode/{schoolCode}', [SetShortCodeController::class, 'store_set_short_code'])->name('store.set.short.code');
-    
+
 
 
     // set exam marks
     Route::get('/getExamMarks/{schoolCode}', [SetExamMarksController::class, 'store_exam_marks'])->name('get.exam.marks');
     Route::post('/setExamMarks/{schoolCode}', [SetExamMarksController::class, 'set_exam_marks'])->name('store.set.exam.marks');
     Route::post('/saveSetExamMarks/{schoolCode}', [SetExamMarksController::class, 'saveSetExamMarks'])->name('saveSetExamMarks');
-    Route::get('/view-set-exam-marks/{schoolCode}',[SetExamMarksController::class,'viewSetExamMarks'])->name('view.set.exam.marks');
-    Route::post('/get-set-exam-marks-data/{schoolCode}', [SetExamMarksController::class,'getSetExamMarksData'])->name('get.set.class.exam.marks.data');
+    Route::get('/view-set-exam-marks/{schoolCode}', [SetExamMarksController::class, 'viewSetExamMarks'])->name('view.set.exam.marks');
+    Route::post('/get-set-exam-marks-data/{schoolCode}', [SetExamMarksController::class, 'getSetExamMarksData'])->name('get.set.class.exam.marks.data');
     Route::post('/set-exam-marks/get-groups/{schoolCode}', [SetExamMarksController::class, 'getGroups'])->name('set.exam.marks.get-groups');
     Route::delete('/delete-exam-marks/{id}/{schoolCode}', [SetExamMarksController::class, 'deleteExamMarks'])->name('delete.set.exam.marks');
 

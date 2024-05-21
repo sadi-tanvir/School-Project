@@ -40,13 +40,13 @@
             {{-- student info --}}
 
             <div class="grid grid-cols-12  ">
-                <div class="border-t  border-b border-l  border-black p-1.5 col-span-2">ছাত্রের নাম(বাংলায়)</div>
+                <div class="border-t  border-b border-l  border-black p-1.5 col-span-2">শিক্ষার্থীর নাম(বাংলায়)</div>
                 <div class="border border-black p-1.5 col-span-6"></div>
                 <div class="border-t  border-b border-r border-black p-1.5 col-span-2">আইডি নং</div>
                 <div class="border-t  border-b border-r  border-black p-1.5 col-span-2">{{$Data->student_id}}</div>
             </div>
             <div class="grid grid-cols-12  ">
-                <div class="border-l border-b border-black p-1.5 col-span-2">ছাত্রের নাম(ইঙ্গরেজিতে)</div>
+                <div class="border-l border-b border-black p-1.5 col-span-2">শিক্ষার্থীর নাম (ইংরেজিতে)</div>
                 <div class="border-l border-b border-black p-1.5 col-span-6">{{$Data->name}}</div>
                 <div class="border-l border-b border-black p-1.5 col-span-2">মোবাইল নং</div>
                 <div class="border-l border-b border-r border-black p-1.5 col-span-2"></div>
@@ -138,8 +138,8 @@
                 <div class="border-b border-l border-r border-black p-1.5 col-span-2">{{$Data->last_result}}</div>
             </div>
             <div class="py-10 mt-20 flex justify-between items-center">
-                <div class="border-t border-black pt-2 w-[25%] text-center">ছাত্রের পুর্নাঙ্গ সাক্ষর</div>
-                <div class="border-t border-black pt-2 w-[25%] text-center">অভিভাবকের সাক্ষর এবং তারিখ</div>
+                <div class="border-t border-black pt-2 w-[25%] text-center">ছাত্রের পুর্নাঙ্গ স্বাক্ষর</div>
+                <div class="border-t border-black pt-2 w-[25%] text-center">অভিভাবকের স্বাক্ষর এবং তারিখ</div>
                 <div class="border-t border-black pt-2 w-[25%] text-center">অধ্যক্ষ</div>
             </div>
         @endforeach

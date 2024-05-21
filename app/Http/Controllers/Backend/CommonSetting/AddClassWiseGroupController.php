@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class AddClassWiseGroupController extends Controller
 {
-    public function add_class_wise_group(Request $request,$schoolCode)
+    public function add_class_wise_group(Request $request, $schoolCode)
     {
         //$school_code = '100';
 
@@ -27,7 +27,7 @@ class AddClassWiseGroupController extends Controller
             $selectedClassName = $request->session()->get('class_name');
             // dd($selectedClassName);
             $classWiseGroupData = AddClassWiseGroup::where('action', 'approved')
-                ->where('school_code',$schoolCode)
+                ->where('school_code', $schoolCode)
                 ->where('class_name', $selectedClassName)
                 ->get();
         } else {
@@ -44,7 +44,7 @@ class AddClassWiseGroupController extends Controller
         return view('Backend/BasicInfo/CommonSetting/addClassWiseGroup', compact('classData', 'groupData', 'classWiseGroupData', 'selectedClassName'));
     }
 
-    public function store_add_class_wise_group(Request $request,$schoolCode)
+    public function store_add_class_wise_group(Request $request, $schoolCode)
     {
         // Validate form data
         $request->validate([
@@ -52,7 +52,7 @@ class AddClassWiseGroupController extends Controller
             'group_name' => 'required|string'
         ]);
 
-       // $school_code = '100';
+        // $school_code = '100';
 
         // Check if the combination of class name and group name already exists for this school
         $existingRecord = AddClassWiseGroup::where('school_code', $schoolCode)
@@ -75,7 +75,7 @@ class AddClassWiseGroupController extends Controller
         $newRecord->save();
 
         // return redirect()->back()->with('success', 'Class wise group added successfully!');
-        return redirect()->route('add.class.wise.group',$schoolCode)->with('success', 'Class wise group added successfully!')->with('class_name', $request->class_name);
+        return redirect()->route('add.class.wise.group', $schoolCode)->with('success', 'Class wise group added successfully!')->with('class_name', $request->class_name);
     }
 
 

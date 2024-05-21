@@ -22,7 +22,7 @@ Suject Setup
                     :</label>
             </div>
             <div class="mr-5">
-                <select id="class_name" name="class_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
+                <select id="class" name="class_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
                     <!-- <option disabled selected>Choose a class</option> -->
                     @if ($selectedClassName === null)
                     <option disabled selected>Choose a class</option>
@@ -41,7 +41,7 @@ Suject Setup
                     :</label>
             </div>
             <div class="mr-5">
-                <select id="group_name" name="group_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
+                <select id="group" name="group_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
                     @if ($selectedGroupName === null)
                     <option disabled selected>Choose a group</option>
                     @elseif($selectedGroupName)
@@ -195,7 +195,7 @@ Suject Setup
 
                     <td class="px-6 py-4  text-xl flex justify-center">
 
-                        <a class="mr-2 edit-button"><i class="fa fa-edit" style="color:green;"></i></a>
+                        <!-- <a class="mr-2 edit-button"><i class="fa fa-edit" style="color:green;"></i></a> -->
 
                         <form method="POST" action="">
                             {{-- @csrf
@@ -241,4 +241,30 @@ Suject Setup
         </div>
     </form>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#class').change(function() {
+            var class_name = $(this).val();
+            $.ajax({
+                url: "{{ route('add.subject.get-groups', $school_code) }}",
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(result) {
+                    $('#group').empty();
+                    $('#group').append('<option disabled selected value="">Select</option>');
+                    $.each(result, function(key, value) {
+                        $('#group').append('<option value="' + value.group_name + '">' + value.group_name + '</option>');
+                    });
+                }
+            });
+        });
+    });
+        
+      
+</script>
 @endsection

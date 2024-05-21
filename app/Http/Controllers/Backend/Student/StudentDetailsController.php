@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend\Student;
 use App\Http\Controllers\Controller;
 use App\Models\AddAcademicYear;
 use App\Models\AddClass;
+use App\Models\SchoolInfo;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -43,7 +44,12 @@ if($students){
         ->where('year', $year)
         ->where('student_id', $id)->get();
 
-    return view('Backend.Student.students(report).studentDetailsPrint',compact('students'));
+        $schoolInfo=SchoolInfo::where('school_code', $schoolCode)->get();
+        // dd($schoolInfo);
+        $date=Date('d-m-Y');
+        // dd($date);
+
+    return view('Backend.Student.students(report).studentDetailsPrint',compact('students','schoolInfo','date'));
 }
 else{
     return redirect()->back()->with('error','not found');

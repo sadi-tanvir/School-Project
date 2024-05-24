@@ -181,6 +181,5 @@ class AddSubjectSetupController extends Controller
 
         $groups = AddClassWiseGroup::where('class_name', $class)->where('school_code', $school_code)->get();
         return response()->json($groups);
-
     }
 }

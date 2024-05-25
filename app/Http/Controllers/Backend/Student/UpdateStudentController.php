@@ -35,6 +35,17 @@ class UpdateStudentController extends Controller
       //dd($id);
       $schoolCode = $request->input('school_code');
 
+
+      $request->validate([
+         'file' => 'file|mimes:jpeg,png,jpg,gif|max:2048',
+      ]);
+
+      $imagePath = null;
+      if ($request->hasFile('file')) {
+         $imagePath = $request->file('file')->move('images/student', $request->input('nedubd_student_id') . '.' . $request->file('file')->extension());
+         $studentImage = 'images/student/' . basename($imagePath);
+      }
+
       $students = Student::findOrFail($id);
       $students->name = $request->input('name');
       $students->birth_date = $request->input('birth_date');
@@ -54,6 +65,7 @@ class UpdateStudentController extends Controller
       $students->session = $request->input('session');
       $students->status = $request->input('status');
       $students->admission_date = $request->input('admission_date');
+      $students->image = $studentImage ?? null;
       $students->mobile_no = $request->input('mobile_no');
       $students->father_name = $request->input('father_name');
       $students->father_mobile = $request->input('father_mobile');

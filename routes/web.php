@@ -238,9 +238,10 @@ Route::prefix('dashboard')->group(function () {
 
 
     Route::post('/postStudent', [BasicAddStudentController::class, 'postStudent'])->name('postStudent');
-    Route::post('/student-profile/get-groups/{schoolCode}', [UpdateStudentClassInfoController::class, 'getGroups'])->name('student.profile.get-groups');
-    Route::post('/student-profile/get-sections/{schoolCode}', [UpdateStudentClassInfoController::class, 'getSections'])->name('student.profile.get-sections');
-    Route::post('/student-profile/get-shifts/{schoolCode}', [UpdateStudentClassInfoController::class, 'getShifts'])->name('student.profile.get-shifts');
+    Route::post('/add-student/get-groups/{schoolCode}', [UpdateStudentClassInfoController::class, 'getGroups'])->name('add.student.get-groups');
+    Route::post('/add-student/get-section/{schoolCode}', [UpdateStudentClassInfoController::class, 'getSections'])->name('add.student.get-sections');
+    Route::post('/add-student/get-shift/{schoolCode}', [UpdateStudentClassInfoController::class, 'getShifts'])->name('add.student.get-shifts');
+   
 
 
 

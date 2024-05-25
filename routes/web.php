@@ -334,7 +334,14 @@ Route::prefix('dashboard')->group(function () {
     Route::post("/studentAccounts/paySlipCollection/storePaySlipData/{schoolCode}", [PaySlipCollectionController::class, "StorePaySlipData"])->name("paySlipData.store");
 
     Route::get("/studentAccounts/quickCollection/{schoolCode}", [QuickCollectionController::class, "QuickCollectionView"])->name("quickCollection.view");
+    // Print Unpaid Payslip
     Route::get("/studentAccounts/printUnpaidPaySlip/{schoolCode}", [PrintUnpaidPaySlipController::class, "PrintUnpaidPaySlipForm"])->name("printUnpaidPaySlip.view");
+    Route::get("/studentAccounts/printUnpaidPaySlip/getSectionAndGroup/{schoolCode}", [PrintUnpaidPaySlipController::class, "GetSectionAndGroup"]);
+    Route::get("/studentAccounts/printUnpaidPaySlip/getStudentRoll/{schoolCode}", [PrintUnpaidPaySlipController::class, "GetStudentRoll"]);
+    Route::get("/studentAccounts/printUnpaidPaySlip/getUnpaidPayslip/{schoolCode}", [PrintUnpaidPaySlipController::class, "GetSingleUnpaidPayslip"]);
+    Route::get("/studentAccounts/printUnpaidPaySlip/printInvoice/{schoolCode}", [PrintUnpaidPaySlipController::class, "PrintUnpaidInvoice"])->name("UnpaidInvoice.print");
+    Route::get("/studentAccounts/printUnpaidPaySlip/getAllStudentUnpaidPayslip/{schoolCode}", [PrintUnpaidPaySlipController::class, "GetAllStudentUnpaidPayslip"]);
+
     Route::get("/studentAccounts/collectUnpaidPaySlip/{schoolCode}", [CollectUnpaidPaySlipController::class, "CollectUnpaidPaySlipView"])->name("collectUnpaidPaySlip.view");
     // Delete Payslip
     Route::get("/studentAccounts/deletePaySlip/{schoolCode}", [DeletePaySlipController::class, "DeletePaySlipView"])->name("deletePaySlip.view");

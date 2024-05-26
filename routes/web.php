@@ -278,25 +278,12 @@ Route::prefix('dashboard')->group(function () {
     // Student Report
 
     Route::get('/admissionSummary/{schoolCode}', [admissionSummaryController::class, 'admission_summary'])->name('admissionSummary');
-
     Route::get('/admissionSummaryDownload/{schoolCode}', [admissionSummaryController::class, 'addmission_summary_download']);
-
     Route::post('/admissionSummaryDownload/{schoolCode}', [admissionSummaryController::class, 'downloadAdmisionSummaryPdf'])->name('admissionSummaryDownload');
 
-
-
-
-
-
     Route::get('/classSectionSTdTotal/{schoolCode}', [classSectionSTdTotalController::class, 'classSectionSTdTotal'])->name('classSectionSTdTotal');
-
     Route::get('/classSectionStdtotalDownload/{schoolCode}', [classSectionSTdTotalController::class, 'classSectionStdTotalDownloadpdf']);
-
     Route::post('/classSectionStdtotalDownload/{schoolCode}', [classSectionSTdTotalController::class, 'classSectionStdTotalDownloadpdf'])->name('classSectionStdTotalDownload');
-
-
-
-
 
     Route::get('/e_sifLists/{schoolCode}', [EsifListController::class, 'e_sifList']);
     Route::get('/listOfMigrateStudent/{schoolCode}', [listOfMigrateStudentListController::class, 'listOfMigrateStudent']);
@@ -458,6 +445,9 @@ Route::prefix('dashboard')->group(function () {
     Route::post('/mark-input-excel-upload', [MarkInputController::class, 'mark_input_excel_uplaod'])->name('mark.input.excel.upload');
 
     Route::get('/exam_process/{schoolCode}', [ExamProcessController::class, 'exam_process']);
+    Route::post('/exam_process/get-groups/{schoolCode}', [ExamProcessController::class, 'getGroups'])->name('exam_process.get-groups');
+    Route::post('/exam_process/get-sections/{schoolCode}', [ExamProcessController::class, 'getSections'])->name('exam_process.get-sections');
+    Route::post('/exam_process/get-student/{schoolCode}', [ExamProcessController::class, 'getStudent'])->name('exam_process.get-student');
     Route::get('/getStudents/{schoolCode}/{class}/{group}/{section}', [ExamProcessController::class, 'getStudents']);
     Route::get('/exam_excel/{schoolCode}', [ExamResultController::class, 'exam_excel']);
     Route::get('/exam_marks_delete/{schoolCode}', [ExamMarksDeleteController::class, 'exam_marks_delete']);
@@ -467,6 +457,9 @@ Route::prefix('dashboard')->group(function () {
     // exam-report
     Route::get('/progressReport/{schoolCode}', [ProgressReportController::class, 'progressReport']);
     Route::get('/downloadProgressReport/{schoolCode}', [ProgressReportController::class, 'downloadProgressReport']);
+    Route::post('/exam/get-groups/{schoolCode}', [ProgressReportController::class, 'getGroups'])->name('exam.get-groups');
+    Route::post('/exam/get-sections/{schoolCode}', [ProgressReportController::class, 'getSections'])->name('exam.get-sections');
+    Route::post('/exam/get-student/{schoolCode}', [ProgressReportController::class, 'getStudent'])->name('exam.get-student');
 
     Route::get('/exam-failList/{schoolCode}', [ReportsExamsReportsController::class, 'failList1']);
     Route::get('/tebular-format1/{schoolCode}', [ReportsExamsReportsController::class, 'format1']);

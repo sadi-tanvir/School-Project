@@ -215,6 +215,7 @@ Generate Multiple Payslip
 
 {{-- month select field --}}
 <script>
+     document.addEventListener('DOMContentLoaded', () => {
     // handle error message
     function showError(message) {
         const errorContainer = document.getElementById('errorContainer');
@@ -234,7 +235,7 @@ Generate Multiple Payslip
 
 
     // handle dropdown menu
-    document.addEventListener('DOMContentLoaded', () => {
+    // document.addEventListener('DOMContentLoaded', () => {
         const toggleMonthDropdown = document.getElementById('toggleMonthDropdown');
         const monthDropdown = document.getElementById('monthDropdown');
         const toggleClassDropdown = document.getElementById('toggleClassDropdown');
@@ -291,29 +292,17 @@ Generate Multiple Payslip
                 classDropdown.classList.add('hidden');
             }
         });
-    })
+    // })
 
 
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const schoolCode = {
-            !!json_encode($school_code) !!
-        };
-        const classes = {
-            !!json_encode($classes) !!
-        };
-        const groups = {
-            !!json_encode($groups) !!
-        };
-        const PaySlipTypes = {
-            !!json_encode($PaySlipTypes) !!
-        };
-        const academicSessions = {
-            !!json_encode($academicSessions) !!
-        };
-        const academicYears = {
-            !!json_encode($academicYears) !!
-        };
+   
+        const schoolCode = {!! json_encode($school_code) !!};
+        const classes = {!! json_encode($classes) !!}
+        const groups = {!! json_encode($groups) !!}
+        const PaySlipTypes = {!! json_encode($PaySlipTypes) !!}
+        const academicSessions = {!! json_encode($academicSessions) !!}
+        const academicYears = {!! json_encode($academicYears) !!}
 
         const monthUnorderedList = document.getElementById('monthUnorderedList');
         const month_select_all = document.getElementById('month_select_all');

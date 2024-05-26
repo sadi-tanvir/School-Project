@@ -22,6 +22,6 @@ class PrintSeatPlanController extends Controller
         $examName=AddClassExam::where("action", "approved")->where("school_code",$schoolCode)->get();
         $year=AddAcademicYear::where("action", "approved")->where("school_code",$schoolCode)->get();
        
-        return view('Backend/AdmitCard/Report(admitcards)/printSeatPlan',compact('classes','sections','groups','studentId','examName','year'));
+        return view('Backend/AdmitCard/printSeatPlan',compact('classes','sections','groups','studentId','examName','year'));
     }
 }

@@ -44,7 +44,7 @@ if($students){
         ->where('year', $year)
         ->where('student_id', $id)->get();
 
-        $schoolInfo=SchoolInfo::where('school_code', $schoolCode)->get();
+        $schoolInfo=SchoolInfo::where('school_code', $schoolCode)->first();
         // dd($schoolInfo);
         $date=Date('d-m-Y');
         // dd($date);

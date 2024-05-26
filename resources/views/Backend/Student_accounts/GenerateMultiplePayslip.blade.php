@@ -331,12 +331,14 @@
 
 
     document.addEventListener('DOMContentLoaded', () => {
+
         const schoolCode = {!! json_encode($school_code) !!};
         const classes = {!! json_encode($classes) !!};
         const groups = {!! json_encode($groups) !!};
         const PaySlipTypes = {!! json_encode($PaySlipTypes) !!};
         const academicSessions = {!! json_encode($academicSessions) !!};
         const academicYears = {!! json_encode($academicYears) !!};
+
 
         const monthUnorderedList = document.getElementById('monthUnorderedList');
         const month_select_all = document.getElementById('month_select_all');

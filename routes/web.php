@@ -79,7 +79,7 @@ use App\Http\Controllers\Backend\Student\MigrateStudentController;
 use App\Http\Controllers\Backend\Student\UpdateStudentController;
 use App\Http\Controllers\Backend\Student\BasicAddStudentController;
 
-use App\Http\Controllers\Backend\Student\studentReports\EsifListController;
+use App\Http\Controllers\Backend\Student\EsifListController;
 use App\Http\Controllers\Backend\Student\UploadExcelFileController;
 
 use App\Http\Controllers\Backend\Student_Account\CollectUnpaidPaySlipController;
@@ -184,7 +184,7 @@ Route::get('/login-user', [AuthController::class, 'loginUser'])->name('login-use
 
 
 
-Route::prefix('dashboard')->group(function () {
+Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/{schoolCode}', [DashboardController::class, 'index'])->name('dashboard.index');
     // NEDUBD Module
     Route::get('/addAdmin/{schoolCode}', [NEDUBDController::class, 'addAdmin']);
@@ -197,9 +197,9 @@ Route::prefix('dashboard')->group(function () {
     // student module
     Route::post('/create-student', [StudentController::class, 'addStudent'])->name('student.add');
     Route::get('/add-student/{schoolCode}', [StudentController::class, 'AddStudentForm'])->name('AddStudentForm');
-    Route::post('/add-student/get-groups/{schoolCode}', [StudentController::class, 'getGroups'])->name('add.get-groups');
-    Route::post('/add-student/get-sections/{schoolCode}', [StudentController::class, 'getSections'])->name('add.get-sections');
-    Route::post('/add-student/get-shifts/{schoolCode}', [StudentController::class, 'getShifts'])->name('add.get-shifts');
+    Route::post('/add-students/get-groups/{schoolCode}', [StudentController::class, 'getGroups'])->name('add.get-groups');
+    Route::post('/add-students/get-sections/{schoolCode}', [StudentController::class, 'getSections'])->name('add.get-sections');
+    Route::post('/add-students/get-shifts/{schoolCode}', [StudentController::class, 'getShifts'])->name('add.get-shifts');
 
 
     //Update Student Basic Info
@@ -238,9 +238,10 @@ Route::prefix('dashboard')->group(function () {
 
 
     Route::post('/postStudent', [BasicAddStudentController::class, 'postStudent'])->name('postStudent');
-    Route::post('/student-profile/get-groups/{schoolCode}', [UpdateStudentClassInfoController::class, 'getGroups'])->name('student.profile.get-groups');
-    Route::post('/student-profile/get-sections/{schoolCode}', [UpdateStudentClassInfoController::class, 'getSections'])->name('student.profile.get-sections');
-    Route::post('/student-profile/get-shifts/{schoolCode}', [UpdateStudentClassInfoController::class, 'getShifts'])->name('student.profile.get-shifts');
+    Route::post('/add-student/get-groups/{schoolCode}', [UpdateStudentClassInfoController::class, 'getGroups'])->name('add.student.get-groups');
+    Route::post('/add-student/get-section/{schoolCode}', [UpdateStudentClassInfoController::class, 'getSections'])->name('add.student.get-sections');
+    Route::post('/add-student/get-shift/{schoolCode}', [UpdateStudentClassInfoController::class, 'getShifts'])->name('add.student.get-shifts');
+   
 
 
 

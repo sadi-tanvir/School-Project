@@ -267,12 +267,12 @@
                             <li>
                                 <a href="/dashboard/studentProfile/{{ $school_code }}"
                                     class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-11 group  hover:bg-slate-100/20 ">
-                                    Student Proile </a>
+                                    Student Profile </a>
                             </li>
                             <li>
                                 <a href="/dashboard/religionWiseStudentSummary/{{ $school_code }}"
                                     class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-11 group  hover:bg-slate-100/20 ">
-                                    Religion Wise Studetn Summary</a>
+                                    Religion Wise Student Summary</a>
                             </li>
 
                             <li>
@@ -430,7 +430,7 @@
                             Exam Process</a>
                     </li>
                     <li>
-                        <a href="/dashboard/student_exam_excel/{{ $school_code }}"
+                        <a href="/dashboard/exam_excel/{{ $school_code }}"
                             class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-11 group  hover:bg-slate-100/20 ">Student
                             Exam Excel</a>
                     </li>

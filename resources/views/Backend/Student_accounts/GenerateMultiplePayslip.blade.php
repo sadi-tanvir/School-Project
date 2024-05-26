@@ -529,7 +529,7 @@
             monthList.forEach((month) => {
                 data[month]?.forEach(element => {
                     if (element.students.length > 0) {
-                        // console.log(element);
+                        console.log('element', element);
                         element.students.forEach((student, index) => {
                             if (student.pay_slip_amount > 0) {
                                 console.log(student);

@@ -154,12 +154,12 @@ class PrintUnpaidPaySlipController extends Controller
 
     public function PrintUnpaidInvoice(Request $request, $school_code)
     {
-
         $paySlipIds = $request->input('payslip-', []);
         $inputStudentId = $request->input('student_id');
-
+        $last_payment_date = $request->input('last_payment_date');
         $allPaySlipsInfo = [];
         $payslipTypes = [];
+
         foreach ($paySlipIds as $key => $value) {
             $explodedVal = explode('-', $value);
             $payslipTypes[$key]["fee_type"] = $explodedVal[0];
@@ -230,70 +230,16 @@ class PrintUnpaidPaySlipController extends Controller
             }
         }
 
+        // get student info
+        foreach ($allPaySlipsInfo as $studentIdKey => $value) {
+            $studentInfo = Student::where('school_code', $school_code)
+                ->where('student_id', $studentIdKey)
+                ->select('student_roll', 'student_id', 'name', 'section', 'group', 'Class_name', 'year')
+                ->first();
 
-
-
-        // dd($allPaySlipsInfo);
-        $last_payment_date = $request->input('last_payment_date');
+            $allPaySlipsInfo[$studentIdKey]['student_info'] = $studentInfo;
+        }
 
         return view('Backend.Student_accounts.UnpaidPaySlipInvoice', compact('allPaySlipsInfo', 'last_payment_date'));
     }
-
-
-
-
-
-    /* public function GetUnpaidPayslip(Request $request, $school_code)
-    {
-        // $class_name = $request->query('class_name');
-        $student_id = $request->query('student_id');
-        // $section = $request->query('section');
-        // $group = $request->query('group');
-
-        $paySlips = GeneratePayslip::where('school_code', $school_code)
-            ->where('action', 'approved')
-            ->where('student_id', $student_id)
-            ->where('payment_status', 'unpaid')
-            ->get();
-
-        return response()->json([
-            "paySlips" => $paySlips,
-            "status" => "success"
-        ]);
-    } */
-
-
-
-    // public function PrintUnpaidInvoice(Request $request, $school_code)
-    // {
-    //     dd($request->all());
-
-    //     // fore
-    //     $paySlipIds = $request->input('payslip-', []);
-    //     $student_id = $request->input('student_id');
-    //     $last_payment_date = $request->input('last_payment_date');
-    //     $paySlipIds = array_map('intval', $paySlipIds);
-    //     // dd($paySlipIds);
-
-    //     // get student info
-    //     $student_info = Student::where('school_code', $school_code)
-    //         ->where('action', 'approved')
-    //         ->where('nedubd_student_id', $student_id)
-    //         ->select('year', 'name', 'student_id', 'nedubd_student_id', 'Class_name', 'group', 'section', 'student_roll')
-    //         ->first();
-    //     // dd($student_info);
-
-    //     $paySlips = GeneratePayslip::where('school_code', $school_code)
-    //         ->whereIn('id', $paySlipIds)
-    //         ->get();
-
-    //     $pay_slips = GeneratePayslip::where('school_code', $school_code)
-    //         ->whereIn('id', $paySlipIds)
-    //         ->select(DB::raw('SUM(paid_amount) as total_paid'), DB::raw('SUM(amount) as total_amount'), DB::raw('SUM(waiver) as total_waiver'), DB::raw('SUM(payable) as total_payable'))
-    //         ->first();
-
-    //     // dd($pay_slips);
-
-    //     return view('Backend.Student_accounts.UnpaidPaySlipInvoice', compact('paySlips', 'student_info', 'pay_slips', 'last_payment_date'));
-    // }
 }

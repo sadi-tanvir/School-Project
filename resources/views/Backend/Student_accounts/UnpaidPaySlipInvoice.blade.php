@@ -37,7 +37,7 @@
             class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-blue-300 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-auto">Print</button>
 
 
-        <div  id="print-section">
+        <div id="print-section">
             @foreach ($allPaySlipsInfo as $studentId => $individualPayslip)
                 <div class="w-[1123px] h-[794px] bg-white mx-auto px-5 grid grid-cols-3 gap-5 mt-2">
                     @for ($indx = 0; $indx < $schoolInfo->number_of_print_page; $indx++)
@@ -79,13 +79,14 @@
                                 </div>
                                 <div class="col-span-2">
                                     <ul>
-                                        <li>Academic Year <span class="ml-2">:</span> 2024 </li>
-                                        <li>Student ID : {{ $individualPayslip['slips'][0]->student_id }}</li>
+                                        <li>Academic Year <span class="ml-2">:</span>
+                                            {{ $individualPayslip['student_info']->year }} </li>
+                                        <li>Student ID : {{ $individualPayslip['student_info']->student_id }}</li>
                                         <li>Name : student name</li>
-                                        <li>Class : {{ $individualPayslip['slips'][0]->class }}</li>
-                                        <li>Group : {{ $individualPayslip['slips'][0]->group }}</li>
-                                        <li>Section : student section</li>
-                                        <li>Roll No. : student roll</li>
+                                        <li>Class : {{ $individualPayslip['student_info']->Class_name }}</li>
+                                        <li>Group : {{ $individualPayslip['student_info']->group }}</li>
+                                        <li>Section : {{ $individualPayslip['student_info']->section }}</li>
+                                        <li>Roll No. : {{ $individualPayslip['student_info']->student_roll }}</li>
                                     </ul>
                                 </div>
                                 <div class="">

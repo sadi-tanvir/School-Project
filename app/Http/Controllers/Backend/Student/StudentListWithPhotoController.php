@@ -8,6 +8,7 @@ use App\Models\AddCategory;
 use App\Models\AddClass;
 use App\Models\AddGroup;
 use App\Models\AddSection;
+use App\Models\SchoolInfo;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -39,12 +40,15 @@ class StudentListWithPhotoController extends Controller
 
         $students=Student::where('school_code',$school_code)->where('action','approved')->where('class_name',$class)->where('group',$group)->where('section',$section)->where('category',$category)->where('year',$academic_year)->get();
         //dd($students);
+        $schoolInfo=SchoolInfo::where('school_code', $school_code)->first();
+        // dd($schoolInfo);
+        $date=Date('d-m-Y');
 
         if (!isset($students)) {
             $students = [];
         }
         
-        return view('Backend.Student.students(report).viewStudentList', compact('students','col'));
+        return view('Backend.Student.students(report).viewStudentList', compact('students','col','schoolInfo','date'));
 }
 
 }

@@ -215,530 +215,544 @@ Generate Multiple Payslip
 
 {{-- month select field --}}
 <script>
-     document.addEventListener('DOMContentLoaded', () => {
-    // handle error message
-    function showError(message) {
-        const errorContainer = document.getElementById('errorContainer');
-        const errorDiv = document.createElement('div');
-        errorDiv.role = "alert";
-        errorDiv.classList.add("p-4", "mb-4", "text-sm", "text-red-800", "rounded-lg", "bg-red-50", "dark:bg-gray-800",
-            "dark:text-red-400");
-        errorDiv.textContent = message;
-        const errorMessage = document.createElement('div');
-        errorMessage.classList.add("font-medium");
-        errorDiv.appendChild(errorMessage);
-        errorContainer.appendChild(errorDiv);
-        setTimeout(() => {
-            errorContainer.removeChild(errorDiv)
-        }, 2000);
-    }
-
-
-    // handle dropdown menu
-    // document.addEventListener('DOMContentLoaded', () => {
-        const toggleMonthDropdown = document.getElementById('toggleMonthDropdown');
-        const monthDropdown = document.getElementById('monthDropdown');
-        const toggleClassDropdown = document.getElementById('toggleClassDropdown');
-        const classDropdown = document.getElementById('classDropdown');
-
-        // Function to check if an element is a descendant of another element
-        const isDescendant = (parent, child) => {
-            let node = child.parentNode;
-            while (node != null) {
-                if (node === parent) {
-                    return true;
+    document.addEventListener('DOMContentLoaded', () => {
+                // handle error message
+                function showError(message) {
+                    const errorContainer = document.getElementById('errorContainer');
+                    const errorDiv = document.createElement('div');
+                    errorDiv.role = "alert";
+                    errorDiv.classList.add("p-4", "mb-4", "text-sm", "text-red-800", "rounded-lg", "bg-red-50", "dark:bg-gray-800",
+                        "dark:text-red-400");
+                    errorDiv.textContent = message;
+                    const errorMessage = document.createElement('div');
+                    errorMessage.classList.add("font-medium");
+                    errorDiv.appendChild(errorMessage);
+                    errorContainer.appendChild(errorDiv);
+                    setTimeout(() => {
+                        errorContainer.removeChild(errorDiv)
+                    }, 2000);
                 }
-                node = node.parentNode;
-            }
-            return false;
-        };
-
-        // Toggle month dropdown
-        toggleMonthDropdown.addEventListener('click', (event) => {
-            // Prevent event propagation to the document click listener
-            event.stopPropagation();
-
-            monthDropdown.classList.toggle('hidden');
-        });
-
-        // Collapse dropdown when clicking outside of it
-        document.addEventListener('click', (event) => {
-            const target = event.target;
-            const isToggle = target === toggleMonthDropdown;
-            const isDropdown = target === monthDropdown || isDescendant(monthDropdown, target);
-
-            if (!isToggle && !isDropdown) {
-                monthDropdown.classList.add('hidden');
-            }
-        });
 
 
+                // handle dropdown menu
+                // document.addEventListener('DOMContentLoaded', () => {
+                const toggleMonthDropdown = document.getElementById('toggleMonthDropdown');
+                const monthDropdown = document.getElementById('monthDropdown');
+                const toggleClassDropdown = document.getElementById('toggleClassDropdown');
+                const classDropdown = document.getElementById('classDropdown');
 
-        // Toggle class dropdown
-        toggleClassDropdown.addEventListener('click', (event) => {
-            // Prevent event propagation to the document click listener
-            event.stopPropagation();
-
-            classDropdown.classList.toggle('hidden');
-        });
-
-        // Collapse dropdown when clicking outside of it
-        document.addEventListener('click', (event) => {
-            const target = event.target;
-            const isToggle = target === toggleClassDropdown;
-            const isDropdown = target === classDropdown || isDescendant(classDropdown, target);
-
-            if (!isToggle && !isDropdown) {
-                classDropdown.classList.add('hidden');
-            }
-        });
-    // })
-
-
-
-   
-        const schoolCode = {!! json_encode($school_code) !!};
-        const classes = {!! json_encode($classes) !!}
-        const groups = {!! json_encode($groups) !!}
-        const PaySlipTypes = {!! json_encode($PaySlipTypes) !!}
-        const academicSessions = {!! json_encode($academicSessions) !!}
-        const academicYears = {!! json_encode($academicYears) !!}
-
-        const monthUnorderedList = document.getElementById('monthUnorderedList');
-        const month_select_all = document.getElementById('month_select_all');
-        const classUnorderedList = document.getElementById('classUnorderedList');
-        const class_select_all = document.getElementById('class_select_all');
-        const group = document.getElementById('group');
-        const pay_slip_type = document.getElementById('pay_slip_type');
-        const academic_session = document.getElementById('academic_session');
-
-        const currentYear = new Date().getFullYear();
-
-        // set year
-        year.value = currentYear;
-
-        // set months
-        const monthList = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august',
-            'september', 'october', 'november', 'december'
-        ];
-
-        monthList.forEach(element => {
-            const monthLi = document.createElement('li');
-            monthLi.classList.add("text-zinc-900", "cursor-default", "select-none", "relative", "py-2",
-                "pl-3",
-                "pr-9");
-            const monthDiv = document.createElement('div');
-            monthDiv.classList.add("flex", "items-center");
-
-            const checkboxCell = document.createElement('input');
-            checkboxCell.type = "checkbox";
-            checkboxCell.id = element;
-            checkboxCell.name = "month_row_checkbox";
-            checkboxCell.classList.add("h-4", "w-4", "text-indigo-600", "border-zinc-300", "rounded",
-                "focus:ring-indigo-500")
-
-            const checkboxLabel = document.createElement('label');
-            checkboxLabel.htmlFor = element;
-            checkboxLabel.classList.add("block", "text-sm", "text-zinc-700", "w-full", "pl-3")
-            checkboxLabel.textContent = element;
-
-            monthDiv.appendChild(checkboxCell);
-            monthDiv.appendChild(checkboxLabel);
-            monthLi.appendChild(monthDiv);
-
-
-            monthUnorderedList.appendChild(monthLi);
-
-            const monthRowCheckboxes = document.querySelectorAll(
-                `input[type="checkbox"][name^="month_row_checkbox"]`);
-            month_select_all.addEventListener('change', () => {
-                monthRowCheckboxes.forEach((checkbox) => {
-                    checkbox.checked = month_select_all.checked;
-                })
-            })
-        });
-
-
-        // set class
-        classes.forEach(element => {
-            const classLi = document.createElement('li');
-            classLi.classList.add("text-zinc-900", "cursor-default", "select-none", "relative", "py-2",
-                "pl-3",
-                "pr-9");
-            const classDiv = document.createElement('div');
-            classDiv.classList.add("flex", "items-center");
-
-            const checkboxCell = document.createElement('input');
-            checkboxCell.type = "checkbox";
-            checkboxCell.id = element.class_name;
-            checkboxCell.name = "class_row_checkbox";
-            checkboxCell.classList.add("h-4", "w-4", "text-indigo-600", "border-zinc-300", "rounded",
-                "focus:ring-indigo-500")
-
-            const checkboxLabel = document.createElement('label');
-            checkboxLabel.htmlFor = element.class_name;
-            checkboxLabel.classList.add("block", "text-sm", "text-zinc-700", "w-full", "pl-3")
-            checkboxLabel.textContent = element.class_name;
-
-            classDiv.appendChild(checkboxCell);
-            classDiv.appendChild(checkboxLabel);
-            classLi.appendChild(classDiv);
-
-
-            classUnorderedList.appendChild(classLi);
-
-            const classRowCheckboxes = document.querySelectorAll(
-                `input[type="checkbox"][name^="class_row_checkbox"]`);
-            class_select_all.addEventListener('change', () => {
-                classRowCheckboxes.forEach((checkbox) => {
-                    checkbox.checked = class_select_all.checked;
-                })
-            })
-        });
-
-
-        // set groups
-        groups.forEach((item) => {
-            const groupOption = document.createElement('option');
-            groupOption.value = item.group_name;
-            // if (item.group_name === 'N/A') groupOption.selected = true;
-            groupOption.textContent = item.group_name;
-            group.appendChild(groupOption);
-        });
-
-        // set payslip type
-        PaySlipTypes.forEach((paySlip) => {
-            const paySlipOption = document.createElement('option');
-            paySlipOption.value = paySlip.pay_slip_type_name;
-            paySlipOption.textContent = paySlip.pay_slip_type_name;
-            pay_slip_type.appendChild(paySlipOption);
-        })
-
-
-        // set academic session
-        academicSessions.forEach((session) => {
-            const sessionOption = document.createElement('option');
-            sessionOption.value = session.academic_session_name;
-            sessionOption.textContent = session.academic_session_name;
-            academic_session.appendChild(sessionOption);
-        })
-
-        // set academic year
-        academicYears.forEach((year) => {
-            const yearOption = document.createElement('option');
-            yearOption.value = year.academic_year_name;
-            yearOption.textContent = year.academic_year_name;
-            academic_year.appendChild(yearOption);
-        })
-
-        // Function to get all selected months
-        const getSelectedMonths = () => {
-            const selectedMonths = [];
-            const monthRowCheckboxes = document.querySelectorAll(
-                'input[type="checkbox"][name="month_row_checkbox"]');
-            monthRowCheckboxes.forEach((checkbox) => {
-                if (checkbox.checked) {
-                    selectedMonths.push(checkbox.id);
-                }
-            });
-            return selectedMonths;
-        };
-
-        // Function to get all selected classes
-        const getSelectedClasses = () => {
-            const selectedClasses = [];
-            const classRowCheckboxes = document.querySelectorAll(
-                'input[type="checkbox"][name="class_row_checkbox"]');
-            classRowCheckboxes.forEach((checkbox) => {
-                if (checkbox.checked) {
-                    selectedClasses.push(checkbox.id);
-                }
-            });
-            return selectedClasses;
-        };
-
-        let selectedClasses = []
-        let selectedMonths = [];
-
-        // get all information
-        getInformation.addEventListener('click', (e) => {
-            e.preventDefault();
-            // get all selected classes
-            selectedClasses = getSelectedClasses();
-            selectedMonths = getSelectedMonths();
-            fetch(
-                    `/dashboard/studentAccounts/getStudentInformation/${schoolCode}?months=${selectedMonths}&classes=${selectedClasses}&group=${group.value}&pay_slip_type=${pay_slip_type.value}&year=${year.value}&academic_session=${academic_session.value}&academic_year=${academic_year.value}`
-                )
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
+                // Function to check if an element is a descendant of another element
+                const isDescendant = (parent, child) => {
+                    let node = child.parentNode;
+                    while (node != null) {
+                        if (node === parent) {
+                            return true;
+                        }
+                        node = node.parentNode;
                     }
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.length <= 0) {
-                        showError('There is no data found')
-                        return;
-                    }
-                    console.log('from multiple', data);
-                    updateTableContent(data)
-                })
-                .catch(error => {
-                    console.error('Error:', error);
+                    return false;
+                };
+
+                // Toggle month dropdown
+                toggleMonthDropdown.addEventListener('click', (event) => {
+                    // Prevent event propagation to the document click listener
+                    event.stopPropagation();
+
+                    monthDropdown.classList.toggle('hidden');
                 });
-        })
 
-        function updateTableContent(data) {
-            // create dynamic row
-            table_body.innerHTML = "";
-            let slColumn = 1;
-            monthList.forEach((month) => {
-                data[month]?.forEach(element => {
-                    if (element.students.length > 0) {
-                        // console.log(element);
-                        element.students.forEach((student, index) => {
-                            if (student.pay_slip_amount > 0) {
-                                console.log(student);
-                                const tr = document.createElement('tr');
-                                tr.classList.add('odd:bg-white', 'odd:dark:bg-gray-900',
-                                    'even:bg-gray-50',
-                                    'even:dark:bg-gray-800', 'border-b',
-                                    'dark:border-gray-700');
+                // Collapse dropdown when clicking outside of it
+                document.addEventListener('click', (event) => {
+                    const target = event.target;
+                    const isToggle = target === toggleMonthDropdown;
+                    const isDropdown = target === monthDropdown || isDescendant(monthDropdown, target);
 
-
-                                // create serial index column
-                                const serialTD = document.createElement('td');
-                                serialTD.classList.add('px-6', 'py-4');
-                                serialTD.textContent = slColumn++;
-                                tr.appendChild(serialTD);
-
-                                // create month_year column
-                                const monthYearTD = document.createElement('td');
-                                monthYearTD.classList.add("px-6", "py-4",
-                                    'overflow-hidden')
-                                monthYearTD.style.maxWidth = "100px";
-                                const monthYearInputBox = document.createElement(
-                                    'input');
-                                monthYearInputBox.type = 'text'
-                                monthYearInputBox.name =
-                                    `input_month_year[${student.nedubd_student_id}][${student.month_year}]`;
-                                monthYearInputBox.value = student.month_year;
-                                monthYearInputBox.classList.add('border-0', 'w-fit',
-                                    'focus:ring-0')
-                                monthYearInputBox.readOnly = true;
-                                monthYearTD.appendChild(monthYearInputBox);
-                                tr.appendChild(monthYearTD);
-
-
-                                // create student_id column
-                                const studentId_TD = document.createElement('td');
-                                studentId_TD.style.maxWidth = "100px";
-                                studentId_TD.classList.add("px-6", "py-4",
-                                    'overflow-hidden')
-                                const studentIdInputBox = document.createElement(
-                                    'input');
-                                studentIdInputBox.type = 'text'
-                                studentIdInputBox.name =
-                                    `input_nedubd_student_id[${student.nedubd_student_id}]`;
-                                studentIdInputBox.value = student.nedubd_student_id;
-                                studentIdInputBox.classList.add('border-0', 'w-fit',
-                                    'focus:ring-0')
-                                studentIdInputBox.readOnly = true;
-                                studentId_TD.appendChild(studentIdInputBox);
-                                tr.appendChild(studentId_TD);
-
-
-                                // create STUDENT NAME column
-                                const studentName_TD = document.createElement('td');
-                                studentName_TD.style.maxWidth = "100px";
-                                studentName_TD.classList.add("px-6", "py-4",
-                                    'overflow-hidden')
-                                const studentNameInputBox = document.createElement(
-                                    'input');
-                                studentNameInputBox.type = 'text'
-                                studentNameInputBox.name =
-                                    `input_name[${student.nedubd_student_id}]`;
-                                studentNameInputBox.value = student.name;
-                                studentNameInputBox.classList.add('border-0', 'w-fit',
-                                    'focus:ring-0')
-                                studentNameInputBox.readOnly = true;
-                                studentName_TD.appendChild(studentNameInputBox);
-                                tr.appendChild(studentName_TD);
-
-
-                                // create student class column
-                                const studentClass_TD = document.createElement('td');
-                                studentClass_TD.style.maxWidth = "100px";
-                                studentClass_TD.classList.add("px-6", "py-4",
-                                    'overflow-hidden')
-                                const studentClassInputBox = document.createElement(
-                                    'input');
-                                studentClassInputBox.type = 'text'
-                                studentClassInputBox.name =
-                                    `input_Class_name[${student.nedubd_student_id}]`;
-                                studentClassInputBox.value = student.Class_name;
-                                studentClassInputBox.classList.add('border-0', 'w-fit',
-                                    'focus:ring-0')
-                                studentClassInputBox.readOnly = true;
-                                studentClass_TD.appendChild(studentClassInputBox);
-                                tr.appendChild(studentClass_TD);
+                    if (!isToggle && !isDropdown) {
+                        monthDropdown.classList.add('hidden');
+                    }
+                });
 
 
 
-                                // create student roll column
-                                const studentRoll_TD = document.createElement('td');
-                                studentRoll_TD.style.maxWidth = "100px";
-                                studentRoll_TD.classList.add("px-6", "py-4",
-                                    'overflow-hidden')
-                                const studentRollInputBox = document.createElement(
-                                    'input');
-                                studentRollInputBox.type = 'text'
-                                studentRollInputBox.name =
-                                    `input_student_roll[${student.nedubd_student_id}]`;
-                                studentRollInputBox.value = student.student_roll;
-                                studentRollInputBox.classList.add('border-0', 'w-fit',
-                                    'focus:ring-0')
-                                studentRollInputBox.readOnly = true;
-                                studentRoll_TD.appendChild(studentRollInputBox);
-                                tr.appendChild(studentRoll_TD);
+                // Toggle class dropdown
+                toggleClassDropdown.addEventListener('click', (event) => {
+                    // Prevent event propagation to the document click listener
+                    event.stopPropagation();
 
+                    classDropdown.classList.toggle('hidden');
+                });
 
-                                // create payslip type column
-                                const payslipType_TD = document.createElement('td');
-                                payslipType_TD.style.maxWidth = "100px";
-                                payslipType_TD.classList.add("px-6", "py-4",
-                                    'overflow-hidden')
-                                const payslipTypeInputBox = document.createElement(
-                                    'input');
-                                payslipTypeInputBox.type = 'text'
-                                payslipTypeInputBox.name =
-                                    `input_pay_slip_type[${student.nedubd_student_id}]`;
-                                payslipTypeInputBox.value = student.pay_slip_type;
-                                payslipTypeInputBox.classList.add('border-0', 'w-fit',
-                                    'focus:ring-0')
-                                payslipTypeInputBox.readOnly = true;
-                                payslipType_TD.appendChild(payslipTypeInputBox);
-                                tr.appendChild(payslipType_TD);
+                // Collapse dropdown when clicking outside of it
+                document.addEventListener('click', (event) => {
+                    const target = event.target;
+                    const isToggle = target === toggleClassDropdown;
+                    const isDropdown = target === classDropdown || isDescendant(classDropdown, target);
+
+                    if (!isToggle && !isDropdown) {
+                        classDropdown.classList.add('hidden');
+                    }
+                });
+                // })
 
 
 
+                document.addEventListener('DOMContentLoaded', () => {
 
-                                // create payslip amount column
-                                const payslipAmount_TD = document.createElement('td');
-                                payslipAmount_TD.style.maxWidth = "100px";
-                                payslipAmount_TD.classList.add("px-6", "py-4",
-                                    'overflow-hidden')
-                                const payslipAmountInputBox = document.createElement(
-                                    'input');
-                                payslipAmountInputBox.type = 'text'
-                                payslipAmountInputBox.name =
-                                    `input_pay_slip_amount[${student.nedubd_student_id}]`;
-                                payslipAmountInputBox.value = student.pay_slip_amount;
-                                payslipAmountInputBox.classList.add('border-0', 'w-fit',
-                                    'focus:ring-0')
-                                payslipAmountInputBox.readOnly = true;
-                                payslipAmount_TD.appendChild(payslipAmountInputBox);
-                                tr.appendChild(payslipAmount_TD);
-
-
-
-                                // create student WAIVER column
-                                const waiverAmount_TD = document.createElement('td');
-                                waiverAmount_TD.style.maxWidth = "100px";
-                                waiverAmount_TD.classList.add("px-6", "py-4",
-                                    'overflow-hidden')
-                                const waiverAmountInputBox = document.createElement(
-                                    'input');
-                                waiverAmountInputBox.type = 'text'
-                                waiverAmountInputBox.name =
-                                    `input_waiver[${student.nedubd_student_id}]`;
-                                waiverAmountInputBox.value = student.waiver;
-                                waiverAmountInputBox.classList.add('border-0', 'w-fit',
-                                    'focus:ring-0')
-                                waiverAmountInputBox.readOnly = true;
-                                waiverAmount_TD.appendChild(waiverAmountInputBox);
-                                tr.appendChild(waiverAmount_TD);
+                    const schoolCode = {
+                        !!json_encode($school_code) !!
+                    };
+                    const classes = {
+                        !!json_encode($classes) !!
+                    };
+                    const groups = {
+                        !!json_encode($groups) !!
+                    };
+                    const PaySlipTypes = {
+                        !!json_encode($PaySlipTypes) !!
+                    };
+                    const academicSessions = {
+                        !!json_encode($academicSessions) !!
+                    };
+                    const academicYears = {
+                        !!json_encode($academicYears) !!
+                    };
 
 
+                    const monthUnorderedList = document.getElementById('monthUnorderedList');
+                    const month_select_all = document.getElementById('month_select_all');
+                    const classUnorderedList = document.getElementById('classUnorderedList');
+                    const class_select_all = document.getElementById('class_select_all');
+                    const group = document.getElementById('group');
+                    const pay_slip_type = document.getElementById('pay_slip_type');
+                    const academic_session = document.getElementById('academic_session');
 
-                                // create student PAYABLE column
-                                const payableAmount_TD = document.createElement('td');
-                                payableAmount_TD.style.maxWidth = "100px";
-                                payableAmount_TD.classList.add("px-6", "py-4",
-                                    'overflow-hidden')
-                                const payableAmountInputBox = document.createElement(
-                                    'input');
-                                payableAmountInputBox.type = 'text'
-                                payableAmountInputBox.name =
-                                    `input_payable[${student.nedubd_student_id}]`;
-                                payableAmountInputBox.value = student.pay_slip_amount -
-                                    student.waiver;
-                                payableAmountInputBox.classList.add('border-0', 'w-fit',
-                                    'focus:ring-0')
-                                payableAmountInputBox.readOnly = true;
-                                payableAmount_TD.appendChild(payableAmountInputBox);
-                                tr.appendChild(payableAmount_TD);
-                                // console.log('student_payable_amount_key ----',
-                                // student_payable_amount_key);
+                    const currentYear = new Date().getFullYear();
 
+                    // set year
+                    year.value = currentYear;
 
+                    // set months
+                    const monthList = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august',
+                        'september', 'october', 'november', 'december'
+                    ];
 
-                                // hidden input fields
-                                // student groups
-                                const studentGroup_TD = document.createElement('td');
-                                studentGroup_TD.classList.add('hidden')
-                                const studentGroupInputBox = document.createElement(
-                                    'input');
-                                studentGroupInputBox.type = 'text'
-                                studentGroupInputBox.name =
-                                    `input_group[${student.nedubd_student_id}]`;
-                                studentGroupInputBox.value = student.group;
-                                studentGroupInputBox.classList.add('hidden')
-                                studentGroup_TD.appendChild(studentGroupInputBox);
-                                tr.appendChild(studentGroup_TD);
+                    monthList.forEach(element => {
+                        const monthLi = document.createElement('li');
+                        monthLi.classList.add("text-zinc-900", "cursor-default", "select-none", "relative", "py-2",
+                            "pl-3",
+                            "pr-9");
+                        const monthDiv = document.createElement('div');
+                        monthDiv.classList.add("flex", "items-center");
 
-                                // student sections
-                                const studentSection_TD = document.createElement('td');
-                                studentSection_TD.classList.add('hidden')
-                                const studentSectionInputBox = document.createElement(
-                                    'input');
-                                studentSectionInputBox.type = 'text'
-                                studentSectionInputBox.name =
-                                    `input_section[${student.nedubd_student_id}]`;
-                                studentSectionInputBox.value = student.section;
-                                studentSectionInputBox.classList.add('hidden')
-                                studentSection_TD.appendChild(studentSectionInputBox);
-                                tr.appendChild(studentSection_TD);
+                        const checkboxCell = document.createElement('input');
+                        checkboxCell.type = "checkbox";
+                        checkboxCell.id = element;
+                        checkboxCell.name = "month_row_checkbox";
+                        checkboxCell.classList.add("h-4", "w-4", "text-indigo-600", "border-zinc-300", "rounded",
+                            "focus:ring-indigo-500")
+
+                        const checkboxLabel = document.createElement('label');
+                        checkboxLabel.htmlFor = element;
+                        checkboxLabel.classList.add("block", "text-sm", "text-zinc-700", "w-full", "pl-3")
+                        checkboxLabel.textContent = element;
+
+                        monthDiv.appendChild(checkboxCell);
+                        monthDiv.appendChild(checkboxLabel);
+                        monthLi.appendChild(monthDiv);
 
 
+                        monthUnorderedList.appendChild(monthLi);
+
+                        const monthRowCheckboxes = document.querySelectorAll(
+                            `input[type="checkbox"][name^="month_row_checkbox"]`);
+                        month_select_all.addEventListener('change', () => {
+                            monthRowCheckboxes.forEach((checkbox) => {
+                                checkbox.checked = month_select_all.checked;
+                            })
+                        })
+                    });
 
 
-                                // append table row into the table body
-                                table_body.appendChild(tr);
+                    // set class
+                    classes.forEach(element => {
+                        const classLi = document.createElement('li');
+                        classLi.classList.add("text-zinc-900", "cursor-default", "select-none", "relative", "py-2",
+                            "pl-3",
+                            "pr-9");
+                        const classDiv = document.createElement('div');
+                        classDiv.classList.add("flex", "items-center");
 
-                                totalStudents.value = slColumn - 1;
+                        const checkboxCell = document.createElement('input');
+                        checkboxCell.type = "checkbox";
+                        checkboxCell.id = element.class_name;
+                        checkboxCell.name = "class_row_checkbox";
+                        checkboxCell.classList.add("h-4", "w-4", "text-indigo-600", "border-zinc-300", "rounded",
+                            "focus:ring-indigo-500")
+
+                        const checkboxLabel = document.createElement('label');
+                        checkboxLabel.htmlFor = element.class_name;
+                        checkboxLabel.classList.add("block", "text-sm", "text-zinc-700", "w-full", "pl-3")
+                        checkboxLabel.textContent = element.class_name;
+
+                        classDiv.appendChild(checkboxCell);
+                        classDiv.appendChild(checkboxLabel);
+                        classLi.appendChild(classDiv);
+
+
+                        classUnorderedList.appendChild(classLi);
+
+                        const classRowCheckboxes = document.querySelectorAll(
+                            `input[type="checkbox"][name^="class_row_checkbox"]`);
+                        class_select_all.addEventListener('change', () => {
+                            classRowCheckboxes.forEach((checkbox) => {
+                                checkbox.checked = class_select_all.checked;
+                            })
+                        })
+                    });
+
+
+                    // set groups
+                    groups.forEach((item) => {
+                        const groupOption = document.createElement('option');
+                        groupOption.value = item.group_name;
+                        // if (item.group_name === 'N/A') groupOption.selected = true;
+                        groupOption.textContent = item.group_name;
+                        group.appendChild(groupOption);
+                    });
+
+                    // set payslip type
+                    PaySlipTypes.forEach((paySlip) => {
+                        const paySlipOption = document.createElement('option');
+                        paySlipOption.value = paySlip.pay_slip_type_name;
+                        paySlipOption.textContent = paySlip.pay_slip_type_name;
+                        pay_slip_type.appendChild(paySlipOption);
+                    })
+
+
+                    // set academic session
+                    academicSessions.forEach((session) => {
+                        const sessionOption = document.createElement('option');
+                        sessionOption.value = session.academic_session_name;
+                        sessionOption.textContent = session.academic_session_name;
+                        academic_session.appendChild(sessionOption);
+                    })
+
+                    // set academic year
+                    academicYears.forEach((year) => {
+                        const yearOption = document.createElement('option');
+                        yearOption.value = year.academic_year_name;
+                        yearOption.textContent = year.academic_year_name;
+                        academic_year.appendChild(yearOption);
+                    })
+
+                    // Function to get all selected months
+                    const getSelectedMonths = () => {
+                        const selectedMonths = [];
+                        const monthRowCheckboxes = document.querySelectorAll(
+                            'input[type="checkbox"][name="month_row_checkbox"]');
+                        monthRowCheckboxes.forEach((checkbox) => {
+                            if (checkbox.checked) {
+                                selectedMonths.push(checkbox.id);
                             }
+                        });
+                        return selectedMonths;
+                    };
+
+                    // Function to get all selected classes
+                    const getSelectedClasses = () => {
+                        const selectedClasses = [];
+                        const classRowCheckboxes = document.querySelectorAll(
+                            'input[type="checkbox"][name="class_row_checkbox"]');
+                        classRowCheckboxes.forEach((checkbox) => {
+                            if (checkbox.checked) {
+                                selectedClasses.push(checkbox.id);
+                            }
+                        });
+                        return selectedClasses;
+                    };
+
+                    let selectedClasses = []
+                    let selectedMonths = [];
+
+                    // get all information
+                    getInformation.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        // get all selected classes
+                        selectedClasses = getSelectedClasses();
+                        selectedMonths = getSelectedMonths();
+                        fetch(
+                                `/dashboard/studentAccounts/getStudentInformation/${schoolCode}?months=${selectedMonths}&classes=${selectedClasses}&group=${group.value}&pay_slip_type=${pay_slip_type.value}&year=${year.value}&academic_session=${academic_session.value}&academic_year=${academic_year.value}`
+                            )
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Network response was not ok');
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                if (data.length <= 0) {
+                                    showError('There is no data found')
+                                    return;
+                                }
+                                console.log('from multiple', data);
+                                updateTableContent(data)
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                    })
+
+                    function updateTableContent(data) {
+                        // create dynamic row
+                        table_body.innerHTML = "";
+                        let slColumn = 1;
+                        monthList.forEach((month) => {
+                            data[month]?.forEach(element => {
+                                if (element.students.length > 0) {
+                                    // console.log(element);
+                                    element.students.forEach((student, index) => {
+                                        if (student.pay_slip_amount > 0) {
+                                            console.log(student);
+                                            const tr = document.createElement('tr');
+                                            tr.classList.add('odd:bg-white', 'odd:dark:bg-gray-900',
+                                                'even:bg-gray-50',
+                                                'even:dark:bg-gray-800', 'border-b',
+                                                'dark:border-gray-700');
+
+
+                                            // create serial index column
+                                            const serialTD = document.createElement('td');
+                                            serialTD.classList.add('px-6', 'py-4');
+                                            serialTD.textContent = slColumn++;
+                                            tr.appendChild(serialTD);
+
+                                            // create month_year column
+                                            const monthYearTD = document.createElement('td');
+                                            monthYearTD.classList.add("px-6", "py-4",
+                                                'overflow-hidden')
+                                            monthYearTD.style.maxWidth = "100px";
+                                            const monthYearInputBox = document.createElement(
+                                                'input');
+                                            monthYearInputBox.type = 'text'
+                                            monthYearInputBox.name =
+                                                `input_month_year[${student.nedubd_student_id}][${student.month_year}]`;
+                                            monthYearInputBox.value = student.month_year;
+                                            monthYearInputBox.classList.add('border-0', 'w-fit',
+                                                'focus:ring-0')
+                                            monthYearInputBox.readOnly = true;
+                                            monthYearTD.appendChild(monthYearInputBox);
+                                            tr.appendChild(monthYearTD);
+
+
+                                            // create student_id column
+                                            const studentId_TD = document.createElement('td');
+                                            studentId_TD.style.maxWidth = "100px";
+                                            studentId_TD.classList.add("px-6", "py-4",
+                                                'overflow-hidden')
+                                            const studentIdInputBox = document.createElement(
+                                                'input');
+                                            studentIdInputBox.type = 'text'
+                                            studentIdInputBox.name =
+                                                `input_nedubd_student_id[${student.nedubd_student_id}]`;
+                                            studentIdInputBox.value = student.nedubd_student_id;
+                                            studentIdInputBox.classList.add('border-0', 'w-fit',
+                                                'focus:ring-0')
+                                            studentIdInputBox.readOnly = true;
+                                            studentId_TD.appendChild(studentIdInputBox);
+                                            tr.appendChild(studentId_TD);
+
+
+                                            // create STUDENT NAME column
+                                            const studentName_TD = document.createElement('td');
+                                            studentName_TD.style.maxWidth = "100px";
+                                            studentName_TD.classList.add("px-6", "py-4",
+                                                'overflow-hidden')
+                                            const studentNameInputBox = document.createElement(
+                                                'input');
+                                            studentNameInputBox.type = 'text'
+                                            studentNameInputBox.name =
+                                                `input_name[${student.nedubd_student_id}]`;
+                                            studentNameInputBox.value = student.name;
+                                            studentNameInputBox.classList.add('border-0', 'w-fit',
+                                                'focus:ring-0')
+                                            studentNameInputBox.readOnly = true;
+                                            studentName_TD.appendChild(studentNameInputBox);
+                                            tr.appendChild(studentName_TD);
+
+
+                                            // create student class column
+                                            const studentClass_TD = document.createElement('td');
+                                            studentClass_TD.style.maxWidth = "100px";
+                                            studentClass_TD.classList.add("px-6", "py-4",
+                                                'overflow-hidden')
+                                            const studentClassInputBox = document.createElement(
+                                                'input');
+                                            studentClassInputBox.type = 'text'
+                                            studentClassInputBox.name =
+                                                `input_Class_name[${student.nedubd_student_id}]`;
+                                            studentClassInputBox.value = student.Class_name;
+                                            studentClassInputBox.classList.add('border-0', 'w-fit',
+                                                'focus:ring-0')
+                                            studentClassInputBox.readOnly = true;
+                                            studentClass_TD.appendChild(studentClassInputBox);
+                                            tr.appendChild(studentClass_TD);
+
+
+
+                                            // create student roll column
+                                            const studentRoll_TD = document.createElement('td');
+                                            studentRoll_TD.style.maxWidth = "100px";
+                                            studentRoll_TD.classList.add("px-6", "py-4",
+                                                'overflow-hidden')
+                                            const studentRollInputBox = document.createElement(
+                                                'input');
+                                            studentRollInputBox.type = 'text'
+                                            studentRollInputBox.name =
+                                                `input_student_roll[${student.nedubd_student_id}]`;
+                                            studentRollInputBox.value = student.student_roll;
+                                            studentRollInputBox.classList.add('border-0', 'w-fit',
+                                                'focus:ring-0')
+                                            studentRollInputBox.readOnly = true;
+                                            studentRoll_TD.appendChild(studentRollInputBox);
+                                            tr.appendChild(studentRoll_TD);
+
+
+                                            // create payslip type column
+                                            const payslipType_TD = document.createElement('td');
+                                            payslipType_TD.style.maxWidth = "100px";
+                                            payslipType_TD.classList.add("px-6", "py-4",
+                                                'overflow-hidden')
+                                            const payslipTypeInputBox = document.createElement(
+                                                'input');
+                                            payslipTypeInputBox.type = 'text'
+                                            payslipTypeInputBox.name =
+                                                `input_pay_slip_type[${student.nedubd_student_id}]`;
+                                            payslipTypeInputBox.value = student.pay_slip_type;
+                                            payslipTypeInputBox.classList.add('border-0', 'w-fit',
+                                                'focus:ring-0')
+                                            payslipTypeInputBox.readOnly = true;
+                                            payslipType_TD.appendChild(payslipTypeInputBox);
+                                            tr.appendChild(payslipType_TD);
+
+
+
+
+                                            // create payslip amount column
+                                            const payslipAmount_TD = document.createElement('td');
+                                            payslipAmount_TD.style.maxWidth = "100px";
+                                            payslipAmount_TD.classList.add("px-6", "py-4",
+                                                'overflow-hidden')
+                                            const payslipAmountInputBox = document.createElement(
+                                                'input');
+                                            payslipAmountInputBox.type = 'text'
+                                            payslipAmountInputBox.name =
+                                                `input_pay_slip_amount[${student.nedubd_student_id}]`;
+                                            payslipAmountInputBox.value = student.pay_slip_amount;
+                                            payslipAmountInputBox.classList.add('border-0', 'w-fit',
+                                                'focus:ring-0')
+                                            payslipAmountInputBox.readOnly = true;
+                                            payslipAmount_TD.appendChild(payslipAmountInputBox);
+                                            tr.appendChild(payslipAmount_TD);
+
+
+
+                                            // create student WAIVER column
+                                            const waiverAmount_TD = document.createElement('td');
+                                            waiverAmount_TD.style.maxWidth = "100px";
+                                            waiverAmount_TD.classList.add("px-6", "py-4",
+                                                'overflow-hidden')
+                                            const waiverAmountInputBox = document.createElement(
+                                                'input');
+                                            waiverAmountInputBox.type = 'text'
+                                            waiverAmountInputBox.name =
+                                                `input_waiver[${student.nedubd_student_id}]`;
+                                            waiverAmountInputBox.value = student.waiver;
+                                            waiverAmountInputBox.classList.add('border-0', 'w-fit',
+                                                'focus:ring-0')
+                                            waiverAmountInputBox.readOnly = true;
+                                            waiverAmount_TD.appendChild(waiverAmountInputBox);
+                                            tr.appendChild(waiverAmount_TD);
+
+
+
+                                            // create student PAYABLE column
+                                            const payableAmount_TD = document.createElement('td');
+                                            payableAmount_TD.style.maxWidth = "100px";
+                                            payableAmount_TD.classList.add("px-6", "py-4",
+                                                'overflow-hidden')
+                                            const payableAmountInputBox = document.createElement(
+                                                'input');
+                                            payableAmountInputBox.type = 'text'
+                                            payableAmountInputBox.name =
+                                                `input_payable[${student.nedubd_student_id}]`;
+                                            payableAmountInputBox.value = student.pay_slip_amount -
+                                                student.waiver;
+                                            payableAmountInputBox.classList.add('border-0', 'w-fit',
+                                                'focus:ring-0')
+                                            payableAmountInputBox.readOnly = true;
+                                            payableAmount_TD.appendChild(payableAmountInputBox);
+                                            tr.appendChild(payableAmount_TD);
+                                            // console.log('student_payable_amount_key ----',
+                                            // student_payable_amount_key);
+
+
+
+                                            // hidden input fields
+                                            // student groups
+                                            const studentGroup_TD = document.createElement('td');
+                                            studentGroup_TD.classList.add('hidden')
+                                            const studentGroupInputBox = document.createElement(
+                                                'input');
+                                            studentGroupInputBox.type = 'text'
+                                            studentGroupInputBox.name =
+                                                `input_group[${student.nedubd_student_id}]`;
+                                            studentGroupInputBox.value = student.group;
+                                            studentGroupInputBox.classList.add('hidden')
+                                            studentGroup_TD.appendChild(studentGroupInputBox);
+                                            tr.appendChild(studentGroup_TD);
+
+                                            // student sections
+                                            const studentSection_TD = document.createElement('td');
+                                            studentSection_TD.classList.add('hidden')
+                                            const studentSectionInputBox = document.createElement(
+                                                'input');
+                                            studentSectionInputBox.type = 'text'
+                                            studentSectionInputBox.name =
+                                                `input_section[${student.nedubd_student_id}]`;
+                                            studentSectionInputBox.value = student.section;
+                                            studentSectionInputBox.classList.add('hidden')
+                                            studentSection_TD.appendChild(studentSectionInputBox);
+                                            tr.appendChild(studentSection_TD);
+
+
+
+
+                                            // append table row into the table body
+                                            table_body.appendChild(tr);
+
+                                            totalStudents.value = slColumn - 1;
+                                        }
+                                    })
+                                }
+                            });
                         })
                     }
                 });
-            })
-        }
-    });
 
 
 
 
 
-    document.addEventListener("DOMContentLoaded", function() {
-        const last_pay_date = document.getElementById('last_pay_date');
-        const desiredMonth = new Date().getMonth();
-        const desiredYear = new Date().getFullYear();
+                document.addEventListener("DOMContentLoaded", function() {
+                    const last_pay_date = document.getElementById('last_pay_date');
+                    const desiredMonth = new Date().getMonth();
+                    const desiredYear = new Date().getFullYear();
 
-        const lastPayDate = new Date(desiredYear, desiredMonth, 10 + 1);
+                    const lastPayDate = new Date(desiredYear, desiredMonth, 10 + 1);
 
-        const formattedDate =
-            `${String(lastPayDate.getMonth() + 1).padStart(2, '0')}-${String(lastPayDate.getDate()).padStart(2, '0')}-${lastPayDate.getFullYear()}`;
+                    const formattedDate =
+                        `${String(lastPayDate.getMonth() + 1).padStart(2, '0')}-${String(lastPayDate.getDate()).padStart(2, '0')}-${lastPayDate.getFullYear()}`;
 
-        document.getElementById('last_pay_date').value = lastPayDate.toISOString().slice(0, 10);
-    });
+                    document.getElementById('last_pay_date').value = lastPayDate.toISOString().slice(0, 10);
+                });
 </script>

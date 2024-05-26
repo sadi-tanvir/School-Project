@@ -21,24 +21,20 @@
 <body>
 
     <div id="page" class="max-w-[1100px] mx-auto ">
-        <div class="flex w-full justify-between items-center p-5  ">
-            <div><img src="https://cdn.pixabay.com/photo/2023/01/13/17/44/red-7716610_640.png"
-                    class="rounded-full w-28 h-28" alt=""></div>
-            <div class="text-center">
-                <h3 class="text-xl">Pallabi Mazedul Islam Model High School</h3>
-                <p class="text-sm">13/14,Pallabi, Dhaka - 1216. <br>
-
-                    Contact No: 01309108183 <br>
-
-                    Email: mimodelschool1978@gmail.com <br>
-
-                    Website: http://pmimhs.edu.bd/ <br>
-
-                    Print date:14-03-2024</p>
-                <p class="text-purple-500 font-bold font-semi-bold text-center">Student List</p>
+        <div class=" w-full  items-center p-5  ">
+        <div class="flex justify-center">
+                <img class="w-44" src="{{asset($schoolInfo->logo)}}" alt="School Logo">
             </div>
-            <div><img src="https://cdn.pixabay.com/photo/2023/01/13/17/44/red-7716610_640.png"
-                    class="rounded-full w-28 h-28" alt=""></div>
+            <div class="text-center">
+                <h3 class="text-2xl text-blue-400 font-bold">{{$schoolInfo->school_name}}</h3>
+                <p class="text-sm">{{$schoolInfo->address}} <br>
+                    Contact No: {{$schoolInfo->mobile_number}} <br>
+                    Email: {{$schoolInfo->school_email}} <br>
+                    Website:{{$schoolInfo->website}}<br>
+                    <span class="text-red-500"> Print date:{{$date}}</span>
+                </p>
+                <p class="font-bold font-semi-bold text-center text-xl">Student Information</p>
+            </div>
         </div>
         <div class="flex justify-center w-full p-5">
             @if($students != null)

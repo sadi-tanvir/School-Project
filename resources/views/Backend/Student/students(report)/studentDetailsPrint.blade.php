@@ -15,27 +15,30 @@
 
 <body class="bg-blue-100">
     <div class=" bg-white w-[1500px] px-[120px] mx-auto" id="page">
-        @foreach ($schoolInfo as $data)
-            <div class="flex w-full justify-between items-center p-5">
+
+        <div class="flex w-full justify-between items-center p-5">
+            <div>
+                <img class="w-20" src="{{asset($schoolInfo->logo)}}" alt="School Logo">
+            </div>
+            <div class="text-center">
+                <h3 class="text-2xl text-blue-400 font-bold">{{$schoolInfo->school_name}}</h3>
+                <p class="text-sm">{{$schoolInfo->address}} <br>
+                    Contact No: {{$schoolInfo->mobile_number}} <br>
+                    Email: {{$schoolInfo->school_email}} <br>
+                    Website:{{$schoolInfo->website}}<br>
+                    <span class="text-red-500"> Print date:{{$date}}</span>
+                </p>
+                <p class="font-bold font-semi-bold text-center text-xl">Student Information</p>
+            </div>
+            @foreach ($students as $Data)
                 <div>
-                    <img src="{{$data->logo}}" alt="">
+                    <img src="{{ asset($Data->image) }}" class="w-40" alt="">
                 </div>
-                <div class="text-center">
-                    <h3 class="text-2xl text-blue-400 font-bold">{{$data->school_name}}</h3>
-                    <p class="text-sm">{{$data->address}} <br>
-                        Contact No: {{$data->mobile_number}} <br>
-                        Email: {{$data->school_email}} <br>
-                        Website:{{$data->website}}<br>
-                        <span class="text-red-500"> Print date:{{$date}}</span>
-                    </p>
-                    <p class="font-bold font-semi-bold text-center text-xl">Student Information</p>
-                </div>
-                @foreach ($students as $Data)
-                        <div>
-                            <img src="{{ asset($Data->image) }}" class="w-40" alt="">
-                        </div>
-                    </div>
-                @endforeach
+            @endforeach
+        </div>
+
+
+        @foreach ($students as $Data)
 
             {{-- student info --}}
 
@@ -129,7 +132,8 @@
                 <div class="border-b border-l border-r border-black p-1.5 col-span-5">{{$Data->parmanent_district}}</div>
                 {{-- --}}
                 <div class="border border-black p-1.5 col-span-12 mt-1">পূর্বে যে প্রতিষ্ঠানে অধ্যায়ন করেছে তার নাম:
-                    {{$Data->last_school_name}} </div>
+                    {{$Data->last_school_name}}
+                </div>
                 <div class="border-b border-l border-black p-1.5 col-span-2">শ্রেনী</div>
                 <div class="border-b border-l border-black p-1.5 col-span-2">{{$Data->last_class_name}}</div>
                 <div class="border-b border-l border-black p-1.5 col-span-2">রেজি নং</div>

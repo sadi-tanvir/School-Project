@@ -15,14 +15,7 @@ use Illuminate\Http\Request;
 
 class ExamResultController extends Controller
 {
-   
-
-    
-
-
-
-
-    public function exam_process()
+public function exam_process()
     {
         return view('/Backend/ExamResult/exam_process');
     }

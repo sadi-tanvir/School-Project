@@ -35,7 +35,8 @@ class classSectionSTdTotalController extends Controller
         $students = Student::where('action', 'approved')->where('school_code', $schoolCode)->where('year', $year)->get();
         $groups = AddClassWiseGroup::where('action', 'approved')->where('school_code', $schoolCode)->get();
         // dd($classes);
-        $schoolInfo = SchoolInfo::where('school_code', $schoolCode)->get();
+        $schoolInfo=SchoolInfo::where('school_code', $schoolCode)->first();
+        dd($schoolInfo);
         $date = date('d-m-Y');
         return view('Backend.Student.classSectionStdTotalDownload', compact('class', 'classData', 'classes', 'sections', 'groups', 'students', 'schoolInfo', 'date'));
     }
@@ -52,8 +53,8 @@ class classSectionSTdTotalController extends Controller
         $classes = AddClass::where('action', 'approved')->where('school_code', $schoolCode)->get();
         $sections = AddClassWiseSection::where('action', 'approved')->where('school_code', $schoolCode)->get();
         $students = Student::where('action', 'approved')->where('school_code', $schoolCode)->where('year', $year)->get();
-        $schoolInfo = SchoolInfo::where('school_code', $schoolCode)->get();
-
+        $schoolInfo=SchoolInfo::where('school_code', $schoolCode)->first();
+        dd($schoolInfo);
         $date = date('d-m-Y');
         $pdf = PDF::loadView('Backend.Student.classSectionStdtotalDownload', compact('class', 'classes', 'sections', 'students', 'schoolInfo', 'date'));
         return $pdf->download('student-class-section-total.pdf');

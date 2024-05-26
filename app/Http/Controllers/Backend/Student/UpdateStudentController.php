@@ -15,24 +15,36 @@ use Illuminate\Http\Request;
 
 class UpdateStudentController extends Controller
 {
-   public function student_update($id,$schoolCode){
+   public function student_update($id, $schoolCode)
+   {
 
-    $student = Student::findOrFail($id);
-    $classes=AddClass::where("action", "approved")->where("school_code",$schoolCode)->get();
-    $sections=AddSection::where("action", "approved")->where("school_code",$schoolCode)->get();
-    $groups=AddGroup::where("action", "approved")->where("school_code",$schoolCode)->get();
-    $shifts=AddShift::where("action", "approved")->where("school_code",$schoolCode)->get();
-    $sessions=AddAcademicSession::where("action", "approved")->where("school_code",$schoolCode)->get();
-    $years=AddAcademicYear::where("action", "approved")->where("school_code",$schoolCode)->get();
-    $categories=AddCategory::where("action", "approved")->where("school_code",$schoolCode)->get();
+      $student = Student::findOrFail($id);
+      $classes = AddClass::where("action", "approved")->where("school_code", $schoolCode)->get();
+      $sections = AddSection::where("action", "approved")->where("school_code", $schoolCode)->get();
+      $groups = AddGroup::where("action", "approved")->where("school_code", $schoolCode)->get();
+      $shifts = AddShift::where("action", "approved")->where("school_code", $schoolCode)->get();
+      $sessions = AddAcademicSession::where("action", "approved")->where("school_code", $schoolCode)->get();
+      $years = AddAcademicYear::where("action", "approved")->where("school_code", $schoolCode)->get();
+      $categories = AddCategory::where("action", "approved")->where("school_code", $schoolCode)->get();
 
-       return view ('Backend.Student.updateStudent',compact('student','classes','sections','groups','shifts','sessions','years','categories'));
+      return view('Backend.Student.updateStudent', compact('student', 'classes', 'sections', 'groups', 'shifts', 'sessions', 'years', 'categories'));
    }
 
    public function updateStudent(Request $request, $id)
-{
-   //dd($id);
-   $schoolCode=$request->input('school_code');
+   {
+      //dd($id);
+      $schoolCode = $request->input('school_code');
+
+
+   $request->validate([
+      'file' => 'file|mimes:jpeg,png,jpg,gif|max:2048',
+  ]);
+  
+  $imagePath = null;
+  if ($request->hasFile('file')) {
+      $imagePath = $request->file('file')->move('images/student', $request->input('nedubd_student_id') . '.' . $request->file('file')->extension());
+      $studentImage = 'images/student/' . basename($imagePath);
+  }
 
   $students = Student::findOrFail($id);
         $students->name = $request->input('name');
@@ -53,6 +65,7 @@ class UpdateStudentController extends Controller
             $students->session = $request->input('session');
             $students->status = $request->input('status');
             $students->admission_date = $request->input('admission_date');
+            $students->image = $studentImage ?? null;
             $students->mobile_no = $request->input('mobile_no');
             $students->father_name = $request->input('father_name');
             $students->father_mobile = $request->input('father_mobile');
@@ -88,14 +101,12 @@ class UpdateStudentController extends Controller
             $students->action = $request->input('action');
             $students->save();
 
-            $student=null;
-            $classes=AddClass::where("action", "approved")->where("school_code",$schoolCode)->get();
-            $sections=AddSection::where("action", "approved")->where("school_code",$schoolCode)->get();
-            $groups=AddGroup::where("action", "approved")->where("school_code",$schoolCode)->get();
-            $sessions=AddAcademicSession::where("action", "approved")->where("school_code",$schoolCode)->get();
-            $years=AddAcademicYear::where("action", "approved")->where("school_code",$schoolCode)->get();
-            return view('Backend.Student.studentProfileUpdate',compact('classes','sections','groups','sessions','years','student'))->with('success', 'Student updated successfully');
+      $student = null;
+      $classes = AddClass::where("action", "approved")->where("school_code", $schoolCode)->get();
+      $sections = AddSection::where("action", "approved")->where("school_code", $schoolCode)->get();
+      $groups = AddGroup::where("action", "approved")->where("school_code", $schoolCode)->get();
+      $sessions = AddAcademicSession::where("action", "approved")->where("school_code", $schoolCode)->get();
+      $years = AddAcademicYear::where("action", "approved")->where("school_code", $schoolCode)->get();
+      return view('Backend.Student.studentProfileUpdate', compact('classes', 'sections', 'groups', 'sessions', 'years', 'student'))->with('success', 'Student updated successfully');
+   }
 }
-}
-
-

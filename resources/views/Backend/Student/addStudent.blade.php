@@ -56,11 +56,14 @@ Add Student
                 <input type="text" name="student_roll" id="website" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " placeholder="student_roll" />
             </div>
             <div>
-                <label for="classess" class="block mb-2 text-sm font-medium text-gray-900 ">Class
-                    Name</label>
+                <div class="flex justify-between">
+                    <label for="classess" class="block mb-2 text-sm font-medium text-gray-900 ">Class
+                        Name </label>
+                    <label class="text-red-700 text-2xl">*</label>
+                </div>
                 <select id="class" name="class_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
 
-                    <option selected>Choose a class</option>
+                    <option disabled selected>Choose a class </option>
                     @foreach ($classes as $class)
                     <option>{{ $class->class_name }}</option>
                     @endforeach
@@ -68,10 +71,14 @@ Add Student
                 </select>
             </div>
             <div>
-                <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 ">group</label>
+
+                <div class="flex justify-between">
+                    <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 ">group</label>
+                    <label class="text-red-700 text-2xl">*</label>
+                </div>
                 <select id="group" name="group" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
 
-                    <option selected>Choose a group</option>
+                    <option disabled selected>Choose a group</option>
                     @foreach ($groups as $group)
                     <option>{{ $group->group_name }}</option>
                     @endforeach
@@ -80,10 +87,14 @@ Add Student
                 </select>
             </div>
             <div>
-                <label for="website" class="block mb-2 text-sm font-medium text-gray-900 ">section</label>
+
+                <div class="flex justify-between">
+                    <label for="website" class="block mb-2 text-sm font-medium text-gray-900 ">section</label>
+                    <label class="text-red-700 text-2xl">*</label>
+                </div>
                 <select id="section" name="section" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
 
-                    <option selected>Choose a Section</option>
+                    <option disabled selected>Choose a Section</option>
                     @foreach ($sections as $section)
                     <option>{{ $section->section_name }}</option>
                     @endforeach
@@ -91,10 +102,14 @@ Add Student
                 </select>
             </div>
             <div>
-                <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 ">shift</label>
+
+                <div class="flex justify-between">
+                    <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900 ">shift</label>
+                    <label class="text-red-700 text-2xl">*</label>
+                </div>
                 <select id="shift" name="shift" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
 
-                    <option selected>Choose a Shift</option>
+                    <option disabled selected>Choose a Shift</option>
                     @foreach ($shifts as $shift)
                     <option>{{ $shift->shift_name }}</option>
                     @endforeach
@@ -102,8 +117,12 @@ Add Student
                 </select>
             </div>
             <div class="mb-6">
-                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">category (Day
-                    care & general)</label>
+
+                <div class="flex justify-between">
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">category (Day
+                        care & general)</label>
+                    <label class="text-red-700 text-2xl">*</label>
+                </div>
                 <select id="countries" name="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
 
                     <option disabled selected>Choose a Category</option>
@@ -114,11 +133,13 @@ Add Student
                 </select>
             </div>
             <div class="mb-6">
-                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">Academic
-                    Year</label>
-                <select name="year" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
 
-                    <option>Select Year</option>
+                <div class="flex justify-between">
+                    <label for="" class="block mb-2 text-sm font-medium text-gray-900 ">Academic
+                        Year</label>
+                    <label class="text-red-700 text-2xl">*</label>
+                </div>
+                <select name="year" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
                     @foreach ($years as $year)
                     <option>{{ $year->academic_year_name }}</option>
                     @endforeach
@@ -126,19 +147,27 @@ Add Student
                 </select>
             </div>
             <div class="mb-6">
-                <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 ">Gender</label>
+
+                <div class="flex justify-between">
+                    <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 ">Gender</label>
+                    <label class="text-red-700 text-2xl">*</label>
+                </div>
                 <select id="countries" name="gender" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
 
-                    <option selected>Choose gender</option>
+                    <option disabled selected>Choose gender</option>
                     <option>Male</option>
                     <option>Female</option>
                 </select>
             </div>
             <div class="mb-6">
-                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Religious</label>
+
+                <div class="flex justify-between">
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Religious</label>
+                    <label class="text-red-700 text-2xl">*</label>
+                </div>
                 <select id="countries" name="religious" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
 
-                    <option selected>Choose Religious</option>
+                    <option disabled selected>Choose Religious</option>
                     <option>Islam</option>
                     <option>Hindu</option>
                     <option>Buddhism</option>
@@ -146,7 +175,11 @@ Add Student
                 </select>
             </div>
             <div class="mb-6">
-                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">Nationality</label>
+
+                <div class="flex justify-between">
+                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">Nationality</label>
+                    <label class="text-red-700 text-2xl">*</label>
+                </div>
                 <select id="countries" name="nationality" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
                     <option selected>Bangladesh</option>
 
@@ -154,9 +187,13 @@ Add Student
                 </select>
             </div>
             <div class="mb-6">
-                <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 ">Blood_group</label>
+
+                <div class="flex justify-between">
+                    <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 ">Blood_group</label>
+                    <label class="text-red-700 text-2xl">*</label>
+                </div>
                 <select id="countries" name="blood_group" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
-                    <option selected>Choose Blood_group</option>
+                    <option disabled selected>Choose Blood_group</option>
                     <option>A+</option>
                     <option>A-</option>
                     <option>O+</option>
@@ -168,16 +205,24 @@ Add Student
                 </select>
             </div>
             <div class="mb-6">
-                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Session</label>
+
+                <div class="flex justify-between">
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Session</label>
+                    <label class="text-red-700 text-2xl">*</label>
+                </div>
                 <select id="countries" name="session" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
-                    <option selected>Choose Session</option>
+                    <option disabled selected>Choose Session</option>
                     @foreach ($sessions as $session)
                     <option>{{ $session->academic_session_name }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="mb-6">
-                <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">Choose Status</label>
+
+                <div class="flex justify-between">
+                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">Choose Status</label>
+                    <label class="text-red-700 text-2xl">*</label>
+                </div>
                 <select name="status" id="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 ">
                     <!-- <option selected="">Select status</option> -->
                     <option value="active">Active</option>
@@ -189,8 +234,12 @@ Add Student
                 </select>
             </div>
             <div class="mb-6">
-                <label class="block mb-2 text-sm font-medium text-gray-900 " for="user_avatar">Upload
-                    Picture</label>
+
+                <div class="flex justify-between">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 " for="user_avatar">Upload
+                        Picture</label>
+                    <label class="text-red-700 text-2xl">*</label>
+                </div>
                 <input name="image" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none  " aria-describedby="user_avatar_help" id="user_avatar" type="file">
 
 
@@ -208,7 +257,11 @@ Add Student
                 </div>
             </div>
             <div class="mb-6">
-                <label for="mobile_no" class="block mb-2 text-sm font-medium text-gray-900 ">Mobile No</label>
+
+                <div class="flex justify-between">
+                    <label for="mobile_no" class="block mb-2 text-sm font-medium text-gray-900 ">Mobile No</label>
+                    <label class="text-red-700 text-2xl">*</label>
+                </div>
                 <div class="relative max-w-sm">
                     <input type="text" name="mobile_no" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  " placeholder="Mobile no">
                 </div>

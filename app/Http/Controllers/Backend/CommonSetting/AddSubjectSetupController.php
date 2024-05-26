@@ -174,13 +174,12 @@ class AddSubjectSetupController extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => 'Subject could not be deleted.']);
         }
-
+    }
     public function getGroups(Request $request, $school_code)
     {
         $class = $request->class;
 
         $groups = AddClassWiseGroup::where('class_name', $class)->where('school_code', $school_code)->get();
         return response()->json($groups);
-
     }
 }

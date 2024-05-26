@@ -121,11 +121,9 @@ class StudentProfileUpdateController extends Controller
                 'section' => $request->section,
                 'year' => $request->year,
                 'session' => $request->session,
-    
             ]);
           
         }
-
             return redirect()->route('studentProfileUpdate',$schoolCode)->with('error','Student Data Not Found');
     }
 }

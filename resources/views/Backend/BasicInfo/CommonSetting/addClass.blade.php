@@ -124,13 +124,10 @@ Add Class
 
 
                 <td class="px-6 py-4  text-xl flex justify-center">
-
-                    <a class="mr-2 edit-button"><i class="fa fa-edit" style="color:green;"></i></a>
-
-                    <form method="POST" action="{{ url('dashboard/delete_contact', $data->id) }}">
+                    <form action="{{ route('delete.class', $data->id) }}" method="POST" >
                         @csrf
                         @method('DELETE')
-                        <button class="btn ">
+                        <button type="submit" class="btn ">
                             <a href=""><i class="fa fa-trash" aria-hidden="true" style="color:red;"></i></a>
                         </button>
                     </form>

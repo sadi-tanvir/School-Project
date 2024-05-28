@@ -238,7 +238,7 @@ class MarkInputController extends Controller
         $fullMarks = $request->input('full_marks');
         $totalMarks = $request->input('total_mark');
         $passMarks = $request->input('pass_mark');
-        $schoolInfo = SchoolInfo::where('school_code', $school_code)->get();
+        $schoolInfo = SchoolInfo::where('school_code', $school_code)->first();
 
         $students = Student::where('school_code', $school_code)->where('Class_name', $selectedClassName)
             ->where('group', $selectedGroupName)
@@ -335,12 +335,8 @@ class MarkInputController extends Controller
         $selectedSubjectName = $request->input('subject');
         $selectedExamName = $request->input('exam');
         $selectedYear = $request->input('year');
-        $schoolInfo = SchoolInfo::where('school_code', $school_code)->get();
+        $schoolInfo = SchoolInfo::where('school_code', $school_code)->first();
         $date = date('d-m-Y');
-
-
-
-
         $marks = ExamMarkInput::where('school_code', $school_code)->where('action', 'approved')->where('class_name', $selectedClassName)->where('group', $selectedGroupName)->where('section', $selectedSectionName)->where('year', $selectedYear)->where('subject', $selectedSubjectName)->get();
         $shortCode = SetClassExamMark::where('class_name', $selectedClassName)->where('school_code', $school_code)->where('subject_name', $selectedSubjectName)->where('exam_name', $selectedExamName)->get();
 

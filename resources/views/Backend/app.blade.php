@@ -21,8 +21,11 @@
 </head>
 <style>
     /* You can add custom styles here */
+    /* .gradient-bg {
+        background: linear-gradient(90deg, #1E3A8A 0%, #007BFF 50%,  #007BFF 100%);
+    } */
     .gradient-bg {
-        background: linear-gradient(90deg, #1E3A8A 0%, #007BFF 50%, #1E3A8A 100%);
+    background: linear-gradient(145deg, #1E3A8A 0%, #0054af 50%, #0054af 100%);
     }
 
     /* .gradient-bg {
@@ -36,7 +39,7 @@
 <body class="">
     @include('Shared.navbar')
     @include('Shared.sidebar')
-    <div class="p-4  sm:ml-72 mt-14 ">
+    <div class="p-3  sm:ml-72 mt-0.5 ">
         @yield('Dashboard')
     </div>
 

@@ -11,11 +11,14 @@ use App\Models\AddClassWiseGroup;
 use App\Models\AddClassWiseSection;
 use App\Models\AddClassWiseShift;
 use App\Models\AddGroup;
+use App\Models\AddPaySlip;
 use App\Models\AddSection;
 use App\Models\AddShift;
+use App\Models\GeneratePayslip;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -55,6 +58,7 @@ class StudentController extends Controller
     }
     public function addStudent(Request $request)
     {
+        // dd($request->all());
 
         $request->validate([
             'image' => 'file|mimes:jpeg,png,jpg,gif|max:2048',
@@ -76,13 +80,14 @@ class StudentController extends Controller
             return redirect()->back()->with('error', 'This Student already exists.');
         }
 
+
         $student = new Student();
         $student->name = $request->input('name');
         $student->birth_date = $request->input('birth_date');
         $student->nedubd_student_id = $request->input('nedubd_student_id');
         $student->student_id = $request->input('student_id') ?? $this->generateUniqueStudentId();
         $student->student_roll = $request->input('student_roll');
-        $student->Class_name = $request->input('Class_name');
+        $student->Class_name = $request->input('class_name');
         $student->group = $request->input('group');
         $student->section = $request->input('section');
         $student->shift = $request->input('shift');
@@ -132,7 +137,57 @@ class StudentController extends Controller
         $student->school_code = $request->input('school_code');
         $student->action = $request->input('action');
         $student->save();
-        return redirect()->back()->with('success', 'student added successfully!');
+
+        $payslipInfo = AddPaySlip::where('school_code', $request->input('school_code'))
+            ->where('class_name', 'play')
+            ->where('group_name', 'N/A')
+            ->select('class_name', 'group_name', 'pay_slip_type', DB::raw('SUM(fees_amount) as totalFeesAmount'))
+            ->groupBy('class_name', 'group_name', 'pay_slip_type')
+            ->get();
+
+        // dd($student);
+
+        return view('Backend.Student.AdmissionInvoice', compact('payslipInfo', 'student'))->with('success', 'student added successfully!');
+        // return redirect()->back()->with('success', 'student added successfully!');
+    }
+
+    public function addNewStudentFees(Request $request, $school_code)
+    {
+        $selectedPayslips = $request->input('select_payslip', []);
+        $months = $request->input('month_', []);
+        $amount = $request->input('amount', []);
+        $last_pay_date = $request->input('last_pay_date');
+        $student_id = $request->input('student_id');
+        $class = $request->input('class');
+        $group = $request->input('group');
+        $section = $request->input('section');
+        $waiver = $request->input('waiver');
+
+        // dd($request->all());
+        // dd($waiver);
+        foreach ($selectedPayslips as $pay_slip_type => $value) {
+            GeneratePayslip::firstOrCreate(
+                [
+                    'student_id' => $student_id,
+                    'action' => 'approved',
+                    'school_code' => $school_code,
+                    'month' => $months[$pay_slip_type],
+                    'year' => date('Y'),
+                    'class' => $class,
+                    'pay_slip_type' => $pay_slip_type,
+                ],
+                [
+                    'last_pay_date' => $last_pay_date,
+                    'group' => $group,
+                    'section' => $section,
+                    'amount' => $amount[$pay_slip_type],
+                    'waiver' => $waiver[$pay_slip_type] ?? 0,
+                    'payable' => $amount[$pay_slip_type] - $waiver[$pay_slip_type] ?? 0,
+                ]
+            );
+        }
+
+        return redirect()->back()->with('success', 'Fees added successfully!');
     }
 
     private function generateUniqueStudentId()

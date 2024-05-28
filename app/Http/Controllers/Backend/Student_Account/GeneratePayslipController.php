@@ -159,7 +159,7 @@ class GeneratePayslipController extends Controller
 
         foreach ($input_student_name as $student_id => $value) {
             if (isset($selected_students[$student_id])) {
-                GeneratePayslip::updateOrCreate(
+                GeneratePayslip::firstOrCreate(
                     // Search criteria
                     [
                         'student_id' => $input_student_id[$student_id],

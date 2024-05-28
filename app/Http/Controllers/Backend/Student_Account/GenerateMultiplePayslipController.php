@@ -190,7 +190,7 @@ class GenerateMultiplePayslipController extends Controller
                         $month = explode(".", $monthYear)[0];
                         // $year = explode(".", $monthYear)[1];
                         $IndividualLastPayDate = $relatedMonth[0] . "-" . $monthList[$month] . "-" . $relatedMonth[2];
-                        GeneratePayslip::updateOrCreate(
+                        GeneratePayslip::firstOrCreate(
                             [
                                 'student_id' => $studentId,
                                 'action' => 'approved',

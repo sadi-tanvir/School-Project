@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Student_Account;
 
 use App\Http\Controllers\Controller;
 use App\Models\AddClass;
+use App\Models\AddGroup;
 use App\Models\AddSection;
 use App\Models\GeneratePayslip;
 use App\Models\SchoolInfo;
@@ -27,19 +28,33 @@ class PaySlipCollectionController extends Controller
             ->where('school_code', $school_code)
             ->get();
 
+        $groups = AddGroup::where("action", "approved")
+            ->where("school_code", $school_code)
+            ->orderBy('group_name', 'asc')
+            ->get();
+
         $sections = AddSection::where("action", "approved")
             ->where("school_code", $school_code)
             ->orderBy('section_name', 'asc')
             ->get();
 
 
-        return view("Backend.Student_accounts.PaySlipCollection", compact('school_code', 'years', 'classes', 'sections'));
+        return view("Backend.Student_accounts.PaySlipCollection", compact('school_code', 'years', 'classes', 'groups', 'sections'));
     }
 
     public function GetStudentRoll(Request $request, $school_code)
     {
         $class = $request->query('class_name');
         $year = $request->query('year');
+        $section = $request->query('section');
+
+        $studentsGroup = Student::where('school_code', $school_code)
+            ->where('action', 'approved')
+            ->where('year', $year)
+            ->where('Class_name', $class)
+            ->select('group')
+            ->distinct()
+            ->get();
 
         $studentsSection = Student::where('school_code', $school_code)
             ->where('action', 'approved')
@@ -53,10 +68,14 @@ class PaySlipCollectionController extends Controller
             ->where('action', 'approved')
             ->where('year', $year)
             ->where('Class_name', $class)
-            ->select('student_roll', 'name', 'nedubd_student_id')
+            ->when($section !== "Select", function ($query) use ($section) {
+                return $query->where('section', $section);
+            })
+            ->select('student_roll', 'name', 'student_id')
             ->get();
 
         return response()->json([
+            "group" => $studentsGroup,
             "section" => $studentsSection,
             "student_info" => $student_info
         ]);
@@ -66,6 +85,7 @@ class PaySlipCollectionController extends Controller
     {
         $class_name = $request->query('class_name');
         $student_id = $request->query('student_id');
+        $group = $request->query('group');
         $section = $request->query('section');
         $year = $request->query('year');
 
@@ -73,6 +93,9 @@ class PaySlipCollectionController extends Controller
             ->where('action', 'approved')
             ->where('class', $class_name)
             ->where('student_id', $student_id)
+            ->when($group !== "Select", function ($query) use ($group) {
+                return $query->where('group', $group);
+            })
             ->when($section !== "Select", function ($query) use ($section) {
                 return $query->where('section', $section);
             })
@@ -86,8 +109,8 @@ class PaySlipCollectionController extends Controller
             ->where('action', 'approved')
             ->where('year', $year)
             ->where('Class_name', $class_name)
-            ->where('nedubd_student_id', $student_id)
-            ->select('nedubd_student_id', 'student_roll', 'name', 'Class_name', 'group', 'mobile_no')
+            ->where('student_id', $student_id)
+            ->select('student_id', 'student_roll', 'name', 'Class_name', 'group', 'mobile_no')
             ->first();
 
         return response()->json([
@@ -141,7 +164,7 @@ class PaySlipCollectionController extends Controller
         $school_info = SchoolInfo::where('school_code', $school_code)->first();
         $student_info = Student::where('school_code', $school_code)
             ->where('action', 'approved')
-            ->where('nedubd_student_id', $printable_student_id)
+            ->where('student_id', $printable_student_id)
             ->select('name', 'year', 'student_id', 'Class_name', 'group', 'section', 'student_roll')
             ->first();
 

@@ -15,7 +15,15 @@ Student Invoice
             @csrf
             <div class="w-full flex flex-col justify-center items-center">
                 {{-- Fees table --}}
-                <h1 class="text-3xl font-bold text-gray-700 mb-5 mt-10">Student Inforamation</h1>
+                <div class="grid grid-cols-3 gap-10 mt-10">
+                    <div></div>
+                    <h1 class="text-3xl font-bold text-gray-700 mb-5">Student Inforamation</h1>
+                    <div>
+                        <a href="{{route("student.invoice.print",['student_id' => $student->id, 'schoolCode' =>  $school_code])}}" target="_blank" class="text-white bg-gradient-to-br from-cyan-600 to-cyan-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-14 py-2 text-center">
+                            Print
+                        </a>
+                    </div>
+                </div>
                 <div class="w-2/3 grid grid-cols-5">
                     <ul class="text-xl font-semibold space-y-2">
                         <li>Student ID</li>
@@ -26,7 +34,7 @@ Student Invoice
                         <li>Session</li>
                     </ul>
                     <ul class="text-xl font-semibold space-y-2 col-span-4">
-                        <li>: {{$student->nedubd_student_id}}</li>
+                        <li>: {{$student->student_id}}</li>
                         <li>: {{$student->name}}</li>
                         <li>: {{$student->Class_name}}</li>
                         <li>: {{ isset($student->group) ? $student->group : "N/A"}}</li>
@@ -41,7 +49,7 @@ Student Invoice
                         <thead class="text-xs text-white uppercase bg-blue-600 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
-                                    <input id="student_header_checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    <input id="student_header_checkbox" checked type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
                                 </th>
                                 <th scope="col" class="px-6 py-3 bg-blue-500">
                                     SL
@@ -65,7 +73,7 @@ Student Invoice
                             <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                                 <th scope="row" class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     <div class="mx-auto">
-                                        <input id="" type="checkbox" value="selected" name="select_payslip[{{ $payslip->pay_slip_type }}]" class="w-4 h-4 ml-3 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <input id="" type="checkbox" checked value="selected" name="select_payslip[{{ $payslip->pay_slip_type }}]" class="w-4 h-4 ml-3 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
                                     </div>
                                 </th>
                                 <td class="px-6 py-4">
@@ -91,7 +99,7 @@ Student Invoice
             </div>
 
             {{-- hidden inputs --}}
-            <input class="hidden" name="student_id" value="{{ $student->nedubd_student_id }}" />
+            <input class="hidden" name="student_id" value="{{ $student->student_id }}" />
             <input class="hidden" name="class" value="{{ $student->Class_name }}" />
             <input class="hidden" name="group" value="{{ isset($student->group) ? $student->group : "N/A"}}" />
             <input class="hidden" name="section" value="{{ isset($student->section) ? $student->section : "N/A"}}" />
@@ -154,8 +162,10 @@ Student Invoice
         // select all payslips
         student_header_checkbox.addEventListener('change', () => {
             select_payslip.forEach((checkbox) => {
-                if (checkbox.checked) checkbox.checked = false;
-                else checkbox.checked = true;
+                // if (checkbox.checked) checkbox.checked = false;
+                // else checkbox.checked = true;
+                if (student_header_checkbox.checked) checkbox.checked = true;
+                else checkbox.checked = false;
             })
         })
     });

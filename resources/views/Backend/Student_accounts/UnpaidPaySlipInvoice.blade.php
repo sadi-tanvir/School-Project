@@ -82,7 +82,7 @@
                                         <li>Academic Year <span class="ml-2">:</span>
                                             {{ $individualPayslip['student_info']->year }} </li>
                                         <li>Student ID : {{ $individualPayslip['student_info']->student_id }}</li>
-                                        <li>Name : student name</li>
+                                        <li>Name : {{ $individualPayslip['student_info']->name }}</li>
                                         <li>Class : {{ $individualPayslip['student_info']->Class_name }}</li>
                                         <li>Group : {{ $individualPayslip['student_info']->group }}</li>
                                         <li>Section : {{ $individualPayslip['student_info']->section }}</li>

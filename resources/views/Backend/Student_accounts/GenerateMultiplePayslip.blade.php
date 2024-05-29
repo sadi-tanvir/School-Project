@@ -17,7 +17,7 @@
         <div class="w-full border mx-auto p-5 space-y-10">
             <form action="" method="">
                 @csrf
-                <div class="grid grid-cols-12 items-center gap-5">
+                <div class="grid grid-cols-11 items-center gap-5">
                     {{-- month --}}
                     <div class="col-span-2">
                         <div class="p-4">
@@ -142,7 +142,7 @@
                     </div>
 
                     {{-- status --}}
-                    <div class="">
+                    {{-- <div class="">
                         <label for="status"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status:</label>
                         <select id="status" name="status"
@@ -151,7 +151,7 @@
                             <option value="New">New</option>
                             <option value="Old">Old</option>
                         </select>
-                    </div>
+                    </div> --}}
 
                     {{-- academic_year --}}
                     <div class="">
@@ -555,7 +555,7 @@
                                     'input');
                                 monthYearInputBox.type = 'text'
                                 monthYearInputBox.name =
-                                    `input_month_year[${student.nedubd_student_id}][${student.month_year}]`;
+                                    `input_month_year[${student.student_id}][${student.month_year}]`;
                                 monthYearInputBox.value = student.month_year;
                                 monthYearInputBox.classList.add('border-0', 'w-fit',
                                     'focus:ring-0')
@@ -573,8 +573,8 @@
                                     'input');
                                 studentIdInputBox.type = 'text'
                                 studentIdInputBox.name =
-                                    `input_nedubd_student_id[${student.nedubd_student_id}]`;
-                                studentIdInputBox.value = student.nedubd_student_id;
+                                    `input_student_id[${student.student_id}]`;
+                                studentIdInputBox.value = student.student_id;
                                 studentIdInputBox.classList.add('border-0', 'w-fit',
                                     'focus:ring-0')
                                 studentIdInputBox.readOnly = true;
@@ -591,7 +591,7 @@
                                     'input');
                                 studentNameInputBox.type = 'text'
                                 studentNameInputBox.name =
-                                    `input_name[${student.nedubd_student_id}]`;
+                                    `input_name[${student.student_id}]`;
                                 studentNameInputBox.value = student.name;
                                 studentNameInputBox.classList.add('border-0', 'w-fit',
                                     'focus:ring-0')
@@ -609,7 +609,7 @@
                                     'input');
                                 studentClassInputBox.type = 'text'
                                 studentClassInputBox.name =
-                                    `input_Class_name[${student.nedubd_student_id}]`;
+                                    `input_Class_name[${student.student_id}]`;
                                 studentClassInputBox.value = student.Class_name;
                                 studentClassInputBox.classList.add('border-0', 'w-fit',
                                     'focus:ring-0')
@@ -628,7 +628,7 @@
                                     'input');
                                 studentRollInputBox.type = 'text'
                                 studentRollInputBox.name =
-                                    `input_student_roll[${student.nedubd_student_id}]`;
+                                    `input_student_roll[${student.student_id}]`;
                                 studentRollInputBox.value = student.student_roll;
                                 studentRollInputBox.classList.add('border-0', 'w-fit',
                                     'focus:ring-0')
@@ -646,7 +646,7 @@
                                     'input');
                                 payslipTypeInputBox.type = 'text'
                                 payslipTypeInputBox.name =
-                                    `input_pay_slip_type[${student.nedubd_student_id}]`;
+                                    `input_pay_slip_type[${student.student_id}]`;
                                 payslipTypeInputBox.value = student.pay_slip_type;
                                 payslipTypeInputBox.classList.add('border-0', 'w-fit',
                                     'focus:ring-0')
@@ -666,7 +666,7 @@
                                     'input');
                                 payslipAmountInputBox.type = 'text'
                                 payslipAmountInputBox.name =
-                                    `input_pay_slip_amount[${student.nedubd_student_id}]`;
+                                    `input_pay_slip_amount[${student.student_id}]`;
                                 payslipAmountInputBox.value = student.pay_slip_amount;
                                 payslipAmountInputBox.classList.add('border-0', 'w-fit',
                                     'focus:ring-0')
@@ -685,7 +685,7 @@
                                     'input');
                                 waiverAmountInputBox.type = 'text'
                                 waiverAmountInputBox.name =
-                                    `input_waiver[${student.nedubd_student_id}]`;
+                                    `input_waiver[${student.student_id}]`;
                                 waiverAmountInputBox.value = student.waiver;
                                 waiverAmountInputBox.classList.add('border-0', 'w-fit',
                                     'focus:ring-0')
@@ -704,7 +704,7 @@
                                     'input');
                                 payableAmountInputBox.type = 'text'
                                 payableAmountInputBox.name =
-                                    `input_payable[${student.nedubd_student_id}]`;
+                                    `input_payable[${student.student_id}]`;
                                 payableAmountInputBox.value = student.pay_slip_amount -
                                     student.waiver;
                                 payableAmountInputBox.classList.add('border-0', 'w-fit',
@@ -725,7 +725,7 @@
                                     'input');
                                 studentGroupInputBox.type = 'text'
                                 studentGroupInputBox.name =
-                                    `input_group[${student.nedubd_student_id}]`;
+                                    `input_group[${student.student_id}]`;
                                 studentGroupInputBox.value = student.group;
                                 studentGroupInputBox.classList.add('hidden')
                                 studentGroup_TD.appendChild(studentGroupInputBox);
@@ -738,7 +738,7 @@
                                     'input');
                                 studentSectionInputBox.type = 'text'
                                 studentSectionInputBox.name =
-                                    `input_section[${student.nedubd_student_id}]`;
+                                    `input_section[${student.student_id}]`;
                                 studentSectionInputBox.value = student.section;
                                 studentSectionInputBox.classList.add('hidden')
                                 studentSection_TD.appendChild(studentSectionInputBox);

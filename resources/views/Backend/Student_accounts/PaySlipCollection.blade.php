@@ -1,412 +1,380 @@
 @extends('Backend.app')
 @section('title')
-    Fees Collection
+Fees Collection
 @endsection
 
 
 @section('Dashboard')
-    <style>
-        .shadowStyle {
-            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-        }
+<style>
+    .shadowStyle {
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    }
 
-        /* Custom styles */
-        .autocomplete {
-            position: relative;
-        }
+    /* Custom styles */
+    .autocomplete {
+        position: relative;
+    }
 
-        .autocomplete input {
-            padding-right: 2.5rem;
-        }
+    .autocomplete input {
+        padding-right: 2.5rem;
+    }
 
-        .autocomplete .autocomplete-list {
-            position: absolute;
-            z-index: 10;
-            width: calc(100% - 1rem);
-            max-height: 200px;
-            overflow-y: auto;
-            background-color: #fff;
-            border: 1px solid #d1d5db;
-            border-radius: 0.25rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
+    .autocomplete .autocomplete-list {
+        position: absolute;
+        z-index: 10;
+        width: calc(100% - 1rem);
+        max-height: 200px;
+        overflow-y: auto;
+        background-color: #fff;
+        border: 1px solid #d1d5db;
+        border-radius: 0.25rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
 
-        .autocomplete .autocomplete-list-item {
-            padding: 0.5rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+    .autocomplete .autocomplete-list-item {
+        padding: 0.5rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
 
-        .autocomplete .autocomplete-list-item:hover {
-            background-color: #f3f4f6;
-        }
-    </style>
+    .autocomplete .autocomplete-list-item:hover {
+        background-color: #f3f4f6;
+    }
 
-    <div>
-        <h1>Others Fees Collection</h1>
+</style>
+
+<div>
+    <h1>Others Fees Collection</h1>
+</div>
+
+<div class="grid grid-cols-3 gap-5">
+    {{-- left section --}}
+    <div class="">
+        {{-- form --}}
+        <form action="{{ url('') }}" method="POST">
+            @csrf
+            <div class="font-bold">
+                <h3>Student Information</h3>
+            </div>
+            <div class="border py-5 px-2 space-y-3 flex flex-col rounded-lg shadow">
+                <div class="">
+                    <label for="year" class="block mb-2 text-sm font-medium whitespace-noWrap ">Year:</label>
+                    <select id="year" name="year" class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5">
+                        <option selected>Select</option>
+                        @foreach ($years as $yearVal)
+                        <option {{ date('Y') == $yearVal->year ? 'selected' : '' }} value="{{ $yearVal->year }}">
+                            {{ $yearVal->year }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                {{-- class --}}
+                <div class="">
+                    <label for="class" class="block mb-2 text-sm font-medium whitespace-noWrap ">Class:</label>
+                    <select id="class" name="class" class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5">
+                        <option selected>Select</option>
+                        @foreach ($classes as $class)
+                        <option value="{{ $class->class_name }}">{{ $class->class_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                {{-- group --}}
+                <div class="">
+                    <label for="group" class="block mb-2 text-sm font-medium whitespace-noWrap ">Group:</label>
+                    <select id="group" name="group" class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5">
+                        <option selected>Select</option>
+                    </select>
+                </div>
+
+                {{-- section --}}
+                <div class="">
+                    <label for="section" class="block mb-2 text-sm font-medium whitespace-noWrap ">Section:</label>
+                    <select id="section" name="section" class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5">
+                        <option selected>Select</option>
+                    </select>
+                </div>
+
+                {{-- Student Roll --}}
+                <div class="">
+                    <label for="student_roll" class="block mb-2 text-sm font-medium whitespace-noWrap ">Student Roll:</label>
+                    <div class="autocomplete w-full relative">
+                        <input type="text" name="student_roll" id="student_roll" placeholder="Search..." class="w-full py-2 px-4 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                        <div id="autocomplete-list" class="autocomplete-list hidden"></div>
+                    </div>
+                </div>
+
+                <button id="getPaySlipData" type="button" class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-auto">Load
+                    Data
+                </button>
+            </div>
+        </form>
+
+        {{-- table section --}}
+        <div class="mt-10">
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                    <thead class="text-xs uppercase bg-blue-600 text-white">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                <div class="flex items-center">
+                                    <input id="headerCheckbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                </div>
+                            </th>
+                            <th scope="col" class="px-6 py-3 bg-blue-500">
+                                SL
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Month
+                            </th>
+                            <th scope="col" class="px-16 py-3 bg-blue-500">
+                                PaySlip
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Amount
+                            </th>
+                            <th scope="col" class="px-6 py-3 bg-blue-500">
+
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="table_body">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-20 flex justify-between">
+                <div class="flex items-center">
+                    <input id="deleteCheckBox" name="deleteCheckBox" type="checkbox" value="" class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500  focus:ring-2 dark:bg-gray-700">
+                    <label for="deleteCheckBox" class="ml-1 text-sm font-medium text-gray-900 ">Delete</label>
+                </div>
+
+                <button id="deletePayslip" type="button" class="text-white  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-auto">Delete
+                </button>
+
+
+                <button id="PrintReadyBtn" type="button" class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-1.5 text-center">
+                    >>
+                </button>
+            </div>
+        </div>
     </div>
 
-    <div class="grid grid-cols-3 gap-5">
-        {{-- left section --}}
-        <div class="">
-            {{-- form --}}
-            <form action="{{ url('') }}" method="POST">
+
+    {{-- right section --}}
+    <div class=" col-span-2">
+
+        <div class="bg-gray-100 rounded-lg shadow  p-5">
+            <div class="w-full flex">
+                <button id="resetVoucher" type="button" class="text-white bg-gradient-to-br from-red-600 to-red-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-10 py-1.5 text-center ml-auto mb-3">
+                    Reset
+                </button>
+            </div>
+            <form action="{{ route('paySlipData.store', $school_code) }}" method="POST">
                 @csrf
-                <div class="font-bold">
-                    <h3>Student Information</h3>
-                </div>
-                <div class="border py-5 px-2 space-y-3 flex flex-col rounded-lg shadow">
-                    <div class="">
-                        <label for="year" class="block mb-2 text-sm font-medium whitespace-noWrap ">Year:</label>
-                        <select id="year" name="year"
-                            class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5">
-                            <option selected>Select</option>
-                            @foreach ($years as $yearVal)
-                                <option {{ date('Y') == $yearVal->year ? 'selected' : '' }} value="{{ $yearVal->year }}">
-                                    {{ $yearVal->year }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                <div class="flex justify-between">
+                    <div class="w-80 space-y-3">
+                        <div class="">
+                            <p class="text-sm font-medium text-gray-700 ">
+                                Voucher Number:
+                                <span id="voucher_id" class="text-lg font-bold"></span>
+                                <input type="text" class="hidden" name="voucher_number" id="voucher_number">
+                            </p>
+                        </div>
 
-                    {{-- class --}}
-                    <div class="">
-                        <label for="class" class="block mb-2 text-sm font-medium whitespace-noWrap ">Class
-                            :</label>
-                        <select id="class" name="class"
-                            class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5">
-                            <option selected>Select</option>
-                            @foreach ($classes as $class)
-                                <option value="{{ $class->class_name }}">{{ $class->class_name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                        <div class="flex items-center gap-3">
+                            <label for="collection_date" class="text-sm font-medium text-gray-600 ">Collention
+                                Date:</label>
+                            <input type="date" value="{{ date('Y-m-d') }}" name="collection_date" id="collection_date" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 " placeholder="student class" />
+                        </div>
 
-                    {{-- section --}}
-                    <div class="">
-                        <label for="section" class="block mb-2 text-sm font-medium whitespace-noWrap ">Section
-                            :</label>
-                        <select id="section" name="section"
-                            class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5">
-                            <option selected>Select</option>
-                        </select>
-                    </div>
-
-                    {{-- Student Roll --}}
-                    <div class="">
-                        <label for="student_roll" class="block mb-2 text-sm font-medium whitespace-noWrap ">Student Roll:
-                        </label>
-                        <div class="autocomplete w-full relative">
-                            <input type="text" name="student_roll" id="student_roll" placeholder="Search..."
-                                class="w-full py-2 px-4 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
-                            <div id="autocomplete-list" class="autocomplete-list hidden"></div>
+                        <div class="flex items-center gap-3">
+                            <label for="collect_amount" class="text-sm font-medium text-gray-600 ">Collection
+                                Amount:</label>
+                            <input type="text" value="" name="collect_amount" id="collect_amount" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 px-2" placeholder="amount" />
                         </div>
                     </div>
 
-                    <button id="getPaySlipData" type="button"
-                        class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-auto">Load
-                        Data
-                    </button>
+
+
+
+                    <div class="w-80 space-y-1.5">
+                        <div class="w-full flex justify-between gap-5">
+                            <div class="">
+                                <p class="text-sm font-medium text-gray-700 ">
+                                    S.ID:
+                                    <input id="printable_student_id" type="text" value="" name="printable_student_id" class="bg-transparent border-none focus:ring-0 h-0 w-fit" readonly>
+                                </p>
+                            </div>
+                            <div class="">
+                                <p class="text-sm font-medium text-gray-700 ">
+                                    Roll:
+                                    <span id="printable_student_roll" class=""></span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <p class="text-sm font-medium text-gray-700 ">
+                                Name:
+                                <span id="printable_student_name" class="font-bold"></span>
+                            </p>
+                        </div>
+
+                        <div class="w-full flex justify-between gap-5">
+                            <div class="">
+                                <p class="text-sm font-medium text-gray-700 ">
+                                    Class:
+                                    <span id="printable_student_class" class="font-bold"></span>
+                                </p>
+                            </div>
+                            <div class="">
+                                <p class="text-sm font-medium text-gray-700 ">
+                                    Group:
+                                    <span id="printable_student_group" class="font-bold"></span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <p class="text-sm font-medium text-gray-700 ">
+                                Mobile:
+                                <span id="printable_student_mobile" class="font-bold"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+                {{-- table section --}}
+                <div class="mt-10">
+                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
+                            <thead class="text-xs text-white uppercase bg-blue-600">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                                        SL
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        HEAD NAME
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                                        AMOUNT
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        WAIVER
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                                        PAYABLE
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Pre Due
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                                        Current Due
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 ">
+                                        Current Pay
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="payablePaySlips">
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="grid grid-cols-4 gap-5">
+                        <div class="mt-20 flex flex-wrap gap-5 col-span-3">
+                            <div class="">
+                                <label for="t_amount" class="mb-2 text-sm font-medium text-gray-600 ">T.
+                                    Amount:</label>
+                                <input type="text" value="" name="t_amount" id="t_amount" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full" placeholder="" readonly />
+                            </div>
+                            <div class="">
+                                <label for="t_waiver" class="mb-2 text-sm font-medium text-gray-600 ">T.
+                                    Waiver:</label>
+                                <input type="text" value="" name="t_waiver" id="t_waiver" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full" placeholder="" readonly />
+                            </div>
+                            <div class="">
+                                <label for="t_payable" class="mb-2 text-sm font-medium text-gray-600 ">T.
+                                    Payable:</label>
+                                <input type="text" value="" name="t_payable" id="t_payable" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full" placeholder="" readonly />
+                            </div>
+
+                            <div class="">
+                                <label for="t_current_pay" class="mb-2 text-sm font-medium text-gray-600 ">Total
+                                    Current
+                                    Pay:</label>
+                                <input type="number" value="0" name="t_current_pay" id="t_current_pay" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full" placeholder="" readonly />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="my-5 flex flex-col">
+                        <label class="font-semibold" for="">Note:</label>
+                        <textarea name="note" id="" cols="30" rows="4" class="rounded-lg w-96 p-2"></textarea>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <div class="">
+                            <label for="changed" class="mb-2 text-sm font-medium text-gray-600 ">Changed:</label>
+                            <input type="text" value="" name="changeAmount" id="changeAmount" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full px-1" placeholder="" />
+                        </div>
+                        <div class="mt-5">
+                            <input type="text" value="" name="returnAmount" id="returnAmount" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full px-1" placeholder="" />
+                        </div>
+                    </div>
+
+                    {{-- hidden inputs starts --}}
+                    <input class="hidden" type="text" name="collected_by_name" value="{{ isset($schoolAdminData->name) ? $schoolAdminData->name : 'Unknown' }}">
+                    <input class="hidden" type="text" name="collected_by_email" value="{{ isset($schoolAdminData->email) ? $schoolAdminData->email : 'Unknown' }}">
+                    <input class="hidden" type="text" name="collected_by_phone" value="{{ isset($schoolAdminData->mobile_number) ? $schoolAdminData->mobile_number : 'Unknown' }}">
+                    {{-- hidden inputs end --}}
+
+                    <div class="w-full grid grid-cols-3 items-center mt-10">
+                        <div></div>
+                        <button id="collect_fees" type="submit" class="w-fit mx-auto h-fit text-white hover:bg-gradient-to-bl focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">Collect
+                            Fees
+                        </button>
+
+                        <div class="w-full ml-auto flex justify-between">
+                            <div class="flex items-center gap-2">
+                                <label for="full_paid" class="ml-1 text-sm font-medium text-gray-900 ">Full
+                                    Paid</label>
+                                <input id="full_paid" name="full_paid" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 dark:bg-gray-700">
+                            </div>
+
+                            <div>
+                                <label for="print_page" class="block mb-2 text-sm font-medium whitespace-noWrap ">Print
+                                    Page
+                                    :</label>
+                                <select id="print_page" name="print_page" class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-32 p-1">
+                                    <option disabled selected>Select</option>
+                                    <option {{ $schoolInfo->number_of_print_page == 1 ? 'selected' : '' }} class="text-center" value="1">
+                                        One Page</option>
+                                    <option {{ $schoolInfo->number_of_print_page == 2 ? 'selected' : '' }} class="text-center" value="2">
+                                        Two Page</option>
+                                    <option {{ $schoolInfo->number_of_print_page == 3 ? 'selected' : '' }} class="text-center" value="3">
+                                        Three Page</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </form>
-
-            {{-- table section --}}
-            <div class="mt-10">
-                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                    <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-                        <thead class="text-xs uppercase bg-blue-600 text-white">
-                            <tr>
-                                <th scope="col" class="px-6 py-3">
-                                    <div class="flex items-center">
-                                        <input id="headerCheckbox" type="checkbox" value=""
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                    </div>
-                                </th>
-                                <th scope="col" class="px-6 py-3 bg-blue-500">
-                                    SL
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Month
-                                </th>
-                                <th scope="col" class="px-16 py-3 bg-blue-500">
-                                    PaySlip
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Amount
-                                </th>
-                                <th scope="col" class="px-6 py-3 bg-blue-500">
-
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody id="table_body">
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="mt-20 flex justify-between">
-                    <div class="flex items-center">
-                        <input id="deleteCheckBox" name="deleteCheckBox" type="checkbox" value=""
-                            class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500  focus:ring-2 dark:bg-gray-700">
-                        <label for="deleteCheckBox" class="ml-1 text-sm font-medium text-gray-900 ">Delete</label>
-                    </div>
-
-                    <button id="deletePayslip" type="button"
-                        class="text-white  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-auto">Delete
-                    </button>
-
-
-                    <button id="PrintReadyBtn" type="button"
-                        class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-1.5 text-center">
-                        >>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-
-        {{-- right section --}}
-        <div class=" col-span-2">
-
-            <div class="bg-gray-100 rounded-lg shadow  p-5">
-                <div class="w-full flex">
-                    <button id="resetVoucher" type="button"
-                        class="text-white bg-gradient-to-br from-red-600 to-red-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-10 py-1.5 text-center ml-auto mb-3">
-                        Reset
-                    </button>
-                </div>
-                <form action="{{ route('paySlipData.store', $school_code) }}" method="POST">
-                    @csrf
-                    <div class="flex justify-between">
-                        <div class="w-80 space-y-3">
-                            <div class="">
-                                <p class="text-sm font-medium text-gray-700 ">
-                                    Voucher Number:
-                                    <span id="voucher_id" class="text-lg font-bold"></span>
-                                    <input type="text" class="hidden" name="voucher_number" id="voucher_number">
-                                </p>
-                            </div>
-
-                            <div class="flex items-center gap-3">
-                                <label for="collection_date" class="text-sm font-medium text-gray-600 ">Collention
-                                    Date:</label>
-                                <input type="date" value="{{ date('Y-m-d') }}" name="collection_date"
-                                    id="collection_date"
-                                    class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 "
-                                    placeholder="student class" />
-                            </div>
-
-                            <div class="flex items-center gap-3">
-                                <label for="collect_amount" class="text-sm font-medium text-gray-600 ">Collection
-                                    Amount:</label>
-                                <input type="text" value="" name="collect_amount" id="collect_amount"
-                                    class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 px-2"
-                                    placeholder="amount" />
-                            </div>
-                        </div>
-
-
-
-
-                        <div class="w-80 space-y-1.5">
-                            <div class="w-full flex justify-between gap-5">
-                                <div class="">
-                                    <p class="text-sm font-medium text-gray-700 ">
-                                        S.ID:
-                                        <input id="printable_student_id" type="text" value=""
-                                            name="printable_student_id"
-                                            class="bg-transparent border-none focus:ring-0 h-0 w-fit" readonly>
-                                    </p>
-                                </div>
-                                <div class="">
-                                    <p class="text-sm font-medium text-gray-700 ">
-                                        Roll:
-                                        <span id="printable_student_roll" class=""></span>
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="">
-                                <p class="text-sm font-medium text-gray-700 ">
-                                    Name:
-                                    <span id="printable_student_name" class="font-bold"></span>
-                                </p>
-                            </div>
-
-                            <div class="w-full flex justify-between gap-5">
-                                <div class="">
-                                    <p class="text-sm font-medium text-gray-700 ">
-                                        Class:
-                                        <span id="printable_student_class" class="font-bold"></span>
-                                    </p>
-                                </div>
-                                <div class="">
-                                    <p class="text-sm font-medium text-gray-700 ">
-                                        Group:
-                                        <span id="printable_student_group" class="font-bold"></span>
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="">
-                                <p class="text-sm font-medium text-gray-700 ">
-                                    Mobile:
-                                    <span id="printable_student_mobile" class="font-bold"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    {{-- table section --}}
-                    <div class="mt-10">
-                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                            <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
-                                <thead class="text-xs text-white uppercase bg-blue-600">
-                                    <tr>
-                                        <th scope="col" class="px-6 py-3 bg-blue-500">
-                                            SL
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            HEAD NAME
-                                        </th>
-                                        <th scope="col" class="px-6 py-3 bg-blue-500">
-                                            AMOUNT
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            WAIVER
-                                        </th>
-                                        <th scope="col" class="px-6 py-3 bg-blue-500">
-                                            PAYABLE
-                                        </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Pre Due
-                                        </th>
-                                        <th scope="col" class="px-6 py-3 bg-blue-500">
-                                            Current Due
-                                        </th>
-                                        <th scope="col" class="px-6 py-3 ">
-                                            Current Pay
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody id="payablePaySlips">
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="grid grid-cols-4 gap-5">
-                            <div class="mt-20 flex flex-wrap gap-5 col-span-3">
-                                <div class="">
-                                    <label for="t_amount" class="mb-2 text-sm font-medium text-gray-600 ">T.
-                                        Amount:</label>
-                                    <input type="text" value="" name="t_amount" id="t_amount"
-                                        class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full"
-                                        placeholder="" readonly />
-                                </div>
-                                <div class="">
-                                    <label for="t_waiver" class="mb-2 text-sm font-medium text-gray-600 ">T.
-                                        Waiver:</label>
-                                    <input type="text" value="" name="t_waiver" id="t_waiver"
-                                        class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full"
-                                        placeholder="" readonly />
-                                </div>
-                                <div class="">
-                                    <label for="t_payable" class="mb-2 text-sm font-medium text-gray-600 ">T.
-                                        Payable:</label>
-                                    <input type="text" value="" name="t_payable" id="t_payable"
-                                        class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full"
-                                        placeholder="" readonly />
-                                </div>
-
-                                <div class="">
-                                    <label for="t_current_pay" class="mb-2 text-sm font-medium text-gray-600 ">Total
-                                        Current
-                                        Pay:</label>
-                                    <input type="number" value="0" name="t_current_pay" id="t_current_pay"
-                                        class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full"
-                                        placeholder="" readonly />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="my-5 flex flex-col">
-                            <label class="font-semibold" for="">Note:</label>
-                            <textarea name="note" id="" cols="30" rows="4" class="rounded-lg w-96 p-2"></textarea>
-                        </div>
-
-                        <div class="flex gap-3">
-                            <div class="">
-                                <label for="changed" class="mb-2 text-sm font-medium text-gray-600 ">Changed:</label>
-                                <input type="text" value="" name="changeAmount" id="changeAmount"
-                                    class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full px-1"
-                                    placeholder="" />
-                            </div>
-                            <div class="mt-5">
-                                <input type="text" value="" name="returnAmount" id="returnAmount"
-                                    class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full px-1"
-                                    placeholder="" />
-                            </div>
-                        </div>
-
-                        {{-- hidden inputs starts --}}
-                        <input class="hidden" type="text" name="collected_by_name"
-                            value="{{ isset($schoolAdminData->name) ? $schoolAdminData->name : 'Unknown' }}">
-                        <input class="hidden" type="text" name="collected_by_email"
-                            value="{{ isset($schoolAdminData->email) ? $schoolAdminData->email : 'Unknown' }}">
-                        <input class="hidden" type="text" name="collected_by_phone"
-                            value="{{ isset($schoolAdminData->mobile_number) ? $schoolAdminData->mobile_number : 'Unknown' }}">
-                        {{-- hidden inputs end --}}
-
-                        <div class="w-full grid grid-cols-3 items-center mt-10">
-                            <div></div>
-                            <button id="collect_fees" type="submit"
-                                class="w-fit mx-auto h-fit text-white hover:bg-gradient-to-bl focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">Collect
-                                Fees
-                            </button>
-
-                            <div class="w-full ml-auto flex justify-between">
-                                <div class="flex items-center gap-2">
-                                    <label for="full_paid" class="ml-1 text-sm font-medium text-gray-900 ">Full
-                                        Paid</label>
-                                    <input id="full_paid" name="full_paid" type="checkbox" value=""
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 dark:bg-gray-700">
-                                </div>
-
-                                <div>
-                                    <label for="print_page"
-                                        class="block mb-2 text-sm font-medium whitespace-noWrap ">Print
-                                        Page
-                                        :</label>
-                                    <select id="print_page" name="print_page"
-                                        class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-32 p-1">
-                                        <option disabled selected>Select</option>
-                                        <option {{ $schoolInfo->number_of_print_page == 1 ? 'selected' : '' }}
-                                            class="text-center" value="1">
-                                            One Page</option>
-                                        <option {{ $schoolInfo->number_of_print_page == 2 ? 'selected' : '' }}
-                                            class="text-center" value="2">
-                                            Two Page</option>
-                                        <option {{ $schoolInfo->number_of_print_page == 3 ? 'selected' : '' }}
-                                            class="text-center" value="3">
-                                            Three Page</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
         </div>
     </div>
+</div>
 @endsection
 
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        var schoolCode = {!! json_encode($school_code) !!};
+        const schoolCode = @json($school_code);
 
         const year = document.getElementById('year');
         const classId = document.getElementById('class');
+        const groupId = document.getElementById('group');
         const sectionId = document.getElementById('section');
         const getPaySlipData = document.getElementById('getPaySlipData');
         const student_roll = document.getElementById('student_roll');
@@ -430,22 +398,56 @@
         full_paid.checked = false;
         full_paid.disabled = true;
 
-        // get student information
-        classId.addEventListener('change', async (e) => {
+        // common function to get student info
+        async function getStudentInfo(className, groupName, sectionName) {
             try {
-                className = e.target.value;
                 const res = await fetch(
-                    `/dashboard/studentAccounts/paySlipCollection/getStudentRoll/${schoolCode}?class_name=${className}&year=${year.value}`
+                    `/dashboard/studentAccounts/paySlipCollection/getStudentRoll/${schoolCode}?class_name=${className}&group=${groupName}&section=${sectionName}&year=${year.value}`
                 )
                 if (!res.ok) throw new Error('Network response was not ok');
                 const data = await res.json();
+                UpdateGroupOption(data.group);
                 UpdateSectionOption(data.section);
                 UpdateStudentRoll(data.student_info)
             } catch (error) {
                 console.error('Error:', error);
             }
+        }
+
+        // get student information
+        classId.addEventListener('change', async (e) => {
+            const className = e.target.value;
+            getStudentInfo(className, groupId.value, sectionId.value);
         });
 
+        // get student info according to the section
+        groupId.addEventListener('change', async (e) => {
+            const groupName = e.target.value;
+            getStudentInfo(classId.value, groupName, sectionId.value);
+        });
+
+        // get student info according to the section
+        sectionId.addEventListener('change', async (e) => {
+            const sectionName = e.target.value;
+            getStudentInfo(classId.value, groupId.value, sectionName);
+        });
+
+
+        // update group options
+        function UpdateGroupOption(groups) {
+            groupId.innerHTML = "";
+            const defaultOption = document.createElement('option');
+            defaultOption.value = "Select";
+            defaultOption.textContent = "Select";
+            defaultOption.slected = true;
+            groupId.appendChild(defaultOption);
+            groups.forEach(group => {
+                const groupOption = document.createElement('option');
+                groupOption.value = group.group;
+                groupOption.textContent = group.group;
+                groupId.appendChild(groupOption);
+            });
+        };
 
 
         // update section options
@@ -475,7 +477,7 @@
                 const filteredData = students.filter(item =>
                     (item.name && item.name.toLowerCase().includes(inputValue)) ||
                     (item.student_roll && item.student_roll.toLowerCase().includes(inputValue)) ||
-                    (item.nedubd_student_id && item.nedubd_student_id.toLowerCase().includes(inputValue))
+                    (item.student_id && item.student_id.toLowerCase().includes(inputValue))
                 );
 
                 if (filteredData.length > 0) {
@@ -485,7 +487,7 @@
                         listItem.textContent = item.student_roll + " - " + item.name;
                         listItem.classList.add('autocomplete-list-item');
                         listItem.addEventListener('click', () => {
-                            inputField.value = item.nedubd_student_id;
+                            inputField.value = item.student_id;
                             autocompleteList.classList.add('hidden');
                         });
                         autocompleteList.appendChild(listItem);
@@ -504,7 +506,7 @@
                     listItem.textContent = item.student_roll + " - " + item.name;
                     listItem.classList.add('autocomplete-list-item');
                     listItem.addEventListener('click', () => {
-                        inputField.value = item.nedubd_student_id;
+                        inputField.value = item.student_id;
                         autocompleteList.classList.add('hidden');
                     });
                     autocompleteList.appendChild(listItem);
@@ -530,7 +532,7 @@
         async function getPaySlipDataFunction() {
             try {
                 const res = await fetch(
-                    `/dashboard/studentAccounts/paySlipCollection/studentWisePaySlips/${schoolCode}?class_name=${classId.value}&section=${sectionId.value}&student_id=${student_roll.value}&year=${year.value}`
+                    `/dashboard/studentAccounts/paySlipCollection/studentWisePaySlips/${schoolCode}?class_name=${classId.value}&group=${groupId.value}&section=${sectionId.value}&student_id=${student_roll.value}&year=${year.value}`
                 )
                 if (!res.ok) throw new Error('Network response was not ok');
                 const data = await res.json();
@@ -554,8 +556,8 @@
             // update table content
             data.paySlips.forEach(slip => {
                 const tr = document.createElement('tr');
-                tr.classList.add('odd:bg-white', 'odd:dark:bg-gray-900', 'even:bg-gray-50',
-                    'even:dark:bg-gray-800', 'border-b', 'dark:border-gray-700');
+                tr.classList.add('odd:bg-white', 'odd:dark:bg-gray-900', 'even:bg-gray-50'
+                    , 'even:dark:bg-gray-800', 'border-b', 'dark:border-gray-700');
 
                 // Create a new checkbox input element
                 const checkboxCell = document.createElement('td');
@@ -563,8 +565,8 @@
                 const checkbox = document.createElement('input');
                 checkbox.type = 'checkbox';
                 checkbox.name = `select_${slip.id}`
-                checkbox.classList.add('w-4', 'h-4', 'text-blue-600', 'bg-gray-100', 'border-gray-300',
-                    'rounded', 'focus:ring-blue-500')
+                checkbox.classList.add('w-4', 'h-4', 'text-blue-600', 'bg-gray-100', 'border-gray-300'
+                    , 'rounded', 'focus:ring-blue-500')
                 checkboxCell.appendChild(checkbox)
                 tr.appendChild(checkboxCell);
 
@@ -578,15 +580,15 @@
 
                 // create month_year column
                 const monthYearTD = document.createElement('td');
-                monthYearTD.classList.add("px-1", "py-4",
-                    'overflow-hidden')
+                monthYearTD.classList.add("px-1", "py-4"
+                    , 'overflow-hidden')
                 monthYearTD.style.maxWidth = "100px";
                 const monthYearInputBox = document.createElement('input');
                 monthYearInputBox.type = 'text'
                 monthYearInputBox.name = `input_month_year[${slip.student_id}]`;
                 monthYearInputBox.value = slip.month + "," + slip.year;
-                monthYearInputBox.classList.add('border-0', 'w-fit',
-                    'focus:ring-0')
+                monthYearInputBox.classList.add('border-0', 'w-fit'
+                    , 'focus:ring-0')
                 monthYearInputBox.readOnly = true;
                 monthYearTD.appendChild(monthYearInputBox);
                 tr.appendChild(monthYearTD);
@@ -594,8 +596,8 @@
 
                 // create Payslip Type column
                 const payslipTypeTD = document.createElement('td');
-                payslipTypeTD.classList.add("px-1", "py-4",
-                    'overflow-hidden')
+                payslipTypeTD.classList.add("px-1", "py-4"
+                    , 'overflow-hidden')
                 payslipTypeTD.style.maxWidth = "100px";
                 const payslipTypeInputBox = document.createElement('input');
                 payslipTypeInputBox.type = 'text'
@@ -609,8 +611,8 @@
 
                 // create Payslip Type column
                 const payableAmountTypeTD = document.createElement('td');
-                payableAmountTypeTD.classList.add("px-1", "py-4",
-                    'overflow-hidden')
+                payableAmountTypeTD.classList.add("px-1", "py-4"
+                    , 'overflow-hidden')
                 payableAmountTypeTD.style.maxWidth = "100px";
                 const payableAmountInputBox = document.createElement('input');
                 payableAmountInputBox.type = 'text'
@@ -675,8 +677,8 @@
                 deletePayslip.disabled = false;
                 deletePayslip.style.cursor = "pointer"
                 deletePayslip.classList.remove("bg-gray-500");
-                deletePayslip.classList.add("bg-gradient-to-br", "from-red-600", "to-red-500",
-                    "hover:bg-gradient-to-bl", "focus:ring-red-300");
+                deletePayslip.classList.add("bg-gradient-to-br", "from-red-600", "to-red-500"
+                    , "hover:bg-gradient-to-bl", "focus:ring-red-300");
             })
             let filteredPaySlipForDelete = [];
             deletePayslip.addEventListener("click", (event) => {
@@ -705,8 +707,8 @@
                 // again disable the delete funciton
                 deletePayslip.disabled = true;
                 deletePayslip.style.cursor = "not-allowed"
-                deletePayslip.classList.remove("bg-gradient-to-br", "from-red-600", "to-red-500",
-                    "hover:bg-gradient-to-bl", "focus:ring-red-300");
+                deletePayslip.classList.remove("bg-gradient-to-br", "from-red-600", "to-red-500"
+                    , "hover:bg-gradient-to-bl", "focus:ring-red-300");
                 deletePayslip.classList.add("bg-gray-500");
 
             });
@@ -728,7 +730,7 @@
                 // showing data in the UI
                 voucher_id.innerText = data.voucher_number;
                 voucher_number.value = data.voucher_number;
-                printable_student_id.value = data.student_information.nedubd_student_id;
+                printable_student_id.value = data.student_information.student_id;
                 printable_student_roll.innerText = data.student_information.student_roll;
                 printable_student_name.innerText = data.student_information.name;
                 printable_student_class.innerText = data.student_information.Class_name;
@@ -763,8 +765,8 @@
                 totalWaiver += slip.waiver;
                 totalPayable += slip.payable;
                 const tr = document.createElement('tr');
-                tr.classList.add('odd:bg-white', 'odd:dark:bg-gray-900', 'even:bg-gray-50',
-                    'even:dark:bg-gray-800', 'border-b', 'dark:border-gray-700');
+                tr.classList.add('odd:bg-white', 'odd:dark:bg-gray-900', 'even:bg-gray-50'
+                    , 'even:dark:bg-gray-800', 'border-b', 'dark:border-gray-700');
 
                 // create serial index column
                 const serialTD = document.createElement('td');
@@ -775,16 +777,16 @@
 
                 // create Payslip Type column
                 const payslipTypeNameTD = document.createElement('td');
-                payslipTypeNameTD.classList.add("px-1", "py-2",
-                    'overflow-hidden')
+                payslipTypeNameTD.classList.add("px-1", "py-2"
+                    , 'overflow-hidden')
                 payslipTypeNameTD.style.maxWidth = "160px";
                 const payslipTypeInputBox = document.createElement('input');
                 payslipTypeInputBox.type = 'text'
                 payslipTypeInputBox.name = `input_fee_type[${slip.id}]`;
                 payslipTypeInputBox.value = slip.pay_slip_type + " (" + slip.month + "," + slip.year +
                     ")";
-                payslipTypeInputBox.classList.add('border-0', 'w-fit',
-                    'focus:ring-0')
+                payslipTypeInputBox.classList.add('border-0', 'w-fit'
+                    , 'focus:ring-0')
                 payslipTypeInputBox.readOnly = true;
                 payslipTypeNameTD.appendChild(payslipTypeInputBox);
                 tr.appendChild(payslipTypeNameTD);
@@ -792,15 +794,15 @@
 
                 // create Payslip Amount column
                 const payslipAmountNameTD = document.createElement('td');
-                payslipAmountNameTD.classList.add("px-1", "py-2",
-                    'overflow-hidden')
+                payslipAmountNameTD.classList.add("px-1", "py-2"
+                    , 'overflow-hidden')
                 payslipAmountNameTD.style.maxWidth = "100px";
                 const payslipAmountInputBox = document.createElement('input');
                 payslipAmountInputBox.type = 'text'
                 payslipAmountInputBox.name = `input_payslip_amount[${slip.id}]`;
                 payslipAmountInputBox.value = slip.amount;
-                payslipAmountInputBox.classList.add('border-0', 'w-fit',
-                    'focus:ring-0')
+                payslipAmountInputBox.classList.add('border-0', 'w-fit'
+                    , 'focus:ring-0')
                 payslipAmountInputBox.readOnly = true;
                 payslipAmountNameTD.appendChild(payslipAmountInputBox);
                 tr.appendChild(payslipAmountNameTD);
@@ -808,8 +810,8 @@
 
                 // create Waiver column
                 const payslipWaiverTD = document.createElement('td');
-                payslipWaiverTD.classList.add("px-1", "py-2",
-                    'overflow-hidden')
+                payslipWaiverTD.classList.add("px-1", "py-2"
+                    , 'overflow-hidden')
                 payslipWaiverTD.style.width = "10px";
                 const payslipWaiverInputBox = document.createElement('input');
                 payslipWaiverInputBox.readOnly = slip.due_amount ? true : false;
@@ -826,15 +828,15 @@
 
                 // create Payable column
                 const payableAmountTD = document.createElement('td');
-                payableAmountTD.classList.add("px-1", "py-2",
-                    'overflow-hidden')
+                payableAmountTD.classList.add("px-1", "py-2"
+                    , 'overflow-hidden')
                 payableAmountTD.style.maxWidth = "100px";
                 const payableInputBox = document.createElement('input');
                 payableInputBox.type = 'text'
                 payableInputBox.name = `input_payable_amount[${slip.id}]`;
                 payableInputBox.value = slip.payable;
-                payableInputBox.classList.add('border-0', 'w-fit',
-                    'focus:ring-0')
+                payableInputBox.classList.add('border-0', 'w-fit'
+                    , 'focus:ring-0')
                 payableInputBox.readOnly = true;
                 payableAmountTD.appendChild(payableInputBox);
                 tr.appendChild(payableAmountTD);
@@ -842,32 +844,32 @@
 
                 // create previous Due Amount column
                 const previousDueAmountTD = document.createElement('td');
-                previousDueAmountTD.classList.add("px-1", "py-2",
-                    'overflow-hidden')
+                previousDueAmountTD.classList.add("px-1", "py-2"
+                    , 'overflow-hidden')
                 previousDueAmountTD.style.maxWidth = "80px";
                 const previousDueAmountInputBox = document.createElement('input');
                 previousDueAmountInputBox.style.width = "100%"
                 previousDueAmountInputBox.type = 'text'
                 previousDueAmountInputBox.name = `input_due_amount[${slip.id}]`;
                 previousDueAmountInputBox.value = slip.due_amount > 0 ? slip.due_amount : 0;
-                previousDueAmountInputBox.classList.add('border-0', 'w-fit',
-                    'focus:ring-0')
+                previousDueAmountInputBox.classList.add('border-0', 'w-fit'
+                    , 'focus:ring-0')
                 previousDueAmountInputBox.readOnly = true;
                 previousDueAmountTD.appendChild(previousDueAmountInputBox);
                 tr.appendChild(previousDueAmountTD);
 
                 // create current Due Amount column
                 const dueAmountTD = document.createElement('td');
-                dueAmountTD.classList.add("px-1", "py-2",
-                    'overflow-hidden')
+                dueAmountTD.classList.add("px-1", "py-2"
+                    , 'overflow-hidden')
                 dueAmountTD.style.maxWidth = "80px";
                 const dueAmountInputBox = document.createElement('input');
                 dueAmountInputBox.style.width = "100%"
                 dueAmountInputBox.type = 'text'
                 dueAmountInputBox.name = `input_due_amount[${slip.id}]`;
                 dueAmountInputBox.value = slip.due_amount > 0 ? slip.due_amount : slip.payable;
-                dueAmountInputBox.classList.add('border-0', 'w-fit',
-                    'focus:ring-0')
+                dueAmountInputBox.classList.add('border-0', 'w-fit'
+                    , 'focus:ring-0')
                 dueAmountInputBox.readOnly = true;
                 dueAmountTD.appendChild(dueAmountInputBox);
                 tr.appendChild(dueAmountTD);
@@ -907,8 +909,8 @@
                     // collect fees null initially
                     collect_fees.disabled = false;
                     collect_fees.style.cursor = "pointer"
-                    collect_fees.classList.add("bg-gradient-to-br", "from-blue-600",
-                        "to-blue-500", "focus:ring-blue-300");
+                    collect_fees.classList.add("bg-gradient-to-br", "from-blue-600"
+                        , "to-blue-500", "focus:ring-blue-300");
 
                     // make readonly the input field
                     collect_amount.readOnly = true;
@@ -979,8 +981,8 @@
                     // collect fees null initially
                     collect_fees.disabled = false;
                     collect_fees.style.cursor = "pointer"
-                    collect_fees.classList.add("bg-gradient-to-br", "from-blue-600",
-                        "to-blue-500", "focus:ring-blue-300");
+                    collect_fees.classList.add("bg-gradient-to-br", "from-blue-600"
+                        , "to-blue-500", "focus:ring-blue-300");
 
                     // make readonly the input field after enter the value once
                     collect_amount.readOnly = true;
@@ -1033,16 +1035,16 @@
                         collect_fees.disabled = false;
                         collect_fees.style.cursor = "pointer"
                         collect_fees.classList.remove("bg-gray-500");
-                        collect_fees.classList.add("bg-gradient-to-br", "from-blue-600",
-                            "to-blue-500",
-                            "hover:bg-gradient-to-bl", "focus:ring-blue-300");
+                        collect_fees.classList.add("bg-gradient-to-br", "from-blue-600"
+                            , "to-blue-500"
+                            , "hover:bg-gradient-to-bl", "focus:ring-blue-300");
                     } else {
                         collect_amount.value = "";
                         collect_fees.disabled = true;
                         collect_fees.style.cursor = "not-allowed"
-                        collect_fees.classList.remove("bg-gradient-to-br", "from-blue-600",
-                            "to-blue-500",
-                            "hover:bg-gradient-to-bl", "focus:ring-blue-300");
+                        collect_fees.classList.remove("bg-gradient-to-br", "from-blue-600"
+                            , "to-blue-500"
+                            , "hover:bg-gradient-to-bl", "focus:ring-blue-300");
                         collect_fees.classList.add("bg-gray-500");
                     }
                 });
@@ -1087,8 +1089,8 @@
             // collect fees null
             collect_fees.disabled = true;
             collect_fees.style.cursor = "not-allowed"
-            collect_fees.classList.remove("bg-gradient-to-br", "from-blue-600",
-                "to-blue-500", "focus:ring-blue-300");
+            collect_fees.classList.remove("bg-gradient-to-br", "from-blue-600"
+                , "to-blue-500", "focus:ring-blue-300");
             collect_fees.classList.add('bg-gray-500');
 
             // make readable the input field after click on the reset
@@ -1114,4 +1116,5 @@
             const data = await res.json();
         })
     })
+
 </script>

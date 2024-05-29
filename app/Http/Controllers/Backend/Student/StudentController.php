@@ -58,20 +58,16 @@ class StudentController extends Controller
     }
     public function addStudent(Request $request)
     {
-        // dd($request->all());
-
         $request->validate([
             'image' => 'file|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
         $imagePath = null;
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->move('images/student', $request->input('nedubd_student_id') . '_' . uniqid() . '.' . $request->file('image')->extension());
             $studentImage = 'images/student/' . basename($imagePath);
         }
 
-
-
-        // dd($studentImage);
 
         $isExist = Student::where('nedubd_student_id', $request->input('nedubd_student_id'))
             ->exists();
@@ -138,17 +134,32 @@ class StudentController extends Controller
         $student->action = $request->input('action');
         $student->save();
 
-        $payslipInfo = AddPaySlip::where('school_code', $request->input('school_code'))
-            ->where('class_name', 'play')
-            ->where('group_name', 'N/A')
-            ->select('class_name', 'group_name', 'pay_slip_type', DB::raw('SUM(fees_amount) as totalFeesAmount'))
-            ->groupBy('class_name', 'group_name', 'pay_slip_type')
-            ->get();
+        // add student fees
+        $add_related_fees = $request->input("add_related_fees");
+        if (isset($add_related_fees)) {
+            $payslipInfo = AddPaySlip::where('school_code', $request->input('school_code'))
+                ->where('class_name', 'play')
+                ->where('group_name', 'N/A')
+                ->select('class_name', 'group_name', 'pay_slip_type', DB::raw('SUM(fees_amount) as totalFeesAmount'))
+                ->groupBy('class_name', 'group_name', 'pay_slip_type')
+                ->get();
 
-        // dd($student);
+            return view('Backend.Student.NewAdmissionFeeGenerate', compact('payslipInfo', 'student'))->with('success', 'student added successfully!');
+        } else {
+            return redirect()->back()->with('success', 'student added successfully!');
+        }
+    }
 
-        return view('Backend.Student.AdmissionInvoice', compact('payslipInfo', 'student'))->with('success', 'student added successfully!');
-        // return redirect()->back()->with('success', 'student added successfully!');
+    function PrintAdmissionInvoice(Request $request, $student_id, $school_code)
+    {
+        $date = now();
+        $studentInfo = Student::where('school_code', $school_code)
+            ->where('action', 'approved')
+            ->where('id', $student_id)
+            ->select('student_id', 'name', 'Class_name', 'group', 'section', 'session')
+            ->first();
+
+        return view('Backend.Student.AdmissionConfirmInvoice', compact('date', 'studentInfo'));
     }
 
     public function addNewStudentFees(Request $request, $school_code)
@@ -163,14 +174,12 @@ class StudentController extends Controller
         $section = $request->input('section');
         $waiver = $request->input('waiver');
 
-        // dd($request->all());
-        // dd($waiver);
         foreach ($selectedPayslips as $pay_slip_type => $value) {
             GeneratePayslip::firstOrCreate(
                 [
-                    'student_id' => $student_id,
-                    'action' => 'approved',
                     'school_code' => $school_code,
+                    'action' => 'approved',
+                    'student_id' => $student_id,
                     'month' => $months[$pay_slip_type],
                     'year' => date('Y'),
                     'class' => $class,

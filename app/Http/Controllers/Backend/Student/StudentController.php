@@ -82,7 +82,7 @@ class StudentController extends Controller
         $student->nedubd_student_id = $request->input('nedubd_student_id');
         $student->student_id = $request->input('student_id') ?? $this->generateUniqueStudentId();
         $student->student_roll = $request->input('student_roll');
-        $student->Class_name = $request->input('Class_name');
+        $student->Class_name = $request->input('class_name');
         $student->group = $request->input('group');
         $student->section = $request->input('section');
         $student->shift = $request->input('shift');

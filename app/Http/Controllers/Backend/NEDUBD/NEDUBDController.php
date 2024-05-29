@@ -62,9 +62,10 @@ class NEDUBDController extends Controller
     {
         $latestSchoolInfo = SchoolInfo::latest()->first();
 
-        $schoolInfo=SchoolInfo::all();
+        $schoolInfos=SchoolInfo::all();
         $schoolCode = null;
        
+        
         if ($latestSchoolInfo) {
             $getSchoolCode = $latestSchoolInfo->school_code;
             $schoolCode = (int) $getSchoolCode + 1;
@@ -72,7 +73,7 @@ class NEDUBDController extends Controller
         else{
             $schoolCode = 10101;
         }
-        return view('Backend.NEDUBD.addSchoolInfo', compact('schoolCode'), ['schoolInfo'=>$schoolInfo]);
+        return view('Backend.NEDUBD.addSchoolInfo', compact('schoolCode'), ['schoolInfo'=>$schoolInfos]);
     }
 
 

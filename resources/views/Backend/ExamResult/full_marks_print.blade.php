@@ -80,22 +80,22 @@
 </div>
 <div id="content" class="container mx-auto px-4 py-8 space-y-10">
   
-  @foreach($schoolInfo as $schoolData)
+
        <div class="flex items-center justify-between  w-full px-5">
             <div>
-                <img src="{{asset($schoolData->logo)}}" alt="School Logo" class="pr-4 w-32" />
+                <img src="{{asset($schoolInfo->logo)}}" alt="School Logo" class="pr-4 w-32" />
             </div>
                 <div class="text-center">
-                    <h1 class="text-2xl font-bold ">{{$schoolData->school_name}}</h1>
-                    <p class="text-sm ">Contact: {{$schoolData->school_phone}}</p>
-                    <p class="text-sm ">Email: {{$schoolData->school_email}}</p>
-                    <p class="text-sm ">Website: {{$schoolData->website}}</p>
+                    <h1 class="text-2xl font-bold ">{{$schoolInfo->school_name}}</h1>
+                    <p class="text-sm ">Contact: {{$schoolInfo->school_phone}}</p>
+                    <p class="text-sm ">Email: {{$schoolInfo->school_email}}</p>
+                    <p class="text-sm ">Website: {{$schoolInfo->website}}</p>
                     <p class="text-sm ">Print date: {{$date}}</p>
             </div>
         <div>
         </div>
        </div>
-  @endforeach
+
        
        <div>
       <div class="grid grid-cols-12 ">

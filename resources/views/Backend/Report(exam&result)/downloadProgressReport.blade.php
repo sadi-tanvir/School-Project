@@ -14,8 +14,14 @@
 </head>
 
 <body class="bg-blue-100">
-    <div class=" bg-white w-[1500px] px-[120px] mx-auto" id="page">
-        <div class="grid grid-cols-3 w-full justify-between items-center p-5">
+    @foreach ($existingRecords as $data)
+    @foreach ($students as $studentData)
+
+    
+    <div class="mt-10">
+
+    <div class=" bg-white w-[1200px] px-[150px] mx-auto" id="page">
+        <div class="grid grid-cols-3 w-full justify-between items-center  pt-20">
             <div>
                 <img src="https://i.pinimg.com/originals/82/c6/5b/82c65b9bb0a75026fc4c82a438b4cc9b.jpg" class="rounded-full w-28 h-28" alt="">
             </div>
@@ -30,10 +36,10 @@
                 <div class="flex justify-center">
                     <img src="https://i.pinimg.com/originals/82/c6/5b/82c65b9bb0a75026fc4c82a438b4cc9b.jpg" class="rounded-full w-28 h-28" alt="">
                 </div>
-                <p class="font-bold font-semi-bold text-center text-xl">PROGRESS REPORT</p>
+                <p class="font-bold font-semi-bold text-center text-xl border-b-2 my-5 border-black">PROGRESS REPORT</p>
             </div>
 
-            <div class="mx-10 md:pl-20 text-sm text-center">
+            <div class="mx-5 md:pl-20 text-sm text-center">
                 <div class="grid grid-cols-3">
                     <div class=" col-span-1 ">Grade</div>
                     <div class=" p-1 col-span-1">Range</div>
@@ -71,73 +77,80 @@
             </div>
         </div>
         {{-- student info --}}
+        @foreach ($data as $key=>$exam)
+        @foreach ($studentData as $studentInfo)
         <div class="grid grid-cols-2">
             <div class="grid grid-cols-3  ">
                 <div class=" col-span-1 font-bold">Name of Student</div>
-                <div class=" p-1.5 col-span-2">:</div>
-                <div class="  col-span-1 font-bold">Father's Name</div>
-                <div class=" p-1.5 col-span-2">:</div>
+                <div class="  col-span-2">:
+                {{$studentInfo->name}}
+                </div>
+                <div class="pt-1  col-span-1 font-bold">Father's Name</div>
+                <div class="  col-span-2">:{{$studentInfo->father_name}}</div>
             </div>
         </div>
         <div class="grid grid-cols-2">
             <div class="grid grid-cols-3  ">
-                <div class=" col-span-1 font-bold">Mother's Name</div>
-                <div class=" p-1.5 col-span-2">:</div>
-                <div class=" col-span-1 font-bold">Student ID</div>
-                <div class=" p-1.5 col-span-2">:</div>
-                <div class=" col-span-1 font-bold">Roll No</div>
-                <div class=" p-1.5 col-span-2">:</div>
-                <div class="  col-span-1 font-bold">Class</div>
-                <div class=" p-1.5 col-span-2">:</div>
+                <div class="pt-1 col-span-1 font-bold">Mother's Name</div>
+                <div class="  col-span-2">:{{$studentInfo->mother_name}}</div>
+                <div class="pt-1 col-span-1 font-bold">Student ID</div>
+                <div class="  col-span-2">:{{$studentInfo->student_id}}</div>
+                <div class="pt-1 col-span-1 font-bold">Roll No</div>
+                <div class="  col-span-2">:{{$studentInfo->student_roll}}</div>
+                <div class=" pt-1 col-span-1 font-bold">Class</div>
+                <div class="  col-span-2">:{{$studentInfo->Class_name}}</div>
             </div>
             <div class="grid grid-cols-3  ">
                 <div class=" col-span-1 font-bold">Exam</div>
-                <div class="= p-1.5 col-span-2">:</div>
-                <div class="= col-span-1 font-bold">Year/Session</div>
-                <div class="= p-1.5 col-span-2">:</div>
-                <div class=" col-span-1 font-bold">Group</div>
-                <div class="= p-1.5 col-span-2">:</div>
-                <div class="= col-span-1 font-bold">Section</div>
-                <div class="= p-1.5 col-span-2">:</div>
+                <div class="col-span-2">:{{$exam->exam_name}}</div>
+                <div class="pt-1 col-span-1 font-bold">Year/Session</div>
+                <div class="  col-span-2">:{{$studentInfo->year}}</div>
+                <div class="pt-1 col-span-1 font-bold">Group</div>
+                <div class=" col-span-2">:{{$studentInfo->group}}</div>
+                <div class="pt-1 col-span-1 font-bold">Section</div>
+                <div class=" col-span-2">:{{$studentInfo->section}}</div>
             </div>
         </div>
+        @endforeach
+        @endforeach
 
+<table class="w-full text-sm text-left rtl:text-right text-black dark:text-blue-100 mt-10">
+        <thead class="text-xs uppercaseborder-b dark:text-white">
+    <tr>
+        <th scope="col" class="text-center py-1 border border-black ">SL</th>
+        <th scope="col" class="text-center py-1 border border-black">Name Of Subject</th>
+        <th scope="col" class="text-center py-1 border border-black">Full Marks</th>
+        <th scope="col" class="text-center py-1 border border-black">Highest Marks</th>
+        @foreach($shortCode as $short)
+        <th scope="col" class="text-center py-1 border border-black">{{$short->short_code}}</th>
+        @endforeach
+        <th scope="col" class="text-center py-1 border border-black">Total Marks</th>
+        <th scope="col" class="text-center py-2 border border-black">Letter Grade</th>
+        <th scope="col" class="text-center py-31 border border-black">Grade WR Point</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach ($data as $key=>$exam)
+    <tr>
+<td class="px-6 py-4 border border-black">{{$key+1}}</td>
+<td class="px-6 py-4 border border-black">{{$exam->subject}}</td>
+<td class="px-6 py-4 border border-black">{{$exam->full_marks}}</td>
+<td class="px-6 py-4 border border-black"></td>
+@php
+    $shortMarkss = json_decode($exam->short_marks, true); // Decode JSON into an associative array
+@endphp
 
-        <div class="grid grid-cols-8 mt-1 text-center font-bold">
-            <div class=" border-b border-l border-t  border-black p-1.5 "> SL</div>
-            <div class="border-l border-b border-t  border-black p-1.5 ">Name Of
-                Subjects</div>
-            <div class="border-l border-b border-t border-black p-1.5 ">Full
-                Marks</div>
-            <div class="border-l border-b border-t border-r border-black p-1.5 ">Highest
-                Marks</div>
-            <div class=" border-b border-t  border-black p-1.5 ">WR </div>
-            <div class="border-l border-b border-t  border-black p-1.5 ">Total
-                Marks</div>
-            <div class="border-l border-b border-t border-black p-1.5 ">Letter
-                Grade</div>
-            <div class="border-l border-b border-t border-r border-black p-1.5 ">Grade
-                WR Point</div>
+@foreach($shortMarkss as $short)
+    <td class="px-6 py-4 border border-black">{{$short}}</td>
+@endforeach
 
-            <div class=" border-b border-l   border-black p-1.5 "> </div>
-            <div class="border-l border-b   border-black p-1.5 "></div>
-            <div class="border-l border-b border-black p-1.5 "></div>
-            <div class="border-l border-b border-r border-black p-1.5 "></div>
-            <div class=" border-b  border-black p-1.5 "></div>
-            <div class="border-l border-b   border-black p-1.5 "></div>
-            <div class="border-l border-b border-black p-1.5 "></div>
-            <div class="border-l border-b  border-r border-black p-1.5 "></div>
-
-
-            <div class=" border-b border-l   border-black p-1.5 col-span-2">Total Exam Marks </div>
-            <div class="border-l border-b   border-black p-1.5 "></div>
-            <div class="border-l border-b border-black p-1.5 col-span-2"> Obtained Marks & GPA</div>
-            <div class="border-l border-b border-r border-black p-1.5 "></div>
-            <div class=" border-b  border-black p-1.5 "></div>
-            <div class="border-l border-b border-r  border-black p-1.5 "></div>
-
-        </div>
-
+<td class="px-6 py-4 border border-black">{{$exam->total_marks}}</td>
+<td class="px-6 py-4 border border-black">{{$exam->grade}}</td>
+<td class="px-6 py-4 border border-black">{{$exam->gpa}}</td>
+    </tr>
+    @endforeach
+    </tbody>
+</table>
 
         <div class="grid grid-cols-3 mt-10 text-center">
             <div class="grid grid-cols-2">
@@ -198,7 +211,9 @@
         </div>
 
     </div>
-
+    </div>
+    @endforeach   
+    @endforeach
     <div class="flex justify-center mt-10">
         <div class="mr-10">
 

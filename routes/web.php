@@ -192,8 +192,6 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/addSchoolInfo/{schoolCode}', [NEDUBDController::class, 'addSchoolInfo']);
     Route::post('/create-schoolInfo', [NEDUBDController::class, 'createSchoolInfo'])->name('schoolInfo.add');
 
-
-
     // student module
     Route::post('/create-student', [StudentController::class, 'addStudent'])->name('student.add');
     Route::get('/add-student/{schoolCode}', [StudentController::class, 'AddStudentForm'])->name('AddStudentForm');
@@ -203,7 +201,6 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
 
 
     //Update Student Basic Info
-
     Route::get('/updateStudentBasicInfo/{schoolCode}', [UpdateStudentBasicInfoController::class, 'updateStudentBasicInfo'])->name('updateStudentBasicInfo');
     Route::get('/getStudentData/{schoolCode}', [UpdateStudentBasicInfoController::class, 'getStudentData'])->name('getStudentData');
     Route::put('/updateData/{schoolCode}', [UpdateStudentBasicInfoController::class, 'updateStudentBasic'])->name('updateStudent');
@@ -222,7 +219,6 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::post('/class-info/get-shifts/{schoolCode}', [UpdateStudentClassInfoController::class, 'getShifts'])->name('class.info.get-shifts');
 
 
-
     //update student profile
     Route::get('/studentProfileUpdate/{schoolCode}', [StudentProfileUpdateController::class, 'studentProfileUpdate'])->name('studentProfileUpdate');
 
@@ -236,14 +232,11 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     //Update Student ->Add Student
     Route::get('/getStudent/{schoolCode}', [BasicAddStudentController::class, 'getStudent'])->name('getStudent');
 
-
     Route::post('/postStudent', [BasicAddStudentController::class, 'postStudent'])->name('postStudent');
     Route::post('/add-student/get-groups/{schoolCode}', [UpdateStudentClassInfoController::class, 'getGroups'])->name('add.student.get-groups');
     Route::post('/add-student/get-section/{schoolCode}', [UpdateStudentClassInfoController::class, 'getSections'])->name('add.student.get-sections');
     Route::post('/add-student/get-shift/{schoolCode}', [UpdateStudentClassInfoController::class, 'getShifts'])->name('add.student.get-shifts');
    
-
-
 
 
     //update student
@@ -456,6 +449,9 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::post('/exam_process/get-groups/{schoolCode}', [ExamProcessController::class, 'getGroups'])->name('exam_process.get-groups');
     Route::post('/exam_process/get-sections/{schoolCode}', [ExamProcessController::class, 'getSections'])->name('exam_process.get-sections');
     Route::post('/exam_process/get-student/{schoolCode}', [ExamProcessController::class, 'getStudent'])->name('exam_process.get-student');
+    Route::post('/exam_process/progress/{schoolCode}', [ExamProcessController::class, 'examProcess'])->name('exam_process');
+
+
     Route::get('/getStudents/{schoolCode}/{class}/{group}/{section}', [ExamProcessController::class, 'getStudents']);
     Route::get('/exam_excel/{schoolCode}', [ExamResultController::class, 'exam_excel']);
     Route::get('/exam_marks_delete/{schoolCode}', [ExamMarksDeleteController::class, 'exam_marks_delete']);
@@ -468,7 +464,9 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::post('/exam/get-groups/{schoolCode}', [ProgressReportController::class, 'getGroups'])->name('exam.get-groups');
     Route::post('/exam/get-sections/{schoolCode}', [ProgressReportController::class, 'getSections'])->name('exam.get-sections');
     Route::post('/exam/get-student/{schoolCode}', [ProgressReportController::class, 'getStudent'])->name('exam.get-student');
+    Route::get('/exam_process/progressStudent/{schoolCode}', [ProgressReportController::class, 'progressStudent'])->name('exam_progressStudent');
 
+    
     Route::get('/exam-failList/{schoolCode}', [ReportsExamsReportsController::class, 'failList1']);
     Route::get('/tebular-format1/{schoolCode}', [ReportsExamsReportsController::class, 'format1']);
     Route::get('/tebular-format2/{schoolCode}', [ReportsExamsReportsController::class, 'format2']);

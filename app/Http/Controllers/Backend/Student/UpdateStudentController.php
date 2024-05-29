@@ -100,7 +100,7 @@ class UpdateStudentController extends Controller
             $students->school_code = $request->input('school_code');
             $students->action = $request->input('action');
             $students->save();
->>>>>>> a1318c260b08f4509539783d24fcda86f7343400
+
 
       $student = null;
       $classes = AddClass::where("action", "approved")->where("school_code", $schoolCode)->get();

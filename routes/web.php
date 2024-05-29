@@ -196,6 +196,8 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
 
     // student module
     Route::post('/create-student', [StudentController::class, 'addStudent'])->name('student.add');
+    Route::post('/create-student/addFees/{schoolCode}', [StudentController::class, 'addNewStudentFees'])->name('student.add.fees');
+    Route::get('/create-student/printAdmissionInvoice/{student_id}/{schoolCode}', [StudentController::class, 'PrintAdmissionInvoice'])->name('student.invoice.print');
     Route::get('/add-student/{schoolCode}', [StudentController::class, 'AddStudentForm'])->name('AddStudentForm');
     Route::post('/add-students/get-groups/{schoolCode}', [StudentController::class, 'getGroups'])->name('add.get-groups');
     Route::post('/add-students/get-sections/{schoolCode}', [StudentController::class, 'getSections'])->name('add.get-sections');

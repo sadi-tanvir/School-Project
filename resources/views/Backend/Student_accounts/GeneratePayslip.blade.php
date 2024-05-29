@@ -38,7 +38,7 @@
             <form action="" method="GET">
                 {{-- <form action="{{ route('AllInformation.get', $school_code) }}" method="GET"> --}}
                 @csrf
-                <div class="grid grid-cols-12 items-center gap-5">
+                <div class="grid grid-cols-11 items-center gap-5">
                     {{-- month --}}
                     <div class="">
                         <label for="month" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Month
@@ -129,7 +129,7 @@
                     </div>
 
                     {{-- status --}}
-                    <div class="">
+                    {{-- <div class="">
                         <label for="status"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status:</label>
                         <select id="status" name="status"
@@ -138,7 +138,7 @@
                             <option value="New">New</option>
                             <option value="Old">Old</option>
                         </select>
-                    </div>
+                    </div> --}}
 
                     {{-- academic_year --}}
                     <div class="">

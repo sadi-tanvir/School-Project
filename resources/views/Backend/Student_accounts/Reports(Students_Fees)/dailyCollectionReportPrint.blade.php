@@ -88,9 +88,9 @@
                                     <th scope="col" class="px-6 py-3 bg-blue-500">
                                         CLASS NAME
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                                    {{-- <th scope="col" class="px-6 py-3 bg-blue-500">
                                         MONTH NAME
-                                    </th>
+                                    </th> --}}
                                     <th scope="col" class="px-6 py-3 bg-blue-500">
                                         AMOUNT
                                     </th>
@@ -118,11 +118,11 @@
                                         <td class="px-6 py-4">
                                             {{ $payslip->class }}
                                         </td>
-                                        <td class="px-6 py-4">
+                                        {{-- <td class="px-6 py-4">
                                             {{ $payslip->month }}
-                                        </td>
+                                        </td> --}}
                                         <td class="px-6 py-4">
-                                            {{ $payslip->paid_amount }}
+                                            {{ $payslip->total_paid }}
                                         </td>
                                         <td class="px-6 py-4">
                                             {{ $payslip->collected_by_name }}
@@ -139,8 +139,8 @@
                                     </td>
                                     <td class="px-6 py-4">
                                     </td>
-                                    <td class="px-6 py-4">
-                                    </td>
+                                    {{-- <td class="px-6 py-4">
+                                    </td> --}}
                                     <td class="px-6 py-4 font-bold text-lg">
                                         Total =
                                     </td>

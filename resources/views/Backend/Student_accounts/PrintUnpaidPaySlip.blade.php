@@ -347,7 +347,7 @@
                 const filteredData = students.filter(item =>
                     (item.name && item.name.toLowerCase().includes(inputValue)) ||
                     (item.student_roll && item.student_roll.toLowerCase().includes(inputValue)) ||
-                    (item.nedubd_student_id && item.nedubd_student_id.toLowerCase().includes(inputValue))
+                    (item.student_id && item.student_id.toLowerCase().includes(inputValue))
                 );
 
                 if (filteredData.length > 0) {
@@ -357,7 +357,7 @@
                         listItem.textContent = item.student_roll + " - " + item.name;
                         listItem.classList.add('autocomplete-list-item');
                         listItem.addEventListener('click', () => {
-                            student_roll.value = item.nedubd_student_id;
+                            student_roll.value = item.student_id;
                             autocompleteList.classList.add('hidden');
 
                             // Manually trigger input event
@@ -382,7 +382,7 @@
                     listItem.textContent = item.student_roll + " - " + item.name;
                     listItem.classList.add('autocomplete-list-item');
                     listItem.addEventListener('click', () => {
-                        student_roll.value = item.nedubd_student_id;
+                        student_roll.value = item.student_id;
                         autocompleteList.classList.add('hidden');
 
                         // Manually trigger input event

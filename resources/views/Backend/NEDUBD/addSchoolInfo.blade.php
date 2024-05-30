@@ -94,56 +94,7 @@ School Info
 
 
 
-<!-- all school table  -->
 
-
-
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-5">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50  ">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    School Name
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Email
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Mobile Number
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    School Code
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Action
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            
-                @foreach($schoolInfo as $school)
-                <tr class="odd:bg-white  even:bg-gray-50  border-b ">
-                <td class="px-6 py-4">
-                    {{$school->school_name}}
-                </td>
-                <td class="px-6 py-4">
-                    {{$school->school_email}}
-                </td>
-                <td class="px-6 py-4">
-                   {{ $school->mobile_number}}
-                </td>
-                <td class="px-6 py-4">
-                   {{ $school->school_code}}
-                </td>
-                <td class="px-6 py-4">
-                    <button>Update</button>
-                </td>
-                </tr>
-                @endforeach
-                
-                
-                
-</div>
 
 
 

@@ -17,10 +17,25 @@ Excel Import Student Exam data
     <div class="card-body min-h-500 border border-primary w-4/6 mx-auto p-5">
         <div class="grid grid-cols-3 gap-10 w-5/6 mx-auto">
             <div class="mr-5">
-
+                 <label for="class" class="text-gray-700 text-xl">Class:</label>
                 <select id="class_name" name="class_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
 
                     <option disabled selected>Choose a class</option>
+                     <option value="1">Play</option>
+                    <option value="2">Nursery</option>
+                    <option value="3">KG</option>
+                    <option value="4">One</option>
+                    <option value="5">Two</option>
+                    <option value="6">Three</option>
+                    <option value="7">Four</option>
+                    <option value="8">Five</option>
+                    <option value="9">Six</option>
+                    <option value="10">Seven</option>
+                    <option value="11">Eight</option>
+                    <option value="12">Nine</option>
+                    <option value="13">Ten</option>
+                    <option value="14">all inactive</option>
+                    <option value="15">Pre Play</option>
                     
                 </select>
             </div>

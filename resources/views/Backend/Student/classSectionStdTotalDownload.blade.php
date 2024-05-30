@@ -22,24 +22,18 @@
 
 <body>
     <div class=" md:w-[1500px] px-[120px] mx-auto" id="page">
-        <div class=" p-5">
-            @foreach($schoolInfo as $schoolData)
-            <div class=" flex justify-center ">
-                <img src="{{ asset($schoolData->logo) }}" alt="School Logo" class="w-[200px] h-[200px]" />
-            </div>
-            <div class="md:flex justify-center  w-full px-5">
-                <div class="text-center">
-                    <h1 class="text-2xl font-bold ">{{$schoolData->school_name}}</h1>
-                    <p class="text-sm ">Contact: {{$schoolData->school_phone}}</p>
-                    <p class="text-sm ">Email: {{$schoolData->school_email}}</p>
-                    <p class="text-sm ">Website: {{$schoolData->website}}</p>
-                    <p class="text-sm ">Print date: {{$date}}</p>
-                </div>
-                <!-- <div>
-                </div> -->
-            </div>
-            @endforeach
-
+        <div>
+            <img class="w-20" src="{{asset($schoolInfo->logo)}}" alt="School Logo">
+        </div>
+        <div class="text-center">
+            <h3 class="text-2xl text-blue-400 font-bold">{{$schoolInfo->school_name}}</h3>
+            <p class="text-sm">{{$schoolInfo->address}} <br>
+                Contact No: {{$schoolInfo->mobile_number}} <br>
+                Email: {{$schoolInfo->school_email}} <br>
+                Website:{{$schoolInfo->website}}<br>
+                <span class="text-red-500"> Print date:{{$date}}</span>
+            </p>
+            <p class="font-bold font-semi-bold text-center text-xl">Student Information</p>
         </div>
         <p class="font-bold font-semi-bold text-center text-xl">Student Total Summary</p>
         <div>
@@ -79,148 +73,148 @@
                             </thead>
                             <tbody>
                                 @php
-                                $stu=0;
+                                    $stu = 0;
                                 @endphp
 
-                                @if($class===null)
-                                @foreach($classes as $key => $class)
-                                <tr class="border table_row">
-                                    <td class="min-w-16 max-w-32 p-3 font-medium">{{ $key + 1 }}</td>
-                                    <td class="min-w-16 max-w-32 p-3 font-medium">{{ $class->class_name }}</td>
-                                    @php
-                                    $sec = $sections->where('class_name', $class->class_name)->where('school_code',$school_code);
-                                    $groupData = $groups->where('class_name', $class->class_name)->where('school_code',$school_code);
+                                @if($class === null)
+                                                            @foreach($classes as $key => $class)
+                                                                                        <tr class="border table_row">
+                                                                                            <td class="min-w-16 max-w-32 p-3 font-medium">{{ $key + 1 }}</td>
+                                                                                            <td class="min-w-16 max-w-32 p-3 font-medium">{{ $class->class_name }}</td>
+                                                                                            @php
+                                                                                                $sec = $sections->where('class_name', $class->class_name)->where('school_code', $school_code);
+                                                                                                $groupData = $groups->where('class_name', $class->class_name)->where('school_code', $school_code);
 
-                                    $totalStudents = 0;
-                                    $totalGroup=0;
+                                                                                                $totalStudents = 0;
+                                                                                                $totalGroup = 0;
 
 
-                                    @endphp
-                                    <td class="min-w-16 max-w-32 p-3 font-medium">
-                                        @foreach($sec as $data)
-                                        <div>
-                                            {{$data->section_name}}
-                                        </div>
-                                        @endforeach
+                                                                                            @endphp
+                                                                                            <td class="min-w-16 max-w-32 p-3 font-medium">
+                                                                                                @foreach($sec as $data)
+                                                                                                    <div>
+                                                                                                        {{$data->section_name}}
+                                                                                                    </div>
+                                                                                                @endforeach
 
-                                    </td>
-                                    <td class="min-w-16 max-w-32 p-3 font-medium">
-                                        @foreach($sec as $data)
-                                        <div class="">
-                                            @php
-                                            $sectionStudents = $students->where('Class_name', $class->class_name)->where('section', $data->section_name);
-                                            $sectionStudentCount = $sectionStudents->count();
-                                            $totalStudents =$totalStudents+ $sectionStudentCount;
-                                            @endphp
-                                            {{ $sectionStudentCount }}
-                                        </div>
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        @foreach($groupData as $data)
-                                        <div>
-                                            {{$data->group_name}}
-                                        </div>
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        @foreach($groupData as $group)
-                                        <div>
-                                            @php
-                                            $groupStudents = $students->where('Class_name', $class->class_name)->where('group', $group->group_name);
+                                                                                            </td>
+                                                                                            <td class="min-w-16 max-w-32 p-3 font-medium">
+                                                                                                @foreach($sec as $data)
+                                                                                                                                <div class="">
+                                                                                                                                    @php
+                                                                                                                                        $sectionStudents = $students->where('Class_name', $class->class_name)->where('section', $data->section_name);
+                                                                                                                                        $sectionStudentCount = $sectionStudents->count();
+                                                                                                                                        $totalStudents = $totalStudents + $sectionStudentCount;
+                                                                                                                                    @endphp
+                                                                                                                                    {{ $sectionStudentCount }}
+                                                                                                                                </div>
+                                                                                                @endforeach
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                @foreach($groupData as $data)
+                                                                                                    <div>
+                                                                                                        {{$data->group_name}}
+                                                                                                    </div>
+                                                                                                @endforeach
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                @foreach($groupData as $group)
+                                                                                                                                <div>
+                                                                                                                                    @php
+                                                                                                                                        $groupStudents = $students->where('Class_name', $class->class_name)->where('group', $group->group_name);
 
-                                            $groupStudentCount = $groupStudents->count();
+                                                                                                                                        $groupStudentCount = $groupStudents->count();
 
-                                            $totalGroup =$totalGroup+ $groupStudentCount;
-                                            @endphp
-                                            {{ $groupStudentCount }}
-                                        </div>
-                                        @endforeach
-                                    </td>
-                                    <td class="min-w-16 max-w-32 p-3 font-medium">
+                                                                                                                                        $totalGroup = $totalGroup + $groupStudentCount;
+                                                                                                                                    @endphp
+                                                                                                                                    {{ $groupStudentCount }}
+                                                                                                                                </div>
+                                                                                                @endforeach
+                                                                                            </td>
+                                                                                            <td class="min-w-16 max-w-32 p-3 font-medium">
 
-                                        {{$totalGroup}}
+                                                                                                {{$totalGroup}}
 
-                                    </td>
+                                                                                            </td>
 
-                                    @php
-                                    $stu=$stu+$totalGroup;
+                                                                                            @php
+                                                                                                $stu = $stu + $totalGroup;
 
-                                    @endphp
+                                                                                            @endphp
 
-                                </tr>
+                                                                                        </tr>
 
-                                @endforeach
+                                                            @endforeach
                                 @else
 
-                                @foreach($classData as $key => $class)
-                                <tr class="border table_row">
-                                    <td class="min-w-16 max-w-32 p-3 font-medium">{{ $key + 1 }}</td>
-                                    <td class="min-w-16 max-w-32 p-3 font-medium">{{ $class->class_name }}</td>
-                                    @php
-                                    $sec = $sections->where('class_name', $class->class_name)->where('school_code',$school_code);
-                                    $groupData = $groups->where('class_name', $class->class_name)->where('school_code',$school_code);
+                                                            @foreach($classData as $key => $class)
+                                                                                        <tr class="border table_row">
+                                                                                            <td class="min-w-16 max-w-32 p-3 font-medium">{{ $key + 1 }}</td>
+                                                                                            <td class="min-w-16 max-w-32 p-3 font-medium">{{ $class->class_name }}</td>
+                                                                                            @php
+                                                                                                $sec = $sections->where('class_name', $class->class_name)->where('school_code', $school_code);
+                                                                                                $groupData = $groups->where('class_name', $class->class_name)->where('school_code', $school_code);
 
-                                    $totalStudents = 0;
-                                    $totalGroup=0;
+                                                                                                $totalStudents = 0;
+                                                                                                $totalGroup = 0;
 
 
-                                    @endphp
-                                    <td class="min-w-16 max-w-32 p-3 font-medium">
-                                        @foreach($sec as $data)
-                                        <div>
-                                            {{$data->section_name}}
-                                        </div>
-                                        @endforeach
+                                                                                            @endphp
+                                                                                            <td class="min-w-16 max-w-32 p-3 font-medium">
+                                                                                                @foreach($sec as $data)
+                                                                                                    <div>
+                                                                                                        {{$data->section_name}}
+                                                                                                    </div>
+                                                                                                @endforeach
 
-                                    </td>
-                                    <td class="min-w-16 max-w-32 p-3 font-medium">
-                                        @foreach($sec as $data)
-                                        <div class="">
-                                            @php
-                                            $sectionStudents = $students->where('Class_name', $class->class_name)->where('section', $data->section_name);
-                                            $sectionStudentCount = $sectionStudents->count();
-                                            $totalStudents =$totalStudents+ $sectionStudentCount;
-                                            @endphp
-                                            {{ $sectionStudentCount }}
-                                        </div>
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        @foreach($groupData as $data)
-                                        <div>
-                                            {{$data->group_name}}
-                                        </div>
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        @foreach($groupData as $group)
-                                        <div>
-                                            @php
-                                            $groupStudents = $students->where('Class_name', $class->class_name)->where('group', $group->group_name);
+                                                                                            </td>
+                                                                                            <td class="min-w-16 max-w-32 p-3 font-medium">
+                                                                                                @foreach($sec as $data)
+                                                                                                                                <div class="">
+                                                                                                                                    @php
+                                                                                                                                        $sectionStudents = $students->where('Class_name', $class->class_name)->where('section', $data->section_name);
+                                                                                                                                        $sectionStudentCount = $sectionStudents->count();
+                                                                                                                                        $totalStudents = $totalStudents + $sectionStudentCount;
+                                                                                                                                    @endphp
+                                                                                                                                    {{ $sectionStudentCount }}
+                                                                                                                                </div>
+                                                                                                @endforeach
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                @foreach($groupData as $data)
+                                                                                                    <div>
+                                                                                                        {{$data->group_name}}
+                                                                                                    </div>
+                                                                                                @endforeach
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                @foreach($groupData as $group)
+                                                                                                                                <div>
+                                                                                                                                    @php
+                                                                                                                                        $groupStudents = $students->where('Class_name', $class->class_name)->where('group', $group->group_name);
 
-                                            $groupStudentCount = $groupStudents->count();
+                                                                                                                                        $groupStudentCount = $groupStudents->count();
 
-                                            $totalGroup =$totalGroup+ $groupStudentCount;
-                                            @endphp
-                                            {{ $groupStudentCount }}
-                                        </div>
-                                        @endforeach
-                                    </td>
-                                    <td class="min-w-16 max-w-32 p-3 font-medium">
+                                                                                                                                        $totalGroup = $totalGroup + $groupStudentCount;
+                                                                                                                                    @endphp
+                                                                                                                                    {{ $groupStudentCount }}
+                                                                                                                                </div>
+                                                                                                @endforeach
+                                                                                            </td>
+                                                                                            <td class="min-w-16 max-w-32 p-3 font-medium">
 
-                                        {{$totalGroup}}
+                                                                                                {{$totalGroup}}
 
-                                    </td>
+                                                                                            </td>
 
-                                    @php
-                                    $stu=$stu+$totalGroup;
+                                                                                            @php
+                                                                                                $stu = $stu + $totalGroup;
 
-                                    @endphp
+                                                                                            @endphp
 
-                                </tr>
+                                                                                        </tr>
 
-                                @endforeach
+                                                            @endforeach
 
                                 @endif
 
@@ -245,13 +239,14 @@
 
 
 
-        <button id="btn" type="button" class="text-white bg-rose-700 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Download</button>
+        <button id="btn" type="button"
+            class="text-white bg-rose-700 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Download</button>
     </div>
     <script>
         let btn = document.getElementById('btn');
         let page = document.getElementById('page');
 
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             html2PDF(page, {
                 jsPDF: {
                     format: 'a4',

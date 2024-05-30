@@ -270,20 +270,7 @@
 </div>
 
 
-    <div class="md:flex justify-start ml-10 mt-10">
-        <div class="">
-            <button type="button"
-                class="  text-white bg-rose-600 hover:bg-rose-600 focus:ring-4 focus:ring-rose-600 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2   focus:outline-none ">
-                Download excel
-            </button>
-        </div>
-        <div class="">
-            <button type="button"
-                class="  text-white bg-blue-700 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  focus:outline-none ">
-                Report Print
-            </button>
-        </div>
-    </div>
+   
 
 </form>
 

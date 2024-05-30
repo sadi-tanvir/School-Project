@@ -182,6 +182,7 @@ Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::get('/logout', [AuthController::class, 'logout']);
 Route::get('/login-user', [AuthController::class, 'loginUser'])->name('login-user');
 
+Route::get('/student-fees-info/{schoolCode}/{studentId}/{invoiceId}', [PaySlipCollectionController::class, 'FeesInfoWithQRCode'])->name('studentFeesInfo.QRCode');
 
 
 Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {

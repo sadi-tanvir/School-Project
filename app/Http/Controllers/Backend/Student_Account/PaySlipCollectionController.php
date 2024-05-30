@@ -12,6 +12,8 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Support\Facades\DB;
 
 class PaySlipCollectionController extends Controller
 {
@@ -153,14 +155,27 @@ class PaySlipCollectionController extends Controller
         ]);
     }
 
+    public function generateQrCode($school_code, $studentId, $invoiceId)
+    {
+        $invoice = explode('#', $invoiceId);
+        $invoiceId = $invoice[1];
+        // $qrCode = QrCode::size(60)->generate('http://127.0.0.1:8000/student-fees-info/' . $school_code . '/' . $studentId . '/' . $invoiceId);
+        $qrCode = QrCode::size(60)->generate('https://cms.nedubd.com/student-fees-info/' . $school_code . '/' . $studentId . '/' . $invoiceId);
+        return $qrCode;
+    }
 
     public function StorePaySlipData(Request $request, $school_code)
     {
+        $voucher_number = $request->input('voucher_number');
+        $printable_student_id = $request->input('printable_student_id');
+
+        // generte QR-Code
+        $qrcode = $this->generateQrCode($school_code, $printable_student_id, $voucher_number);
+
         $note = $request->input('note');
         $collected_by_name = $request->input('collected_by_name');
         $collected_by_email = $request->input('collected_by_email');
         $collected_by_phone = $request->input('collected_by_phone');
-        $printable_student_id = $request->input('printable_student_id');
         $school_info = SchoolInfo::where('school_code', $school_code)->first();
         $student_info = Student::where('school_code', $school_code)
             ->where('action', 'approved')
@@ -170,7 +185,6 @@ class PaySlipCollectionController extends Controller
 
         // dd($student_info, $request->all());
         $collection_date = $request->input('collection_date');
-        $voucher_number = $request->input('voucher_number');
         $total_waiver = $request->input('t_waiver');
         $total_payable = $request->input('t_payable');
         $total_amount = $request->input('t_amount');
@@ -233,7 +247,32 @@ class PaySlipCollectionController extends Controller
                 'note',
                 'totalCurrentPay',
                 'collected_by_name',
+                'qrcode'
             )
         );
+    }
+
+
+    // student fees info with QR code
+    public function FeesInfoWithQRCode(Request $request)
+    {
+        $school_code = $request->schoolCode;
+        $invoiceId = $request->invoiceId;
+        $studentId = $request->studentId;
+        $pay_slips = GeneratePayslip::where('school_code', $school_code)
+            ->where('voucher_number', '#' . $invoiceId)
+            ->get();
+        $aggregateAmounts = GeneratePayslip::where('school_code', $school_code)
+            ->where('voucher_number', '#' . $invoiceId)
+            ->select('voucher_number', DB::raw('SUM(payable) as total_payable'), DB::raw('SUM(paid_amount) as total_paid'), DB::raw('SUM(amount) as total_amount'), DB::raw('SUM(waiver) as total_waiver'), DB::raw('SUM(due_amount) as total_due_amount'))
+            ->groupBy('voucher_number')
+            ->first();
+
+        $studentInfo = Student::where('school_code', $school_code)
+            ->where('student_id', $studentId)
+            ->select('name', 'year', 'student_id', 'Class_name', 'group', 'section', 'student_roll')
+            ->first();
+
+        return view('Backend.Student_accounts.QRCodePaySlipInvoice', compact('pay_slips', 'aggregateAmounts', 'studentInfo'));
     }
 }

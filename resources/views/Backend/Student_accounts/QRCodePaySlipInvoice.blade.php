@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Fees Information</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
@@ -24,9 +24,10 @@
                 <div class="flex justify-between items-center border-b-2 border-gray-600 px-2 text-[10px]">
                     <img src="https://cms.nedubd.com/logo/graduation.png" class="w-12" alt="">
                     <div class="text-center">
-                        <h1>N/A</h1>
+                        <h1 class="font-bold text-md sm:text-xl">{{$schoolInfo->school_name}}</h1>
+                        <h1 class="text-xs">N/A</h1>
                     </div>
-                    <p>Student Copy</p>
+                    <p class="text-xs">Student Copy</p>
                 </div>
                 <div class="text-center my-3">
                     <span class="border-b-2 px-2 font-semibold border-gray-600 text-[12px]">Money Receipt</span>

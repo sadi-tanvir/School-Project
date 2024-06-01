@@ -18,8 +18,8 @@ Student Invoice
                 <div class="grid grid-cols-3 gap-10 mt-10">
                     <div></div>
                     <h1 class="text-3xl font-bold text-gray-700 mb-5">Student Inforamation</h1>
-                    <div>
-                        <a href="{{route("student.invoice.print",['student_id' => $student->id, 'schoolCode' =>  $school_code])}}" target="_blank" class="text-white bg-gradient-to-br from-cyan-600 to-cyan-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-14 py-2 text-center">
+                    <div class="mt-3 ml-auto">
+                        <a href="{{route("student.invoice.print",['student_id' => $student->id, 'schoolCode' =>  $school_code])}}" target="_blank" class="text-white bg-gradient-to-br from-sky-600 to-sky-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-14 py-2 text-center">
                             Print
                         </a>
                     </div>
@@ -103,6 +103,10 @@ Student Invoice
             <input class="hidden" name="class" value="{{ $student->Class_name }}" />
             <input class="hidden" name="group" value="{{ isset($student->group) ? $student->group : "N/A"}}" />
             <input class="hidden" name="section" value="{{ isset($student->section) ? $student->section : "N/A"}}" />
+            <input class="hidden" type="text" name="collected_by_name" value="{{ isset($schoolAdminData->name) ? $schoolAdminData->name : 'Unknown' }}">
+            <input class="hidden" type="text" name="collected_by_email" value="{{ isset($schoolAdminData->email) ? $schoolAdminData->email : 'Unknown' }}">
+            <input class="hidden" type="text" name="collected_by_phone" value="{{ isset($schoolAdminData->mobile_number) ? $schoolAdminData->mobile_number : 'Unknown' }}">
+            <input class="hidden" type="date" value="{{ date('Y-m-d') }}" name="collection_date" id="collection_date" />
 
             {{-- bottom section --}}
             <div class="">
@@ -110,8 +114,14 @@ Student Invoice
                     <button type="submit" class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-20 py-2.5 text-center">
                         Save
                     </button>
+
+                    <div class="flex items-center gap-2">
+                        <input checked id="pay_now" name="pay_now" type="checkbox" value="true" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 dark:bg-gray-700">
+                        <label for="pay_now" class="text-md font-medium text-gray-900">Pay Now</label>
+                    </div>
+
+                    {{-- last pay date --}}
                     <div class="flex items-center">
-                        {{-- last pay date --}}
                         <div class="mb-4">
                             <label for="last_pay_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Pay Date:</label>
                             <input type="date" value="{{ date('Y-m-d') }}" name="last_pay_date" id="last_pay_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full" placeholder="" />

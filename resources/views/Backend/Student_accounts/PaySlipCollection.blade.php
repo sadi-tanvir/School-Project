@@ -46,7 +46,7 @@ Fees Collection
 <div>
     <h1>Others Fees Collection</h1>
 </div>
-
+@include('Shared.alert')
 <div class="grid grid-cols-3 gap-5">
     {{-- left section --}}
     <div class="">

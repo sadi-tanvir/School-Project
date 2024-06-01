@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class StudentController extends Controller
 {
@@ -145,7 +146,6 @@ class StudentController extends Controller
                 ->groupBy('class_name', 'group_name', 'pay_slip_type')
                 ->get();
 
-            // return view('Backend.Student.NewAdmissionFeeGenerate', compact('payslipInfo'))->with('success', 'student added successfully!');
             return view('Backend.Student.NewAdmissionFeeGenerate', compact('payslipInfo', 'student'))->with('success', 'student added successfully!');
         } else {
             return redirect()->back()->with('success', 'student added successfully!');
@@ -162,6 +162,15 @@ class StudentController extends Controller
             ->first();
 
         return view('Backend.Student.AdmissionConfirmInvoice', compact('date', 'studentInfo'));
+    }
+
+    public function generateQrCode($school_code, $studentId, $invoiceId)
+    {
+        $invoice = explode('#', $invoiceId);
+        $invoiceId = $invoice[1];
+        $qrCode = QrCode::size(60)->generate('http://127.0.0.1:8000/student-fees-info/' . $school_code . '/' . $studentId . '/' . $invoiceId);
+        // $qrCode = QrCode::size(60)->generate('https://cms.nedubd.com/student-fees-info/' . $school_code . '/' . $studentId . '/' . $invoiceId);
+        return $qrCode;
     }
 
     // genearate & pay student fees
@@ -204,13 +213,25 @@ class StudentController extends Controller
 
         // pay fees
         if ($pay_now) {
+            $date = now();
             // create a uniqe voucher number
             $voucerNumber = Str::upper('#V' . uniqid());
+
+            // generate QR-Code
+            $qrcode = $this->generateQrCode($school_code, $student_id, $voucerNumber);
+
 
             $collected_by_name = $request->input('collected_by_name');
             $collected_by_email = $request->input('collected_by_email');
             $collected_by_phone = $request->input('collected_by_phone');
             $collection_date = $request->input('collection_date');
+
+            // get student informaion
+            $studentInfo = Student::where('school_code', $school_code)
+                ->where('action', 'approved')
+                ->where('student_id', $student_id)
+                ->select('student_id', 'name', 'Class_name', 'group', 'section', 'session', 'year', 'student_roll')
+                ->first();
 
             // get all payslip of the student
             $generatedPayslip = GeneratePayslip::where('school_code', $school_code)
@@ -218,8 +239,14 @@ class StudentController extends Controller
                 ->where('payment_status', 'unpaid')
                 ->get();
 
+            $payslipInfoForInvoice = [];
+            $totalPayableAmount = $generatedPayslip->sum('payable');
+            $totalWaiver = $generatedPayslip->sum('waiver');
+            $totalPaidAmount = $totalPayableAmount - $totalWaiver;
+
+            // update payslip
             foreach ($generatedPayslip as $payslip) {
-                GeneratePayslip::where('school_code', $school_code)
+                $updatePaylip = GeneratePayslip::where('school_code', $school_code)
                     ->where('student_id', $student_id)
                     ->where('id', $payslip->id)
                     ->update([
@@ -234,7 +261,34 @@ class StudentController extends Controller
                         "collected_by_phone" => $collected_by_phone,
                         "payment_status" => 'paid',
                     ]);
+
+                // add payslip info for invoice
+                $payslipInfoForInvoice[] = [
+                    'month' => $payslip->month,
+                    'year' => $payslip->year,
+                    'pay_slip_type' => $payslip->pay_slip_type,
+                    'amount' => $payslip->payable,
+                    'waiver' => $payslip->waiver,
+                    'payable' => $payslip->payable - $payslip->waiver,
+                    'note' => $payslip->pay_slip_type . ' - ' . $payslip->month . ' ' . $payslip->year
+                ];
             }
+
+            return view(
+                'Backend.Student.InstantPaymentInvoice',
+                compact(
+                    'qrcode',
+                    'studentInfo',
+                    'date',
+                    'voucerNumber',
+                    'collected_by_name',
+                    'collection_date',
+                    'totalPayableAmount',
+                    'totalWaiver',
+                    'totalPaidAmount',
+                    'payslipInfoForInvoice'
+                )
+            );
         }
 
         return redirect()->back()->with('success', 'Fees added successfully!');

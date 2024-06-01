@@ -19,6 +19,7 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class StudentController extends Controller
 {
@@ -144,6 +145,7 @@ class StudentController extends Controller
                 ->groupBy('class_name', 'group_name', 'pay_slip_type')
                 ->get();
 
+            // return view('Backend.Student.NewAdmissionFeeGenerate', compact('payslipInfo'))->with('success', 'student added successfully!');
             return view('Backend.Student.NewAdmissionFeeGenerate', compact('payslipInfo', 'student'))->with('success', 'student added successfully!');
         } else {
             return redirect()->back()->with('success', 'student added successfully!');
@@ -162,6 +164,7 @@ class StudentController extends Controller
         return view('Backend.Student.AdmissionConfirmInvoice', compact('date', 'studentInfo'));
     }
 
+    // genearate & pay student fees
     public function addNewStudentFees(Request $request, $school_code)
     {
         $selectedPayslips = $request->input('select_payslip', []);
@@ -173,7 +176,9 @@ class StudentController extends Controller
         $group = $request->input('group');
         $section = $request->input('section');
         $waiver = $request->input('waiver');
+        $pay_now = $request->input('pay_now');
 
+        // generate payslip
         foreach ($selectedPayslips as $pay_slip_type => $value) {
             GeneratePayslip::firstOrCreate(
                 [
@@ -194,6 +199,42 @@ class StudentController extends Controller
                     'payable' => $amount[$pay_slip_type] - $waiver[$pay_slip_type] ?? 0,
                 ]
             );
+        }
+
+
+        // pay fees
+        if ($pay_now) {
+            // create a uniqe voucher number
+            $voucerNumber = Str::upper('#V' . uniqid());
+
+            $collected_by_name = $request->input('collected_by_name');
+            $collected_by_email = $request->input('collected_by_email');
+            $collected_by_phone = $request->input('collected_by_phone');
+            $collection_date = $request->input('collection_date');
+
+            // get all payslip of the student
+            $generatedPayslip = GeneratePayslip::where('school_code', $school_code)
+                ->where('student_id', $student_id)
+                ->where('payment_status', 'unpaid')
+                ->get();
+
+            foreach ($generatedPayslip as $payslip) {
+                GeneratePayslip::where('school_code', $school_code)
+                    ->where('student_id', $student_id)
+                    ->where('id', $payslip->id)
+                    ->update([
+                        "payable" => 0,
+                        "voucher_number" => $voucerNumber,
+                        "collect_date" => $collection_date,
+                        "due_amount" => 0,
+                        "paid_amount" => $payslip->payable,
+                        "note" => $payslip->month . ' ' . $payslip->year . ' ' . $payslip->pay_slip_type,
+                        "collected_by_name" => $collected_by_name,
+                        "collected_by_email" => $collected_by_email,
+                        "collected_by_phone" => $collected_by_phone,
+                        "payment_status" => 'paid',
+                    ]);
+            }
         }
 
         return redirect()->back()->with('success', 'Fees added successfully!');

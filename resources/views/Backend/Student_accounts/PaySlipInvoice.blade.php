@@ -3,7 +3,6 @@
 Payslip Invoice
 @endsection
 
-{{ $index = 0 }}
 @section('Dashboard')
 <style>
     /* Hide non-printable elements */
@@ -28,6 +27,11 @@ Payslip Invoice
     }
 
 </style>
+
+@php
+$index = 0;
+@endphp
+
 <div class="w-full min-h-screen bg-neutral-200 mx-auto p-5">
     <a id="deletePayslip" href="{{ route('paySlipCollection.view', $school_code) }}" class="text-white bg-gradient-to-br from-red-600 to-red-500 hover:bg-gradient-to-bl focus:ring-red-300 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-auto">Back</a>
     <button id="deletePayslip" type="button" onclick="window.print()" class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-blue-300 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-auto">Print</button>
@@ -93,8 +97,8 @@ Payslip Invoice
                         <table class="w-full divide-y divide-zinc-200 border border-b-0">
                             <thead class="text-[10px]">
                                 <tr>
-                                    <th class="p-2 text-left text-zinc-500 uppercase tracking-wider">
-                                        SL</th>
+                                    {{-- <th class="p-2 text-left text-zinc-500 uppercase tracking-wider">
+                                        SL</th> --}}
                                     <th class="p-2 text-left text-zinc-500 uppercase tracking-wider">
                                         Fees Name</th>
                                     <th class="p-2 text-left text-zinc-500 uppercase tracking-wider">
@@ -108,7 +112,7 @@ Payslip Invoice
                             <tbody class="bg-white divide-y divide-zinc-200">
                                 @foreach ($input_fee_types as $key => $feeType)
                                 <tr class="">
-                                    <td class="text-[10px] p-1 whitespace-nowrap">{{ $index = $index + 1 }}</td>
+                                    {{-- <td class="text-[10px] p-1 whitespace-nowrap">{{ $index = $index + 1 }}</td> --}}
                                     <td class="text-[10px] p-1 whitespace-nowrap">{{ $feeType }}</td>
                                     <td class="text-[10px] p-1 whitespace-nowrap">n/a</td>
                                     <td class="text-[10px] p-1 whitespace-nowrap">{{ $input_waivers[$key] }}</td>

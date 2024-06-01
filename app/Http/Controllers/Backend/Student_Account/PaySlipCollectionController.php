@@ -159,8 +159,8 @@ class PaySlipCollectionController extends Controller
     {
         $invoice = explode('#', $invoiceId);
         $invoiceId = $invoice[1];
-        // $qrCode = QrCode::size(60)->generate('http://127.0.0.1:8000/student-fees-info/' . $school_code . '/' . $studentId . '/' . $invoiceId);
-        $qrCode = QrCode::size(60)->generate('https://cms.nedubd.com/student-fees-info/' . $school_code . '/' . $studentId . '/' . $invoiceId);
+        $qrCode = QrCode::size(60)->generate('http://127.0.0.1:8000/student-fees-info/' . $school_code . '/' . $studentId . '/' . $invoiceId);
+        // $qrCode = QrCode::size(60)->generate('https://cms.nedubd.com/student-fees-info/' . $school_code . '/' . $studentId . '/' . $invoiceId);
         return $qrCode;
     }
 
@@ -169,7 +169,7 @@ class PaySlipCollectionController extends Controller
         $voucher_number = $request->input('voucher_number');
         $printable_student_id = $request->input('printable_student_id');
 
-        // generte QR-Code
+        // generate QR-Code
         $qrcode = $this->generateQrCode($school_code, $printable_student_id, $voucher_number);
 
         $note = $request->input('note');
@@ -208,48 +208,54 @@ class PaySlipCollectionController extends Controller
             return intval($carry) + intval($item);
         });
 
+        $isFeesCollected = GeneratePayslip::where('school_code', $school_code)
+            ->where('voucher_number', $voucher_number)
+            ->where('payment_status', 'paid')
+            ->exists();
 
-        // dd($input_fee_types);
+        if ($isFeesCollected) {
+            return redirect()->back()->with('error', 'This invoice has already been collected');
+        } else {
+            foreach ($input_payslip_ids as $payslip_id) {
+                GeneratePayslip::where('school_code', $school_code)
+                    ->where('id', intval($payslip_id))
+                    ->update([
+                        "waiver" => $input_waivers[$payslip_id],
+                        "payable" => $input_due_amounts[$payslip_id],
+                        "voucher_number" => $voucher_number,
+                        "collect_date" => $collection_date,
+                        "due_amount" => $input_due_amounts[$payslip_id],
+                        "paid_amount" => $input_current_pay[$payslip_id],
+                        "note" => $note,
+                        "collected_by_name" => $collected_by_name,
+                        "collected_by_email" => $collected_by_email,
+                        "collected_by_phone" => $collected_by_phone,
+                        "payment_status" => $input_due_amounts[$payslip_id] == 0 ? 'paid' : 'unpaid',
+                    ]);
+            }
 
-        foreach ($input_payslip_ids as $payslip_id) {
-            GeneratePayslip::where('school_code', $school_code)
-                ->where('id', intval($payslip_id))
-                ->update([
-                    "waiver" => $input_waivers[$payslip_id],
-                    "payable" => $input_due_amounts[$payslip_id],
-                    "voucher_number" => $voucher_number,
-                    "collect_date" => $collection_date,
-                    "due_amount" => $input_due_amounts[$payslip_id],
-                    "paid_amount" => $input_current_pay[$payslip_id],
-                    "note" => $note,
-                    "collected_by_name" => $collected_by_name,
-                    "collected_by_email" => $collected_by_email,
-                    "collected_by_phone" => $collected_by_phone,
-                    "payment_status" => $input_due_amounts[$payslip_id] == 0 ? 'paid' : 'unpaid',
-                ]);
+            return view(
+                'Backend.Student_accounts.PaySlipInvoice',
+                compact(
+                    'school_code',
+                    'student_info',
+                    'school_info',
+                    'voucher_number',
+                    'collection_date',
+                    'total_waiver',
+                    'total_payable',
+                    'total_due_amount',
+                    'collect_amount',
+                    'input_fee_types',
+                    'input_waivers',
+                    'input_payable_amounts',
+                    'note',
+                    'totalCurrentPay',
+                    'collected_by_name',
+                    'qrcode'
+                )
+            );
         }
-
-        return view(
-            'Backend.Student_accounts.PaySlipInvoice',
-            compact(
-                'school_code',
-                'student_info',
-                'school_info',
-                'voucher_number',
-                'collection_date',
-                'total_waiver',
-                'total_payable',
-                'total_due_amount',
-                'collect_amount',
-                'input_fee_types',
-                'input_waivers',
-                'input_payable_amounts',
-                'note',
-                'totalCurrentPay',
-                'collected_by_name',
-                'qrcode'
-            )
-        );
     }
 
 

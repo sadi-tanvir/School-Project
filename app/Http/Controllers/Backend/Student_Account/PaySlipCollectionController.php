@@ -157,10 +157,10 @@ class PaySlipCollectionController extends Controller
 
     public function generateQrCode($school_code, $studentId, $invoiceId)
     {
+        $appUrl = env('APP_URL');
         $invoice = explode('#', $invoiceId);
         $invoiceId = $invoice[1];
-        $qrCode = QrCode::size(60)->generate('http://127.0.0.1:8000/student-fees-info/' . $school_code . '/' . $studentId . '/' . $invoiceId);
-        // $qrCode = QrCode::size(60)->generate('https://cms.nedubd.com/student-fees-info/' . $school_code . '/' . $studentId . '/' . $invoiceId);
+        $qrCode = QrCode::size(60)->generate($appUrl . '/' . 'student-fees-info/' . $school_code . '/' . $studentId . '/' . $invoiceId);
         return $qrCode;
     }
 

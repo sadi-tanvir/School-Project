@@ -209,7 +209,7 @@
                                                     {{ $student->name }}
                                                 </td>
                                                 <td class="px-6 py-4">
-                                                    {{ $student->nedubd_student_id }}
+                                                    {{ $student->student_id }}
                                                     <input type="text" class="hidden" value="{{ $student->id }}"
                                                         name="student_id[{{ $student->id }}]">
                                                 </td>

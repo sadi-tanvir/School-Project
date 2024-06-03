@@ -61,9 +61,9 @@
                                 <span class="border-b-2 px-2 font-semibold border-gray-600 text-[12px]">Money Receipt</span>
                             </div>
                             {{-- student information --}}
-                            <div class="grid grid-cols-6 text-[10px]">
+                            <div class="grid grid-cols-2 text-[10px]">
 
-                                <div class="col-span-3 flex">
+                                <div class="flex">
                                     <ul>
                                         <li>Invoice ID</li>
                                         <li>Payment Date</li>
@@ -77,23 +77,23 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="col-span-2">
+                                <div class="">
                                     <ul>
                                         <li>Academic Year <span class="ml-2">:</span>
                                             {{ $individualPayslip['student_info']->year }} </li>
                                         <li>Student ID : {{ $individualPayslip['student_info']->student_id }}</li>
-                                        <li>Name : student name</li>
+                                        <li>Name : {{ $individualPayslip['student_info']->name }}</li>
                                         <li>Class : {{ $individualPayslip['student_info']->Class_name }}</li>
                                         <li>Group : {{ $individualPayslip['student_info']->group }}</li>
                                         <li>Section : {{ $individualPayslip['student_info']->section }}</li>
                                         <li>Roll No. : {{ $individualPayslip['student_info']->student_roll }}</li>
                                     </ul>
                                 </div>
-                                <div class="">
+                                {{-- <div class="">
                                     <img class="w-16"
                                         src="https://th.bing.com/th/id/OIP.lhmC35cDIwGov-aWutxtbgAAAA?rs=1&pid=ImgDetMain"
                                         alt="QR Code">
-                                </div>
+                                </div> --}}
                             </div>
 
                             <div class="my-3 text-[10px]">

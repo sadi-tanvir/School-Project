@@ -28,6 +28,7 @@
     /* .gradient-bg {
         background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.04),rgba(0,0,0,0.03),rgba(0,0,0,0.09),rgba(0,0,0,0.09),rgba(0,0,0,0.06),rgba(0,0,0,0.04),transparent,rgba(0,0,0,0.05),rgba(0,0,0,0.06),rgba(0,0,0,0.02),rgba(0,0,0,0.09),rgba(0,0,0,0.03),rgba(0,0,0,0.07) 4px),linear-gradient(0deg, rgb(24, 9, 88),rgb(20, 15, 94));
     } */
+
 </style>
 
 <body class="">
@@ -56,16 +57,19 @@
             <div class="space-y-2 mt-10">
                 <div class="w-full flex justify-between items-center">
                     <div>
-                        <h1 class="uppercase font-semibold text-gray-500">Name: {{ $individualWaiverData[0]->name }}
+                        <h1 class="uppercase text-gray-500">Name:
+                            <span class="font-bold">{{ $individualWaiverData[0]->name }}</span>
                         </h1>
                     </div>
                     <div>
-                        <h1 class="uppercase font-semibold text-gray-500">Id:
-                            {{ $individualWaiverData[0]->nedubd_student_id }}</h1>
+                        <h1 class="uppercase font-semibold text-gray-500">Student Id:
+                            <span class="font-bold">{{ $individualWaiverData[0]->student_id }}</span>
+                        </h1>
                     </div>
                     <div>
                         <h1 class="uppercase font-semibold text-gray-500">DISCOUNT:
-                            {{ $individualWaiverData[0]->waiver_type_name }}</h1>
+                            <span class="font-bold">{{ $individualWaiverData[0]->waiver_type_name }}</span>
+                        </h1>
                     </div>
                 </div>
                 <div class="mt-10">
@@ -89,24 +93,22 @@
                             </thead>
                             <tbody>
                                 @foreach ($individualWaiverData as $key => $waiver)
-                                    <tr
-                                        class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 text-center">
-                                        <td class="px-6 py-4">
-                                            {{ $key + 1 }}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            {{ $waiver->fee_type }}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            {{ $waiver->fee_amount }}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            {{ $waiver->waiver_amount }}
-                                        </td>
-                                    </tr>
+                                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 text-center">
+                                    <td class="px-6 py-4">
+                                        {{ $key + 1 }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $waiver->fee_type }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $waiver->fee_amount }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $waiver->waiver_amount }}
+                                    </td>
+                                </tr>
                                 @endforeach
-                                <tr
-                                    class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 text-center">
+                                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 text-center">
                                     <td class="px-6 py-4">
                                         {{-- {{ $key + 1 }} --}}
                                     </td>

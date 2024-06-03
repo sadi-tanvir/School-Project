@@ -11,7 +11,7 @@
     >
         <h2 class="text-4xl">
             <span class="font-light">Hello!</span>
-            <span class="font-semibold">{{ $adminData->first_name }} {{ $adminData->last_name }}</span>
+            <span class="font-semibold">{{isset($adminData->first_name) ?  $adminData->first_name : "" }} {{ isset($adminData->last_name) ? $adminData->last_name : ""}}</span>
         </h2>
         <p class="mt-1 font-light opacity-90">Welcome! Have a wonderful day!</p>
 

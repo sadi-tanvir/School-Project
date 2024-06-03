@@ -369,6 +369,7 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     // HeadWiseSummary Report
     Route::get('/headwiseSummary/{schoolCode}', [HeadWiseSummaryController::class, 'headwiseSummary'])->name('headwiseSummary');
     Route::get('/headwiseSummary/getStudentRoll/{schoolCode}', [HeadWiseSummaryController::class, 'GetStudentRoll']);
+    Route::get('/headwiseSummary/getPayslipReport/{schoolCode}', [HeadWiseSummaryController::class, 'GetPaySlipReport'])->name('headwiseSummary.getReports');
 
     Route::get('/transferToAccounts/{schoolCode}', [TransferToAccountsController::class, 'transferToAccounts'])->name('transferToAccounts');
     Route::get('/paidInvoice/{schoolCode}', [PaidInvoiceController::class, 'paidInvoice'])->name('paidInvoice');

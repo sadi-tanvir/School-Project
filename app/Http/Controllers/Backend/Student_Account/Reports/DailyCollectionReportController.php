@@ -9,6 +9,7 @@ use App\Models\SchoolAdmin;
 use App\Models\SchoolInfo;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DailyCollectionReportController extends Controller
 {
@@ -29,7 +30,7 @@ class DailyCollectionReportController extends Controller
         $student_info = Student::where('school_code', $school_code)
             ->where('action', 'approved')
             ->where('Class_name', $class)
-            ->select('student_roll', 'name', 'nedubd_student_id')
+            ->select('student_roll', 'name', 'student_id')
             ->get();
 
         return response()->json([
@@ -66,7 +67,11 @@ class DailyCollectionReportController extends Controller
                 return $query->where('collected_by_email', $entry_by_email);
             })
             ->whereBetween('collect_date', [$date_from, $date_to])
+            ->select('voucher_number', 'student_id', 'class', 'group', 'collected_by_name', 'collect_date', DB::raw('SUM(paid_amount) as total_paid'), DB::raw('SUM(amount) as total_amount'), DB::raw('SUM(waiver) as total_waiver'))
+            ->groupBy('voucher_number', 'student_id', 'class', 'group', 'collected_by_name', 'collect_date')
             ->get();
+
+        // total paid amount
         $TotalAmount = GeneratePayslip::where('school_code', $school_code)
             ->where('action', 'approved')
             ->when($class !== "Select", function ($query) use ($class) {

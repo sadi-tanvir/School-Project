@@ -1,4 +1,4 @@
- @extends('Backend.app')
+@extends('Backend.app')
 @section('title')
     Student Details Information
 @endsection

@@ -70,7 +70,7 @@ class GenerateMultiplePayslipController extends Controller
                 $studentsForClass = Student::where("school_code", $school_code)
                     ->where('action', 'approved')
                     ->where("class_name", $class)
-                    ->select("id", "nedubd_student_id", "student_roll", "name", "Class_name", "group", "section")
+                    ->select("id", "student_id", "student_roll", "name", "Class_name", "group", "section")
                     ->get();
 
                 $allStudents = array_merge($allStudents, [$class => $studentsForClass->toArray()]);
@@ -172,7 +172,7 @@ class GenerateMultiplePayslipController extends Controller
             $commonLastPayDate = $request->input("last_pay_date");
             $relatedMonth = explode("-", $commonLastPayDate);
             $monthYears = $request->input("input_month_year", []);
-            $studentIds = $request->input("input_nedubd_student_id", []);
+            $studentIds = $request->input("input_student_id", []);
             // $studentNames = $request->input("input_name", []);
             $studentClasses = $request->input("input_Class_name", []);
             $studentSections = $request->input("input_section", []);
@@ -190,7 +190,7 @@ class GenerateMultiplePayslipController extends Controller
                         $month = explode(".", $monthYear)[0];
                         // $year = explode(".", $monthYear)[1];
                         $IndividualLastPayDate = $relatedMonth[0] . "-" . $monthList[$month] . "-" . $relatedMonth[2];
-                        GeneratePayslip::updateOrCreate(
+                        GeneratePayslip::firstOrCreate(
                             [
                                 'student_id' => $studentId,
                                 'action' => 'approved',

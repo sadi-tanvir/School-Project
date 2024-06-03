@@ -66,8 +66,10 @@ use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\TrialBa
 use App\Http\Controllers\Backend\GeneralAccounts\VoucherPostingController;
 use App\Http\Controllers\Backend\NEDUBD\NEDUBDController;
 use App\Http\Controllers\Backend\NEDUBD\SchoolAdminController;
+use App\Http\Controllers\Backend\OnlineApplication\ListOfApplicantController;
 use App\Http\Controllers\Backend\Student\addShortListController;
 use App\Http\Controllers\Backend\Student\classSectionSTdTotalController;
+use App\Http\Controllers\Backend\Student\DownloadStudentController;
 use App\Http\Controllers\Backend\Student\StudentController;
 use App\Http\Controllers\Backend\Student\StudentDetailsController;
 use App\Http\Controllers\Backend\Student\StudentListWithPhotoController;
@@ -82,13 +84,10 @@ use App\Http\Controllers\Backend\Student\BasicAddStudentController;
 use App\Http\Controllers\Backend\Student\EsifListController;
 use App\Http\Controllers\Backend\Student\UploadExcelFileController;
 
-use App\Http\Controllers\Backend\Student_Account\CollectUnpaidPaySlipController;
 use App\Http\Controllers\Backend\Student_Account\DeletePaySlipController;
 use App\Http\Controllers\Backend\Student_Account\EditGeneratedPayslipController;
 use App\Http\Controllers\Backend\Student_Account\GenerateMultiplePayslipController;
 use App\Http\Controllers\Backend\Student_Account\GeneratePayslipController;
-use App\Http\Controllers\Backend\Student_Account\NewOldStdAddPaySlipController;
-use App\Http\Controllers\Backend\Student_Account\NewStdAddPaySlipController;
 use App\Http\Controllers\Backend\Student_Account\Others\FromFeeController;
 use App\Http\Controllers\Backend\Student_Account\Others\DonationController;
 use App\Http\Controllers\Backend\Student_Account\Others\OthersFeeController;
@@ -96,7 +95,6 @@ use App\Http\Controllers\Backend\Student_Account\Others\FineFailController;
 
 use App\Http\Controllers\Backend\Student_Account\PaySlipCollectionController;
 use App\Http\Controllers\Backend\Student_Account\PrintUnpaidPaySlipController;
-use App\Http\Controllers\Backend\Student_Account\QuickCollectionController;
 use App\Http\Controllers\Backend\Student_Account\Reports\DailyCollectionReportController;
 use App\Http\Controllers\Backend\Student_Account\Reports\geneTranferInquiriController;
 use App\Http\Controllers\Backend\Student_Account\Reports\DuePaySummaryController;
@@ -182,6 +180,7 @@ Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::get('/logout', [AuthController::class, 'logout']);
 Route::get('/login-user', [AuthController::class, 'loginUser'])->name('login-user');
 
+Route::get('/student-fees-info/{schoolCode}/{studentId}/{invoiceId}', [PaySlipCollectionController::class, 'FeesInfoWithQRCode'])->name('studentFeesInfo.QRCode');
 
 
 Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
@@ -192,12 +191,24 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/addSchoolInfo/{schoolCode}', [NEDUBDController::class, 'addSchoolInfo']);
     Route::post('/create-schoolInfo', [NEDUBDController::class, 'createSchoolInfo'])->name('schoolInfo.add');
 
+    //Online Application
+
+    Route::get('/list-of-application/{schoolCode}',[ListOfApplicantController::class,'ListOfApplicantView'])->name('list.online.application');
+    Route::get('/online-application-view/{schoolCode}',[ListOfApplicantController::class,'ListOfApplicantView'])->name('onlineApplicationForm.view');
+
+    Route::get('/report-applicant/{schoolCode}',[ListOfApplicantController::class,'ReportApplicationView'])->name('report.applicant');
+
     // student module
     Route::post('/create-student', [StudentController::class, 'addStudent'])->name('student.add');
+    Route::post('/create-student/addFees/{schoolCode}', [StudentController::class, 'addNewStudentFees'])->name('student.add.fees');
+    Route::get('/create-student/printAdmissionInvoice/{student_id}/{schoolCode}', [StudentController::class, 'PrintAdmissionInvoice'])->name('student.invoice.print');
     Route::get('/add-student/{schoolCode}', [StudentController::class, 'AddStudentForm'])->name('AddStudentForm');
     Route::post('/add-students/get-groups/{schoolCode}', [StudentController::class, 'getGroups'])->name('add.get-groups');
     Route::post('/add-students/get-sections/{schoolCode}', [StudentController::class, 'getSections'])->name('add.get-sections');
     Route::post('/add-students/get-shifts/{schoolCode}', [StudentController::class, 'getShifts'])->name('add.get-shifts');
+
+    Route::get('/view-download-student/{schoolCode}',[DownloadStudentController::class,'viewDownloadStudent'])->name('view.download.student');             
+    Route::post('/download-student-data/{schoolCode}',[DownloadStudentController::class,'DownloadStudentData'])->name('download.student.data');             
 
 
     //Update Student Basic Info
@@ -213,7 +224,7 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/studentClassInfo/{schoolCode}', [UpdateStudentClassInfoController::class, 'studentClassInfo'])->name('studentClassInfo');
     Route::get('/getStudentClassData/{schoolCode}', [UpdateStudentClassInfoController::class, 'getStudentClassData'])->name('getStudentClassData');
     Route::put('/updateStudentClass/{schoolCode}', [UpdateStudentClassInfoController::class, 'updateStudentClass'])->name('updateStudentClass');
-    Route::delete('/deleteStudent/{schoolCode}/{ids}', [UpdateStudentClassInfoController::class, 'delete'])->name('deleteStudent');
+    Route::delete('/deleteStudent/{schoolCode}', [UpdateStudentClassInfoController::class, 'deleteStudents'])->name('deleteStudent');
     Route::post('/class-info/get-groups/{schoolCode}', [UpdateStudentClassInfoController::class, 'getGroups'])->name('class.info.get-groups');
     Route::post('/class-info/get-sections/{schoolCode}', [UpdateStudentClassInfoController::class, 'getSections'])->name('class.info.get-sections');
     Route::post('/class-info/get-shifts/{schoolCode}', [UpdateStudentClassInfoController::class, 'getShifts'])->name('class.info.get-shifts');
@@ -236,7 +247,7 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::post('/add-student/get-groups/{schoolCode}', [UpdateStudentClassInfoController::class, 'getGroups'])->name('add.student.get-groups');
     Route::post('/add-student/get-section/{schoolCode}', [UpdateStudentClassInfoController::class, 'getSections'])->name('add.student.get-sections');
     Route::post('/add-student/get-shift/{schoolCode}', [UpdateStudentClassInfoController::class, 'getShifts'])->name('add.student.get-shifts');
-   
+
 
 
     //update student
@@ -247,6 +258,9 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/uploadExelFile/{schoolCode}', [UploadExcelFileController::class, 'uploadExelFile'])->name('uploadExelFile');
     Route::get('/download-demo/{schoolCode}', [UploadExcelFileController::class, 'downloadDemo'])->name('download.demo');
     Route::post('/upload-excel', [UploadExcelFileController::class, 'uploadExcel'])->name('upload.excel');
+    Route::post('/upload-excel/get-groups/{schoolCode}', [UploadExcelFileController::class, 'uploadGroups'])->name('upload.get-groups');
+    Route::post('/upload-excel/get-sections/{schoolCode}', [UploadExcelFileController::class, 'uploadSections'])->name('upload.get-sections');
+    Route::post('/upload-excel/get-shifts/{schoolCode}', [UploadExcelFileController::class, 'uploaduploadShifts'])->name('upload.get-shifts');
 
 
     //upload photo student
@@ -313,7 +327,6 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get("/studentAccounts/paySlipCollection/updatePrintPage/{schoolCode}", [PaySlipCollectionController::class, "UpdatePrintPage"])->name("updatePrintPage");
     Route::post("/studentAccounts/paySlipCollection/storePaySlipData/{schoolCode}", [PaySlipCollectionController::class, "StorePaySlipData"])->name("paySlipData.store");
 
-    Route::get("/studentAccounts/quickCollection/{schoolCode}", [QuickCollectionController::class, "QuickCollectionView"])->name("quickCollection.view");
     // Print Unpaid Payslip
     Route::get("/studentAccounts/printUnpaidPaySlip/{schoolCode}", [PrintUnpaidPaySlipController::class, "PrintUnpaidPaySlipForm"])->name("printUnpaidPaySlip.view");
     Route::get("/studentAccounts/printUnpaidPaySlip/getSectionAndGroup/{schoolCode}", [PrintUnpaidPaySlipController::class, "GetSectionAndGroup"]);
@@ -322,21 +335,20 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get("/studentAccounts/printUnpaidPaySlip/printInvoice/{schoolCode}", [PrintUnpaidPaySlipController::class, "PrintUnpaidInvoice"])->name("UnpaidInvoice.print");
     Route::get("/studentAccounts/printUnpaidPaySlip/getAllStudentUnpaidPayslip/{schoolCode}", [PrintUnpaidPaySlipController::class, "GetAllStudentUnpaidPayslip"]);
 
-    Route::get("/studentAccounts/collectUnpaidPaySlip/{schoolCode}", [CollectUnpaidPaySlipController::class, "CollectUnpaidPaySlipView"])->name("collectUnpaidPaySlip.view");
     // Delete Payslip
     Route::get("/studentAccounts/deletePaySlip/{schoolCode}", [DeletePaySlipController::class, "DeletePaySlipView"])->name("deletePaySlip.view");
     Route::get("/studentAccounts/deletePaySlip/getPaySlipData/{schoolCode}", [DeletePaySlipController::class, "GetPaySlipData"]);
     Route::get("/studentAccounts/deletePaySlip/deletePaySlipData/{schoolCode}", [DeletePaySlipController::class, "DeletePaySlipData"]);
-    Route::get("/studentAccounts/newStdAddPaySlip/{schoolCode}", [NewStdAddPaySlipController::class, "NewStdAddPaySlipView"])->name("newStdAddPaySlip.view");
-    Route::get("/studentAccounts/newOldStdAddPaySlip/{schoolCode}", [NewOldStdAddPaySlipController::class, "NewOldStdAddPaySlipView"])->name("newOldStdAddPaySlip.view");
     // Generate payslips
     Route::get("/studentAccounts/generatePayslip/{schoolCode}", [GeneratePayslipController::class, "GeneratePayslipView"])->name("generatePayslip.view");
     Route::get("/studentAccounts/getPaySlipData/{schoolCode}", [GeneratePayslipController::class, "GetPaySlipData"])->name("PaySlipData.get");
     Route::get("/studentAccounts/getFeeDataTypes/{schoolCode}", [GeneratePayslipController::class, "GetFeeDataTypes"])->name("feeDataTypes.get");
     Route::get("/studentAccounts/getAllInformation/{schoolCode}", [GeneratePayslipController::class, "GetAllInformation"])->name("AllInformation.get");
     Route::post("/studentAccounts/storeGeneratePaySlip/{schoolCode}", [GeneratePayslipController::class, "StoreGeneratePaySlip"])->name("generatePaySlip.store");
-
+    // Edit Generated Payslip
     Route::get("/studentAccounts/editGeneratedPayslip/{schoolCode}", [EditGeneratedPayslipController::class, "EditGeneratedPayslipView"])->name("editGeneratedPayslip.view");
+    Route::get("/studentAccounts/editGeneratedPayslip/getPaySlipData/{schoolCode}", [EditGeneratedPayslipController::class, "GetPaySlipData"]);
+    Route::get("/studentAccounts/editGeneratedPayslip/getAllInformation/{schoolCode}", [EditGeneratedPayslipController::class, "GetAllInformation"])->name("AllPayslipInformation.get");
     // Generate multiple payslips
     Route::get("/studentAccounts/generateMultiplePayslip/{schoolCode}", [GenerateMultiplePayslipController::class, "GenerateMultiplePayslipView"])->name("generateMultiplePayslip.view");
     Route::get("/studentAccounts/getStudentInformation/{schoolCode}", [GenerateMultiplePayslipController::class, "GetStudentInformation"])->name("studentInformation.get");
@@ -354,7 +366,10 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     // Route::get('/DailyCollectionReport/printReports/{schoolCode}', [DailyCollectionReportController::class, 'PrintPaySlipReport'])->name('DailyCollectionReport.print');
     Route::get('/geneTransferInquiri/{schoolCode}', [geneTranferInquiriController::class, 'geneTransferInquiri'])->name('geneTransferInquiri');
     Route::get('/DuepaySummary/{schoolCode}', [DuePaySummaryController::class, 'DuepaySummary'])->name('DuepaySummary');
+    // HeadWiseSummary Report
     Route::get('/headwiseSummary/{schoolCode}', [HeadWiseSummaryController::class, 'headwiseSummary'])->name('headwiseSummary');
+    Route::get('/headwiseSummary/getStudentRoll/{schoolCode}', [HeadWiseSummaryController::class, 'GetStudentRoll']);
+
     Route::get('/transferToAccounts/{schoolCode}', [TransferToAccountsController::class, 'transferToAccounts'])->name('transferToAccounts');
     Route::get('/paidInvoice/{schoolCode}', [PaidInvoiceController::class, 'paidInvoice'])->name('paidInvoice');
     Route::get('/othTransInquiry/{schoolCode}', [OuthTransInquiryController::class, 'othTransInquiry'])->name('othTransInquiry');
@@ -616,7 +631,6 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     // Common Setting End .............................................................................................................
 
 
-
     // Exam Setting Start .............................................................................................................
 
     // Add Grade Point
@@ -783,7 +797,8 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     //Print Admit Card
     Route::get('/printAdmitCard/{schoolCode}', [PrintAdmitCardController::class, "printAdmitCard"])->name('printAdmitCard');
     Route::post('/downloadAdmit/{schoolCode}', [PrintAdmitCardController::class, "downloadAdmit"])->name('downloadAdmitCard');
-
+    Route::post('/print/get-groups/{schoolCode}', [PrintAdmitCardController::class, 'printGroups'])->name('print.get-groups');
+    Route::post('/print/get-sections/{schoolCode}', [PrintAdmitCardController::class, 'printSections'])->name('print.get-sections');
 
     //Print Seat Plan
     Route::get('/printSeatPlan/{schoolCode}', [PrintSeatPlanController::class, "printSeatPlan"]);

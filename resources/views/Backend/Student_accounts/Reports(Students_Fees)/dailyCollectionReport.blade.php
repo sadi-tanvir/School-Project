@@ -50,8 +50,7 @@
             {{-- date range --}}
             <div class="grid grid-cols-2 place-items-start  gap-5 mb-14">
                 <div>
-                    <label for="class" class="block mb-2 text-sm font-medium whitespace-noWrap ">Date From
-                        :</label>
+                    <label for="class" class="block mb-2 text-sm font-medium whitespace-noWrap ">Date From:</label>
                     <div class="relative max-w-sm">
                         <div class="absolute inset-y-0 start-0 flex items-center mt-3">
                             <input type="date" value="{{ date('Y-m-d') }}" name="date_from" id="date_from"
@@ -153,7 +152,7 @@
                 const filteredData = students.filter(item =>
                     (item.name && item.name.toLowerCase().includes(inputValue)) ||
                     (item.student_roll && item.student_roll.toLowerCase().includes(inputValue)) ||
-                    (item.nedubd_student_id && item.nedubd_student_id.toLowerCase().includes(inputValue))
+                    (item.student_id && item.student_id.toLowerCase().includes(inputValue))
                 );
 
                 if (filteredData.length > 0) {
@@ -163,7 +162,7 @@
                         listItem.textContent = item.student_roll + " - " + item.name;
                         listItem.classList.add('autocomplete-list-item');
                         listItem.addEventListener('click', () => {
-                            inputField.value = item.nedubd_student_id;
+                            inputField.value = item.student_id;
                             autocompleteList.classList.add('hidden');
                         });
                         autocompleteList.appendChild(listItem);
@@ -182,7 +181,7 @@
                     listItem.textContent = item.student_roll + " - " + item.name;
                     listItem.classList.add('autocomplete-list-item');
                     listItem.addEventListener('click', () => {
-                        inputField.value = item.nedubd_student_id;
+                        inputField.value = item.student_id;
                         autocompleteList.classList.add('hidden');
                     });
                     autocompleteList.appendChild(listItem);

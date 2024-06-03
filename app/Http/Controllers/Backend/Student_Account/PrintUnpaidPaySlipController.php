@@ -60,7 +60,7 @@ class PrintUnpaidPaySlipController extends Controller
             ->where('action', 'approved')
             ->where('year', $year)
             ->where('Class_name', $class)
-            ->select('student_roll', 'name', 'nedubd_student_id')
+            ->select('student_roll', 'name', 'student_id')
             ->get();
 
         return response()->json([
@@ -86,7 +86,7 @@ class PrintUnpaidPaySlipController extends Controller
             ->when($section !== "Select", function ($query) use ($section) {
                 return $query->where('section', $section);
             })
-            ->select('student_roll', 'name', 'nedubd_student_id')
+            ->select('student_roll', 'name', 'student_id')
             ->get();
 
         return response()->json([

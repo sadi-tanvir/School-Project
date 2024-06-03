@@ -113,7 +113,7 @@ class GeneratePayslipController extends Controller
             $temp_data = [
                 // 'student_table_id' => $student->id,
                 'month_year' => $month_year,
-                'student_id' => $student->nedubd_student_id,
+                'student_id' => $student->student_id,
                 'student_name' => $student->name,
                 'class' => $student->Class_name,
                 'section' => $student->section,
@@ -140,7 +140,6 @@ class GeneratePayslipController extends Controller
         $last_pay_date = $request->input('last_pay_date');
         $class = $request->input('class');
         $input_sections = $request->input('input_section', []);
-        // dd($sections);
         $group = $request->input('group');
         $pay_slip_type = $request->input('pay_slip_type');
         $selected_students = $request->input('select', []);
@@ -159,19 +158,16 @@ class GeneratePayslipController extends Controller
 
         foreach ($input_student_name as $student_id => $value) {
             if (isset($selected_students[$student_id])) {
-                GeneratePayslip::updateOrCreate(
-                    // Search criteria
+                GeneratePayslip::firstOrCreate(
                     [
-                        'student_id' => $input_student_id[$student_id],
-                        'action' => 'approved',
                         'school_code' => $school_code,
+                        'action' => 'approved',
+                        'student_id' => $input_student_id[$student_id],
                         'month' => $month,
                         'year' => $year,
                         'class' => $class,
                         'pay_slip_type' => $pay_slip_type,
                     ],
-
-                    // Values to update or create
                     [
                         'last_pay_date' => $last_pay_date,
                         'group' => $group,

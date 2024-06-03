@@ -33,7 +33,7 @@ $index = 0;
 @endphp
 
 <div class="w-full min-h-screen bg-neutral-200 mx-auto p-5">
-    <a id="deletePayslip" href="{{ route('paySlipCollection.view', $school_code) }}" class="text-white bg-gradient-to-br from-red-600 to-red-500 hover:bg-gradient-to-bl focus:ring-red-300 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-auto">Back</a>
+    <a id="deletePayslip" href="{{ route('student.add') }}" class="text-white bg-gradient-to-br from-red-600 to-red-500 hover:bg-gradient-to-bl focus:ring-red-300 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-auto">Back</a>
     <button id="deletePayslip" type="button" onclick="window.print()" class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-blue-300 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-auto">Print</button>
 
 
@@ -44,7 +44,7 @@ $index = 0;
                 <div class="flex justify-between items-center border-b-2 border-gray-600 px-2 text-[10px]">
                     <img src="https://cms.nedubd.com/logo/graduation.png" class="w-12" alt="">
                     <div class="text-center">
-                        <h1 class="font-bold">{{ $school_info->school_name }}</h1>
+                        <h1 class="font-bold">{{ $schoolInfo->school_name }}</h1>
                         <h1>N/A</h1>
                     </div>
                     @if ($indx == 0)
@@ -69,7 +69,7 @@ $index = 0;
                             <li>Collected By</li>
                         </ul>
                         <ul>
-                            <li class="font-semibold">: {{ $voucher_number }}</li>
+                            <li class="font-semibold">: {{ $voucerNumber }}</li>
                             <li>: {{ $collection_date }}</li>
                             <li>: {{ $collected_by_name }}</li>
                         </ul>
@@ -77,13 +77,13 @@ $index = 0;
                     <div class="col-span-2">
                         <ul>
                             <li>Academic Year <span class="ml-2">:</span>
-                                {{ $student_info->year }} </li>
-                            <li>Student ID : {{ $student_info->student_id }}</li>
-                            <li>Name : {{$student_info->name}}</li>
-                            <li>Class : {{ $student_info->Class_name }}</li>
-                            <li>Group : {{ $student_info->group }}</li>
-                            <li>Section : {{ $student_info->section }}</li>
-                            <li>Roll No. : {{ $student_info->student_roll }}</li>
+                                {{ $studentInfo->year }} </li>
+                            <li>Student ID : {{ $studentInfo->student_id }}</li>
+                            <li>Name : {{$studentInfo->name}}</li>
+                            <li>Class : {{ $studentInfo->Class_name }}</li>
+                            <li>Group : {{ $studentInfo->group }}</li>
+                            <li>Section : {{ $studentInfo->section }}</li>
+                            <li>Roll No. : {{ $studentInfo->student_roll }}</li>
                         </ul>
                     </div>
                     <div class="">
@@ -110,14 +110,20 @@ $index = 0;
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-zinc-200">
-                                @foreach ($input_fee_types as $key => $feeType)
+                                @foreach ($payslipInfoForInvoice as $key => $payslip)
                                 <tr class="">
                                     {{-- <td class="text-[10px] p-1 whitespace-nowrap">{{ $index = $index + 1 }}</td> --}}
-                                    <td class="text-[10px] p-1 whitespace-nowrap">{{ $feeType }}</td>
-                                    <td class="text-[10px] p-1 whitespace-nowrap">n/a</td>
-                                    <td class="text-[10px] p-1 whitespace-nowrap">{{ $input_waivers[$key] }}</td>
                                     <td class="text-[10px] p-1 whitespace-nowrap">
-                                        {{ $input_payable_amounts[$key] }}
+                                        {{ $payslip["pay_slip_type"] }}
+                                    </td>
+                                    <td class="text-[10px] p-1 whitespace-nowrap">
+                                        {{$payslip["month"] . "-" . $payslip["year"]}}
+                                    </td>
+                                    <td class="text-[10px] p-1 whitespace-nowrap">
+                                        {{ $payslip["waiver"] }}
+                                    </td>
+                                    <td class="text-[10px] p-1 whitespace-nowrap">
+                                        {{ $payslip["payable"] }}
                                     </td>
                                 </tr>
                                 @endforeach
@@ -125,7 +131,7 @@ $index = 0;
                         </table>
                         <div class=" w-full border border-gray-300 grid grid-cols-6">
                             <div class="w-full text-wrap col-span-3 border-r p-1">
-                                <p><span class="font-semibold">Note:</span> {{ $note }}</p>
+                                <p><span class="font-semibold">Note:</span> {{$payslipInfoForInvoice[0]["note"]}}</p>
                             </div>
                             <div class="col-span-3 grid grid-cols-2">
                                 <ul class=" grid columns-4">
@@ -135,10 +141,10 @@ $index = 0;
                                     <li class="p-px ">Total Due</li>
                                 </ul>
                                 <ul class="border-l grid columns-4">
-                                    <li class="p-px border-b font-bold">{{ $total_payable }}</li>
-                                    <li class="p-px border-b">{{ $total_waiver }}</li>
-                                    <li class="p-px border-b">{{ $totalCurrentPay }}</li>
-                                    <li class="p-px ">{{ $total_due_amount }}</li>
+                                    <li class="p-px border-b font-bold">{{ $totalPayableAmount }}</li>
+                                    <li class="p-px border-b">{{ $totalWaiver }}</li>
+                                    <li class="p-px border-b">{{ $totalPaidAmount }}</li>
+                                    <li class="p-px ">0</li>
                                 </ul>
                             </div>
                         </div>

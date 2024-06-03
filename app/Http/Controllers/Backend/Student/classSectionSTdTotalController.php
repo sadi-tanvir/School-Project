@@ -28,11 +28,12 @@ class classSectionSTdTotalController extends Controller
     {
         $class = $request->class;
         $year = $request->year;
-        //dd($year);
+        // dd($request);
         $classes = AddClass::where('action', 'approved')->where('school_code', $schoolCode)->get();
         $classData = AddClass::where('action', 'approved')->where('school_code', $schoolCode)->where('class_name', $class)->get();
         $sections = AddClassWiseSection::where('action', 'approved')->where('school_code', $schoolCode)->get();
-        $students = Student::where('action', 'approved')->where('school_code', $schoolCode)->where('year', $year)->get();
+        $students = Student::where('school_code', $schoolCode)->where('action', 'approved')->where('year', $year)->get();
+        // dd($students);
         $groups = AddClassWiseGroup::where('action', 'approved')->where('school_code', $schoolCode)->get();
         // dd($classes);
         $schoolInfo=SchoolInfo::where('school_code', $schoolCode)->first();

@@ -11,11 +11,18 @@ use App\Models\AddClassWiseGroup;
 use App\Models\AddClassWiseSection;
 use App\Models\AddClassWiseShift;
 use App\Models\AddGroup;
+use App\Models\AddPaySlip;
 use App\Models\AddSection;
 use App\Models\AddShift;
+use App\Models\GeneratePayslip;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+
+use Illuminate\Support\Str;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 
 class StudentController extends Controller
 {
@@ -55,10 +62,10 @@ class StudentController extends Controller
     }
     public function addStudent(Request $request)
     {
-
         $request->validate([
             'image' => 'file|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
         $imagePath = null;
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->move('images/student', $request->input('nedubd_student_id') . '_' . uniqid() . '.' . $request->file('image')->extension());
@@ -66,15 +73,12 @@ class StudentController extends Controller
         }
 
 
-
-        // dd($studentImage);
-
-        $isExist = Student::where('nedubd_student_id', $request->input('nedubd_student_id'))
-            ->exists();
+        $isExist = Student::where('school_code', $request->input('school_code'))->where('action', 'approved')->where('student_id', $request->input('student_id'))->exists();
 
         if ($isExist) {
             return redirect()->back()->with('error', 'This Student already exists.');
         }
+
 
         $student = new Student();
         $student->name = $request->input('name');
@@ -132,7 +136,167 @@ class StudentController extends Controller
         $student->school_code = $request->input('school_code');
         $student->action = $request->input('action');
         $student->save();
-        return redirect()->back()->with('success', 'student added successfully!');
+
+        // add student fees
+        $add_related_fees = $request->input("add_related_fees");
+        if (isset($add_related_fees)) {
+            $payslipInfo = AddPaySlip::where('school_code', $request->input('school_code'))
+                ->where('class_name', 'play')
+                ->where('group_name', 'N/A')
+                ->select('class_name', 'group_name', 'pay_slip_type', DB::raw('SUM(fees_amount) as totalFeesAmount'))
+                ->groupBy('class_name', 'group_name', 'pay_slip_type')
+                ->get();
+
+            return view('Backend.Student.NewAdmissionFeeGenerate', compact('payslipInfo', 'student'))->with('success', 'student added successfully!');
+        } else {
+            return redirect()->back()->with('success', 'student added successfully!');
+        }
+    }
+
+    function PrintAdmissionInvoice(Request $request, $student_id, $school_code)
+    {
+        $date = now();
+        $studentInfo = Student::where('school_code', $school_code)
+            ->where('action', 'approved')
+            ->where('id', $student_id)
+            ->select('student_id', 'name', 'Class_name', 'group', 'section', 'session')
+            ->first();
+
+        return view('Backend.Student.AdmissionConfirmInvoice', compact('date', 'studentInfo'));
+    }
+
+
+    public function generateQrCode($school_code, $studentId, $invoiceId)
+    {
+        $appUrl = env('APP_URL');
+        $invoice = explode('#', $invoiceId);
+        $invoiceId = $invoice[1];
+        $qrCode = QrCode::size(60)->generate($appUrl . '/' . 'student-fees-info/' . $school_code . '/' . $studentId . '/' . $invoiceId);
+        return $qrCode;
+    }
+
+    // genearate & pay student fees
+
+    public function addNewStudentFees(Request $request, $school_code)
+    {
+        $selectedPayslips = $request->input('select_payslip', []);
+        $months = $request->input('month_', []);
+        $amount = $request->input('amount', []);
+        $last_pay_date = $request->input('last_pay_date');
+        $student_id = $request->input('student_id');
+        $class = $request->input('class');
+        $group = $request->input('group');
+        $section = $request->input('section');
+        $waiver = $request->input('waiver');
+
+        $pay_now = $request->input('pay_now');
+
+        // generate payslip
+        foreach ($selectedPayslips as $pay_slip_type => $value) {
+            GeneratePayslip::firstOrCreate(
+                [
+                    'school_code' => $school_code,
+                    'action' => 'approved',
+                    'student_id' => $student_id,
+                    'month' => $months[$pay_slip_type],
+                    'year' => date('Y'),
+                    'class' => $class,
+                    'pay_slip_type' => $pay_slip_type,
+                ],
+                [
+                    'last_pay_date' => $last_pay_date,
+                    'group' => $group,
+                    'section' => $section,
+                    'amount' => $amount[$pay_slip_type],
+                    'waiver' => $waiver[$pay_slip_type] ?? 0,
+                    'payable' => $amount[$pay_slip_type] - $waiver[$pay_slip_type] ?? 0,
+                ]
+            );
+        }
+
+
+        // pay fees
+        if ($pay_now) {
+            $date = now();
+            // create a uniqe voucher number
+            $voucerNumber = Str::upper('#V' . uniqid());
+
+            // generate QR-Code
+            $qrcode = $this->generateQrCode($school_code, $student_id, $voucerNumber);
+
+
+            $collected_by_name = $request->input('collected_by_name');
+            $collected_by_email = $request->input('collected_by_email');
+            $collected_by_phone = $request->input('collected_by_phone');
+            $collection_date = $request->input('collection_date');
+
+            // get student informaion
+            $studentInfo = Student::where('school_code', $school_code)
+                ->where('action', 'approved')
+                ->where('student_id', $student_id)
+                ->select('student_id', 'name', 'Class_name', 'group', 'section', 'session', 'year', 'student_roll')
+                ->first();
+
+            // get all payslip of the student
+            $generatedPayslip = GeneratePayslip::where('school_code', $school_code)
+                ->where('student_id', $student_id)
+                ->where('payment_status', 'unpaid')
+                ->get();
+
+            $payslipInfoForInvoice = [];
+            $totalPayableAmount = $generatedPayslip->sum('payable');
+            $totalWaiver = $generatedPayslip->sum('waiver');
+            $totalPaidAmount = $totalPayableAmount - $totalWaiver;
+
+            // update payslip
+            foreach ($generatedPayslip as $payslip) {
+                $updatePaylip = GeneratePayslip::where('school_code', $school_code)
+                    ->where('student_id', $student_id)
+                    ->where('id', $payslip->id)
+                    ->update([
+                        "payable" => 0,
+                        "voucher_number" => $voucerNumber,
+                        "collect_date" => $collection_date,
+                        "due_amount" => 0,
+                        "paid_amount" => $payslip->payable,
+                        "note" => $payslip->month . ' ' . $payslip->year . ' ' . $payslip->pay_slip_type,
+                        "collected_by_name" => $collected_by_name,
+                        "collected_by_email" => $collected_by_email,
+                        "collected_by_phone" => $collected_by_phone,
+                        "payment_status" => 'paid',
+                    ]);
+
+                // add payslip info for invoice
+                $payslipInfoForInvoice[] = [
+                    'month' => $payslip->month,
+                    'year' => $payslip->year,
+                    'pay_slip_type' => $payslip->pay_slip_type,
+                    'amount' => $payslip->payable,
+                    'waiver' => $payslip->waiver,
+                    'payable' => $payslip->payable - $payslip->waiver,
+                    'note' => $payslip->pay_slip_type . ' - ' . $payslip->month . ' ' . $payslip->year
+                ];
+            }
+
+            return view(
+                'Backend.Student.InstantPaymentInvoice',
+                compact(
+                    'qrcode',
+                    'studentInfo',
+                    'date',
+                    'voucerNumber',
+                    'collected_by_name',
+                    'collection_date',
+                    'totalPayableAmount',
+                    'totalWaiver',
+                    'totalPaidAmount',
+                    'payslipInfoForInvoice'
+                )
+            );
+        }
+
+
+        return redirect()->back()->with('success', 'Fees added successfully!');
     }
 
     private function generateUniqueStudentId()

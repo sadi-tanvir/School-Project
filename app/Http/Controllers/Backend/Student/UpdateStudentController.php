@@ -101,6 +101,7 @@ class UpdateStudentController extends Controller
             $students->action = $request->input('action');
             $students->save();
 
+
       $student = null;
       $classes = AddClass::where("action", "approved")->where("school_code", $schoolCode)->get();
       $sections = AddSection::where("action", "approved")->where("school_code", $schoolCode)->get();

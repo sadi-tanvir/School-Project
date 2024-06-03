@@ -263,7 +263,7 @@ Exam Marks
             </td>
 
             <td class="px-6 py-4  ">
-                <!-- <input type="number" class="mark-input row-input md:w-[120px] md:h-[30px] px-2 rounded-md" data-total="{{$code->total_mark}}" data-pass="{{$code->pass_mark}}"> -->
+               
 
                 <span class="grade">F</span>
                 <input type="text" class="hidden grade-input" value="F" name="grade[{{ $data->id }}]">

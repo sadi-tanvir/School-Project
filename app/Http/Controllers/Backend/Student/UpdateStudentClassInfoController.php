@@ -34,7 +34,7 @@ class UpdateStudentClassInfoController extends Controller
     }
     public function getStudentClassData(Request $request, $schoolCode)
     {
-        $student = [];
+      
         $selectedClassName = $request->input('class_name');
         $selectedGroupName = $request->input('group');
         $selectedSectionName = $request->input('section');
@@ -46,85 +46,33 @@ class UpdateStudentClassInfoController extends Controller
 
         $selectedGender = $request->input('gender');
 
-        if ($selectedClassName && $selectedGroupName && $selectedSectionName &&  $selectedYear  &&  $selectedShift   &&  $selectedGender && $selectedCategory && $selectedStatus) {
-            $student = Student::where('action', 'approved')
-                ->where('school_code', $schoolCode)
-                ->where('class_name', $selectedClassName)
-                ->where('group', $selectedGroupName)
-                ->where('category', $selectedCategory)
-                ->where('section', $selectedSectionName)
-                ->where('year', $selectedYear)
-                ->where('shift', $selectedShift)
-                ->where('gender', $selectedGender)
-                ->where('status', $selectedStatus)
-                ->get();
-        } else if ($selectedClassName && $selectedGroupName && $selectedSectionName &&  $selectedYear  &&  $selectedGender && $selectedCategory && $selectedStatus) {
-            $student = Student::where('action', 'approved')
-                ->where('school_code', $schoolCode)
-                ->where('class_name', $selectedClassName)
-                ->where('group', $selectedGroupName)
-                ->where('category', $selectedCategory)
-                ->where('section', $selectedSectionName)
-                ->where('year', $selectedYear)
-                ->where('shift', $selectedShift)
-                ->where('gender', $selectedGender)
-                ->where('status', $selectedStatus)
-                ->get();
-        } else if ($selectedClassName && $selectedGroupName && $selectedSectionName  &&  $selectedGender && $selectedCategory && $selectedStatus) {
-            $student = Student::where('action', 'approved')
-                ->where('school_code', $schoolCode)
-                ->where('class_name', $selectedClassName)
-                ->where('group', $selectedGroupName)
-                ->where('category', $selectedCategory)
-                ->where('section', $selectedSectionName)
-                ->where('gender', $selectedGender)
-                ->where('year', $selectedYear)
-                ->where('status', $selectedStatus)
-                ->get();
-        } else if ($selectedClassName && $selectedGroupName  &&  $selectedGender && $selectedCategory && $selectedStatus) {
-            $student = Student::where('action', 'approved')
-                ->where('school_code', $schoolCode)
-                ->where('class_name', $selectedClassName)
-                ->where('group', $selectedGroupName)
-                ->where('category', $selectedCategory)
-                ->where('gender', $selectedGender)
-                ->where('year', $selectedYear)
-                ->where('status', $selectedStatus)
-                ->get();
-        } else if ($selectedClassName  &&  $selectedGender && $selectedCategory && $selectedStatus) {
-            $student = Student::where('action', 'approved')
-                ->where('school_code', $schoolCode)
-                ->where('class_name', $selectedClassName)
-                ->where('category', $selectedCategory)
-                ->where('gender', $selectedGender)
-                ->where('year', $selectedYear)
-                ->where('status', $selectedStatus)
-                ->get();
-        } else if ($selectedClassName && $selectedGroupName && $selectedCategory && $selectedStatus) {
-            $student = Student::where('action', 'approved')
-                ->where('school_code', $schoolCode)
-                ->where('class_name', $selectedClassName)
-                ->where('category', $selectedCategory)
-                ->where('group', $selectedGroupName)
-                ->where('year', $selectedYear)
-                ->where('status', $selectedStatus)
-                ->get();
-        } else if ($selectedClassName && $selectedGroupName) {
-            $student = Student::where('action', 'approved')
-                ->where('school_code', $schoolCode)
-                ->where('class_name', $selectedClassName)
-                ->where('group', $selectedGroupName)
-                ->where('year', $selectedYear)
+        $studentsQuery = Student::where('school_code', $schoolCode)
+        ->where('action', 'approved')
+        ->where('Class_name', $selectedClassName)
+        ->where('year', $selectedYear);
 
-                ->get();
-        } else if ($selectedClassName) {
-            $student = Student::where('action', 'approved')
-                ->where('school_code', $schoolCode)
-                ->where('class_name', $selectedClassName)
-                ->where('year', $selectedYear)
-                ->get();
-        }
+    if ($request->group) {
+        $studentsQuery->where('group', $selectedGroupName);
+    }
 
+    if ($request->section) {
+        $studentsQuery->where('section', $selectedSectionName);
+    }
+    if ($request->category) {
+        $studentsQuery->where('section', $selectedCategory);
+    }
+    if ($request->shift) {
+        $studentsQuery->where('section', $selectedShift);
+    }
+    if ($request->status) {
+        $studentsQuery->where('section', $selectedStatus);
+    }
+
+    if ($request->gender) {
+        $studentsQuery->where('gender', $selectedGender);
+    }
+
+    $student = $studentsQuery->get();
 
 
         //dd($student);
@@ -200,22 +148,21 @@ class UpdateStudentClassInfoController extends Controller
     }
 
 
-    public function delete($schoolCode, $ids)
+    public function deleteStudents(Request $request, $schoolCode)
     {
+        // Validate that 'id' field is an array of integers
+        $request->validate([
+            'id' => 'required|array',
+            'id.*' => 'integer',
+        ]);
 
-        if (!$ids) {
-            return redirect()->route('studentClassInfo', $schoolCode)->with('error', 'No students selected for deletion');
-        }
-        // Perform the deletion logic
-        if (!empty($ids)) {
-            $idArray = explode(',', $ids);
+        // Retrieve the array of student IDs to delete
+        $studentIds = $request->input('id');
 
-            // Delete the students
-            Student::whereIn('id', $idArray)->delete();
-            return redirect()->route('studentClassInfo', $schoolCode)->with('success', 'Students deleted successfully');
-        } else {
-            // Handle if no IDs are selected
-            return redirect()->route('studentClassInfo', $schoolCode)->with('error', 'No students selected for deletion');
-        }
+        // Delete the students with the specified IDs
+        Student::whereIn('id', $studentIds)->delete();
+
+        // Redirect back with a success message
+        return redirect()->route('studentClassInfo', $schoolCode)->with('success', 'Selected students have been deleted successfully.');
     }
 }

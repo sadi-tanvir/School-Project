@@ -145,11 +145,15 @@
                 </button>
                 <ul id="dropdown-online-examination" class="hidden py-2 space-y-1 border-s ms-7 border-dashed px-3">
                     <li>
-                        <a href="#" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List
+
+                        <a href="{{route('list.online.application',$school_code)}}"
+                            class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List
                             Of Application</a>
                     </li>
+                   
                     <li>
-                        <a href="#" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Report
+                        <a href="{{route('report.applicant',$school_code)}}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Report
+
                             Applicant</a>
                     </li>
 
@@ -177,8 +181,11 @@
                             New Student </a>
                     </li>
                     <li>
-                        <a href="{{ route('updateStudentBasicInfo', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Update
-                            Student Basic Info</a>
+                        <a href="{{ route('view.download.student', $school_code) }}"
+                            class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Download Student</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('updateStudentBasicInfo', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Update Student Basic Info</a>
                     </li>
                     <li>
                         <a href="{{ route('studentProfileUpdate', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Student

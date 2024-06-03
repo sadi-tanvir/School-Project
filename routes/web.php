@@ -66,8 +66,10 @@ use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\TrialBa
 use App\Http\Controllers\Backend\GeneralAccounts\VoucherPostingController;
 use App\Http\Controllers\Backend\NEDUBD\NEDUBDController;
 use App\Http\Controllers\Backend\NEDUBD\SchoolAdminController;
+use App\Http\Controllers\Backend\OnlineApplication\ListOfApplicantController;
 use App\Http\Controllers\Backend\Student\addShortListController;
 use App\Http\Controllers\Backend\Student\classSectionSTdTotalController;
+use App\Http\Controllers\Backend\Student\DownloadStudentController;
 use App\Http\Controllers\Backend\Student\StudentController;
 use App\Http\Controllers\Backend\Student\StudentDetailsController;
 use App\Http\Controllers\Backend\Student\StudentListWithPhotoController;
@@ -190,6 +192,12 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::post('/create-schoolInfo', [NEDUBDController::class, 'createSchoolInfo'])->name('schoolInfo.add');
 
 
+    //Online Application
+
+    Route::get('/list-of-application/{schoolCode}',[ListOfApplicantController::class,'ListOfApplicantView'])->name('list.online.application');
+    Route::get('/online-application-view/{schoolCode}',[ListOfApplicantController::class,'ListOfApplicantView'])->name('onlineApplicationForm.view');
+
+    Route::get('/report-applicant/{schoolCode}',[ListOfApplicantController::class,'ReportApplicationView'])->name('report.applicant');
 
     // student module
     Route::post('/create-student', [StudentController::class, 'addStudent'])->name('student.add');
@@ -199,6 +207,9 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::post('/add-students/get-groups/{schoolCode}', [StudentController::class, 'getGroups'])->name('add.get-groups');
     Route::post('/add-students/get-sections/{schoolCode}', [StudentController::class, 'getSections'])->name('add.get-sections');
     Route::post('/add-students/get-shifts/{schoolCode}', [StudentController::class, 'getShifts'])->name('add.get-shifts');
+
+    Route::get('/view-download-student/{schoolCode}',[DownloadStudentController::class,'viewDownloadStudent'])->name('view.download.student');             
+    Route::post('/download-student-data/{schoolCode}',[DownloadStudentController::class,'DownloadStudentData'])->name('download.student.data');             
 
 
     //Update Student Basic Info
@@ -215,7 +226,7 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/studentClassInfo/{schoolCode}', [UpdateStudentClassInfoController::class, 'studentClassInfo'])->name('studentClassInfo');
     Route::get('/getStudentClassData/{schoolCode}', [UpdateStudentClassInfoController::class, 'getStudentClassData'])->name('getStudentClassData');
     Route::put('/updateStudentClass/{schoolCode}', [UpdateStudentClassInfoController::class, 'updateStudentClass'])->name('updateStudentClass');
-    Route::delete('/deleteStudent/{schoolCode}/{ids}', [UpdateStudentClassInfoController::class, 'delete'])->name('deleteStudent');
+    Route::delete('/deleteStudent/{schoolCode}', [UpdateStudentClassInfoController::class, 'deleteStudents'])->name('deleteStudent');
     Route::post('/class-info/get-groups/{schoolCode}', [UpdateStudentClassInfoController::class, 'getGroups'])->name('class.info.get-groups');
     Route::post('/class-info/get-sections/{schoolCode}', [UpdateStudentClassInfoController::class, 'getSections'])->name('class.info.get-sections');
     Route::post('/class-info/get-shifts/{schoolCode}', [UpdateStudentClassInfoController::class, 'getShifts'])->name('class.info.get-shifts');
@@ -253,6 +264,9 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/uploadExelFile/{schoolCode}', [UploadExcelFileController::class, 'uploadExelFile'])->name('uploadExelFile');
     Route::get('/download-demo/{schoolCode}', [UploadExcelFileController::class, 'downloadDemo'])->name('download.demo');
     Route::post('/upload-excel', [UploadExcelFileController::class, 'uploadExcel'])->name('upload.excel');
+    Route::post('/upload-excel/get-groups/{schoolCode}', [UploadExcelFileController::class, 'uploadGroups'])->name('upload.get-groups');
+    Route::post('/upload-excel/get-sections/{schoolCode}', [UploadExcelFileController::class, 'uploadSections'])->name('upload.get-sections');
+    Route::post('/upload-excel/get-shifts/{schoolCode}', [UploadExcelFileController::class, 'uploaduploadShifts'])->name('upload.get-shifts');
 
 
     //upload photo student
@@ -625,7 +639,6 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     // Common Setting End .............................................................................................................
 
 
-
     // Exam Setting Start .............................................................................................................
 
     // Add Grade Point
@@ -792,7 +805,8 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     //Print Admit Card
     Route::get('/printAdmitCard/{schoolCode}', [PrintAdmitCardController::class, "printAdmitCard"])->name('printAdmitCard');
     Route::post('/downloadAdmit/{schoolCode}', [PrintAdmitCardController::class, "downloadAdmit"])->name('downloadAdmitCard');
-
+    Route::post('/print/get-groups/{schoolCode}', [PrintAdmitCardController::class, 'printGroups'])->name('print.get-groups');
+    Route::post('/print/get-sections/{schoolCode}', [PrintAdmitCardController::class, 'printSections'])->name('print.get-sections');
 
     //Print Seat Plan
     Route::get('/printSeatPlan/{schoolCode}', [PrintSeatPlanController::class, "printSeatPlan"]);

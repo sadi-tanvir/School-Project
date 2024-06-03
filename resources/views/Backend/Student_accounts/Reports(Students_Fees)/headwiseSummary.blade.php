@@ -46,7 +46,7 @@ Income Summary Report
     <h1 class="">Income Summary Report</h1>
 </div>
 <div class=" mt-10">
-    <form action="" class="p-5 shadowStyle rounded-[8px] border border-slate-300 w-2/5 mx-auto space-y-3">
+    <form action="{{ route('headwiseSummary.getReports', $school_code) }}" class="p-5 shadowStyle rounded-[8px] border border-slate-300 w-2/5 mx-auto space-y-3">
         {{-- date range --}}
         <div class="w-full grid grid-cols-4 place-items-center  gap-5 mb-14 mx-auto">
             <div></div>
@@ -102,12 +102,13 @@ Income Summary Report
         </div>
         {{-- Entry By --}}
         <div class="grid grid-cols-4 place-items-start  gap-5">
-            <label for="section" class="block mb-2 text-sm font-medium whitespace-noWrap ">Entry By :
+            <label for="entry_by" class="block mb-2 text-sm font-medium whitespace-noWrap ">Entry By :
                 :</label>
-            <select id="section" name="entry" class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5 col-span-3">
-                <option disabled selected>Select </option>
-                <option value="">x</option>
-                <option value="">y</option>
+            <select id="entry_by" name="entry_by" class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5 col-span-3">
+                <option selected>Select</option>
+                @foreach ($schoolAdmins as $admin)
+                <option value="{{ $admin->email . '_' .  $admin->name }}">{{ $admin->name }}</option>
+                @endforeach
             </select>
         </div>
 

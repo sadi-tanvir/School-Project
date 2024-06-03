@@ -295,6 +295,7 @@ Suject Setup
         });
     }
 </script>
+
 <script>
     // Call sortTable function after DOMContentLoaded
     document.addEventListener('DOMContentLoaded', function() {

@@ -19,7 +19,7 @@ Add Student
             <svg fill="#ffffff" width="24px" height="24px" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M11.448 10c-.4-.01-.796.065-1.082.345-.287.28-.373.675-.366 1.08.008.404.093.864.25 1.42l4.515 15.986c.088.31.205.575.39.784.184.208.447.35.714.38.532.056.975-.228 1.372-.595l3.144-2.91c.244-.244.468-.174.636-.006l3.252 3.122c.284.272.652.383 1.01.385.357.002.73-.11 1.013-.392l3.306-3.305c.284-.284.396-.655.397-1.016 0-.36-.11-.74-.405-1.02l-3.25-3.123c-.177-.176-.166-.436.013-.615l3.027-3.142c.378-.394.668-.844.607-1.38-.03-.267-.174-.53-.383-.714-.21-.184-.475-.3-.786-.39L12.846 10.25c-.544-.157-.998-.237-1.398-.25zm-.03 1c.26.006.662.068 1.17.216l15.976 4.644c.646.188.362.562.102.822l-3.027 3.144c-.274.284-.387.65-.39 1.01-.002.358.11.74.403 1.02l3.25 3.12c.228.227.095.508-.007.61L25.59 28.89c-.14.164-.466.15-.623-.006l-3.25-3.12c-.285-.273-.655-.382-1.01-.38-.353 0-.716.108-1 .372l-3.145 2.91c-.48.396-.712.325-.83-.093l-4.517-15.987c-.147-.52-.21-.922-.215-1.18 0-.407.198-.407.418-.407zm-6.92 15c-.45 0-.66-.55-.354-.853l2-2c.457-.455 1.165.25.71.707l-2.003 2c-.093.097-.217.146-.353.146zM25.5 4c.45 0 .66.55.356.853l-2 2c-.457.455-1.165-.25-.71-.707l2.003-2c.093-.097.214-.146.35-.146zM4.497 4c-.45 0-.658.55-.353.853l2 2c.457.455 1.165-.25.71-.707l-2.003-2C4.758 4.05 4.634 4 4.498 4zM0 14.5c0-.277.223-.5.5-.5h3c.277 0 .5.223.5.5s-.223.5-.5.5h-3c-.277 0-.5-.223-.5-.5zM14.5 0c.277 0 .5.223.5.5v3c0 .277-.223.5-.5.5s-.5-.223-.5-.5v-3c0-.277.223-.5.5-.5z"></path></g></svg>
         </span>
     </div>
-   
+
 
 <div class="">
     <form action="{{ url('/dashboard/create-student') }}" method="POST" enctype="multipart/form-data">
@@ -54,11 +54,9 @@ Add Student
                             <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                         </svg>
                     </div>
-                    <input datepicker datepicker-autohide type="text" name="birth_date" class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-3.5   " placeholder="Select date">
+                    <input datepicker datepicker-autohide type="text" name="birth_date" class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-3.5   " placeholder="Select date" />
 
                 </div>
-
-
             </div>
 
             <div>
@@ -240,9 +238,6 @@ Add Student
                     <option value="in active">In active</option>
 
                 </select>
-
-
-                </select>
             </div>
             <div class="mb-6">
 
@@ -251,20 +246,19 @@ Add Student
                         Picture</label>
                     <label class="text-red-700 text-2xl">*</label>
                 </div>
-                <input name="image" class="block w-full text-sm text-white border-0 rounded-lg cursor-pointer bg-gray-50 focus:outline-none  " aria-describedby="user_avatar_help" id="user_avatar" type="file">
+                <input name="image" class="block w-full text-sm text-white border-0 rounded-lg cursor-pointer bg-gray-50 focus:outline-none  " aria-describedby="user_avatar_help" id="user_avatar" type="file"/>
 
 
             </div>
             <div class="mb-6">
-                <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 ">Admission
-                    Date</label>
+                <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 ">Admission Date</label>
                 <div class="relative max-w-sm">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                         <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                         </svg>
                     </div>
-                    <input datepicker datepicker-autohide type="text" name="admission_date" class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-3.5   " placeholder="Select date">
+                    <input datepicker datepicker-autohide type="text" name="admission_date" class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-3.5   " placeholder="Select date"/>
                 </div>
             </div>
             <div class="mb-6">
@@ -274,7 +268,7 @@ Add Student
                     <label class="text-red-700 text-2xl">*</label>
                 </div>
                 <div class="relative max-w-sm">
-                    <input type="text" name="mobile_no" class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-3.5  " placeholder="Mobile no">
+                    <input type="text" name="mobile_no" class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-3.5  " placeholder="Mobile no"/>
                 </div>
             </div>
         </div>
@@ -321,7 +315,7 @@ Add Student
                             <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                         </svg>
                     </div>
-                    <input datepicker datepicker-autohide type="text" name="father_birth_date" class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-3.5   " placeholder="Select date">
+                    <input datepicker datepicker-autohide type="text" name="father_birth_date" class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-3.5   " placeholder="Select date"/>
                 </div>
             </div>
 
@@ -499,7 +493,7 @@ Add Student
             <div>
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">Last
                     Passing year
-                    <input type="text" name="last_passing_year" id="last_name" class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5    " placeholder="Enter The Last Passing year" />
+                    <input type="text" name="last_passing_year" id="last_name" class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 " placeholder="Enter The Last Passing year" />
             </div>
         </div>
 
@@ -540,9 +534,18 @@ Add Student
             </div>
         </div>
 
-        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
-            Submit
-        </button>
+        <div class="flex justify-center items-center gap-20">
+            <div class="flex items-center gap-2">
+                <input checked id="add_related_fees" name="add_related_fees" type="checkbox" value="true"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 dark:bg-gray-700">
+                <label for="add_related_fees" class="ml-1 text-lg font-medium text-gray-900 ">Add Fees</label>
+            </div>
+
+            <button type="submit"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">
+                Submit
+            </button>
+        </div>
 
 
     </form>

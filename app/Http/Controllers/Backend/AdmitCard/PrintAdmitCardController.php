@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Backend\AdmitCard;
 
+use App\Models\AddClassWiseGroup;
+use App\Models\AddClassWiseSection;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
 use App\Models\AddAcademicYear;
@@ -101,6 +103,19 @@ class PrintAdmitCardController extends Controller
         return $pdf->download('admit-card.pdf');
     }
     
+    public function printGroups(Request $request, $school_code)
+    {
+        $class = $request->class;
 
+        $groups = AddClassWiseGroup::where('class_name', $class)->where('school_code', $school_code)->get();
+        return response()->json($groups);
+    }
+
+    public function printSections(Request $request, $school_code)
+    {
+        $class = $request->class;
+        $sections = AddClassWiseSection::where('class_name', $class)->where('school_code', $school_code)->get();
+        return response()->json($sections);
+    }
 
 }

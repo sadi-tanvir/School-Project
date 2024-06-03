@@ -1,13 +1,13 @@
 @extends('Backend.app')
 @section('title')
-    Student Id Card
+    Student BasicInfo
 @endsection
 
 @section('Dashboard')
     @include('Message.message')
 
-    <div class="gradient-bg relative mb-4 overflow-hidden rounded-md px-6 py-4 font-semibold text-white">
-        <h2 class="">Student Id Card</h2>
+    <div class="gradient-bg relative overflow-hidden rounded-md px-6 py-4 font-semibold text-white">
+        <h2 class="">Download Student</h2>
         <span class="absolute -bottom-2 right-3 rotate-3">
             <svg
                 fill="#ffffff"
@@ -72,146 +72,176 @@
         </span>
     </div>
 
-    <div class="">
-        <div class="rounded-md border-2 border-gray-300 bg-gray-200 p-6">
-            <form action="" method="" enctype="multipart/form-data">
+    <div class="relative overflow-x-auto border-x-2 border-b-2 pt-6 sm:rounded-lg">
+      
+
+        
+    </div>
+
+    <form class="border-t-2 px-6" action="{{ route('download.student.data', $school_code) }}" method="POST">
                 @csrf
-                <div class="mb-5">
-                    <div class=" ">
-                        <label for="last_name" class="mb-2 block text-sm font-medium">Class:</label>
-                    </div>
-                    <div class="">
-                        <select
-                            id="countries"
-                            name="Class_name"
-                            class="block w-full rounded-lg border-0 border-gray-300 bg-white p-3.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-0"
-                        >
-                            <option>Choose a class</option>
-                            <option>one</option>
-                            <option>two</option>
-                        </select>
-                    </div>
-                </div>
 
-                <div class="mb-5">
-                    <div class=" ">
-                        <label for="last_name" class="mb-2 block text-sm font-medium">Section:</label>
-                    </div>
-                    <div class="">
+                <div class="mb-6 mt-6 grid gap-2 md:grid-cols-8">
+                    <div>
                         <select
-                            id="countries"
-                            name="id"
-                            class="block w-full rounded-lg border-0 border-gray-300 bg-white p-3.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-0"
+                            id="class"
+                            name="class_name"
+                            class="block h-full w-full rounded-md border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
                         >
-                            <option selected>Choose student Section</option>
-                            <option>01</option>
+                            <option selected>Choose a class</option>
+                            @foreach ($classes as $data)
+                                <option value="{{ $data->class_name }}">{{ $data->class_name }}</option>
+                            @endforeach
                         </select>
                     </div>
-                </div>
-                <div class="mb-5">
-                    <div class=" ">
-                        <label for="last_name" class="mb-2 block text-sm font-medium">Group:</label>
-                    </div>
-                    <div class="">
-                        <select
-                            id="countries"
-                            name="id"
-                            class="block w-full rounded-lg border-0 border-gray-300 bg-white p-3.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-0"
-                        >
-                            <option selected>Choose student Group</option>
-                            <option>01</option>
-                        </select>
-                    </div>
-                </div>
 
-                <div class="mb-5">
-                    <div class=" ">
-                        <label for="last_name" class="mb-2 block text-sm font-medium">Student ID:</label>
-                    </div>
-                    <div class="">
+                    <div>
                         <select
-                            id="countries"
-                            name="id"
-                            class="block w-full rounded-lg border-0 border-gray-300 bg-white p-3.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-0"
+                            id="group"
+                            name="group"
+                            class="block h-full w-full rounded-md border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
                         >
-                            <option selected>Choose student Id</option>
-                            <option>01</option>
+                            <option selected>Choose a Group</option>
+                            @foreach ($groups as $group)
+                                <option value="{{ $group->group_name }}">{{ $group->group_name }}</option>
+                            @endforeach
                         </select>
                     </div>
-                </div>
-                <div class="mb-5">
-                    <div class=" ">
-                        <label for="last_name" class="mb-2 block text-sm font-medium">Academic Year:</label>
-                    </div>
-                    <div class="">
+                    <div>
                         <select
-                            id="countries"
-                            name="id"
-                            class="block w-full rounded-lg border-0 border-gray-300 bg-white p-3.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-0"
+                            id="section"
+                            name="section"
+                            class="block h-full w-full rounded-md border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
                         >
-                            <option selected>Select Year</option>
-                            <option>01</option>
+                            <option selected>Choose a section</option>
+                            @foreach ($sections as $section)
+                                <option value="{{ $section->section_name }}">{{ $section->section_name }}</option>
+                            @endforeach
                         </select>
                     </div>
-                </div>
-                <div class="mb-5">
-                    <div class=" ">
-                        <label for="last_name" class="mb-2 block text-sm font-medium">Template:</label>
-                    </div>
-                    <div class="">
+                    <div>
                         <select
-                            id="countries"
-                            name="id"
-                            class="block w-full rounded-lg border-0 border-gray-300 bg-white p-3.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-0"
+                            id="gender"
+                            name="gender"
+                            class="block h-full w-full rounded-md border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
                         >
-                            <option selected>Choose Templete</option>
-                            <option>01</option>
+                            <option selected disabled>Selected Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="female">Female</option>
                         </select>
                     </div>
-                </div>
-
-                <div class="flex justify-end">
-                    <button
-                        type="submit"
-                        class="mb-2 flex h-full items-center justify-center gap-3 rounded-lg bg-blue-700 px-7 py-3.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    >
-                        <span>Print</span>
-                        <span>
-                            <svg
-                                fill="#ffffff"
-                                height="20px"
-                                width="20px"
-                                version="1.1"
-                                id="Capa_1"
-                                xmlns="http://www.w3.org/2000/svg"
-                                xmlns:xlink="http://www.w3.org/1999/xlink"
-                                viewBox="0 0 60 60"
-                                xml:space="preserve"
-                                stroke="#ffffff"
-                            >
-                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                <g id="SVGRepo_iconCarrier">
-                                    <g>
+                    <div>
+                        <select
+                            id="section"
+                            name="year"
+                            class="block h-full w-full rounded-md border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                        >
+                            @foreach ($years as $year)
+                                <option value="{{ $year->academic_year_name }}">
+                                    {{ $year->academic_year_name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="w-full">
+                        <button
+                            type="submit"
+                            class="mb-2 me-2 flex h-full w-full items-center justify-center gap-3 rounded-md bg-blue-700 px-6 py-3.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        >
+                            <span>Download</span>
+                            <span>
+                                <svg
+                                    width="20px"
+                                    height="20px"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
                                         <path
-                                            d="M42,43H18c-0.553,0-1,0.447-1,1s0.447,1,1,1h24c0.553,0,1-0.447,1-1S42.553,43,42,43z"
+                                            d="M16.6725 16.6412L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
+                                            stroke="#ffffff"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
                                         ></path>
-                                        <path
-                                            d="M42,48H18c-0.553,0-1,0.447-1,1s0.447,1,1,1h24c0.553,0,1-0.447,1-1S42.553,48,42,48z"
-                                        ></path>
-                                        <g>
-                                            <path
-                                                d="M51,17V0H9v17H0v34h6v3h3v6h42v-6h3v-3h6V17H51z M11,2h38v15H11V2z M49,54v4H11v-4V37h38V54z M50,32c-2.757,0-5-2.243-5-5 s2.243-5,5-5s5,2.243,5,5S52.757,32,50,32z"
-                                            ></path>
-                                            <circle cx="50" cy="27" r="3"></circle>
-                                        </g>
                                     </g>
-                                </g>
-                            </svg>
-                        </span>
-                    </button>
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
                 </div>
             </form>
-        </div>
-    </div>
+
+  
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#class').change(function () {
+                var class_name = $(this).val();
+                $.ajax({
+                    url: '{{ route('add.student.get-groups', $school_code) }}',
+                    method: 'post',
+                    data: {
+                        class: class_name,
+                        _token: '{{ csrf_token() }}',
+                    },
+                    success: function (result) {
+                        $('#group').empty();
+                        $('#group').append('<option disabled selected value="">Select</option>');
+                        $.each(result, function (key, value) {
+                            $('#group').append(
+                                '<option value="' + value.group_name + '">' + value.group_name + '</option>',
+                            );
+                        });
+                    },
+                });
+            });
+            //section
+            $('#class').change(function () {
+                var class_name = $(this).val();
+                $.ajax({
+                    url: '{{ route('add.student.get-sections', $school_code) }}',
+                    method: 'post',
+                    data: {
+                        class: class_name,
+                        _token: '{{ csrf_token() }}',
+                    },
+                    success: function (result) {
+                        $('#section').empty();
+                        $('#section').append('<option disabled selected value="">Select</option>');
+                        $.each(result, function (key, value) {
+                            $('#section').append(
+                                '<option value="' + value.section_name + '">' + value.section_name + '</option>',
+                            );
+                        });
+                    },
+                });
+            });
+        });
+        //shift
+        $('#class').change(function () {
+            var class_name = $(this).val();
+            $.ajax({
+                url: '{{ route('add.student.get-shifts', $school_code) }}',
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}',
+                },
+                success: function (result) {
+                    $('#shift').empty();
+                    $('#shift').append('<option disabled selected value="">Select</option>');
+                    $.each(result, function (key, value) {
+                        $('#shift').append(
+                            '<option value="' + value.shift_name + '">' + value.shift_name + '</option>',
+                        );
+                    });
+                },
+            });
+        });
+    </script>
 @endsection

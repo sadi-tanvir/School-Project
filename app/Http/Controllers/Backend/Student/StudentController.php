@@ -19,8 +19,10 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+
 use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 
 class StudentController extends Controller
 {
@@ -71,8 +73,7 @@ class StudentController extends Controller
         }
 
 
-        $isExist = Student::where('nedubd_student_id', $request->input('nedubd_student_id'))
-            ->exists();
+        $isExist = Student::where('school_code', $request->input('school_code'))->where('action', 'approved')->where('student_id', $request->input('student_id'))->exists();
 
         if ($isExist) {
             return redirect()->back()->with('error', 'This Student already exists.');
@@ -164,6 +165,7 @@ class StudentController extends Controller
         return view('Backend.Student.AdmissionConfirmInvoice', compact('date', 'studentInfo'));
     }
 
+
     public function generateQrCode($school_code, $studentId, $invoiceId)
     {
         $appUrl = env('APP_URL');
@@ -174,6 +176,7 @@ class StudentController extends Controller
     }
 
     // genearate & pay student fees
+
     public function addNewStudentFees(Request $request, $school_code)
     {
         $selectedPayslips = $request->input('select_payslip', []);
@@ -185,6 +188,7 @@ class StudentController extends Controller
         $group = $request->input('group');
         $section = $request->input('section');
         $waiver = $request->input('waiver');
+
         $pay_now = $request->input('pay_now');
 
         // generate payslip
@@ -290,6 +294,7 @@ class StudentController extends Controller
                 )
             );
         }
+
 
         return redirect()->back()->with('success', 'Fees added successfully!');
     }

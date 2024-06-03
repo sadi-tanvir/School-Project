@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -19,6 +18,9 @@ return new class extends Migration
             $table->string('student_id');
             $table->string('exam_name');
             $table->string('merit_status');
+            $table->string('student_roll');
+            $table->string('total_marks');
+            $table->string('total_gpa');
             $table->string('year');
             $table->enum('status', ['active', 'in active'])->default('active');
             $table->enum('action', ['pending', 'approved', 'delete', 'edit'])->default('pending');
@@ -33,6 +35,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('exam_process');
-        
+
     }
 };

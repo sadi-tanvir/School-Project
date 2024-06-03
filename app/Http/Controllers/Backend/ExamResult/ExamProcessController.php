@@ -10,9 +10,13 @@ use App\Models\AddClassWiseGroup;
 use App\Models\AddClassWiseSection;
 use App\Models\AddGroup;
 use App\Models\AddSection;
+use App\Models\ExamMarkInput;
 use App\Models\ExamProcess;
+use App\Models\GradeSetup;
+use App\Models\SetShortCode;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ExamProcessController extends Controller
 {
@@ -71,10 +75,13 @@ class ExamProcessController extends Controller
         $exam_name = $request->exam_name;
         $merit_status = $request->merit_status;
         $year = $request->year;
-    
+
         // Initialize the array to hold student IDs
         $student_ids = [];
-    
+
+
+
+
         // Check if student_id is null
         if (is_null($student_id)) {
             // Retrieve student IDs from the students table based on class, section, group, and year
@@ -87,28 +94,79 @@ class ExamProcessController extends Controller
             // If student_id is not null, add it to the array
             $student_ids[] = $student_id;
         }
-    
+
+
+        // dd($student_ids);
         // Loop through each student ID and save or update the record
         foreach ($student_ids as $id) {
             // Check if the record already exists
             $existingRecord = ExamProcess::where('student_id', $id)
                 ->where('exam_name', $exam_name)
                 ->where('year', $year)
+                ->where('merit_status', $merit_status)
                 ->first();
-    
+
             if ($existingRecord) {
                 // Update the existing record
+
+                $singleStudent = Student::where('school_code', $school_code)->where('action', 'approved')->where('student_id', $id)->first();
+                $singleStudentTotalMarks = ExamMarkInput::where('school_code', $school_code)->where('action', 'approved')->where('student_id', $id)->get();
+                // dd($singleStudentTotalMarks);
+
+                $count = $singleStudentTotalMarks->count();
+                // dd($count);
+                $totalMarks = 0;
+                $totalGPA = 0;
+                foreach ($singleStudentTotalMarks as $value) {
+                    if ($value->grade === "F") {
+                        $totalGPA = 0;
+                        break;
+                    } else {
+                        $totalGPA += $value->gpa;
+                    }
+
+                }
+                foreach ($singleStudentTotalMarks as $value) {
+                    $totalMarks += $value->total_marks;
+                }
+                $GPA = $totalGPA / $count;
+                $GPA = number_format($GPA, 2);
                 $existingRecord->update([
                     'class' => $class,
                     'group' => $group,
                     'section' => $section,
                     'merit_status' => $merit_status,
+                    'student_roll' => $singleStudent->student_roll,
+                    'total_marks' => $totalMarks,
+                    'total_gpa' => $GPA,
                     'status' => 'active',
                     'action' => 'approved',
                     'school_code' => $school_code,
                 ]);
             } else {
                 // Create a new record
+                $singleStudent = Student::where('school_code', $school_code)->where('action', 'approved')->where('student_id', $id)->first();
+                $singleStudentTotalMarks = ExamMarkInput::where('school_code', $school_code)->where('action', 'approved')->where('student_id', $id)->get();
+                // dd($singleStudentTotalMarks);
+
+                $count = $singleStudentTotalMarks->count();
+                // dd($count);
+                $totalMarks = 0;
+                $totalGPA = 0;
+                foreach ($singleStudentTotalMarks as $value) {
+                    if ($value->grade === "F") {
+                        $totalGPA = 0;
+                        break;
+                    } else {
+                        $totalGPA += $value->gpa;
+                    }
+
+                }
+                foreach ($singleStudentTotalMarks as $value) {
+                    $totalMarks += $value->total_marks;
+                }
+                $GPA = $totalGPA / $count;
+                $GPA = number_format($GPA, 2);
                 ExamProcess::create([
                     'class' => $class,
                     'group' => $group,
@@ -116,6 +174,9 @@ class ExamProcessController extends Controller
                     'student_id' => $id,
                     'exam_name' => $exam_name,
                     'merit_status' => $merit_status,
+                    'student_roll' => $singleStudent->student_roll,
+                    'total_marks' => $totalMarks,
+                    'total_gpa' => $GPA,
                     'year' => $year,
                     'status' => 'active',
                     'action' => 'approved',
@@ -123,9 +184,9 @@ class ExamProcessController extends Controller
                 ]);
             }
         }
-    
+
         return redirect()->back()->with('success', 'Exam Process complete successfully!');
     }
-    
+
 
 }

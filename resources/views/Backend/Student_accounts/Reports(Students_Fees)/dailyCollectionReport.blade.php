@@ -50,8 +50,7 @@
             {{-- date range --}}
             <div class="grid grid-cols-2 place-items-start  gap-5 mb-14">
                 <div>
-                    <label for="class" class="block mb-2 text-sm font-medium whitespace-noWrap ">Date From
-                        :</label>
+                    <label for="class" class="block mb-2 text-sm font-medium whitespace-noWrap ">Date From:</label>
                     <div class="relative max-w-sm">
                         <div class="absolute inset-y-0 start-0 flex items-center mt-3">
                             <input type="date" value="{{ date('Y-m-d') }}" name="date_from" id="date_from"

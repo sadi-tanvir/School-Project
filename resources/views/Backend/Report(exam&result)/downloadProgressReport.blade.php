@@ -224,6 +224,7 @@
                                                         $studentId = $studentInfo->student_id;
                                                         $gradePoint = $exam->gpa;
                                                         $studentRoll = $studentInfo->student_roll;
+                                                        $gradeMark = 0;
                                                     @endphp
                                                     <td>{{$key + 1}}</td>
                                                     <td>{{$exam->subject}}</td>

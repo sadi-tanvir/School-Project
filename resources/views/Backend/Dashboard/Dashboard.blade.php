@@ -11,7 +11,15 @@
     >
         <h2 class="text-4xl">
             <span class="font-light">Hello!</span>
+            @if ($adminData)
             <span class="font-semibold">{{ $adminData->first_name }} {{ $adminData->last_name }}</span>
+            @endif
+            @if ($schoolAdminData)
+            <span class="font-semibold">{{ $schoolAdminData->name }}</span>
+            @endif
+            @if ($studentData)
+            <span class="font-semibold">{{ $studentData->name }}</span>
+            @endif
         </h2>
         <p class="mt-1 font-light opacity-90">Welcome! Have a wonderful day!</p>
 

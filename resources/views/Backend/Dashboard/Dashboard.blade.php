@@ -20,6 +20,7 @@
             @if ($studentData)
             <span class="font-semibold">{{ $studentData->name }}</span>
             @endif
+
         </h2>
         <p class="mt-1 font-light opacity-90">Welcome! Have a wonderful day!</p>
 

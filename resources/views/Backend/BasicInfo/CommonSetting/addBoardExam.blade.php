@@ -367,7 +367,7 @@
                         </td>
 
                         <td class="flex px-6 py-4 text-xl">
-                            <a class="edit-button mr-2"><i class="fa fa-edit" style="color: green"></i></a>
+                            <!-- <a class="edit-button mr-2"><i class="fa fa-edit" style="color: green"></i></a> -->
 
                             <form method="POST" action="{{ url('dashboard/delete_board_exam', $data->id) }}">
                                 @csrf

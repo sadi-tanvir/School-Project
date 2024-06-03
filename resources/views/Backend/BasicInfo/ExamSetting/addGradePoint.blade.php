@@ -148,7 +148,7 @@ Add GradePoint
 
                 <td class="px-6 py-4  text-xl flex justify-center">
 
-                    <a class="mr-2 edit-button"><i class="fa fa-edit" style="color:green;"></i></a>
+                    <!-- <a class="mr-2 edit-button"><i class="fa fa-edit" style="color:green;"></i></a> -->
 
                     <form method="POST" action="{{ url('dashboard/delete_grade_point', $data->id) }}">
                         @csrf

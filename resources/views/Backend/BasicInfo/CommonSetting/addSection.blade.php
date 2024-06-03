@@ -350,7 +350,7 @@
                         </td>
 
                         <td class="flex px-6 py-4 text-xl">
-                            <a class="mr-2"><i class="fa fa-edit" style="color: green"></i></a>
+                           
 
                             <form method="POST" action="{{ url('dashboard/delete_section', $data->id) }}">
                                 @csrf

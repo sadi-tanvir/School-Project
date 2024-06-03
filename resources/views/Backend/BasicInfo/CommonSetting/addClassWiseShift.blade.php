@@ -333,7 +333,7 @@
                             {{ $data->shift_name }}
                         </td>
                         <td class="flex justify-center px-6 py-4 text-xl">
-                            <a class="edit-button mr-2"><i class="fa fa-edit" style="color: green"></i></a>
+                            <!-- <a class="edit-button mr-2"><i class="fa fa-edit" style="color: green"></i></a> -->
                             <form method="POST" action="{{ url('dashboard/delete_class_wise_shift', $data->id) }}">
                                 @csrf
                                 @method('DELETE')

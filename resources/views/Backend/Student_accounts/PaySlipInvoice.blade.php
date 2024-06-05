@@ -151,7 +151,7 @@ $index = 0;
 
                 <div>
                     <div class="flex justify-between items-center text-[10px] mt-8">
-                        <p class="text-red-500 font-semibold text-xs">Print Date: {{ date('Y-m-d') }}</p>
+                        <p class="text-slate-800 font-semibold text-xs">Print Date: {{ date('Y-m-d') }}</p>
                         <div class="">
                             <p class="border-t border-dashed px-3 text-center">Accountant Sign</p>
                         </div>

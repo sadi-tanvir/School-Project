@@ -44,7 +44,7 @@ $index = 0;
                 <div class="flex justify-between items-center border-b-2 border-gray-600 px-2 text-[10px]">
                     <img src="https://cms.nedubd.com/logo/graduation.png" class="w-12" alt="">
                     <div class="text-center">
-                        <h1 class="font-bold">{{ $school_info->school_name }}</h1>
+                        <h1 class="font-bold">{{ isset($school_info->school_name) ? $school_info->school_name : "N/A" }}</h1>
                         <h1>N/A</h1>
                     </div>
                     @if ($indx == 0)

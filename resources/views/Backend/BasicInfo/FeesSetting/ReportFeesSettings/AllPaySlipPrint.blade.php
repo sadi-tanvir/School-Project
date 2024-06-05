@@ -28,6 +28,7 @@
     /* .gradient-bg {
         background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.04),rgba(0,0,0,0.03),rgba(0,0,0,0.09),rgba(0,0,0,0.09),rgba(0,0,0,0.06),rgba(0,0,0,0.04),transparent,rgba(0,0,0,0.05),rgba(0,0,0,0.06),rgba(0,0,0,0.02),rgba(0,0,0,0.09),rgba(0,0,0,0.03),rgba(0,0,0,0.07) 4px),linear-gradient(0deg, rgb(24, 9, 88),rgb(20, 15, 94));
     } */
+
 </style>
 
 <body class="">
@@ -56,8 +57,8 @@
             <div class="space-y-1">
                 <div class="mt-10">
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-white uppercase bg-blue-600 dark:bg-gray-700 dark:text-gray-400">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                            <thead class="text-xs text-white uppercase bg-blue-600">
                                 <tr class="text-center">
                                     <th scope="col" class="px-6 py-3 bg-blue-500">
                                         SL
@@ -65,53 +66,49 @@
                                     <th scope="col" class="px-6 py-3">
                                         CLASS
                                     </th>
-                                    @foreach ($paySlipTypes as $key => $paySlipType)
-                                        <th scope="col"
-                                            class="px-6 py-3 {{ ($key + 1) % 2 !== 0 ? 'bg-blue-500' : '' }}">
-                                            {{ $paySlipType->pay_slip_type_name }}
-                                        </th>
-                                    @endforeach
                                     <th scope="col" class="px-6 py-3 bg-blue-500">
-                                        TOTAL
+                                        Fee Name
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Fee Amount
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr
-                                    class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 text-center">
-                                    <th scope="row"
-                                        class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        1
-                                    </th>
+                                @if ($paySlipTypes)
+                                @foreach ($paySlipTypes as $key => $paySlipType)
+                                <tr class="odd:bg-white even:bg-gray-50 text-center">
                                     <td class="px-6 py-4">
-                                        {{$class}}
+                                        {{$key + 1}}
                                     </td>
-                                    @foreach ($paySlipTypes as $paySlipType)
-                                        <td class="px-6 py-4">
-                                            {{$allAmountOfpaySlips[$paySlipType->pay_slip_type_name]}}
-                                        </td>
-                                    @endforeach
                                     <td class="px-6 py-4">
+                                        {{ $class }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $paySlipType->pay_slip_type_name }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{$allAmountOfpaySlips[$paySlipType->pay_slip_type_name]}}
+                                    </td>
+                                </tr>
+                                @endforeach
+                                @endif
+                                <tr class="odd:bg-white even:bg-gray-50 border-b text-center">
+                                    <td scope="row" class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                    </td>
+                                    <td scope="row" class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                    </td>
+                                    <td class="px-6 py-4 text-end font-bold  text-lg">
+
+                                    </td>
+                                    <td class=" py-4 font-bold text-lg">
+                                        Total <span class="">=</span>
                                         {{ $totalAmount }}
                                     </td>
                                 </tr>
-                                {{-- <tr
-                                    class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                                    <th scope="row"
-                                        class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    </th>
-                                    <td class="px-6 py-4 text-end">
-                                        Total
-                                    </td>
-                                    <td class="px-6 py-4">
-
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{ $totalAmount }} - {{ $totalAmountOfpaySlips }}
-                                    </td>
-                                </tr> --}}
                             </tbody>
                         </table>
+
                     </div>
                 </div>
             </div>

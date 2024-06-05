@@ -265,6 +265,7 @@ class PaySlipCollectionController extends Controller
         $school_code = $request->schoolCode;
         $invoiceId = $request->invoiceId;
         $studentId = $request->studentId;
+        $school_info = SchoolInfo::where('school_code', $school_code)->first();
         $pay_slips = GeneratePayslip::where('school_code', $school_code)
             ->where('voucher_number', '#' . $invoiceId)
             ->get();
@@ -279,6 +280,6 @@ class PaySlipCollectionController extends Controller
             ->select('name', 'year', 'student_id', 'Class_name', 'group', 'section', 'student_roll')
             ->first();
 
-        return view('Backend.Student_accounts.QRCodePaySlipInvoice', compact('pay_slips', 'aggregateAmounts', 'studentInfo'));
+        return view('Backend.Student_accounts.QRCodePaySlipInvoice', compact('pay_slips', 'aggregateAmounts', 'studentInfo', 'school_info'));
     }
 }

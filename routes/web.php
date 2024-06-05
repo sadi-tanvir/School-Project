@@ -207,8 +207,8 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::post('/add-students/get-sections/{schoolCode}', [StudentController::class, 'getSections'])->name('add.get-sections');
     Route::post('/add-students/get-shifts/{schoolCode}', [StudentController::class, 'getShifts'])->name('add.get-shifts');
 
-    Route::get('/view-download-student/{schoolCode}',[DownloadStudentController::class,'viewDownloadStudent'])->name('view.download.student');             
-    Route::post('/download-student-data/{schoolCode}',[DownloadStudentController::class,'DownloadStudentData'])->name('download.student.data');             
+    Route::get('/view-download-student/{schoolCode}',[DownloadStudentController::class,'viewDownloadStudent'])->name('view.download.student');
+    Route::post('/download-student-data/{schoolCode}',[DownloadStudentController::class,'DownloadStudentData'])->name('download.student.data');
 
 
     //Update Student Basic Info
@@ -352,7 +352,7 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     // Generate multiple payslips
     Route::get("/studentAccounts/generateMultiplePayslip/{schoolCode}", [GenerateMultiplePayslipController::class, "GenerateMultiplePayslipView"])->name("generateMultiplePayslip.view");
     Route::get("/studentAccounts/getStudentInformation/{schoolCode}", [GenerateMultiplePayslipController::class, "GetStudentInformation"])->name("studentInformation.get");
-    Route::get("/studentAccounts/storeMultiplePayslipData/{schoolCode}", [GenerateMultiplePayslipController::class, "StoreMultiplePayslipData"])->name("multiplePayslipData.store");
+    Route::post("/studentAccounts/storeMultiplePayslipData/{schoolCode}", [GenerateMultiplePayslipController::class, "StoreMultiplePayslipData"])->name("multiplePayslipData.store");
     //others
     Route::get('/FeeCollection/{schoolCode}', [FromFeeController::class, 'AddFromFee'])->name('feeCollection');
     Route::get('/donation/{schoolCode}', [DonationController::class, 'AddDonationFee'])->name('donation');
@@ -482,7 +482,7 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::post('/exam/get-student/{schoolCode}', [ProgressReportController::class, 'getStudent'])->name('exam.get-student');
     Route::get('/exam_process/progressStudent/{schoolCode}', [ProgressReportController::class, 'progressStudent'])->name('exam_progressStudent');
 
-    
+
     Route::get('/exam-failList/{schoolCode}', [ReportsExamsReportsController::class, 'failList1']);
     Route::get('/tebular-format1/{schoolCode}', [ReportsExamsReportsController::class, 'format1']);
     Route::get('/tebular-format2/{schoolCode}', [ReportsExamsReportsController::class, 'format2']);

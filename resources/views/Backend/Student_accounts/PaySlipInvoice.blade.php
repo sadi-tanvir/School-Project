@@ -44,7 +44,7 @@ $index = 0;
                 <div class="flex justify-between items-center border-b-2 border-gray-600 px-2 text-[10px]">
                     <img src="https://cms.nedubd.com/logo/graduation.png" class="w-12" alt="">
                     <div class="text-center">
-                        <h1 class="font-bold">{{ $school_info->school_name }}</h1>
+                        <h1 class="font-bold">{{ isset($school_info->school_name) ? $school_info->school_name : "N/A" }}</h1>
                         <h1>N/A</h1>
                     </div>
                     @if ($indx == 0)
@@ -151,7 +151,7 @@ $index = 0;
 
                 <div>
                     <div class="flex justify-between items-center text-[10px] mt-8">
-                        <p class="text-red-500 font-semibold text-xs">Print Date: {{ date('Y-m-d') }}</p>
+                        <p class="text-slate-800 font-semibold text-xs">Print Date: {{ date('Y-m-d') }}</p>
                         <div class="">
                             <p class="border-t border-dashed px-3 text-center">Accountant Sign</p>
                         </div>

@@ -11,13 +11,12 @@
 
     @include('Shared.alert')
     <div id="errorContainer"></div>
-    <form action="{{ route('multiplePayslipData.store', $school_code) }}">
+    <form action="{{ route('multiplePayslipData.store', $school_code) }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="w-full border mx-auto p-5 space-y-10">
-            <form action="" method="">
-                @csrf
-                <div class="grid grid-cols-11 items-center gap-5">
+            <div >
+                <div class="grid grid-cols-12 items-center gap-5">
                     {{-- month --}}
                     <div class="col-span-2">
                         <div class="p-4">
@@ -142,7 +141,7 @@
                     </div>
 
                     {{-- status --}}
-                    {{-- <div class="">
+                    <div class="">
                         <label for="status"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status:</label>
                         <select id="status" name="status"
@@ -151,7 +150,7 @@
                             <option value="New">New</option>
                             <option value="Old">Old</option>
                         </select>
-                    </div> --}}
+                    </div>
 
                     {{-- academic_year --}}
                     <div class="">
@@ -171,7 +170,7 @@
                         </button>
                     </div>
                 </div>
-            </form>
+            </div>
 
             {{-- table --}}
             <div class="space-y-1">

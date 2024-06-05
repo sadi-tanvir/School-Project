@@ -1,23 +1,24 @@
 @extends('Backend.app')
 @section('title')
-    All Fees Print
+All Fees Print
 @endsection
 
 
 @section('Dashboard')
-    <div class="mb-2">
-        <h1>All Fees Print</h1>
-    </div>
+<div class="mb-2">
+    <h1>All Fees Print</h1>
+</div>
 
-    {{-- alert message --}}
-    @include('Shared.alert')
+{{-- alert message --}}
+@include('Shared.alert')
 
-    <div class="w-full border mx-auto p-5 space-y-10">
-        <div class="space-y-1">
-            <div class="">
+<div class="w-full border mx-auto p-5 space-y-10">
+    <div class="space-y-1">
+        <div class="">
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-white uppercase bg-blue-600 dark:bg-gray-700 dark:text-gray-400">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                        <thead class="text-xs text-white uppercase bg-blue-600">
                             <tr class="text-center">
                                 <th scope="col" class="px-6 py-3 bg-blue-500">
                                     SL
@@ -25,42 +26,51 @@
                                 <th scope="col" class="px-6 py-3">
                                     CLASS
                                 </th>
-                                @if ($feesData)
-                                    @foreach ($feesData as $key => $feeData)
-                                        <th scope="col"
-                                            class="px-6 py-3 {{ $key % 2 === 0 ? 'bg-blue-500' : '' }} ">
-                                            {{ $feeData->fee_type }}
-                                        </th>
-                                    @endforeach
-                                @endif
-                                <th scope="col" class="px-6 py-3 ">
-                                    Total
+                                <th scope="col" class="px-6 py-3 bg-blue-500">
+                                    Fee Name
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Fee Amount
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="text-center content-center">
-                            <td class="px-6 py-4">
-                                1
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $class }}
-                            </td>
+                        <tbody>
                             @if ($feesData)
-                                @foreach ($feesData as $feeData)
-                                    <td class="px-6 py-4">
-                                        <input class="py-0 border-0 text-center" type="number" name="amount_{{ $feeData->fee_amount }}"
-                                            value="{{ $feeData->fee_amount }}">
-                                    </td>
-                                @endforeach
+                            @foreach ($feesData as $feeData)
+                            <tr class="odd:bg-white even:bg-gray-50 text-center">
+                                <td class="px-6 py-4">
+                                    1
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $class }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $feeData->fee_type }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $feeData->fee_amount }}
+                                </td>
+                            </tr>
+                            @endforeach
                             @endif
-                            <td class="px-6 py-4">
-                                <input readonly class="py-0 border-0 text-center" type="number" value="{{ $totalAmount }}"
-                                    name="total_amount">
-                            </td>
+                            <tr class="odd:bg-white even:bg-gray-50 border-b text-center">
+                                <td scope="row" class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                </td>
+                                <td scope="row" class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                </td>
+                                <td class="px-6 py-4 text-end font-bold  text-lg">
+
+                                </td>
+                                <td class=" py-4 font-bold text-lg">
+                                    Total <span class="mx-5">=</span>
+                                    {{$totalAmount}}
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection

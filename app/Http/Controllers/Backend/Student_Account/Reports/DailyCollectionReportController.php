@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Student_Account\Reports;
 
 use App\Http\Controllers\Controller;
 use App\Models\AddClass;
+use App\Models\AddPaySlip;
 use App\Models\GeneratePayslip;
 use App\Models\SchoolAdmin;
 use App\Models\SchoolInfo;
@@ -89,5 +90,28 @@ class DailyCollectionReportController extends Controller
         $schoolInfo = SchoolInfo::where('school_code', $school_code)->first();
 
         return view('Backend/Student_accounts/Reports(Students_Fees)/dailyCollectionReportPrint', compact('schoolInfo', 'date_from', 'date_to', 'paySlipReport', 'entry_by_name', 'TotalAmount'));
+    }
+
+
+    // get all payslip details according to the voucher number
+    public function GetPayslipDetailsReport(Request $request, $school_code, $voucherNumber)
+    {
+        $voucherWisePayslips = GeneratePayslip::where('school_code', $school_code)
+            ->where('voucher_number', "#" . $voucherNumber)
+            ->get();
+
+        return view('Backend.Student_accounts.Reports(Students_Fees).dailyCollectionReportPayslipDetailsPrint', compact('voucherWisePayslips'));
+    }
+
+
+    // get all fees details according to the payslip Types
+    public function GetFeesDetailsReport(Request $request, $school_code, $className, $payslipType)
+    {
+        $payslipWiseFees = AddPaySlip::where('school_code', $school_code)
+            ->where('class_name', $className)
+            ->where('pay_slip_type', $payslipType)
+            ->get();
+
+        return view('Backend.Student_accounts.Reports(Students_Fees).dailyCollectionReportFeesDetailsPrint', compact('payslipWiseFees'));
     }
 }

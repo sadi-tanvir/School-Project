@@ -29,9 +29,20 @@
 <body class="">
     <div class="w-full bg-slate-200 min-h-screen">
         <div class="w-[60%] h-fit bg-white mx-auto px-5 py-12">
-            <button type="button" onclick="history.back()" class="text-white bg-red-700 hover:bg-red-600 focus:ring-0  font-medium rounded-lg text-sm px-10 py-2.5 me-2 mb-2 focus:outline-none uppercase">
-                Back
-            </button>
+            <div class="flex w-full justify-between items-center">
+                <button type="button" onclick="history.back()" class="text-white bg-red-700 hover:bg-red-600 focus:ring-0  font-medium rounded-lg text-sm px-10 py-2.5 me-2 mb-2 focus:outline-none uppercase">
+                    Back
+                </button>
+                <div class="flex space-x-3">
+                    <form id="sortOrderForm" action="{{ route('DailyCollectionReport.sort.getReports', $school_code) }}" method="get">
+                        <select id="sortOrder" name="sortOrder" class="w-32 bg-gray-50 text-gray-900 text-sm rounded-lg block p-2.5 col-span-2" onchange="document.getElementById('sortOrderForm').submit()">
+                            <option selected disabled>Select</option>
+                            <option value="asc" {{ $sessionSortOrder == 'asc' ? 'selected' : '' }}>ASC</option>
+                            <option value="desc" {{ $sessionSortOrder == 'desc' ? 'selected' : '' }}>DESC</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
             {{-- assessment scale section --}}
             <div>
                 <h1 class="text-center text-blue-500 font-bold">{{ $schoolInfo->school_name }}</h1>
@@ -74,7 +85,7 @@
                                     <th scope="col" class="px-6 py-3 bg-blue-500">
                                         VOUCHER ID
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                                    <th scope="col" class="px-6 py-3">
                                         STUDENT ID
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-blue-500">
@@ -83,20 +94,20 @@
                                     {{-- <th scope="col" class="px-6 py-3 bg-blue-500">
                                         MONTH NAME
                                     </th> --}}
-                                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                                    <th scope="col" class="px-6 py-3">
                                         AMOUNT
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-blue-500">
                                         BY
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                                    <th scope="col" class="px-6 py-3">
 
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($paySlipReport as $key => $payslip)
-                                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 text-center">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b text-center">
                                     <td class="px-6 py-4">
                                         {{ $key + 1 }}
                                     </td>
@@ -155,6 +166,18 @@
                 </div>
             </div>
         </div>
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                const sortOrder = document.getElementById('sortOrder');
+                const sortOrderForm = document.getElementById('sortOrderForm');
+                sortOrder.addEventListener('change', function(event) {
+                    sortOrder.value = event.target.value;
+                    sortOrderForm.submit();
+                });
+            });
+        </script>
 </body>
 
 </html>

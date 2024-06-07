@@ -96,7 +96,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($voucherWisePayslips as $key => $payslip)
-                                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 text-center">
+                                <tr class="odd:bg-white even:bg-gray-50 border-b text-center">
                                     <td class="px-6 py-4">
                                         {{ $key + 1 }}
                                     </td>

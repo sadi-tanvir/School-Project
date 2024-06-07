@@ -363,6 +363,7 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/DailyCollectionReport/{schoolCode}', [DailyCollectionReportController::class, 'DailyCollectionReport'])->name('DailyCollectionReport');
     Route::get('/DailyCollectionReport/getStudentRoll/{schoolCode}', [DailyCollectionReportController::class, 'GetStudentRoll'])->name('DailyCollectionReport.studentRoll');
     Route::get('/DailyCollectionReport/getReports/{schoolCode}', [DailyCollectionReportController::class, 'GetPaySlipReport'])->name('DailyCollectionReport.getReports');
+    Route::get('/DailyCollectionReport/getReports/sort/{schoolCode}', [DailyCollectionReportController::class, 'GetPaySlipReportSortingWise'])->name('DailyCollectionReport.sort.getReports');
     Route::get('/DailyCollectionReport/getReports/payslipDetails/{schoolCode}/{voucherNumber}', [DailyCollectionReportController::class, 'GetPayslipDetailsReport'])->name('DailyCollectionReport.payslipDetails.getReports');
     Route::get('/DailyCollectionReport/getReports/FeesDetails/{schoolCode}/{className}/{payslipType}', [DailyCollectionReportController::class, 'GetFeesDetailsReport'])->name('DailyCollectionReport.feesDetails.getReports');
     // Route::get('/DailyCollectionReport/printReports/{schoolCode}', [DailyCollectionReportController::class, 'PrintPaySlipReport'])->name('DailyCollectionReport.print');

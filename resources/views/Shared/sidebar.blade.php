@@ -150,7 +150,7 @@
                             class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List
                             Of Application</a>
                     </li>
-                   
+
                     <li>
                         <a href="{{route('report.applicant',$school_code)}}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Report
 
@@ -678,19 +678,19 @@
 
             <!-- Generel Accounts  -->
             <li class="dropdown">
-                <button type="button" class="flex items-center w-full py-2 px-4 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-slate-100/20" aria-controls="dropdown-student-Attendence" data-collapse-toggle="dropdown-student-Attendence">
+                <button type="button" class="flex items-center w-full py-2 px-4 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-slate-100/20" aria-controls="dropdown-general-accounts" data-collapse-toggle="dropdown-general-accounts">
                     <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ffffff">
                         <path d="M9 1V3H15V1H17V3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9ZM20 11H4V19H20V11ZM8 13V15H6V13H8ZM13 13V15H11V13H13ZM18 13V15H16V13H18ZM7 5H4V9H20V5H17V7H15V5H9V7H7V5Z">
                         </path>
                     </svg>
-                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap text-white ">Generel
+                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap text-white ">General
                         Accounts</span>
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                         <path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
                     </svg>
 
                 </button>
-                <ul id="dropdown-student-Attendence" class="hidden py-2 space-y-1 border-s ms-7 border-dashed px-3">
+                <ul id="dropdown-general-accounts" class="hidden py-2 space-y-1 border-s ms-7 border-dashed px-3">
                     <li>
                         <a href="/dashboard/generalAccounts/cashPaymentVoucher/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Cash
                             Payment Voucher</a>

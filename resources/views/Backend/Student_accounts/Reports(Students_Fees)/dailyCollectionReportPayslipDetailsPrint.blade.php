@@ -20,6 +20,7 @@
 
 </head>
 <style>
+    /* You can add custom styles here */
     .gradient-bg {
         background: linear-gradient(90deg, #1E3A8A 0%, #007BFF 50%, #1E3A8A 100%);
     }
@@ -29,20 +30,9 @@
 <body class="">
     <div class="w-full bg-slate-200 min-h-screen">
         <div class="w-[60%] h-fit bg-white mx-auto px-5 py-12">
-            <div class="flex w-full justify-between items-center">
-                <button type="button" onclick="history.back()" class="text-white bg-red-700 hover:bg-red-600 focus:ring-0  font-medium rounded-lg text-sm px-10 py-2.5 me-2 mb-2 focus:outline-none uppercase">
-                    Back
-                </button>
-                <div class="flex space-x-3">
-                    <form id="sortOrderForm" action="{{ route('DailyCollectionReport.sort.getReports', $school_code) }}" method="get">
-                        <select id="sortOrder" name="sortOrder" class="w-32 bg-gray-50 text-gray-900 text-sm rounded-lg block p-2.5 col-span-2" onchange="document.getElementById('sortOrderForm').submit()">
-                            <option selected disabled>Select</option>
-                            <option value="asc" {{ $sessionSortOrder == 'asc' ? 'selected' : '' }}>ASC</option>
-                            <option value="desc" {{ $sessionSortOrder == 'desc' ? 'selected' : '' }}>DESC</option>
-                        </select>
-                    </form>
-                </div>
-            </div>
+            <button type="button" onclick="history.back()" class="text-white bg-red-700 hover:bg-red-600 focus:ring-0  font-medium rounded-lg text-sm px-10 py-2.5 me-2 mb-2 focus:outline-none uppercase">
+                Back
+            </button>
             {{-- assessment scale section --}}
             <div>
                 <h1 class="text-center text-blue-500 font-bold">{{ $schoolInfo->school_name }}</h1>
@@ -58,17 +48,19 @@
             {{-- All fee types --}}
             <div class="space-y-2 mt-10">
                 <div class="w-full flex justify-between items-center">
-                    <div>
-                        <h1 class="font-semibold text-gray-500">Date: from:
-                            <span class="font-bold">{{ $date_from }}</span> to:
-                            <span class="font-bold">{{ $date_to }}</span>
+                    <div class="space-y-2">
+                        <h1 class="font-semibold text-gray-500">Student Id:
+                            <span class="bg-gray-100 font-bold rounded-lg px-1.5 py-1">{{ $voucherWisePayslips[0]->student_id }}</span>
                         </h1>
+                        <h1 class="font-semibold text-gray-500">Voucher No.:
+                            <span class="bg-gray-100 font-bold rounded-lg px-1.5 py-1">{{ $voucherWisePayslips[0]->voucher_number }}</span>
                         </h1>
                     </div>
 
                     <div>
-                        <h1 class="uppercase font-semibold text-gray-500">By:
-                            {{ $entry_by_name != '' ? $entry_by_name : 'All' }}</h1>
+                        <h1 class="capitalize font-semibold text-gray-500">Collected By:
+                            <span class="bg-gray-100 font-bold rounded-lg p-1.5">{{ $voucherWisePayslips[0]->collected_by_name }}</span>
+                        </h1>
                     </div>
                 </div>
                 <div class="mt-10">
@@ -80,33 +72,30 @@
                                         SL
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Date
+                                        Collect Date
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-blue-500">
-                                        VOUCHER ID
+                                        Pay Slip Type
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        STUDENT ID
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 bg-blue-500">
-                                        CLASS NAME
-                                    </th>
-                                    {{-- <th scope="col" class="px-6 py-3 bg-blue-500">
-                                        MONTH NAME
-                                    </th> --}}
-                                    <th scope="col" class="px-6 py-3">
-                                        AMOUNT
+                                    <th scope="col" class="px-6 py-3 ">
+                                        Amount
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-blue-500">
-                                        BY
+                                        Waiver
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 ">
+                                        paid_amount
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                                        Collect BY
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-
+                                        Action
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($paySlipReport as $key => $payslip)
+                                @foreach ($voucherWisePayslips as $key => $payslip)
                                 <tr class="odd:bg-white even:bg-gray-50 border-b text-center">
                                     <td class="px-6 py-4">
                                         {{ $key + 1 }}
@@ -115,69 +104,33 @@
                                         {{ $payslip->collect_date }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{ $payslip->voucher_number }}
+                                        {{ $payslip->pay_slip_type }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{ $payslip->student_id }}
+                                        {{ $payslip->amount }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{ $payslip->class }}
+                                        {{ $payslip->waiver }}
                                     </td>
-                                    {{-- <td class="px-6 py-4">
-                                            {{ $payslip->month }}
-                                    </td> --}}
                                     <td class="px-6 py-4">
-                                        {{ $payslip->total_paid }}
+                                        {{ $payslip->paid_amount }}
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ $payslip->collected_by_name }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        <a href="{{route("DailyCollectionReport.payslipDetails.getReports", ["schoolCode" => $school_code, "voucherNumber" => str_replace("#" , "", $payslip->voucher_number)])}}" class="text-white bg-blue-700 hover:bg-blue-600 focus:ring-0  font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2 focus:outline-none">
+                                        <a href="{{route("DailyCollectionReport.feesDetails.getReports",  ["schoolCode" => $school_code,"className" => $payslip->class, "payslipType" => $payslip->pay_slip_type])}}" class="text-white bg-blue-700 hover:bg-blue-600 focus:ring-0  font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2 focus:outline-none">
                                             Details
                                         </a>
                                     </td>
                                 </tr>
                                 @endforeach
-                                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 text-center">
-                                    <td class="px-6 py-4">
-                                    </td>
-                                    <td class="px-6 py-4">
-                                    </td>
-                                    <td class="px-6 py-4">
-                                    </td>
-                                    <td class="px-6 py-4">
-                                    </td>
-                                    {{-- <td class="px-6 py-4">
-                                    </td> --}}
-                                    <td class="px-6 py-4 font-bold text-lg">
-                                        Total =
-                                    </td>
-                                    <td class="px-6 py-4 font-bold text-lg">
-                                        {{ $TotalAmount }}
-                                    </td>
-                                    <td class="px-6 py-4 font-bold text-lg">
-
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-
-
-        <script>
-            document.addEventListener('DOMContentLoaded', (event) => {
-                const sortOrder = document.getElementById('sortOrder');
-                const sortOrderForm = document.getElementById('sortOrderForm');
-                sortOrder.addEventListener('change', function(event) {
-                    sortOrder.value = event.target.value;
-                    sortOrderForm.submit();
-                });
-            });
-        </script>
 </body>
 
 </html>

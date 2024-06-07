@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Student_Account\Reports;
 
 use App\Http\Controllers\Controller;
 use App\Models\AddClass;
+use App\Models\AddPaySlip;
 use App\Models\GeneratePayslip;
 use App\Models\SchoolAdmin;
 use App\Models\SchoolInfo;
@@ -41,6 +42,8 @@ class DailyCollectionReportController extends Controller
 
     public function GetPaySlipReport(Request $request, $school_code)
     {
+        // sorting inputs
+        $sessionSortOrder = $request->session()->get('sortOrder');
         $date_from = $request->input('date_from');
         $date_to = $request->input('date_to');
         $class = $request->input('class');
@@ -48,12 +51,15 @@ class DailyCollectionReportController extends Controller
         $entry_by = $request->input('entry_by');
         $entry_by_email = "";
         $entry_by_name = "";
-        if ($entry_by != "Select") {
+        if ($entry_by != "Select" && $entry_by != null) {
             $entry_by_split = explode("_", $entry_by);
             $entry_by_email = $entry_by_split[0];
             $entry_by_name = $entry_by_split[1];
         }
-        // dd($entry_by);
+
+        if ($sessionSortOrder == null) {
+            $sessionSortOrder = 'desc';
+        }
 
         $paySlipReport = GeneratePayslip::where('school_code', $school_code)
             ->where('action', 'approved')
@@ -69,6 +75,7 @@ class DailyCollectionReportController extends Controller
             ->whereBetween('collect_date', [$date_from, $date_to])
             ->select('voucher_number', 'student_id', 'class', 'group', 'collected_by_name', 'collect_date', DB::raw('SUM(paid_amount) as total_paid'), DB::raw('SUM(amount) as total_amount'), DB::raw('SUM(waiver) as total_waiver'))
             ->groupBy('voucher_number', 'student_id', 'class', 'group', 'collected_by_name', 'collect_date')
+            ->orderBy('collect_date', $sessionSortOrder)
             ->get();
 
         // total paid amount
@@ -88,6 +95,41 @@ class DailyCollectionReportController extends Controller
 
         $schoolInfo = SchoolInfo::where('school_code', $school_code)->first();
 
-        return view('Backend/Student_accounts/Reports(Students_Fees)/dailyCollectionReportPrint', compact('schoolInfo', 'date_from', 'date_to', 'paySlipReport', 'entry_by_name', 'TotalAmount'));
+        if (count($paySlipReport) > 0) {
+            return view('Backend/Student_accounts/Reports(Students_Fees)/dailyCollectionReportPrint', compact('schoolInfo', 'date_from', 'date_to', 'paySlipReport', 'entry_by_name', 'TotalAmount', 'sessionSortOrder'));
+        } else {
+            return redirect()->back()->with('error', 'No data found');
+        }
+    }
+
+    public function GetPaySlipReportSortingWise(Request $request, $school_code)
+    {
+        $sortOrder = $request->input('sortOrder');
+        return redirect()->route('DailyCollectionReport.getReports', $school_code)->with([
+            'sortOrder' => $sortOrder,
+        ]);
+    }
+
+
+    // get all payslip details according to the voucher number
+    public function GetPayslipDetailsReport(Request $request, $school_code, $voucherNumber)
+    {
+        $voucherWisePayslips = GeneratePayslip::where('school_code', $school_code)
+            ->where('voucher_number', "#" . $voucherNumber)
+            ->get();
+
+        return view('Backend.Student_accounts.Reports(Students_Fees).dailyCollectionReportPayslipDetailsPrint', compact('voucherWisePayslips'));
+    }
+
+
+    // get all fees details according to the payslip Types
+    public function GetFeesDetailsReport(Request $request, $school_code, $className, $payslipType)
+    {
+        $payslipWiseFees = AddPaySlip::where('school_code', $school_code)
+            ->where('class_name', $className)
+            ->where('pay_slip_type', $payslipType)
+            ->get();
+
+        return view('Backend.Student_accounts.Reports(Students_Fees).dailyCollectionReportFeesDetailsPrint', compact('payslipWiseFees'));
     }
 }

@@ -193,10 +193,10 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
 
     //Online Application
 
-    Route::get('/list-of-application/{schoolCode}',[ListOfApplicantController::class,'ListOfApplicantView'])->name('list.online.application');
-    Route::get('/online-application-view/{schoolCode}',[ListOfApplicantController::class,'ListOfApplicantView'])->name('onlineApplicationForm.view');
+    Route::get('/list-of-application/{schoolCode}', [ListOfApplicantController::class, 'ListOfApplicantView'])->name('list.online.application');
+    Route::get('/online-application-view/{schoolCode}', [ListOfApplicantController::class, 'ListOfApplicantView'])->name('onlineApplicationForm.view');
 
-    Route::get('/report-applicant/{schoolCode}',[ListOfApplicantController::class,'ReportApplicationView'])->name('report.applicant');
+    Route::get('/report-applicant/{schoolCode}', [ListOfApplicantController::class, 'ReportApplicationView'])->name('report.applicant');
 
     // student module
     Route::post('/create-student', [StudentController::class, 'addStudent'])->name('student.add');
@@ -207,8 +207,8 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::post('/add-students/get-sections/{schoolCode}', [StudentController::class, 'getSections'])->name('add.get-sections');
     Route::post('/add-students/get-shifts/{schoolCode}', [StudentController::class, 'getShifts'])->name('add.get-shifts');
 
-    Route::get('/view-download-student/{schoolCode}',[DownloadStudentController::class,'viewDownloadStudent'])->name('view.download.student');
-    Route::post('/download-student-data/{schoolCode}',[DownloadStudentController::class,'DownloadStudentData'])->name('download.student.data');
+    Route::get('/view-download-student/{schoolCode}', [DownloadStudentController::class, 'viewDownloadStudent'])->name('view.download.student');
+    Route::post('/download-student-data/{schoolCode}', [DownloadStudentController::class, 'DownloadStudentData'])->name('download.student.data');
 
 
     //Update Student Basic Info
@@ -368,7 +368,13 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/DailyCollectionReport/getReports/FeesDetails/{schoolCode}/{className}/{payslipType}', [DailyCollectionReportController::class, 'GetFeesDetailsReport'])->name('DailyCollectionReport.feesDetails.getReports');
     // Route::get('/DailyCollectionReport/printReports/{schoolCode}', [DailyCollectionReportController::class, 'PrintPaySlipReport'])->name('DailyCollectionReport.print');
     Route::get('/geneTransferInquiri/{schoolCode}', [geneTranferInquiriController::class, 'geneTransferInquiri'])->name('geneTransferInquiri');
+    // Due/Pay Sumary Report
     Route::get('/DuepaySummary/{schoolCode}', [DuePaySummaryController::class, 'DuepaySummary'])->name('DuepaySummary');
+    Route::get('/DuepaySummary/getGroupsAndSections/{schoolCode}', [DuePaySummaryController::class, 'GetClassWiseGroupsAndSection']);
+    Route::get('/DuepaySummary/getStudentInfo/{schoolCode}', [DuePaySummaryController::class, 'GetStudentInformation']);
+    Route::post('/DuepaySummary/getAllPaidUnpaidInformation/{schoolCode}', [DuePaySummaryController::class, 'GetAllPaidUnpaidInformation'])->name('DuepaySummary.info');
+    Route::get('/DuepaySummary/payslipDetails/{student_id}/{payment_status}/{schoolCode}', [DuePaySummaryController::class, 'GetAllPaidUnpaidDetailsInformation'])->name('DuepaySummary.details.info');
+
     // HeadWiseSummary Report
     Route::get('/headwiseSummary/{schoolCode}', [HeadWiseSummaryController::class, 'headwiseSummary'])->name('headwiseSummary');
     Route::get('/headwiseSummary/getStudentRoll/{schoolCode}', [HeadWiseSummaryController::class, 'GetStudentRoll']);

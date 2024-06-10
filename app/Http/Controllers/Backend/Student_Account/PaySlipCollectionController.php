@@ -93,7 +93,9 @@ class PaySlipCollectionController extends Controller
 
         $paySlips = GeneratePayslip::where('school_code', $school_code)
             ->where('action', 'approved')
-            ->where('class', $class_name)
+            ->when($class_name !== "Select", function ($query) use ($class_name) {
+                return $query->where('class', $class_name);
+            })
             ->where('student_id', $student_id)
             ->when($group !== "Select", function ($query) use ($group) {
                 return $query->where('group', $group);

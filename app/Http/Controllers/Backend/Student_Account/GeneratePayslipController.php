@@ -60,6 +60,10 @@ class GeneratePayslipController extends Controller
     public function GetAllInformation(Request $request, $school_code)
     {
         $class = $request->query('class_name');
+        $classPosition = AddClass::where('school_code', $school_code)
+            ->where('class_name', $class)
+            ->select('position')
+            ->first();
         $group = $request->query('group_name');
         $month_year = $request->query('month_year');
         $pay_slip_type = $request->query('pay_slip_type');
@@ -116,6 +120,7 @@ class GeneratePayslipController extends Controller
                 'student_id' => $student->student_id,
                 'student_name' => $student->name,
                 'class' => $student->Class_name,
+                'class_position' => $classPosition->position,
                 'section' => $student->section,
                 'student_roll' => $student->student_roll,
                 'pay_slip_type' => $pay_slip_type,
@@ -123,8 +128,6 @@ class GeneratePayslipController extends Controller
                 'waiver' => $totalIndividualWaiver,
                 'payable' => $amountOfPaySlip - $totalIndividualWaiver,
             ];
-
-
 
             $tabledata[] = $temp_data;
         }
@@ -139,6 +142,7 @@ class GeneratePayslipController extends Controller
         $year = $request->input('year');
         $last_pay_date = $request->input('last_pay_date');
         $class = $request->input('class');
+        $class_positions = $request->input('input_class_position', []);
         $input_sections = $request->input('input_section', []);
         $group = $request->input('group');
         $pay_slip_type = $request->input('pay_slip_type');
@@ -169,6 +173,7 @@ class GeneratePayslipController extends Controller
                         'pay_slip_type' => $pay_slip_type,
                     ],
                     [
+                        'class_position' => $class_positions[$student_id],
                         'last_pay_date' => $last_pay_date,
                         'group' => $group,
                         'section' => $input_sections[$student_id],

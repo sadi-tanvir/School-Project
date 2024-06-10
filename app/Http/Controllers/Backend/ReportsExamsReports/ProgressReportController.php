@@ -102,7 +102,7 @@ class ProgressReportController extends Controller
                 $student_ids[] = $student_id;
             }
 
-            $existingRecord = [];
+            $existingRecords = [];
             $students = [];
 
             foreach ($student_ids as $id) {

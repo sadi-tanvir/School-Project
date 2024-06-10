@@ -76,11 +76,13 @@ class DuePaySummaryController extends Controller
     public function GetAllPaidUnpaidInformation(Request $request, $school_code)
     {
         $date = now();
-        $class = $request->input('class');
-        $group = $request->input('group');
-        $section = $request->input('section');
-        $student_id = $request->input('student_id');
-        $payment_status = $request->input('payment_status', 'unpaid');
+        $sortType = $request->session()->get('sessionSortType', $request->input('sortType', 'class_position'));
+        $sortOrder = $request->session()->get('sessionSortOrder', $request->input('sortType', 'asc'));
+        $class = $request->session()->get('sessionClass', $request->input('class'));
+        $group = $request->session()->get('sessionGroup', $request->input('group'));
+        $section = $request->session()->get('sessionSection', $request->input('section'));
+        $student_id = $request->session()->get('sessionStudent_id', $request->input('student_id'));
+        $payment_status = $request->session()->get('sessionPayment_status', $request->input('payment_status', 'unpaid'));
 
         $payslips = GeneratePayslip::where('school_code', $school_code)
             ->when($class !== "Select", function ($query) use ($class) {
@@ -95,9 +97,10 @@ class DuePaySummaryController extends Controller
             ->when($student_id !== null, function ($query) use ($student_id) {
                 return $query->where('student_id', $student_id);
             })
-            ->select('student_id', 'class', 'payment_status', DB::raw('SUM(amount) as amount'), DB::raw('SUM(paid_amount) as paid_amount'), DB::raw('SUM(waiver) as waiver'), DB::raw('SUM(payable) as payable'))
-            ->groupBy('student_id', 'class', 'payment_status')
+            ->select('student_id', 'class', 'payment_status', 'collect_date', 'class_position', DB::raw('SUM(amount) as amount'), DB::raw('SUM(paid_amount) as paid_amount'), DB::raw('SUM(waiver) as waiver'), DB::raw('SUM(payable) as payable'))
+            ->groupBy('student_id', 'class', 'payment_status', 'collect_date', 'class_position')
             ->where('payment_status', $payment_status)
+            ->orderBy($sortType, $sortOrder)
             ->get();
 
         $totalAmount = $payslips->sum('amount');
@@ -108,8 +111,31 @@ class DuePaySummaryController extends Controller
         if (count($payslips) == 0) {
             return redirect()->back()->with('error', 'No data found');
         } else {
-            return view("Backend.Student_accounts.Reports(Students_Fees).duePaySummaryPrint", compact('date', 'payslips', 'totalAmount', 'totalReceived', 'totalWaiver', 'totalDue'));
+            return view("Backend.Student_accounts.Reports(Students_Fees).duePaySummaryPrint", compact('date', 'payslips', 'totalAmount', 'totalReceived', 'totalWaiver', 'totalDue', 'class', 'group', 'section', 'student_id', 'payment_status', 'sortType', 'sortOrder'));
         }
+    }
+
+    public function GetSortingWisePaidUnpaidReports(Request $request, $school_code)
+    {
+        // dd($request->all());
+
+        $sortOrder = $request->input('sortOrder');
+        $sortType = $request->input('sortType');
+        $class = $request->input('class');
+        $group = $request->input('group');
+        $section = $request->input('section');
+        $student_id = $request->input('student_id');
+        $payment_status = $request->input('payment_status');
+
+        return redirect()->route('DuepaySummary.info', $school_code)->with([
+            'sessionSortType' => $sortType,
+            'sessionSortOrder' => $sortOrder,
+            'sessionClass' => $class,
+            'sessionGroup' => $group,
+            'sessionSection' => $section,
+            'sessionStudent_id' => $student_id,
+            'sessionPayment_status' => $payment_status,
+        ]);
     }
 
     public function GetAllPaidUnpaidDetailsInformation(Request $request, $student_id, $payment_status, $school_code)

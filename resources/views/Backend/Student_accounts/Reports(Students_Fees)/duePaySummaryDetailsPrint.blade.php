@@ -41,6 +41,9 @@
 
     <div class="w-full bg-slate-200 min-h-screen">
         <div class="w-[80%] h-fit bg-white mx-auto px-5 py-12">
+            <button type="button" onclick="history.back()" class="text-white bg-red-700 hover:bg-red-600 focus:ring-0  font-medium rounded-lg text-sm px-10 py-2.5 me-2 mb-2 focus:outline-none uppercase">
+                Back
+            </button>
             {{-- assessment scale section --}}
             <div>
                 <h1 class="text-center text-blue-500 font-bold">{{ $schoolInfo->school_name }}</h1>

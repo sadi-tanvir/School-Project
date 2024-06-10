@@ -372,7 +372,8 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/DuepaySummary/{schoolCode}', [DuePaySummaryController::class, 'DuepaySummary'])->name('DuepaySummary');
     Route::get('/DuepaySummary/getGroupsAndSections/{schoolCode}', [DuePaySummaryController::class, 'GetClassWiseGroupsAndSection']);
     Route::get('/DuepaySummary/getStudentInfo/{schoolCode}', [DuePaySummaryController::class, 'GetStudentInformation']);
-    Route::post('/DuepaySummary/getAllPaidUnpaidInformation/{schoolCode}', [DuePaySummaryController::class, 'GetAllPaidUnpaidInformation'])->name('DuepaySummary.info');
+    Route::get('/DuepaySummary/getAllPaidUnpaidInformation/{schoolCode}', [DuePaySummaryController::class, 'GetAllPaidUnpaidInformation'])->name('DuepaySummary.info');
+    Route::get('/DuepaySummary/getSortingWisePaidUnpaidReports/{schoolCode}', [DuePaySummaryController::class, 'GetSortingWisePaidUnpaidReports'])->name('DuepaySummary.sort.info');
     Route::get('/DuepaySummary/payslipDetails/{student_id}/{payment_status}/{schoolCode}', [DuePaySummaryController::class, 'GetAllPaidUnpaidDetailsInformation'])->name('DuepaySummary.details.info');
 
     // HeadWiseSummary Report

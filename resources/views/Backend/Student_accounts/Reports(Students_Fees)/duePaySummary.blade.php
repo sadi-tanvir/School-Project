@@ -47,8 +47,8 @@ Due Pay Summary
 </div> --}}
 
 <div class=" mt-10">
-    <form action="{{route("DuepaySummary.info", $school_code)}}" method="POST" class="p-5 shadowStyle rounded-[8px] border border-slate-300 w-2/5 mx-auto space-y-3">
-        @csrf
+    <form action="{{route("DuepaySummary.info", $school_code)}}" method="GET" class="p-5 shadowStyle rounded-[8px] border border-slate-300 w-2/5 mx-auto space-y-3">
+        {{-- @csrf --}}
         {{-- class --}}
         <div class="grid grid-cols-4 place-items-start  gap-5">
             <label for="class" class="block mb-2 text-sm font-medium whitespace-noWrap ">Class:</label>

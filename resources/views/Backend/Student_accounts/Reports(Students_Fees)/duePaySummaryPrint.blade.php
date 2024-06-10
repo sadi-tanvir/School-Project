@@ -45,20 +45,28 @@
                 <button type="button" onclick="location.replace('{{env('APP_URL')}}/dashboard/DuepaySummary/{{$school_code}}')" class="text-white bg-red-700 hover:bg-red-600 focus:ring-0  font-medium rounded-lg text-sm px-10 py-2.5 me-2 mb-2 focus:outline-none uppercase">
                     Back
                 </button>
-                <div class="flex space-x-3">
-                    <select id="sortOrder" name="sortOrder" class="w-32 bg-gray-50 text-gray-900 text-sm rounded-lg block p-2.5 col-span-2">
-                        <option selected disabled>Select</option>
-                        <option value="asc">Collect Date</option>
-                        <option value="desc">Class</option>
-                    </select>
-                    <select id="sortOrder" name="sortOrder" class="w-32 bg-gray-50 text-gray-900 text-sm rounded-lg block p-2.5 col-span-2">
-                        <option selected disabled>Select</option>
-                        <option value="asc">ASC</option>
-                        <option value="desc">DESC</option>
-                        {{-- <option value="asc" {{ $sortOrder == 'asc' ? 'selected' : '' }}>ASC</option>
-                        <option value="desc" {{ $sortOrder == 'desc' ? 'selected' : '' }}>DESC</option> --}}
-                    </select>
-                </div>
+                <form id="sortOrderForm" action="{{route("DuepaySummary.sort.info", $school_code)}}" method="GET">
+                    <div class="flex space-x-3">
+                        {{-- @csrf --}}
+                        <select id="sortType" name="sortType" class="w-32 bg-gray-50 text-gray-900 text-sm rounded-lg block p-2.5 col-span-2">
+                            <option selected disabled>Select</option>
+                            <option {{$sortType === "collect_date" ? 'selected' : ''}} value="collect_date">Collect Date</option>
+                            <option {{$sortType === "class_position" ? 'selected' : ''}} value="class_position">Class</option>
+                        </select>
+                        <select id="sortOrder" name="sortOrder" class="w-32 bg-gray-50 text-gray-900 text-sm rounded-lg block p-2.5 col-span-2">
+                            <option selected disabled>Select</option>
+                            <option {{$sortOrder === "asc" ? 'selected' : ''}} value="asc">ASC</option>
+                            <option {{$sortOrder === "desc" ? 'selected' : ''}} value="desc">DESC</option>
+                        </select>
+
+                        {{-- hidden inputs --}}
+                        <input class="hidden" name="class" value="{{ $class }}">
+                        <input class="hidden" name="group" value="{{ $group }}">
+                        <input class="hidden" name="section" value="{{ $section }}">
+                        <input class="hidden" name="student_id" value="{{ $student_id }}">
+                        <input class="hidden" name="payment_status" value="{{ $payment_status }}">
+                    </div>
+                </form>
             </div>
             {{-- assessment scale section --}}
             <div>
@@ -161,11 +169,29 @@
                                 </tr>
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div>
         </div>
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                const sortOrder = document.getElementById('sortOrder');
+                const sortType = document.getElementById('sortType');
+                const sortOrderForm = document.getElementById('sortOrderForm');
+                sortOrder.addEventListener('change', function(event) {
+                    sortOrder.value = event.target.value;
+                    sortOrderForm.submit();
+                });
+                sortType.addEventListener('change', function(event) {
+                    sortType.value = event.target.value;
+                    sortOrderForm.submit();
+                });
+
+            });
+
+        </script>
 </body>
 
 </html>

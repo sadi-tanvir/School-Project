@@ -19,7 +19,7 @@ Student Short List Information
             <div>
 
                 <label class="block mb-2 text-sm font-medium text-gray-900" for="class">Class</label>
-                <select name="class"
+                <select id="class" name="class"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
 
                     <option disabled selected>Choose class</option>
@@ -32,7 +32,7 @@ Student Short List Information
             <div>
 
                 <label class="block mb-2 text-sm font-medium text-gray-900" for="group">Group</label>
-                <select name="group"
+                <select name="group" id="group"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
 
                     <option disabled selected>Choose group</option>
@@ -45,7 +45,7 @@ Student Short List Information
             <div>
 
                 <label class="block mb-2 text-sm font-medium text-gray-900" for="section">Section</label>
-                <select name="section"
+                <select name="section" id="section"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
 
                     <option disabled selected>Choose section</option>
@@ -158,9 +158,7 @@ Student Short List Information
                         </svg>
                     </div>
                     <input datepicker datepicker-autohide type="text" name="to_date"
-
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
-
                         placeholder="Select date">
                 </div>
                 <div>
@@ -227,7 +225,7 @@ Student Short List Information
         @endif
     @endif
 </form>
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     document.getElementById('selectAll').addEventListener('click', function () {
         const checkboxes = document.querySelectorAll('.group-checkbox');
@@ -249,6 +247,50 @@ Student Short List Information
             imageType: 'image/jpeg',
             output: './pdf/generate.pdf'
         });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#class').change(function () {
+            var class_name = $(this).val();
+            $.ajax({
+                url: "{{ route('add.get-groups', $school_code) }}",
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function (result) {
+                    $('#group').empty();
+                    $('#group').append('<option disabled selected value="">Select</option>');
+                    $.each(result, function (key, value) {
+                        $('#group').append('<option value="' + value.group_name + '">' + value.group_name + '</option>');
+                    });
+                }
+            });
+        });
+        //section
+        $('#class').change(function () {
+            var class_name = $(this).val();
+            $.ajax({
+                url: "{{ route('add.get-sections', $school_code) }}",
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function (result) {
+                    $('#section').empty();
+                    $('#section').append('<option disabled selected value="">Select</option>');
+                    $.each(result, function (key, value) {
+                        $('#section').append('<option value="' + value.section_name + '">' + value.section_name + '</option>');
+                    });
+                }
+            });
+        });
+
+
     });
 </script>
 @endsection

@@ -13,7 +13,8 @@ use Illuminate\Http\Request;
 
 class SequentialWiseExamController extends Controller
 {
-    public function SequentialExam(Request $request,$schoolCode){
+    public function SequentialExam(Request $request, $schoolCode)
+    {
         $searchClassData = null;
         $searchClassExamName = null;
         $searchAcademicYearName = null;
@@ -26,10 +27,10 @@ class SequentialWiseExamController extends Controller
         $academicYearData = AddAcademicYear::where('action', 'approved')->where('school_code', $schoolCode)->get();
 
 
-        return view ('Backend/BasicInfo/ExamSetting/sequentialExam',compact('sequentialExamData','classData', 'classExamData', 'academicYearData', 'searchClassData', 'searchClassExamName', 'searchAcademicYearName'));
+        return view('Backend/BasicInfo/ExamSetting/sequentialExam', compact('sequentialExamData', 'classData', 'classExamData', 'academicYearData', 'searchClassData', 'searchClassExamName', 'searchAcademicYearName'));
     }
 
-    public function store_sequential_exam(Request $request,$schoolCode)
+    public function store_sequential_exam(Request $request, $schoolCode)
     {
         // dd($request);
         // Validate form data
@@ -48,7 +49,7 @@ class SequentialWiseExamController extends Controller
 
 
         if ($exam === null) {
-            return redirect()->route('sequentialExam',$schoolCode)->with([
+            return redirect()->route('sequentialExam', $schoolCode)->with([
                 'error' => 'Please select sequential exam name!',
                 'class_name' => $request->class_name,
                 'exam_name' => $request->exam_name,
@@ -61,20 +62,19 @@ class SequentialWiseExamController extends Controller
             ->where('class_name', $request->class_name)
             ->where('exam_name', $request->exam_name)
             ->where('year', $request->year)
-            ->get();
-
-        if ($existingData->isNotEmpty()) {
-            return redirect()->route('sequentialExam',$schoolCode)->with([
-                'error' => 'All Ready Added',
-                'class_name' => $request->class_name,
-                'exam_name' => $request->exam_name,
-                'year' => $request->year
-            ]);
-        }
-
-
+            ->exists();
         // dd($existingData);
-       
+
+        if ($existingData) {
+            SequentialExam::where('action', 'approved')
+                ->where('school_code', $schoolCode)
+                ->where('class_name', $request->class_name)
+                ->where('exam_name', $request->exam_name)
+                ->where('year', $request->year)
+                ->update([
+                    'sequential_exam' => $request->sequential_exam
+                ]);
+        } else {
             // Handle the case when only a single subject is received
             $addexam = new SequentialExam();
             $addexam->class_name = $request->class_name;
@@ -83,11 +83,9 @@ class SequentialWiseExamController extends Controller
             $addexam->sequential_exam = $request->sequential_exam;
             $addexam->action = 'approved';
             $addexam->school_code = $schoolCode;
-
             $addexam->save();
-        
-
-        return redirect()->route('sequentialExam',$schoolCode)->with([
+        }
+        return redirect()->route('sequentialExam', $schoolCode)->with([
             'success' => 'Sequential exam added successfully!',
             'class_name' => $request->class_name,
             'exam_name' => $request->exam_name,

@@ -51,9 +51,9 @@ class FourthSubjectController extends Controller
     }
 
 
-    public function addFourthSubject(Request $request)
+    public function addFourthSubject(Request $request, $school_code)
     {
-        return redirect()->route('set.Forth.Subject')->with([
+        return redirect()->route('set.Forth.Subject', $school_code)->with([
             'class_name' => $request->class_name,
             'group_name' => $request->group_name,
             'section_name' => $request->section_name,
@@ -65,11 +65,7 @@ class FourthSubjectController extends Controller
     {
         if ($request->has('selected_students')) {
             $students = $request->input('selected_students');
-            // dd($students);
-
-
-
-
+            //dd($students);
 
 
             foreach ($students as $student) {
@@ -80,9 +76,9 @@ class FourthSubjectController extends Controller
                     ->where('section', $request->section)
                     ->where('year', $request->year)
                     ->where('shift', $request->shift)
-                    ->where('student_id', $student)
-                    ->get();
-
+                    ->where('student_id', $students)
+                    ->exists();
+                //dd($existingData);
                 if ($existingData) {
                     return redirect()->back()->with('error', 'fouth Subject have already added!');
                 } else {
@@ -105,9 +101,8 @@ class FourthSubjectController extends Controller
         }
     }
 
-    public function viewFourthSubject(Request $request)
+    public function viewFourthSubject(Request $request, $school_code)
     {
-        $school_code = '100';
 
         $classes = AddClass::where('action', 'approved')->where('school_code', $school_code)->get();
         $groups = AddGroup::where('action', 'approved')->where('school_code', $school_code)->get();
@@ -137,10 +132,10 @@ class FourthSubjectController extends Controller
     }
 
 
-    public function getFourthSubject(Request $request)
+    public function getFourthSubject(Request $request, $school_code)
     {
 
-        return redirect()->route('viewFourthSubject')->with([
+        return redirect()->route('viewFourthSubject', $school_code)->with([
             'class_name' => $request->class_name,
             'group_name' => $request->group_name,
             'section_name' => $request->section_name,

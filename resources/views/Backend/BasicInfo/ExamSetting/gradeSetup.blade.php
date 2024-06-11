@@ -1,9 +1,10 @@
 @extends('Backend.app')
 @section('title')
-Grade
+    Grade
 @endsection
-@section('Dashboard')
 
+@section('Dashboard')
+    @include('Message.message')
 @include('Message.message')
 <div>
     <h3>
@@ -204,3 +205,4 @@ Grade
 
 </div>
 @endsection
+

@@ -16,6 +16,7 @@ class GeneratePayslip extends Model
         "last_pay_date",
         "student_id",
         "class",
+        "class_position",
         "group",
         "section",
         "pay_slip_type",

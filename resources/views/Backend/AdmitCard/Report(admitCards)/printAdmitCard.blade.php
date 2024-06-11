@@ -52,7 +52,6 @@ Student Admit Card
         </svg>
     </span>
 </div>
-
 <div class="">
     <div class="rounded-md border-2 border-gray-300 bg-gray-200 p-6">
         <form action="{{ route('downloadAdmitCard', $school_code) }}" method="POST">
@@ -105,7 +104,6 @@ Student Admit Card
             </div>
             <div class="mb-5">
                 <div class=" ">
-
                     <label for="last_name" class="mb-2 block text-sm font-medium text-gray-900">Section:</label>
                 </div>
                 <div class="">
@@ -143,10 +141,13 @@ Student Admit Card
                         <option selected>Choose Exam Name</option>
                         @foreach ($examName as $exam)
                             <option>{{ $exam->class_exam_name }}</option>
+
                         @endforeach
                     </select>
                 </div>
             </div>
+
+
 
             <div class="mb-5">
                 <div class=" ">
@@ -171,6 +172,7 @@ Student Admit Card
                         <option selected>Choose Print Types</option>
                         <option value="1">With Subject</option>
                         <option value="2">Without Subject</option>
+
                     </select>
                 </div>
             </div>

@@ -322,7 +322,7 @@ GroupData
                     {{$data->group_name}}
                 </td>
                 <td class="px-6 py-4  text-xl flex ">
-                    <a class="mr-2 edit-button"><i class="fa fa-edit" style="color:green;"></i></a>
+                    <!-- <a class="mr-2 edit-button"><i class="fa fa-edit" style="color:green;"></i></a> -->
                     <form method="POST" action="{{ url('dashboard/delete_class_wise_group', $data->id) }}">
                         @csrf
                         @method('DELETE')

@@ -24,7 +24,7 @@
                 <div class="flex justify-between items-center border-b-2 border-gray-600 px-2 text-[10px]">
                     <img src="https://cms.nedubd.com/logo/graduation.png" class="w-12" alt="">
                     <div class="text-center">
-                        <h1 class="font-bold text-md sm:text-xl">{{$schoolInfo->school_name}}</h1>
+                        <h1 class="font-bold text-md sm:text-xl">{{$school_info->school_name}}</h1>
                         <h1 class="text-xs">N/A</h1>
                     </div>
                     <p class="text-xs">Student Copy</p>

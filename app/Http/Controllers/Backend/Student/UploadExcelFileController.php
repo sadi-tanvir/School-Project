@@ -42,6 +42,7 @@ class UploadExcelFileController extends Controller
     public function uploadExcel(Request $request)
     {
 
+       
         $request->validate([
             'file' => 'required|mimes:xlsx,xls',
         ]);
@@ -88,8 +89,8 @@ class UploadExcelFileController extends Controller
                 $student = new Student();
                 $student->name = $studentData[2];
                 $student->student_roll = $studentData[1];
-                $student->group = $studentData[3];
-                $student->category = $studentData[4];
+                $student->group = $request->group;
+                $student->category = $request->category;
                 $student->gender = $studentData[5];
                 $student->birth_date = $studentData[6] ?? null;
                 $student->religious = $studentData[7];

@@ -71,9 +71,9 @@
 
 </style>
 
-<aside id="logo-sidebar" class="fixed top-[90px] left-0 z-40 w-72 h-screen  transition-transform -translate-x-full sm:translate-x-0 duration-1000" aria-label="logo-sidebar">
+<aside id="logo-sidebar" class="fixed left-0 top-[90px] z-40 h-screen w-72 -translate-x-full overflow-y-auto transition-transform duration-1000 sm:translate-x-0" aria-label="logo-sidebar">
     <div class="h-full  overflow-y-auto scrollbar  px-3 pt-5 pb-20   gradient-bg">
-        <ul class="space-y-2  font-medium ">
+        <ul class="space-y-2 pb-6  font-medium ">
 
 
 
@@ -150,7 +150,7 @@
                             class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List
                             Of Application</a>
                     </li>
-                   
+
                     <li>
                         <a href="{{route('report.applicant',$school_code)}}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Report
 
@@ -678,19 +678,19 @@
 
             <!-- Generel Accounts  -->
             <li class="dropdown">
-                <button type="button" class="flex items-center w-full py-2 px-4 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-slate-100/20" aria-controls="dropdown-student-Attendence" data-collapse-toggle="dropdown-student-Attendence">
+                <button type="button" class="flex items-center w-full py-2 px-4 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-slate-100/20" aria-controls="dropdown-general-accounts" data-collapse-toggle="dropdown-general-accounts">
                     <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ffffff">
                         <path d="M9 1V3H15V1H17V3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9ZM20 11H4V19H20V11ZM8 13V15H6V13H8ZM13 13V15H11V13H13ZM18 13V15H16V13H18ZM7 5H4V9H20V5H17V7H15V5H9V7H7V5Z">
                         </path>
                     </svg>
-                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap text-white ">Generel
+                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap text-white ">General
                         Accounts</span>
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                         <path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
                     </svg>
 
                 </button>
-                <ul id="dropdown-student-Attendence" class="hidden py-2 space-y-1 border-s ms-7 border-dashed px-3">
+                <ul id="dropdown-general-accounts" class="hidden py-2 space-y-1 border-s ms-7 border-dashed px-3">
                     <li>
                         <a href="/dashboard/generalAccounts/cashPaymentVoucher/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Cash
                             Payment Voucher</a>
@@ -1026,7 +1026,7 @@
 
 
             <!-- Basic Setting -->
-            <li class="dropdown">
+            <li class="dropdown mb-9">
                 <button type="button" class="flex items-center w-full py-2 px-4 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-slate-100/20" aria-controls="dropdown-basic-setting" data-collapse-toggle="dropdown-basic-setting">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z" />

@@ -5,7 +5,6 @@
 @section('Dashboard')
 
 @include('Message.message')
-
 <div>
     <h3>
         Fourth Subject Setup
@@ -14,8 +13,9 @@
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-10 md:my-10">
     <form action="{{route('addFourthSubject', $school_code)}}" method="POST">
         @csrf
-        <div class="grid md:grid-cols-9 gap-4 my-10 ">
-            <div class="mr-2 md:flex justify-end">
+        <div class="grid md:grid-cols-4 gap-4 items-end mb-6">
+            <div class="">
+            <div class="">
                 <label for="session" class="block mb-2 text-sm font-medium text-gray-900 ">Class :</label>
             </div>
             <div class="mr-2">
@@ -39,7 +39,9 @@
                     @endforeach
                 </select>
             </div>
-            <div class="mr-2 md:flex justify-end">
+            <div class="">
+                
+            <div class="">
                 <label for="session" class="block mb-2 text-sm font-medium text-gray-900 ">Section :</label>
             </div>
             <div class="mr-2">
@@ -52,8 +54,10 @@
                     @endforeach
                 </select>
             </div>
+            </div>
 
-            <div class="mr-2 md:flex justify-end">
+           <div class="">
+           <div class="">
                 <label for="session" class="block mb-2 text-sm font-medium text-gray-900 ">Year :</label>
             </div>
             <div class="mr-2">
@@ -79,9 +83,9 @@
 
     </form>
     <div class=" text-lg font-bold">
-        <div class="flex justify-center">
+        <div class="flex justify-center pb-3">
             <h3>
-                FOURTH SUBJECT SETTING
+                Forth Subject Setting
             </h3>
         </div>
 
@@ -143,6 +147,7 @@
                                 @endforeach
                             </div>
                         </div>
+
             @endif
 
 
@@ -188,13 +193,13 @@
                             SL
                         </th>
                         <th scope="col" class="px-6 py-3 bg-blue-500">
-                            STUDENT ID
+                            Student Id
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            STUDENT NAME
+                            Student Name
                         </th>
                         <th scope="col" class="px-6 py-3 bg-blue-500">
-                            ROLL
+                            Roll
                         </th>
 
                     </tr>
@@ -273,11 +278,13 @@
         <div class="mr-10">
             <button type="submit"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  ">Save</button>
+
         </div>
-        <div class="mr-10">
+        <div class="mr-3">
             <a href="/dashboard">
                 <button
                     class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Close</button>
+
             </a>
         </div>
 

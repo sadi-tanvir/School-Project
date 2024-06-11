@@ -49,12 +49,26 @@
                 <h1 class="text-center text-slate-500 font-bold">Website
                     <a href="#" class="text-blue-600">{{ $schoolInfo->website }}</a>
                 </h1>
-                <h1 class="text-center font-bold text-red-500">Print date: {{ $date->format('Y-m-d H:i:s') }}</h1>
+                {{-- <h1 class="text-center font-bold text-red-500">Print date: {{ $date->format('Y-m-d H:i:s') }}</h1> --}}
             </div>
 
 
             {{-- All fee types --}}
-            <div class="space-y-1">
+            <div class="space-y-2 mt-10">
+                <div class="w-full flex justify-between items-center">
+                    <div>
+                        <h1 class="font-semibold text-gray-500">Date: from:
+                            <span class="font-bold">{{ $date_from }}</span> to:
+                            <span class="font-bold">{{ $date_to }}</span>
+                        </h1>
+                        </h1>
+                    </div>
+
+                    <div>
+                        <h1 class="uppercase font-semibold text-gray-500">By:
+                            {{ $entry_by_name != '' ? $entry_by_name : 'All' }}</h1>
+                    </div>
+                </div>
                 <div class="mt-10">
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
@@ -64,51 +78,36 @@
                                         SL
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        CLASS
+                                        HEAD NAME
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-blue-500">
-                                        Fee Name
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Fee Amount
+                                        AMOUNT
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ($paySlipTypes)
-                                @foreach ($paySlipTypes as $key => $paySlipType)
-                                <tr class="odd:bg-white even:bg-gray-50 text-center">
+                                @foreach ($paySlipReport as $key => $payslip)
+                                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 text-center">
                                     <td class="px-6 py-4">
-                                        {{$key + 1}}
+                                        {{ $key + 1 }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{ $class }}
+                                        {{ $payslip->pay_slip_type }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{ $paySlipType->pay_slip_type_name }}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{$allAmountOfpaySlips[$paySlipType->pay_slip_type_name]}}
+                                        {{ $payslip->total_payable_amount }}
                                     </td>
                                 </tr>
                                 @endforeach
-                                @endif
-                                <tr class="odd:bg-white even:bg-gray-50 border-b text-center">
-                                    <td scope="row" class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    </td>
-                                    <td scope="row" class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    </td>
-                                    <td class="px-6 py-4 text-end font-bold  text-lg">
-
-                                    </td>
-                                    <td class=" py-4 font-bold text-lg">
-                                        Total <span class="">=</span>
-                                        {{ $totalAmount }}
+                                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 text-center">
+                                    <td class="px-6 py-4"></td>
+                                    <td class="px-6 py-4 font-bold text-lg"></td>
+                                    <td class="px-6 py-4 font-bold text-lg">
+                                        Total = {{ $totalAmount }}
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div>

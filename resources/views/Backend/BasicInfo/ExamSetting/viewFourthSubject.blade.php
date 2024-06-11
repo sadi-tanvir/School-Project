@@ -4,6 +4,7 @@ View 4th Subject
 @endsection
 @section('Dashboard')
 @include('Message.message')
+
 <div>
     <h3>
         Choosable Subject List
@@ -12,13 +13,14 @@ View 4th Subject
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-10 md:my-10">
     <form action="{{route('getFourthSubject', $school_code)}}" method="post">
         @csrf
-        <div class="grid md:grid-cols-9 gap-4 my-10 ">
-            <div class="mr-2 md:flex justify-end">
+        <div class=" ">
+            <div class=" md:flex justify-end">
                 <label for="session" class="block mb-2 text-sm font-medium text-gray-900 ">Class :</label>
             </div>
             <div class="mr-2">
                 <select id="countries" name="class_name"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
+
                     @foreach($classes as $class)
 
                         <option value="{{ $class->class_name }}">{{$class->class_name}}</option>
@@ -26,23 +28,25 @@ View 4th Subject
                 </select>
                 </select>
             </div>
-            <div class="mr-2 md:flex justify-end">
+            <div class=" md:flex justify-end">
                 <label for="session" class="block mb-2 text-sm font-medium text-gray-900 ">Group :</label>
             </div>
             <div class="mr-2">
                 <select id="countries" name="group_name"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
+
                     @foreach($groups as $group)
                         <option>{{$group->group_name}}</option>
                     @endforeach
                 </select>
             </div>
-            <div class="mr-2 md:flex justify-end">
+            <div class=" md:flex justify-end">
                 <label for="session" class="block mb-2 text-sm font-medium text-gray-900 ">Section :</label>
             </div>
             <div class="mr-2">
                 <select id="countries" name="section_name"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
+
                     @foreach($sections as $section)
                         <option>{{$section->section_name}}</option>
                     @endforeach
@@ -50,7 +54,7 @@ View 4th Subject
                 </select>
             </div>
 
-            <div class="mr-2 md:flex justify-end">
+            <div class=" md:flex justify-end">
                 <label for="session" class="block mb-2 text-sm font-medium text-gray-900 ">Year :</label>
             </div>
             <div class="mr-2">
@@ -179,13 +183,11 @@ View 4th Subject
     </div>
     <br><br>
     <div class="md:flex justify-center">
-
-
-
         <div class="ml-32">
             <h3>Total = <span class=" border-2 p-5">@if($students)
                 {{$students->count()}}
             @endif
+
                 </span></h3>
         </div>
 

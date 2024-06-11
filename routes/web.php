@@ -681,11 +681,11 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     //forth subject
 
     Route::get('/setForthSubject/{school_code}', [FourthSubjectController::class, 'fourthSubject'])->name('set.Forth.Subject');
-    Route::post('/addFourthSubject', [FourthSubjectController::class, 'addFourthSubject'])->name('addFourthSubject');
-    Route::post('/saveFourthSubject', [FourthSubjectController::class, 'saveFourthSubject'])->name('saveFourthSubject');
-    Route::get('/viewFourthSubject', [FourthSubjectController::class, 'viewFourthSubject'])->name('viewFourthSubject');
-    Route::post('/getFourthSubject', [FourthSubjectController::class, 'getFourthSubject'])->name('getFourthSubject');
-    Route::delete('/deleteFourthSubject/{id}', [FourthSubjectController::class, 'deleteFourthSubject'])->name('deleteFourthSubject');
+    Route::post('/addFourthSubject/{school_code}', [FourthSubjectController::class, 'addFourthSubject'])->name('addFourthSubject');
+    Route::post('/saveFourthSubject/{school_code}', [FourthSubjectController::class, 'saveFourthSubject'])->name('saveFourthSubject');
+    Route::get('/viewFourthSubject/{school_code}', [FourthSubjectController::class, 'viewFourthSubject'])->name('viewFourthSubject');
+    Route::post('/getFourthSubject/{school_code}', [FourthSubjectController::class, 'getFourthSubject'])->name('getFourthSubject');
+    Route::delete('/deleteFourthSubject/{id}/{school_code}', [FourthSubjectController::class, 'deleteFourthSubject'])->name('deleteFourthSubject');
 
 
 
@@ -721,6 +721,7 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
 
     //Set signature
     Route::get('/SetSignature/{schoolCode}', [SetSignatureController::class, 'SetSignature'])->name('view.signature');
+    Route::post('/getSignatureData/{schoolCode}', [SetSignatureController::class, 'getSignatureData'])->name('get.signature.data');
     Route::post('/SetSignature/{schoolCode}', [SetSignatureController::class, 'processForm'])->name('store.signature');
 
 
@@ -812,8 +813,8 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::post('/print/get-sections/{schoolCode}', [PrintAdmitCardController::class, 'printSections'])->name('print.get-sections');
 
     //Print Seat Plan
-    Route::get('/printSeatPlan/{schoolCode}', [PrintSeatPlanController::class, "printSeatPlan"]);
-
+    Route::get('/printSeatPlan/{schoolCode}', [PrintSeatPlanController::class, "printSeatPlan"])->name('printSeatPlan');
+    Route::post('/downloadPrint/{schoolCode}', [PrintSeatPlanController::class, "downloadPrint"])->name('downloadPrint');
     //Print Admit Instuction
     Route::get('/AddAdmitInstruction/{schoolCode}', [AddAdmitInstructionController::class, "AddAdmitInstruction"])->name('addAdmitinstruction');
     Route::post('/instructionInsert/{schoolCode}', [AddAdmitInstructionController::class, 'instructionInsert'])->name('store.instructionInsert');

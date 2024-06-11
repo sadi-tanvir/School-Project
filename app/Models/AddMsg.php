@@ -12,8 +12,9 @@ class AddMsg extends Model
     protected $fillable = [
         'message',
         'school_code',
+        'message_count',
         'action',
     ];
 
-    protected $table="add_messages";
+    protected $table = "add_messages";
 }

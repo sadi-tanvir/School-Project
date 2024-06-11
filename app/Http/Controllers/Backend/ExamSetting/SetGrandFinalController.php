@@ -27,7 +27,7 @@ class SetGrandFinalController extends Controller
         $examNames = $request->input('class_exam_name', []);
 
         if ($classNames === null) {
-            return redirect()->route('grandfinal',$schoolCode)->with([
+            return redirect()->route('grandfinal', $schoolCode)->with([
                 'error' => 'Please select subject name!',
             ]);
         }
@@ -41,19 +41,19 @@ class SetGrandFinalController extends Controller
             ->get();
 
         if ($existingData->isNotEmpty()) {
-            return redirect()->route('grandfinal',$schoolCode)->with([
+            return redirect()->route('grandfinal', $schoolCode)->with([
                 'error' => 'All Ready Added',
             ]);
         }
 
 
 
-      
+
         if (is_array($classNames)) {
-            
+
             foreach ($classNames as $class) {
                 if (is_array($examNames)) {
-                   // dd($examNames);
+                    // dd($examNames);
                     foreach ($examNames as $key => $exam) {
                         $addClassSubject = new GrandFinal();
                         $addClassSubject->class_name = $class;
@@ -79,9 +79,7 @@ class SetGrandFinalController extends Controller
                     $addClassSubject->save();
                 }
             }
-        } 
-        
-        else {
+        } else {
             $addClassSubject = new GrandFinal();
             $addClassSubject->class_name = $classNames;
             $addClassSubject->class_exam_name = $examNames;
@@ -91,9 +89,9 @@ class SetGrandFinalController extends Controller
             $addClassSubject->action = 'approved';
             $addClassSubject->school_code = $schoolCode;
             $addClassSubject->save();
-            
+
         }
-        
+
 
         return redirect()->route('grandfinal', $schoolCode)->with([
             'success' => 'Added successfully!',

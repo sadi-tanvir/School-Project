@@ -13,7 +13,7 @@ Suject Setup
 </div>
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-10 md:my-10">
 
-    <form id="dataForm" method="POST" action="{{ route('store.subject.setup',$school_code) }}">
+    <form id="dataForm" method="POST" action="{{ route('store.subject.setup', $school_code) }}">
         @csrf
         @method('PUT')
         <div class="grid md:grid-cols-6 gap-4 my-10 ">
@@ -22,17 +22,18 @@ Suject Setup
                     :</label>
             </div>
             <div class="mr-5">
-                <select id="class" name="class_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
+                <select id="class" name="class_name"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
                     <!-- <option disabled selected>Choose a class</option> -->
                     @if ($selectedClassName === null)
-                    <option disabled selected>Choose a class</option>
+                        <option disabled selected>Choose a class</option>
                     @elseif($selectedClassName)
-                    <option value="{{ $selectedClassName }}" selected>{{ $selectedClassName }}</option>
+                        <option value="{{ $selectedClassName }}" selected>{{ $selectedClassName }}</option>
                     @endif
 
 
                     @foreach ($classData as $data)
-                    <option value="{{ $data->class_name }}">{{ $data->class_name }}</option>
+                        <option value="{{ $data->class_name }}">{{ $data->class_name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -41,38 +42,45 @@ Suject Setup
                     :</label>
             </div>
             <div class="mr-5">
-                <select id="group" name="group_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
+                <select id="group" name="group_name"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
                     @if ($selectedGroupName === null)
-                    <option disabled selected>Choose a group</option>
+                        <option disabled selected>Choose a group</option>
                     @elseif($selectedGroupName)
-                    <option value="{{ $selectedGroupName }}" selected>{{ $selectedGroupName }}</option>
+                        <option value="{{ $selectedGroupName }}" selected>{{ $selectedGroupName }}</option>
                     @endif
                     @foreach ($groupData as $data)
-                    <option value="{{ $data->group_name }}">{{ $data->group_name }}</option>
+                        <option value="{{ $data->group_name }}">{{ $data->group_name }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="hidden">
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">School Code
                 </label>
-                <input type="text" value="{{$school_code}}" name="school_code" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     " placeholder="Enter The Police Station Name" />
+                <input type="text" value="{{$school_code}}" name="school_code" id="last_name"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     "
+                    placeholder="Enter The Police Station Name" />
             </div>
             <div>
-                <button onclick="submitForm()" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  ">GET
+                <button onclick="submitForm()" type="submit"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  ">GET
                     DATA</button>
             </div>
 
         </div>
         <div>
             <div>
-                <div class="grid gap-6 mb-6 py-5 md:grid-cols-3 items-center ps-4 border border-gray-200 rounded  mx-20">
+                <div
+                    class="grid gap-6 mb-6 py-5 md:grid-cols-3 items-center ps-4 border border-gray-200 rounded  mx-20">
 
                     @foreach ($subjectData as $data)
-                    <div>
-                        <!-- <input id="subject_name" type="checkbox" value="{{ $data->subject_name }}" name="subject_name[]" class="shift-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500   focus:ring-2  "> -->
-                        <input id="subject_name" type="checkbox" value="{{ $data->subject_name }}" name="subject_name[]" class="group-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500   focus:ring-2  ">
-                        <label for="subject_name" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 ">{{ $data->subject_name }}</label>
-                    </div>
+                        <div>
+                            <!-- <input id="subject_name" type="checkbox" value="{{ $data->subject_name }}" name="subject_name[]" class="shift-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500   focus:ring-2  "> -->
+                            <input id="subject_name" type="checkbox" value="{{ $data->subject_name }}" name="subject_name[]"
+                                class="group-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500   focus:ring-2  ">
+                            <label for="subject_name"
+                                class="w-full py-4 ms-2 text-sm font-medium text-gray-900 ">{{ $data->subject_name }}</label>
+                        </div>
                     @endforeach
 
 
@@ -93,7 +101,7 @@ Suject Setup
             CLASS WISE SUBJECT SETTING
         </h3>
     </div>
-    <form action="{{ route('update.setSubject',$school_code) }}" method="POST">
+    <form action="{{ route('update.setSubject', $school_code) }}" method="POST">
 
         @csrf
         @method('PUT')
@@ -122,55 +130,60 @@ Suject Setup
             </thead>
             <tbody>
                 @if ($classWiseSubjectData !== null)
-                @foreach ($classWiseSubjectData as $key => $data)
-                <tr id="row-{{ $data->id }}" class="border-b capitalize text-lg" data-serial="{{ $data->subject_serial }}">
-                    <th scope="row" class="px-6 py-4 font-medium  text-black whitespace-nowrap ">
-                        {{ $key + 1 }}
-                    </th>
-                    <td class="px-6 py-4">
-                        {{ $data->subject_name }}
-                        <input class="hidden" value="{{ $data->id }}" type="text" name="id[]" id="">
-                        <input class="hidden" value="{{ $data->class_name }}" type="text" name="class_name" id="">
-                        <input class="hidden" value="{{ $data->group_name }}" type="text" name="group_name" id="">
-                        <input class="hidden" value="{{ $data->school_code }}" type="text" name="school_code" id="">
-                    </td>
+                    @foreach ($classWiseSubjectData as $key => $data)
+                        <tr id="row-{{ $data->id }}" class="border-b capitalize text-lg"
+                            data-serial="{{ $data->subject_serial }}">
+                            <th scope="row" class="px-6 py-4 font-medium  text-black whitespace-nowrap ">
+                                {{ $key + 1 }}
+                            </th>
+                            <td class="px-6 py-4">
+                                {{ $data->subject_name }}
+                                <input class="hidden" value="{{ $data->id }}" type="text" name="id[]" id="">
+                                <input class="hidden" value="{{ $data->class_name }}" type="text" name="class_name" id="">
+                                <input class="hidden" value="{{ $data->group_name }}" type="text" name="group_name" id="">
+                                <input class="hidden" value="{{ $data->school_code }}" type="text" name="school_code" id="">
+                            </td>
 
-                    <td class="px-6 py-4">
-                        <select name="subject_type[{{ $data->id }}]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
-                            <option class="capitalize" value="{{ $data->subject_type }}">
-                                {{ $data->subject_type }}
-                            </option>
-                            <option value="select">Select</option>
-                            <option value="choosable">Choosable</option>
-                            <option value="uncountable">Uncountable</option>
-                        </select>
-                    </td>
-                    <td class="px-6 py-4">
-                        <input type="number" name="subject_serial[{{ $data->id }}]" class="serial-input" value="{{ $data->subject_serial }}">
-                    </td>
-                    <td class="px-6 py-4 ">
+                            <td class="px-6 py-4">
+                                <select name="subject_type[{{ $data->id }}]"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
+                                    <option class="capitalize" value="{{ $data->subject_type }}">
+                                        {{ $data->subject_type }}
+                                    </option>
+                                    <option value="select">Select</option>
+                                    <option value="choosable">Choosable</option>
+                                    <option value="uncountable">Uncountable</option>
+                                </select>
+                            </td>
+                            <td class="px-6 py-4">
+                                <input type="number" name="subject_serial[{{ $data->id }}]" class="serial-input"
+                                    value="{{ $data->subject_serial }}">
+                            </td>
+                            <td class="px-6 py-4 ">
 
-                        <input type="text" id="subject_marge" name="subject_marge[{{ $data->id }}]" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     " value="{{ $data->subject_marge }}" />
-                    </td>
+                                <input type="text" id="subject_marge" name="subject_marge[{{ $data->id }}]"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     "
+                                    value="{{ $data->subject_marge }}" />
+                            </td>
 
-                    <td class="px-6 py-4  text-xl flex justify-center">
-
-
-                        <!-- <a class="mr-2 edit-button"><i class="fa fa-edit" style="color:green;"></i></a> -->
-
-                        <form method="POST" action="">
-                            {{-- @csrf
-                        @method('DELETE') --}}
-                            <button class="btn ">
-                                <a href=""><i class="fa fa-trash" aria-hidden="true" style="color:red;"></i></a>
-                            </button>
-                        </form>
+                            <td class="px-6 py-4  text-xl flex justify-center">
 
 
+                                <!-- <a class="mr-2 edit-button"><i class="fa fa-edit" style="color:green;"></i></a> -->
 
-                    </td>
-                </tr>
-                @endforeach
+                                <form method="POST" action="">
+                                    {{-- @csrf
+                                    @method('DELETE') --}}
+                                    <button class="btn ">
+                                        <a href=""><i class="fa fa-trash" aria-hidden="true" style="color:red;"></i></a>
+                                    </button>
+                                </form>
+
+
+
+                            </td>
+                        </tr>
+                    @endforeach
                 @endif
             </tbody>
         </table>
@@ -178,16 +191,18 @@ Suject Setup
         <br><br>
         <div class="grid md:grid-cols-3 ">
             <div class="mr-10 md:flex justify-center">
-                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  ">Save</button>
+                <button type="submit"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  ">Save</button>
             </div>
             <div class="mr-10">
-                <button type="submit" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Close</button>
+                <button type="submit"
+                    class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Close</button>
             </div>
 
             <div class="ml-32">
                 <h3>Total =
                     @if ($classWiseSubjectData !== null)
-                    {{ $classWiseSubjectData->count() }}
+                        {{ $classWiseSubjectData->count() }}
                     @endif
                     <div class=" border-2"></div>
 
@@ -202,10 +217,10 @@ Suject Setup
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         // Attach click event listener to all delete buttons
         document.querySelectorAll('.delete-button').forEach(button => {
-            button.addEventListener('click', function(event) {
+            button.addEventListener('click', function (event) {
                 event.preventDefault(); // Prevent default button action
 
                 var rowId = this.getAttribute('data-id');
@@ -215,7 +230,7 @@ Suject Setup
                 if (confirm('Are you sure you want to delete this subject?')) {
 
                     axios.delete(routeUrl)
-                        .then(function(response) {
+                        .then(function (response) {
                             if (response.data.success) {
                                 var row = document.getElementById('row-' + rowId);
                                 if (row) {
@@ -227,7 +242,7 @@ Suject Setup
                                 alert('Error: ' + response.data.message);
                             }
                         })
-                        .catch(function(error) {
+                        .catch(function (error) {
                             console.log(error);
                             alert('An error occurred while deleting the subject.');
                         });
@@ -238,11 +253,11 @@ Suject Setup
 </script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const checkboxes = document.querySelectorAll('.shift-checkbox');
 
         checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
+            checkbox.addEventListener('change', function () {
                 document.getElementById('dataForm').submit();
             });
         });
@@ -268,11 +283,11 @@ Suject Setup
 
         // Send an AJAX request using Axios
         axios.post(routeUrl, formData)
-            .then(function(response) {
+            .then(function (response) {
                 // Handle success response
                 console.log(response.data);
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 // Handle error response
                 console.log(error);
             });
@@ -284,13 +299,13 @@ Suject Setup
         var tbody = document.querySelector('tbody');
         var rows = Array.from(tbody.querySelectorAll('tr'));
 
-        rows.sort(function(a, b) {
+        rows.sort(function (a, b) {
             var serialA = parseInt(a.getAttribute('data-serial'));
             var serialB = parseInt(b.getAttribute('data-serial'));
             return serialA - serialB;
         });
 
-        rows.forEach(function(row) {
+        rows.forEach(function (row) {
             tbody.appendChild(row);
         });
     }
@@ -298,11 +313,34 @@ Suject Setup
 
 <script>
     // Call sortTable function after DOMContentLoaded
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         sortTable();
     });
 </script>
 
+<script>
+    $(document).ready(function () {
+        $('#class').change(function () {
+            var class_name = $(this).val();
+            $.ajax({
+                url: "{{ route('add.get-groups', $school_code) }}",
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function (result) {
+                    $('#group').empty();
+                    $('#group').append('<option disabled selected value="">Select</option>');
+                    $.each(result, function (key, value) {
+                        $('#group').append('<option value="' + value.group_name + '">' + value.group_name + '</option>');
+                    });
+                }
+            });
+        });
+
+    });
+</script>
 
 
 

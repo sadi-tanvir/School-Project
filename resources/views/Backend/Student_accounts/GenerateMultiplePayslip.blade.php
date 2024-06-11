@@ -12,10 +12,11 @@
     @include('Shared.alert')
     <div id="errorContainer"></div>
     <form action="{{ route('multiplePayslipData.store', $school_code) }}" method="POST" enctype="multipart/form-data">
-        @csrf
+        @csrf 
 
         <div class="w-full border mx-auto p-5 space-y-10">
             <div >
+                @csrf
                 <div class="grid grid-cols-12 items-center gap-5">
                     {{-- month --}}
                     <div class="col-span-2">

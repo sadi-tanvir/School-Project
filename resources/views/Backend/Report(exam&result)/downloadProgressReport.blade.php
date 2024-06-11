@@ -70,11 +70,21 @@
             border-top: 1px solid transparent;
             padding: 2px 10px 2px 15px;
         }
+
+        .page-container {
+            page-break-after: always;
+        }
+
+        @media print {
+            .page-container {
+                page-break-before: always;
+            }
+        }
     </style>
 </head>
 
 <body class="bg-blue-100">
-    @php
+    <!-- @php
 
         foreach ($sorted_exam_process_data as $index => $data) {
             if ($data->total_gpa == 0) {
@@ -84,9 +94,9 @@
             }
         }
 
-    @endphp
+    @endphp -->
 
-    @foreach ($students as $studentData)
+    @foreach ($students as $key => $studentData)
         <div class="mt-10 page-container" id="page-{{ $loop->index }}">
 
             <div id="content-container" class=" mx-auto w-[1150px]  bg-white px-[120px] border-[7px] border-blue-500">
@@ -310,32 +320,31 @@
                         @endif
 
 
-
                         @if ($merit_status === "section_wise")
+
                             <div class="col-span-1 border-b border-l border-r border-black p-1">Section Position</div>
-                            @foreach ($sorted_exam_process_data as $positionData)
-
-                                @if($positionData->student_id === $studentData[0]->student_id)
-                                    <div class="col-span-1 border-b border-r border-black p-1">
-                                        {{$positionData->position}}
-                                    </div>
-                                @endif
-
-
+                            @foreach ($studentData as $positionSTD)
+                                @foreach ($sorted_exam_process_data as $positionData)
+                                    @if($positionData->student_id === $positionSTD->student_id)
+                                        <div class="col-span-1 border-b border-r border-black p-1">
+                                            {{$positionData->position}}
+                                        </div>
+                                    @endif
+                                @endforeach
                             @endforeach
+
 
                         @endif
                         @if ($merit_status === "class_wise")
                             <div class="col-span-1 border-b border-l border-r border-black p-1">Class Position</div>
-                            @foreach ($sorted_exam_process_data as $positionData)
-
-                                @if($positionData->student_id === $studentData[0]->student_id)
-                                    <div class="col-span-1 border-b border-r border-black p-1">
-                                        {{$positionData->position}}
-                                    </div>
-                                @endif
-
-
+                            @foreach ($studentData as $positionSTD)
+                                @foreach ($sorted_exam_process_data as $positionData)
+                                    @if($positionData->student_id === $positionSTD->student_id)
+                                        <div class="col-span-1 border-b border-r border-black p-1">
+                                            {{$positionData->position}}
+                                        </div>
+                                    @endif
+                                @endforeach
                             @endforeach
                         @endif
 
@@ -405,17 +414,13 @@
                     </div>
                 </div>
 
-                @foreach ($signatures as $sign)
-                    @if ($sign->sign == 'Principle' || $sign->sign == 'Headmaster')
 
-                        <div class=" flex justify-end  py-10">
-                            <div class="w-[200px]">
-                                <img class="w-1/2" src="{{asset($sign->image)}}" alt="">
-                                <div class=" border-t border-black  text-center">Headmaster</div>
-                            </div>
-                        </div>
-                    @endif
-                @endforeach
+                <div class=" flex justify-end  py-10">
+                    <div class="w-[200px]">
+                        <img class="w-1/2" src="{{asset($signImage)}}" alt="">
+                        <div class=" border-t border-black  text-center">{{$signatureName}}</div>
+                    </div>
+                </div>
 
 
             </div>

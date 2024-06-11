@@ -11,8 +11,9 @@ class Message extends Model
     protected $fillable = [
         'message',
         'contact',
+        'message_count',
         'school_code',
     ];
 
-    protected $table="messages";
+    protected $table = "messages";
 }

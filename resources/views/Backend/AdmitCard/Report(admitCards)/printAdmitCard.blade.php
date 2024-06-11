@@ -52,11 +52,25 @@ Student Admit Card
         </svg>
     </span>
 </div>
-
 <div class="">
     <div class="rounded-md border-2 border-gray-300 bg-gray-200 p-6">
         <form action="{{ route('downloadAdmitCard', $school_code) }}" method="POST">
             @csrf
+            <div class="mb-5">
+                <div class="flex justify-between">
+                    <label for="classess" class="block mb-2 text-sm font-medium text-gray-900 ">Choose Report for
+                        signature </label>
+                </div>
+                <select name="report_name"
+                    class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  ">
+
+                    <option disabled selected>Choose Report Name </option>
+                    @foreach ($reports as $report)
+                        <option>{{ $report->report_name }}</option>
+                    @endforeach
+
+                </select>
+            </div>
             <div class="mb-5">
                 <div class="flex justify-between">
                     <label for="classess" class="block mb-2 text-sm font-medium text-gray-900 ">Class
@@ -104,6 +118,7 @@ Student Admit Card
             </div>
             <div class="mb-5">
                 <div class=" ">
+
                     <label for="last_name" class="mb-2 block text-sm font-medium text-gray-900">Student ID:</label>
                 </div>
                 <div class="">
@@ -126,10 +141,13 @@ Student Admit Card
                         <option selected>Choose Exam Name</option>
                         @foreach ($examName as $exam)
                             <option>{{ $exam->class_exam_name }}</option>
+
                         @endforeach
                     </select>
                 </div>
             </div>
+
+
 
             <div class="mb-5">
                 <div class=" ">
@@ -152,8 +170,9 @@ Student Admit Card
                     <select id="countries" name="print_type"
                         class="block w-full rounded-md border-0 bg-white p-3.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500">
                         <option selected>Choose Print Types</option>
-                        <option>With Subject</option>
-                        <option>Without Subject</option>
+                        <option value="1">With Subject</option>
+                        <option value="2">Without Subject</option>
+
                     </select>
                 </div>
             </div>

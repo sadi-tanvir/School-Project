@@ -115,7 +115,7 @@ View 4th Subject
                     // Search for student name with student ID
                     $studentName = \DB::table('students')->where('student_id', $student->student_id)->value('name');
                     //$lastName = \DB::table('students')->where('student_id', $student->student_id)->value('last_name');
-                                                                                        ?>
+                                                                                                        ?>
                                         {{$studentName}}
                                     </td>
                                     <td class="px-6 py-4">
@@ -123,7 +123,7 @@ View 4th Subject
                     // Search for student name with student ID
                     $studentRoll = \DB::table('students')->where('school_code', $student->school_code)->where('student_id', $student->student_id)->value('student_roll');
 
-                                                                                        ?>
+                                                                                                        ?>
                                         {{$studentRoll}}
                                     </td>
                                     <td class="px-6 py-4 ">

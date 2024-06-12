@@ -349,7 +349,7 @@
                         </td>
 
                         <td class="flex px-6 py-4 text-xl">
-                            <a href="" class="mr-2"><i class="fa fa-edit" style="color: green"></i></a>
+                           
 
                             <form method="POST" action="{{ url('dashboard/delete_shift', $data->id) }}">
                                 @csrf

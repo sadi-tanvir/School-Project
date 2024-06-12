@@ -352,7 +352,7 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     // Generate multiple payslips
     Route::get("/studentAccounts/generateMultiplePayslip/{schoolCode}", [GenerateMultiplePayslipController::class, "GenerateMultiplePayslipView"])->name("generateMultiplePayslip.view");
     Route::get("/studentAccounts/getStudentInformation/{schoolCode}", [GenerateMultiplePayslipController::class, "GetStudentInformation"])->name("studentInformation.get");
-    Route::get("/studentAccounts/storeMultiplePayslipData/{schoolCode}", [GenerateMultiplePayslipController::class, "StoreMultiplePayslipData"])->name("multiplePayslipData.store");
+    Route::post("/studentAccounts/storeMultiplePayslipData/{schoolCode}", [GenerateMultiplePayslipController::class, "StoreMultiplePayslipData"])->name("multiplePayslipData.store");
     //others
     Route::get('/FeeCollection/{schoolCode}', [FromFeeController::class, 'AddFromFee'])->name('feeCollection');
     Route::get('/donation/{schoolCode}', [DonationController::class, 'AddDonationFee'])->name('donation');
@@ -363,12 +363,23 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/DailyCollectionReport/{schoolCode}', [DailyCollectionReportController::class, 'DailyCollectionReport'])->name('DailyCollectionReport');
     Route::get('/DailyCollectionReport/getStudentRoll/{schoolCode}', [DailyCollectionReportController::class, 'GetStudentRoll'])->name('DailyCollectionReport.studentRoll');
     Route::get('/DailyCollectionReport/getReports/{schoolCode}', [DailyCollectionReportController::class, 'GetPaySlipReport'])->name('DailyCollectionReport.getReports');
+    Route::get('/DailyCollectionReport/getReports/sort/{schoolCode}', [DailyCollectionReportController::class, 'GetPaySlipReportSortingWise'])->name('DailyCollectionReport.sort.getReports');
+    Route::get('/DailyCollectionReport/getReports/payslipDetails/{schoolCode}/{voucherNumber}', [DailyCollectionReportController::class, 'GetPayslipDetailsReport'])->name('DailyCollectionReport.payslipDetails.getReports');
+    Route::get('/DailyCollectionReport/getReports/FeesDetails/{schoolCode}/{className}/{payslipType}', [DailyCollectionReportController::class, 'GetFeesDetailsReport'])->name('DailyCollectionReport.feesDetails.getReports');
     // Route::get('/DailyCollectionReport/printReports/{schoolCode}', [DailyCollectionReportController::class, 'PrintPaySlipReport'])->name('DailyCollectionReport.print');
     Route::get('/geneTransferInquiri/{schoolCode}', [geneTranferInquiriController::class, 'geneTransferInquiri'])->name('geneTransferInquiri');
+    // Due/Pay Sumary Report
     Route::get('/DuepaySummary/{schoolCode}', [DuePaySummaryController::class, 'DuepaySummary'])->name('DuepaySummary');
+    Route::get('/DuepaySummary/getGroupsAndSections/{schoolCode}', [DuePaySummaryController::class, 'GetClassWiseGroupsAndSection']);
+    Route::get('/DuepaySummary/getStudentInfo/{schoolCode}', [DuePaySummaryController::class, 'GetStudentInformation']);
+    Route::get('/DuepaySummary/getAllPaidUnpaidInformation/{schoolCode}', [DuePaySummaryController::class, 'GetAllPaidUnpaidInformation'])->name('DuepaySummary.info');
+    Route::get('/DuepaySummary/getSortingWisePaidUnpaidReports/{schoolCode}', [DuePaySummaryController::class, 'GetSortingWisePaidUnpaidReports'])->name('DuepaySummary.sort.info');
+    Route::get('/DuepaySummary/payslipDetails/{student_id}/{payment_status}/{schoolCode}', [DuePaySummaryController::class, 'GetAllPaidUnpaidDetailsInformation'])->name('DuepaySummary.details.info');
+
     // HeadWiseSummary Report
     Route::get('/headwiseSummary/{schoolCode}', [HeadWiseSummaryController::class, 'headwiseSummary'])->name('headwiseSummary');
     Route::get('/headwiseSummary/getStudentRoll/{schoolCode}', [HeadWiseSummaryController::class, 'GetStudentRoll']);
+    Route::get('/headwiseSummary/getPayslipReport/{schoolCode}', [HeadWiseSummaryController::class, 'GetPaySlipReport'])->name('headwiseSummary.getReports');
 
     Route::get('/transferToAccounts/{schoolCode}', [TransferToAccountsController::class, 'transferToAccounts'])->name('transferToAccounts');
     Route::get('/paidInvoice/{schoolCode}', [PaidInvoiceController::class, 'paidInvoice'])->name('paidInvoice');

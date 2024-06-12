@@ -155,12 +155,6 @@
                             class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-20 py-2.5 text-center">
                             Save
                         </button>
-                        <button
-                            class="text-white bg-gradient-to-br from-red-600 to-red-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-20 py-2.5 text-center">
-                            Close
-                        </button>
-                        <h1>Total: <span id="totalAmount">{{ $TotalPaySlipAmount }}</span></h1>
-
                     </div>
                 </form>
             </div>

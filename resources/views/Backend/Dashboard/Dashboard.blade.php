@@ -10,7 +10,15 @@ Dashboard
     class="relative mb-3 overflow-hidden rounded-md bg-gradient-to-tr from-[#1E3A8A] to-[#0054af] px-10 py-16 text-white">
     <h2 class="text-4xl">
         <span class="font-light">Hello!</span>
-        <span class="font-semibold">{{ $adminData->first_name }} {{ $adminData->last_name }}</span>
+        @if ($adminData)
+            <span class="font-semibold">{{ $adminData->first_name }} {{ $adminData->last_name }}</span>
+        @endif
+        @if ($schoolAdminData)
+            <span class="font-semibold">{{ $schoolAdminData->name }}</span>
+        @endif
+        @if ($studentData)
+            <span class="font-semibold">{{ $studentData->name }}</span>
+        @endif
     </h2>
     <p class="mt-1 font-light opacity-90">Welcome! Have a wonderful day!</p>
 
@@ -264,14 +272,51 @@ Dashboard
                     </svg>
                 </span>
             </div>
+
             <div
                 class="relative mx-2 overflow-hidden rounded-md bg-gradient-to-br from-slate-500 to-slate-800 p-9 backdrop-blur-xl lg:mx-0">
-                <h1 class="pb-2.5 text-3xl font-light text-white">Total Message Send</h1>
+                <h1 class="pb-2.5 text-3xl font-light text-white">Remaining Message</h1>
                 <div class="mb-4 mt-2 h-2.5 w-full rounded-full bg-gray-200">
-                    <div class="h-2.5 rounded-full bg-yellow-400" style="width: {{ $msgData}}%"></div>
+                    <div class="h-2.5 rounded-full bg-yellow-400" style="width: {{ $parsentRemainingSMS}}%"></div>
                 </div>
                 <div class="flex items-center justify-between text-white">
-                    <p>Total Message</p>
+                    <p>Remaining Message</p>
+                    <p class="font-semibold">{{ $remainingSMS}}</p>
+                </div>
+
+                <span class="absolute -top-6 right-5 opacity-20">
+                    <svg fill="#000000" width="100px" height="100px" viewBox="0 0 32 32"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <title></title>
+                            <g data-name="Layer 21" id="Layer_21">
+                                <path
+                                    d="M27.61,7h-2a1,1,0,0,1,.95,1.32l-5.33,16a1,1,0,0,1-.95.68h2a1,1,0,0,0,.95-.68l5.33-16A1,1,0,0,0,27.61,7Z">
+                                </path>
+                                <path
+                                    d="M13,15a1,1,0,0,1-.5-.13l-7-4a1,1,0,0,1,1-1.74l6.59,3.77L23.66,9.06a1,1,0,0,1,.68,1.88l-11,4A1,1,0,0,1,13,15Z">
+                                </path>
+                                <path d="M11,23H5a1,1,0,0,1,0-2h6a1,1,0,0,1,0,2Z"></path>
+                                <path d="M10,19H3a1,1,0,0,1,0-2h7a1,1,0,0,1,0,2Z"></path>
+                                <path d="M7,15H4a1,1,0,0,1,0-2H7a1,1,0,0,1,0,2Z"></path>
+                                <path
+                                    d="M22.28,26H5a1,1,0,0,1,0-2H22.28L27.61,8H3A1,1,0,0,1,3,6H27.61a2,2,0,0,1,1.9,2.63l-5.33,16A2,2,0,0,1,22.28,26Z">
+                                </path>
+                            </g>
+                        </g>
+                    </svg>
+                </span>
+            </div>
+            <div
+                class="relative mx-2 overflow-hidden rounded-md bg-gradient-to-br from-slate-500 to-green-800 p-9 backdrop-blur-xl lg:mx-0">
+                <h1 class="pb-2.5 text-3xl font-light text-white">Total Send Message</h1>
+                <div class="mb-4 mt-2 h-2.5 w-full rounded-full bg-gray-200">
+                    <div class="h-2.5 rounded-full bg-white" style="width: {{ $parsentRemainingSMS}}%"></div>
+                </div>
+                <div class="flex items-center justify-between text-white">
+                    <p>Total Send Message</p>
                     <p class="font-semibold">{{ $msgData}}</p>
                 </div>
 

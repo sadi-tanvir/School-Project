@@ -66,6 +66,10 @@ class GenerateMultiplePayslipController extends Controller
         $monthWiseAllClassStudent = [];
 
         foreach ($classesArray as $class) {
+            $classPosition = AddClass::where("school_code", $school_code)
+                ->where("class_name", $class)
+                ->select("position")
+                ->first();
             foreach ($monthsArray as $month) {
                 $studentsForClass = Student::where("school_code", $school_code)
                     ->where('action', 'approved')
@@ -132,6 +136,7 @@ class GenerateMultiplePayslipController extends Controller
                             $totalIndividualWaiver += $tempWaiverAmount->waiver_amount;
                         }
                     }
+                    $student['class_position'] = $classPosition->position;
                     $student['waiver'] = $totalIndividualWaiver;
                     $student['payable'] = $student['pay_slip_amount'] - $totalIndividualWaiver;
                     $student['month_year'] = $month . "." . $yearQuery;
@@ -175,6 +180,7 @@ class GenerateMultiplePayslipController extends Controller
             $studentIds = $request->input("input_student_id", []);
             // $studentNames = $request->input("input_name", []);
             $studentClasses = $request->input("input_Class_name", []);
+            $classesPosition = $request->input("input_class_position", []);
             $studentSections = $request->input("input_section", []);
             // $studentRoles = $request->input("input_student_roll", []);
             $studentPaySlipAmounts = $request->input("input_pay_slip_amount", []);
@@ -201,6 +207,7 @@ class GenerateMultiplePayslipController extends Controller
                                 'pay_slip_type' => $commonPaySlipType,
                             ],
                             [
+                                'class_position' => $classesPosition[$studentId],
                                 'last_pay_date' => $IndividualLastPayDate,
                                 'group' => $studentGroups[$studentId],
                                 'section' => $studentSections[$studentId],

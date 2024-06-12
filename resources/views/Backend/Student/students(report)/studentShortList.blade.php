@@ -13,15 +13,12 @@ Student Short List Information
 <form method="POST" action="{{route('viewStudentShortList')}}">
     @csrf
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-10 md:my-10 border-2 md:p-5">
-
         <div class="grid gap-6 mb-6 md:grid-cols-4 mt-2">
             <!-- Class Dropdown -->
             <div>
-
                 <label class="block mb-2 text-sm font-medium text-gray-900" for="class">Class</label>
                 <select id="class" name="class"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-
                     <option disabled selected>Choose class</option>
                     @foreach($classes as $class)
                         <option value="{{$class->class_name}}">{{$class->class_name}}</option>
@@ -30,11 +27,9 @@ Student Short List Information
             </div>
             <!-- Group Dropdown -->
             <div>
-
                 <label class="block mb-2 text-sm font-medium text-gray-900" for="group">Group</label>
                 <select name="group" id="group"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-
                     <option disabled selected>Choose group</option>
                     @foreach($groups as $group)
                         <option value="{{$group->group_name}}">{{$group->group_name}}</option>
@@ -43,11 +38,9 @@ Student Short List Information
             </div>
             <!-- Section Dropdown -->
             <div>
-
                 <label class="block mb-2 text-sm font-medium text-gray-900" for="section">Section</label>
                 <select name="section" id="section"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-
                     <option disabled selected>Choose section</option>
                     @foreach($sections as $section)
                         <option value="{{$section->section_name}}">{{$section->section_name}}</option>
@@ -59,7 +52,6 @@ Student Short List Information
                 <label class="block mb-2 text-sm font-medium text-gray-900" for="category">Category</label>
                 <select name="category"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-
                     <option disabled selected>Choose Category</option>
                     @foreach($categories as $category)
                         <option value="{{$category->category_name}}">{{$category->category_name}}</option>
@@ -84,11 +76,9 @@ Student Short List Information
             </div>
             <!-- Gender Dropdown -->
             <div>
-
                 <label class="block mb-2 text-sm font-medium text-gray-900" for="gender">Gender</label>
                 <select name="gender"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-
                     <option disabled selected>Choose Gender</option>
                     <option>Male</option>
                     <option>Female</option>
@@ -96,11 +86,9 @@ Student Short List Information
             </div>
             <!-- Religion Dropdown -->
             <div>
-
                 <label class="block mb-2 text-sm font-medium text-gray-900" for="religion">Religion</label>
                 <select name="religion"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-
                     <option disabled selected>Choose religion</option>
                     <option>Islam</option>
                     <option>Hindu</option>
@@ -121,7 +109,6 @@ Student Short List Information
             </div>
             <!-- Status Dropdown -->
             <div>
-
                 <label class="block mb-2 text-sm font-medium text-gray-900" for="status">Status</label>
                 <select name="status"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">

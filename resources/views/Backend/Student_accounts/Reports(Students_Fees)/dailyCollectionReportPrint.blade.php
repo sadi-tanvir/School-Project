@@ -35,11 +35,21 @@
                         Back
                     </button>
                     <div class="flex space-x-3">
-                        <select id="sortOrder" name="sortOrder" class="w-32 bg-gray-50 text-gray-900 text-sm rounded-lg block p-2.5 col-span-2">
-                            <option selected disabled>Select</option>
-                            <option value="asc" {{ $sortOrder == 'asc' ? 'selected' : '' }}>ASC</option>
-                            <option value="desc" {{ $sortOrder == 'desc' ? 'selected' : '' }}>DESC</option>
-                        </select>
+                        <div class="flex w-full justify-between items-center mt-10">
+                            <div class="flex space-x-3">
+                                {{-- @csrf --}}
+                                <select id="sortType" name="sortType" class="w-32 bg-gray-50 text-gray-900 text-sm rounded-lg block p-2.5 col-span-2">
+                                    <option selected disabled>Select</option>
+                                    <option {{$sortType === "collect_date" ? 'selected' : ''}} value="collect_date">Collect Date</option>
+                                    <option {{$sortType === "class_position" ? 'selected' : ''}} value="class_position">Class</option>
+                                </select>
+                                <select id="sortOrder" name="sortOrder" class="w-32 bg-gray-50 text-gray-900 text-sm rounded-lg block p-2.5 col-span-2">
+                                    <option selected disabled>Select</option>
+                                    <option {{$sortOrder === "asc" ? 'selected' : ''}} value="asc">ASC</option>
+                                    <option {{$sortOrder === "desc" ? 'selected' : ''}} value="desc">DESC</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 {{-- assessment scale section --}}
@@ -185,6 +195,7 @@
                 });
 
             });
+
         </script>
 </body>
 

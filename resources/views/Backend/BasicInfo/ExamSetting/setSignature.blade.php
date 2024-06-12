@@ -45,6 +45,7 @@ Signature
         </div>
         <form id="dataForm" method="POST" action="{{ route('store.signature', $school_code) }}">
             @csrf
+
             <table id="data" class="w-full text-sm text-center rtl:text-right text-black">
                 <thead class="text-xs text-white uppercase bg-blue-600 border-b border-blue-400 ">
                     <tr>
@@ -88,6 +89,7 @@ Signature
                 <div class="mr-10">
                     <button type="submit"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  ">Save</button>
+
                 </div>
                 <div class="mr-10">
                     <button type="button"

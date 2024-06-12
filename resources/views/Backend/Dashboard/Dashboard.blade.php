@@ -6,6 +6,7 @@ Dashboard
 @section('Dashboard')
 @include('/Message/message')
 
+
 <div
     class="relative mb-3 overflow-hidden rounded-md bg-gradient-to-tr from-[#1E3A8A] to-[#0054af] px-10 py-16 text-white">
     <h2 class="text-4xl">
@@ -21,6 +22,7 @@ Dashboard
         @endif
     </h2>
     <p class="mt-1 font-light opacity-90">Welcome! Have a wonderful day!</p>
+
 
     <img class="absolute right-0 h-72 -rotate-45" src="{{ asset('assets/images/dashboard-welcome-bg.svg') }}" alt="" />
 </div>

@@ -43,6 +43,7 @@ class DailyCollectionReportController extends Controller
     public function GetPaySlipReport(Request $request, $school_code)
     {
         // sorting inputs
+        $sortType = $request->session()->get('sortType', 'collect_date');
         $sortOrder = $request->session()->get('sortOrder', 'desc');
         $date_from = $request->session()->get('date_from', $request->input('date_from'));
         $date_to = $request->session()->get('date_to', $request->input('date_to'));
@@ -70,9 +71,9 @@ class DailyCollectionReportController extends Controller
                 return $query->where('collected_by_email', $entry_by_email);
             })
             ->whereBetween('collect_date', [$date_from, $date_to])
-            ->select('voucher_number', 'student_id', 'class', 'group', 'collected_by_name', 'collect_date', DB::raw('SUM(paid_amount) as total_paid'), DB::raw('SUM(amount) as total_amount'), DB::raw('SUM(waiver) as total_waiver'))
-            ->groupBy('voucher_number', 'student_id', 'class', 'group', 'collected_by_name', 'collect_date')
-            ->orderBy('collect_date', $sortOrder)
+            ->select('voucher_number', 'student_id', 'class','class_position', 'group', 'collected_by_name', 'collect_date', DB::raw('SUM(paid_amount) as total_paid'), DB::raw('SUM(amount) as total_amount'), DB::raw('SUM(waiver) as total_waiver'))
+            ->groupBy('voucher_number', 'student_id', 'class','class_position', 'group', 'collected_by_name', 'collect_date')
+            ->orderBy($sortType, $sortOrder)
             ->get();
 
         // total paid amount
@@ -92,7 +93,7 @@ class DailyCollectionReportController extends Controller
 
 
         if (count($paySlipReport) > 0) {
-            return view('Backend/Student_accounts/Reports(Students_Fees)/dailyCollectionReportPrint', compact('date_from', 'date_to', 'paySlipReport', 'entry_by_name', 'TotalAmount', 'sortOrder', 'class', 'student_roll', 'entry_by'));
+            return view('Backend/Student_accounts/Reports(Students_Fees)/dailyCollectionReportPrint', compact('date_from', 'date_to', 'paySlipReport', 'entry_by_name', 'TotalAmount', 'sortType', 'sortOrder', 'class', 'student_roll', 'entry_by'));
         } else {
             return redirect()->back()->with('error', 'No data found');
         }
@@ -100,6 +101,7 @@ class DailyCollectionReportController extends Controller
 
     public function GetPaySlipReportSortingWise(Request $request, $school_code)
     {
+        $sortType = $request->input('sortType');
         $sortOrder = $request->input('sortOrder');
         $date_to = $request->input('date_to');
         $date_from = $request->input('date_from');
@@ -107,6 +109,7 @@ class DailyCollectionReportController extends Controller
         $student_roll = $request->input('student_roll');
         $entry_by = $request->input('entry_by');
         return redirect()->route('DailyCollectionReport.getReports', $school_code)->with([
+            'sortType' => $sortType,
             'sortOrder' => $sortOrder,
             'date_from' => $date_from,
             'date_to' => $date_to,

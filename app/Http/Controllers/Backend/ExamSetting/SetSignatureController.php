@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\ExamSetting;
 
 use App\Http\Controllers\Controller;
 use App\Models\AddReportName;
+use App\Models\AddSignature;
 use App\Models\SetSignature;
 use Illuminate\Http\Request;
 
@@ -11,60 +12,65 @@ class SetSignatureController extends Controller
 {
     public function SetSignature(Request $request, $schoolCode)
     {
-        if ($request->has('report_name')) {
-            $selectedReport = $request->input('report_name');
-            $reports = AddReportName::where('action', 'approved')->where('school_code', $schoolCode)->get();
-            return view('Backend.BasicInfo.ExamSetting.setSignature', compact('reports', 'selectedReport'));
-        } else {
-            $selectedReport = null;
-            $reports = AddReportName::where('action', 'approved')->where('school_code', $schoolCode)->get();
-            return view('Backend.BasicInfo.ExamSetting.setSignature', compact('reports', 'selectedReport'));
-        }
+
+        $reportName = null;
+        $signatures = AddSignature::where('school_code', $schoolCode)->where('action', 'approved')->get();
+        $reports = AddReportName::where('school_code', $schoolCode)->where('action', 'approved')->get();
+        return view('Backend.BasicInfo.ExamSetting.setSignature', compact('signatures', 'reports', 'reportName'));
+
     }
 
+
+    public function getSignatureData(Request $request, $school_code)
+    {
+        // dd($request);
+        $signatures = AddSignature::where('school_code', $school_code)->where('action', 'approved')->get();
+        $reports = AddReportName::where('school_code', $school_code)->where('action', 'approved')->get();
+        $reportName = $request->report_name;
+        return view('Backend.BasicInfo.ExamSetting.setSignature', compact('signatures', 'reports', 'reportName'));
+    }
     public function processForm(Request $request, $schoolCode)
-{
-    $request->validate([
-        'report_name' => 'required|string',
-        'signature_name.*' => 'required|string',
-        'positions.*' => 'required|string',
-        'status.*' => 'required|string',
-    ]);
+    {
+        $reportName = $request->input('reportName');
+        $signatureNames = $request->input('signatureName');
+        $positions = $request->input('positions');
+        $statuses = $request->input('status');
 
-    $reportName = $request->input('report_name');
-    $signatureNames = $request->input('signature_name');
-    $positions = $request->input('positions');
-    $statuses = $request->input('status');
 
-    // Loop through the arrays and save/update each signature
-    foreach ($signatureNames as $index => $signatureName) {
-        // Check if the signature already exists
-        $existingSignature = SetSignature::where('action', 'approved')
-            ->where('school_code', $schoolCode)
+        // Deactivate all signatures for the given school and report
+        SetSignature::where('school_code', $schoolCode)
             ->where('report_name', $reportName)
-            ->where('signature_name', $signatureName)
-            ->first();
+            ->update(['status' => 'in active']);
 
-        if ($existingSignature) {
-            // If the signature exists, update its positions
-            $existingSignature->update([
-                'positions' => $positions[$index],
-                'status' => $statuses[$index],
-            ]);
-        } else {
-            // If the signature doesn't exist, create a new one
-            SetSignature::create([
-                'report_name' => $reportName,
-                'signature_name' => $signatureName,
-                'positions' => $positions[$index],
-                'status' => $statuses[$index],
-                'action' => 'approved',
-                'school_code' => $schoolCode,
-            ]);
+        // Loop through each signature to update or create
+        foreach ($signatureNames as $key => $signatureName) {
+            $status = isset($statuses[$key]) ? 'active' : 'in active';
+            $position = isset($positions[$key]) ? $positions[$key] : null;
+            $isExist = SetSignature::where('school_code', $schoolCode)
+                ->where('report_name', $reportName)
+                ->where('signature_name', $signatureName)
+                ->first();
+
+            if ($isExist) {
+                $isExist->update([
+                    'positions' => $position,
+                    'status' => $status
+                ]);
+            } else {
+                SetSignature::create([
+                    'report_name' => $reportName,
+                    'signature_name' => $signatureName,
+                    'positions' => $position,
+                    'status' => $status,
+                    'action' => 'approved',
+                    'school_code' => $schoolCode,
+                ]);
+            }
         }
+
+        return redirect()->route('view.signature', $schoolCode)->with('success', 'Signatures saved successfully');
     }
 
-    return redirect()->route('view.signature', $schoolCode)->with('success', 'Signatures saved successfully');
-}
+
 
 }

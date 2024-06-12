@@ -11,23 +11,29 @@
             animation: move-from-top 1s ease-out;
         }
 
-        .svg-bottom {
-            animation: move-from-bottom 1s ease-out;
-        }
-        .svg-right {
-            animation: move-from-right 1s ease-out;
-        }
-
-        @keyframes move-from-top {
-            0% {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-10 md:my-10">
+    <form action="{{ route('get.signature.data', $school_code) }}" method="POST">
+        @csrf
+        <div class="md:flex my-10 ">
+            <div class="mr-5">
+                <label for="session" class="block mb-2 text-sm font-medium text-gray-900 ">Report NAME
+                    :</label>
+            </div>
+            <div class="mr-10">
+                <select name="report_name"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
+                    <option disabled selected>Select</option>
+                    @foreach ($reports as $report)
+                        <option value="{{ $report->report_name }}">{{ $report->report_name }}</option>`
+                    @endforeach
+                </select>
+            </div>
+            <div>
+                <button type="submit"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  ">GET
+                    DATA
+                </button>
+            </div>
 
         @keyframes move-from-bottom {
             0% {
@@ -132,9 +138,51 @@
     <div class="relative overflow-x-auto border-2 p-6 sm:rounded-lg">
         <form action="{{ route('view.signature', $school_code) }}" method="GET">
             @csrf
-            <div class="">
-                <div class="mr-5">
-                    <label for="session" class="mb-2 block text-sm font-medium text-gray-900">Report NAME :</label>
+
+            <table id="data" class="w-full text-sm text-center rtl:text-right text-black">
+                <thead class="text-xs text-white uppercase bg-blue-600 border-b border-blue-400 ">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 bg-blue-500">SL</th>
+                        <th scope="col" class="px-6 py-3">SIGNATURE NAME</th>
+                        <th scope="col" class="px-6 py-3 bg-blue-500">POSITION</th>
+                        <th scope="col" class="px-6 py-3">STATUS</th>
+                    </tr>
+                </thead>
+                @if ($reportName !== null)
+                    <tbody id="dataBody">
+                        @foreach ($signatures as $key => $signature)
+                            <tr>
+                                <td>{{ $key + 1 }}</td>
+                                <input class="hidden" name="reportName" value="{{ $reportName }}" type="text">
+                                <input class="hidden" name="signatureName[]" value="{{ $signature->sign }}" type="text">
+                                <td>{{ $signature->sign }}</td>
+                                <td>
+                                    <select name="positions[{{ $key }}]"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                        <option disabled selected>Select</option>
+                                        <option value="left">Left</option>
+                                        <option value="center">Center</option>
+                                        <option value="right">Right</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <div class="">
+                                        <input id="laravel-checkbox-{{ $key }}" type="checkbox" value="active"
+                                            name="status[{{ $key }}]"
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+
+                @endif
+            </table>
+            <div class="md:flex justify-center my-10">
+                <div class="mr-10">
+                    <button type="submit"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  ">Save</button>
+
                 </div>
                 <div class="mr-10">
                     <select

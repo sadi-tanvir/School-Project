@@ -104,6 +104,7 @@ Student Admit Card
             </div>
             <div class="mb-5">
                 <div class=" ">
+
                     <label for="last_name" class="mb-2 block text-sm font-medium text-gray-900">Section:</label>
                 </div>
                 <div class="">

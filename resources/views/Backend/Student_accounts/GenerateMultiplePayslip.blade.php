@@ -1,250 +1,249 @@
 @extends('Backend.app')
 @section('title')
-    Generate Multiple Payslip
+Generate Multiple Payslip
 @endsection
 
 
 @section('Dashboard')
-    <div>
-        <h1>Multiple Fees Generate</h1>
-    </div>
+<div>
+    <h1>Multiple Fees Generate</h1>
+</div>
 
-    @include('Shared.alert')
-    <div id="errorContainer"></div>
-    <form action="{{ route('multiplePayslipData.store', $school_code) }}" method="POST" enctype="multipart/form-data">
-        @csrf 
+@include('Shared.alert')
+<div id="errorContainer"></div>
+<form action="{{ route('multiplePayslipData.store', $school_code) }}" method="POST" enctype="multipart/form-data">
+    @csrf
 
-        <div class="w-full border mx-auto p-5 space-y-10">
-            <div >
-                @csrf
-                <div class="grid grid-cols-12 items-center gap-5">
-                    {{-- month --}}
-                    <div class="col-span-2">
-                        <div class="p-4">
-                            <label for="month" class="block text-sm font-medium text-zinc-700">Month:</label>
-                            <div class="mt-1 relative">
-                                <button type="button" id="toggleMonthDropdown"
-                                    class="relative w-full bg-white border border-zinc-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                    <span class="block truncate">Select Month</span>
-                                    <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                                        <svg class="h-5 w-5 text-zinc-400" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                            <path fill-rule="evenodd"
-                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </span>
-                                </button>
-                                <div id="monthDropdown"
-                                    class="hidden absolute mt-1 w-full rounded-md bg-white shadow-lg  z-50">
-                                    <ul id="monthUnorderedList" tabindex="-1" role="listbox"
-                                        aria-labelledby="listbox-label" aria-activedescendant="listbox-item-3"
-                                        class="max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-                                        <li class="text-zinc-900 cursor-default select-none relative py-2 pl-3 pr-9">
-                                            <div class="flex items-center">
-                                                <input id="month_select_all" type="checkbox"
-                                                    class="h-4 w-4 text-indigo-600 border-zinc-300 rounded focus:ring-indigo-500">
-                                                <label for="month_select_all" class="font-normal ml-3 block truncate">Select
-                                                    All</label>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
+    <div class="w-full border mx-auto p-5 space-y-10">
+        <div>
+            @csrf
+            <div class="grid grid-cols-12 items-center gap-5">
+                {{-- month --}}
+                <div class="col-span-2">
+                    <div class="p-4">
+                        <label for="month" class="block text-sm font-medium text-zinc-700">Month:</label>
+                        <div class="mt-1 relative">
+                            <button type="button" id="toggleMonthDropdown"
+                                class="relative w-full bg-white border border-zinc-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                <span class="block truncate">Select Month</span>
+                                <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                                    <svg class="h-5 w-5 text-zinc-400" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </span>
+                            </button>
+                            <div id="monthDropdown"
+                                class="hidden absolute mt-1 w-full rounded-md bg-white shadow-lg  z-50">
+                                <ul id="monthUnorderedList" tabindex="-1" role="listbox" aria-labelledby="listbox-label"
+                                    aria-activedescendant="listbox-item-3"
+                                    class="max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+                                    <li class="text-zinc-900 cursor-default select-none relative py-2 pl-3 pr-9">
+                                        <div class="flex items-center">
+                                            <input id="month_select_all" type="checkbox"
+                                                class="h-4 w-4 text-indigo-600 border-zinc-300 rounded focus:ring-indigo-500">
+                                            <label for="month_select_all" class="font-normal ml-3 block truncate">Select
+                                                All</label>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    {{-- year --}}
-                    <div class="">
-                        <label for="year" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year
-                            :</label>
-                        <input type="text" value="" name="year" id="year"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full"
-                            placeholder="" />
-                    </div>
+                {{-- year --}}
+                <div class="">
+                    <label for="year" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year
+                        :</label>
+                    <input type="text" value="" name="year" id="year"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full"
+                        placeholder="" />
+                </div>
 
-                    {{-- last pay date --}}
-                    <div class="">
-                        <label for="last_pay_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last
-                            Pay
-                            Date:</label>
-                        <input type="date" value="" name="last_pay_date" id="last_pay_date"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full"
-                            placeholder="" />
-                    </div>
+                {{-- last pay date --}}
+                <div class="">
+                    <label for="last_pay_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last
+                        Pay
+                        Date:</label>
+                    <input type="date" value="" name="last_pay_date" id="last_pay_date"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full"
+                        placeholder="" />
+                </div>
 
-                    {{-- class --}}
-                    <div class="col-span-2">
-                        <div class="p-4">
-                            <label for="month" class="block text-sm font-medium text-zinc-700">Class:</label>
-                            <div class="mt-1 relative">
-                                <button type="button" id="toggleClassDropdown"
-                                    class="relative w-full bg-white border border-zinc-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                    <span class="block truncate">Select Class</span>
-                                    <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                                        <svg class="h-5 w-5 text-zinc-400" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                            <path fill-rule="evenodd"
-                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </span>
-                                </button>
-                                <div id="classDropdown"
-                                    class="hidden absolute mt-1 w-full rounded-md bg-white shadow-lg  z-50">
-                                    <ul id="classUnorderedList" tabindex="-1" role="listbox"
-                                        aria-labelledby="listbox-label" aria-activedescendant="listbox-item-3"
-                                        class="max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-                                        <li class="text-zinc-900 cursor-default select-none relative py-2 pl-3 pr-9">
-                                            <div class="flex items-center">
-                                                <input id="class_select_all" type="checkbox"
-                                                    class="h-4 w-4 text-indigo-600 border-zinc-300 rounded focus:ring-indigo-500">
-                                                <label for="class_select_all" class="font-normal ml-3 block truncate">Select
-                                                    All</label>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
+                {{-- class --}}
+                <div class="col-span-2">
+                    <div class="p-4">
+                        <label for="month" class="block text-sm font-medium text-zinc-700">Class:</label>
+                        <div class="mt-1 relative">
+                            <button type="button" id="toggleClassDropdown"
+                                class="relative w-full bg-white border border-zinc-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                <span class="block truncate">Select Class</span>
+                                <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                                    <svg class="h-5 w-5 text-zinc-400" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </span>
+                            </button>
+                            <div id="classDropdown"
+                                class="hidden absolute mt-1 w-full rounded-md bg-white shadow-lg  z-50">
+                                <ul id="classUnorderedList" tabindex="-1" role="listbox" aria-labelledby="listbox-label"
+                                    aria-activedescendant="listbox-item-3"
+                                    class="max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+                                    <li class="text-zinc-900 cursor-default select-none relative py-2 pl-3 pr-9">
+                                        <div class="flex items-center">
+                                            <input id="class_select_all" type="checkbox"
+                                                class="h-4 w-4 text-indigo-600 border-zinc-300 rounded focus:ring-indigo-500">
+                                            <label for="class_select_all" class="font-normal ml-3 block truncate">Select
+                                                All</label>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    {{-- group --}}
-                    <div class="">
-                        <label for="group"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Group:</label>
-                        <select id="group" name="group"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Select</option>
-                        </select>
-                    </div>
+                {{-- group --}}
+                <div class="">
+                    <label for="group"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Group:</label>
+                    <select id="group" name="group"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option selected>Select</option>
+                    </select>
+                </div>
 
-                    {{-- pay slip types --}}
-                    <div class="">
-                        <label for="pay_slip_type"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PaySlip
-                            :</label>
-                        <select id="pay_slip_type" name="pay_slip_type"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Select</option>
-                        </select>
-                    </div>
+                {{-- pay slip types --}}
+                <div class="">
+                    <label for="pay_slip_type"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PaySlip
+                        :</label>
+                    <select id="pay_slip_type" name="pay_slip_type"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option selected>Select</option>
+                    </select>
+                </div>
 
-                    {{-- academic session --}}
-                    <div class="">
-                        <label for="academic_session"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Session
-                            :</label>
-                        <select id="academic_session" name="academic_session"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Select</option>
-                        </select>
-                    </div>
+                {{-- academic session --}}
+                <div class="">
+                    <label for="academic_session"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Session
+                        :</label>
+                    <select id="academic_session" name="academic_session"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option selected>Select</option>
+                    </select>
+                </div>
 
-                    {{-- status --}}
-                    <div class="">
-                        <label for="status"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status:</label>
-                        <select id="status" name="status"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Select</option>
-                            <option value="New">New</option>
-                            <option value="Old">Old</option>
-                        </select>
-                    </div>
+                {{-- status --}}
+                <div class="">
+                    <label for="status"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status:</label>
+                    <select id="status" name="status"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option selected>Select</option>
+                        <option value="New">New</option>
+                        <option value="Old">Old</option>
+                    </select>
+                </div>
 
-                    {{-- academic_year --}}
-                    <div class="">
-                        <label for="academic_year"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year
-                            :</label>
-                        <select id="academic_year" name="academic_year"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Select</option>
-                        </select>
-                    </div>
+                {{-- academic_year --}}
+                <div class="">
+                    <label for="academic_year" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year
+                        :</label>
+                    <select id="academic_year" name="academic_year"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option selected>Select</option>
+                    </select>
+                </div>
 
-                    <div>
-                        <button id="getInformation" type="submit"
-                            class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center uppercase mt-5">
-                            get data
+                <div>
+                    <button id="getInformation" type="submit"
+                        class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center uppercase mt-5">
+                        get data
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        {{-- table --}}
+        <div class="space-y-1">
+            <div class="bg-blue-200 text-center rounded-lg">
+                <h1 class="py-1">Transaction Data</h1>
+            </div>
+            <div class="">
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg h-auto max-h-[400px] overflow-scroll">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
+                        <thead class="text-xs text-white uppercase bg-blue-600 dark:bg-gray-700 dark:text-gray-400">
+                            <tr id="table_header_row">
+                                <th scope="col" class="px-6 py-3">
+                                    SL
+                                </th>
+                                <th scope="col" class="px-6 py-3 bg-blue-500">
+                                    MONTH.YEAR
+                                </th>
+                                <th scope="col" class="px-16 py-3">
+                                    S. ID
+                                </th>
+                                <th scope="col" class="px-6 py-3 bg-blue-500">
+                                    STUDENT NAME
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    CLASS
+                                </th>
+                                <th scope="col" class="px-6 py-3 bg-blue-500">
+                                    ROLL
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    TYPE
+                                </th>
+                                <th scope="col" class="px-6 py-3 bg-blue-500">
+                                    AMOUNT
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    WAIVER
+                                </th>
+                                <th scope="col" class="px-6 py-3 bg-blue-500">
+                                    PAYABLE
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="table_body" class="" style="height: 500px">
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-20 flex justify-between">
+                    <h1>
+                        Total =
+                        <input readonly type="number" value="" id="totalStudents"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1"
+                            placeholder="" />
+                    </h1>
+
+                    <div class="flex space-x-10">
+
+                        <button type="submit"
+                            class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-16 py-1 text-center">
+                            Save
+                        </button>
+                        <button type="button"
+                            class="text-white bg-gradient-to-br from-red-600 to-red-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-16 py-1 text-center">
+                            Close
                         </button>
                     </div>
                 </div>
             </div>
-
-            {{-- table --}}
-            <div class="space-y-1">
-                <div class="bg-blue-200 text-center rounded-lg">
-                    <h1 class="py-1">Transaction Data</h1>
-                </div>
-                <div class="">
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg h-auto max-h-[400px] overflow-scroll">
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
-                            <thead class="text-xs text-white uppercase bg-blue-600 dark:bg-gray-700 dark:text-gray-400">
-                                <tr id="table_header_row">
-                                    <th scope="col" class="px-6 py-3">
-                                        SL
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 bg-blue-500">
-                                        MONTH.YEAR
-                                    </th>
-                                    <th scope="col" class="px-16 py-3">
-                                        S. ID
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 bg-blue-500">
-                                        STUDENT NAME
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        CLASS
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 bg-blue-500">
-                                        ROLL
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        TYPE
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 bg-blue-500">
-                                        AMOUNT
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        WAIVER
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 bg-blue-500">
-                                        PAYABLE
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody id="table_body" class="" style="height: 500px">
-
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="mt-20 flex justify-between">
-                        <h1>
-                            Total =
-                            <input readonly type="number" value="" id="totalStudents"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1"
-                                placeholder="" />
-                        </h1>
-
-                        <div class="flex space-x-10">
-
-                            <button type="submit"
-                                class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-16 py-1 text-center">
-                                Save
-                            </button>
-                            <button type="button"
-                                class="text-white bg-gradient-to-br from-red-600 to-red-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-16 py-1 text-center">
-                                Close
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
-    </form>
+    </div>
+</form>
 @endsection
 
 
@@ -501,8 +500,8 @@
             selectedClasses = getSelectedClasses();
             selectedMonths = getSelectedMonths();
             fetch(
-                    `/dashboard/studentAccounts/getStudentInformation/${schoolCode}?months=${selectedMonths}&classes=${selectedClasses}&group=${group.value}&pay_slip_type=${pay_slip_type.value}&year=${year.value}&academic_session=${academic_session.value}&academic_year=${academic_year.value}`
-                )
+                `/dashboard/studentAccounts/getStudentInformation/${schoolCode}?months=${selectedMonths}&classes=${selectedClasses}&group=${group.value}&pay_slip_type=${pay_slip_type.value}&year=${year.value}&academic_session=${academic_session.value}&academic_year=${academic_year.value}`
+            )
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -514,6 +513,7 @@
                         showError('There is no data found')
                         return;
                     }
+                    console.log('from multiple', data);
                     updateTableContent(data)
                 })
                 .catch(error => {
@@ -528,8 +528,10 @@
             monthList.forEach((month) => {
                 data[month]?.forEach(element => {
                     if (element.students.length > 0) {
+                        // console.log(element);
                         element.students.forEach((student, index) => {
                             if (student.pay_slip_amount > 0) {
+                                console.log(student);
                                 const tr = document.createElement('tr');
                                 tr.classList.add('odd:bg-white', 'odd:dark:bg-gray-900',
                                     'even:bg-gray-50',
@@ -709,6 +711,7 @@
                                 payableAmountInputBox.readOnly = true;
                                 payableAmount_TD.appendChild(payableAmountInputBox);
                                 tr.appendChild(payableAmount_TD);
+                                // console.log('student_payable_amount_key ----',
                                 // student_payable_amount_key);
 
 
@@ -740,19 +743,6 @@
                                 studentSection_TD.appendChild(studentSectionInputBox);
                                 tr.appendChild(studentSection_TD);
 
-                                // class position
-                                const classPosition_TD = document.createElement('td');
-                                classPosition_TD.classList.add('hidden')
-                                const classPositionInputBox = document.createElement(
-                                    'input');
-                                classPositionInputBox.type = 'text'
-                                classPositionInputBox.name =
-                                    `input_class_position[${student.student_id}]`;
-                                classPositionInputBox.value = student.class_position;
-                                classPositionInputBox.classList.add('hidden')
-                                classPosition_TD.appendChild(classPositionInputBox);
-                                tr.appendChild(classPosition_TD);
-
 
 
 
@@ -772,7 +762,7 @@
 
 
 
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         const last_pay_date = document.getElementById('last_pay_date');
         const desiredMonth = new Date().getMonth();
         const desiredYear = new Date().getFullYear();

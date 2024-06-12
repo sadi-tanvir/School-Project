@@ -44,7 +44,6 @@ class StudentProfileController extends Controller
 
     public function search(Request $request, $school_code)
     {
-
         $id = $request->input('id');
 
         if ($id) {

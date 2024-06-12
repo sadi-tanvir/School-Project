@@ -29,6 +29,28 @@
         background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.04),rgba(0,0,0,0.03),rgba(0,0,0,0.09),rgba(0,0,0,0.09),rgba(0,0,0,0.06),rgba(0,0,0,0.04),transparent,rgba(0,0,0,0.05),rgba(0,0,0,0.06),rgba(0,0,0,0.02),rgba(0,0,0,0.09),rgba(0,0,0,0.03),rgba(0,0,0,0.07) 4px),linear-gradient(0deg, rgb(24, 9, 88),rgb(20, 15, 94));
     } */
 
+
+    /* Hide non-printable elements */
+    @media print {
+        body * {
+            visibility: hidden;
+        }
+
+        #print-section,
+        #print-section * {
+            visibility: visible;
+        }
+    }
+
+    /* Style the print section */
+    @media print {
+        #print-section {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    }
+
 </style>
 
 <body class="">
@@ -39,35 +61,41 @@
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jspdf-html2canvas@latest/dist/jspdf-html2canvas.min.js"></script>
 
-    <div class="w-full bg-slate-200 min-h-screen">
-        <div class="w-[80%] h-fit bg-white mx-auto px-5 py-12">
-            <div class="flex w-full justify-between items-center">
+    <div class="w-[80%] mx-auto min-h-screen flex flex-col justify-center items-center">
+        <div class="flex w-full justify-between items-center mt-10">
+            <div class="flex items-center space-x-2">
                 <button type="button" onclick="location.replace('{{env('APP_URL')}}/dashboard/DuepaySummary/{{$school_code}}')" class="text-white bg-red-700 hover:bg-red-600 focus:ring-0  font-medium rounded-lg text-sm px-10 py-2.5 me-2 mb-2 focus:outline-none uppercase">
                     Back
                 </button>
-                <form id="sortOrderForm" action="{{route("DuepaySummary.sort.info", $school_code)}}" method="GET">
-                    <div class="flex space-x-3">
-                        {{-- @csrf --}}
-                        <select id="sortType" name="sortType" class="w-32 bg-gray-50 text-gray-900 text-sm rounded-lg block p-2.5 col-span-2">
-                            <option selected disabled>Select</option>
-                            <option {{$sortType === "collect_date" ? 'selected' : ''}} value="collect_date">Collect Date</option>
-                            <option {{$sortType === "class_position" ? 'selected' : ''}} value="class_position">Class</option>
-                        </select>
-                        <select id="sortOrder" name="sortOrder" class="w-32 bg-gray-50 text-gray-900 text-sm rounded-lg block p-2.5 col-span-2">
-                            <option selected disabled>Select</option>
-                            <option {{$sortOrder === "asc" ? 'selected' : ''}} value="asc">ASC</option>
-                            <option {{$sortOrder === "desc" ? 'selected' : ''}} value="desc">DESC</option>
-                        </select>
-
-                        {{-- hidden inputs --}}
-                        <input class="hidden" name="class" value="{{ $class }}">
-                        <input class="hidden" name="group" value="{{ $group }}">
-                        <input class="hidden" name="section" value="{{ $section }}">
-                        <input class="hidden" name="student_id" value="{{ $student_id }}">
-                        <input class="hidden" name="payment_status" value="{{ $payment_status }}">
-                    </div>
-                </form>
+                <button type="button" onclick="window.print()" class="text-white bg-blue-700 hover:bg-blue-600 focus:ring-0  font-medium rounded-lg text-sm px-10 py-2.5 me-2 mb-2 focus:outline-none uppercase">
+                    Print
+                </button>
             </div>
+            <form id="sortOrderForm" action="{{route("DuepaySummary.sort.info", $school_code)}}" method="GET">
+                <div class="flex space-x-3">
+                    {{-- @csrf --}}
+                    <select id="sortType" name="sortType" class="w-32 bg-gray-50 text-gray-900 text-sm rounded-lg block p-2.5 col-span-2">
+                        <option selected disabled>Select</option>
+                        <option {{$sortType === "collect_date" ? 'selected' : ''}} value="collect_date">Collect Date</option>
+                        <option {{$sortType === "class_position" ? 'selected' : ''}} value="class_position">Class</option>
+                    </select>
+                    <select id="sortOrder" name="sortOrder" class="w-32 bg-gray-50 text-gray-900 text-sm rounded-lg block p-2.5 col-span-2">
+                        <option selected disabled>Select</option>
+                        <option {{$sortOrder === "asc" ? 'selected' : ''}} value="asc">ASC</option>
+                        <option {{$sortOrder === "desc" ? 'selected' : ''}} value="desc">DESC</option>
+                    </select>
+
+                    {{-- hidden inputs --}}
+                    <input class="hidden" name="class" value="{{ $class }}">
+                    <input class="hidden" name="group" value="{{ $group }}">
+                    <input class="hidden" name="section" value="{{ $section }}">
+                    <input class="hidden" name="student_id" value="{{ $student_id }}">
+                    <input class="hidden" name="payment_status" value="{{ $payment_status }}">
+                </div>
+            </form>
+        </div>
+
+        <div id="print-section" class="w-full h-fit bg-white mx-auto px-5 py-12">
             {{-- assessment scale section --}}
             <div>
                 <h1 class="text-center text-blue-500 font-bold">{{ $schoolInfo->school_name }}</h1>
@@ -82,8 +110,8 @@
             {{-- All fee types --}}
             <div class="space-y-1">
                 <div class="mt-10">
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                    <div class="relative shadow-md sm:rounded-lg">
+                        <table class="w-full text-xs text-left rtl:text-right text-gray-500">
                             <thead class="text-xs text-white uppercase bg-blue-600">
                                 <tr class="text-center">
                                     <th scope="col" class="px-6 py-3 bg-blue-500">

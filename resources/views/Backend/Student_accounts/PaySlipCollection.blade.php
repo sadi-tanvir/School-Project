@@ -396,16 +396,23 @@ Fees Collection
         full_paid.style.cursor = "not-allowed"
 
         // common function to get student info
-        async function getStudentInfo(className, groupName, sectionName) {
+        async function getStudentInfo(className, groupName, sectionName, requestedBy) {
             try {
                 const res = await fetch(
                     `/dashboard/studentAccounts/paySlipCollection/getStudentRoll/${schoolCode}?class_name=${className}&group=${groupName}&section=${sectionName}&year=${year.value}`
                 )
                 if (!res.ok) throw new Error('Network response was not ok');
                 const data = await res.json();
-                UpdateGroupOption(data.group);
-                UpdateSectionOption(data.section);
-                UpdateStudentRoll(data.student_info)
+                if (requestedBy === 'class') {
+                    UpdateGroupOption(data.group);
+                    UpdateSectionOption(data.section);
+                    UpdateStudentRoll(data.student_info)
+                } else if (requestedBy === 'group') {
+                    UpdateSectionOption(data.section);
+                    UpdateStudentRoll(data.student_info)
+                } else if (requestedBy === 'section') {
+                    UpdateStudentRoll(data.student_info)
+                }
             } catch (error) {
                 console.error('Error:', error);
             }
@@ -414,19 +421,20 @@ Fees Collection
         // get student information
         classId.addEventListener('change', async (e) => {
             const className = e.target.value;
-            getStudentInfo(className, groupId.value, sectionId.value);
+            getStudentInfo(className, groupId.value, sectionId.value, 'class');
         });
 
         // get student info according to the section
         groupId.addEventListener('change', async (e) => {
             const groupName = e.target.value;
-            getStudentInfo(classId.value, groupName, sectionId.value);
+            // console.log('group name', groupName);
+            getStudentInfo(classId.value, groupName, sectionId.value, 'group');
         });
 
         // get student info according to the section
         sectionId.addEventListener('change', async (e) => {
             const sectionName = e.target.value;
-            getStudentInfo(classId.value, groupId.value, sectionName);
+            getStudentInfo(classId.value, groupId.value, sectionName, 'section');
         });
 
 

@@ -22,6 +22,7 @@ return new class extends Migration {
             $table->string('class_position')->nullable();
             $table->string('group');
             $table->string('section')->nullable();
+            $table->string('category')->nullable();
             $table->string('pay_slip_type');
             $table->integer('amount');
             $table->integer('waiver');

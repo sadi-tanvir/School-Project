@@ -1,135 +1,133 @@
 @extends('Backend.app')
 @section('title')
-    Generate Payslip
+Generate Payslip
 @endsection
 
 
 @section('Dashboard')
-    <style>
-        input[type="checkbox"] {
-            /* Hide the default checkbox */
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            /* Set custom styles for the checkbox */
-            width: 16px;
-            height: 16px;
-            background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            cursor: pointer;
-            /* Add a checkmark when the checkbox is checked */
-        }
+<style>
+    input[type="checkbox"] {
+        /* Hide the default checkbox */
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        /* Set custom styles for the checkbox */
+        width: 16px;
+        height: 16px;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        cursor: pointer;
+        /* Add a checkmark when the checkbox is checked */
+    }
 
-        input[type="checkbox"]:checked {
-            background-color: #007bff;
-            border-color: #007bff;
-        }
-    </style>
-    <div>
-        <h1>Fees Generate</h1>
-    </div>
+    input[type="checkbox"]:checked {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
 
-    @include('Shared.alert')
+</style>
+<div>
+    <h1>Fees Generate</h1>
+</div>
 
-    <form action="{{ route('generatePaySlip.store', $school_code) }}" method="POST">
-        <div class="w-full border mx-auto p-5 space-y-10">
+@include('Shared.alert')
 
-            <form action="" method="GET">
-                {{-- <form action="{{ route('AllInformation.get', $school_code) }}" method="GET"> --}}
-                @csrf
-                <div class="grid grid-cols-11 items-center gap-5">
-                    {{-- month --}}
-                    <div class="">
-                        <label for="month" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Month
-                            :</label>
-                        <select id="month" name="month"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option disabled selected>Select</option>
-                        </select>
-                    </div>
+<form action="{{ route('generatePaySlip.store', $school_code) }}" method="POST">
+    <div class="w-full border mx-auto p-5 space-y-10">
 
-                    {{-- year --}}
-                    <div class="">
-                        <label for="year" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year
-                            :</label>
-                        <input type="text" value="" name="year" id="year"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full"
-                            placeholder="" />
-                    </div>
+        <form action="" method="GET">
+            {{-- <form action="{{ route('AllInformation.get', $school_code) }}" method="GET"> --}}
+            @csrf
+            <div class="grid grid-cols-12 items-center gap-5">
+                {{-- month --}}
+                <div class="">
+                    <label for="month" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Month
+                        :</label>
+                    <select id="month" name="month" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option disabled selected>Select</option>
+                    </select>
+                </div>
 
-                    {{-- month_year --}}
-                    <div class="mt-7">
-                        <input type="text" value="" name="month_year" id="month_year"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full"
-                            placeholder="" />
-                    </div>
+                {{-- year --}}
+                <div class="">
+                    <label for="year" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year
+                        :</label>
+                    <input type="text" value="" name="year" id="year" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full" placeholder="" />
+                </div>
 
-                    {{-- last pay date --}}
-                    <div class="">
-                        <label for="last_pay_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last
-                            Pay
-                            Date:</label>
-                        <input type="date" value="" name="last_pay_date" id="last_pay_date"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full"
-                            placeholder="" />
-                    </div>
+                {{-- month_year --}}
+                <div class="mt-7">
+                    <input type="text" value="" name="month_year" id="month_year" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full" placeholder="" />
+                </div>
 
-                    {{-- class --}}
-                    <div class="">
-                        <label for="class"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Class:</label>
-                        <select id="class" name="class"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option disabled selected>Select</option>
-                            @foreach ($classes as $class)
-                                <option value="{{ $class->class_name }}">{{ $class->class_name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                {{-- last pay date --}}
+                <div class="">
+                    <label for="last_pay_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last
+                        Pay
+                        Date:</label>
+                    <input type="date" value="" name="last_pay_date" id="last_pay_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full" placeholder="" />
+                </div>
 
-                    {{-- Group --}}
-                    <div class="">
-                        <label for="group"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Group:</label>
-                        <select id="group" name="group"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Select</option>
-                            @foreach ($groups as $group)
-                                <option {{ $group->group_name === 'N/A' ? 'selected' : '' }}
-                                    value="{{ $group->group_name }}">
-                                    {{ $group->group_name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                {{-- class --}}
+                <div class="">
+                    <label for="class" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Class:</label>
+                    <select id="class" name="class" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option disabled selected>Select</option>
+                        @foreach ($classes as $class)
+                        <option value="{{ $class->class_name }}">{{ $class->class_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
 
-                    {{-- PaySlip --}}
-                    <div class="">
-                        <label for="pay_slip_type"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PaySlip
-                            :</label>
-                        <select id="pay_slip_type" name="pay_slip_type"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option disabled selected>Select</option>
-                        </select>
-                    </div>
+                {{-- Group --}}
+                <div class="">
+                    <label for="group" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Group:</label>
+                    <select id="group" name="group" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option selected>Select</option>
+                    </select>
+                </div>
 
-                    {{-- Session --}}
-                    <div class="">
-                        <label for="session" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Session
-                            :</label>
-                        <select id="session" name="session"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1">
-                            <option selected>Select</option>
-                            @foreach ($academicSessions as $session)
-                                <option value="{{ $session->academic_session_name }}">{{ $session->academic_session_name }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
+                {{-- PaySlip --}}
+                <div class="">
+                    <label for="pay_slip_type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PaySlip
+                        :</label>
+                    <select id="pay_slip_type" name="pay_slip_type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option disabled selected>Select</option>
+                    </select>
+                </div>
 
-                    {{-- status --}}
-                    {{-- <div class="">
+                {{-- Section --}}
+                <div class="">
+                    <label for="section" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Section:</label>
+                    <select id="section" name="section" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option selected>Select</option>
+                    </select>
+                </div>
+
+                {{-- category --}}
+                <div class="">
+                    <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category:</label>
+                    <select id="category" name="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option selected>Select</option>
+                    </select>
+                </div>
+
+                {{-- Session --}}
+                <div class="">
+                    <label for="session" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Session
+                        :</label>
+                    <select id="session" name="session" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1">
+                        <option selected>Select</option>
+                        @foreach ($academicSessions as $session)
+                        <option value="{{ $session->academic_session_name }}">{{ $session->academic_session_name }}
+                        </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                {{-- status --}}
+                {{-- <div class="">
                         <label for="status"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status:</label>
                         <select id="status" name="status"
@@ -140,78 +138,72 @@
                         </select>
                     </div> --}}
 
-                    {{-- academic_year --}}
-                    <div class="">
-                        <label for="academic_year" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year
-                            :</label>
-                        <select id="academic_year" name="academic_year"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Select</option>
-                        </select>
-                    </div>
-
-
-
-                    <div>
-                        <button id="getInformation" type="submit"
-                            class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl foc2024:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 text-center uppercase mt-5">
-                            get data
-                        </button>
-                    </div>
-                </div>
-            </form>
-
-
-            @csrf
-            <div class="space-y-1">
-                <div class="bg-blue-200 text-center rounded-lg">
-                    <h1 class="py-1">Transaction Data</h1>
-                </div>
+                {{-- academic_year --}}
                 <div class="">
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-white uppercase bg-blue-600 dark:bg-gray-700 dark:text-gray-400">
-                                <tr id="table_header_row">
+                    <label for="academic_year" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year
+                        :</label>
+                    <select id="academic_year" name="academic_year" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option selected>Select</option>
+                    </select>
+                </div>
 
-                                </tr>
-                            </thead>
-                            <tbody id="table_body">
 
-                            </tbody>
-                        </table>
-                    </div>
 
-                    <div class="mt-20 flex justify-between">
-                        <h1>
-                            Total =
-                            <input readonly type="number" value="" id="totalStudents"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1"
-                                placeholder="" />
-                        </h1>
+                <div>
+                    <button id="getInformation" type="submit" class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl foc2024:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-1 text-center uppercase mt-5">
+                        get data
+                    </button>
+                </div>
+            </div>
+        </form>
 
-                        <div class="flex space-x-10">
 
-                            <button type="submit"
-                                class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-16 py-1 text-center">
-                                Save
-                            </button>
-                            <button type="button"
-                                class="text-white bg-gradient-to-br from-red-600 to-red-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-16 py-1 text-center">
-                                Close
-                            </button>
-                        </div>
+        @csrf
+        <div class="space-y-1">
+            <div class="bg-blue-200 text-center rounded-lg">
+                <h1 class="py-1">Transaction Data</h1>
+            </div>
+            <div class="">
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-white uppercase bg-blue-600 dark:bg-gray-700 dark:text-gray-400">
+                            <tr id="table_header_row">
+
+                            </tr>
+                        </thead>
+                        <tbody id="table_body">
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-20 flex justify-between">
+                    <h1>
+                        Total =
+                        <input readonly type="number" value="" id="totalStudents" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1" placeholder="" />
+                    </h1>
+
+                    <div class="flex space-x-10">
+
+                        <button type="submit" class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-16 py-1 text-center">
+                            Save
+                        </button>
+                        <button type="button" class="text-white bg-gradient-to-br from-red-600 to-red-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-16 py-1 text-center">
+                            Close
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
+</form>
 @endsection
 
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        var schoolCode = {!! json_encode($school_code) !!};
-        var academicYears = {!! json_encode($academicYears) !!};
+        var schoolCode = @json($school_code);
+        var academicYears = @json($academicYears);
 
         const month = document.getElementById('month');
         const year = document.getElementById('year');
@@ -219,6 +211,8 @@
         const last_pay_date = document.getElementById('last_pay_date');
         const student_class = document.getElementById('class');
         const student_group = document.getElementById('group');
+        const student_section = document.getElementById('section');
+        const student_category = document.getElementById('category');
         const getInformation = document.getElementById('getInformation');
         const session = document.getElementById('session');
         const academic_year = document.getElementById('academic_year');
@@ -230,9 +224,9 @@
 
 
         // set months
-        const monthList = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august',
-            'september', 'october',
-            'november', 'december'
+        const monthList = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august'
+            , 'september', 'october'
+            , 'november', 'december'
         ];
         monthList.forEach((item) => {
             let option = document.createElement('option');
@@ -256,12 +250,11 @@
 
         // getting pay slip types using class & group
         let className = "";
-        let groupName = student_group.value;
-        let AllPaySlips = [];
-        student_class.addEventListener('change', (e) => {
-            className = e.target.value;
+        let groupName = '';
+
+        function getPaySlipAndOthersData(className, groupName, requestedBy) {
             fetch(
-                    `/dashboard/studentAccounts/getPaySlipData/${schoolCode}?class_name=${className}&group_name=${groupName}`
+                    `/dashboard/studentAccounts/getPaySlipData/${schoolCode}?class_name=${className}&group_name=${groupName ? groupName : 'Select'}`
                 )
                 .then(response => {
                     if (!response.ok) {
@@ -271,43 +264,93 @@
                 })
                 .then(data => {
                     // Handle the response data here
-                    AllPaySlips = data;
-                    updatePaySlipContent();
+                    console.log('Data:', data);
+                    // AllPaySlips = data;
+
+                    if (requestedBy === 'class') {
+                        updatePaySlipContent(data.paySlipData);
+                        updateGroupOptions(data.groupData);
+                        updateCategoryOptions(data.categoryData);
+                        updateSectionOptions(data.sectionData);
+                    } else if (requestedBy === 'group') {
+                        updatePaySlipContent(data.paySlipData);
+                        updateCategoryOptions(data.categoryData);
+                        updateSectionOptions(data.sectionData);
+                    }
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
+        }
+
+        student_class.addEventListener('change', (e) => {
+            className = e.target.value;
+            getPaySlipAndOthersData(className, null, 'class')
         })
 
         student_group.addEventListener('change', (e) => {
             groupName = e.target.value;
-            fetch(
-                    `/dashboard/studentAccounts/getPaySlipData/${schoolCode}?class_name=${className}&group_name=${groupName}`
-                )
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    AllPaySlips = data;
-                    updatePaySlipContent();
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+            getPaySlipAndOthersData(className, groupName, 'group')
         })
 
 
         // update pay slip content
-        function updatePaySlipContent() {
+        function updatePaySlipContent(AllPaySlips) {
             pay_slip_type.innerHTML = "";
+            let option = document.createElement('option');
+            option.value = "Select";
+            option.text = "Select";
+            pay_slip_type.appendChild(option);
             AllPaySlips.forEach((item) => {
                 let option = document.createElement('option');
                 option.value = item.pay_slip_type;
                 option.text = item.pay_slip_type;
                 pay_slip_type.appendChild(option);
+            })
+        }
+
+        // update group options
+        function updateGroupOptions(AllGroups) {
+            student_group.innerHTML = "";
+            let option = document.createElement('option');
+            option.value = "Select";
+            option.text = "Select";
+            student_group.appendChild(option);
+            AllGroups.forEach((group) => {
+                let option = document.createElement('option');
+                option.value = group.group_name;
+                option.text = group.group_name;
+                student_group.appendChild(option);
+            })
+        }
+
+        // update section options
+        function updateSectionOptions(sections) {
+            student_section.innerHTML = "";
+            let option = document.createElement('option');
+            option.value = "Select";
+            option.text = "Select";
+            student_section.appendChild(option);
+            sections.forEach((section) => {
+                let option = document.createElement('option');
+                option.value = section.section_name;
+                option.text = section.section_name;
+                student_section.appendChild(option);
+            })
+        }
+
+        // update category options
+        function updateCategoryOptions(categories) {
+            student_category.innerHTML = "";
+            let option = document.createElement('option');
+            option.value = "Select";
+            option.text = "Select";
+            student_category.appendChild(option);
+            categories.forEach((category) => {
+                let option = document.createElement('option');
+                option.value = category.category_name;
+                option.text = category.category_name;
+                student_category.appendChild(option);
             })
         }
 
@@ -327,7 +370,7 @@
         getInformation.addEventListener('click', (e) => {
             e.preventDefault();
             fetch(
-                    `/dashboard/studentAccounts/getAllInformation/${schoolCode}?class_name=${className}&group_name=${groupName}&month_year=${month_year.value}&pay_slip_type=${pay_slip_type.value}&session=${session.value}&academic_year=${academic_year.value}`
+                    `/dashboard/studentAccounts/getAllInformation/${schoolCode}?class_name=${className}&group_name=${student_group.value}&section=${student_section.value}&category=${student_category.value}&month_year=${month_year.value}&pay_slip_type=${pay_slip_type.value}&session=${session.value}&academic_year=${academic_year.value}`
                 )
                 .then(response => {
                     if (!response.ok) {
@@ -355,8 +398,8 @@
             thCheckbox.classList.add("px-6", "py-3", "bg-blue-500");
             const headerCheckbox = document.createElement('input');
             headerCheckbox.type = 'checkbox';
-            headerCheckbox.classList.add('w-4', 'h-4', 'bg-gray-100', 'border-gray-300',
-                'rounded', 'focus:ring-blue-500', 'mt-2')
+            headerCheckbox.classList.add('w-4', 'h-4', 'bg-gray-100', 'border-gray-300'
+                , 'rounded', 'focus:ring-blue-500', 'mt-2')
             headerCheckbox.id = "header_ceckbox"
             thCheckbox.appendChild(headerCheckbox)
             table_header_row.appendChild(thCheckbox);
@@ -378,8 +421,8 @@
             table_body.innerHTML = "";
             data.forEach((item, index) => {
                 const tr = document.createElement('tr');
-                tr.classList.add('odd:bg-white', 'odd:dark:bg-gray-900', 'even:bg-gray-50',
-                    'even:dark:bg-gray-800', 'border-b', 'dark:border-gray-700');
+                tr.classList.add('odd:bg-white', 'odd:dark:bg-gray-900', 'even:bg-gray-50'
+                    , 'even:dark:bg-gray-800', 'border-b', 'dark:border-gray-700');
 
                 // Create a new checkbox input element
                 const checkboxCell = document.createElement('td');
@@ -387,8 +430,8 @@
                 const checkbox = document.createElement('input');
                 checkbox.type = 'checkbox';
                 checkbox.name = `select[${item.student_id}]`
-                checkbox.classList.add('w-4', 'h-4', 'text-blue-600', 'bg-gray-100', 'border-gray-300',
-                    'rounded', 'focus:ring-blue-500')
+                checkbox.classList.add('w-4', 'h-4', 'text-blue-600', 'bg-gray-100', 'border-gray-300'
+                    , 'rounded', 'focus:ring-blue-500')
                 checkboxCell.appendChild(checkbox)
                 tr.appendChild(checkboxCell);
 
@@ -450,4 +493,5 @@
 
         document.getElementById('last_pay_date').value = lastPayDate.toISOString().slice(0, 10);
     });
+
 </script>

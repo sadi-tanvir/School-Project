@@ -16,7 +16,6 @@ class DashboardController extends Controller
 {
     public function index($schoolCode)
     {
-        $totalSMS = 0;
         $school_code = Session::get('school_code');
         $studentData = Student::where('school_code', $schoolCode)->get();
         $classData = AddClass::where('school_code', $schoolCode)->get();
@@ -26,11 +25,7 @@ class DashboardController extends Controller
         $schoolInfo = SchoolInfo::where('school_code', $school_code)->first();
         $totalSMS = $schoolInfo->messages;
         $remainingSMS = $totalSMS - $msgData;
-        if ($totalSMS != 0) {
-            $parsentRemainingSMSData = $msgData / $totalSMS;
-        } else {
-            $parsentRemainingSMSData = 0;
-        }
+        $parsentRemainingSMSData = $msgData / $totalSMS;
         $parsentRemainingSMS = $parsentRemainingSMSData * 100;
         // dd($schoolInfo);
 

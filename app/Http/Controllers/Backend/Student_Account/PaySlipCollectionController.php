@@ -111,8 +111,6 @@ class PaySlipCollectionController extends Controller
 
         $studentInformation = Student::where('school_code', $school_code)
             ->where('action', 'approved')
-            ->where('year', $year)
-            ->where('Class_name', $class_name)
             ->where('student_id', $student_id)
             ->select('student_id', 'student_roll', 'name', 'Class_name', 'group', 'mobile_no')
             ->first();

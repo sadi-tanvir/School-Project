@@ -19,10 +19,10 @@ class SchoolInfo extends Model
         'website',
         'logo',
         'school_code',
+        'messages',
         'number_of_print_page',
     ];
 
 
     protected $table = 'school_info';
 }
-

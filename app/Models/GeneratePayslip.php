@@ -19,6 +19,7 @@ class GeneratePayslip extends Model
         "class_position",
         "group",
         "section",
+        "category",
         "pay_slip_type",
         "amount",
         "waiver",

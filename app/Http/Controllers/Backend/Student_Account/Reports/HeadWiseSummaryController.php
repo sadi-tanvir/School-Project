@@ -89,7 +89,13 @@ class HeadWiseSummaryController extends Controller
 
         $schoolInfo = SchoolInfo::where('school_code', $school_code)->first();
 
-        return view('Backend/Student_accounts/Reports(Students_Fees)/headWiseSummaryReportPrint', compact('schoolInfo', 'date_from', 'date_to', 'paySlipReport', 'entry_by_name', 'totalAmount'));
+        if (count($paySlipReport) > 0) {
+            return view('Backend/Student_accounts/Reports(Students_Fees)/headWiseSummaryReportPrint', compact('schoolInfo', 'date_from', 'date_to', 'paySlipReport', 'entry_by_name', 'totalAmount'));
+        } else {
+            return redirect()->back()->with('error', 'No data found');
+        }
+
+
     }
 
 }

@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->date('last_pay_date');
             $table->string('student_id');
             $table->string('class');
+            $table->string('class_position')->nullable();
             $table->string('group');
             $table->string('section')->nullable();
             $table->string('pay_slip_type');

@@ -190,6 +190,11 @@ class StudentController extends Controller
         $waiver = $request->input('waiver');
 
         $pay_now = $request->input('pay_now');
+        
+        $classPosition = AddClass::where('school_code', $school_code)
+            ->where('class_name', $class)
+            ->select('position')
+            ->first();
 
         // generate payslip
         foreach ($selectedPayslips as $pay_slip_type => $value) {
@@ -204,6 +209,7 @@ class StudentController extends Controller
                     'pay_slip_type' => $pay_slip_type,
                 ],
                 [
+                    'class_position' => $classPosition->position,
                     'last_pay_date' => $last_pay_date,
                     'group' => $group,
                     'section' => $section,

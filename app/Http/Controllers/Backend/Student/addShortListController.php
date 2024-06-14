@@ -18,7 +18,7 @@ class addShortListController extends Controller
     {
 
         $students = null;
-        $columns = ['name', 'birth_date', 'student_id', 'student_role', 'Class_name', 'group', 'section', 'shift', 'category', 'year', 'religious', 'mobile_no', 'father_name', 'father_birth_date', 'mother_name', 'mother_nid', 'addmission_date', 'blood_group'];
+        $columns = ['name', 'birth_date', 'student_id', 'student_roll', 'Class_name', 'group', 'section', 'shift', 'category', 'year', 'religious', 'mobile_no', 'father_name', 'father_birth_date', 'mother_name', 'mother_nid', 'addmission_date', 'blood_group'];
         $classes = AddClass::where('school_code', $school_code)->where('action', 'approved')->get();
         $sections = AddSection::where('school_code', $school_code)->where('action', 'approved')->get();
         $groups = AddGroup::where('school_code', $school_code)->where('action', 'approved')->get();

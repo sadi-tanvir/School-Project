@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('add_pay_slip_types', function (Blueprint $table) {
             $table->id();
-            $table->string('pay_slip_type_name')->unique();;
+            $table->string('pay_slip_type_name');
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->enum('action', ['pending', 'approved', 'delete', 'edit'])->default('approved');
             $table->string('school_code');

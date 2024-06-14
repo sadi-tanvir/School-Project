@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('waiver_type', function (Blueprint $table) {
             $table->id();
-            $table->string('waiver_type_name')->unique();
+            $table->string('waiver_type_name');
             $table->enum('status', ['active', 'inactive']);
             $table->enum('action', ['pending', 'approved', 'delete', 'edit'])->default('approved');
             $table->string('school_code');

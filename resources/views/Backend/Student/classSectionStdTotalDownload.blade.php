@@ -21,23 +21,26 @@
 </head>
 
 <body>
-    <div class=" md:w-[1500px] px-[120px] mx-auto" id="page">
-        <div>
-            <img class="w-20" src="{{asset($schoolInfo->logo)}}" alt="School Logo">
-        </div>
-        <div class="text-center">
-            <h3 class="text-2xl text-blue-400 font-bold">{{$schoolInfo->school_name}}</h3>
-            <p class="text-sm">{{$schoolInfo->address}} <br>
-                Contact No: {{$schoolInfo->mobile_number}} <br>
-                Email: {{$schoolInfo->school_email}} <br>
-                Website:{{$schoolInfo->website}}<br>
-                <span class="text-red-500"> Print date:{{$date}}</span>
-            </p>
-            <p class="font-bold font-semi-bold text-center text-xl">Student Information</p>
-        </div>
-        <p class="font-bold font-semi-bold text-center text-xl">Student Total Summary</p>
-        <div>
-            {{-- --}}
+    <div class=" md:w-[1500px] px-[120px] mx-auto mt-10 " id="page">
+            <div class="grid grid-cols-4 gap-5">
+            <div>
+                <img class="w-20" src="{{asset($schoolInfo->logo)}}" alt="School Logo">
+            </div>
+            <div class="text-center col-span-2">
+                <h3 class="text-4xl text-blue-400 font-bold">{{$schoolInfo->school_name}}</h3>
+                <p class="text-sm">{{$schoolInfo->address}} <br>
+                    Contact No: {{$schoolInfo->mobile_number}} <br>
+                    Email: {{$schoolInfo->school_email}} <br>
+                    Website:{{$schoolInfo->website}}<br>
+                    <span class="text-red-500"> Print date:{{$date}}</span>
+                </p>
+                <p class="font-bold font-semi-bold text-center text-xl">Student Information</p>
+                <p class="font-bold font-semi-bold text-center text-xl">Student Total Summary</p>
+            </div>
+            <div>
+                {{-- --}}
+            </div>
+
         </div>
 
         <!-- <div class="grid grid-cols-12 ">
@@ -57,7 +60,7 @@
 
 
 
-                <div class="inline-block min-w-full py-2">
+                <div class="inline-block min-w-full py-2 text-center">
                     <div class="">
                         <table class="min-w-full text-left text-sm font-light">
                             <thead class="border font-medium">

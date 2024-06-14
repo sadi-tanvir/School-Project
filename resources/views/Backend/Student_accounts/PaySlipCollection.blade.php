@@ -50,65 +50,61 @@ Fees Collection
 <div class="grid grid-cols-3 gap-5">
     {{-- left section --}}
     <div class="">
-        {{-- form --}}
-        <form action="{{ url('') }}" method="POST">
-            @csrf
-            <div class="font-bold">
-                <h3>Student Information</h3>
+        <div class="font-bold">
+            <h3>Student Information</h3>
+        </div>
+        <div class="border py-5 px-2 space-y-3 flex flex-col rounded-lg shadow">
+            <div class="">
+                <label for="year" class="block mb-2 text-sm font-medium whitespace-noWrap ">Year:</label>
+                <select id="year" name="year" class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5">
+                    <option selected>Select</option>
+                    @foreach ($years as $yearVal)
+                    <option {{ date('Y') == $yearVal->year ? 'selected' : '' }} value="{{ $yearVal->year }}">
+                        {{ $yearVal->year }}</option>
+                    @endforeach
+                </select>
             </div>
-            <div class="border py-5 px-2 space-y-3 flex flex-col rounded-lg shadow">
-                <div class="">
-                    <label for="year" class="block mb-2 text-sm font-medium whitespace-noWrap ">Year:</label>
-                    <select id="year" name="year" class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5">
-                        <option selected>Select</option>
-                        @foreach ($years as $yearVal)
-                        <option {{ date('Y') == $yearVal->year ? 'selected' : '' }} value="{{ $yearVal->year }}">
-                            {{ $yearVal->year }}</option>
-                        @endforeach
-                    </select>
-                </div>
 
-                {{-- class --}}
-                <div class="">
-                    <label for="class" class="block mb-2 text-sm font-medium whitespace-noWrap ">Class:</label>
-                    <select id="class" name="class" class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5">
-                        <option selected>Select</option>
-                        @foreach ($classes as $class)
-                        <option value="{{ $class->class_name }}">{{ $class->class_name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                {{-- group --}}
-                <div class="">
-                    <label for="group" class="block mb-2 text-sm font-medium whitespace-noWrap ">Group:</label>
-                    <select id="group" name="group" class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5">
-                        <option selected>Select</option>
-                    </select>
-                </div>
-
-                {{-- section --}}
-                <div class="">
-                    <label for="section" class="block mb-2 text-sm font-medium whitespace-noWrap ">Section:</label>
-                    <select id="section" name="section" class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5">
-                        <option selected>Select</option>
-                    </select>
-                </div>
-
-                {{-- Student Roll --}}
-                <div class="">
-                    <label for="student_roll" class="block mb-2 text-sm font-medium whitespace-noWrap ">Student Roll:</label>
-                    <div class="autocomplete w-full relative">
-                        <input type="text" name="student_roll" id="student_roll" placeholder="Search..." class="w-full py-2 px-4 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
-                        <div id="autocomplete-list" class="autocomplete-list hidden"></div>
-                    </div>
-                </div>
-
-                <button id="getPaySlipData" type="button" class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-auto">Load
-                    Data
-                </button>
+            {{-- class --}}
+            <div class="">
+                <label for="class" class="block mb-2 text-sm font-medium whitespace-noWrap ">Class:</label>
+                <select id="class" name="class" class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5">
+                    <option selected>Select</option>
+                    @foreach ($classes as $class)
+                    <option value="{{ $class->class_name }}">{{ $class->class_name }}</option>
+                    @endforeach
+                </select>
             </div>
-        </form>
+
+            {{-- group --}}
+            <div class="">
+                <label for="group" class="block mb-2 text-sm font-medium whitespace-noWrap ">Group:</label>
+                <select id="group" name="group" class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5">
+                    <option selected>Select</option>
+                </select>
+            </div>
+
+            {{-- section --}}
+            <div class="">
+                <label for="section" class="block mb-2 text-sm font-medium whitespace-noWrap ">Section:</label>
+                <select id="section" name="section" class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5">
+                    <option selected>Select</option>
+                </select>
+            </div>
+
+            {{-- Student Roll --}}
+            <div class="">
+                <label for="student_roll" class="block mb-2 text-sm font-medium whitespace-noWrap ">Student Roll:</label>
+                <div class="autocomplete w-full relative">
+                    <input type="text" name="student_roll" id="student_roll" placeholder="Search..." class="w-full py-2 px-4 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                    <div id="autocomplete-list" class="autocomplete-list hidden"></div>
+                </div>
+            </div>
+
+            <button id="getPaySlipData" type="button" class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-auto">Load
+                Data
+            </button>
+        </div>
 
         {{-- table section --}}
         <div class="mt-10">
@@ -397,18 +393,26 @@ Fees Collection
         // make unckeck the full paid checkbox
         full_paid.checked = false;
         full_paid.disabled = true;
+        full_paid.style.cursor = "not-allowed"
 
         // common function to get student info
-        async function getStudentInfo(className, groupName, sectionName) {
+        async function getStudentInfo(className, groupName, sectionName, requestedBy) {
             try {
                 const res = await fetch(
                     `/dashboard/studentAccounts/paySlipCollection/getStudentRoll/${schoolCode}?class_name=${className}&group=${groupName}&section=${sectionName}&year=${year.value}`
                 )
                 if (!res.ok) throw new Error('Network response was not ok');
                 const data = await res.json();
-                UpdateGroupOption(data.group);
-                UpdateSectionOption(data.section);
-                UpdateStudentRoll(data.student_info)
+                if (requestedBy === 'class') {
+                    UpdateGroupOption(data.group);
+                    UpdateSectionOption(data.section);
+                    UpdateStudentRoll(data.student_info)
+                } else if (requestedBy === 'group') {
+                    UpdateSectionOption(data.section);
+                    UpdateStudentRoll(data.student_info)
+                } else if (requestedBy === 'section') {
+                    UpdateStudentRoll(data.student_info)
+                }
             } catch (error) {
                 console.error('Error:', error);
             }
@@ -417,19 +421,20 @@ Fees Collection
         // get student information
         classId.addEventListener('change', async (e) => {
             const className = e.target.value;
-            getStudentInfo(className, groupId.value, sectionId.value);
+            getStudentInfo(className, groupId.value, sectionId.value, 'class');
         });
 
         // get student info according to the section
         groupId.addEventListener('change', async (e) => {
             const groupName = e.target.value;
-            getStudentInfo(classId.value, groupName, sectionId.value);
+            // console.log('group name', groupName);
+            getStudentInfo(classId.value, groupName, sectionId.value, 'group');
         });
 
         // get student info according to the section
         sectionId.addEventListener('change', async (e) => {
             const sectionName = e.target.value;
-            getStudentInfo(classId.value, groupId.value, sectionName);
+            getStudentInfo(classId.value, groupId.value, sectionName, 'section');
         });
 
 
@@ -726,6 +731,7 @@ Fees Collection
                 // make clickable the full paid checkbox
                 full_paid.checked = false;
                 full_paid.disabled = false;
+                full_paid.style.cursor = "pointer"
 
                 // showing data in the UI
                 voucher_id.innerText = data.voucher_number;
@@ -761,9 +767,9 @@ Fees Collection
             let totalPayable = 0;
 
             paySlips.forEach((slip, index) => {
-                totalAmount += slip.amount;
-                totalWaiver += slip.waiver;
-                totalPayable += slip.payable;
+                totalAmount += parseInt(slip.amount);
+                totalWaiver += parseInt(slip.waiver);
+                totalPayable += parseInt(slip.payable);
                 const tr = document.createElement('tr');
                 tr.classList.add('odd:bg-white', 'odd:dark:bg-gray-900', 'even:bg-gray-50'
                     , 'even:dark:bg-gray-800', 'border-b', 'dark:border-gray-700');
@@ -907,6 +913,8 @@ Fees Collection
                 let preValueOfCurrentPay = parseInt(currentPayInputBox.value) || 0;
                 currentPayInputBox.addEventListener('change', (event) => {
                     // collect fees null initially
+                    full_paid.disabled = true;
+                    full_paid.style.cursor = "not-allowed"
                     collect_fees.disabled = false;
                     collect_fees.style.cursor = "pointer"
                     collect_fees.classList.add("bg-gradient-to-br", "from-blue-600"
@@ -979,6 +987,8 @@ Fees Collection
                 // calculate & distribute collect amount
                 function distributeAmount(value) {
                     // collect fees null initially
+                    full_paid.disabled = true;
+                    full_paid.style.cursor = "not-allowed"
                     collect_fees.disabled = false;
                     collect_fees.style.cursor = "pointer"
                     collect_fees.classList.add("bg-gradient-to-br", "from-blue-600"
@@ -1003,7 +1013,7 @@ Fees Collection
                     currentPayInputBox.value = "";
                     if (collectAmount === null) collectAmount = value;
                     if (dueAmountInputBox.value <= collectAmount) {
-                        collectAmount = collectAmount - dueAmountInputBox.value;
+                        collectAmount = collectAmount - parseInt(dueAmountInputBox.value);
                         currentPayInputBox.value = dueAmountInputBox.value;
                         dueAmountInputBox.value = 0;
                     } else {
@@ -1030,6 +1040,7 @@ Fees Collection
                 full_paid.addEventListener('change', (e) => {
                     if (e.target.checked) {
                         full_paid.disabled = true;
+                        full_paid.style.cursor = "not-allowed"
                         collect_amount.value = t_payable.value;
                         distributeAmount(parseInt(collect_amount.value));
                         collect_fees.disabled = false;
@@ -1075,9 +1086,9 @@ Fees Collection
         let changeAmount = document.getElementById('changeAmount');
         let returnAmount = document.getElementById('returnAmount');
         changeAmount.addEventListener('change', (event) => {
-            if (collect_amount.value > 0) {
+            if (t_current_pay.value > 0) {
                 const change = parseInt(event.target.value);
-                returnAmount.value = change - parseInt(collect_amount.value);
+                returnAmount.value = change - parseInt(t_current_pay.value);
             }
         })
 
@@ -1098,6 +1109,8 @@ Fees Collection
             collect_amount.classList.remove("bg-gray-200");
 
             t_current_pay.value = 0;
+            returnAmount.value = '';
+            changeAmount.value = '';
 
             // make unckeck the full paid checkbox
             full_paid.checked = false;

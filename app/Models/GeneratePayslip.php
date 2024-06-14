@@ -17,6 +17,7 @@ class GeneratePayslip extends Model
         "student_id",
         "class",
         "group",
+        "class_position",
         "section",
         "pay_slip_type",
         "amount",

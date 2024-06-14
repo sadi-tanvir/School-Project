@@ -164,7 +164,7 @@ Student Short List Information
 
             @foreach($columns as $column)
                 <div class="">
-                    <input id="{{$column}}" value="{{$column}}" type="checkbox" name="columns[{{$column}}]"
+                    <input id="{{$column}}" {{$column==="name" || $column==="category" || $column==="Class_name"|| $column==="Class_name" || $column==="father_name"|| $column==="group"|| $column==="student_id"|| $column==="section"|| $column==="student_roll"|| $column==="shift"|| $column==="mobile_no"   ? 'checked' : '' }} value="{{$column}}" type="checkbox" name="columns[{{$column}}]"
                         class="group-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                     <label for="{{$column}}" class="w-full py-4 ms-2 text-sm font-medium text-gray-900">{{$column}}</label>
                 </div>

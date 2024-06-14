@@ -11,13 +11,12 @@
 
     @include('Shared.alert')
     <div id="errorContainer"></div>
-    <form action="{{ route('multiplePayslipData.store', $school_code) }}">
+    <form action="{{ route('multiplePayslipData.store', $school_code) }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="w-full border mx-auto p-5 space-y-10">
-            <form action="" method="">
-                @csrf
-                <div class="grid grid-cols-11 items-center gap-5">
+            <div >
+                <div class="grid grid-cols-12 items-center gap-5">
                     {{-- month --}}
                     <div class="col-span-2">
                         <div class="p-4">
@@ -142,7 +141,7 @@
                     </div>
 
                     {{-- status --}}
-                    {{-- <div class="">
+                    <div class="">
                         <label for="status"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status:</label>
                         <select id="status" name="status"
@@ -151,7 +150,7 @@
                             <option value="New">New</option>
                             <option value="Old">Old</option>
                         </select>
-                    </div> --}}
+                    </div>
 
                     {{-- academic_year --}}
                     <div class="">
@@ -171,7 +170,7 @@
                         </button>
                     </div>
                 </div>
-            </form>
+            </div>
 
             {{-- table --}}
             <div class="space-y-1">
@@ -514,7 +513,6 @@
                         showError('There is no data found')
                         return;
                     }
-                    console.log('from multiple', data);
                     updateTableContent(data)
                 })
                 .catch(error => {
@@ -529,10 +527,8 @@
             monthList.forEach((month) => {
                 data[month]?.forEach(element => {
                     if (element.students.length > 0) {
-                        // console.log(element);
                         element.students.forEach((student, index) => {
                             if (student.pay_slip_amount > 0) {
-                                console.log(student);
                                 const tr = document.createElement('tr');
                                 tr.classList.add('odd:bg-white', 'odd:dark:bg-gray-900',
                                     'even:bg-gray-50',
@@ -712,7 +708,6 @@
                                 payableAmountInputBox.readOnly = true;
                                 payableAmount_TD.appendChild(payableAmountInputBox);
                                 tr.appendChild(payableAmount_TD);
-                                // console.log('student_payable_amount_key ----',
                                 // student_payable_amount_key);
 
 
@@ -743,6 +738,19 @@
                                 studentSectionInputBox.classList.add('hidden')
                                 studentSection_TD.appendChild(studentSectionInputBox);
                                 tr.appendChild(studentSection_TD);
+
+                                // class position
+                                const classPosition_TD = document.createElement('td');
+                                classPosition_TD.classList.add('hidden')
+                                const classPositionInputBox = document.createElement(
+                                    'input');
+                                classPositionInputBox.type = 'text'
+                                classPositionInputBox.name =
+                                    `input_class_position[${student.student_id}]`;
+                                classPositionInputBox.value = student.class_position;
+                                classPositionInputBox.classList.add('hidden')
+                                classPosition_TD.appendChild(classPositionInputBox);
+                                tr.appendChild(classPosition_TD);
 
 
 

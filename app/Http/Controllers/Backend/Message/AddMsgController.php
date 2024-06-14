@@ -8,18 +8,21 @@ use Illuminate\Http\Request;
 
 class AddMsgController extends Controller
 {
-    public function addMsg(){
-        return view ('Backend.Messaging.addMessage');
-       }
-       public function addInstruction(Request $request){
-       
-        $message=new AddMsg();
+    public function addMsg()
+    {
+        return view('Backend.Messaging.addMessage');
+    }
+    public function addInstruction(Request $request)
+    {
+
+        $message = new AddMsg();
         $message->message = $request->message;
         $message->school_code = $request->school_code;
+        $message->message_count = $request->message_count;
         $message->action = "approved";
         $message->save();
 
-        return redirect()->back()->with('success','Message added successfully');
+        return redirect()->back()->with('success', 'Message added successfully');
 
-       } 
+    }
 }

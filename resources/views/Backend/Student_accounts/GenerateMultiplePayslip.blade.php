@@ -8,169 +8,42 @@ Generate Multiple Payslip
 <div>
     <h1>Multiple Fees Generate</h1>
 </div>
-    @include('Shared.alert')
-    <div id="errorContainer"></div>
-    <form action="{{ route('multiplePayslipData.store', $school_code) }}" method="POST" enctype="multipart/form-data">
-        @csrf
 
-        <div class="w-full border mx-auto p-5 space-y-10">
-            <div >
-                <div class="grid grid-cols-12 items-center gap-5">
-                    {{-- month --}}
-                    <div class="col-span-2">
-                        <div class="p-4">
-                            <label for="month" class="block text-sm font-medium text-zinc-700">Month:</label>
-                            <div class="mt-1 relative">
-                                <button type="button" id="toggleMonthDropdown"
-                                    class="relative w-full bg-white border border-zinc-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                    <span class="block truncate">Select Month</span>
-                                    <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                                        <svg class="h-5 w-5 text-zinc-400" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                            <path fill-rule="evenodd"
-                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </span>
-                                </button>
-                                <div id="monthDropdown"
-                                    class="hidden absolute mt-1 w-full rounded-md bg-white shadow-lg  z-50">
-                                    <ul id="monthUnorderedList" tabindex="-1" role="listbox"
-                                        aria-labelledby="listbox-label" aria-activedescendant="listbox-item-3"
-                                        class="max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-                                        <li class="text-zinc-900 cursor-default select-none relative py-2 pl-3 pr-9">
-                                            <div class="flex items-center">
-                                                <input id="month_select_all" type="checkbox"
-                                                    class="h-4 w-4 text-indigo-600 border-zinc-300 rounded focus:ring-indigo-500">
-                                                <label for="month_select_all" class="font-normal ml-3 block truncate">Select
-                                                    All</label>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
+@include('Shared.alert')
+<div id="errorContainer"></div>
+<form action="{{ route('multiplePayslipData.store', $school_code) }}" method="POST" enctype="multipart/form-data">
+    @csrf
+
+    <div class="w-full border mx-auto p-5 space-y-10">
+        <div>
+            <div class="grid grid-cols-12 items-center gap-5">
+                {{-- month --}}
+                <div class="col-span-2">
+                    <div class="p-4">
+                        <label for="month" class="block text-sm font-medium text-zinc-700">Month:</label>
+                        <div class="mt-1 relative">
+                            <button type="button" id="toggleMonthDropdown" class="relative w-full bg-white border border-zinc-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                <span class="block truncate">Select Month</span>
+                                <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                                    <svg class="h-5 w-5 text-zinc-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </span>
+                            </button>
+                            <div id="monthDropdown" class="hidden absolute mt-1 w-full rounded-md bg-white shadow-lg  z-50">
+                                <ul id="monthUnorderedList" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-item-3" class="max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+                                    <li class="text-zinc-900 cursor-default select-none relative py-2 pl-3 pr-9">
+                                        <div class="flex items-center">
+                                            <input id="month_select_all" type="checkbox" class="h-4 w-4 text-indigo-600 border-zinc-300 rounded focus:ring-indigo-500">
+                                            <label for="month_select_all" class="font-normal ml-3 block truncate">Select
+                                                All</label>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                    </div>
-
-                    {{-- year --}}
-                    <div class="">
-                        <label for="year" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year
-                            :</label>
-                        <input type="text" value="" name="year" id="year"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full"
-                            placeholder="" />
-                    </div>
-
-                    {{-- last pay date --}}
-                    <div class="">
-                        <label for="last_pay_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last
-                            Pay
-                            Date:</label>
-                        <input type="date" value="" name="last_pay_date" id="last_pay_date"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full"
-                            placeholder="" />
-                    </div>
-
-                    {{-- class --}}
-                    <div class="col-span-2">
-                        <div class="p-4">
-                            <label for="month" class="block text-sm font-medium text-zinc-700">Class:</label>
-                            <div class="mt-1 relative">
-                                <button type="button" id="toggleClassDropdown"
-                                    class="relative w-full bg-white border border-zinc-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                    <span class="block truncate">Select Class</span>
-                                    <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                                        <svg class="h-5 w-5 text-zinc-400" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                            <path fill-rule="evenodd"
-                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </span>
-                                </button>
-                                <div id="classDropdown"
-                                    class="hidden absolute mt-1 w-full rounded-md bg-white shadow-lg  z-50">
-                                    <ul id="classUnorderedList" tabindex="-1" role="listbox"
-                                        aria-labelledby="listbox-label" aria-activedescendant="listbox-item-3"
-                                        class="max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-                                        <li class="text-zinc-900 cursor-default select-none relative py-2 pl-3 pr-9">
-                                            <div class="flex items-center">
-                                                <input id="class_select_all" type="checkbox"
-                                                    class="h-4 w-4 text-indigo-600 border-zinc-300 rounded focus:ring-indigo-500">
-                                                <label for="class_select_all" class="font-normal ml-3 block truncate">Select
-                                                    All</label>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- group --}}
-                    <div class="">
-                        <label for="group"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Group:</label>
-                        <select id="group" name="group"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Select</option>
-                        </select>
-                    </div>
-
-                    {{-- pay slip types --}}
-                    <div class="">
-                        <label for="pay_slip_type"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PaySlip
-                            :</label>
-                        <select id="pay_slip_type" name="pay_slip_type"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Select</option>
-                        </select>
-                    </div>
-
-                    {{-- academic session --}}
-                    <div class="">
-                        <label for="academic_session"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Session
-                            :</label>
-                        <select id="academic_session" name="academic_session"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Select</option>
-                        </select>
-                    </div>
-
-                    {{-- status --}}
-                    <div class="">
-                        <label for="status"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status:</label>
-                        <select id="status" name="status"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Select</option>
-                            <option value="New">New</option>
-                            <option value="Old">Old</option>
-                        </select>
-                    </div>
-
-                    {{-- academic_year --}}
-                    <div class="">
-                        <label for="academic_year"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year
-                            :</label>
-                        <select id="academic_year" name="academic_year"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option selected>Select</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <button id="getInformation" type="submit"
-                            class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center uppercase mt-5">
-                            get data
-                        </button>
                     </div>
                 </div>
-            </div>
-
 
                 {{-- year --}}
                 <div class="">
@@ -650,7 +523,7 @@ Generate Multiple Payslip
                         showError('There is no data found')
                         return;
                     }
-
+                    console.log('Success:', data);
                     updateTableContent(data)
                 })
                 .catch(error => {
@@ -874,33 +747,6 @@ Generate Multiple Payslip
                                 classPosition_TD.classList.add('hidden')
                                 const classPositionInputBox = document.createElement(
                                     'input');
-                                studentGroupInputBox.type = 'text'
-                                studentGroupInputBox.name =
-                                    `input_group[${student.student_id}]`;
-                                studentGroupInputBox.value = student.group;
-                                studentGroupInputBox.classList.add('hidden')
-                                studentGroup_TD.appendChild(studentGroupInputBox);
-                                tr.appendChild(studentGroup_TD);
-
-                                // student sections
-                                const studentSection_TD = document.createElement('td');
-                                studentSection_TD.classList.add('hidden')
-                                const studentSectionInputBox = document.createElement(
-                                    'input');
-                                studentSectionInputBox.type = 'text'
-                                studentSectionInputBox.name =
-                                    `input_section[${student.student_id}]`;
-                                studentSectionInputBox.value = student.section;
-                                studentSectionInputBox.classList.add('hidden')
-                                studentSection_TD.appendChild(studentSectionInputBox);
-                                tr.appendChild(studentSection_TD);
-
-                                // class position
-                                const classPosition_TD = document.createElement('td');
-                                classPosition_TD.classList.add('hidden')
-                                const classPositionInputBox = document.createElement(
-                                    'input');
-
                                 classPositionInputBox.type = 'text'
                                 classPositionInputBox.name =
                                     `input_class_position[${student.student_id}]`;
@@ -908,6 +754,8 @@ Generate Multiple Payslip
                                 classPositionInputBox.classList.add('hidden')
                                 classPosition_TD.appendChild(classPositionInputBox);
                                 tr.appendChild(classPosition_TD);
+
+
                                 // append table row into the table body
                                 table_body.appendChild(tr);
 

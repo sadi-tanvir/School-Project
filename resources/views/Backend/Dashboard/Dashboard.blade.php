@@ -77,7 +77,7 @@ Dashboard
                 </div>
                 <div class="flex items-center justify-between text-white">
                     <p>Amount</p>
-                    <p class="font-semibold">&#2547; 0</p>
+                    <p class="font-semibold">&#2547; {{$todaysFeesCollection}}</p>
 
                 </div>
 
@@ -526,7 +526,7 @@ Dashboard
                     src="{{ asset('assets/images/dashboard-welcome-bg.svg') }}" alt="" />
             </div>
             <div
-                class="relative overflow-hidden rounded-md bg-gradient-to-br from-blue-600 to-blue-950 px-8 py-10 
+                class="relative overflow-hidden rounded-md bg-gradient-to-br from-blue-600 to-blue-950 px-8 py-10
                 <a href="#" class="">
                     <div class="text-xl font-light">
                         <p>Exam not taken: 0</p>
@@ -594,4 +594,3 @@ Dashboard
     </div>
 </div>
 @endsection
-

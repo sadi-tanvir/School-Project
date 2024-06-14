@@ -26,4 +26,3 @@ class SchoolInfo extends Model
 
     protected $table = 'school_info';
 }
-

@@ -132,7 +132,9 @@ class SendMSGController extends Controller
     }
     public function sendMessage(Request $request)
     {
+
         // dd($request);
+
         $contacts = $request->contact;
         $messages = $request->message;
         $smsCount = $request->smsCount;
@@ -174,6 +176,7 @@ class SendMSGController extends Controller
                     $message->school_code = $school_code;
                     $message->save();
                 }
+
             }
 
             return redirect()->route('message', $school_code)->with('success', 'SMS sent successfully');

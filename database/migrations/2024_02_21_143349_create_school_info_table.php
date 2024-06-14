@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->string('website');
             $table->string('school_code');
             $table->string('logo');
-            $table->string('messages');
+            $table->string('messages')->default('1');
             $table->integer('number_of_print_page')->nullable();
             $table->timestamps();
         });

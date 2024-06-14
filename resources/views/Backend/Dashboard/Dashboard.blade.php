@@ -5,7 +5,6 @@ Dashboard
 
 @section('Dashboard')
 @include('/Message/message')
-
 <div
     class="relative mb-3 overflow-hidden rounded-md bg-gradient-to-tr from-[#1E3A8A] to-[#0054af] px-10 py-16 text-white">
     <h2 class="text-4xl">
@@ -22,6 +21,7 @@ Dashboard
     </h2>
     <p class="mt-1 font-light opacity-90">Welcome! Have a wonderful day!</p>
 
+
     <img class="absolute right-0 h-72 -rotate-45" src="{{ asset('assets/images/dashboard-welcome-bg.svg') }}" alt="" />
 </div>
 <div class="row-span-3 grid grid-cols-4 gap-3">
@@ -29,6 +29,7 @@ Dashboard
         <div class="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
             <div
                 class="relative mx-2 overflow-hidden rounded-md bg-gradient-to-br from-red-600 to-orange-600 p-9 backdrop-blur-xl lg:mx-0">
+
                 <h1 class="pb-2.5 text-3xl font-light text-white">Balance</h1>
                 <div class="mb-4 mt-2 h-2.5 w-full rounded-full bg-gray-200">
                     <div class="h-2.5 rounded-full bg-yellow-400" style="width: 45%"></div>
@@ -46,6 +47,7 @@ Dashboard
                     <svg width="95px" height="95px" viewBox="0 0 512 512" id="Layer_1" version="1.1"
                         xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
                         xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
+
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                         <g id="SVGRepo_iconCarrier">
@@ -68,6 +70,7 @@ Dashboard
             </div>
             <div
                 class="relative mx-2 overflow-hidden rounded-md bg-gradient-to-tr from-[#1E3A8A] to-[#0054af] p-9 backdrop-blur-xl lg:mx-0">
+
                 <h1 class="pb-2.5 text-3xl font-light text-white">Todays Fee</h1>
                 <div class="mb-4 mt-2 h-2.5 w-full rounded-full bg-gray-200">
                     <div class="h-2.5 rounded-full bg-yellow-400" style="width: 65%"></div>
@@ -75,6 +78,7 @@ Dashboard
                 <div class="flex items-center justify-between text-white">
                     <p>Amount</p>
                     <p class="font-semibold">&#2547; 0</p>
+
                 </div>
 
                 <span class="absolute -top-7 right-8 opacity-20">
@@ -164,6 +168,7 @@ Dashboard
                     <svg fill="#000000" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                         xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 491.584 491.584" xml:space="preserve"
                         width="95px" height="95px">
+
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                         <g id="SVGRepo_iconCarrier">
@@ -187,6 +192,7 @@ Dashboard
                                         <rect x="252.702" y="55.616"
                                             transform="matrix(-0.4472 0.8944 -0.8944 -0.4472 519.6956 -193.9584)"
                                             width="134.164" height="15.999"></rect>
+
                                     </g>
                                 </g>
                             </g>
@@ -196,6 +202,7 @@ Dashboard
             </div>
             <div
                 class="relative mx-2 overflow-hidden rounded-md bg-gradient-to-br from-blue-800 to-indigo-900 p-9 backdrop-blur-xl lg:mx-0">
+
                 <h1 class="pb-2.5 text-3xl font-light text-white">Class</h1>
                 <div class="mb-4 mt-2 h-2.5 w-full rounded-full bg-gray-200">
                     <div class="h-2.5 rounded-full bg-yellow-400" style="width: {{ $classData->count() }}%"></div>
@@ -209,6 +216,7 @@ Dashboard
                     <svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                         xmlns:xlink="http://www.w3.org/1999/xlink" width="85px" height="85px"
                         viewBox="0 0 29.936 29.936" xml:space="preserve">
+
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                         <g id="SVGRepo_iconCarrier">
@@ -216,6 +224,7 @@ Dashboard
                                 <g>
                                     <path
                                         d="M29.936,1.153H0v20.045h10.91l-3.76,7.584h2.899l1.288-2.613h6.72l1.287,2.613h2.932l-3.787-7.583h11.445V1.153H29.936z M12.292,24.234l1.496-3.035h1.819l1.496,3.035H12.292z M28.646,19.908H1.29V2.443h27.356V19.908z">
+
                                     </path>
                                     <rect x="22.631" y="17.149" width="5.191" height="1.859"></rect>
                                 </g>
@@ -226,6 +235,7 @@ Dashboard
             </div>
             <div
                 class="relative mx-2 overflow-hidden rounded-md bg-gradient-to-br from-emerald-600 to-emerald-900 p-9 backdrop-blur-xl lg:mx-0">
+
                 <h1 class="pb-2.5 text-3xl font-light text-white">Section</h1>
                 <div class="mb-4 mt-2 h-2.5 w-full rounded-full bg-gray-200">
                     <div class="h-2.5 rounded-full bg-yellow-400" style="width: {{ $sectionData->count() }}%"></div>
@@ -243,12 +253,14 @@ Dashboard
                             <path
                                 d="M5 3H3v2h2V3zm2 4h2v2H7V7zm4 0h2v2h-2V7zm2 12h-2v2h2v-2zm2 0h2v2h-2v-2zm6 0h-2v2h2v-2zM7 11h2v2H7v-2zm14 0h-2v2h2v-2zm-2 4h2v2h-2v-2zM7 19h2v2H7v-2zM19 7h2v2h-2V7zM7 3h2v2H7V3zm2 12H7v2h2v-2zM3 7h2v2H3V7zm14 0h-2v2h2V7zM3 11h2v2H3v-2zm2 4H3v2h2v-2zm6-12h2v2h-2V3zm6 0h-2v2h2V3z"
                                 fill="#000000"></path>
+
                         </g>
                     </svg>
                 </span>
             </div>
             <div
                 class="relative mx-2 overflow-hidden rounded-md bg-gradient-to-br from-stone-500 to-stone-700 p-9 backdrop-blur-xl lg:mx-0">
+
                 <h1 class="pb-2.5 text-3xl font-light text-white">Groups</h1>
                 <div class="mb-4 mt-2 h-2.5 w-full rounded-full bg-gray-200">
                     <div class="h-2.5 rounded-full bg-yellow-400" style="width: {{ $groupData->count() }}%"></div>
@@ -266,15 +278,16 @@ Dashboard
                         <g id="SVGRepo_iconCarrier">
                             <path
                                 d="M2 20h1v1H1v-2h1zm20 0h-1v1h2v-2h-1zM1 5h1V4h1V3H1zm1 2H1v2h1zm0 4H1v2h1zm20-2h1V7h-1zm0 4h1v-2h-1zM2 15H1v2h1zm20 2h1v-2h-1zM5 4h2V3H5zm6 0V3H9v1zm2 0h2V3h-2zm6-1h-2v1h2zM5 21h2v-1H5zm4 0h2v-1H9zm4 0h2v-1h-2zm4 0h2v-1h-2zm4-17h1v1h1V3h-2zm-1 4v2a1.001 1.001 0 0 1-1 1H5a1.001 1.001 0 0 1-1-1V8a1.001 1.001 0 0 1 1-1h14a1.001 1.001 0 0 1 1 1zm-.999 2H19V8H5v2h14m1 4v2a1.001 1.001 0 0 1-1 1H5a1.001 1.001 0 0 1-1-1v-2a1.001 1.001 0 0 1 1-1h14a1.001 1.001 0 0 1 1 1zm-.999 2H19v-2H5v2h14">
+
                             </path>
                             <path fill="none" d="M0 0h24v24H0z"></path>
                         </g>
                     </svg>
                 </span>
             </div>
-
             <div
                 class="relative mx-2 overflow-hidden rounded-md bg-gradient-to-br from-slate-500 to-slate-800 p-9 backdrop-blur-xl lg:mx-0">
+
                 <h1 class="pb-2.5 text-3xl font-light text-white">Remaining Message</h1>
                 <div class="mb-4 mt-2 h-2.5 w-full rounded-full bg-gray-200">
                     <div class="h-2.5 rounded-full bg-yellow-400" style="width: {{ $parsentRemainingSMS}}%"></div>
@@ -287,22 +300,26 @@ Dashboard
                 <span class="absolute -top-6 right-5 opacity-20">
                     <svg fill="#000000" width="100px" height="100px" viewBox="0 0 32 32"
                         xmlns="http://www.w3.org/2000/svg">
+
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                         <g id="SVGRepo_iconCarrier">
                             <title></title>
                             <g data-name="Layer 21" id="Layer_21">
-                                <path
+                              <path
                                     d="M27.61,7h-2a1,1,0,0,1,.95,1.32l-5.33,16a1,1,0,0,1-.95.68h2a1,1,0,0,0,.95-.68l5.33-16A1,1,0,0,0,27.61,7Z">
                                 </path>
                                 <path
                                     d="M13,15a1,1,0,0,1-.5-.13l-7-4a1,1,0,0,1,1-1.74l6.59,3.77L23.66,9.06a1,1,0,0,1,.68,1.88l-11,4A1,1,0,0,1,13,15Z">
+
                                 </path>
                                 <path d="M11,23H5a1,1,0,0,1,0-2h6a1,1,0,0,1,0,2Z"></path>
                                 <path d="M10,19H3a1,1,0,0,1,0-2h7a1,1,0,0,1,0,2Z"></path>
                                 <path d="M7,15H4a1,1,0,0,1,0-2H7a1,1,0,0,1,0,2Z"></path>
+
                                 <path
                                     d="M22.28,26H5a1,1,0,0,1,0-2H22.28L27.61,8H3A1,1,0,0,1,3,6H27.61a2,2,0,0,1,1.9,2.63l-5.33,16A2,2,0,0,1,22.28,26Z">
+
                                 </path>
                             </g>
                         </g>
@@ -311,6 +328,7 @@ Dashboard
             </div>
             <div
                 class="relative mx-2 overflow-hidden rounded-md bg-gradient-to-br from-slate-500 to-green-800 p-9 backdrop-blur-xl lg:mx-0">
+
                 <h1 class="pb-2.5 text-3xl font-light text-white">Total Send Message</h1>
                 <div class="mb-4 mt-2 h-2.5 w-full rounded-full bg-gray-200">
                     <div class="h-2.5 rounded-full bg-white" style="width: {{ $parsentRemainingSMS}}%"></div>
@@ -323,6 +341,7 @@ Dashboard
                 <span class="absolute -top-6 right-5 opacity-20">
                     <svg fill="#000000" width="100px" height="100px" viewBox="0 0 32 32"
                         xmlns="http://www.w3.org/2000/svg">
+
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                         <g id="SVGRepo_iconCarrier">
@@ -370,6 +389,7 @@ Dashboard
             <span class="absolute -bottom-2 right-6">
                 <svg fill="#000000" width="80px" height="80px" viewBox="0 -2.85 29.69 29.69"
                     xmlns="http://www.w3.org/2000/svg">
+
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                     <g id="SVGRepo_iconCarrier">
@@ -390,6 +410,7 @@ Dashboard
 
         <div
             class="relative mt-4 grow overflow-hidden rounded-e-lg rounded-t-lg bg-gradient-to-br from-amber-500 to-pink-500 p-9 backdrop-blur-xl">
+
             <div class="rounded-md lg:mx-0">
                 <h1 class="text-3xl font-semibold">Todays Teacher's Attendance</h1>
             </div>
@@ -410,15 +431,18 @@ Dashboard
             </div>
 
             <span class="absolute -bottom-3 right-6">
+
                 <svg height="100px" width="100px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 28.054 28.054" xml:space="preserve"
                     fill="#000000">
+
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                     <g id="SVGRepo_iconCarrier">
                         <g>
                             <path style="fill: #000000"
                                 d="M27.961,1.867v11.204c0,0.319-0.258,0.578-0.578,0.578H12.144c-0.319,0-0.578-0.259-0.578-0.578 v-0.885l1.156-0.775v1.082h14.082V2.444H12.721v4.229c-0.051,0.039-0.106,0.073-0.154,0.117l-0.162,0.112 c-0.195-0.51-0.492-0.912-0.839-1.242V1.867c0-0.319,0.26-0.578,0.578-0.578h15.239C27.703,1.289,27.961,1.547,27.961,1.867z M14.316,9.461l0.692-0.464h-0.001c0.001-0.004,0.003-0.004,0.005-0.007c0.352-0.349,0.406-0.868,0.188-1.277l5.599-3.799 l-0.254-0.375l-5.646,3.83c-0.177-0.128-0.375-0.209-0.583-0.216c-0.296-0.01-0.597,0.09-0.823,0.317c0,0-0.005,0.006-0.007,0.006 l-0.138,0.096l-1.254,0.856V8.064c-0.233-2.769-3.442-2.728-3.442-2.728h-1.39L6.094,7.258L4.92,5.337H3.587 c-3.621,0.068-3.493,2.727-3.493,2.727v6.206h0.002c0.001,0.016-0.002,0.035-0.002,0.048c0,0.591,0.477,1.066,1.066,1.066 c0.587,0,1.064-0.477,1.064-1.066c0-0.013,0-0.032-0.002-0.048h0.002V8.53H2.89L2.882,26.613c0,0.795,0.646,1.441,1.438,1.441 c0.795,0,1.439-0.646,1.439-1.441v-11.67H6.4v11.683l0.012,0.013c0.01,0.781,0.646,1.415,1.432,1.415 c0.789,0,1.431-0.643,1.431-1.432L9.271,8.5h0.693v1.888c0,0.002,0,0.007,0,0.009c0,0.587,0.477,1.065,1.063,1.065 c0.173,0,0.328-0.049,0.475-0.125l0.005,0.007l1.84-1.234L14.316,9.461z M6.073,4.874c1.346,0,2.437-1.091,2.437-2.437 S7.419,0,6.073,0S3.636,1.092,3.636,2.437S4.727,4.874,6.073,4.874z">
+
                             </path>
                         </g>
                     </g>
@@ -439,8 +463,10 @@ Dashboard
                     <label for="password" class="mb-1.5 block text-sm font-medium text-gray-900">
                         Academic Year
                     </label>
+
                     <select name="year" id="date-dropdown"
                         class="block w-full rounded-lg border-0 bg-white p-3.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500">
+
                         <option>Select Year</option>
                     </select>
                 </div>
@@ -448,6 +474,7 @@ Dashboard
                     <label for="email" class="mb-1.5 block text-sm font-medium text-gray-900">Choose Exam</label>
                     <select id="countries" name="category"
                         class="block w-full rounded-lg border-0 bg-white p-3.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500">
+
                         <option selected>Choose Exam</option>
                         <option value="">X</option>
                         <option value="">Y</option>
@@ -457,6 +484,7 @@ Dashboard
                 <div class="mt-5 text-end">
                     <button type="submit"
                         class="rounded-lg bg-blue-700 px-16 py-3.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300">
+
                         Search
                     </button>
                 </div>
@@ -465,26 +493,30 @@ Dashboard
         <div class="text-md mt-5 grid gap-3 font-semibold md:grid-cols-2">
             <div
                 class="relative overflow-hidden rounded-md bg-gradient-to-br from-blue-600 to-blue-950 px-8 py-10 text-start text-white">
+
                 <a href="#" class="">
                     <div class="text-xl font-light">
                         <p>Total Class: 0</p>
                     </div>
                 </a>
+
                 <img class="absolute -right-48 -top-14 h-40 -rotate-45"
                     src="{{ asset('assets/images/dashboard-welcome-bg.svg') }}" alt="" />
             </div>
             <div
                 class="relative overflow-hidden rounded-md bg-gradient-to-br from-blue-600 to-blue-950 px-8 py-10 text-start text-white">
+
                 <a href="#" class="">
                     <div class="text-xl font-light">
                         <p>Total Section: 0</p>
                     </div>
                 </a>
-                <img class="absolute -right-48 -top-14 h-40 -rotate-45"
+               <img class="absolute -right-48 -top-14 h-40 -rotate-45"
                     src="{{ asset('assets/images/dashboard-welcome-bg.svg') }}" alt="" />
             </div>
             <div
                 class="relative overflow-hidden rounded-md bg-gradient-to-br from-blue-600 to-blue-950 px-8 py-10 text-start text-white">
+
                 <a href="#" class="">
                     <div class="text-xl font-light">
                         <p>Exam Taken: 0</p>
@@ -494,7 +526,7 @@ Dashboard
                     src="{{ asset('assets/images/dashboard-welcome-bg.svg') }}" alt="" />
             </div>
             <div
-                class="relative overflow-hidden rounded-md bg-gradient-to-br from-blue-600 to-blue-950 px-8 py-10 text-start text-white">
+                class="relative overflow-hidden rounded-md bg-gradient-to-br from-blue-600 to-blue-950 px-8 py-10 
                 <a href="#" class="">
                     <div class="text-xl font-light">
                         <p>Exam not taken: 0</p>
@@ -502,6 +534,7 @@ Dashboard
                 </a>
                 <img class="absolute -right-48 -top-14 h-40 -rotate-45"
                     src="{{ asset('assets/images/dashboard-welcome-bg.svg') }}" alt="" />
+
             </div>
         </div>
     </div>
@@ -512,6 +545,7 @@ Dashboard
         <div class="text-md mt-3 space-y-1.5">
             <div
                 class="relative overflow-hidden rounded-md bg-gradient-to-br from-purple-600 to-purple-900 px-8 py-10 text-start text-white">
+
                 <a href="#" class="">
                     <div class="text-xl font-light">
                         <p>Total Pass: 0</p>
@@ -522,16 +556,19 @@ Dashboard
             </div>
             <div
                 class="relative overflow-hidden rounded-md bg-gradient-to-br from-purple-600 to-purple-900 px-8 py-10 text-start text-white">
+
                 <a href="#" class="">
                     <div class="text-xl font-light">
                         <p>Total Fail: 0</p>
                     </div>
                 </a>
+
                 <img class="absolute -right-48 -top-14 h-40 -rotate-45"
                     src="{{ asset('assets/images/dashboard-welcome-bg.svg') }}" alt="" />
             </div>
             <div
                 class="relative overflow-hidden rounded-md bg-gradient-to-br from-purple-600 to-purple-900 px-8 py-10 text-start text-white">
+
                 <a href="#" class="">
                     <div class="text-xl font-light">
                         <p>Total Participated: 0</p>
@@ -542,15 +579,19 @@ Dashboard
             </div>
             <div
                 class="relative overflow-hidden rounded-md bg-gradient-to-br from-purple-600 to-purple-900 px-8 py-10 text-start text-white">
+
                 <a href="#" class="">
                     <div class="text-xl font-light">
                         <p>Not Participated: 0</p>
                     </div>
                 </a>
+
                 <img class="absolute -right-48 -top-14 h-40 -rotate-45"
                     src="{{ asset('assets/images/dashboard-welcome-bg.svg') }}" alt="" />
+
             </div>
         </div>
     </div>
 </div>
 @endsection
+

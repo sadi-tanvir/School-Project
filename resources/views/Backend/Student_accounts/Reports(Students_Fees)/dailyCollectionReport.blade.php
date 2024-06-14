@@ -41,9 +41,6 @@
         }
     </style>
 
-    <div>
-        <h1 class="">Income Statement</h1>
-    </div>
     <div class=" mt-10">
         <form action="{{ route('DailyCollectionReport.getReports', $school_code) }}"
             class="p-5 shadowStyle rounded-[8px] border border-slate-300 w-2/5 mx-auto space-y-3">

@@ -17,7 +17,7 @@ Student Short List Information
             <!-- Class Dropdown -->
             <div>
                 <label class="block mb-2 text-sm font-medium text-gray-900" for="class">Class</label>
-                <select name="class"
+                <select id="class" name="class"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                     <option disabled selected>Choose class</option>
                     @foreach($classes as $class)
@@ -28,7 +28,7 @@ Student Short List Information
             <!-- Group Dropdown -->
             <div>
                 <label class="block mb-2 text-sm font-medium text-gray-900" for="group">Group</label>
-                <select name="group"
+                <select name="group" id="group"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                     <option disabled selected>Choose group</option>
                     @foreach($groups as $group)
@@ -39,7 +39,7 @@ Student Short List Information
             <!-- Section Dropdown -->
             <div>
                 <label class="block mb-2 text-sm font-medium text-gray-900" for="section">Section</label>
-                <select name="section"
+                <select name="section" id="section"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                     <option disabled selected>Choose section</option>
                     @foreach($sections as $section)
@@ -212,7 +212,7 @@ Student Short List Information
         @endif
     @endif
 </form>
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     document.getElementById('selectAll').addEventListener('click', function () {
         const checkboxes = document.querySelectorAll('.group-checkbox');
@@ -234,6 +234,50 @@ Student Short List Information
             imageType: 'image/jpeg',
             output: './pdf/generate.pdf'
         });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#class').change(function () {
+            var class_name = $(this).val();
+            $.ajax({
+                url: "{{ route('add.get-groups', $school_code) }}",
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function (result) {
+                    $('#group').empty();
+                    $('#group').append('<option disabled selected value="">Select</option>');
+                    $.each(result, function (key, value) {
+                        $('#group').append('<option value="' + value.group_name + '">' + value.group_name + '</option>');
+                    });
+                }
+            });
+        });
+        //section
+        $('#class').change(function () {
+            var class_name = $(this).val();
+            $.ajax({
+                url: "{{ route('add.get-sections', $school_code) }}",
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function (result) {
+                    $('#section').empty();
+                    $('#section').append('<option disabled selected value="">Select</option>');
+                    $.each(result, function (key, value) {
+                        $('#section').append('<option value="' + value.section_name + '">' + value.section_name + '</option>');
+                    });
+                }
+            });
+        });
+
+
     });
 </script>
 @endsection

@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Backend\Student_Account;
 use App\Http\Controllers\Controller;
 use App\Models\AddAcademicSession;
 use App\Models\AddAcademicYear;
+use App\Models\AddCategory;
 use App\Models\AddClass;
 use App\Models\AddGroup;
 use App\Models\AddPaySlip;
 use App\Models\AddPaySlipType;
+use App\Models\AddSection;
 use App\Models\GeneratePayslip;
 use App\Models\Student;
 use App\Models\Waiver;
@@ -28,6 +30,16 @@ class GenerateMultiplePayslipController extends Controller
             ->select("group_name")
             ->get();
 
+        $sections = AddSection::where("action", "approved")
+            ->where("school_code", $school_code)
+            ->select("section_name")
+            ->get();
+
+        $categories = AddCategory::where("action", "approved")
+            ->where("school_code", $school_code)
+            ->select("category_name")
+            ->get();
+
         $PaySlipTypes = AddPaySlipType::where("action", "approved")
             ->where("school_code", $school_code)
             ->select("pay_slip_type_name")
@@ -44,7 +56,7 @@ class GenerateMultiplePayslipController extends Controller
             ->select('academic_year_name')
             ->get();
 
-        return view("Backend.Student_accounts.GenerateMultiplePayslip", compact("school_code", "classes", "groups", "PaySlipTypes", "academicSessions", "academicYears"));
+        return view("Backend.Student_accounts.GenerateMultiplePayslip", compact("school_code", "classes", "groups", "sections", "categories", "PaySlipTypes", "academicSessions", "academicYears"));
     }
 
     public function GetStudentInformation(Request $request, $school_code)
@@ -52,6 +64,8 @@ class GenerateMultiplePayslipController extends Controller
         $monthQuery = $request->query("months");
         $classQuery = $request->query("classes");
         $groupQuery = $request->query("group");
+        $sectionQuery = $request->query("section");
+        $categoryQuery = $request->query("category");
         $yearQuery = $request->query("year");
         $pay_slip_type = $request->query("pay_slip_type");
         $academic_session = $request->query("academic_session");
@@ -73,8 +87,23 @@ class GenerateMultiplePayslipController extends Controller
             foreach ($monthsArray as $month) {
                 $studentsForClass = Student::where("school_code", $school_code)
                     ->where('action', 'approved')
-                    ->where("class_name", $class)
-                    ->select("id", "student_id", "student_roll", "name", "Class_name", "group", "section")
+                    ->where('Class_name', $class)
+                    ->when($groupQuery !== "Select", function ($query) use ($groupQuery) {
+                        return $query->where('group', $groupQuery);
+                    })
+                    ->when($categoryQuery !== "Select", function ($query) use ($categoryQuery) {
+                        return $query->where('category', $categoryQuery);
+                    })
+                    ->when($sectionQuery !== "Select", function ($query) use ($sectionQuery) {
+                        return $query->where('section', $sectionQuery);
+                    })
+                    ->when($academic_session !== "Select", function ($query) use ($academic_session) {
+                        return $query->where('session', $academic_session);
+                    })
+                    ->when($academic_year !== "Select", function ($query) use ($academic_year) {
+                        return $query->where('year', $academic_year);
+                    })
+                    ->select("id", "student_id", "student_roll", "name", "Class_name", "group", "section", 'category')
                     ->get();
 
                 $allStudents = array_merge($allStudents, [$class => $studentsForClass->toArray()]);
@@ -172,6 +201,7 @@ class GenerateMultiplePayslipController extends Controller
         ];
 
         try {
+            $studentCategory = $request->input("input_category", []);
             $commonPaySlipType = $request->input("pay_slip_type");
             $commonYear = $request->input("year");
             $commonLastPayDate = $request->input("last_pay_date");
@@ -204,13 +234,14 @@ class GenerateMultiplePayslipController extends Controller
                                 'month' => $month,
                                 'year' => $commonYear,
                                 'class' => $studentClasses[$studentId],
+                                'group' => $studentGroups[$studentId],
+                                'section' => $studentSections[$studentId],
+                                'category' => $studentCategory[$studentId],
                                 'pay_slip_type' => $commonPaySlipType,
                             ],
                             [
                                 'class_position' => $classesPosition[$studentId],
                                 'last_pay_date' => $IndividualLastPayDate,
-                                'group' => $studentGroups[$studentId],
-                                'section' => $studentSections[$studentId],
                                 'amount' => $studentPaySlipAmounts[$studentId],
                                 'waiver' => $studentWaiver[$studentId],
                                 'payable' => $studentPayable[$studentId],

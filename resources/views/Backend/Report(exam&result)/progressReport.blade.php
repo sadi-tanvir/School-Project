@@ -188,6 +188,7 @@ Exam Progress Report
 <h3 class="text-xl text-red-500 text-center "> প্রগ্রেস রিপোর্ট সঠিকভাবে পাওয়ার জন্য আগে মার্ক ইনপুট করে নিন তারপর এক্সাম প্রসেস করুন । </h3>
 </div>
 
+
 <div class=" ">
     <div class="border-2 rounded-md ">
         <div class="p-6">
@@ -198,6 +199,7 @@ Exam Progress Report
                         <label for="class" class="text-gray-700 text-sm w-[150px] mr-2">Select Report:</label>
                         <select name="report"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
+
                             <option disabled selected>Select</option>
                             @foreach ($reports as $data)
                                 <option value="{{ $data->report_name }}">{{ $data->report_name }}</option>
@@ -209,6 +211,7 @@ Exam Progress Report
                         <label for="class" class="text-gray-700 text-sm w-[150px] mr-2">Class:</label>
                         <select id="class" name="class"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
+
                             <option disabled selected>Select</option>
                             @foreach ($classData as $data)
                                 <option value="{{ $data->class_name }}">{{ $data->class_name }}</option>
@@ -220,6 +223,7 @@ Exam Progress Report
                         <label for="class" class="text-gray-700 text-sm w-[150px] mr-2">Group:</label>
                         <select id="group" name="group"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5     ">
+
                             <option disabled selected value="">Select</option>
 
                             @foreach ($groupData as $data)
@@ -229,9 +233,11 @@ Exam Progress Report
                         </select>
                     </div>
                     <div class="flex justify-between items-center mb-5">
+
                         <label for="class" class="text-gray-700 text-sm w-[150px] mr-2">Section:</label>
                         <select id="section" name="section"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5     ">
+
                             <option disabled selected value="">Select</option>
 
                             @foreach ($sectionData as $data)
@@ -242,17 +248,21 @@ Exam Progress Report
                     </div>
 
                     <div class="flex justify-between items-center mb-5">
+
                         <label for="student" class="text-gray-700 text-sm w-[150px] mr-2">Student Id:</label>
                         <select id="student" name="student_id"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5     ">
+
                             <option selected value="">Select</option>
 
                         </select>
                     </div>
                     <div class="flex justify-between items-center mb-5">
+
                         <label for="class" class="text-gray-700 text-sm w-[150px] mr-2">Exam Name:</label>
                         <select name="exam_name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5     ">
+
                             <option disabled selected value="">Select</option>
 
                             @foreach ($classExamData as $data)
@@ -262,9 +272,11 @@ Exam Progress Report
                         </select>
                     </div>
                     <div class="flex justify-between items-center mb-5">
+
                         <label for="class" class="text-gray-700 text-sm w-[150px] mr-2">Merit Status:</label>
                         <select name="merit_status"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5     ">
+
                             <option disabled selected value="">Select</option>
 
                             <option value="section_wise">Section Wise</option>
@@ -273,9 +285,11 @@ Exam Progress Report
                         </select>
                     </div>
                     <div class="flex justify-between items-center mb-5">
+
                         <label for="class" class="text-gray-700 text-sm w-[150px] mr-2">Year:</label>
                         <select name="year"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5     ">
+
 
 
                             @foreach ($academicYearData as $data)
@@ -291,7 +305,9 @@ Exam Progress Report
                     <div class="row form-group">
                         <div class="offset-md-8 col-md-2">
                             <button type="submit" style="width: 100%;"
+
                                 class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3.5 me-2 mb-2  "
+
                                 id="feesCollectSaved">Print</button>
                         </div>
                     </div>

@@ -12,6 +12,7 @@ use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
+
 class DashboardController extends Controller
 {
     public function index($schoolCode)
@@ -28,10 +29,7 @@ class DashboardController extends Controller
         $parsentRemainingSMSData= $msgData / $totalSMS ;
         $parsentRemainingSMS= $parsentRemainingSMSData * 100;
         // dd($schoolInfo);
-
         $totalStudent = $studentData->count();
-
-
         return view("Backend.Dashboard.Dashboard", compact('totalStudent', 'classData', 'sectionData', 'groupData', 'msgData','remainingSMS','parsentRemainingSMS'));
 
     }

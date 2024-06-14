@@ -302,8 +302,8 @@ class ProgressReportController extends Controller
             }
 
             // dd($signImage);
-
             return view('/Backend/Report(exam&result)/downloadProgressReport', compact('existingRecords', 'shortCode', 'students', 'class', 'group', 'section', 'exam_name', 'merit_status', 'year', 'highestMarks', 'grades', 'exam_name', 'sequentialWiseExam', 'sorted_exam_process_data', 'gradePoints', 'schoolInfo', 'signatureName', 'signImage','signPosition'));
+
         } else {
             return redirect()->back()->with('error', 'Not found');
         }

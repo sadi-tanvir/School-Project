@@ -1108,6 +1108,7 @@ Fees Collection
             collect_amount.readOnly = false;
             collect_amount.classList.remove("bg-gray-200");
 
+            // make reset input fields to empty
             t_current_pay.value = 0;
             returnAmount.value = '';
             changeAmount.value = '';

@@ -32,6 +32,7 @@ Send Message
                     <label for="instruction"
                         class="block mb-2 text-sm font-medium whitespace-noWrap">Instruction:</label>
                     <textarea readOnly name="message" id="instruction" rows="4"
+
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="write a message"></textarea>
                     <input value="{{ $school_code }}" name="school_code" class="hidden" type="text">
@@ -212,6 +213,7 @@ Send Message
                             @else
                                 @foreach ($contacts as $data)
                                     <tr id="row_{{ $data->id }}">
+
                                         <td scope="col" class="text-sm px-6 py-3">
                                             <input type="checkbox" name="contact[{{ $data->contact }}]"
                                                 value="{{ $data->contact }}" class="row-checkbox" data-row-id="{{ $data->id }}">
@@ -224,6 +226,8 @@ Send Message
                                         <td scope="col" class="text-sm px-6 py-3">
                                             {{ $data->contact }}
                                         </td>
+
+                                        
                                         <td>
                                             <input class="rowMessage" readonly name="message" class="rounded-xl" type="text">
                                         </td>
@@ -232,6 +236,7 @@ Send Message
                                                 <i class="fa fa-trash" aria-hidden="true" style="color:red;"></i>
                                             </button>
                                         </td>
+
                                     </tr>
                                 @endforeach
                             @endif

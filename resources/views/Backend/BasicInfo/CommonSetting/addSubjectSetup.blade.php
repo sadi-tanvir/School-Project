@@ -8,11 +8,6 @@ Suject Setup
 
 <style>
     /* table radius  */
-    thead th:first-child {
-        border-top-left-radius: 0.5rem;
-        border-bottom-left-radius: 0.5rem;
-    }
-
     thead th:last-child {
         border-top-right-radius: 0.5rem;
         border-bottom-right-radius: 0.5rem;
@@ -188,6 +183,7 @@ Suject Setup
 
 <div class="relative overflow-x-auto sm:rounded-lg bg-gray-200 border-2 border-gray-300 p-6">
 
+
     <form id="dataForm" method="POST" action="{{ route('store.subject.setup', $school_code) }}">
         @csrf
         @method('PUT')
@@ -199,6 +195,7 @@ Suject Setup
             <div class="">
                 <select id="class" name="class_name"
                     class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
+
                     <!-- <option disabled selected>Choose a class</option> -->
                     @if ($selectedClassName === null)
                         <option disabled selected>Choose a class</option>
@@ -219,6 +216,7 @@ Suject Setup
             <div class="mb-4">
                 <select id="group" name="group_name"
                     class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
+
                     @if ($selectedGroupName === null)
                         <option disabled selected>Choose a group</option>
                     @elseif($selectedGroupName)
@@ -237,6 +235,7 @@ Suject Setup
                     placeholder="Enter The Police Station Name" />
             </div>
             <div class="w-full">
+
                 <button onclick="submitForm()" type="submit"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  ">GET
                     DATA</button>
@@ -246,6 +245,7 @@ Suject Setup
         <div>
             <div>
                 <div class="grid gap-6 mb-6 py-5 md:grid-cols-3 items-center ps-4 border border-gray-200 rounded  ">
+
 
                     @foreach ($subjectData as $data)
                         <div>
@@ -306,6 +306,7 @@ Suject Setup
                 @if ($classWiseSubjectData !== null)
                     @foreach ($classWiseSubjectData as $key => $data)
                         <tr id="row-{{ $data->id }}" class="border-b space-x-2 text-sm"
+
                             data-serial="{{ $data->subject_serial }}">
                             <th scope="row" class="px-6 py-4 font-medium  text-black whitespace-nowrap ">
                                 {{ $key + 1 }}
@@ -318,9 +319,11 @@ Suject Setup
                                 <input class="hidden" value="{{ $data->school_code }}" type="text" name="school_code" id="">
                             </td>
 
+
                             <td class="py-4">
                                 <select name="subject_type[{{ $data->id }}]"
                                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
+
                                     <option class="capitalize" value="{{ $data->subject_type }}">
                                         {{ $data->subject_type }}
                                     </option>
@@ -340,16 +343,10 @@ Suject Setup
                                     class="bg-white border-0 w-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5     "
                                     value="{{ $data->subject_marge }}" />
                             </td>
-
                             <td class="px-6 py-4  text-xl flex items-center">
-
-
                                 <button class="btn delete-button" data-id="{{ $data->id }}">
                                     <i class="fa fa-trash" aria-hidden="true" style="color:red;"></i>
                                 </button>
-
-
-
                             </td>
                         </tr>
                     @endforeach
@@ -431,8 +428,6 @@ Suject Setup
         });
     });
 </script>
-
-
 <script>
     function sortTable() {
         var tbody = document.querySelector('tbody');
@@ -466,6 +461,7 @@ Suject Setup
                 data: {
                     class: class_name,
                     _token: '{{ csrf_token() }}',
+
                 },
                 success: function (result) {
                     $('#group').empty();
@@ -479,8 +475,8 @@ Suject Setup
             });
         });
 
+
     });
 </script>
-
 
 @endsection

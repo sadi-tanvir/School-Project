@@ -129,7 +129,13 @@ class ExamProcessController extends Controller
                 foreach ($singleStudentTotalMarks as $value) {
                     $totalMarks += $value->total_marks;
                 }
-                $GPA = $totalGPA / $count;
+                if($totalGPA ==0){
+                    $totalGPA = 0;
+                }
+                else {
+
+                    $GPA = $totalGPA / $count;
+                }
                 $GPA = number_format($GPA, 2);
                 $existingRecord->update([
                     'class' => $class,
@@ -165,7 +171,13 @@ class ExamProcessController extends Controller
                 foreach ($singleStudentTotalMarks as $value) {
                     $totalMarks += $value->total_marks;
                 }
-                $GPA = $totalGPA / $count;
+                if($totalGPA ==0){
+                    $totalGPA = 0;
+                }
+                else {
+
+                    $GPA = $totalGPA / $count;
+                }
                 $GPA = number_format($GPA, 2);
                 ExamProcess::create([
                     'class' => $class,

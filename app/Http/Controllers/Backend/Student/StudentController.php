@@ -191,6 +191,11 @@ class StudentController extends Controller
         $waiver = $request->input('waiver');
 
         $pay_now = $request->input('pay_now');
+        
+        $classPosition = AddClass::where('school_code', $school_code)
+            ->where('class_name', $class)
+            ->select('position')
+            ->first();
 
         $classPosition = AddClass::where('school_code', $school_code)
             ->where('class_name', $class)

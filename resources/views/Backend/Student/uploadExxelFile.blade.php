@@ -4,6 +4,7 @@
 @endsection
 
 @section('Dashboard')
+@include('/Message/message')
     <div class="gradient-bg relative mb-4 overflow-hidden rounded-md px-6 py-4 font-semibold text-white">
         <h2 class="">Excel Import Student Data</h2>
         <span class="absolute -bottom-2 right-3 rotate-3">
@@ -190,6 +191,7 @@
                         <option value="generate_id">Generate ID</option>
                     </select>
                 </div>
+                <input type="text" value="{{$school_code}}" class="hidden" name="school_code" id="">
             </div>
             <div class="items-center justify-end md:flex">
                 <div class="">

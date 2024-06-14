@@ -5,7 +5,7 @@
 
 @section('Dashboard')
     @include('Message.message')
-    <div class="gradient-bg relative overflow-hidden rounded-md px-6 py-4 font-semibold text-white">
+    <div class="gradient-bg relative overflow-hidden rounded-md px-3 py-1 font-semibold text-white">
         <h2 class="">Student Class Info</h2>
         <span class="absolute -bottom-2 right-3 rotate-3">
             <svg
@@ -383,25 +383,25 @@
         <form action="{{ route('updateStudentClass', $school_code) }}" method="POST">
             @csrf
             @method('PUT')
-            <table class="w-full text-left text-sm text-black rtl:text-right">
-                <thead class="border-b border-blue-400 bg-blue-600 text-xs uppercase text-white">
+            <table class="w-full mx-auto text-left text-sm text-black rtl:text-right">
+                <thead class=" border-b border-blue-400 bg-blue-600 text-xs uppercase text-white">
                     <tr>
-                        <th scope="col" class="bg-blue-500 px-6 py-3">
+                        <th scope="col" class="bg-blue-500 px-3 py-1">
                             <input
                                 id="select-all-checkbox"
                                 type="checkbox"
                                 class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-blue-500"
                             />
                         </th>
-                        <th scope="col" class="bg-blue-500 px-6 py-3">Name</th>
-                        <th scope="col" class="px-6 py-3">Student ID</th>
-                        <th scope="col" class="bg-blue-500 px-6 py-3">Roll</th>
-                        <th scope="col" class="px-6 py-3">Class</th>
-                        <th scope="col" class="bg-blue-500 px-6 py-3">Group</th>
-                        <th scope="col" class="px-6 py-3">Section</th>
-                        <th scope="col" class="bg-blue-500 px-6 py-3">Session</th>
-                        <th scope="col" class="px-6 py-3">Year</th>
-                        <th scope="col" class="bg-blue-500 px-6 py-3">Status</th>
+                        <th scope="col" class="bg-blue-500 px-3 py-1">Name</th>
+                        <th scope="col" class="px-3 py-1">Student ID</th>
+                        <th scope="col" class="bg-blue-500 px-3 py-1">Roll</th>
+                        <th scope="col" class="px-3 py-1">Class</th>
+                        <th scope="col" class="bg-blue-500 px-3 py-1">Group</th>
+                        <th scope="col" class="px-3 py-1">Section</th>
+                        <th scope="col" class="bg-blue-500 px-3 py-1">Session</th>
+                        <th scope="col" class="px-3 py-1">Year</th>
+                        <th scope="col" class="bg-blue-500 px-3 py-1">Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -409,30 +409,30 @@
                         {{-- @dd($student) <!-- Add this line to inspect the value --> --}}
                         @foreach ($student as $key => $data)
                             <tr>
-                                <td scope="col" class="px-6 py-3">
+                                <td scope="col" class="px-3 py-1">
                                     <input
                                         type="checkbox"
                                         value="{{ $data->id }}"
                                         name="id[]"
-                                        class="row-checkbox"
+                                        class="row-checkbox rounded"
                                         data-row-index="{{ $key }}"
                                     />
                                 </td>
-                                <td class="px-6 py-4">
+                                <td class="px-3 py-1 md:h-[20px] md:w-[120px]">
                                     {{ $data->name }}
                                 </td>
-                                <td class="px-6 py-4">
+                                <td class="px-3 py-1 md:h-[20px] md:w-[80px]">
                                     {{ $data->student_id }}
                                 </td>
-                                <td class="px-6 py-4">
+                                <td class="px-3 py-1 md:h-[20px] md:w-[50px]">
                                     {{ $data->student_roll }}
                                 </td>
-                                <td class="px-6 py-4">
+                                <td class="px-3 py-1">
                                     <span class="row-data">{{ $data->Class_name }}</span>
 
                                     <select
                                         name="Class_name[{{ $data->id }}]"
-                                        class="form-control row-input hidden px-2 md:h-[30px] md:w-[120px]"
+                                        class="form-control row-input rounded-lg hidden px-2 md:h-[20px] md:w-[80px]"
                                     >
                                         <option value="{{ $data->Class_name }}">{{ $data->Class_name }}</option>
                                         @foreach ($classData as $class)
@@ -441,12 +441,12 @@
                                     </select>
                                 </td>
 
-                                <td class="px-6 py-4">
+                                <td class="px-3 py-1">
                                     <span class="row-data">{{ $data->group }}</span>
 
                                     <select
                                         name="group[{{ $data->id }}]"
-                                        class="form-control row-input hidden px-2 md:h-[30px] md:w-[120px]"
+                                        class="form-control row-input rounded-lg hidden px-2 md:h-[20px] md:w-[80px]"
                                     >
                                         <option value="{{ $data->group }}">{{ $data->group }}</option>
                                         @foreach ($groupData as $group)
@@ -454,11 +454,11 @@
                                         @endforeach
                                     </select>
                                 </td>
-                                <td class="px-6 py-4">
+                                <td class="px-3 py-1">
                                     <span class="row-data">{{ $data->section }}</span>
                                     <select
                                         name="section[{{ $data->id }}]"
-                                        class="form-control row-input hidden px-2 md:h-[30px] md:w-[120px]"
+                                        class="form-control row-input rounded-lg hidden px-2 md:h-[20px] md:w-[100px]"
                                     >
                                         <option value="{{ $data->section }}">{{ $data->section }}</option>
                                         @foreach ($sectionData as $section)
@@ -468,11 +468,11 @@
                                         @endforeach
                                     </select>
                                 </td>
-                                <td class="px-6 py-4">
+                                <td class="px-3 py-1">
                                     <span class="row-data">{{ $data->session }}</span>
                                     <select
                                         name="session[{{ $data->id }}]"
-                                        class="form-control row-input hidden px-2 md:h-[30px] md:w-[120px]"
+                                        class="form-control row-input rounded-lg hidden px-2 md:h-[20px] md:w-[100px]"
                                     >
                                         <option value="{{ $data->session }}">{{ $data->session }}</option>
                                         @foreach ($Session as $session)
@@ -482,11 +482,11 @@
                                         @endforeach
                                     </select>
                                 </td>
-                                <td class="px-6 py-4">
+                                <td class="px-3 py-1">
                                     <span class="row-data">{{ $data->year }}</span>
                                     <select
                                         name="year[{{ $data->id }}]"
-                                        class="form-control row-input hidden px-2 md:h-[30px] md:w-[120px]"
+                                        class="form-control row-input rounded-lg hidden px-2 md:h-[20px] md:w-[80px]"
                                     >
                                         <option value="{{ $data->year }}">{{ $data->year }}</option>
                                         @foreach ($Year as $year)
@@ -496,11 +496,11 @@
                                         @endforeach
                                     </select>
                                 </td>
-                                <td class="px-6 py-4">
+                                <td class="px-3 py-1">
                                     <span class="row-data">{{ $data->status }}</span>
                                     <select
                                         name="status[{{ $data->id }}]"
-                                        class="form-control row-input hidden px-2 md:h-[30px] md:w-[120px]"
+                                        class="form-control rounded-lg row-input hidden px-2 md:h-[20px] md:w-[100px]"
                                     >
                                         <option value="{{ $data->status }}">{{ $data->status }}</option>
                                         <option value="active">Active</option>

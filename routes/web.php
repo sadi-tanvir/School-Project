@@ -724,7 +724,6 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::post('/getSignatureData/{schoolCode}', [SetSignatureController::class, 'getSignatureData'])->name('get.signature.data');
     Route::post('/SetSignature/{schoolCode}', [SetSignatureController::class, 'processForm'])->name('store.signature');
 
-
     // Exam Setting End .............................................................................................................
 
 
@@ -812,9 +811,11 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::post('/print/get-groups/{schoolCode}', [PrintAdmitCardController::class, 'printGroups'])->name('print.get-groups');
     Route::post('/print/get-sections/{schoolCode}', [PrintAdmitCardController::class, 'printSections'])->name('print.get-sections');
 
-    //Print Seat Plan
+     //Print Seat Plan
     Route::get('/printSeatPlan/{schoolCode}', [PrintSeatPlanController::class, "printSeatPlan"])->name('printSeatPlan');
     Route::post('/downloadPrint/{schoolCode}', [PrintSeatPlanController::class, "downloadPrint"])->name('downloadPrint');
+
+
     //Print Admit Instuction
     Route::get('/AddAdmitInstruction/{schoolCode}', [AddAdmitInstructionController::class, "AddAdmitInstruction"])->name('addAdmitinstruction');
     Route::post('/instructionInsert/{schoolCode}', [AddAdmitInstructionController::class, 'instructionInsert'])->name('store.instructionInsert');

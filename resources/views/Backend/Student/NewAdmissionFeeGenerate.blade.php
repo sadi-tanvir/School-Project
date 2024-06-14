@@ -103,6 +103,7 @@ Student Invoice
             <input class="hidden" name="class" value="{{ $student->Class_name }}" />
             <input class="hidden" name="group" value="{{ isset($student->group) ? $student->group : "N/A"}}" />
             <input class="hidden" name="section" value="{{ isset($student->section) ? $student->section : "N/A"}}" />
+            <input class="hidden" name="category" value="{{ isset($student->category) ? $student->category : "N/A"}}" />
             <input class="hidden" type="text" name="collected_by_name" value="{{ isset($schoolAdminData->name) ? $schoolAdminData->name : 'Unknown' }}">
             <input class="hidden" type="text" name="collected_by_email" value="{{ isset($schoolAdminData->email) ? $schoolAdminData->email : 'Unknown' }}">
             <input class="hidden" type="text" name="collected_by_phone" value="{{ isset($schoolAdminData->mobile_number) ? $schoolAdminData->mobile_number : 'Unknown' }}">

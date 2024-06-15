@@ -150,8 +150,6 @@ class GeneratePayslipController extends Controller
                 'student_id' => $student->student_id,
                 'student_name' => $student->name,
                 'class' => $student->Class_name,
-                'group' => $student->group,
-                'category' => $student->category,
                 'class_position' => $classPosition->position,
                 'section' => $student->section,
                 'student_roll' => $student->student_roll,

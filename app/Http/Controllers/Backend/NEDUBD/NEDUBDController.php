@@ -104,6 +104,7 @@ class NEDUBDController extends Controller
             $SchoolInfo->address = $request->input('address');
             $SchoolInfo->eiin = $request->input('eiin');
             $SchoolInfo->website = $request->input('website');
+            $SchoolInfo->messages = $request->input('sms');
             $SchoolInfo->logo = $logo;
             $SchoolInfo->school_code = $request->input('school_code');
             $SchoolInfo->save();

@@ -63,7 +63,6 @@ class UploadPhotoController extends Controller
     }
 
     $students = $studentsQuery->get();
-       
         $classes = AddClass::where('school_code', $school_code)->where('action', 'approved')->get();
         $sections = AddSection::where('school_code', $school_code)->where('action', 'approved')->get();
         $groups = AddGroup::where('school_code', $school_code)->where('action', 'approved')->get();
@@ -100,11 +99,9 @@ class UploadPhotoController extends Controller
     public function updateImage(Request $request, $school_code, $id)
     {
         // dd($request);
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+       
         $student = Student::findOrFail($id);
-
+        // dd($student); 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             if (!is_null($student->image)) {
@@ -112,6 +109,7 @@ class UploadPhotoController extends Controller
             }
             $imagePath = $request->file('image')->move('images/student', $id . '_' . uniqid() . '.' . $request->file('image')->extension());
             $student->image = $imagePath;
+            
             $student->save();
 
             $class = $request->input('class');

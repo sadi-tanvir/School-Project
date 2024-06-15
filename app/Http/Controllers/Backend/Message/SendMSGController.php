@@ -16,6 +16,7 @@ use App\Models\AddClass;
 use App\Models\AddSection;
 use App\Models\AddGroup;
 use App\Models\AddShift;
+use App\Models\SchoolInfo;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -131,45 +132,56 @@ class SendMSGController extends Controller
     }
     public function sendMessage(Request $request)
     {
-        //dd($request);
+
+        // dd($request);
+
         $contacts = $request->contact;
         $messages = $request->message;
         $smsCount = $request->smsCount;
         $messageEncoded = urlencode($messages);
         $school_code = Session::get('school_code');
         $sid = "Bdassociateeng";
-        $messageCount = Message::where('id', $messages)->where('school_code', $school_code)->get();
-        foreach ($contacts as $contact) {
-            // Check if message is not empty before sending SMS
-            if (!empty($messages)) {
-                // Send SMS only if there's a message
-                $url = "http://api.boom-cast.com/boomcast/WebFramework/boomCastWebService/externalApiSendTextMessage.php?masking=NOMASK&userName=bassociate&password=8d611d3ea607e1e12f0f3440c314c3c1&MsgType=TEXT&receiver=$contact&message=$messageEncoded";
-                $param = "user=bassociate&pass=8d611d3ea607e1e12f0f3440c314c3c1&sms[0][0]= $contact&sms[0][1]=" . urlencode("$request->message") . "&sms[0][2]=123456789&sid=$sid";
+        $schoolInfo = SchoolInfo::where('school_code', $school_code)->first();
+        $totalSMS = $schoolInfo->messages;
+        $totalSendSMS = Message::where('school_code', $school_code)->sum('message_count');
+        $remainingSMS = $totalSMS - $totalSendSMS;
+        if ($remainingSMS <= 1) {
+            return redirect()->back()->with('error', 'You do not have sufficient SMS');
+        } else {
+            foreach ($contacts as $contact) {
+                // Check if message is not empty before sending SMS
+                if (!empty($messages)) {
+                    // Send SMS only if there's a message
+                    $url = "http://api.boom-cast.com/boomcast/WebFramework/boomCastWebService/externalApiSendTextMessage.php?masking=NOMASK&userName=bassociate&password=8d611d3ea607e1e12f0f3440c314c3c1&MsgType=TEXT&receiver=$contact&message=$messageEncoded";
+                    $param = "user=bassociate&pass=8d611d3ea607e1e12f0f3440c314c3c1&sms[0][0]= $contact&sms[0][1]=" . urlencode("$request->message") . "&sms[0][2]=123456789&sid=$sid";
 
-                $crl = curl_init();
-                curl_setopt($crl, CURLOPT_SSL_VERIFYPEER, FALSE);
-                curl_setopt($crl, CURLOPT_SSL_VERIFYHOST, 2);
-                curl_setopt($crl, CURLOPT_URL, $url);
-                curl_setopt($crl, CURLOPT_HEADER, 0);
-                curl_setopt($crl, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($crl, CURLOPT_POST, 1);
-                curl_setopt($crl, CURLOPT_POSTFIELDS, $param);
-                $response = curl_exec($crl);
-                curl_close($crl);
+                    $crl = curl_init();
+                    curl_setopt($crl, CURLOPT_SSL_VERIFYPEER, FALSE);
+                    curl_setopt($crl, CURLOPT_SSL_VERIFYHOST, 2);
+                    curl_setopt($crl, CURLOPT_URL, $url);
+                    curl_setopt($crl, CURLOPT_HEADER, 0);
+                    curl_setopt($crl, CURLOPT_RETURNTRANSFER, 1);
+                    curl_setopt($crl, CURLOPT_POST, 1);
+                    curl_setopt($crl, CURLOPT_POSTFIELDS, $param);
+                    $response = curl_exec($crl);
+                    curl_close($crl);
+                }
+
+                // Save message to database only if there's a message
+                if (!empty($messages)) {
+                    $message = new Message();
+                    $message->message = $messageEncoded;
+                    $message->contact = $contact;
+                    $message->message_count = $smsCount;
+                    $message->school_code = $school_code;
+                    $message->save();
+                }
+
             }
 
-            // Save message to database only if there's a message
-            if (!empty($messages)) {
-                $message = new Message();
-                $message->message = $messageEncoded;
-                $message->contact = $contact;
-                $message->message_count = $smsCount;
-                $message->school_code = $school_code;
-                $message->save();
-            }
+            return redirect()->route('message', $school_code)->with('success', 'SMS sent successfully');
         }
 
-        return redirect()->route('message', $school_code)->with('success', 'SMS sent successfully');
     }
 
 

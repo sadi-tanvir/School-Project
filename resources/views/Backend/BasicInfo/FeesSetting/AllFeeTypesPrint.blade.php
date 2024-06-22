@@ -56,8 +56,8 @@
             <div class="space-y-1">
                 <div class="mt-10">
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            <thead class="text-xs text-white uppercase bg-blue-600 dark:bg-gray-700 dark:text-gray-400">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                            <thead class="text-xs text-white uppercase bg-blue-600">
                                 <tr>
                                     <th scope="col" class="px-6 py-3 bg-blue-500">
                                         SL
@@ -76,9 +76,9 @@
                             <tbody>
                                 @foreach ($feeTypes as $key => $feeType)
                                     <tr
-                                        class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                                        class="odd:bg-white even:bg-gray-50">
                                         <th scope="row"
-                                            class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap">
                                             {{ $key + 1 }}
                                         </th>
                                         <td class="px-6 py-4">

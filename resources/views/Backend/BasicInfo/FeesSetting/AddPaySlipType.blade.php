@@ -250,10 +250,10 @@
                                 <div class="flex items-start mb-5">
                                     <div class="flex items-center h-5">
                                         <input id="status" name="status" type="checkbox" value="true" checked
-                                            class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300   dark:focus:ring-blue-600 " />
+                                            class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300" />
                                     </div>
                                     <label for="status"
-                                        class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Active
+                                        class="ms-2 text-sm font-medium text-gray-900">Active
                                         Status</label>
                                 </div>
                             </div>
@@ -261,7 +261,7 @@
                             <div
                                 class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b ">
                                 <button type="submit"
-                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
+                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Save</button>
                                 <button data-modal-hide="add_pay_slip_type_modal" type="button"
                                     class="py-2.5 px-5 ms-3 text-sm font-medium text-white focus:outline-none bg-red-500 rounded-lg border border-red-200 hover:bg-red-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-red-100 ">Close</button>
                             </div>
@@ -302,7 +302,7 @@
                         <tbody>
                             @foreach ($allPaySlipTypes as $key => $slipType)
                                 <tr
-                                    class="border-b dark:border-gray-700">
+                                    class="border-b">
                                     <td class="px-6 py-4 text-center">
                                         {{ $key + 1 }}
                                     </td>
@@ -390,11 +390,11 @@
                                                                         <input id="status" name="status"
                                                                             type="checkbox"
                                                                             value="{{ $slipType->status }}"
-                                                                            class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300   dark:focus:ring-blue-600 "
+                                                                            class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300"
                                                                             {{ $slipType->status == 'active' ? 'checked' : '' }} />
                                                                     </div>
                                                                     <label for="status"
-                                                                        class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Active
+                                                                        class="ms-2 text-sm font-medium text-gray-900">Active
                                                                         Status</label>
                                                                 </div>
                                                             </div>
@@ -402,7 +402,7 @@
                                                             <div
                                                                 class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b ">
                                                                 <button type="submit"
-                                                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update</button>
+                                                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Update</button>
                                                                 <button
                                                                     data-modal-hide="update_fee_type_modal_{{ $slipType->id }}"
                                                                     type="button"

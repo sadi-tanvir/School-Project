@@ -240,7 +240,7 @@
                                             Type Name:</label>
                                         <input type="text" id="fee_type_name" name="fee_type_name"
                                             value="{{ old('fee_type_name') }}"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5   dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:text-xs"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder:text-xs"
                                             placeholder="type fee name here" />
                                         @if ($errors->has('fee_type_name'))
                                             <span class="text-red-500">{{ $errors->first('fee_type_name') }}</span>
@@ -251,7 +251,7 @@
                                             class="block mb-2 text-sm font-medium text-gray-900 ">Position:</label>
                                         <input type="number" id="position" name="position" value="{{ old('position') }}"
 
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5   dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500 placeholder:text-xs"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder:text-xs"
                                             placeholder="type position here" />
 
                                         @if ($errors->has('position'))
@@ -261,10 +261,10 @@
                                     <div class="flex items-start mb-5">
                                         <div class="flex items-center h-5">
                                             <input id="status" name="status" type="checkbox" value="true" checked
-                                                class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300   dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" />
+                                                class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300" />
                                         </div>
                                         <label for="status"
-                                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Active
+                                            class="ms-2 text-sm font-medium text-gray-900">Active
                                             Status</label>
                                     </div>
                                 </div>
@@ -272,7 +272,7 @@
                                 <div
                                     class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b ">
                                     <button type="submit"
-                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
+                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Save</button>
                                     <button data-modal-hide="add_fee_type_modal" type="button"
                                         class="py-2.5 px-5 ms-3 text-sm font-medium text-white focus:outline-none bg-red-500 rounded-lg border border-red-200 hover:bg-red-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-red-100 ">Close</button>
                                 </div>
@@ -328,7 +328,7 @@
                         <tbody class="">
                             @foreach ($feeTypes as $key => $feeType)
                                 <tr
-                                    class="border-b dark:border-gray-700">
+                                    class="border-b">
                                     <th scope="row"
                                         class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                         {{ $key + 1 }}
@@ -409,7 +409,7 @@
                                                                     <input type="text" id="fee_type_name"
                                                                         name="fee_type_name"
                                                                         value="{{ $feeType->fee_type_name }}"
-                                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5   dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                                                         placeholder="" />
                                                                     @if ($errors->has('fee_type_name'))
                                                                         <span
@@ -421,7 +421,7 @@
                                                                         class="block mb-2 text-sm font-medium text-gray-900 ">Position</label>
                                                                     <input type="number" id="position" name="position"
                                                                         value="{{ $feeType->position }}"
-                                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5   dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
                                                                     @if ($errors->has('position'))
                                                                         <span
                                                                             class="text-red-500">{{ $errors->first('position') }}</span>
@@ -432,11 +432,11 @@
                                                                         <input id="status" name="status"
                                                                             type="checkbox"
                                                                             value="{{ $feeType->status }}"
-                                                                            class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300   dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+                                                                            class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300"
                                                                             {{ $feeType->status == 'active' ? 'checked' : '' }} />
                                                                     </div>
                                                                     <label for="status"
-                                                                        class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Active
+                                                                        class="ms-2 text-sm font-medium text-gray-900">Active
                                                                         Status</label>
                                                                 </div>
                                                             </div>
@@ -444,7 +444,7 @@
                                                             <div
                                                                 class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b ">
                                                                 <button type="submit"
-                                                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update</button>
+                                                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Update</button>
                                                                 <button
                                                                     data-modal-hide="update_fee_type_modal_{{ $feeType->id }}"
                                                                     type="button"

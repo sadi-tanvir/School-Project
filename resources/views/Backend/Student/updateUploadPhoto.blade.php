@@ -250,7 +250,7 @@
                     <select
                         id="class"
                         name="class"
-                        class="block w-full rounded-md border-0 border-gray-300 bg-white p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700   dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                        class="block w-full rounded-md border-0 border-gray-300 bg-white p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600     dark:focus:border-blue-500 dark:focus:ring-blue-500"
                     >
                         <option disabled selected>Choose class</option>
                         @foreach ($classes as $class)

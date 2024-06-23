@@ -43,21 +43,21 @@ Update Student
                     class="block mb-2 text-sm font-medium text-gray-900  ">NEDUBD Student ID</label>
                 <input type="text" readOnly value="{{$student->nedubd_student_id }}" name="nedubd_student_id"
                     id="nedubd_student_id"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="" />
             </div>
             <div>
                 <label for="student_id" class="block mb-2 text-sm font-medium text-gray-900  ">Institute
                     Student ID</label>
                 <input type="text" name="student_id" id="student_id" value="{{$student->student_id}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Student Id" />
             </div>
             <div>
                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900  ">
                     Name</label>
                 <input type="text" name="name" id="name" value="{{$student->name}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The  Name" required />
             </div>
             <div>
@@ -74,7 +74,7 @@ Update Student
                         </svg>
                     </div>
                     <input datepicker datepicker-autohide type="text" name="birth_date" value="{{$student->birth_date}}"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-3.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-3.5   dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Select date" required>
                 </div>
 
@@ -85,14 +85,14 @@ Update Student
                 <label for="website" class="block mb-2 text-sm font-medium text-gray-900  ">student
                     Roll</label>
                 <input type="text" name="student_roll" id="website" value="{{$student->student_roll}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="student_roll" />
             </div>
             <div>
                 <label for="classess" class="block mb-2 text-sm font-medium text-gray-900  ">Class
                     Name</label>
                 <select id="classess" name="Class_name" value="{{$student->Class_name}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required>
                     <option selected>{{$student->Class_name}}</option>
                     @foreach($classes as $class)
@@ -104,7 +104,7 @@ Update Student
             <div>
                 <label for="phone" class="block mb-2 text-sm font-medium text-gray-900  ">group</label>
                 <select id="countries" name="group" value="{{$student->group}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required>
                     <option selected>{{$student->group}}</option>
                     @foreach($groups as $group)
@@ -118,7 +118,7 @@ Update Student
                 <label for="website"
                     class="block mb-2 text-sm font-medium text-gray-900  ">section</label>
                 <select id="countries" name="section" value="{{$student->section}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required>
                     <option selected>{{$student->section}}</option>
                     @foreach($sections as $section)
@@ -130,7 +130,7 @@ Update Student
             <div>
                 <label for="visitors" class="block mb-2 text-sm font-medium text-gray-900  ">shift</label>
                 <select id="countries" name="shift" value="{{$student->shift}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required>
                     <option selected>{{$student->shift}}</option>
                     @foreach($shifts as $shift)
@@ -143,7 +143,7 @@ Update Student
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900  ">category (Day
                     care & general)</label>
                 <select id="countries" name="category" value="{{$student->category}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required>
                     <option selected>{{$student->category}}</option>
                     @foreach($categories as $category)
@@ -156,7 +156,7 @@ Update Student
                 <label for="password" class="block mb-2 text-sm font-medium text-gray-900  ">Academic
                     Year</label>
                 <select name="year" value="{{$student->year}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required>
                     <option>{{$student->year}}</option>
                     @foreach($years as $year)
@@ -169,7 +169,7 @@ Update Student
                 <label for="confirm_password"
                     class="block mb-2 text-sm font-medium text-gray-900  ">Gender</label>
                 <select id="countries" name="gender" value="{{$student->gender}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required>
                     <option selected>{{$student->gender}}</option>
                     <option>Male</option>
@@ -180,7 +180,7 @@ Update Student
                 <label for="email"
                     class="block mb-2 text-sm font-medium text-gray-900  ">Religious</label>
                 <select id="countries" name="religious" value="{{$student->religious}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required>
                     <option selected>{{$student->religious}}</option>
                     <option>Islam</option>
@@ -193,7 +193,7 @@ Update Student
                 <label for="password"
                     class="block mb-2 text-sm font-medium text-gray-900  ">Nationality</label>
                 <select id="countries" name="nationality" value="{{$student->nationality}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected>Bangladesh</option>
 
 
@@ -203,7 +203,7 @@ Update Student
                 <label for="confirm_password"
                     class="block mb-2 text-sm font-medium text-gray-900  ">Blood_group</label>
                 <select id="countries" name="blood_group" value="{{$student->blood_group}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected>{{$student->blood_group}}</option>
                     <option>A+</option>
                     <option>A-</option>
@@ -218,7 +218,7 @@ Update Student
             <div class="mb-6">
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900  ">Session</label>
                 <select id="countries" name="session" value="{{$student->session}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected>{{$student->session}}</option>
                     @foreach($sessions as $session)
                         <option>{{$session->academic_session_name}}</option>
@@ -229,7 +229,7 @@ Update Student
                 <label for="password" class="block mb-2 text-sm font-medium text-gray-900  ">Choose
                     Status</label>
                 <select name="status" value="{{$student->status}}" id="status"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-primary-500 focus:border-primary-500 block w-full p-3.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400   dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-primary-500 focus:border-primary-500 block w-full p-3.5 dark:bg-gray-600 dark:border-gray-500    dark:focus:ring-primary-500 dark:focus:border-primary-500">
                     <option selected="">{{$student->status}}</option>
                     <option value="active">Active</option>
                     <option value="in active">In active</option>
@@ -243,7 +243,7 @@ Update Student
                 <label class="block mb-2 text-sm font-medium text-gray-900  " for="user_avatar">Upload
                     Picture</label>
                 <input name="file" 
-                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-md cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-md cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none  dark:border-gray-600 "
                     aria-describedby="user_avatar_help" id="user_avatar" type="file">
                 <div>
                     <img src="{{ asset($student->image) }}" alt="Sign Image" class="w-[100px]" />
@@ -263,7 +263,7 @@ Update Student
                     </div>
                     <input datepicker datepicker-autohide type="text" name="admission_date"
                         value="{{$student->admission_date}}"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-3.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-3.5   dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Select date">
                 </div>
             </div>
@@ -272,7 +272,7 @@ Update Student
                     No</label>
                 <div class="relative max-w-sm">
                     <input type="text" name="mobile_no" value="{{$student->mobile_no}}"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-3.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-3.5   dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Mobile no">
                 </div>
             </div>
@@ -285,7 +285,7 @@ Update Student
                 <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900  ">Father's
                     name</label>
                 <input type="text" name="father_name" value="{{$student->father_name}}" id="first_name"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The  Name" />
             </div>
             <div>
@@ -293,7 +293,7 @@ Update Student
                     Mobile
                 </label>
                 <input type="text" name="father_mobile" value="{{$student->father_mobile}}" id="last_name"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The Mobile No" />
             </div>
             <div>
@@ -301,7 +301,7 @@ Update Student
                     Occupation
                 </label>
                 <input type="text" name="father_occupation" value="{{$student->father_occupation}}" id="first_name"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The Occupation" />
             </div>
             <div>
@@ -309,7 +309,7 @@ Update Student
                     Yearly Income
                 </label>
                 <input type="text" name="father_income" id="last_name" value="{{$student->father_income}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The Income" />
             </div>
             <div>
@@ -317,7 +317,7 @@ Update Student
                     NID
                 </label>
                 <input type="text" name="father_nid" id="last_name" value="{{$student->father_nid}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The NID" />
             </div>
             <div>
@@ -334,7 +334,7 @@ Update Student
                     </div>
                     <input datepicker datepicker-autohide type="text" name="father_birth_date"
                         value="{{$student->father_birth_date}}"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-3.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-3.5   dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Select date">
                 </div>
             </div>
@@ -343,7 +343,7 @@ Update Student
                 <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900  ">Mother's
                     Name</label>
                 <input type="text" name="mother_name" id="first_name" value="{{$student->mother_name}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The  Name" />
             </div>
             <div>
@@ -351,7 +351,7 @@ Update Student
                     Number
                 </label>
                 <input type="text" name="mother_number" id="last_name" value="{{$student->mother_number}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The Number" />
             </div>
             <div>
@@ -359,7 +359,7 @@ Update Student
                     occupation
                 </label>
                 <input type="text" name="mother_occupation" id="first_name" value="{{$student->mother_occupation}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The occupation" />
             </div>
             <div>
@@ -367,7 +367,7 @@ Update Student
                     NID
                 </label>
                 <input type="text" name="mother_nid" id="last_name" value="{{$student->mother_nid}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The NID" />
             </div>
             <div>
@@ -384,7 +384,7 @@ Update Student
                     </div>
                     <input datepicker datepicker-autohide type="text" name="mother_birth_date"
                         value="{{$student->mother_birth_date}}"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-3.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-3.5   dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Select date">
                 </div>
             </div>
@@ -393,7 +393,7 @@ Update Student
                     Income
                 </label>
                 <input type="text" name="mother_income" id="last_name" value="{{$student->mother_income}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The Mother's Income" />
             </div>
         </div>
@@ -405,7 +405,7 @@ Update Student
                 <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900  ">Present
                     Village</label>
                 <input type="text" name="present_village" id="first_name" value="{{$student->present_village}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The Village Name" />
             </div>
             <div>
@@ -413,7 +413,7 @@ Update Student
                     Post Office
                 </label>
                 <input type="text" name="present_post_office" id="last_name" value="{{$student->present_post_office}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The Post Office" />
             </div>
             <div>
@@ -421,7 +421,7 @@ Update Student
                     Country
                 </label>
                 <input type="text" name="present_country" id="first_name" value="{{$student->present_country}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The Country Name" />
             </div>
             <div>
@@ -429,14 +429,14 @@ Update Student
                     Zip Code/Post_code
                 </label>
                 <input type="text" name="present_zip_code" id="last_name" value="{{$student->present_zip_code}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The Present Zip Code/Post_code" />
             </div>
             <div>
                 <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900  ">present
                     District</label>
                 <input type="text" name="present_district" id="first_name" value="{{$student->present_district}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The District Name" />
             </div>
             <div>
@@ -445,7 +445,7 @@ Update Student
                 </label>
                 <input type="text" name="present_police_station" id="last_name"
                     value="{{$student->present_police_station}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The Police Station Name" />
             </div>
 
@@ -459,7 +459,7 @@ Update Student
                 <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900  ">Parmanent
                     Village</label>
                 <input type="text" name="parmanent_village" id="first_name" value="{{$student->parmanent_village}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The Village Name" />
             </div>
             <div>
@@ -468,7 +468,7 @@ Update Student
                 </label>
                 <input type="text" name="parmanent_post_office" id="last_name"
                     value="{{$student->parmanent_post_office}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The Post Office" />
             </div>
             <div>
@@ -476,7 +476,7 @@ Update Student
                     Country
                 </label>
                 <input type="text" name="parmanent_country" id="first_name" value="{{$student->parmanent_country}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The Country Name" />
             </div>
             <div>
@@ -484,14 +484,14 @@ Update Student
                     Zip Code/Post_code
                 </label>
                 <input type="text" name="parmanent_zip_code" id="last_name" value="{{$student->parmanent_zip_code}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The Present Zip Code/Post_code" />
             </div>
             <div>
                 <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900  ">parmanent
                     District</label>
                 <input type="text" name="parmanent_district" id="first_name" value="{{$student->parmanent_district}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The District Name" />
             </div>
             <div>
@@ -500,7 +500,7 @@ Update Student
                 </label>
                 <input type="text" name="parmanent_police_station" id="last_name"
                     value="{{$student->parmanent_police_station}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The Police Station Name" />
             </div>
 
@@ -517,7 +517,7 @@ Update Student
 
                 </label>
                 <input type="text" name="guardian_name" id="last_name" value="{{$student->guardian_name}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The Police Station Name" />
             </div>
             <div>
@@ -525,7 +525,7 @@ Update Student
                     Address
                 </label>
                 <input type="text" name="guardian_address" id="last_name" value="{{$student->guardian_address}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The Police Station Name" />
             </div>
         </div>
@@ -541,7 +541,7 @@ Update Student
 
                 </label>
                 <input type="text" name="last_school_name" id="last_name" value="{{$student->last_school_name}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The Last School Name" />
             </div>
             <div>
@@ -550,7 +550,7 @@ Update Student
 
                 </label>
                 <input type="text" name="last_class_name" id="last_name" value="{{$student->last_class_name}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The Last Class Name" />
             </div>
             <div>
@@ -559,14 +559,14 @@ Update Student
 
                 </label>
                 <input type="text" name="last_result" id="last_name" value="{{$student->last_result}}"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The Last Result" />
             </div>
             <div>
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900  ">Last
                     Passing year
                     <input type="text" name="last_passing_year" id="last_name" value="{{$student->last_passing_year}}"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Enter The Last Passing year" />
             </div>
         </div>
@@ -579,21 +579,21 @@ Update Student
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900  ">Role
                 </label>
                 <input type="text" value="student" name="role" id="last_name"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The Police Station Name" />
             </div>
             <div class="hidden">
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900  ">Action
                 </label>
                 <input type="text" value="approved" name="action" id="last_name"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The Police Station Name" />
             </div>
             <div class="hidden">
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900  ">School Code
                 </label>
                 <input type="text" value="{{$school_code}}" name="school_code" id="last_name"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter The Police Station Name" />
             </div>
         </div>

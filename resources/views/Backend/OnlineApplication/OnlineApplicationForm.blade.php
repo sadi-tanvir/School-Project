@@ -98,7 +98,7 @@
                         <div class="flex flex-col ">
                             <div class="flex items-center mb-px">
                                 <input id="default-checkbox" type="checkbox" value=""
-                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2  dark:border-gray-600">
                                 <label for="default-checkbox"
                                     class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">জন্মনিবন্ধনপত্র
                                     নম্বর</label>
@@ -191,7 +191,7 @@
                             <label for="mobile_number" class="mb-2 text-sm font-medium text-gray-900 ">শিক্ষার্থীর ছবি:
                                 <span class="text-red-500">*</span></label>
                             <input
-                                class="w-5/6 block text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                class="w-5/6 block text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none  dark:border-gray-600 "
                                 id="excel_file" type="file">
                         </div>
                     </div>
@@ -344,7 +344,7 @@
                     <h2 class="font-semibold">স্থায়ী ঠিকানাঃ</h2>
                     <div class="flex items-center">
                         <input id="default-checkbox" type="checkbox" value=""
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2  dark:border-gray-600">
                         <label for="default-checkbox"
                             class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Same as</label>
                     </div>

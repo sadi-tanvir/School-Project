@@ -63,7 +63,7 @@
                             <label for="excel_file" class="ml-auto mb-2 text-sm font-medium text-gray-900 ">এক্সেল ফাইল :</label>
 
                             <input
-                                class="col-span-3 w-5/6 block text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                class="col-span-3 w-5/6 block text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none  dark:border-gray-600 "
                                 id="excel_file" type="file">
 
                         </div>

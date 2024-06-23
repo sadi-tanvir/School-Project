@@ -117,6 +117,7 @@ class ExamProcessController extends Controller
                 // dd($count);
                 $totalMarks = 0;
                 $totalGPA = 0;
+                $GPA=null;
                 foreach ($singleStudentTotalMarks as $value) {
                     if ($value->grade === "F") {
                         $totalGPA = 0;
@@ -136,7 +137,7 @@ class ExamProcessController extends Controller
 
                     $GPA = $totalGPA / $count;
                 }
-                $GPA = number_format($GPA, 2);
+                $MarkGPA = number_format($GPA, 2);
                 $existingRecord->update([
                     'class' => $class,
                     'group' => $group,
@@ -144,7 +145,7 @@ class ExamProcessController extends Controller
                     'merit_status' => $merit_status,
                     'student_roll' => $singleStudent->student_roll,
                     'total_marks' => $totalMarks,
-                    'total_gpa' => $GPA,
+                    'total_gpa' => $MarkGPA,
                     'status' => 'active',
                     'action' => 'approved',
                     'school_code' => $school_code,
@@ -159,6 +160,7 @@ class ExamProcessController extends Controller
                 // dd($count);
                 $totalMarks = 0;
                 $totalGPA = 0;
+                $GPA=null;
                 foreach ($singleStudentTotalMarks as $value) {
                     if ($value->grade === "F") {
                         $totalGPA = 0;
@@ -178,7 +180,7 @@ class ExamProcessController extends Controller
 
                     $GPA = $totalGPA / $count;
                 }
-                $GPA = number_format($GPA, 2);
+                $markGPA = number_format($GPA, 2);
                 ExamProcess::create([
                     'class' => $class,
                     'group' => $group,
@@ -188,7 +190,7 @@ class ExamProcessController extends Controller
                     'merit_status' => $merit_status,
                     'student_roll' => $singleStudent->student_roll,
                     'total_marks' => $totalMarks,
-                    'total_gpa' => $GPA,
+                    'total_gpa' => $markGPA,
                     'year' => $year,
                     'status' => 'active',
                     'action' => 'approved',

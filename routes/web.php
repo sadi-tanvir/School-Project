@@ -810,6 +810,8 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::post('/downloadAdmit/{schoolCode}', [PrintAdmitCardController::class, "downloadAdmit"])->name('downloadAdmitCard');
     Route::post('/print/get-groups/{schoolCode}', [PrintAdmitCardController::class, 'printGroups'])->name('print.get-groups');
     Route::post('/print/get-sections/{schoolCode}', [PrintAdmitCardController::class, 'printSections'])->name('print.get-sections');
+    Route::get('/get-student-ids/{schoolCode}', [PrintAdmitCardController::class, 'getStudentIds'])->name('getStudentIds');
+
 
      //Print Seat Plan
     Route::get('/printSeatPlan/{schoolCode}', [PrintSeatPlanController::class, "printSeatPlan"])->name('printSeatPlan');

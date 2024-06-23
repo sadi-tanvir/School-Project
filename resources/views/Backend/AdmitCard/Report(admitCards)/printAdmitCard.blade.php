@@ -123,12 +123,10 @@ Student Admit Card
                     <label for="last_name" class="mb-2 block text-sm font-medium text-gray-900">Student ID:</label>
                 </div>
                 <div class="">
-                    <select id="countries" name="id"
+                    <select id="student_id" name="id"
                         class="block w-full rounded-md border-0 bg-white p-3.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500">
-                        <option selected>Choose Student ID</option>
-                        @foreach ($studentId as $student)
-                            <option>{{ $student->student_id }}</option>
-                        @endforeach
+                        <option disabled selected>Choose Student ID</option>
+                        
                     </select>
                 </div>
             </div>
@@ -142,14 +140,10 @@ Student Admit Card
                         <option selected>Choose Exam Name</option>
                         @foreach ($examName as $exam)
                             <option>{{ $exam->class_exam_name }}</option>
-
                         @endforeach
                     </select>
                 </div>
             </div>
-
-
-
             <div class="mb-5">
                 <div class=" ">
                     <label for="last_name" class="mb-2 block text-sm font-medium text-gray-900">YEAR :</label>
@@ -213,6 +207,64 @@ Student Admit Card
 </div>
 @endsection
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+   $(document).ready(function () {
+    // Variables to store the selected values
+    var className, groupName, sectionName;
+
+    // Event listeners to capture the selected values
+    $('#class').change(function () {
+        className = $(this).val();
+        fetchStudentIds();
+    });
+
+    $('#group').change(function () {
+        groupName = $(this).val();
+        fetchStudentIds();
+    });
+
+    $('#section').change(function () {
+        sectionName = $(this).val();
+        fetchStudentIds();
+    });
+    function fetchStudentIds() {
+        var schoolCode = "{{ $school_code }}"; 
+
+        if (className && groupName && sectionName) {
+            $.ajax({
+                url: "/dashboard/get-student-ids/" + schoolCode,
+                type: "get",
+                data: {
+                    class: className,
+                    group: groupName,
+                    section: sectionName
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (data) {
+                    $('#student_id').empty();
+                    $('#student_id').append('<option disabled selected>Choose Student ID</option>');
+                    $.each(data, function (index, value) {
+                        $('#student_id').append('<option value="' + value + '">' + value + '</option>');
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching student IDs:", status, error);
+                }
+            });
+        } else {
+            $('#student_id').empty();
+            $('#student_id').append('<option disabled selected>Choose Student ID</option>');
+        }
+    }
+});
+
+
+
+</script>
+
 <script>
     $(document).ready(function () {
         $('#class').change(function () {

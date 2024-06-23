@@ -382,7 +382,10 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/headwiseSummary/getPayslipReport/{schoolCode}', [HeadWiseSummaryController::class, 'GetPaySlipReport'])->name('headwiseSummary.getReports');
 
     Route::get('/transferToAccounts/{schoolCode}', [TransferToAccountsController::class, 'transferToAccounts'])->name('transferToAccounts');
+    // Paid Invoice
     Route::get('/paidInvoice/{schoolCode}', [PaidInvoiceController::class, 'paidInvoice'])->name('paidInvoice');
+    Route::get('/paidInvoice/voucherId/printInvoice/{schoolCode}', [PaidInvoiceController::class, 'PrintInvoiceWithVoucherId'])->name('printPaidInvoice.voucherId');
+
     Route::get('/othTransInquiry/{schoolCode}', [OuthTransInquiryController::class, 'othTransInquiry'])->name('othTransInquiry');
     Route::get('/ListOfdueOrPay/{schoolCode}', [ListOfDueOrPayController::class, 'ListOfdueOrPay'])->name('ListOfdueOrPay');
     Route::get('/listOfHeadWise/{schoolCode}', [ListOfHeadWiseController::class, 'listOfHeadWise'])->name('listOfHeadWise');
@@ -811,7 +814,7 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::post('/print/get-groups/{schoolCode}', [PrintAdmitCardController::class, 'printGroups'])->name('print.get-groups');
     Route::post('/print/get-sections/{schoolCode}', [PrintAdmitCardController::class, 'printSections'])->name('print.get-sections');
 
-     //Print Seat Plan
+    //Print Seat Plan
     Route::get('/printSeatPlan/{schoolCode}', [PrintSeatPlanController::class, "printSeatPlan"])->name('printSeatPlan');
     Route::post('/downloadPrint/{schoolCode}', [PrintSeatPlanController::class, "downloadPrint"])->name('downloadPrint');
 

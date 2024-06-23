@@ -52,7 +52,7 @@
             </div>
 
 
-            {{-- All fee types --}}
+            {{-- Individual Payslip --}}
             <div class="space-y-2 mt-10">
                 <div class="w-full flex justify-between items-center">
                     <div>
@@ -81,7 +81,7 @@
                             <tbody>
                                 @foreach ($individualPaySlipsData as $key => $PaySlip)
                                     <tr
-                                        class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 text-center">
+                                        class="odd:bg-white even:bg-gray-50 border-b text-center">
                                         <td class="px-6 py-4">
                                             {{ $key + 1 }}
                                         </td>
@@ -94,9 +94,10 @@
                                     </tr>
                                 @endforeach
                                 <tr
-                                    class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 text-center">
+                                    class="odd:bg-white even:bg-gray-50 border-b text-center">
                                     <th scope="row"
                                         class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap  ">
+
                                     </th>
                                     <td class="px-6 py-4 text-end font-bold  text-lg">
                                         Total <span class="ml-5">=</span>

@@ -42,16 +42,16 @@ Generate Payslip
             <div class="grid grid-cols-12 items-center gap-5">
                 {{-- month --}}
                 <div class="">
-                    <label for="month" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Month
+                    <label for="month" class="block mb-2 text-sm font-medium text-gray-900  ">Month
                         :</label>
-                    <select id="month" name="month" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <select id="month" name="month" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option disabled selected>Select</option>
                     </select>
                 </div>
 
                 {{-- year --}}
                 <div class="">
-                    <label for="year" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year
+                    <label for="year" class="block mb-2 text-sm font-medium text-gray-900  ">Year
                         :</label>
                     <input type="text" value="" name="year" id="year" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full" placeholder="" />
                 </div>
@@ -63,7 +63,7 @@ Generate Payslip
 
                 {{-- last pay date --}}
                 <div class="">
-                    <label for="last_pay_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last
+                    <label for="last_pay_date" class="block mb-2 text-sm font-medium text-gray-900  ">Last
                         Pay
                         Date:</label>
                     <input type="date" value="" name="last_pay_date" id="last_pay_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full" placeholder="" />
@@ -71,8 +71,8 @@ Generate Payslip
 
                 {{-- class --}}
                 <div class="">
-                    <label for="class" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Class:</label>
-                    <select id="class" name="class" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <label for="class" class="block mb-2 text-sm font-medium text-gray-900  ">Class:</label>
+                    <select id="class" name="class" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option disabled selected>Select</option>
                         @foreach ($classes as $class)
                         <option value="{{ $class->class_name }}">{{ $class->class_name }}</option>
@@ -82,40 +82,40 @@ Generate Payslip
 
                 {{-- Group --}}
                 <div class="">
-                    <label for="group" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Group:</label>
-                    <select id="group" name="group" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <label for="group" class="block mb-2 text-sm font-medium text-gray-900  ">Group:</label>
+                    <select id="group" name="group" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option selected>Select</option>
                     </select>
                 </div>
 
                 {{-- PaySlip --}}
                 <div class="">
-                    <label for="pay_slip_type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PaySlip
+                    <label for="pay_slip_type" class="block mb-2 text-sm font-medium text-gray-900  ">PaySlip
                         :</label>
-                    <select id="pay_slip_type" name="pay_slip_type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <select id="pay_slip_type" name="pay_slip_type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option disabled selected>Select</option>
                     </select>
                 </div>
 
                 {{-- Section --}}
                 <div class="">
-                    <label for="section" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Section:</label>
-                    <select id="section" name="section" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <label for="section" class="block mb-2 text-sm font-medium text-gray-900  ">Section:</label>
+                    <select id="section" name="section" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option selected>Select</option>
                     </select>
                 </div>
 
                 {{-- category --}}
                 <div class="">
-                    <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category:</label>
-                    <select id="category" name="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <label for="category" class="block mb-2 text-sm font-medium text-gray-900  ">Category:</label>
+                    <select id="category" name="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option selected>Select</option>
                     </select>
                 </div>
 
                 {{-- Session --}}
                 <div class="">
-                    <label for="session" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Session
+                    <label for="session" class="block mb-2 text-sm font-medium text-gray-900  ">Session
                         :</label>
                     <select id="session" name="session" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1">
                         <option selected>Select</option>
@@ -129,9 +129,9 @@ Generate Payslip
                 {{-- status --}}
                 {{-- <div class="">
                         <label for="status"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status:</label>
+                            class="block mb-2 text-sm font-medium text-gray-900  ">Status:</label>
                         <select id="status" name="status"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option selected>Select</option>
                             <option value="New">New</option>
                             <option value="Old">Old</option>
@@ -140,9 +140,9 @@ Generate Payslip
 
                 {{-- academic_year --}}
                 <div class="">
-                    <label for="academic_year" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year
+                    <label for="academic_year" class="block mb-2 text-sm font-medium text-gray-900  ">Year
                         :</label>
-                    <select id="academic_year" name="academic_year" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <select id="academic_year" name="academic_year" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option selected>Select</option>
                     </select>
                 </div>
@@ -166,7 +166,7 @@ Generate Payslip
             <div class="">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-white uppercase bg-blue-600 dark:bg-gray-700 dark:text-gray-400">
+                        <thead class="text-xs text-white uppercase bg-blue-600  dark:text-gray-400">
                             <tr id="table_header_row">
 
                             </tr>

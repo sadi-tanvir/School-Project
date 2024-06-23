@@ -252,8 +252,7 @@
                                                             <div class="p-4 md:p-5 space-y-4">
 
                                                                 <div class="mb-5">
-                                                                    <label for="pay_slip_type_name"
-                                                                        class="block mb-2 text-sm font-medium text-gray-900 ">Waiver
+                                                                    <label for="pay_slip_type_name"                                                                        class="block mb-2 text-sm font-medium text-gray-900 ">Waiver
                                                                         Type Name</label>
                                                                     <input type="text" id="waiver_type_name"
                                                                         name="waiver_type_name"

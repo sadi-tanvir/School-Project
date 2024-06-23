@@ -12,7 +12,7 @@
                 <div class="space-y-2">
                     <label for="class_name" class="ml-auto mb-2 text-sm font-medium text-gray-900 ">Class Name:</label>
                     <select id="class_name" name="class_name"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option selected>Class</option>
                         <option value="US">United States</option>
                         <option value="CA">Canada</option>
@@ -23,7 +23,7 @@
                 <div class="space-y-2">
                     <label for="group" class="ml-auto mb-2 text-sm font-medium text-gray-900 ">Group: </label>
                     <select id="group" name="group"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option selected>Select</option>
                         <option value="US">United States</option>
                         <option value="CA">Canada</option>
@@ -34,7 +34,7 @@
                 <div class="space-y-2">
                     <label for="section" class="ml-auto mb-2 text-sm font-medium text-gray-900 ">Section:</label>
                     <select id="section" name="section"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option selected>Select</option>
                         <option value="US">United States</option>
                         <option value="CA">Canada</option>
@@ -45,7 +45,7 @@
                 <div class="space-y-2">
                     <label for="shift" class="ml-auto mb-2 text-sm font-medium text-gray-900 ">Shift:</label>
                     <select id="shift" name="shift"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option selected>Select</option>
                         <option value="US">United States</option>
                         <option value="CA">Canada</option>
@@ -56,7 +56,7 @@
                 <div class="space-y-2">
                     <label for="subject" class="ml-auto mb-2 text-sm font-medium text-gray-900 ">Subject:</label>
                     <select id="subject" name="subject"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option selected>Select</option>
                         <option value="US">United States</option>
                         <option value="CA">Canada</option>
@@ -67,7 +67,7 @@
                 <div class="space-y-2">
                     <label for="exam" class="ml-auto mb-2 text-sm font-medium text-gray-900 ">Exam:</label>
                     <select id="exam" name="exam"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option selected>Select</option>
                         <option value="US">United States</option>
                         <option value="CA">Canada</option>
@@ -78,7 +78,7 @@
                 <div class="space-y-2">
                     <label for="type" class="ml-auto mb-2 text-sm font-medium text-gray-900 ">Type:</label>
                     <select id="type" name="type"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option selected>Select</option>
                         <option value="US">United States</option>
                         <option value="CA">Canada</option>
@@ -89,7 +89,7 @@
                 <div class="space-y-2">
                     <label for="year" class="ml-auto mb-2 text-sm font-medium text-gray-900 ">Year:</label>
                     <select id="year" name="year"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option selected>Select</option>
                         <option value="US">United States</option>
                         <option value="CA">Canada</option>

@@ -73,7 +73,7 @@
             <div class="">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-white uppercase bg-blue-600 dark:bg-gray-700 dark:text-gray-400">
+                        <thead class="text-xs text-white uppercase bg-blue-600  dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
                                     SL#
@@ -99,13 +99,13 @@
                             <tr
                                 class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                                 <th scope="row"
-                                    class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap  ">
                                     1
                                 </th>
                                 <td class="px-6 py-4">
                                     <div class="">
                                         <select id="group" name="group"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected>Select</option>
                                             <option value="US">United States</option>
                                             <option value="CA">Canada</option>
@@ -117,7 +117,7 @@
                                 <td class="px-6 py-4">
                                     <div class="">
                                         <select id="group" name="group"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected>Select</option>
                                             <option value="US">United States</option>
                                             <option value="CA">Canada</option>
@@ -129,7 +129,7 @@
                                 <td class="px-6 py-4">
                                     <div class="">
                                         <select id="group" name="group"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected>Select</option>
                                             <option value="US">United States</option>
                                             <option value="CA">Canada</option>
@@ -170,7 +170,7 @@
             <div class="">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-white uppercase bg-blue-600 dark:bg-gray-700 dark:text-gray-400">
+                        <thead class="text-xs text-white uppercase bg-blue-600  dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
                                     CHEQUE #
@@ -199,7 +199,7 @@
                             <tr
                                 class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                                 <th scope="row"
-                                    class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap  ">
                                     <input type="number" value="" name="" id=""
                                         class="col-span-3 bg-gray-50 border border-gray-300 px-5 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-5/6"
                                         placeholder="" />
@@ -207,7 +207,7 @@
                                 <td class="px-6 py-4">
                                     <div class="">
                                         <select id="group" name="group"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected>Select</option>
                                             <option value="US">United States</option>
                                             <option value="CA">Canada</option>
@@ -219,7 +219,7 @@
                                 <td class="px-6 py-4">
                                     <div class="">
                                         <select id="group" name="group"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected>Select</option>
                                             <option value="US">United States</option>
                                             <option value="CA">Canada</option>
@@ -246,7 +246,7 @@
                                 <td class="px-6 py-4">
                                     <div class="">
                                         <select id="group" name="group"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             <option selected>CHEQUE</option>
                                             <option value="US">United States</option>
                                             <option value="CA">Canada</option>

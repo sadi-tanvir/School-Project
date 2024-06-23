@@ -186,13 +186,13 @@
 
                 <button
                     type="button"
-                    class="mb-2 me-2 rounded-md bg-blue-700 px-10 py-3.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    class="mb-2 me-2 rounded-md bg-blue-700 px-10 py-3.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300      "
                 >
                     Get Data
                 </button>
             </div>
         </form>
-        <table class="w-full text-left text-sm text-black rtl:text-right dark:text-blue-100">
+        <table class="w-full text-left text-sm text-black rtl:text-right  ">
             <thead
                 class="border-b border-blue-400 bg-blue-600 text-xs uppercase text-white"
                 scope="col"
@@ -222,7 +222,7 @@
                 <div class="">
                     <button
                         type="submit"
-                        class="w-full rounded-md bg-blue-700 px-20 py-3.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        class="w-full rounded-md bg-blue-700 px-20 py-3.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:w-auto      "
                     >
                         save
                     </button>

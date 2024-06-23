@@ -22,14 +22,15 @@ class AddGradePointController extends Controller
 
         // dd($request);
         // Validate the incoming request data
-        $validatedData = $request->validate([
-            'mark_point_1st' => 'required|string|max:255',
-            'mark_point_2nd' => 'required|string|max:255',
-            'grade_point' => 'required|string|max:255',
-            'letter_grade' => 'required|string|max:255',
-            'note' => 'nullable|string|max:255',
-            'status' => 'required|string|in:active,inactive',
-        ]);
+        // $validatedData = $request->validate([
+        //     'mark_point_1st' => 'required|string|max:255',
+        //     'mark_point_2nd' => 'required|string|max:255',
+        //     'grade_point' => 'required|string|max:255',
+        //     'letter_grade' => 'required|string|max:255',
+        //     'status' => 'required|string|in:active,inactive',
+        // ]);
+
+       
         // dd($validatedData);
 
         // Set the school code

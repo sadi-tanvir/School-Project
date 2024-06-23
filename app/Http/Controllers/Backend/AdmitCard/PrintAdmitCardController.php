@@ -21,6 +21,7 @@ use App\Models\AddSection;
 use App\Models\AddGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 
 class PrintAdmitCardController extends Controller
 {
@@ -37,6 +38,19 @@ class PrintAdmitCardController extends Controller
 
         return view('Backend/AdmitCard/Report(admitCards)/printAdmitCard', compact('classes', 'sections', 'groups', 'studentId', 'examName', 'years', 'reports'));
     }
+    public function getStudentIds(Request $request, $school_code)
+    {
+        $className = $request->class;
+        $groupName = $request->group;
+        $sectionName = $request->section;
+        $studentIds = Student::where('school_code', $school_code)
+            ->where('class_name', $className)
+            ->where('group', $groupName)
+            ->where('section', $sectionName)
+            ->pluck('student_id');
+        return response()->json($studentIds);
+    }
+    
 
     public function downloadAdmit(Request $request, $schoolCode)
     {

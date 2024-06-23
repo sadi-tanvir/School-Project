@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('mark_point_2nd');
             $table->string('grade_point');
             $table->string('letter_grade');
-            $table->string('note');
+            $table->string('note')->nullable();
             $table->enum('status', ['active', 'in active'])->default('active');
             $table->enum('action', ['pending', 'approved', 'delete', 'edit'])->default('pending');
             $table->string('school_code');

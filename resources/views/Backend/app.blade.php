@@ -39,12 +39,9 @@
 <body class="">
     @include('Shared.navbar')
     @include('Shared.sidebar')
-    <div class="p-3  sm:ml-72 mt-0.5 ">
+    <div class="p-3  sm:ml-80 mt-0.5 ">
         @yield('Dashboard')
     </div>
-
-
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>

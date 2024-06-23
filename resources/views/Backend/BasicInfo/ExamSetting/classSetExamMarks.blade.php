@@ -308,14 +308,13 @@
             
             <div class="flex justify-center mb-5">
                 <div class="text-rose-600">
-                    <h3 class="text-lg font-semibold">Suggestion:</h3>
+                    <h3 class="text-lg font-semibold">সাজেশন:</h3>
                     <h3 class="text-sm">
-                        1. Select the required short code in the STATUS check box along with the subject. <br>
+                        ১. সাবজেক্ট অনুযায়ী আলাদা করে শর্ট কোড সেট করতে হবে । <br>
 
-                        2. In the case of subjects that merge, the short code Merge is required, then type 1.<br>
+                        ২.সাবজেক্ট  এর সাথে শর্ট কোড মার্জের  প্রয়োজন হলে একই সংখ্যা দিয়ে মার্জ করতে হবে । যেমন বাংলা ১ম পত্র এবং বাংলা ২য় পত্র মার্জ করতে হলে দুটির জন্য 1 লিখুন । <br>
 
-                        3. In all the subjects in which No. 1 and No. 2 are the same, only select them and click on the
-                        Save button.
+                        ৩. একই সালের একই ক্লাসের মার্ক সেটাপ একবার সেট করা হয়ে গেলে যদি কোন ভুল হয় তাহলে পুনরায় সংশোধনের জন্য মার্ক কনফিগ ভিউ (Mark Config view) তে গিয়ে মার্ক সেটাপ সব গুলো ডিলেট করে দিয়ে পুনরায় সেটাপ করতে হবে । 
                     </h3>
                 </div>
             </div>

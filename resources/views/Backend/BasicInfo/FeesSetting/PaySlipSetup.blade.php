@@ -24,10 +24,10 @@
             @csrf
             <div class="grid grid-cols-5 items-center gap-7">
                 <div class="">
-                    <label for="class_to" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CLASS
+                    <label for="class_to" class="block mb-2 text-sm font-medium text-gray-900  ">CLASS
                         TO</label>
                     <select id="class_to" name="class_to"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option selected>Select</option>
                         @foreach ($classes as $class)
                             <option {{ $class->class_name == $classTo ? 'selected' : '' }} value="{{ $class->class_name }}">
@@ -37,10 +37,10 @@
                 </div>
 
                 <div class="">
-                    <label for="class_from" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CLASS
+                    <label for="class_from" class="block mb-2 text-sm font-medium text-gray-900  ">CLASS
                         FROM</label>
                     <select id="class_from" name="class_from"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option selected>Select</option>
                         @foreach ($classes as $class)
                             <option {{ $class->class_name == $classFrom ? 'selected' : '' }}
@@ -51,10 +51,10 @@
                 </div>
 
                 <div class="">
-                    <label for="pay_slip_type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PAY SLIP
+                    <label for="pay_slip_type" class="block mb-2 text-sm font-medium text-gray-900  ">PAY SLIP
                         TYPE:</label>
                     <select id="pay_slip_type" name="pay_slip_type"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option selected>Select</option>
                         @foreach ($paySlipTypes as $paySlipType)
                             <option {{ $paySlipType->pay_slip_type_name == $paySlipTypeName ? 'selected' : '' }}
@@ -65,10 +65,10 @@
                 </div>
 
                 <div class="">
-                    <label for="group" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">GROUP
+                    <label for="group" class="block mb-2 text-sm font-medium text-gray-900  ">GROUP
                         :</label>
                     <select id="group" name="group"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         @foreach ($groups as $group)
                             <option {{ $group->group_name == 'N/A' ? 'selected' : '' }} value="{{ $group->group_name }}">
                                 {{ $group->group_name }}</option>

@@ -119,7 +119,7 @@
                 <a href="{{ route('studentClassInfo', $school_code) }}">
                     <button
                         type="button"
-                        class="me-2 flex items-center justify-center gap-3 rounded-md bg-blue-700 px-7 py-2.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        class="me-2 flex items-center justify-center gap-3 rounded-md bg-blue-700 px-7 py-2.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300      "
                     >
                         <span>Class Info</span>
                         <span>
@@ -271,7 +271,7 @@
                 <div class="flex justify-end">
                     <a
                         onclick="generateRows()"
-                        class="mb-0.5 me-2 rounded-lg bg-blue-700 px-5 py-3.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        class="mb-0.5 me-2 rounded-lg bg-blue-700 px-5 py-3.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300      "
                     >
                         Search
                     </a>
@@ -369,7 +369,7 @@
                 <div class="mt-2.5 flex justify-end">
                     <button
                         type="submit"
-                        class="mb-2 me-2 rounded-lg bg-blue-700 px-10 py-2.5 text-lg font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        class="mb-2 me-2 rounded-lg bg-blue-700 px-10 py-2.5 text-lg font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300      "
                     >
                         Save
                     </button>

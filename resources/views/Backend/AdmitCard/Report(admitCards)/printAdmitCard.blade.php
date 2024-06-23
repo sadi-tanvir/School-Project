@@ -180,7 +180,7 @@ Student Admit Card
 
             <div class="flex justify-end">
                 <button type="submit"
-                    class="mb-2 flex h-full items-center justify-center gap-3 rounded-lg bg-blue-700 px-7 py-3.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    class="mb-2 flex h-full items-center justify-center gap-3 rounded-lg bg-blue-700 px-7 py-3.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300      ">
                     <span>Print</span>
                     <span>
                         <svg fill="#ffffff" height="20px" width="20px" version="1.1" id="Capa_1"

@@ -221,7 +221,7 @@
                     <a href="{{ route('getStudent', $school_code) }}">
                         <button
                             type="button"
-                            class="flex items-center justify-center gap-3 rounded-md bg-blue-700 px-7 py-2.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            class="flex items-center justify-center gap-3 rounded-md bg-blue-700 px-7 py-2.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300      "
                         >
                             <span>Add Student</span>
                             <span>
@@ -325,7 +325,7 @@
                         <select
                             id=""
                             name="session"
-                            class="block h-full w-full rounded-md border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                            class="block h-full w-full rounded-md border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700   dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                         >
                             <option selected>Choose a session</option>
                             @foreach ($Session as $session)
@@ -345,7 +345,7 @@
                     <div class="w-full">
                         <button
                             type="submit"
-                            class="mb-2 me-2 flex h-full w-full items-center justify-center gap-3 rounded-md bg-blue-700 px-6 py-3.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            class="mb-2 me-2 flex h-full w-full items-center justify-center gap-3 rounded-md bg-blue-700 px-6 py-3.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300      "
                         >
                             <span>Search</span>
                             <span>
@@ -534,7 +534,7 @@
                 <div class="mb-4 mt-5 flex justify-end px-4">
                     <button
                         type="submit"
-                        class="mb-2 me-2 flex items-center justify-center gap-3 rounded-md bg-blue-700 px-7 py-3.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        class="mb-2 me-2 flex items-center justify-center gap-3 rounded-md bg-blue-700 px-7 py-3.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300      "
                     >
                         <span>Update</span>
                         <span>

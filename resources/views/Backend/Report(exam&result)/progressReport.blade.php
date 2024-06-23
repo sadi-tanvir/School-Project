@@ -198,7 +198,7 @@ Exam Progress Report
                     <div class="flex justify-between items-center mb-5">
                         <label for="class" class="text-gray-700 text-sm w-[150px] mr-2">Select Report:</label>
                         <select name="report"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
 
                             <option disabled selected>Select</option>
                             @foreach ($reports as $data)
@@ -210,7 +210,7 @@ Exam Progress Report
                     <div class="flex justify-between items-center mb-5">
                         <label for="class" class="text-gray-700 text-sm w-[150px] mr-2">Class:</label>
                         <select id="class" name="class"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
 
                             <option disabled selected>Select</option>
                             @foreach ($classData as $data)

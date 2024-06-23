@@ -221,6 +221,7 @@ class PrintUnpaidPaySlipController extends Controller
                             'total_payable' => 0,
                         ];
                     }
+
                     $allPaySlipsInfo[$studentId]['slips'][] = $individualSlip;
                     $allPaySlipsInfo[$studentId]['total_amount'] += $individualSlip->amount;
                     $allPaySlipsInfo[$studentId]['total_waiver'] += $individualSlip->waiver;

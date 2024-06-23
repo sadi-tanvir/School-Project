@@ -71,7 +71,7 @@ Student Invoice
                         <tbody>
                             @foreach ($payslipInfo as $key => $payslip)
                             <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                                <th scope="row" class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <th scope="row" class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap  ">
                                     <div class="mx-auto">
                                         <input id="" type="checkbox" checked value="selected" name="select_payslip[{{ $payslip->pay_slip_type }}]" class="w-4 h-4 ml-3 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
                                     </div>
@@ -124,7 +124,7 @@ Student Invoice
                     {{-- last pay date --}}
                     <div class="flex items-center">
                         <div class="mb-4">
-                            <label for="last_pay_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Pay Date:</label>
+                            <label for="last_pay_date" class="block mb-2 text-sm font-medium text-gray-900  ">Last Pay Date:</label>
                             <input type="date" value="{{ date('Y-m-d') }}" name="last_pay_date" id="last_pay_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full" placeholder="" />
                         </div>
                     </div>

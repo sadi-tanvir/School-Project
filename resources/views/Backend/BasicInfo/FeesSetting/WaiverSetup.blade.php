@@ -204,9 +204,10 @@
             <form class="grid grid-cols-3 gap-5" id="waiver_setup_form" action="{{ route('GetStudent.data', $school_code) }}"
                 method="GET">
                 <div class="">
-                    <label for="class" class="block mb-2 text-sm font-medium text-gray-900 ">Class:</label>
+                    <label for="class" class="block mb-2 text-sm font-medium text-gray-900  ">CLASS:</label>
                     <select id="class" onchange="onClassChange()" name="class"
-                        class="bg-white border-0 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
                         <option selected>Select</option>
                         @foreach ($classes as $class)
                             <option {{ $sessionClass === $class->class_name ? 'selected' : '' }}
@@ -218,9 +219,10 @@
 
                 <div class="">
                     <label for="group"
-                        class="block mb-2 text-sm font-medium text-gray-900 ">Group:</label>
+                        class="block mb-2 text-sm font-medium text-gray-900  ">Group:</label>
                     <select id="group" onchange="onGroupChange()" name="group"
-                        class="bg-white border-0 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
                         <option selected>Select</option>
                         @foreach ($groups as $group)
                             <option
@@ -232,9 +234,10 @@
 
                 <div class="">
                     <label for="section"
-                        class="block mb-2 text-sm font-medium text-gray-900 ">Section:</label>
+                        class="block mb-2 text-sm font-medium text-gray-900  ">Section:</label>
                     <select id="section" onchange="onSectionChange()" name="section"
-                        class="bg-white border-0 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
                         <option selected>Select</option>
                         @foreach ($sections as $section)
                             <option {{ $sessionSection === $section->section_name ? 'selected' : '' }}
@@ -249,10 +252,11 @@
                 action="{{ route('waiverSetup.getData', $school_code) }}" method="GET">
                 @csrf
                 <div class="">
-                    <label for="waiver_type" class="block mb-2 text-sm font-medium text-gray-900 ">Waiver
-                        Type:</label>
+                    <label for="waiver_type" class="block mb-2 text-sm font-medium text-gray-900  ">Waiver
+                        TYPE:</label>
                     <select id="waiver_type" name="waiver_type"
-                        class="bg-white border-0 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
                         <option selected>Select</option>
                         @foreach ($waiverTypes as $waiverType)
                             <option {{ $sessionWaiver_type === $waiverType->waiver_type_name ? 'selected' : '' }}
@@ -263,7 +267,8 @@
                 </div>
 
                 <div class="">
-                    <label for="percentage" class="block mb-2 text-sm font-medium text-gray-900 ">Percentage
+                    <label for="percentage" class="block mb-2 text-sm font-medium text-gray-900  ">PERCENTAGE
+
                         %:</label>
                     <input type="number" value="{{ isset($sessionPercentage) ? $sessionPercentage : '' }}"
                         name="percentage" id="percentage"
@@ -319,7 +324,8 @@
                                             <tr
                                                 class="border-b border-gray-300 last:border-gray-200 text-center">
                                                 <th scope="row"
-                                                    class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                                                    class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap  ">
+
                                                     <div class="mx-auto">
                                                         <input id="" type="checkbox" value="selected"
                                                             name="fees_select[{{ $fee->id }}]"
@@ -379,7 +385,8 @@
                                             <tr
                                                 class="border-b border-gray-300 last:border-gray-200 text-center">
                                                 <th scope="row"
-                                                    class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                                                    class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap  ">
+
                                                     <div class="mx-auto">
                                                         <input id="" type="checkbox" value="selected"
                                                             name="student_select[{{ $student->id }}]"

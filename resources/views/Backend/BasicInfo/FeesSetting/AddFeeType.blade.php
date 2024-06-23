@@ -213,9 +213,10 @@
                         <!-- Modal content -->
                         <div class="relative bg-white rounded-lg shadow p-4">
                             <div
-                                class="flex items-center justify-between p-4 md:p-5 border-b rounded-t ">
-                                <h3 class="text-xl font-semibold text-gray-900 ">
-                                    New fee type entry form
+                                class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                <h3 class="text-xl font-semibold text-gray-900  ">
+                                    NEW FEE TYPE ENTRY FORM
+
                                 </h3>
                                 <button type="button"
                                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center "
@@ -236,23 +237,22 @@
 
                                     <div class="mb-5">
                                         <label for="fee_type_name"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Fee
-                                            Type Name:</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900  ">Fee
+                                            Type Name</label>
                                         <input type="text" id="fee_type_name" name="fee_type_name"
                                             value="{{ old('fee_type_name') }}"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder:text-xs"
-                                            placeholder="type fee name here" />
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            placeholder="" />
+
                                         @if ($errors->has('fee_type_name'))
                                             <span class="text-red-500">{{ $errors->first('fee_type_name') }}</span>
                                         @endif
                                     </div>
                                     <div class="mb-5">
                                         <label for="position"
-                                            class="block mb-2 text-sm font-medium text-gray-900 ">Position:</label>
+                                            class="block mb-2 text-sm font-medium text-gray-900  ">Position</label>
                                         <input type="number" id="position" name="position" value="{{ old('position') }}"
-
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder:text-xs"
-                                            placeholder="type position here" />
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500" />
 
                                         @if ($errors->has('position'))
                                             <span class="text-red-500">{{ $errors->first('position') }}</span>
@@ -272,7 +272,9 @@
                                 <div
                                     class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b ">
                                     <button type="submit"
-                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Save</button>
+
+                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center      ">Save</button>
+
                                     <button data-modal-hide="add_fee_type_modal" type="button"
                                         class="py-2.5 px-5 ms-3 text-sm font-medium text-white focus:outline-none bg-red-500 rounded-lg border border-red-200 hover:bg-red-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-red-100 ">Close</button>
                                 </div>
@@ -330,7 +332,8 @@
                                 <tr
                                     class="border-b">
                                     <th scope="row"
-                                        class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                                        class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap  ">
+
                                         {{ $key + 1 }}
                                     </th>
                                     <td class="px-6 py-4">
@@ -377,7 +380,7 @@
                                                         <div
                                                             class="flex items-center justify-between p-4 md:p-5 border-b rounded-t ">
                                                             <h3
-                                                                class="text-xl font-semibold text-gray-900 ">
+                                                                class="text-xl font-semibold text-gray-900  ">
                                                                 Update Fee Type of <span
                                                                     class="text-blue-500 font-semibold">{{ $feeType->fee_type_name }}</span>
                                                             </h3>
@@ -404,12 +407,14 @@
 
                                                                 <div class="mb-5">
                                                                     <label for="fee_type_name"
-                                                                        class="block mb-2 text-sm font-medium text-gray-900 ">Fee
+
+                                                                        class="block mb-2 text-sm font-medium text-gray-900  ">Fee
+
                                                                         Type Name</label>
                                                                     <input type="text" id="fee_type_name"
                                                                         name="fee_type_name"
                                                                         value="{{ $feeType->fee_type_name }}"
-                                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                                         placeholder="" />
                                                                     @if ($errors->has('fee_type_name'))
                                                                         <span
@@ -418,10 +423,10 @@
                                                                 </div>
                                                                 <div class="mb-5">
                                                                     <label for="position"
-                                                                        class="block mb-2 text-sm font-medium text-gray-900 ">Position</label>
+                                                                        class="block mb-2 text-sm font-medium text-gray-900  ">Position</label>
                                                                     <input type="number" id="position" name="position"
                                                                         value="{{ $feeType->position }}"
-                                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                                                                     @if ($errors->has('position'))
                                                                         <span
                                                                             class="text-red-500">{{ $errors->first('position') }}</span>
@@ -444,7 +449,8 @@
                                                             <div
                                                                 class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b ">
                                                                 <button type="submit"
-                                                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Update</button>
+
+                                                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center      ">Update</button>
                                                                 <button
                                                                     data-modal-hide="update_fee_type_modal_{{ $feeType->id }}"
                                                                     type="button"

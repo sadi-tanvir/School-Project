@@ -43,7 +43,7 @@
                 <div>
 
                     <select id="class" name="class_name"
-                        class="bg-gray-50 border h-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        class="bg-gray-50 border h-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
                         <option selected>Choose a class</option>
                         @foreach ($classes as $class)
@@ -96,7 +96,7 @@
                 <div class="flex justify-end">
 
                 <button type="submit"
-                    class="w-full h-full  text-white bg-blue-700 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-6 py-3.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex items-center justify-center gap-3">
+                    class="w-full h-full  text-white bg-blue-700 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-6 py-3.5 me-2 mb-2     focus:outline-none   flex items-center justify-center gap-3">
                     <span>
                         Search 
                     </span>
@@ -108,7 +108,7 @@
                 <div>
 
                     <a 
-                        class=" h-full w-full text-white bg-blue-700 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex items-center justify-center gap-3">
+                        class=" h-full w-full text-white bg-blue-700 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2     focus:outline-none   flex items-center justify-center gap-3">
                         <span>
                             Print
                         </span>
@@ -117,8 +117,8 @@
                 </div>
             </div>
         </form>
-        <table class="w-full  rtl:text-right text-black dark:text-blue-100 text-center">
-            <thead class="text-xs text-white uppercase bg-blue-600 border-b border-blue-400 dark:text-white">
+        <table class="w-full  rtl:text-right text-black   text-center">
+            <thead class="text-xs text-white uppercase bg-blue-600 border-b border-blue-400  ">
                 <tr>
 
                     <th scope="col" class="px-3 py-1">
@@ -193,7 +193,7 @@
         </table>
         <div class="flex justify-end mt-5">
         <button type="submit"
-                class="text-white bg-blue-700 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-7 py-3.5  mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 flex items-center justify-center gap-3">
+                class="text-white bg-blue-700 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-7 py-3.5  mb-2     focus:outline-none   flex items-center justify-center gap-3">
                 <span>
 
                     Update

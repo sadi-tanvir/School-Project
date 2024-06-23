@@ -78,7 +78,8 @@
                                     <tr
                                         class="odd:bg-white even:bg-gray-50">
                                         <th scope="row"
-                                            class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                            class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap  ">
+
                                             {{ $key + 1 }}
                                         </th>
                                         <td class="px-6 py-4">

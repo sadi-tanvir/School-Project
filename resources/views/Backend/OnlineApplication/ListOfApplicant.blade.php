@@ -34,25 +34,25 @@
                 <div class="grid grid-cols-5 items-center gap-7">
                     <div class="">
                         <label for="class"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CLASS</label>
+                            class="block mb-2 text-sm font-medium text-gray-900  ">CLASS</label>
                         <select id="class" name="class"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option selected>Select</option>
                         </select>
                     </div>
                     <div class="">
                         <label for="class"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CLASS</label>
+                            class="block mb-2 text-sm font-medium text-gray-900  ">CLASS</label>
                         <select id="class" name="class"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option selected>Select</option>
                         </select>
                     </div>
                     <div class="">
                         <label for="class"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CLASS</label>
+                            class="block mb-2 text-sm font-medium text-gray-900  ">CLASS</label>
                         <select id="class" name="class"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option selected>Select</option>
                         </select>
                     </div>

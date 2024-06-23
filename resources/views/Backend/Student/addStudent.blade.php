@@ -682,7 +682,7 @@ Add Student
         <div class="flex justify-center items-center gap-20">
             <div class="flex items-center gap-2">
                 <input checked id="add_related_fees" name="add_related_fees" type="checkbox" value="true"
-                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 dark:bg-gray-700">
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 ">
                 <label for="add_related_fees" class="ml-1 text-lg font-medium text-gray-900 ">Add Fees</label>
             </div>
 

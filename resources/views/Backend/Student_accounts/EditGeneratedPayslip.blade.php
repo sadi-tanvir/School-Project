@@ -77,7 +77,7 @@ Generate Payslip
             <div class="">
                 <label for="month" class="block mb-2 text-sm font-medium text-gray-900  ">Month
                     :</label>
-                <select id="month" name="month" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <select id="month" name="month" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option disabled selected>Select</option>
                 </select>
             </div>
@@ -105,7 +105,7 @@ Generate Payslip
             {{-- class --}}
             <div class="">
                 <label for="class" class="block mb-2 text-sm font-medium text-gray-900  ">Class:</label>
-                <select id="class" name="class" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <select id="class" name="class" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option disabled selected>Select</option>
                     @foreach ($classes as $class)
                     <option value="{{ $class->class_name }}">{{ $class->class_name }}</option>
@@ -116,7 +116,7 @@ Generate Payslip
             {{-- Group --}}
             <div class="">
                 <label for="group" class="block mb-2 text-sm font-medium text-gray-900  ">Group:</label>
-                <select id="group" name="group" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <select id="group" name="group" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected>Select</option>
                     @foreach ($groups as $group)
                     <option {{ $group->group_name === 'N/A' ? 'selected' : '' }} value="{{ $group->group_name }}">
@@ -142,7 +142,7 @@ Generate Payslip
             <div class="">
                 <label for="pay_slip_type" class="block mb-2 text-sm font-medium text-gray-900  ">PaySlip
                     :</label>
-                <select id="pay_slip_type" name="pay_slip_type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <select id="pay_slip_type" name="pay_slip_type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option disabled selected>Select</option>
                 </select>
             </div>
@@ -173,13 +173,13 @@ Generate Payslip
             <div class="">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-white uppercase bg-blue-600 dark:bg-gray-700 dark:text-gray-400">
+                        <thead class="text-xs text-white uppercase bg-blue-600  dark:text-gray-400">
                             <tr id="table_header_row">
 
                             </tr>
                         </thead>
                         <tbody id="table_body">
-                            <thead class="text-xs text-white uppercase bg-blue-600 dark:bg-gray-700 dark:text-gray-400">
+                            <thead class="text-xs text-white uppercase bg-blue-600  dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3 bg-blue-500">
                                         SL
@@ -220,7 +220,7 @@ Generate Payslip
                                         {{-- Update Fee type modal form start --}}
                                         <div id="update_payslip_modal_{{ $payslip->id }}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                             <div class="relative p-4 w-full max-w-2xl max-h-full">
-                                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                <div class="relative bg-white rounded-lg shadow ">
                                                     <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                                                         <h3 class="text-xl font-semibold text-gray-900  ">
                                                             Update Fee Type of <span class="text-blue-500 font-semibold">{{ $payslip->pay_slip_type }}</span>
@@ -239,12 +239,12 @@ Generate Payslip
                                                         <div class="p-4 md:p-5 space-y-4">
                                                             <div class="mb-5">
                                                                 <label for="month" class="block mb-2 text-sm font-medium text-gray-900  ">month</label>
-                                                                <input type="text" name="month" value="{{ $payslip->month }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" />
+                                                                <input type="text" name="month" value="{{ $payslip->month }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" />
                                                             </div>
 
                                                             <div class="mb-5">
                                                                 <label for="year" class="block mb-2 text-sm font-medium text-gray-900  ">year</label>
-                                                                <input type="text" name="year" value="{{ $payslip->year }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" />
+                                                                <input type="text" name="year" value="{{ $payslip->year }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" />
                                                             </div>
 
                                                             <div class="mb-5">
@@ -254,12 +254,12 @@ Generate Payslip
 
                                                             <div class="mb-5">
                                                                 <label for="student_id" class="block mb-2 text-sm font-medium text-gray-900  ">Student Id</label>
-                                                                <input type="text" name="student_id" value="{{ $payslip->student_id }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" />
+                                                                <input type="text" name="student_id" value="{{ $payslip->student_id }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" />
                                                             </div>
 
                                                             <div class="mb-5">
                                                                 <label for="class" class="block mb-2 text-sm font-medium text-gray-900  ">Class</label>
-                                                                <select name="class" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                <select name="class" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                                     <option disabled selected>Select</option>
                                                                     @foreach ($classes as $class)
                                                                     <option {{$payslip->class == $class->class_name ? "selected" : ""}} value="{{ $class->class_name }}">{{ $class->class_name }}</option>
@@ -269,7 +269,7 @@ Generate Payslip
 
                                                             <div class="mb-5">
                                                                 <label for="group" class="block mb-2 text-sm font-medium text-gray-900  ">Group</label>
-                                                                <select name="group" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                <select name="group" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                                     <option disabled selected>Select</option>
                                                                     @foreach ($groups as $group)
                                                                     <option {{$payslip->group == $group->group_name ? "selected" : ""}} value="{{ $group->group_name }}">{{ $group->group_name }}</option>
@@ -279,7 +279,7 @@ Generate Payslip
 
                                                             <div class="mb-5">
                                                                 <label for="section" class="block mb-2 text-sm font-medium text-gray-900  ">Section</label>
-                                                                <select name="section" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                <select name="section" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                                     <option disabled selected>Select</option>
                                                                     @foreach ($sections as $section)
                                                                     <option {{$payslip->section == $section->section_name ? "selected" : ""}} value="{{ $section->section_name  }}">{{ $section->section_name  }}</option>
@@ -289,7 +289,7 @@ Generate Payslip
 
                                                             <div class="mb-5">
                                                                 <label for="student_id" class="block mb-2 text-sm font-medium text-gray-900  ">Fee Type Name</label>
-                                                                <input type="text" id="student_id" name="student_id" value="{{ $payslip->student_id }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" />
+                                                                <input type="text" id="student_id" name="student_id" value="{{ $payslip->student_id }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" />
                                                             </div>
                                                         </div>
 

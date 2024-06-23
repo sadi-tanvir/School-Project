@@ -22,7 +22,7 @@ Exam Marks
                     <div class="col-span-1">
                         <div class="">
                             <label for="class" class="text-gray-700">Class:</label>
-                            <select id="class" name="class_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <select id="class" name="class_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option disabled selected value="">Select</option>
                                 @foreach ($classData as $data)
                                 <option value="{{ $data->class_name }}">{{ $data->class_name }}</option>
@@ -34,7 +34,7 @@ Exam Marks
                     <div class="col-span-1">
                         <div class="">
                             <label for="group" class="text-gray-700">Group:</label>
-                            <select id="group" name="group" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <select id="group" name="group" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option disabled selected>Select</option>
                                 @foreach ($groupData as $data)
                                 <option value="{{ $data->group_name }}">{{ $data->group_name }}</option>
@@ -48,7 +48,7 @@ Exam Marks
                         <div class="">
                             <label for="section" class="text-gray-700">Section:</label>
 
-                            <select id="section" name="section" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <select id="section" name="section" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option disabled selected>Select</option>
                                 @foreach ($sectionData as $data)
                                 <option value="{{ $data->section_name }}">{{ $data->section_name }}</option>
@@ -64,7 +64,7 @@ Exam Marks
                         <div class="">
                             <label for="shift" class="text-gray-700">Shift:</label>
 
-                            <select id="shift" name="shift" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <select id="shift" name="shift" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option disabled selected>Select</option>
                                 @foreach ($shiftData as $data)
                                 <option value="{{ $data->shift_name }}">{{ $data->shift_name }}</option>
@@ -77,7 +77,7 @@ Exam Marks
                     <div class="col-span-1">
                         <div class="">
                             <label for="class" class="text-gray-700">Subject:</label>
-                            <select id="subject" name="subject" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <select id="subject" name="subject" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
                                 <option disabled selected value="">Select</option>
                                 @foreach ($subjectData as $data)
@@ -92,7 +92,7 @@ Exam Marks
                         <div class="">
                             <label for="class" class="text-gray-700">Exam:</label>
 
-                            <select id="exam" name="exam" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <select id="exam" name="exam" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
                                 <option disabled selected>Select</option>
                                 @foreach ($classExamData as $data)
@@ -106,7 +106,7 @@ Exam Marks
                         <div class="">
                             <label for="class" class="text-gray-700">Year:</label>
 
-                            <select name="year" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <select name="year" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
                                 <option disabled selected value="">Select</option>
                                 @foreach ($academicYearData as $data)

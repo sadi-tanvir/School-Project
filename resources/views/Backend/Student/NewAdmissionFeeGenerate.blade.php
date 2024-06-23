@@ -46,7 +46,7 @@ Student Invoice
                 <h1 class="text-2xl font-bold text-gray-700 mb-3 mt-10">Payslip Inforamation</h1>
                 <div class="w-2/3 relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-white uppercase bg-blue-600 dark:bg-gray-700 dark:text-gray-400">
+                        <thead class="text-xs text-white uppercase bg-blue-600  dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
                                     <input id="student_header_checkbox" checked type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
@@ -117,7 +117,7 @@ Student Invoice
                     </button>
 
                     <div class="flex items-center gap-2">
-                        <input checked id="pay_now" name="pay_now" type="checkbox" value="true" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 dark:bg-gray-700">
+                        <input checked id="pay_now" name="pay_now" type="checkbox" value="true" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 ">
                         <label for="pay_now" class="text-md font-medium text-gray-900">Pay Now</label>
                     </div>
 

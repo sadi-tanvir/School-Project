@@ -213,10 +213,10 @@
                 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                 <div class="relative p-10 w-full max-w-2xl max-h-full">
                     <!-- Modal content -->
-                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                            <h3 class="text-xl font-semibold text-gray-900  ">
-                                NEW PAY SLIP TYPE ENTRY FORM
+                    <div class="relative bg-white rounded-lg shadow ">
+                        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t ">
+                            <h3 class="text-xl font-semibold text-gray-900">
+                                New pay slip type entry form
                             </h3>
                             <button type="button"
                                 class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center "
@@ -236,15 +236,12 @@
                             <div class="p-4 md:p-5 space-y-4">
                                 <div class="mb-5">
                                     <label for="fee_type_name"
-                                        class="block mb-2 text-sm font-medium text-gray-900  ">
-
+                                        class="block mb-2 text-sm font-medium text-gray-900">
                                         Pay Slip Type Name :
                                     </label>
                                     <input type="text" id="pay_slip_type_name" name="pay_slip_type_name"
                                         value="{{ old('pay_slip_type_name') }}"
-
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
-
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  "
                                         placeholder="" />
                                     @if ($errors->has('pay_slip_type_name'))
                                         <span class="text-red-500">{{ $errors->first('pay_slip_type_name') }}</span>
@@ -264,8 +261,7 @@
                             <div
                                 class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b ">
                                 <button type="submit"
-                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center      ">Save</button>
-
+                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Save</button>
                                 <button data-modal-hide="add_pay_slip_type_modal" type="button"
                                     class="py-2.5 px-5 ms-3 text-sm font-medium text-white focus:outline-none bg-red-500 rounded-lg border border-red-200 hover:bg-red-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-red-100 ">Close</button>
                             </div>
@@ -350,8 +346,7 @@
                                                         <div
                                                             class="flex items-center justify-between p-4 md:p-5 border-b rounded-t ">
                                                             <h3
-                                                                class="text-xl font-semibold text-gray-900  ">
-
+                                                                class="text-xl font-semibold text-gray-900">
                                                                 Update Fee Type of <span
                                                                     class="text-blue-500 font-semibold">{{ $slipType->fee_type_name }}</span>
                                                             </h3>
@@ -378,15 +373,12 @@
 
                                                                 <div class="mb-5">
                                                                     <label for="pay_slip_type_name"
-
-                                                                        class="block mb-2 text-sm font-medium text-gray-900  ">pay
-
+                                                                        class="block mb-2 text-sm font-medium text-gray-900">pay
                                                                         slip type name</label>
                                                                     <input type="text" id="pay_slip_type_name"
                                                                         name="pay_slip_type_name"
                                                                         value="{{ $slipType->pay_slip_type_name }}"
-                                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400   dark:focus:ring-blue-500 dark:focus:border-blue-500"
-
+                                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  "
                                                                         placeholder="" />
                                                                     @if ($errors->has('pay_slip_type_name'))
                                                                         <span
@@ -410,7 +402,7 @@
                                                             <div
                                                                 class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b ">
                                                                 <button type="submit"
-                                                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center      ">Update</button>
+                                                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Update</button>
                                                                 <button
                                                                     data-modal-hide="update_fee_type_modal_{{ $slipType->id }}"
                                                                     type="button"

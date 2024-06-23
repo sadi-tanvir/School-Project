@@ -114,7 +114,7 @@ Fees Collection
                         <tr>
                             <th scope="col" class="px-6 py-3">
                                 <div class="flex items-center">
-                                    <input id="headerCheckbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    <input id="headerCheckbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2  dark:border-gray-600">
                                 </div>
                             </th>
                             <th scope="col" class="px-6 py-3 bg-blue-500">
@@ -141,7 +141,7 @@ Fees Collection
 
             <div class="mt-20 flex justify-between">
                 <div class="flex items-center">
-                    <input id="deleteCheckBox" name="deleteCheckBox" type="checkbox" value="" class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500  focus:ring-2 dark:bg-gray-700">
+                    <input id="deleteCheckBox" name="deleteCheckBox" type="checkbox" value="" class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500  focus:ring-2 ">
                     <label for="deleteCheckBox" class="ml-1 text-sm font-medium text-gray-900 ">Delete</label>
                 </div>
 
@@ -337,7 +337,7 @@ Fees Collection
                             <div class="flex items-center gap-2">
                                 <label for="full_paid" class="ml-1 text-sm font-medium text-gray-900 ">Full
                                     Paid</label>
-                                <input id="full_paid" name="full_paid" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 dark:bg-gray-700">
+                                <input id="full_paid" name="full_paid" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 ">
                             </div>
 
                             <div>

@@ -6,12 +6,12 @@ Grade
 @section('Dashboard')
 @include('Message.message')
 
-<<<<<<<<< Temporary merge branch 1 <style>
+ <style>
     /* animation */
     .svg-top-rotate {
     animation: move-from-top 1s ease-out;
     }
-    =========
+
     @include('Message.message')
     <div>
         <h3>
@@ -51,7 +51,7 @@ Grade
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  ">GET
                         DATA</button>
                 </div>
-                >>>>>>>>> Temporary merge branch 2
+              
 
                 .svg-bottom {
                 animation: move-from-bottom 1s ease-out;
@@ -141,7 +141,7 @@ Grade
                         </svg>
                     </span>
 
-                    <<<<<<<<< Temporary merge branch 1 <span class="svg-right absolute -top-2 right-3 rotate-3">
+                     <span class="svg-right absolute -top-2 right-3 rotate-3">
                         <svg fill="#ffffff" width="24px" height="24px" viewBox="0 0 30 30"
                             xmlns="http://www.w3.org/2000/svg">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -357,4 +357,3 @@ Grade
 
                 </div>
                 @endsection
-                >>>>>>>>> Temporary merge branch 2

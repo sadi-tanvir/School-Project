@@ -85,45 +85,72 @@ class SetExamMarksController extends Controller
     public function saveSetExamMarks(Request $request,$school_code){
        // dd($request);
             $subjects=$request->input('subject');
+            if($subjects==null){
+                return redirect()->route('get.exam.marks',$school_code)->with('error', "Pease select the subject");
+            }
             $school_code=$request->input('school_code');
             $class_name=$request->input('class_name');
             $academic_year_name=$request->input('academic_year_name');
             $exam_name=$request->input('exam_name');
             $action = $request->input('action');
             $key=$request->input('key');
-             //dd($subjects);
+             
+            // dd($subjects);
 
-            foreach($subjects as $subject){
-               
-                $alreadySaveData=SetClassExamMark::where("school_code", $school_code)->where("action", "approved")->where("exam_name", $exam_name)->where("academic_year_name", $academic_year_name)->where("class_name",$class_name )->where("subject_name",$subject )->exists();
-                if($alreadySaveData){
-                    //dd($alreadySaveData);
-                    return redirect()->route('get.exam.marks',$school_code)->with('error', "Class Exam Marks for this year this class this exam already exist");
-                }else{
-                    //dd($key);
-                    foreach ($key as $id) {
-                       
-                                        $examMarks = new SetClassExamMark();
-                                        $examMarks->exam_name = $exam_name;
-                                        $examMarks->academic_year_name = $academic_year_name;
-                                        $examMarks->class_name = $class_name;
-                                        $examMarks->subject_name =$subject;
-                                        $examMarks->short_code = $request->short_code[$id];
-                                        $examMarks->total_mark = $request->total_marks[$id];
-                                        $examMarks->countable_mark = $request->countable_marks[$id];
-                                        $examMarks->pass_mark = $request->pass_marks[$id];
-                                        $examMarks->acceptance = $request->acceptance[$id];
-                                        $examMarks->marge = $request->marge[$id];
-                                        $examMarks->status = $request->status[$id];
-                                        $examMarks->action = $action;
-                                        $examMarks->school_code = $school_code;
-                                        $examMarks->save();
-                    }
+            foreach($subjects as $subject) {
+         
                     
+                        foreach ($key as $id) {
+                            $alreadySaveData = SetClassExamMark::where("school_code", $school_code)
+                            ->where("action", "approved")
+                            ->where("exam_name", $exam_name)
+                            ->where("academic_year_name", $academic_year_name)
+                            ->where("class_name", $class_name)
+                            ->where("subject_name", $subject)
+                            ->where('short_code',$request->short_code[$id])
+                            ->exists();
+                            if ($alreadySaveData) {
+                            // dd($request->total_marks[$id]);
+                                                SetClassExamMark::where("school_code", $school_code)
+                                                ->where("action", "approved")
+                                                ->where("exam_name", $exam_name)
+                                                ->where("academic_year_name", $academic_year_name)
+                                                ->where("class_name", $class_name)
+                                                ->where("subject_name", $subject)
+                                                ->where('short_code',$request->short_code[$id])
+                                                ->update([
+                                                    "total_mark" => $request->total_marks[$id],
+                                                    "countable_mark" => $request->countable_marks[$id],
+                                                    "pass_mark" => $request->pass_marks[$id],
+                                                    "acceptance" => $request->acceptance[$id],
+                                                    "marge" => $request->marge[$id],
+                                                    "status" => $request->status[$id],
+                                                ]);
+                             }
+                             else {
+                                
+                                $examMarks = new SetClassExamMark();
+                                $examMarks->exam_name = $exam_name;
+                                $examMarks->academic_year_name = $academic_year_name;
+                                $examMarks->class_name = $class_name;
+                                $examMarks->subject_name = $subject;
+                                $examMarks->short_code = $request->short_code[$id];
+                                $examMarks->total_mark = $request->total_marks[$id];
+                                $examMarks->countable_mark = $request->countable_marks[$id];
+                                $examMarks->pass_mark = $request->pass_marks[$id];
+                                $examMarks->acceptance = $request->acceptance[$id];
+                                $examMarks->marge = $request->marge[$id];
+                                $examMarks->status = $request->status[$id];
+                                $examMarks->action = $action;
+                                $examMarks->school_code = $school_code;
+                                $examMarks->save();
+                            
+                        } 
+                        }
+                       
+               
                 }
-
-
-            }
+            
             return redirect()->route('get.exam.marks',$school_code)->with('success', "Class Exam Marks set successfully");
         }
 

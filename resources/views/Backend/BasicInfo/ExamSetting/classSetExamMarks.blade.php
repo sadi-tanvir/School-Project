@@ -245,13 +245,6 @@
                         </div>
                         <select name="academic_year_name" id='date-academic_year_name'
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
-                            @if ($searchAcademicYearName === null)
-                                <option selected>Select Year</option>
-                            @elseif($searchAcademicYearName)
-                                <option value="{{ $searchAcademicYearName }}" selected>{{ $searchAcademicYearName }}
-                                </option>
-                            @endif
-
                             @foreach ($academicYearData as $data)
                                 <option value="{{ $data->academic_year_name }}">{{ $data->academic_year_name }}</option>
                             @endforeach
@@ -282,29 +275,30 @@
 
         <form action="{{route('saveSetExamMarks',$school_code)}}" method="POST">
         @csrf
+        <div>
+    <div class="grid gap-6 mb-6 py-5 md:grid-cols-1 items-center ps-4 border border-gray-200 rounded">
+        <h3>Select subject</h3>
+        @if($className != null)
+            <input type="text" class="hidden" value="{{$className}}" name="class_name" id="">
+            <input type="text" class="hidden" value="{{$classExamName}}" name="exam_name" id="">
+            <input type="text" class="hidden" value="{{$academic_year_name}}" name="academic_year_name" id="">
             <div>
-                <div
-                    class="grid gap-6 mb-6 py-5 md:grid-cols-1 items-center ps-4 border border-gray-200 rounded">
-                    <h3>Select subject</h3>
-                    @if($className!=null)
-                    <input type="text" class="hidden" value="{{$className}}" name="class_name" id="">
-                    <input type="text" class="hidden" value="{{$classExamName}}" name="exam_name" id="">
-                    <input type="text" class="hidden" value="{{$academic_year_name}}" name="academic_year_name" id="">
-                    <div>
-                    @if($searchClassses->count() > 0)
-                    @foreach($searchClassses as $key=> $class)
-                    <div>
-                    <input id="bordered-checkbox-1" checked type="checkbox" value="{{$class->subject_name}}" name="subject[{{$class->subject_name}}]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500   focus:ring-2  ">
-                        <label for="bordered-checkbox-1" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 ">{{$class->subject_name}}</label>
+                @if($searchClassses->count() > 0)
+                    <div class="pb-5">
+                        <input id="select-all" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                        <label for="select-all" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 ">Select All</label>
                     </div>
+                    @foreach($searchClassses as $key => $class)
+                        <div>
+                            <input id="checkbox-{{$key}}" type="checkbox" value="{{$class->subject_name}}" name="subject[{{$class->subject_name}}]" class="subject-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                            <label for="checkbox-{{$key}}" class="w-full py-4 ms-2 text-sm font-medium text-gray-900">{{$class->subject_name}}</label>
+                        </div>
                     @endforeach
-                     @endif
-                        
-                    </div>
-                    @endif
-                </div>
-                
+                @endif
             </div>
+        @endif
+    </div>
+</div>
             
             <div class="flex justify-center mb-5">
                 <div class="text-rose-600">
@@ -362,11 +356,11 @@
                                 <td class="px-4 py-3">{{$code->short_code}}</td>
                                 <input class="hidden" value="{{$code->short_code}}" name="short_code[{{$key}}]" type="text">
                                 <input class="hidden" value="{{$key}}" name="key[]" type="text">
-                                <td class="px-4 py-3"><input name="total_marks[{{$key}}]" class="border-0 w-[100px] total_marks" type="text"></td>
-                                <td class="px-4 py-3"><input name="countable_marks[{{$key}}]" class="border-0 w-[100px] countable_marks" type="text"></td>
-                                <td class="px-4 py-3"><input name="pass_marks[{{$key}}]" class="border-0 w-[100px] pass_marks" type="text"></td>
-                                <td class="px-4 py-3"><input name="acceptance[{{$key}}]" class="border-0 w-[100px] acceptance" type="text"></td>
-                                <td class="px-4 py-3"><input name="marge[{{$key}}]" value="0" class="border-0 w-[100px]" type="text"></td>
+                                <td class="px-4 py-3 " ><input name="total_marks[{{$key}}]" class="w-[100px] total_marks block rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500" type="text" required></td>
+                                <td class="px-4 py-3 " ><input name="countable_marks[{{$key}}]" class=" w-[100px] countable_marks block  rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500" type="text" required></td>
+                                <td class="px-4 py-3"><input name="pass_marks[{{$key}}]" class="w-[100px] pass_marks block rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500" type="text"></td>
+                                <td class="px-4 py-3"><input name="acceptance[{{$key}}]" class=" w-[100px] acceptance block rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500" type="text"></td>
+                                <td class="px-4 py-3"><input name="marge[{{$key}}]" value="0" class="w-[100px] block rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500" type="text"></td>
                                 <td class="px-4 py-3">
                                     <div>
                                         <select class="p-2 rounded-xl" name="status[{{$key}}]" id="">
@@ -463,4 +457,26 @@
     calculateMarks();
 </script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const selectAllCheckbox = document.getElementById('select-all');
+        const subjectCheckboxes = document.querySelectorAll('.subject-checkbox');
+
+        selectAllCheckbox.addEventListener('change', function() {
+            subjectCheckboxes.forEach(function(checkbox) {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+        });
+
+        subjectCheckboxes.forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                if (!checkbox.checked) {
+                    selectAllCheckbox.checked = false;
+                } else if (Array.from(subjectCheckboxes).every(cb => cb.checked)) {
+                    selectAllCheckbox.checked = true;
+                }
+            });
+        });
+    });
+</script>
 @endsection

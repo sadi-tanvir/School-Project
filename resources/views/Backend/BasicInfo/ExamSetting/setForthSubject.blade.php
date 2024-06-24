@@ -6,7 +6,7 @@
 
 @include('Message.message')
 
-<<<<<<<<< Temporary merge branch 1 <style>
+ <style>
     /* table radius */
     thead th:first-child {
     border-top-left-radius: 0.5rem;
@@ -212,7 +212,7 @@
                             </select>
                         </div>
                         <div class="mr-2 md:flex justify-end">
-                            >>>>>>>>> Temporary merge branch 2
+                          
                             <label for="session" class="block mb-2 text-sm font-medium text-gray-900 ">Section :</label>
                         </div>
                         <div class="mr-2">
@@ -316,7 +316,7 @@
                                                         @endforeach
                                                     </div>
                                                 </div>
-                                                >>>>>>>>> Temporary merge branch 2
+                                             
                         @endif
 
 
@@ -449,13 +449,13 @@
                     <div class="mr-10">
                         <button type="submit"
                             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  ">Save</button>
-                        >>>>>>>>> Temporary merge branch 2
+                      
                     </div>
                     <div class="mr-10">
                         <a href="/dashboard">
                             <button
                                 class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Close</button>
-                            >>>>>>>>> Temporary merge branch 2
+                          
                         </a>
                     </div>
 

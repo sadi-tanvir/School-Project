@@ -100,9 +100,9 @@
                     <select id="group" name="group"
                         class="col-span-3 bg-white border-0  text-gray-900 text-sm rounded-lg  block w-full p-3.5">
                         <option disabled selected>Select </option>
-                        @foreach ($groups as $group)
+                        {{-- @foreach ($groups as $group)
                             <option value="{{ $group->group_name }}">{{ $group->group_name }}</option>
-                        @endforeach
+                        @endforeach --}}
                     </select>
                 </div>
             </div>
@@ -115,3 +115,49 @@
         </form>
     </div>
 @endsection
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const schoolCode = @json($school_code);
+        const classSelect = document.getElementById('class');
+        const groupId = document.getElementById('group');
+
+        async function getGroups(className) {
+            try {
+                const res = await fetch(
+                    `/dashboard/reportFeesSettings/allPaySlip/getGroups/${schoolCode}?class_name=${className}`
+                )
+                if (!res.ok) throw new Error('Network response was not ok');
+                const data = await res.json();
+                console.log(data);
+                UpdateGroupOption(data);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        // class select event
+        classSelect.addEventListener('change', (e) => {
+            const classValue = e.target.value;
+            const groupSelect = document.getElementById('group');
+            getGroups(classValue);
+        });
+
+        // update group options
+        function UpdateGroupOption(groups) {
+            groupId.innerHTML = "";
+            const defaultOption = document.createElement('option');
+            defaultOption.value = "Select";
+            defaultOption.textContent = "Select";
+            defaultOption.selected = true;
+            groupId.appendChild(defaultOption);
+            groups.forEach(group => {
+                const groupOption = document.createElement('option');
+                groupOption.value = group.group_name;
+                groupOption.textContent = group.group_name;
+                groupId.appendChild(groupOption);
+            });
+        };
+    })
+</script>

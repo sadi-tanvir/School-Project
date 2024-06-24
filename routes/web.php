@@ -775,6 +775,7 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/allFees/print/{schoolCode}', [AllFeesController::class, 'FeesReportDataPrint'])->name('allFeesReport.print');
     // Report (Fees Setting) => All Pay Slip
     Route::get('/reportFeesSettings/allPaySlip/{schoolCode}', [AllPaySlipController::class, 'AllPaySlipView'])->name('allPaySlipReport.view');
+    Route::get('/reportFeesSettings/allPaySlip/getGroups/{schoolCode}', [AllPaySlipController::class, 'GetGroupsAccordingToClass'])->name('allPaySlipReport.getGroups');
     Route::get('/allPaySlip/print/{schoolCode}', [AllPaySlipController::class, 'AllPaySlipPrint'])->name('allPaySlip.print');
     // Report (Fees Setting) => Individual Pay Slip
     Route::get('/reportFeesSettings/individualPaySlip/{schoolCode}', [IndividualPaySlipController::class, 'IndividualPaySlipView'])->name('individualPaySlipReport.view');

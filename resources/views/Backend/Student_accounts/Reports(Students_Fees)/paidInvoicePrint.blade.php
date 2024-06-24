@@ -30,7 +30,7 @@ $index = 0;
         }
     }
 </style>
-<div class="w-full min-h-screen bg-neutral-200 mx-auto p-5">
+<div class="w-full h-fit bg-neutral-200 mx-auto p-5">
     <a id="" href="{{route("paidInvoice", $school_code)}}"
         class="text-white bg-gradient-to-br from-red-600 to-red-500 hover:bg-gradient-to-bl focus:ring-red-300 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-auto">Back</a>
     <button id="" type="button" onclick="window.print()"

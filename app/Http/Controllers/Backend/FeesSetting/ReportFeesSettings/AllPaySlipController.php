@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Backend\FeesSetting\ReportFeesSettings;
 
 use App\Http\Controllers\Controller;
-use App\Models\AddClass;
-use App\Models\AddFees;
-use App\Models\AddGroup;
+use App\Models\AddClassWiseGroup;
 use App\Models\AddPaySlip;
 use App\Models\AddPaySlipType;
 use App\Models\SchoolInfo;
@@ -26,6 +24,17 @@ class AllPaySlipController extends Controller
             ->distinct()
             ->get();
         return view('Backend.BasicInfo.FeesSetting.ReportFeesSettings.AllPaySlip', compact('classes', 'groups', 'school_code'));
+    }
+
+    public function GetGroupsAccordingToClass(Request $request, $school_code)
+    {
+        $groups = AddClassWiseGroup::where("school_code", $school_code)
+            ->where("class_name", $request->query('class_name'))
+            ->where('action', 'approved')
+            ->select('group_name')
+            ->get();
+
+        return response()->json($groups);
     }
 
     public function AllPaySlipPrint(Request $request, $school_code)

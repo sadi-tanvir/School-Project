@@ -71,7 +71,7 @@
 
 </style>
 
-<aside id="logo-sidebar" class="fixed left-0 top-[90px] z-40 h-screen w-72 -translate-x-full overflow-y-auto transition-transform duration-1000 sm:translate-x-0" aria-label="logo-sidebar">
+<aside id="logo-sidebar" class="fixed left-0 top-[90px] z-40 h-screen w-80 -translate-x-full overflow-y-auto transition-transform duration-1000 sm:translate-x-0" aria-label="logo-sidebar">
     <div class="h-full  overflow-y-auto scrollbar  px-3 pt-5 pb-20   gradient-bg">
         <ul class="space-y-2 pb-6  font-medium ">
 

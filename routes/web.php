@@ -384,7 +384,9 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/transferToAccounts/{schoolCode}', [TransferToAccountsController::class, 'transferToAccounts'])->name('transferToAccounts');
     // Paid Invoice
     Route::get('/paidInvoice/{schoolCode}', [PaidInvoiceController::class, 'paidInvoice'])->name('paidInvoice');
-    Route::get('/paidInvoice/voucherId/printInvoice/{schoolCode}', [PaidInvoiceController::class, 'PrintInvoiceWithVoucherId'])->name('printPaidInvoice.voucherId');
+    Route::get('/paidInvoice/voucherId/printInvoice/{schoolCode}/{voucher_id?}', [PaidInvoiceController::class, 'PrintInvoiceWithVoucherId'])->name('printPaidInvoice.voucherId');
+    Route::get('/paidInvoice/collectDate/printInvoice/{schoolCode}', [PaidInvoiceController::class, 'PrintInvoiceWithCollectDate'])->name('printPaidInvoice.collectDate');
+    Route::get('/paidInvoice/studentId/printInvoice/{schoolCode}', [PaidInvoiceController::class, 'PrintInvoiceWithStudentId'])->name('printPaidInvoice.studentId');
 
     Route::get('/othTransInquiry/{schoolCode}', [OuthTransInquiryController::class, 'othTransInquiry'])->name('othTransInquiry');
     Route::get('/ListOfdueOrPay/{schoolCode}', [ListOfDueOrPayController::class, 'ListOfdueOrPay'])->name('ListOfdueOrPay');
@@ -768,6 +770,7 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::post('/waiverSetup/storeWaiberStudent/{schoolCode}', [WaiverSetupController::class, 'WaiverStudentListSetup'])->name('studentListWaiverSetup.store');
     // Report (Fees Setting) => All Fees
     Route::get('/reportFeesSettings/allFees/{schoolCode}', [AllFeesController::class, 'AllFeesView'])->name('allFeesReport.view');
+    Route::get('/allFees/getGroups/{schoolCode}', [AllFeesController::class, 'GetGroupsAccordingToClass'])->name('allFeesReport.getGroups');
     Route::get('/allFees/getData/{schoolCode}', [AllFeesController::class, 'GetAllFeesReportData'])->name('allFeesReport.getData');
     Route::get('/allFees/print/{schoolCode}', [AllFeesController::class, 'FeesReportDataPrint'])->name('allFeesReport.print');
     // Report (Fees Setting) => All Pay Slip

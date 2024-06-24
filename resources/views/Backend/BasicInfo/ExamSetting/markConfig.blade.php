@@ -18,7 +18,7 @@ Exam Mark Setup
             <div class="">
                 <label for="class" class="text-gray-700">Class:</label>
                 <select id="class" name="class_name"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option disabled selected value="">Select</option>
                     @foreach ($classData as $data)
                         <option value="{{ $data->class_name }}">{{ $data->class_name }}</option>
@@ -31,7 +31,7 @@ Exam Mark Setup
             <div class="">
                 <label for="group" class="text-gray-700">Group:</label>
                 <select id="group" name="group"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option disabled selected>Select</option>
                     @foreach ($groupData as $data)
                         <option value="{{ $data->group_name }}">{{ $data->group_name }}</option>
@@ -45,7 +45,7 @@ Exam Mark Setup
                 <label for="class" class="text-gray-700">Exam:</label>
 
                 <select id="exam" name="exam"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
                     <option disabled selected>Select</option>
                     @foreach ($classExamData as $data)
@@ -59,7 +59,7 @@ Exam Mark Setup
             <div class="">
                 <label for="class" class="text-gray-700">Year:</label>
                 <select name="year"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option disabled selected value="">Select</option>
                     @foreach ($academicYearData as $data)
                         <option value="{{ $data->academic_year_name }}">{{ $data->academic_year_name }}</option>
@@ -71,7 +71,7 @@ Exam Mark Setup
         <div class="col-span-1">
             <div class="">
                 <button type="submit"
-                    class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-green-800 mt-5">Find</button>
+                    class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2     dark:focus:ring-green-800 mt-5">Find</button>
             </div>
         </div>
 

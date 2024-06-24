@@ -221,7 +221,7 @@
                     <a href="{{ route('getStudent', $school_code) }}">
                         <button
                             type="button"
-                            class="flex items-center justify-center gap-3 rounded-md bg-blue-700 px-7 py-2.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            class="flex items-center justify-center gap-3 rounded-md bg-blue-700 px-7 py-2.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300      "
                         >
                             <span>Add Student</span>
                             <span>
@@ -325,7 +325,7 @@
                         <select
                             id=""
                             name="session"
-                            class="block h-full w-full rounded-md border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                            class="block h-full w-full rounded-md border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600     dark:focus:border-blue-500 dark:focus:ring-blue-500"
                         >
                             <option selected>Choose a session</option>
                             @foreach ($Session as $session)
@@ -345,7 +345,7 @@
                     <div class="w-full">
                         <button
                             type="submit"
-                            class="mb-2 me-2 flex h-full w-full items-center justify-center gap-3 rounded-md bg-blue-700 px-6 py-3.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            class="mb-2 me-2 flex h-full w-full items-center justify-center gap-3 rounded-md bg-blue-700 px-6 py-3.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300      "
                         >
                             <span>Search</span>
                             <span>
@@ -380,12 +380,13 @@
                 <table class="w-full text-left text-sm text-black rtl:text-right">
                     <thead class="border-b border-blue-400 bg-blue-600 text-xs uppercase text-white">
                         <tr>
-                            <th scope="col" class="bg-blue-500 px-3 py-1">
-                                {{--
-                                    <input type="checkbox" id="select-all-checkbox"
-                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 ">
-                                --}}
-                            </th>
+                        <th scope="col" class="bg-blue-500 px-6 py-3 text-center">
+                            <input
+                                id="select-all-checkbox"
+                                type="checkbox"
+                                class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-blue-500"
+                            />
+                        </th>
                             <th scope="col" class="px-3 py-1">Roll</th>
                             <th scope="col" class="bg-blue-500 px-3 py-1">Student ID</th>
                             <th scope="col" class="px-3 py-1">Name</th>
@@ -407,7 +408,7 @@
                             {{-- @dd($student) <!-- Add this line to inspect the value --> --}}
                             @foreach ($student as $key => $data)
                                 <tr>
-                                    <td scope="col" class="px-3 py-1">
+                                    <td scope="col" class="px-3 py-1 text-center">
                                         <input
                                             type="checkbox"
                                             value="{{ $data->id }}"
@@ -421,7 +422,7 @@
                                         <input
                                             type="text"
                                             name="student_roll[{{ $data->id }}]"
-                                            class="form-control row-input hidden px-2 md:h-[20px] md:w-[100px]"
+                                            class="form-control row-input hidden px-2 py-3 rounded-lg md:h-[20px] md:w-[50px]"
                                             value="{{ $data->student_roll }}"
                                         />
                                     </td>
@@ -430,7 +431,7 @@
                                         <input
                                             type="text"
                                             name="student_id[{{ $data->id }}]"
-                                            class="form-control row-input hidden px-2 md:h-[20px] md:w-[100px]"
+                                            class="form-control row-input hidden px-2 py-3 rounded-lg md:h-[20px] md:w-[120px]"
                                             value="{{ $data->student_id }}"
                                         />
                                     </td>
@@ -439,7 +440,7 @@
                                         <input
                                             type="text"
                                             name="name[{{ $data->id }}]"
-                                            class="form-control row-input hidden px-2 md:h-[20px] md:w-[100px]"
+                                            class="form-control row-input hidden px-2 py-3 rounded-lg md:h-[20px] md:w-[120px]"
                                             value="{{ $data->name }} "
                                         />
                                     </td>
@@ -449,7 +450,7 @@
                                         <input
                                             type="text"
                                             name="father_name[{{ $data->id }}]"
-                                            class="form-control row-input hidden px-2 md:h-[20px] md:w-[100px]"
+                                            class="form-control row-input hidden px-2 py-3 rounded-lg md:h-[20px] md:w-[120px]"
                                             value="{{ $data->father_name }}"
                                         />
                                     </td>
@@ -458,7 +459,7 @@
                                         <input
                                             type="text"
                                             name="father_nid[{{ $data->id }}]"
-                                            class="form-control row-input hidden px-2 md:h-[20px] md:w-[100px]"
+                                            class="form-control row-input hidden px-2 py-3 rounded-lg md:h-[20px] md:w-[100px]"
                                             value="{{ $data->father_nid }}"
                                         />
                                     </td>
@@ -467,7 +468,7 @@
                                         <input
                                             type="text"
                                             name="mother_name[{{ $data->id }}]"
-                                            class="form-control row-input hidden px-2 md:h-[20px] md:w-[100px]"
+                                            class="form-control row-input hidden px-2 py-3 rounded-lg md:h-[20px] md:w-[100px]"
                                             value=" {{ $data->mother_name }}"
                                         />
                                     </td>
@@ -476,7 +477,7 @@
                                         <input
                                             type="text"
                                             name="mother_nid[{{ $data->id }}]"
-                                            class="form-control row-input hidden px-2 md:h-[30px] md:w-[100px]"
+                                            class="form-control row-input hidden px-2 py-3 rounded-lg md:h-[30px] md:w-[100px]"
                                             value="{{ $data->mother_nid }}"
                                         />
                                     </td>
@@ -485,7 +486,7 @@
                                         <input
                                             type="text"
                                             name="birth_date[{{ $data->id }}]"
-                                            class="form-control row-input hidden px-2 md:h-[20px] md:w-[100px]"
+                                            class="form-control row-input hidden px-2 py-3 rounded-lg md:h-[20px] md:w-[100px]"
                                             value="{{ $data->birth_date }}"
                                         />
                                     </td>
@@ -494,7 +495,7 @@
                                         <input
                                             type="text"
                                             name="gender[{{ $data->id }}]"
-                                            class="form-control row-input hidden px-2 md:h-[20px] md:w-[100px]"
+                                            class="form-control row-input hidden px-2 py-3 rounded-lg md:h-[20px] md:w-[80px]"
                                             value=" {{ $data->gender }}"
                                         />
                                     </td>
@@ -503,7 +504,7 @@
                                         <input
                                             type="text"
                                             name="religious[{{ $data->id }}]"
-                                            class="form-control row-input hidden px-2 md:h-[20px] md:w-[100px]"
+                                            class="form-control row-input hidden px-2 py-3 rounded-lg md:h-[20px] md:w-[80px]"
                                             value=" {{ $data->religious }}"
                                         />
                                     </td>
@@ -512,7 +513,7 @@
                                         <input
                                             type="text"
                                             name="blood_group[{{ $data->id }}]"
-                                            class="form-control row-input hidden px-2 md:h-[20px] md:w-[100px]"
+                                            class="form-control row-input hidden px-2 py-3 rounded-lg md:h-[20px] md:w-[40px]"
                                             value="{{ $data->blood_group }}"
                                         />
                                     </td>
@@ -521,7 +522,7 @@
                                         <input
                                             type="text"
                                             name="mobile_no[{{ $data->id }}]"
-                                            class="form-control row-input hidden px-2 md:h-[20px] md:w-[100px]"
+                                            class="form-control row-input hidden px-2 py-3 rounded-lg md:h-[20px] md:w-[120px]"
                                             value=" {{ $data->mobile_no }}"
                                         />
                                     </td>
@@ -533,7 +534,7 @@
                 <div class="mb-4 mt-5 flex justify-end px-4">
                     <button
                         type="submit"
-                        class="mb-2 me-2 flex items-center justify-center gap-3 rounded-md bg-blue-700 px-7 py-3.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        class="mb-2 me-2 flex items-center justify-center gap-3 rounded-md bg-blue-700 px-7 py-3.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300      "
                     >
                         <span>Update</span>
                         <span>
@@ -564,38 +565,64 @@
     </div>
 
     <script>
-        // Function to toggle between displaying text and input fields
-        function toggleRowEditing(rowIndex) {
-            var row = document.querySelector('tbody').children[rowIndex];
-            var inputs = row.querySelectorAll('.row-input');
-            var dataFields = row.querySelectorAll('.row-data');
-            for (var i = 0; i < inputs.length; i++) {
-                inputs[i].classList.toggle('hidden');
-                dataFields[i].classList.toggle('hidden');
+document.addEventListener('DOMContentLoaded', function () {
+    const selectAllCheckbox = document.getElementById('select-all-checkbox');
+    const rowCheckboxes = document.querySelectorAll('.row-checkbox');
+
+    function toggleRowInputs(row, visible) {
+        const inputs = row.querySelectorAll('.row-input');
+        const spans = row.querySelectorAll('.row-data');
+
+        inputs.forEach(function (input) {
+            if (visible) {
+                input.classList.remove('hidden');
+            } else {
+                input.classList.add('hidden');
             }
-        }
-
-        // Event listener for checkbox change
-        document.querySelectorAll('.row-checkbox').forEach(function (checkbox) {
-            checkbox.addEventListener('change', function () {
-                var rowIndex = this.getAttribute('data-row-index');
-                toggleRowEditing(rowIndex);
-            });
         });
 
-        // Event listener for update button click
-        document.getElementById('update-btn').addEventListener('click', function () {
-            // Handle update logic here
+        spans.forEach(function (span) {
+            if (visible) {
+                span.classList.add('hidden');
+            } else {
+                span.classList.remove('hidden');
+            }
         });
+    }
 
-        // Event listener for select all checkbox
-        document.getElementById('select-all-checkbox').addEventListener('change', function () {
-            var checkboxes = document.querySelectorAll('.row-checkbox');
-            checkboxes.forEach(function (checkbox) {
-                checkbox.checked = this.checked;
-            });
+    function updateRowInputsVisibility() {
+        rowCheckboxes.forEach(function (checkbox) {
+            const row = checkbox.closest('tr');
+            const isChecked = checkbox.checked;
+            toggleRowInputs(row, isChecked);
         });
+    }
+
+    
+
+    selectAllCheckbox.addEventListener('change', function () {
+        const isChecked = selectAllCheckbox.checked;
+        rowCheckboxes.forEach(function (checkbox) {
+            checkbox.checked = isChecked;
+        });
+        updateRowInputsVisibility();
+      
+    });
+
+    rowCheckboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+            const isChecked = this.checked;
+            const row = this.closest('tr');
+            toggleRowInputs(row, isChecked);
+        
+        });
+    });
+
+  
+});
+
     </script>
+
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>

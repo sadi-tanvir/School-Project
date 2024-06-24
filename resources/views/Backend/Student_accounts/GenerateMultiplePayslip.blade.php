@@ -16,34 +16,25 @@ Generate Multiple Payslip
 
     <div class="w-full border mx-auto p-5 space-y-10">
         <div>
-            @csrf
             <div class="grid grid-cols-12 items-center gap-5">
                 {{-- month --}}
                 <div class="col-span-2">
                     <div class="p-4">
                         <label for="month" class="block text-sm font-medium text-zinc-700">Month:</label>
                         <div class="mt-1 relative">
-                            <button type="button" id="toggleMonthDropdown"
-                                class="relative w-full bg-white border border-zinc-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <button type="button" id="toggleMonthDropdown" class="relative w-full bg-white border border-zinc-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                 <span class="block truncate">Select Month</span>
                                 <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                                    <svg class="h-5 w-5 text-zinc-400" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                            clip-rule="evenodd" />
+                                    <svg class="h-5 w-5 text-zinc-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                     </svg>
                                 </span>
                             </button>
-                            <div id="monthDropdown"
-                                class="hidden absolute mt-1 w-full rounded-md bg-white shadow-lg  z-50">
-                                <ul id="monthUnorderedList" tabindex="-1" role="listbox" aria-labelledby="listbox-label"
-                                    aria-activedescendant="listbox-item-3"
-                                    class="max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+                            <div id="monthDropdown" class="hidden absolute mt-1 w-full rounded-md bg-white shadow-lg  z-50">
+                                <ul id="monthUnorderedList" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-item-3" class="max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
                                     <li class="text-zinc-900 cursor-default select-none relative py-2 pl-3 pr-9">
                                         <div class="flex items-center">
-                                            <input id="month_select_all" type="checkbox"
-                                                class="h-4 w-4 text-indigo-600 border-zinc-300 rounded focus:ring-indigo-500">
+                                            <input id="month_select_all" type="checkbox" class="h-4 w-4 text-indigo-600 border-zinc-300 rounded focus:ring-indigo-500">
                                             <label for="month_select_all" class="font-normal ml-3 block truncate">Select
                                                 All</label>
                                         </div>
@@ -56,21 +47,17 @@ Generate Multiple Payslip
 
                 {{-- year --}}
                 <div class="">
-                    <label for="year" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year
+                    <label for="year" class="block mb-2 text-sm font-medium text-gray-900  ">Year
                         :</label>
-                    <input type="text" value="" name="year" id="year"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full"
-                        placeholder="" />
+                    <input type="text" value="" name="year" id="year" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full" placeholder="" />
                 </div>
 
                 {{-- last pay date --}}
                 <div class="">
-                    <label for="last_pay_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last
+                    <label for="last_pay_date" class="block mb-2 text-sm font-medium text-gray-900  ">Last
                         Pay
                         Date:</label>
-                    <input type="date" value="" name="last_pay_date" id="last_pay_date"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full"
-                        placeholder="" />
+                    <input type="date" value="" name="last_pay_date" id="last_pay_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full" placeholder="" />
                 </div>
 
                 {{-- class --}}
@@ -78,27 +65,19 @@ Generate Multiple Payslip
                     <div class="p-4">
                         <label for="month" class="block text-sm font-medium text-zinc-700">Class:</label>
                         <div class="mt-1 relative">
-                            <button type="button" id="toggleClassDropdown"
-                                class="relative w-full bg-white border border-zinc-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <button type="button" id="toggleClassDropdown" class="relative w-full bg-white border border-zinc-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                 <span class="block truncate">Select Class</span>
                                 <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                                    <svg class="h-5 w-5 text-zinc-400" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                            clip-rule="evenodd" />
+                                    <svg class="h-5 w-5 text-zinc-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                     </svg>
                                 </span>
                             </button>
-                            <div id="classDropdown"
-                                class="hidden absolute mt-1 w-full rounded-md bg-white shadow-lg  z-50">
-                                <ul id="classUnorderedList" tabindex="-1" role="listbox" aria-labelledby="listbox-label"
-                                    aria-activedescendant="listbox-item-3"
-                                    class="max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+                            <div id="classDropdown" class="hidden absolute mt-1 w-full rounded-md bg-white shadow-lg  z-50">
+                                <ul id="classUnorderedList" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-item-3" class="max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
                                     <li class="text-zinc-900 cursor-default select-none relative py-2 pl-3 pr-9">
                                         <div class="flex items-center">
-                                            <input id="class_select_all" type="checkbox"
-                                                class="h-4 w-4 text-indigo-600 border-zinc-300 rounded focus:ring-indigo-500">
+                                            <input id="class_select_all" type="checkbox" class="h-4 w-4 text-indigo-600 border-zinc-300 rounded focus:ring-indigo-500">
                                             <label for="class_select_all" class="font-normal ml-3 block truncate">Select
                                                 All</label>
                                         </div>
@@ -111,61 +90,67 @@ Generate Multiple Payslip
 
                 {{-- group --}}
                 <div class="">
-                    <label for="group"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Group:</label>
-                    <select id="group" name="group"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <label for="group" class="block mb-2 text-sm font-medium text-gray-900  ">Group:</label>
+                    <select id="group" name="group" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option selected>Select</option>
                     </select>
                 </div>
 
                 {{-- pay slip types --}}
                 <div class="">
-                    <label for="pay_slip_type"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">PaySlip
+                    <label for="pay_slip_type" class="block mb-2 text-sm font-medium text-gray-900  ">PaySlip
                         :</label>
-                    <select id="pay_slip_type" name="pay_slip_type"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <select id="pay_slip_type" name="pay_slip_type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option selected>Select</option>
+                    </select>
+                </div>
+
+                {{-- Section --}}
+                <div class="">
+                    <label for="section" class="block mb-2 text-sm font-medium text-gray-900  ">Section:</label>
+                    <select id="section" name="section" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option selected>Select</option>
+                    </select>
+                </div>
+
+                {{-- category --}}
+                <div class="">
+                    <label for="category" class="block mb-2 text-sm font-medium text-gray-900  ">Category:</label>
+                    <select id="category" name="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option selected>Select</option>
                     </select>
                 </div>
 
                 {{-- academic session --}}
                 <div class="">
-                    <label for="academic_session"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Session
+                    <label for="academic_session" class="block mb-2 text-sm font-medium text-gray-900  ">Session
                         :</label>
-                    <select id="academic_session" name="academic_session"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <select id="academic_session" name="academic_session" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option selected>Select</option>
                     </select>
                 </div>
 
                 {{-- status --}}
-                <div class="">
-                    <label for="status"
-                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status:</label>
-                    <select id="status" name="status"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                {{-- <div class="">
+                    <label for="status" class="block mb-2 text-sm font-medium text-gray-900  ">Status:</label>
+                    <select id="status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option selected>Select</option>
                         <option value="New">New</option>
                         <option value="Old">Old</option>
                     </select>
-                </div>
+                </div> --}}
 
                 {{-- academic_year --}}
                 <div class="">
-                    <label for="academic_year" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year
+                    <label for="academic_year" class="block mb-2 text-sm font-medium text-gray-900  ">Year
                         :</label>
-                    <select id="academic_year" name="academic_year"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <select id="academic_year" name="academic_year" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option selected>Select</option>
                     </select>
                 </div>
 
                 <div>
-                    <button id="getInformation" type="submit"
-                        class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center uppercase mt-5">
+                    <button id="getInformation" type="submit" class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center uppercase mt-5">
                         get data
                     </button>
                 </div>
@@ -180,7 +165,7 @@ Generate Multiple Payslip
             <div class="">
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg h-auto max-h-[400px] overflow-scroll">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
-                        <thead class="text-xs text-white uppercase bg-blue-600 dark:bg-gray-700 dark:text-gray-400">
+                        <thead class="text-xs text-white uppercase bg-blue-600  dark:text-gray-400">
                             <tr id="table_header_row">
                                 <th scope="col" class="px-6 py-3">
                                     SL
@@ -200,16 +185,25 @@ Generate Multiple Payslip
                                 <th scope="col" class="px-6 py-3 bg-blue-500">
                                     ROLL
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" class="px-6 py-3 ">
+                                    Group
+                                </th>
+                                <th scope="col" class="px-6 py-3 bg-blue-500">
+                                    Section
+                                </th>
+                                <th scope="col" class="px-6 py-3 ">
+                                    Category
+                                </th>
+                                <th scope="col" class="px-6 py-3 bg-blue-500">
                                     TYPE
                                 </th>
-                                <th scope="col" class="px-6 py-3 bg-blue-500">
+                                <th scope="col" class="px-6 py-3 ">
                                     AMOUNT
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                <th scope="col" class="px-6 py-3 bg-blue-500">
                                     WAIVER
                                 </th>
-                                <th scope="col" class="px-6 py-3 bg-blue-500">
+                                <th scope="col" class="px-6 py-3">
                                     PAYABLE
                                 </th>
                             </tr>
@@ -223,19 +217,15 @@ Generate Multiple Payslip
                 <div class="mt-20 flex justify-between">
                     <h1>
                         Total =
-                        <input readonly type="number" value="" id="totalStudents"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1"
-                            placeholder="" />
+                        <input readonly type="number" value="" id="totalStudents" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1" placeholder="" />
                     </h1>
 
                     <div class="flex space-x-10">
 
-                        <button type="submit"
-                            class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-16 py-1 text-center">
+                        <button type="submit" class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-16 py-1 text-center">
                             Save
                         </button>
-                        <button type="button"
-                            class="text-white bg-gradient-to-br from-red-600 to-red-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-16 py-1 text-center">
+                        <button type="button" class="text-white bg-gradient-to-br from-red-600 to-red-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-16 py-1 text-center">
                             Close
                         </button>
                     </div>
@@ -254,8 +244,8 @@ Generate Multiple Payslip
         const errorContainer = document.getElementById('errorContainer');
         const errorDiv = document.createElement('div');
         errorDiv.role = "alert";
-        errorDiv.classList.add("p-4", "mb-4", "text-sm", "text-red-800", "rounded-lg", "bg-red-50", "dark:bg-gray-800",
-            "dark:text-red-400");
+        errorDiv.classList.add("p-4", "mb-4", "text-sm", "text-red-800", "rounded-lg", "bg-red-50", "dark:bg-gray-800"
+            , "dark:text-red-400");
         errorDiv.textContent = message;
         const errorMessage = document.createElement('div');
         errorMessage.classList.add("font-medium");
@@ -330,18 +320,22 @@ Generate Multiple Payslip
 
 
     document.addEventListener('DOMContentLoaded', () => {
-        const schoolCode = {!! json_encode($school_code) !!};
-        const classes = {!! json_encode($classes) !!};
-        const groups = {!! json_encode($groups) !!};
-        const PaySlipTypes = {!! json_encode($PaySlipTypes) !!};
-        const academicSessions = {!! json_encode($academicSessions) !!};
-        const academicYears = {!! json_encode($academicYears) !!};
+        const schoolCode = @json($school_code);
+        const classes = @json($classes);
+        const groups = @json($groups);
+        const sections = @json($sections);
+        const categories = @json($categories);
+        const PaySlipTypes = @json($PaySlipTypes);
+        const academicSessions = @json($academicSessions);
+        const academicYears = @json($academicYears);
 
         const monthUnorderedList = document.getElementById('monthUnorderedList');
         const month_select_all = document.getElementById('month_select_all');
         const classUnorderedList = document.getElementById('classUnorderedList');
         const class_select_all = document.getElementById('class_select_all');
         const group = document.getElementById('group');
+        const section = document.getElementById('section');
+        const category = document.getElementById('category');
         const pay_slip_type = document.getElementById('pay_slip_type');
         const academic_session = document.getElementById('academic_session');
 
@@ -351,15 +345,15 @@ Generate Multiple Payslip
         year.value = currentYear;
 
         // set months
-        const monthList = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august',
-            'september', 'october', 'november', 'december'
+        const monthList = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august'
+            , 'september', 'october', 'november', 'december'
         ];
 
         monthList.forEach(element => {
             const monthLi = document.createElement('li');
-            monthLi.classList.add("text-zinc-900", "cursor-default", "select-none", "relative", "py-2",
-                "pl-3",
-                "pr-9");
+            monthLi.classList.add("text-zinc-900", "cursor-default", "select-none", "relative", "py-2"
+                , "pl-3"
+                , "pr-9");
             const monthDiv = document.createElement('div');
             monthDiv.classList.add("flex", "items-center");
 
@@ -367,8 +361,8 @@ Generate Multiple Payslip
             checkboxCell.type = "checkbox";
             checkboxCell.id = element;
             checkboxCell.name = "month_row_checkbox";
-            checkboxCell.classList.add("h-4", "w-4", "text-indigo-600", "border-zinc-300", "rounded",
-                "focus:ring-indigo-500")
+            checkboxCell.classList.add("h-4", "w-4", "text-indigo-600", "border-zinc-300", "rounded"
+                , "focus:ring-indigo-500")
 
             const checkboxLabel = document.createElement('label');
             checkboxLabel.htmlFor = element;
@@ -395,9 +389,9 @@ Generate Multiple Payslip
         // set class
         classes.forEach(element => {
             const classLi = document.createElement('li');
-            classLi.classList.add("text-zinc-900", "cursor-default", "select-none", "relative", "py-2",
-                "pl-3",
-                "pr-9");
+            classLi.classList.add("text-zinc-900", "cursor-default", "select-none", "relative", "py-2"
+                , "pl-3"
+                , "pr-9");
             const classDiv = document.createElement('div');
             classDiv.classList.add("flex", "items-center");
 
@@ -405,8 +399,8 @@ Generate Multiple Payslip
             checkboxCell.type = "checkbox";
             checkboxCell.id = element.class_name;
             checkboxCell.name = "class_row_checkbox";
-            checkboxCell.classList.add("h-4", "w-4", "text-indigo-600", "border-zinc-300", "rounded",
-                "focus:ring-indigo-500")
+            checkboxCell.classList.add("h-4", "w-4", "text-indigo-600", "border-zinc-300", "rounded"
+                , "focus:ring-indigo-500")
 
             const checkboxLabel = document.createElement('label');
             checkboxLabel.htmlFor = element.class_name;
@@ -445,6 +439,22 @@ Generate Multiple Payslip
             paySlipOption.value = paySlip.pay_slip_type_name;
             paySlipOption.textContent = paySlip.pay_slip_type_name;
             pay_slip_type.appendChild(paySlipOption);
+        })
+
+        // set payslip type
+        sections.forEach((sectionElem) => {
+            const sectionOption = document.createElement('option');
+            sectionOption.value = sectionElem.section_name;
+            sectionOption.textContent = sectionElem.section_name;
+            section.appendChild(sectionOption);
+        })
+
+        // set payslip type
+        categories.forEach((categoryElem) => {
+            const categoryOption = document.createElement('option');
+            categoryOption.value = categoryElem.category_name;
+            categoryOption.textContent = categoryElem.category_name;
+            category.appendChild(categoryOption);
         })
 
 
@@ -500,8 +510,8 @@ Generate Multiple Payslip
             selectedClasses = getSelectedClasses();
             selectedMonths = getSelectedMonths();
             fetch(
-                `/dashboard/studentAccounts/getStudentInformation/${schoolCode}?months=${selectedMonths}&classes=${selectedClasses}&group=${group.value}&pay_slip_type=${pay_slip_type.value}&year=${year.value}&academic_session=${academic_session.value}&academic_year=${academic_year.value}`
-            )
+                    `/dashboard/studentAccounts/getStudentInformation/${schoolCode}?months=${selectedMonths}&classes=${selectedClasses}&group=${group.value}&section=${section.value}&category=${category.value}&pay_slip_type=${pay_slip_type.value}&year=${year.value}&academic_session=${academic_session.value}&academic_year=${academic_year.value}`
+                )
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -513,7 +523,7 @@ Generate Multiple Payslip
                         showError('There is no data found')
                         return;
                     }
-                    console.log('from multiple', data);
+                    console.log('Success:', data);
                     updateTableContent(data)
                 })
                 .catch(error => {
@@ -528,15 +538,13 @@ Generate Multiple Payslip
             monthList.forEach((month) => {
                 data[month]?.forEach(element => {
                     if (element.students.length > 0) {
-                        // console.log(element);
                         element.students.forEach((student, index) => {
                             if (student.pay_slip_amount > 0) {
-                                console.log(student);
                                 const tr = document.createElement('tr');
-                                tr.classList.add('odd:bg-white', 'odd:dark:bg-gray-900',
-                                    'even:bg-gray-50',
-                                    'even:dark:bg-gray-800', 'border-b',
-                                    'dark:border-gray-700');
+                                tr.classList.add('odd:bg-white', 'odd:dark:bg-gray-900'
+                                    , 'even:bg-gray-50'
+                                    , 'even:dark:bg-gray-800', 'border-b'
+                                    , 'dark:border-gray-700');
 
 
                                 // create serial index column
@@ -547,8 +555,8 @@ Generate Multiple Payslip
 
                                 // create month_year column
                                 const monthYearTD = document.createElement('td');
-                                monthYearTD.classList.add("px-6", "py-4",
-                                    'overflow-hidden')
+                                monthYearTD.classList.add("px-6", "py-4"
+                                    , 'overflow-hidden')
                                 monthYearTD.style.maxWidth = "100px";
                                 const monthYearInputBox = document.createElement(
                                     'input');
@@ -556,8 +564,8 @@ Generate Multiple Payslip
                                 monthYearInputBox.name =
                                     `input_month_year[${student.student_id}][${student.month_year}]`;
                                 monthYearInputBox.value = student.month_year;
-                                monthYearInputBox.classList.add('border-0', 'w-fit',
-                                    'focus:ring-0')
+                                monthYearInputBox.classList.add('border-0', 'w-fit'
+                                    , 'focus:ring-0')
                                 monthYearInputBox.readOnly = true;
                                 monthYearTD.appendChild(monthYearInputBox);
                                 tr.appendChild(monthYearTD);
@@ -566,16 +574,16 @@ Generate Multiple Payslip
                                 // create student_id column
                                 const studentId_TD = document.createElement('td');
                                 studentId_TD.style.maxWidth = "100px";
-                                studentId_TD.classList.add("px-6", "py-4",
-                                    'overflow-hidden')
+                                studentId_TD.classList.add("px-6", "py-4"
+                                    , 'overflow-hidden')
                                 const studentIdInputBox = document.createElement(
                                     'input');
                                 studentIdInputBox.type = 'text'
                                 studentIdInputBox.name =
                                     `input_student_id[${student.student_id}]`;
                                 studentIdInputBox.value = student.student_id;
-                                studentIdInputBox.classList.add('border-0', 'w-fit',
-                                    'focus:ring-0')
+                                studentIdInputBox.classList.add('border-0', 'w-fit'
+                                    , 'focus:ring-0')
                                 studentIdInputBox.readOnly = true;
                                 studentId_TD.appendChild(studentIdInputBox);
                                 tr.appendChild(studentId_TD);
@@ -584,16 +592,16 @@ Generate Multiple Payslip
                                 // create STUDENT NAME column
                                 const studentName_TD = document.createElement('td');
                                 studentName_TD.style.maxWidth = "100px";
-                                studentName_TD.classList.add("px-6", "py-4",
-                                    'overflow-hidden')
+                                studentName_TD.classList.add("px-6", "py-4"
+                                    , 'overflow-hidden')
                                 const studentNameInputBox = document.createElement(
                                     'input');
                                 studentNameInputBox.type = 'text'
                                 studentNameInputBox.name =
                                     `input_name[${student.student_id}]`;
                                 studentNameInputBox.value = student.name;
-                                studentNameInputBox.classList.add('border-0', 'w-fit',
-                                    'focus:ring-0')
+                                studentNameInputBox.classList.add('border-0', 'w-fit'
+                                    , 'focus:ring-0')
                                 studentNameInputBox.readOnly = true;
                                 studentName_TD.appendChild(studentNameInputBox);
                                 tr.appendChild(studentName_TD);
@@ -602,16 +610,12 @@ Generate Multiple Payslip
                                 // create student class column
                                 const studentClass_TD = document.createElement('td');
                                 studentClass_TD.style.maxWidth = "100px";
-                                studentClass_TD.classList.add("px-6", "py-4",
-                                    'overflow-hidden')
-                                const studentClassInputBox = document.createElement(
-                                    'input');
+                                studentClass_TD.classList.add("px-6", "py-4", 'overflow-hidden')
+                                const studentClassInputBox = document.createElement('input');
                                 studentClassInputBox.type = 'text'
-                                studentClassInputBox.name =
-                                    `input_Class_name[${student.student_id}]`;
+                                studentClassInputBox.name = `input_Class_name[${student.student_id}]`;
                                 studentClassInputBox.value = student.Class_name;
-                                studentClassInputBox.classList.add('border-0', 'w-fit',
-                                    'focus:ring-0')
+                                studentClassInputBox.classList.add('border-0', 'w-fit', 'focus:ring-0')
                                 studentClassInputBox.readOnly = true;
                                 studentClass_TD.appendChild(studentClassInputBox);
                                 tr.appendChild(studentClass_TD);
@@ -621,34 +625,64 @@ Generate Multiple Payslip
                                 // create student roll column
                                 const studentRoll_TD = document.createElement('td');
                                 studentRoll_TD.style.maxWidth = "100px";
-                                studentRoll_TD.classList.add("px-6", "py-4",
-                                    'overflow-hidden')
-                                const studentRollInputBox = document.createElement(
-                                    'input');
+                                studentRoll_TD.classList.add("px-6", "py-4", 'overflow-hidden')
+                                const studentRollInputBox = document.createElement('input');
                                 studentRollInputBox.type = 'text'
-                                studentRollInputBox.name =
-                                    `input_student_roll[${student.student_id}]`;
+                                studentRollInputBox.name = `input_student_roll[${student.student_id}]`;
                                 studentRollInputBox.value = student.student_roll;
-                                studentRollInputBox.classList.add('border-0', 'w-fit',
-                                    'focus:ring-0')
+                                studentRollInputBox.classList.add('border-0', 'w-fit', 'focus:ring-0')
                                 studentRollInputBox.readOnly = true;
                                 studentRoll_TD.appendChild(studentRollInputBox);
                                 tr.appendChild(studentRoll_TD);
 
+                                // student groups
+                                const studentGroup_TD = document.createElement('td');
+                                studentGroup_TD.style.maxWidth = "100px";
+                                studentGroup_TD.classList.add("px-6", "py-4", 'overflow-hidden')
+                                const studentGroupInputBox = document.createElement('input');
+                                studentGroupInputBox.type = 'text'
+                                studentGroupInputBox.name = `input_group[${student.student_id}]`;
+                                studentGroupInputBox.value = student.group;
+                                studentGroupInputBox.classList.add('border-0', 'w-fit', 'focus:ring-0')
+                                studentGroupInputBox.readOnly = true;
+                                studentGroup_TD.appendChild(studentGroupInputBox);
+                                tr.appendChild(studentGroup_TD);
+
+                                // student sections
+                                const studentSection_TD = document.createElement('td');
+                                studentSection_TD.style.maxWidth = "100px";
+                                studentSection_TD.classList.add("px-6", "py-4", 'overflow-hidden')
+                                const studentSectionInputBox = document.createElement('input');
+                                studentSectionInputBox.type = 'text'
+                                studentSectionInputBox.name = `input_section[${student.student_id}]`;
+                                studentSectionInputBox.value = student.section;
+                                studentSectionInputBox.classList.add('border-0', 'w-fit', 'focus:ring-0')
+                                studentSectionInputBox.classList.readOnly = true;
+                                studentSection_TD.appendChild(studentSectionInputBox);
+                                tr.appendChild(studentSection_TD);
+
+                                // student sections
+                                const studentCategory_TD = document.createElement('td');
+                                studentCategory_TD.style.maxWidth = "100px";
+                                studentCategory_TD.classList.add("px-6", "py-4", 'overflow-hidden')
+                                const studentCategoryInputBox = document.createElement('input');
+                                studentCategoryInputBox.type = 'text'
+                                studentCategoryInputBox.name = `input_category[${student.student_id}]`;
+                                studentCategoryInputBox.value = student.category;
+                                studentCategoryInputBox.classList.add('border-0', 'w-fit', 'focus:ring-0')
+                                studentCategoryInputBox.classList.readOnly = true;
+                                studentCategory_TD.appendChild(studentCategoryInputBox);
+                                tr.appendChild(studentCategory_TD);
 
                                 // create payslip type column
                                 const payslipType_TD = document.createElement('td');
                                 payslipType_TD.style.maxWidth = "100px";
-                                payslipType_TD.classList.add("px-6", "py-4",
-                                    'overflow-hidden')
-                                const payslipTypeInputBox = document.createElement(
-                                    'input');
+                                payslipType_TD.classList.add("px-6", "py-4", 'overflow-hidden')
+                                const payslipTypeInputBox = document.createElement('input');
                                 payslipTypeInputBox.type = 'text'
-                                payslipTypeInputBox.name =
-                                    `input_pay_slip_type[${student.student_id}]`;
+                                payslipTypeInputBox.name = `input_pay_slip_type[${student.student_id}]`;
                                 payslipTypeInputBox.value = student.pay_slip_type;
-                                payslipTypeInputBox.classList.add('border-0', 'w-fit',
-                                    'focus:ring-0')
+                                payslipTypeInputBox.classList.add('border-0', 'w-fit', 'focus:ring-0')
                                 payslipTypeInputBox.readOnly = true;
                                 payslipType_TD.appendChild(payslipTypeInputBox);
                                 tr.appendChild(payslipType_TD);
@@ -659,16 +693,14 @@ Generate Multiple Payslip
                                 // create payslip amount column
                                 const payslipAmount_TD = document.createElement('td');
                                 payslipAmount_TD.style.maxWidth = "100px";
-                                payslipAmount_TD.classList.add("px-6", "py-4",
-                                    'overflow-hidden')
+                                payslipAmount_TD.classList.add("px-6", "py-4", 'overflow-hidden')
                                 const payslipAmountInputBox = document.createElement(
                                     'input');
                                 payslipAmountInputBox.type = 'text'
-                                payslipAmountInputBox.name =
-                                    `input_pay_slip_amount[${student.student_id}]`;
+                                payslipAmountInputBox.name = `input_pay_slip_amount[${student.student_id}]`;
                                 payslipAmountInputBox.value = student.pay_slip_amount;
-                                payslipAmountInputBox.classList.add('border-0', 'w-fit',
-                                    'focus:ring-0')
+                                payslipAmountInputBox.classList.add('border-0', 'w-fit'
+                                    , 'focus:ring-0')
                                 payslipAmountInputBox.readOnly = true;
                                 payslipAmount_TD.appendChild(payslipAmountInputBox);
                                 tr.appendChild(payslipAmount_TD);
@@ -678,16 +710,13 @@ Generate Multiple Payslip
                                 // create student WAIVER column
                                 const waiverAmount_TD = document.createElement('td');
                                 waiverAmount_TD.style.maxWidth = "100px";
-                                waiverAmount_TD.classList.add("px-6", "py-4",
-                                    'overflow-hidden')
-                                const waiverAmountInputBox = document.createElement(
-                                    'input');
+                                waiverAmount_TD.classList.add("px-6", "py-4", 'overflow-hidden')
+                                const waiverAmountInputBox = document.createElement('input');
                                 waiverAmountInputBox.type = 'text'
                                 waiverAmountInputBox.name =
                                     `input_waiver[${student.student_id}]`;
                                 waiverAmountInputBox.value = student.waiver;
-                                waiverAmountInputBox.classList.add('border-0', 'w-fit',
-                                    'focus:ring-0')
+                                waiverAmountInputBox.classList.add('border-0', 'w-fit', 'focus:ring-0')
                                 waiverAmountInputBox.readOnly = true;
                                 waiverAmount_TD.appendChild(waiverAmountInputBox);
                                 tr.appendChild(waiverAmount_TD);
@@ -697,53 +726,34 @@ Generate Multiple Payslip
                                 // create student PAYABLE column
                                 const payableAmount_TD = document.createElement('td');
                                 payableAmount_TD.style.maxWidth = "100px";
-                                payableAmount_TD.classList.add("px-6", "py-4",
-                                    'overflow-hidden')
+                                payableAmount_TD.classList.add("px-6", "py-4", 'overflow-hidden')
                                 const payableAmountInputBox = document.createElement(
                                     'input');
                                 payableAmountInputBox.type = 'text'
-                                payableAmountInputBox.name =
-                                    `input_payable[${student.student_id}]`;
+                                payableAmountInputBox.name = `input_payable[${student.student_id}]`;
                                 payableAmountInputBox.value = student.pay_slip_amount -
                                     student.waiver;
-                                payableAmountInputBox.classList.add('border-0', 'w-fit',
-                                    'focus:ring-0')
+                                payableAmountInputBox.classList.add('border-0', 'w-fit', 'focus:ring-0')
                                 payableAmountInputBox.readOnly = true;
                                 payableAmount_TD.appendChild(payableAmountInputBox);
                                 tr.appendChild(payableAmount_TD);
-                                // console.log('student_payable_amount_key ----',
                                 // student_payable_amount_key);
 
 
 
                                 // hidden input fields
-                                // student groups
-                                const studentGroup_TD = document.createElement('td');
-                                studentGroup_TD.classList.add('hidden')
-                                const studentGroupInputBox = document.createElement(
+                                // class position
+                                const classPosition_TD = document.createElement('td');
+                                classPosition_TD.classList.add('hidden')
+                                const classPositionInputBox = document.createElement(
                                     'input');
-                                studentGroupInputBox.type = 'text'
-                                studentGroupInputBox.name =
-                                    `input_group[${student.student_id}]`;
-                                studentGroupInputBox.value = student.group;
-                                studentGroupInputBox.classList.add('hidden')
-                                studentGroup_TD.appendChild(studentGroupInputBox);
-                                tr.appendChild(studentGroup_TD);
-
-                                // student sections
-                                const studentSection_TD = document.createElement('td');
-                                studentSection_TD.classList.add('hidden')
-                                const studentSectionInputBox = document.createElement(
-                                    'input');
-                                studentSectionInputBox.type = 'text'
-                                studentSectionInputBox.name =
-                                    `input_section[${student.student_id}]`;
-                                studentSectionInputBox.value = student.section;
-                                studentSectionInputBox.classList.add('hidden')
-                                studentSection_TD.appendChild(studentSectionInputBox);
-                                tr.appendChild(studentSection_TD);
-
-
+                                classPositionInputBox.type = 'text'
+                                classPositionInputBox.name =
+                                    `input_class_position[${student.student_id}]`;
+                                classPositionInputBox.value = student.class_position;
+                                classPositionInputBox.classList.add('hidden')
+                                classPosition_TD.appendChild(classPositionInputBox);
+                                tr.appendChild(classPosition_TD);
 
 
                                 // append table row into the table body
@@ -762,7 +772,7 @@ Generate Multiple Payslip
 
 
 
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
         const last_pay_date = document.getElementById('last_pay_date');
         const desiredMonth = new Date().getMonth();
         const desiredYear = new Date().getFullYear();
@@ -774,4 +784,5 @@ Generate Multiple Payslip
 
         document.getElementById('last_pay_date').value = lastPayDate.toISOString().slice(0, 10);
     });
+
 </script>

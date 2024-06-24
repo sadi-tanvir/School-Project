@@ -38,13 +38,12 @@ class StudentProfileController extends Controller
         $totalReceived = $payslips->sum('paid_amount');
         $totalWaiver = $payslips->sum('waiver');
         $totalDue = $payslips->sum('payable');
-        return view('Backend.Student.students(report).studentProfile', compact('student', 'payslips'));
+        return view('Backend.Student.students(report).studentProfile', compact('student', 'payslips', 'totalAmount', 'totalReceived', 'totalWaiver', 'totalDue'));
 
     }
 
     public function search(Request $request, $school_code)
     {
-
         $id = $request->input('id');
 
         if ($id) {

@@ -46,7 +46,7 @@ Student Invoice
                 <h1 class="text-2xl font-bold text-gray-700 mb-3 mt-10">Payslip Inforamation</h1>
                 <div class="w-2/3 relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-white uppercase bg-blue-600 dark:bg-gray-700 dark:text-gray-400">
+                        <thead class="text-xs text-white uppercase bg-blue-600  dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
                                     <input id="student_header_checkbox" checked type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
@@ -71,7 +71,7 @@ Student Invoice
                         <tbody>
                             @foreach ($payslipInfo as $key => $payslip)
                             <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                                <th scope="row" class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <th scope="row" class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap  ">
                                     <div class="mx-auto">
                                         <input id="" type="checkbox" checked value="selected" name="select_payslip[{{ $payslip->pay_slip_type }}]" class="w-4 h-4 ml-3 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
                                     </div>
@@ -103,6 +103,7 @@ Student Invoice
             <input class="hidden" name="class" value="{{ $student->Class_name }}" />
             <input class="hidden" name="group" value="{{ isset($student->group) ? $student->group : "N/A"}}" />
             <input class="hidden" name="section" value="{{ isset($student->section) ? $student->section : "N/A"}}" />
+            <input class="hidden" name="category" value="{{ isset($student->category) ? $student->category : "N/A"}}" />
             <input class="hidden" type="text" name="collected_by_name" value="{{ isset($schoolAdminData->name) ? $schoolAdminData->name : 'Unknown' }}">
             <input class="hidden" type="text" name="collected_by_email" value="{{ isset($schoolAdminData->email) ? $schoolAdminData->email : 'Unknown' }}">
             <input class="hidden" type="text" name="collected_by_phone" value="{{ isset($schoolAdminData->mobile_number) ? $schoolAdminData->mobile_number : 'Unknown' }}">
@@ -116,14 +117,14 @@ Student Invoice
                     </button>
 
                     <div class="flex items-center gap-2">
-                        <input checked id="pay_now" name="pay_now" type="checkbox" value="true" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 dark:bg-gray-700">
+                        <input checked id="pay_now" name="pay_now" type="checkbox" value="true" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 ">
                         <label for="pay_now" class="text-md font-medium text-gray-900">Pay Now</label>
                     </div>
 
                     {{-- last pay date --}}
                     <div class="flex items-center">
                         <div class="mb-4">
-                            <label for="last_pay_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Pay Date:</label>
+                            <label for="last_pay_date" class="block mb-2 text-sm font-medium text-gray-900  ">Last Pay Date:</label>
                             <input type="date" value="{{ date('Y-m-d') }}" name="last_pay_date" id="last_pay_date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full" placeholder="" />
                         </div>
                     </div>

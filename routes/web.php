@@ -382,7 +382,12 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/headwiseSummary/getPayslipReport/{schoolCode}', [HeadWiseSummaryController::class, 'GetPaySlipReport'])->name('headwiseSummary.getReports');
 
     Route::get('/transferToAccounts/{schoolCode}', [TransferToAccountsController::class, 'transferToAccounts'])->name('transferToAccounts');
+    // Paid Invoice
     Route::get('/paidInvoice/{schoolCode}', [PaidInvoiceController::class, 'paidInvoice'])->name('paidInvoice');
+    Route::get('/paidInvoice/voucherId/printInvoice/{schoolCode}/{voucher_id?}', [PaidInvoiceController::class, 'PrintInvoiceWithVoucherId'])->name('printPaidInvoice.voucherId');
+    Route::get('/paidInvoice/collectDate/printInvoice/{schoolCode}', [PaidInvoiceController::class, 'PrintInvoiceWithCollectDate'])->name('printPaidInvoice.collectDate');
+    Route::get('/paidInvoice/studentId/printInvoice/{schoolCode}', [PaidInvoiceController::class, 'PrintInvoiceWithStudentId'])->name('printPaidInvoice.studentId');
+
     Route::get('/othTransInquiry/{schoolCode}', [OuthTransInquiryController::class, 'othTransInquiry'])->name('othTransInquiry');
     Route::get('/ListOfdueOrPay/{schoolCode}', [ListOfDueOrPayController::class, 'ListOfdueOrPay'])->name('ListOfdueOrPay');
     Route::get('/listOfHeadWise/{schoolCode}', [ListOfHeadWiseController::class, 'listOfHeadWise'])->name('listOfHeadWise');
@@ -724,7 +729,6 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::post('/getSignatureData/{schoolCode}', [SetSignatureController::class, 'getSignatureData'])->name('get.signature.data');
     Route::post('/SetSignature/{schoolCode}', [SetSignatureController::class, 'processForm'])->name('store.signature');
 
-
     // Exam Setting End .............................................................................................................
 
 
@@ -766,10 +770,12 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::post('/waiverSetup/storeWaiberStudent/{schoolCode}', [WaiverSetupController::class, 'WaiverStudentListSetup'])->name('studentListWaiverSetup.store');
     // Report (Fees Setting) => All Fees
     Route::get('/reportFeesSettings/allFees/{schoolCode}', [AllFeesController::class, 'AllFeesView'])->name('allFeesReport.view');
+    Route::get('/allFees/getGroups/{schoolCode}', [AllFeesController::class, 'GetGroupsAccordingToClass'])->name('allFeesReport.getGroups');
     Route::get('/allFees/getData/{schoolCode}', [AllFeesController::class, 'GetAllFeesReportData'])->name('allFeesReport.getData');
     Route::get('/allFees/print/{schoolCode}', [AllFeesController::class, 'FeesReportDataPrint'])->name('allFeesReport.print');
     // Report (Fees Setting) => All Pay Slip
     Route::get('/reportFeesSettings/allPaySlip/{schoolCode}', [AllPaySlipController::class, 'AllPaySlipView'])->name('allPaySlipReport.view');
+    Route::get('/reportFeesSettings/allPaySlip/getGroups/{schoolCode}', [AllPaySlipController::class, 'GetGroupsAccordingToClass'])->name('allPaySlipReport.getGroups');
     Route::get('/allPaySlip/print/{schoolCode}', [AllPaySlipController::class, 'AllPaySlipPrint'])->name('allPaySlip.print');
     // Report (Fees Setting) => Individual Pay Slip
     Route::get('/reportFeesSettings/individualPaySlip/{schoolCode}', [IndividualPaySlipController::class, 'IndividualPaySlipView'])->name('individualPaySlipReport.view');
@@ -811,10 +817,14 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::post('/downloadAdmit/{schoolCode}', [PrintAdmitCardController::class, "downloadAdmit"])->name('downloadAdmitCard');
     Route::post('/print/get-groups/{schoolCode}', [PrintAdmitCardController::class, 'printGroups'])->name('print.get-groups');
     Route::post('/print/get-sections/{schoolCode}', [PrintAdmitCardController::class, 'printSections'])->name('print.get-sections');
+    Route::get('/get-student-ids/{schoolCode}', [PrintAdmitCardController::class, 'getStudentIds'])->name('getStudentIds');
+
 
     //Print Seat Plan
     Route::get('/printSeatPlan/{schoolCode}', [PrintSeatPlanController::class, "printSeatPlan"])->name('printSeatPlan');
     Route::post('/downloadPrint/{schoolCode}', [PrintSeatPlanController::class, "downloadPrint"])->name('downloadPrint');
+
+
     //Print Admit Instuction
     Route::get('/AddAdmitInstruction/{schoolCode}', [AddAdmitInstructionController::class, "AddAdmitInstruction"])->name('addAdmitinstruction');
     Route::post('/instructionInsert/{schoolCode}', [AddAdmitInstructionController::class, 'instructionInsert'])->name('store.instructionInsert');

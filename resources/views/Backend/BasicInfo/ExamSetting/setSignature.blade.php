@@ -21,10 +21,16 @@ Signature
             <div class="mr-10">
                 <select name="report_name"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
+                    @if ($reportName !== null)
+                    <option selected>{{$reportName}}</option>
+                    @else
                     <option disabled selected>Select</option>
                     @foreach ($reports as $report)
                         <option value="{{ $report->report_name }}">{{ $report->report_name }}</option>`
                     @endforeach
+                    @endif
+                    
+                    
                 </select>
             </div>
             <div>
@@ -45,7 +51,6 @@ Signature
         </div>
         <form id="dataForm" method="POST" action="{{ route('store.signature', $school_code) }}">
             @csrf
-
             <table id="data" class="w-full text-sm text-center rtl:text-right text-black">
                 <thead class="text-xs text-white uppercase bg-blue-600 border-b border-blue-400 ">
                     <tr>
@@ -63,21 +68,28 @@ Signature
                                 <input class="hidden" name="reportName" value="{{ $reportName }}" type="text">
                                 <input class="hidden" name="signatureName[]" value="{{ $signature->sign }}" type="text">
                                 <td>{{ $signature->sign }}</td>
+                                
                                 <td>
                                     <select name="positions[{{ $key }}]"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                        @if($previouslySelectedReport && $previouslySelectedReport->status == 'active' && $previouslySelectedReport->signature_name===$signature->sign) 
+                                        <option value="{{$previouslySelectedReport->positions}}">{{$previouslySelectedReport->positions}}</option>
+                                        @else
                                         <option disabled selected>Select</option>
+                                        @endif
+                                        
                                         <option value="left">Left</option>
                                         <option value="center">Center</option>
                                         <option value="right">Right</option>
                                     </select>
                                 </td>
                                 <td>
-                                    <div class="">
-                                        <input id="laravel-checkbox-{{ $key }}" type="checkbox" value="active"
-                                            name="status[{{ $key }}]"
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
-                                    </div>
+                                <div class="">
+                        <input id="laravel-checkbox-{{ $key }}" type="checkbox" value="active"
+                            name="status[{{ $key }}]" 
+                            @if($previouslySelectedReport && $previouslySelectedReport->status == 'active' && $previouslySelectedReport->signature_name===$signature->sign) checked @endif
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                    </div>
                                 </td>
                             </tr>
                         @endforeach
@@ -89,7 +101,6 @@ Signature
                 <div class="mr-10">
                     <button type="submit"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  ">Save</button>
-
                 </div>
                 <div class="mr-10">
                     <button type="button"

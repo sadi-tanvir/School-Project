@@ -187,9 +187,15 @@ class StudentController extends Controller
         $class = $request->input('class');
         $group = $request->input('group');
         $section = $request->input('section');
+        $category = $request->input('category');
         $waiver = $request->input('waiver');
 
         $pay_now = $request->input('pay_now');
+        
+        $classPosition = AddClass::where('school_code', $school_code)
+            ->where('class_name', $class)
+            ->select('position')
+            ->first();
 
         $classPosition = AddClass::where('school_code', $school_code)
             ->where('class_name', $class)
@@ -206,13 +212,14 @@ class StudentController extends Controller
                     'month' => $months[$pay_slip_type],
                     'year' => date('Y'),
                     'class' => $class,
+                    'group' => $group,
+                    'section' => $section,
+                    'category' => $category,
                     'pay_slip_type' => $pay_slip_type,
                 ],
                 [
                     'class_position' => $classPosition->position,
                     'last_pay_date' => $last_pay_date,
-                    'group' => $group,
-                    'section' => $section,
                     'amount' => $amount[$pay_slip_type],
                     'waiver' => $waiver[$pay_slip_type] ?? 0,
                     'payable' => $amount[$pay_slip_type] - $waiver[$pay_slip_type] ?? 0,

@@ -31,7 +31,8 @@ Send Message
                     </select>
                     <label for="instruction"
                         class="block mb-2 text-sm font-medium whitespace-noWrap">Instruction:</label>
-                    <textarea readonly name="message" id="instruction" rows="4"
+                    <textarea readOnly name="message" id="instruction" rows="4"
+
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                         placeholder="write a message"></textarea>
                     <input value="{{ $school_code }}" name="school_code" class="hidden" type="text">
@@ -45,7 +46,7 @@ Send Message
                         <div class="">
                             <label for="class" class="text-gray-700">Class:</label>
                             <select id="class" name="class_name"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option disabled selected value="">Select class</option>
                                 @foreach ($classes as $data)
                                     <option value="{{ $data->class_name }}">{{ $data->class_name }}</option>
@@ -55,7 +56,7 @@ Send Message
                         <div class="">
                             <label for="section" class="text-gray-700">Section:</label>
                             <select id="section" name="section_name"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option disabled selected value="">Select Section</option>
                                 @foreach ($sections as $data)
                                     <option value="{{ $data->section_name }}">{{ $data->section_name }}</option>
@@ -65,7 +66,7 @@ Send Message
                         <div class="">
                             <label for="group" class="text-gray-700">Group:</label>
                             <select id="group" name="group_name"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option disabled selected value="">Select group</option>
                                 @foreach ($groups as $data)
                                     <option value="{{ $data->group_name }}">{{ $data->group_name }}</option>
@@ -75,7 +76,7 @@ Send Message
                         <div class="">
                             <label for="shift" class="text-gray-700">shift:</label>
                             <select id="shift" name="shift_name"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option disabled selected value="">Select Shift</option>
                                 @foreach ($shifts as $data)
                                     <option value="{{ $data->shift_name }}">{{ $data->shift_name }}</option>
@@ -85,7 +86,7 @@ Send Message
                         <div class="">
                             <label for="Category" class="text-gray-700">Category:</label>
                             <select id="Category" name="category_name"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option disabled selected value="">Select Category</option>
                                 @foreach ($categories as $data)
                                     <option value="{{ $data->category_name }}">{{ $data->category_name }}</option>
@@ -95,7 +96,7 @@ Send Message
                         <div class="">
                             <label for="Session" class="text-gray-700">Session:</label>
                             <select id="Session" name="session_name"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option disabled selected value="">Select Session</option>
                                 @foreach ($sessions as $data)
                                     <option value="{{ $data->academic_session_name }}">{{ $data->academic_session_name }}
@@ -107,7 +108,7 @@ Send Message
                         <div class="">
                             <label for="Year" class="text-gray-700">Year:</label>
                             <select id="Year" name="year_name"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 @foreach ($years as $data)
                                     <option value="{{ $data->academic_year_name }}">{{ $data->academic_year_name }}</option>
                                 @endforeach
@@ -115,7 +116,7 @@ Send Message
                         </div>
                         <div class="">
                             <button type="submit"
-                                class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-green-800 mt-5">Find</button>
+                                class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2     dark:focus:ring-green-800 mt-5">Find</button>
                         </div>
                     </div>
 
@@ -211,7 +212,8 @@ Send Message
                                 @endforeach
                             @else
                                 @foreach ($contacts as $data)
-                                    <tr id="row_{{ $data->id }}" class="text-center">
+                                    <tr id="row_{{ $data->id }}">
+
                                         <td scope="col" class="text-sm px-6 py-3">
                                             <input type="checkbox" name="contact[{{ $data->contact }}]"
                                                 value="{{ $data->contact }}" class="row-checkbox" data-row-id="{{ $data->id }}">
@@ -224,14 +226,17 @@ Send Message
                                         <td scope="col" class="text-sm px-6 py-3">
                                             {{ $data->contact }}
                                         </td>
-                                        <!-- <td>
-                                                                    <input class="rowMessage" readonly name="message" class="rounded-xl" type="text">
-                                                                </td> -->
-                                        <!-- <td scope="col" class="text-sm px-6 py-3 flex justify-center">
-                                                                            <button class="btn delete-button" data-contact-id="{{ $data->id }}">
-                                                                                <i class="fa fa-trash" aria-hidden="true" style="color:red;"></i>
-                                                                            </button>
-                                                                        </td> -->
+
+                                        
+                                        <td>
+                                            <input class="rowMessage" readonly name="message" class="rounded-xl" type="text">
+                                        </td>
+                                        <td scope="col" class="text-sm px-6 py-3 flex justify-center">
+                                            <button class="btn delete-button" data-contact-id="{{ $data->id }}">
+                                                <i class="fa fa-trash" aria-hidden="true" style="color:red;"></i>
+                                            </button>
+                                        </td>
+
                                     </tr>
                                 @endforeach
                             @endif

@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Backend\Student_Account;
 use App\Http\Controllers\Controller;
 use App\Models\AddAcademicSession;
 use App\Models\AddAcademicYear;
+use App\Models\AddCategory;
 use App\Models\AddClass;
-use App\Models\AddGroup;
+use App\Models\AddClassWiseGroup;
+use App\Models\AddClassWiseSection;
 use App\Models\AddPaySlip;
 use App\Models\GeneratePayslip;
 use App\Models\Student;
@@ -22,11 +24,6 @@ class GeneratePayslipController extends Controller
             ->select("class_name")
             ->get();
 
-        $groups = AddGroup::where("action", "approved")
-            ->where("school_code", $school_code)
-            ->select("group_name")
-            ->get();
-
         $academicSessions = AddAcademicSession::where('action', 'approved')
             ->where('school_code', $school_code)
             ->get();
@@ -36,9 +33,7 @@ class GeneratePayslipController extends Controller
             ->select('academic_year_name')
             ->get();
 
-        // dd($academicSessions);
-
-        return view("Backend.Student_accounts.GeneratePayslip", compact("classes", 'groups', 'academicSessions', 'school_code', 'academicYears'));
+        return view("Backend.Student_accounts.GeneratePayslip", compact("classes", 'academicSessions', 'school_code', 'academicYears'));
     }
 
     public function GetPaySlipData(Request $request, $school_code)
@@ -49,12 +44,34 @@ class GeneratePayslipController extends Controller
         $PaySlipData = AddPaySlip::where("school_code", $school_code)
             ->where('action', 'approved')
             ->where('class_name', $class_name)
-            ->where('group_name', $group_name)
+            ->when($group_name !== "Select", function ($query) use ($group_name) {
+                return $query->where('group_name', $group_name);
+            })
             ->select('pay_slip_type')
             ->distinct()
             ->get();
 
-        return $PaySlipData;
+        $groupData = AddClassWiseGroup::where('school_code', $school_code)
+            ->where('class_name', $class_name)
+            ->select('group_name')
+            ->get();
+
+        $sectionData = AddClassWiseSection::where('school_code', $school_code)
+            ->where('class_name', $class_name)
+            ->select('section_name')
+            ->get();
+
+        $categoryData = AddCategory::where('school_code', $school_code)
+            ->where('action', 'approved')
+            ->select('category_name')
+            ->get();
+
+        return response()->json([
+            'paySlipData' => $PaySlipData,
+            'groupData' => $groupData,
+            'sectionData' => $sectionData,
+            'categoryData' => $categoryData,
+        ]);
     }
 
     public function GetAllInformation(Request $request, $school_code)
@@ -65,6 +82,8 @@ class GeneratePayslipController extends Controller
             ->select('position')
             ->first();
         $group = $request->query('group_name');
+        $category = $request->query('category');
+        $section = $request->query('section');
         $month_year = $request->query('month_year');
         $pay_slip_type = $request->query('pay_slip_type');
         $session = $request->query('session');
@@ -73,7 +92,15 @@ class GeneratePayslipController extends Controller
         $students = Student::where('school_code', $school_code)
             ->where('action', 'approved')
             ->where('Class_name', $class)
-            ->where('group', $group)
+            ->when($group !== "Select", function ($query) use ($group) {
+                return $query->where('group', $group);
+            })
+            ->when($category !== "Select", function ($query) use ($category) {
+                return $query->where('category', $category);
+            })
+            ->when($section !== "Select", function ($query) use ($section) {
+                return $query->where('section', $section);
+            })
             ->when($session !== "Select", function ($query) use ($session) {
                 return $query->where('session', $session);
             })
@@ -85,7 +112,9 @@ class GeneratePayslipController extends Controller
         $amountOfPaySlip = AddPaySlip::where("school_code", $school_code)
             ->where('action', 'approved')
             ->where('class_name', $class)
-            ->where('group_name', $group)
+            ->when($group !== "Select", function ($query) use ($group) {
+                return $query->where('group_name', $group);
+            })
             ->where('pay_slip_type', $pay_slip_type)
             ->sum('fees_amount');
 
@@ -93,7 +122,9 @@ class GeneratePayslipController extends Controller
         $tempFeesTypes = AddPaySlip::where("school_code", $school_code)
             ->where('action', 'approved')
             ->where('class_name', $class)
-            ->where('group_name', $group)
+            ->when($group !== "Select", function ($query) use ($group) {
+                return $query->where('group_name', $group);
+            })
             ->where('pay_slip_type', $pay_slip_type)
             ->select('fee_type_name')
             ->get();
@@ -111,7 +142,6 @@ class GeneratePayslipController extends Controller
                 if ($tempWaiverAmount) {
                     $totalIndividualWaiver += $tempWaiverAmount->waiver_amount;
                 }
-                // dump($tempWaiverAmount);
             }
 
             $temp_data = [
@@ -144,7 +174,9 @@ class GeneratePayslipController extends Controller
         $class = $request->input('class');
         $class_positions = $request->input('input_class_position', []);
         $input_sections = $request->input('input_section', []);
-        $group = $request->input('group');
+        $input_category = $request->input('input_category', []);
+        // $group = $request->input('group');
+        $groups = $request->input('input_group', []);
         $pay_slip_type = $request->input('pay_slip_type');
         $selected_students = $request->input('select', []);
         // $input_month_year = $request->input('input_month_year', []);
@@ -170,13 +202,14 @@ class GeneratePayslipController extends Controller
                         'month' => $month,
                         'year' => $year,
                         'class' => $class,
+                        'group' => $groups[$student_id],
+                        'category' => $input_category[$student_id],
+                        'section' => $input_sections[$student_id],
                         'pay_slip_type' => $pay_slip_type,
                     ],
                     [
                         'class_position' => $class_positions[$student_id],
                         'last_pay_date' => $last_pay_date,
-                        'group' => $group,
-                        'section' => $input_sections[$student_id],
                         'amount' => $input_fees_amount[$student_id],
                         'waiver' => $input_waiver[$student_id],
                         'payable' => $input_fees_amount[$student_id] - $input_waiver[$student_id],

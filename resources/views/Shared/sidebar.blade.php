@@ -71,7 +71,7 @@
 
 </style>
 
-<aside id="logo-sidebar" class="fixed left-0 top-[90px] z-40 h-screen w-72 -translate-x-full overflow-y-auto transition-transform duration-1000 sm:translate-x-0" aria-label="logo-sidebar">
+<aside id="logo-sidebar" class="fixed left-0 top-[90px] z-40 h-screen w-80 -translate-x-full overflow-y-auto transition-transform duration-1000 sm:translate-x-0" aria-label="logo-sidebar">
     <div class="h-full  overflow-y-auto scrollbar  px-3 pt-5 pb-20   gradient-bg">
         <ul class="space-y-2 pb-6  font-medium ">
 
@@ -130,7 +130,7 @@
 
 
             <!-- online Application  -->
-            <li class="dropdown">
+            <li class="dropdown hidden">
                 <button type="button" class="flex items-center w-full py-2 px-4 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-slate-100/20" aria-controls="dropdown-online-examination" data-collapse-toggle="dropdown-online-examination">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
@@ -195,11 +195,11 @@
                         <a href="{{ route('uploadExelFile', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Upload
                             Exel File</a>
                     </li>
-                    <li>
+                    <li class="hidden">
                         <a href="{{ route('uploadPhoto', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Upload
                             Photo</a>
                     </li>
-                    <li>
+                    <li class="hidden">
                         <a href="{{ route('migrateStudent', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Migrate
                             Student</a>
                     </li>
@@ -233,7 +233,7 @@
                                 <a href="/dashboard/studentListWithPhoto/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">
                                     Student List With Photo</a>
                             </li>
-                            <li>
+                            <li class="hidden">
                                 <a href="/dashboard/e_sifLists/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">
                                     E-SIF List </a>
                             </li>
@@ -241,20 +241,20 @@
                                 <a href="/dashboard/studentProfile/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">
                                     Student Profile </a>
                             </li>
-                            <li>
+                            <li class="hidden">
                                 <a href="/dashboard/religionWiseStudentSummary/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">
                                     Religion Wise Student Summary</a>
                             </li>
 
-                            <li>
+                            <li class="hidden">
                                 <a href="/dashboard/studentIdCard/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">
                                     Student ID Card</a>
                             </li>
-                            <li>
+                            <li class="hidden">
                                 <a href="/dashboard/listOfMigrateStudent/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">
                                     List Of Migrate Student</a>
                             </li>
-                            <li>
+                            <li class="hidden">
                                 <a href="/dashboard/admissionSummary/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">
                                     Admission Summary</a>
                             </li>
@@ -262,15 +262,15 @@
                                 <a href="/dashboard/classSectionSTdTotal/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">
                                     Class Section Std Total</a>
                             </li>
-                            <li>
+                            <li class="hidden">
                                 <a href="/dashboard/transferCertificate/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Transfer
                                     Certificate</a>
                             </li>
-                            <li>
+                            <li class="hidden">
                                 <a href="/dashboard/testimonial/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Testimonial</a>
                             </li>
 
-                            <li>
+                            <li class="hidden">
                                 <a href="/dashboard/transferCertificateList/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Transfer
                                     Certificate List</a>
                             </li>
@@ -315,7 +315,7 @@
                                     Admit Card
                                 </a>
                             </li>
-                            <li>
+                            <li >
                                 <a href="/dashboard/printSeatPlan/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Print
                                     Seat Plan</a>
                             </li>
@@ -324,7 +324,7 @@
                                 <a href="/dashboard/AddAdmitInstruction/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Add
                                     Admit Instruction</a>
                             </li>
-                            <li>
+                            <li class="hidden">
                                 <a href="/dashboard/ExamBlankSheet/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">
                                     Exam Blank Sheet</a>
                             </li>
@@ -361,19 +361,19 @@
                         <a href="/dashboard/exam_process/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">
                             Exam Process </a>
                     </li>
-                    <li>
+                    <li class="hidden">
                         <a href="/dashboard/exam_excel/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">
                             Exam Excel </a>
                     </li>
-                    <li>
+                    <li class="hidden">
                         <a href="/dashboard/update_exam_process/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Update
                             Exam Process</a>
                     </li>
-                    <li>
+                    <li class="hidden">
                         <a href="/dashboard/student_exam_excel/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Student
                             Exam Excel</a>
                     </li>
-                    <li>
+                    <li >
                         <a href="/dashboard/exam_marks_delete/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Student
                             exam Marks Delete</a>
                     </li>
@@ -401,23 +401,23 @@
                                 <a href="/dashboard/grand_exam_setup/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Add
                                     Setup Grand </a>
                             </li>
-                            <li>
+                            <li class="hidden">
                                 <a href="/dashboard/grand_exam_final_process" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Update
                                     Grand Final Process</a>
                             </li>
-                            <li>
+                            <li class="hidden">
                                 <a href="/dashboard/grand_exam_progress_report" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Student
                                     Grand Progress Report</a>
                             </li>
-                            <li>
+                            <li class="hidden">
                                 <a href="/dashboard/grand_merit_list" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Upload
                                     Grand Merit List</a>
                             </li>
-                            <li>
+                            <li class="hidden">
                                 <a href="/dashboard/grand_fail_list" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Upload
                                     Grand Fail List</a>
                             </li>
-                            <li>
+                            <li class="hidden">
                                 <a href="/dashboard/grand_result_pass_fail_percentage" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Upload
                                     Grand Pass/Fail Percentage</a>
                             </li>
@@ -446,43 +446,43 @@
                                 <a href="/dashboard/progressReport/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Add
                                     Single Mark Sheet </a>
                             </li>
-                            <li>
+                            <li class="hidden">
                                 <a href="/dashboard/grandFinal/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Update
                                     Grand Final</a>
                             </li>
-                            <li>
+                            <li class="hidden">
                                 <a href="/dashboard/tebular-format1/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Student
                                     Tabulation [Format-1]</a>
                             </li>
-                            <li>
+                            <li class="hidden">
                                 <a href="/dashboard/tebular-format2/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Upload
                                     Tabulation [Format-2]</a>
                             </li>
-                            <li>
+                            <li class="hidden">
                                 <a href="/dashboard/tebular-format3/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Upload
                                     Tabulation [Format-3]</a>
                             </li>
-                            <li>
+                            <li class="hidden">
                                 <a href="/dashboard/meritList/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Upload
                                     Merit List</a>
                             </li>
-                            <li>
+                            <li class="hidden">
                                 <a href="/dashboard/meritClass/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Upload
                                     Merit List</a>
                             </li>
-                            <li>
+                            <li class="hidden">
                                 <a href="/dashboard/exam-failList/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Upload
                                     Fail List Summary</a>
                             </li>
-                            <li>
+                            <li class="hidden">
                                 <a href="/dashboard/unassignedSubject/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Upload
                                     List of Unassigned Subject</a>
                             </li>
-                            <li>
+                            <li class="hidden">
                                 <a href="/dashboard/passFailPercentage/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Upload
                                     List of Pass/Fail Percentage</a>
                             </li>
-                            <li>
+                            <li class="hidden">
                                 <a href="/dashboard/gradeInfo/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Upload
                                     List of Grade Info</a>
                             </li>
@@ -893,7 +893,7 @@
             </li>
 
             <!-- Student Attendence  -->
-            <li class="dropdown">
+            <li class="dropdown hidden">
                 <button type="button" class="flex items-center w-full py-2 px-4 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-slate-100/20" aria-controls="dropdown-student-Attendence" data-collapse-toggle="dropdown-student-Attendence">
                     <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ffffff">
                         <path d="M9 1V3H15V1H17V3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9ZM20 11H4V19H20V11ZM8 13V15H6V13H8ZM13 13V15H11V13H13ZM18 13V15H16V13H18ZM7 5H4V9H20V5H17V7H15V5H9V7H7V5Z">
@@ -922,7 +922,7 @@
 
 
                     <!-- reports of student attendence  -->
-                    <li class="dropdown">
+                    <li class="dropdown hidden">
                         <button type="button" class="flex items-center w-full py-2 px-4 text-base text-gray-900 transition duration-75 rounded-lg group " aria-controls="dropdown-student-Reports" data-collapse-toggle="dropdown-student-Reports">
                             <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" viewBox="0 0 18 21">
                                 <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z" />
@@ -962,7 +962,7 @@
 
             {{-- teacher --}}
 
-            <li class="dropdown">
+            <li class="dropdown hidden">
                 <button class="flex items-center w-full py-2 px-4 text-base text-gray-900 transition duration-75 rounded-lg group cursor-pointer hover:bg-slate-100/20" aria-controls="dropdown-teacher" data-collapse-toggle="dropdown-teacher">
                     <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />

@@ -1,79 +1,145 @@
 @extends('Backend.app')
 @section('title')
-    Individual Waiver
+Individual Waiver
 @endsection
 @section('Dashboard')
-    @include('/Message/message')
-    <style>
-        .shadowStyle {
-            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-        }
+@include('/Message/message')
+<style>
+    /* Custom styles */
+    .autocomplete {
+        position: relative;
+    }
 
-        /* Custom styles */
-        .autocomplete {
-            position: relative;
-        }
+    .autocomplete input {
+        padding-right: 2.5rem;
+    }
 
-        .autocomplete input {
-            padding-right: 2.5rem;
-        }
+    .autocomplete .autocomplete-list {
+        position: absolute;
+        z-index: 10;
+        width: calc(100% - 1rem);
+        max-height: 200px;
+        overflow-y: auto;
+        background-color: #fff;
+        border: 1px solid #d1d5db;
+        border-radius: 0.25rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
 
-        .autocomplete .autocomplete-list {
-            position: absolute;
-            z-index: 10;
-            width: calc(100% - 1rem);
-            max-height: 200px;
-            overflow-y: auto;
-            background-color: #fff;
-            border: 1px solid #d1d5db;
-            border-radius: 0.25rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
+    .autocomplete .autocomplete-list-item {
+        padding: 0.5rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
 
-        .autocomplete .autocomplete-list-item {
-            padding: 0.5rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+    .autocomplete .autocomplete-list-item:hover {
+        background-color: #f3f4f6;
+    }
 
-        .autocomplete .autocomplete-list-item:hover {
-            background-color: #f3f4f6;
-        }
-    </style>
-    <div class=" mt-10">
+    thead th:first-child {
+        border-top-left-radius: 0.5rem;
+        border-bottom-left-radius: 0.5rem;
+    }
+
+    thead th:last-child {
+        border-top-right-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+    }
+
+    /* hover effect  */
+    .btn-hover,
+    .btn-hover {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn-hover::before {
+        background: #fff;
+        content: '';
+        height: 20rem;
+        opacity: 0;
+        position: absolute;
+        top: -50px;
+        transform: rotate(15deg);
+        width: 40px;
+        transition: all 3000ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    .btn-hover::after {
+        background: #fff;
+        content: '';
+        height: 20rem;
+        opacity: 0;
+        position: absolute;
+        top: -50px;
+        transform: rotate(15deg);
+        transition: all 3000ms cubic-bezier(0.19, 1, 0.22, 1);
+        width: 8rem;
+    }
+
+    .btn-hover__new::before {
+        left: -50%;
+    }
+
+    .btn-hover__new::after {
+        left: -100%;
+    }
+
+    .btn-hover__new:hover::before {
+        left: 120%;
+        opacity: 0.5s;
+    }
+
+    .btn-hover__new:hover::after {
+        left: 200%;
+        opacity: 0.6;
+    }
+
+    .btn-hover span {
+        z-index: 20;
+    }
+</style>
+
+    @include('Shared.ContentHeader', ['title' => 'Individual Waiver'])
+
+    <div class="mt-10">
         <form method="GET" action="{{ route('individualWaiverReport.getData', $school_code) }}"
-            class="p-5 shadowStyle rounded-[8px] border border-slate-300 w-2/5 mx-auto space-y-3">
+            class="p-6 rounded-[8px] border-2 bg-gray-200 border-slate-300 mx-auto space-y-3 w-3/6">
             @csrf
             <div class="space-y-3">
-                <div class="grid grid-cols-4 place-items-start  gap-5">
+                <div class=" place-items-start  gap-5">
                     <label for="class" class="block mb-2 text-sm font-medium whitespace-noWrap ">Class
                         :</label>
                     <select id="class" name="class"
-                        class="col-span-3 bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5">
+                        class="col-span-3 bg-white border-0 text-gray-900 text-sm rounded-lg  block w-full p-3.5">
                         <option disabled selected>Select Class</option>
                         @foreach ($classes as $key => $class)
-                            <option value="{{ $class }}">{{ $class }}</option>
+                        <option value="{{ $class }}">{{ $class }}</option>
                         @endforeach
                     </select>
                 </div>
 
-                <div class="grid grid-cols-4 place-items-start  gap-5">
+                <div class=" place-items-start  gap-5">
                     <label for="student_id" class="block mb-2 text-sm font-medium whitespace-noWrap ">Student ID: </label>
                     <div class="autocomplete w-full relative col-span-3">
                         <input type="text" name="student_id" id="autocomplete-input" placeholder="Search..."
-                            class="w-full py-2 px-4 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                            class="w-full py-3 px-4 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
                         <div id="autocomplete-list" class="autocomplete-list hidden"></div>
                     </div>
                 </div>
 
 
-                <div class="grid grid-cols-4 place-items-start  gap-5">
+                <div class=" place-items-start  gap-5">
                     <label for="waiver_type" class="block mb-2 text-sm font-medium whitespace-noWrap ">Waiver Type :</label>
                     <select id="waiver_type" name="waiver_type"
-                        class="col-span-3 bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5">
+                        class="col-span-3 bg-white border-0 text-gray-900 text-sm rounded-lg  block w-full p-3.5">
                         <option disabled selected>Select</option>
                         @foreach ($waiver_types as $waiver_type)
-                            <option value="{{ $waiver_type }}">{{ $waiver_type }}</option>
+                        <option value="{{ $waiver_type }}">{{ $waiver_type }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -81,14 +147,14 @@
 
             <div class="w-full flex justify-end">
                 <button type="submit"
-                    class="w-1/3  text-white bg-blue-700 hover:bg-blue-600 focus:ring-0  font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2 focus:outline-none">Print
+                    class="w-full  text-white bg-blue-700 hover:bg-blue-600 focus:ring-0  font-medium rounded-lg text-sm px-3 py-3.5 me-2 mb-2 focus:outline-none">Print
                 </button>
             </div>
         </form>
     </div>
 
-    <script>
-        var mainData = {!! json_encode($students_id) !!};
+<script>
+    var mainData = {!! json_encode($students_id) !!};
         console.log(mainData);
         let data = Object.values(mainData);
         let data2 = Object.keys(mainData);
@@ -144,5 +210,5 @@
                 autocompleteList.classList.add('hidden');
             }
         });
-    </script>
+</script>
 @endsection

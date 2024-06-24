@@ -271,16 +271,24 @@ class ProgressReportController extends Controller
             }
 
             //dd($sorted_exam_process_data);
-            $signatureName = "";
-            $signImage = "";
-
             $gradePoints = AddGradePoint::where('school_code', $school_code)->where('action', 'approved')->get();
             $schoolInfo = SchoolInfo::where('school_code', $school_code)->first();
-
+            $signatureName = "";
+            $signImage = "";
+            $signPosition = "";
             $signatures = AddSignature::where('school_code', $school_code)->where('action', 'approved')->get();
             $setSignature = SetSignature::where('school_code', $school_code)->where('status', 'active')->where('report_name', $report)->get();
 
-
+            foreach ($signatures as $sign) {
+                foreach ($setSignature as $setSign) {
+                    if ($setSign->signature_name === $sign->sign) {
+                        $signatureName = $setSign->signature_name;
+                        $signImage = $sign->image;
+                        $signPosition = $setSign->positions;
+                        break;
+                    }
+                }
+            }
 
 
             foreach ($signatures as $sign) {
@@ -294,8 +302,8 @@ class ProgressReportController extends Controller
             }
 
             // dd($signImage);
+            return view('/Backend/Report(exam&result)/downloadProgressReport', compact('existingRecords', 'shortCode', 'students', 'class', 'group', 'section', 'exam_name', 'merit_status', 'year', 'highestMarks', 'grades', 'exam_name', 'sequentialWiseExam', 'sorted_exam_process_data', 'gradePoints', 'schoolInfo', 'signatureName', 'signImage','signPosition'));
 
-            return view('/Backend/Report(exam&result)/downloadProgressReport', compact('existingRecords', 'shortCode', 'students', 'class', 'group', 'section', 'exam_name', 'merit_status', 'year', 'highestMarks', 'grades', 'exam_name', 'sequentialWiseExam', 'sorted_exam_process_data', 'gradePoints', 'schoolInfo', 'signatureName', 'signImage'));
         } else {
             return redirect()->back()->with('error', 'Not found');
         }

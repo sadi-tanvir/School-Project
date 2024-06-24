@@ -206,7 +206,7 @@
                 <a href="{{ route('getStudent', $school_code) }}">
                     <button
                         type="button"
-                        class="flex items-center justify-center gap-3 rounded-md bg-blue-700 px-7 py-2.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        class="flex items-center justify-center gap-3 rounded-md bg-blue-700 px-7 py-2.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300      "
                     >
                         <span>Add Student</span>
                         <span>
@@ -250,7 +250,7 @@
                     <select
                         id="class"
                         name="class"
-                        class="block w-full rounded-md border-0 border-gray-300 bg-white p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+                        class="block w-full rounded-md border-0 border-gray-300 bg-white p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600     dark:focus:border-blue-500 dark:focus:ring-blue-500"
                     >
                         <option disabled selected>Choose class</option>
                         @foreach ($classes as $class)
@@ -328,15 +328,15 @@
                 <div class="">
                     <button
                         type="submit "
-                        class="me-2 mt-6 w-full rounded-md bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        class="me-2 mt-6 w-full rounded-md bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300      "
                     >
                         Search
                     </button>
                 </div>
             </div>
         </form>
-        <table class="w-full text-left text-sm text-black rtl:text-right dark:text-blue-100">
-            <thead class="border-b border-blue-400 bg-blue-600 text-xs uppercase text-white dark:text-white">
+        <table class="w-full text-left text-sm text-black rtl:text-right  ">
+            <thead class="border-b border-blue-400 bg-blue-600 text-xs uppercase text-white  ">
                 <tr>
                     <th scope="col" class="px-6 py-3">Student Id</th>
                     <th scope="col" class="bg-blue-500 px-6 py-3">Roll</th>

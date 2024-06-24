@@ -215,6 +215,8 @@
                             $fail = 0;
                             $Grade = [];
                             $gpa = [];
+                             $GPA=0;
+                             $grade=0;
                             $studentId = "";
                             $gradePoint = "";
                             $studentRoll = "";

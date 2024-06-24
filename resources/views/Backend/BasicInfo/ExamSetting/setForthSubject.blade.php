@@ -6,7 +6,7 @@
 
 @include('Message.message')
 
-<style>
+ <style>
     /* table radius */
     thead th:first-child {
     border-top-left-radius: 0.5rem;
@@ -176,7 +176,8 @@
 
 
     <div class="relative overflow-x-auto border-2 sm:rounded-lg p-6">
-        <form action="{{route('addFourthSubject',$school_code)}}" method="POST">
+        <form action="{{route('addFourthSubject')}}" method="POST">
+            =========
             <div>
                 <h3>
                     Fourth Subject Setup
@@ -192,9 +193,8 @@
                         <div class="mr-2">
                             <select id="class" name="class_name"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
-                                <option>Select</option>
                                 @foreach($classes as $class)
-
+                                    <option>Select</option>
                                     <option value="{{ $class->class_name }}">{{$class->class_name}}</option>
                                 @endforeach
                             </select>
@@ -205,21 +205,22 @@
                         <div class="mr-2">
                             <select id="group" name="group_name"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
-                                <option>Select</option>
                                 @foreach($groups as $group)
-
+                                    <option>Select</option>
                                     <option>{{$group->group_name}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="mr-2 md:flex justify-end">
+                          
                             <label for="session" class="block mb-2 text-sm font-medium text-gray-900 ">Section :</label>
                         </div>
                         <div class="mr-2">
                             <select id="section" name="section_name"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
-                                <option>Select</option>
+
                                 @foreach($sections as $section)
+                                    <option>Select</option>
                                     <option>{{$section->section_name}}</option>
                                 @endforeach
                             </select>
@@ -233,10 +234,11 @@
 
                             <select name="year" id=''
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
-                                <option>Select</option>
                                 @foreach($years as $year)
+                                    <option>Select</option>
                                     <option>{{$year->academic_year_name}}</option>
                                 @endforeach
+
                             </select>
                         </div>
                         <div>
@@ -255,9 +257,12 @@
                             FOURTH SUBJECT SETTING
                         </h3>
                     </div>
+
+
                     <!-- optional subject part  -->
                     <form action="{{route('saveFourthSubject', $school_code)}}" method="POST">
                         @csrf
+
                         @if($students)
 
                                                 @php
@@ -311,6 +316,7 @@
                                                         @endforeach
                                                     </div>
                                                 </div>
+                                             
                         @endif
 
 
@@ -443,7 +449,7 @@
                     <div class="mr-10">
                         <button type="submit"
                             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  ">Save</button>
-                  
+                      
                     </div>
                     <div class="mr-10">
                         <a href="/dashboard">

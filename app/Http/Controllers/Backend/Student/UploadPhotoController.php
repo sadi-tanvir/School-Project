@@ -124,7 +124,7 @@ class UploadPhotoController extends Controller
             $students = [];
             $students = Student::where('school_code', $school_code)
                 ->where('action', 'approved')
-                ->where('class_name', $class)
+                ->where('Class_name', $class)
                 ->where('group', $group)
                 ->where('section', $section)
                 ->where('category', $category)

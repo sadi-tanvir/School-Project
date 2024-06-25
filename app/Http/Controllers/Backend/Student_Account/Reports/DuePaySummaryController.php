@@ -84,7 +84,7 @@ class DuePaySummaryController extends Controller
         $student_id = $request->session()->get('sessionStudent_id', $request->input('student_id'));
         $payment_status = $request->session()->get('sessionPayment_status', $request->input('payment_status', 'unpaid'));
 
-        $payslips = GeneratePayslip::where('school_code', $school_code)
+        $payslips = GeneratePayslip::where('generate_payslips.school_code', $school_code)
             ->when($class !== "Select", function ($query) use ($class) {
                 return $query->where('class', $class);
             })
@@ -97,11 +97,37 @@ class DuePaySummaryController extends Controller
             ->when($student_id !== null, function ($query) use ($student_id) {
                 return $query->where('student_id', $student_id);
             })
-            ->select('student_id', 'class', 'payment_status', 'collect_date', 'class_position', DB::raw('SUM(amount) as amount'), DB::raw('SUM(paid_amount) as paid_amount'), DB::raw('SUM(waiver) as waiver'), DB::raw('SUM(payable) as payable'))
-            ->groupBy('student_id', 'class', 'payment_status', 'collect_date', 'class_position')
-            ->where('payment_status', $payment_status)
+            ->join('students', function ($join) use ($school_code) {
+                $join->on('generate_payslips.student_id', '=', 'students.student_id')
+                    ->where('students.school_code', '=', $school_code); // Use dynamic school_code
+            })
+            ->select(
+                'generate_payslips.student_id',
+                'students.name',
+                'generate_payslips.class',
+                'generate_payslips.payment_status',
+                'generate_payslips.collect_date',
+                'generate_payslips.class_position',
+                DB::raw('SUM(generate_payslips.amount) as amount'),
+                DB::raw('SUM(generate_payslips.paid_amount) as paid_amount'),
+                DB::raw('SUM(generate_payslips.waiver) as waiver'),
+                DB::raw('SUM(generate_payslips.payable) as payable')
+            )
+            ->groupBy(
+                'generate_payslips.student_id',
+                'students.name',
+                'generate_payslips.class',
+                'generate_payslips.payment_status',
+                'generate_payslips.collect_date',
+                'generate_payslips.class_position'
+            )
+            ->where('generate_payslips.payment_status', $payment_status)
             ->orderBy($sortType, $sortOrder)
             ->get();
+
+
+
+        // dd($payslips);
 
         $totalAmount = $payslips->sum('amount');
         $totalReceived = $payslips->sum('paid_amount');

@@ -3,8 +3,8 @@
 Fees Collection
 @endsection
 
-
 @section('Dashboard')
+
 <style>
     .shadowStyle {
         box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
@@ -42,18 +42,15 @@ Fees Collection
     }
 </style>
 
+@include('Message.message')
 
-@include('Shared.ContentHeader', ['title' => 'Others Fees Collection'])
-
-@include('Shared.alert')
+@include('Shared.ContentHeader', ['title' => 'Fees Collection'])
 
 <div class="grid grid-cols-3 gap-5">
     {{-- left section --}}
-    <div class="border-2  rounded-lg">
-        <div class="font-bold border-b px-6 py-3">
-            <h3>Student Information</h3>
-        </div>
-        <div class=" py-5 px-6 space-y-3 flex flex-col">
+    <div class="rounded-lg">
+        @include('Shared.ContentHeader', ['title' => 'Student Information'])
+        <div class="border-2 rounded-lg py-5 px-6 space-y-3 flex flex-col">
             <div class="">
                 <label for="year" class="block mb-2 text-sm font-medium whitespace-noWrap ">Year:</label>
                 <select id="year" name="year"
@@ -113,9 +110,16 @@ Fees Collection
             </button>
         </div>
 
+        {{-- error message --}}
+        <h1 id="fees_not_fount" class="text-red-400 text-center font-bold py-8 hidden">
+            @include('Shared.generalErrorMessage', ['errorMessage' => 'No Records Found for the Provided Student ID.'])
+        </h1>
+
+
+
         {{-- table section --}}
-        <div class="mt-10">
-            <div class="relative max-h-60 overflow-auto  p-2">
+        <div class="mt-10 hidden border-2 rounded-lg" id="payslip_table_section">
+            <div class="relative max-h-60 overflow-auto p-2">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                     <thead class="text-xs uppercase bg-blue-600 text-white">
                         <tr>
@@ -143,9 +147,6 @@ Fees Collection
                     </tbody>
                 </table>
             </div>
-            {{-- error message --}}
-            <h1 id="fees_not_fount" class="text-red-400 text-center font-bold py-8 hidden">No Records Found
-                for the Provided Student ID.</h1>
 
             <div class="mt-5 flex items-center justify-end pb-2 px-2">
                 <div class="flex items-center ms-3">
@@ -594,7 +595,7 @@ Fees Collection
             getPaySlipDataFunction()
         })
 
-
+    const payslip_table_section = document.getElementById('payslip_table_section');
         function DisplayUserPaySlip(data) {
             console.log(data.paySlips);
             const selectedCheckboxes = [];
@@ -602,11 +603,13 @@ Fees Collection
             if(data.paySlips.length === 0){
                 table_body.innerHTML = "";
                 fees_not_fount.classList.remove("hidden");
+                payslip_table_section.classList.add("hidden");
                 return;
             }
 
 
             // create dynamic row
+            payslip_table_section.classList.remove("hidden");
             let slColumn = 1;
             table_body.innerHTML = "";
             fees_not_fount.classList.add("hidden");

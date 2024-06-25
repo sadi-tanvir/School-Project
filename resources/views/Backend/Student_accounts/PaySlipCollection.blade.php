@@ -40,26 +40,27 @@ Fees Collection
     .autocomplete .autocomplete-list-item:hover {
         background-color: #f3f4f6;
     }
-
 </style>
 
-<div>
-    <h1>Others Fees Collection</h1>
-</div>
+
+@include('Shared.ContentHeader', ['title' => 'Others Fees Collection'])
+
 @include('Shared.alert')
+
 <div class="grid grid-cols-3 gap-5">
     {{-- left section --}}
-    <div class="">
-        <div class="font-bold">
+    <div class="border-2  rounded-lg">
+        <div class="font-bold border-b px-6 py-3">
             <h3>Student Information</h3>
         </div>
-        <div class="border py-5 px-2 space-y-3 flex flex-col rounded-lg shadow">
+        <div class=" py-5 px-6 space-y-3 flex flex-col">
             <div class="">
                 <label for="year" class="block mb-2 text-sm font-medium whitespace-noWrap ">Year:</label>
-                <select id="year" name="year" class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5">
+                <select id="year" name="year"
+                    class="bg-gray-200 border-0 text-gray-900 text-sm rounded-lg  block w-full p-3.5">
                     <option selected>Select</option>
                     @foreach ($years as $yearVal)
-                    <option {{ date('Y') == $yearVal->year ? 'selected' : '' }} value="{{ $yearVal->year }}">
+                    <option {{ date('Y')==$yearVal->year ? 'selected' : '' }} value="{{ $yearVal->year }}">
                         {{ $yearVal->year }}</option>
                     @endforeach
                 </select>
@@ -68,7 +69,8 @@ Fees Collection
             {{-- class --}}
             <div class="">
                 <label for="class" class="block mb-2 text-sm font-medium whitespace-noWrap ">Class:</label>
-                <select id="class" name="class" class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5">
+                <select id="class" name="class"
+                    class="bg-gray-200 border-0  text-gray-900 text-sm rounded-lg  block w-full p-3.5">
                     <option selected>Select</option>
                     @foreach ($classes as $class)
                     <option value="{{ $class->class_name }}">{{ $class->class_name }}</option>
@@ -79,7 +81,8 @@ Fees Collection
             {{-- group --}}
             <div class="">
                 <label for="group" class="block mb-2 text-sm font-medium whitespace-noWrap ">Group:</label>
-                <select id="group" name="group" class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5">
+                <select id="group" name="group"
+                    class="bg-gray-200 border-0  text-gray-900 text-sm rounded-lg  block w-full p-3.5">
                     <option selected>Select</option>
                 </select>
             </div>
@@ -87,37 +90,42 @@ Fees Collection
             {{-- section --}}
             <div class="">
                 <label for="section" class="block mb-2 text-sm font-medium whitespace-noWrap ">Section:</label>
-                <select id="section" name="section" class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5">
+                <select id="section" name="section"
+                    class="bg-gray-200 border-0  text-gray-900 text-sm rounded-lg  block w-full p-3.5">
                     <option selected>Select</option>
                 </select>
             </div>
 
             {{-- Student Roll --}}
             <div class="">
-                <label for="student_roll" class="block mb-2 text-sm font-medium whitespace-noWrap ">Student Roll:</label>
+                <label for="student_roll" class="block mb-2 text-sm font-medium whitespace-noWrap ">Student
+                    Roll:</label>
                 <div class="autocomplete w-full relative">
-                    <input type="text" name="student_roll" id="student_roll" placeholder="Search..." class="w-full py-2 px-4 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                    <input type="text" name="student_roll" id="student_roll" placeholder="Search..."
+                        class="w-full py-3 px-4 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
                     <div id="autocomplete-list" class="autocomplete-list hidden"></div>
                 </div>
             </div>
 
-            <button id="getPaySlipData" type="button" class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-auto">Load
+            <button id="getPaySlipData" type="button"
+                class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 w-full  py-3.5 text-center mx-auto">Load
                 Data
             </button>
         </div>
 
         {{-- table section --}}
         <div class="mt-10">
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <div class="relative max-h-60 overflow-auto  p-2">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                     <thead class="text-xs uppercase bg-blue-600 text-white">
                         <tr>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-2 py-3 rounded-l-lg">
                                 <div class="flex items-center">
-                                    <input id="headerCheckbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2  dark:border-gray-600">
+                                    <input id="headerCheckbox" type="checkbox" value=""
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500     focus:ring-2   ">
                                 </div>
                             </th>
-                            <th scope="col" class="px-6 py-3 bg-blue-500">
+                            <th scope="col" class="px-4 py-3 bg-blue-500">
                                 SL
                             </th>
                             <th scope="col" class="px-6 py-3">
@@ -126,11 +134,8 @@ Fees Collection
                             <th scope="col" class="px-16 py-3 bg-blue-500">
                                 PaySlip
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-6 py-3 rounded-r-lg">
                                 Amount
-                            </th>
-                            <th scope="col" class="px-6 py-3 bg-blue-500">
-
                             </th>
                         </tr>
                     </thead>
@@ -138,18 +143,24 @@ Fees Collection
                     </tbody>
                 </table>
             </div>
+            {{-- error message --}}
+            <h1 id="fees_not_fount" class="text-red-400 text-center font-bold py-8 hidden">No Records Found
+                for the Provided Student ID.</h1>
 
-            <div class="mt-20 flex justify-between">
-                <div class="flex items-center">
-                    <input id="deleteCheckBox" name="deleteCheckBox" type="checkbox" value="" class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500  focus:ring-2 ">
+            <div class="mt-5 flex items-center justify-end pb-2 px-2">
+                <div class="flex items-center ms-3">
+                    <input id="deleteCheckBox" name="deleteCheckBox" type="checkbox" value=""
+                        class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500  focus:ring-2 ">
                     <label for="deleteCheckBox" class="ml-1 text-sm font-medium text-gray-900 ">Delete</label>
                 </div>
 
-                <button id="deletePayslip" type="button" class="text-white  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-auto">Delete
+                <button id="deletePayslip" type="button"
+                    class="text-white  focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-9 py-3.5 text-end mx-auto bg-red-700">Delete
                 </button>
 
 
-                <button id="PrintReadyBtn" type="button" class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-1.5 text-center">
+                <button id="PrintReadyBtn" type="button"
+                    class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-3.5 text-center">
                     >>
                 </button>
             </div>
@@ -162,7 +173,8 @@ Fees Collection
 
         <div class="bg-gray-100 rounded-lg shadow  p-5">
             <div class="w-full flex">
-                <button id="resetVoucher" type="button" class="text-white bg-gradient-to-br from-red-600 to-red-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-10 py-1.5 text-center ml-auto mb-3">
+                <button id="resetVoucher" type="button"
+                    class="text-white bg-gradient-to-br from-red-600 to-red-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-10 py-2.5 text-center ml-auto mb-3">
                     Reset
                 </button>
             </div>
@@ -173,21 +185,28 @@ Fees Collection
                         <div class="">
                             <p class="text-sm font-medium text-gray-700 ">
                                 Voucher Number:
+
+                            </p>
+                            <div class="">
                                 <span id="voucher_id" class="text-lg font-bold"></span>
                                 <input type="text" class="hidden" name="voucher_number" id="voucher_number">
-                            </p>
+                            </div>
                         </div>
 
                         <div class="flex items-center gap-3">
-                            <label for="collection_date" class="text-sm font-medium text-gray-600 ">Collention
+                            <label for="collection_date" class="text-sm font-medium text-gray-600 block">Collection
                                 Date:</label>
-                            <input type="date" value="{{ date('Y-m-d') }}" name="collection_date" id="collection_date" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 " placeholder="student class" />
+                            <input type="date" value="{{ date('Y-m-d') }}" name="collection_date" id="collection_date"
+                                class="bg-gray-200 border-0  border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2 py-3.5 "
+                                placeholder="student class" />
                         </div>
 
                         <div class="flex items-center gap-3">
-                            <label for="collect_amount" class="text-sm font-medium text-gray-600 ">Collection
+                            <label for="collect_amount" class="text-sm font-medium text-gray-600 block ">Collection
                                 Amount:</label>
-                            <input type="text" value="" name="collect_amount" id="collect_amount" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 px-2" placeholder="amount" />
+                            <input type="text" value="" name="collect_amount" id="collect_amount"
+                                class="bg-gray-200 border-0 -gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2 py-3.5"
+                                placeholder="amount" />
                         </div>
                     </div>
 
@@ -199,7 +218,8 @@ Fees Collection
                             <div class="">
                                 <p class="text-sm font-medium text-gray-700 ">
                                     S.ID:
-                                    <input id="printable_student_id" type="text" value="" name="printable_student_id" class="bg-transparent border-none focus:ring-0 h-0 w-fit" readonly>
+                                    <input id="printable_student_id" type="text" value="" name="printable_student_id"
+                                        class="bg-transparent border-none focus:ring-0 h-0 w-fit" readonly>
                                 </p>
                             </div>
                             <div class="">
@@ -244,11 +264,11 @@ Fees Collection
 
                 {{-- table section --}}
                 <div class="mt-10">
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <div class="relative overflow-x-auto ">
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
                             <thead class="text-xs text-white uppercase bg-blue-600">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                                    <th scope="col" class="px-6 py-3 bg-blue-500 rounded-l-lg">
                                         SL
                                     </th>
                                     <th scope="col" class="px-6 py-3">
@@ -269,7 +289,7 @@ Fees Collection
                                     <th scope="col" class="px-6 py-3 bg-blue-500">
                                         Current Due
                                     </th>
-                                    <th scope="col" class="px-6 py-3 ">
+                                    <th scope="col" class="px-6 py-3 rounded-r-lg">
                                         Current Pay
                                     </th>
                                 </tr>
@@ -279,78 +299,101 @@ Fees Collection
                         </table>
                     </div>
 
-                    <div class="grid grid-cols-4 gap-5">
-                        <div class="mt-20 flex flex-wrap gap-5 col-span-3">
-                            <div class="">
-                                <label for="t_amount" class="mb-2 text-sm font-medium text-gray-600 ">T.
-                                    Amount:</label>
-                                <input type="text" value="" name="t_amount" id="t_amount" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full" placeholder="" readonly />
-                            </div>
-                            <div class="">
-                                <label for="t_waiver" class="mb-2 text-sm font-medium text-gray-600 ">T.
-                                    Waiver:</label>
-                                <input type="text" value="" name="t_waiver" id="t_waiver" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full" placeholder="" readonly />
-                            </div>
-                            <div class="">
-                                <label for="t_payable" class="mb-2 text-sm font-medium text-gray-600 ">T.
-                                    Payable:</label>
-                                <input type="text" value="" name="t_payable" id="t_payable" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full" placeholder="" readonly />
-                            </div>
+                    <div class="grid grid-cols-4 gap-5 mt-20">
 
-                            <div class="">
-                                <label for="t_current_pay" class="mb-2 text-sm font-medium text-gray-600 ">Total
-                                    Current
-                                    Pay:</label>
-                                <input type="number" value="0" name="t_current_pay" id="t_current_pay" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full" placeholder="" readonly />
-                            </div>
+                        <div class="">
+                            <label for="t_amount" class="mb-2 text-sm font-medium text-gray-600 ">T.
+                                Amount:</label>
+                            <input type="text" value="" name="t_amount" id="t_amount"
+                                class="bg-gray-200 border-0  border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2 py-3.5 block w-full"
+                                placeholder="" readonly />
                         </div>
+                        <div class="">
+                            <label for="t_waiver" class="mb-2 text-sm font-medium text-gray-600 ">T.
+                                Waiver:</label>
+                            <input type="text" value="" name="t_waiver" id="t_waiver"
+                                class="bg-gray-200 border-0  border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2 py-3.5 block w-full"
+                                placeholder="" readonly />
+                        </div>
+                        <div class="">
+                            <label for="t_payable" class="mb-2 text-sm font-medium text-gray-600 ">T.
+                                Payable:</label>
+                            <input type="text" value="" name="t_payable" id="t_payable"
+                                class="bg-gray-200 border-0  border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2 py-3.5 block w-full"
+                                placeholder="" readonly />
+                        </div>
+
+                        <div class="">
+                            <label for="t_current_pay" class="mb-2 text-sm font-medium text-gray-600 ">Total
+                                Current
+                                Pay:</label>
+                            <input type="number" value="0" name="t_current_pay" id="t_current_pay"
+                                class="bg-gray-200 border-0  border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-2 py-3.5 block w-full"
+                                placeholder="" readonly />
+                        </div>
+
                     </div>
 
                     <div class="my-5 flex flex-col">
                         <label class="font-semibold" for="">Note:</label>
-                        <textarea name="note" id="" cols="30" rows="4" class="rounded-lg w-96 p-2"></textarea>
+                        <textarea name="note" id="" cols="30" rows="4"
+                            class="rounded-lg w-full border-0 bg-gray-200 p-2"
+                            placeholder="Type your notes here..."></textarea>
                     </div>
 
                     <div class="flex gap-3">
                         <div class="">
                             <label for="changed" class="mb-2 text-sm font-medium text-gray-600 ">Changed:</label>
-                            <input type="text" value="" name="changeAmount" id="changeAmount" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full px-1" placeholder="" />
+                            <input type="text" value="" name="changeAmount" id="changeAmount"
+                                class="bg-gray-200 border-0  border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  py-3.5 block w-full "
+                                placeholder="" />
                         </div>
                         <div class="mt-5">
-                            <input type="text" value="" name="returnAmount" id="returnAmount" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-1 block w-full px-1" placeholder="" />
+                            <input type="text" value="" name="returnAmount" id="returnAmount"
+                                class="bg-gray-200 border-0  border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 py-3.5 block w-full "
+                                placeholder="" />
                         </div>
                     </div>
 
                     {{-- hidden inputs starts --}}
-                    <input class="hidden" type="text" name="collected_by_name" value="{{ isset($schoolAdminData->name) ? $schoolAdminData->name : 'Unknown' }}">
-                    <input class="hidden" type="text" name="collected_by_email" value="{{ isset($schoolAdminData->email) ? $schoolAdminData->email : 'Unknown' }}">
-                    <input class="hidden" type="text" name="collected_by_phone" value="{{ isset($schoolAdminData->mobile_number) ? $schoolAdminData->mobile_number : 'Unknown' }}">
+                    <input class="hidden" type="text" name="collected_by_name"
+                        value="{{ isset($schoolAdminData->name) ? $schoolAdminData->name : 'Unknown' }}">
+                    <input class="hidden" type="text" name="collected_by_email"
+                        value="{{ isset($schoolAdminData->email) ? $schoolAdminData->email : 'Unknown' }}">
+                    <input class="hidden" type="text" name="collected_by_phone"
+                        value="{{ isset($schoolAdminData->mobile_number) ? $schoolAdminData->mobile_number : 'Unknown' }}">
                     {{-- hidden inputs end --}}
 
-                    <div class="w-full grid grid-cols-3 items-center mt-10">
+                    <div class="w-full grid grid-cols-3 items-end mt-10">
                         <div></div>
-                        <button id="collect_fees" type="submit" class="w-fit mx-auto h-fit text-white hover:bg-gradient-to-bl focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">Collect
+                        <button id="collect_fees" type="submit"
+                            class="w-fit mx-auto h-fit text-white bg-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-8 py-3.5 text-center">Collect
                             Fees
                         </button>
 
                         <div class="w-full ml-auto flex justify-between">
-                            <div class="flex items-center gap-2">
-                                <label for="full_paid" class="ml-1 text-sm font-medium text-gray-900 ">Full
+                            <div class="flex items-center gap-2 mt-8">
+                                <label for="full_paid" class="ml-1 text-sm font-medium text-gray-900">Full
                                     Paid</label>
-                                <input id="full_paid" name="full_paid" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 ">
+                                <input id="full_paid" name="full_paid" type="checkbox" value=""
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 ">
                             </div>
 
                             <div>
                                 <label for="print_page" class="block mb-2 text-sm font-medium whitespace-noWrap ">Print
                                     Page
                                     :</label>
-                                <select id="print_page" name="print_page" class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-32 p-1">
+                                <select id="print_page" name="print_page"
+                                    class="bg-gray-200 border-0  text-gray-900 text-sm rounded-lg  block w-32 px-2 py-3.5">
                                     <option disabled selected>Select</option>
-                                    <option {{ $schoolInfo->number_of_print_page == 1 ? 'selected' : '' }} class="text-center" value="1">
+                                    <option {{ $schoolInfo->number_of_print_page == 1 ? 'selected' : '' }}
+                                        class="text-center" value="1">
                                         One Page</option>
-                                    <option {{ $schoolInfo->number_of_print_page == 2 ? 'selected' : '' }} class="text-center" value="2">
+                                    <option {{ $schoolInfo->number_of_print_page == 2 ? 'selected' : '' }}
+                                        class="text-center" value="2">
                                         Two Page</option>
-                                    <option {{ $schoolInfo->number_of_print_page == 3 ? 'selected' : '' }} class="text-center" value="3">
+                                    <option {{ $schoolInfo->number_of_print_page == 3 ? 'selected' : '' }}
+                                        class="text-center" value="3">
                                         Three Page</option>
                                 </select>
                             </div>
@@ -444,7 +487,7 @@ Fees Collection
             const defaultOption = document.createElement('option');
             defaultOption.value = "Select";
             defaultOption.textContent = "Select";
-            defaultOption.selected = true;
+            defaultOption.slected = true;
             groupId.appendChild(defaultOption);
             groups.forEach(group => {
                 const groupOption = document.createElement('option');
@@ -461,7 +504,7 @@ Fees Collection
             const defaultOption = document.createElement('option');
             defaultOption.value = "Select";
             defaultOption.textContent = "Select";
-            defaultOption.selected = true;
+            defaultOption.slected = true;
             sectionId.appendChild(defaultOption);
             sections.forEach(section => {
                 const sectionOption = document.createElement('option');
@@ -553,20 +596,28 @@ Fees Collection
 
 
         function DisplayUserPaySlip(data) {
+            console.log(data.paySlips);
             const selectedCheckboxes = [];
+
+            if(data.paySlips.length === 0){
+                table_body.innerHTML = "";
+                fees_not_fount.classList.remove("hidden");
+                return;
+            }
+
 
             // create dynamic row
             let slColumn = 1;
             table_body.innerHTML = "";
+            fees_not_fount.classList.add("hidden");
             // update table content
             data.paySlips.forEach(slip => {
                 const tr = document.createElement('tr');
-                tr.classList.add('odd:bg-white', 'odd:dark:bg-gray-900', 'even:bg-gray-50'
-                    , 'even:dark:bg-gray-800', 'border-b', 'dark:border-gray-700');
+                tr.classList.add( 'border-b', 'last:border-b-0');
 
                 // Create a new checkbox input element
                 const checkboxCell = document.createElement('td');
-                checkboxCell.classList.add("px-6", "py-4")
+                checkboxCell.classList.add("px-2", "py-4")
                 const checkbox = document.createElement('input');
                 checkbox.type = 'checkbox';
                 checkbox.name = `select_${slip.id}`
@@ -578,7 +629,7 @@ Fees Collection
 
                 // create serial index column
                 const serialTD = document.createElement('td');
-                serialTD.classList.add('px-6', 'py-4');
+                serialTD.classList.add('px-4', 'py-4');
                 serialTD.textContent = slColumn++;
                 tr.appendChild(serialTD);
 
@@ -679,11 +730,20 @@ Fees Collection
 
             // delete payslip
             deleteCheckBox.addEventListener("change", (event) => {
-                deletePayslip.disabled = false;
-                deletePayslip.style.cursor = "pointer"
-                deletePayslip.classList.remove("bg-gray-500");
-                deletePayslip.classList.add("bg-gradient-to-br", "from-red-600", "to-red-500"
-                    , "hover:bg-gradient-to-bl", "focus:ring-red-300");
+                console.log('delete checkbox', );
+                    if(event.target.checked){
+                        deletePayslip.disabled = false;
+                        deletePayslip.style.cursor = "pointer"
+                        deletePayslip.classList.remove("bg-gray-200");
+                        deletePayslip.classList.add("bg-gradient-to-br", "from-red-600", "to-red-500"
+                            , "hover:bg-gradient-to-bl", "focus:ring-red-300");
+                    }if(!event.target.checked){
+                        deletePayslip.disabled = true;
+                        deletePayslip.style.cursor = "not-allowed"
+                        deletePayslip.classList.add("bg-gray-200");
+                        deletePayslip.classList.remove("bg-gradient-to-br", "from-red-600", "to-red-500"
+                            , "hover:bg-gradient-to-bl", "focus:ring-red-300");
+                    }
             })
             let filteredPaySlipForDelete = [];
             deletePayslip.addEventListener("click", (event) => {
@@ -714,7 +774,7 @@ Fees Collection
                 deletePayslip.style.cursor = "not-allowed"
                 deletePayslip.classList.remove("bg-gradient-to-br", "from-red-600", "to-red-500"
                     , "hover:bg-gradient-to-bl", "focus:ring-red-300");
-                deletePayslip.classList.add("bg-gray-500");
+                deletePayslip.classList.add("bg-gray-2000");
 
             });
 
@@ -771,8 +831,7 @@ Fees Collection
                 totalWaiver += parseInt(slip.waiver);
                 totalPayable += parseInt(slip.payable);
                 const tr = document.createElement('tr');
-                tr.classList.add('odd:bg-white', 'odd:dark:bg-gray-900', 'even:bg-gray-50'
-                    , 'even:dark:bg-gray-800', 'border-b', 'dark:border-gray-700');
+                tr.classList.add( 'border-b', );
 
                 // create serial index column
                 const serialTD = document.createElement('td');
@@ -784,7 +843,7 @@ Fees Collection
                 // create Payslip Type column
                 const payslipTypeNameTD = document.createElement('td');
                 payslipTypeNameTD.classList.add("px-1", "py-2"
-                    , 'overflow-hidden')
+                    , 'overflow-hidden','bg-gray-200')
                 payslipTypeNameTD.style.maxWidth = "160px";
                 const payslipTypeInputBox = document.createElement('input');
                 payslipTypeInputBox.type = 'text'
@@ -792,7 +851,7 @@ Fees Collection
                 payslipTypeInputBox.value = slip.pay_slip_type + " (" + slip.month + "," + slip.year +
                     ")";
                 payslipTypeInputBox.classList.add('border-0', 'w-fit'
-                    , 'focus:ring-0')
+                    , 'focus:ring-0','bg-gray-200')
                 payslipTypeInputBox.readOnly = true;
                 payslipTypeNameTD.appendChild(payslipTypeInputBox);
                 tr.appendChild(payslipTypeNameTD);
@@ -801,14 +860,14 @@ Fees Collection
                 // create Payslip Amount column
                 const payslipAmountNameTD = document.createElement('td');
                 payslipAmountNameTD.classList.add("px-1", "py-2"
-                    , 'overflow-hidden')
+                    , 'overflow-hidden','bg-gray-200')
                 payslipAmountNameTD.style.maxWidth = "100px";
                 const payslipAmountInputBox = document.createElement('input');
                 payslipAmountInputBox.type = 'text'
                 payslipAmountInputBox.name = `input_payslip_amount[${slip.id}]`;
                 payslipAmountInputBox.value = slip.amount;
                 payslipAmountInputBox.classList.add('border-0', 'w-fit'
-                    , 'focus:ring-0')
+                    , 'focus:ring-0','bg-gray-200')
                 payslipAmountInputBox.readOnly = true;
                 payslipAmountNameTD.appendChild(payslipAmountInputBox);
                 tr.appendChild(payslipAmountNameTD);
@@ -817,7 +876,7 @@ Fees Collection
                 // create Waiver column
                 const payslipWaiverTD = document.createElement('td');
                 payslipWaiverTD.classList.add("px-1", "py-2"
-                    , 'overflow-hidden')
+                    , 'overflow-hidden','bg-gray-200')
                 payslipWaiverTD.style.width = "10px";
                 const payslipWaiverInputBox = document.createElement('input');
                 payslipWaiverInputBox.readOnly = slip.due_amount ? true : false;
@@ -826,7 +885,7 @@ Fees Collection
                 payslipWaiverInputBox.type = 'text'
                 payslipWaiverInputBox.name = `input_waiver[${slip.id}]`;
                 payslipWaiverInputBox.value = slip.waiver;
-                payslipWaiverInputBox.classList.add('w-fit', 'rounded-lg')
+                payslipWaiverInputBox.classList.add('w-fit', 'rounded-lg', 'bg-gray-50', 'border-0')
                 payslipWaiverTD.appendChild(payslipWaiverInputBox);
                 tr.appendChild(payslipWaiverTD);
 
@@ -835,14 +894,14 @@ Fees Collection
                 // create Payable column
                 const payableAmountTD = document.createElement('td');
                 payableAmountTD.classList.add("px-1", "py-2"
-                    , 'overflow-hidden')
+                    , 'overflow-hidden','bg-gray-200')
                 payableAmountTD.style.maxWidth = "100px";
                 const payableInputBox = document.createElement('input');
                 payableInputBox.type = 'text'
                 payableInputBox.name = `input_payable_amount[${slip.id}]`;
                 payableInputBox.value = slip.payable;
                 payableInputBox.classList.add('border-0', 'w-fit'
-                    , 'focus:ring-0')
+                    , 'focus:ring-0','bg-gray-200')
                 payableInputBox.readOnly = true;
                 payableAmountTD.appendChild(payableInputBox);
                 tr.appendChild(payableAmountTD);
@@ -851,7 +910,7 @@ Fees Collection
                 // create previous Due Amount column
                 const previousDueAmountTD = document.createElement('td');
                 previousDueAmountTD.classList.add("px-1", "py-2"
-                    , 'overflow-hidden')
+                    , 'overflow-hidden','bg-gray-200')
                 previousDueAmountTD.style.maxWidth = "80px";
                 const previousDueAmountInputBox = document.createElement('input');
                 previousDueAmountInputBox.style.width = "100%"
@@ -859,7 +918,7 @@ Fees Collection
                 previousDueAmountInputBox.name = `input_due_amount[${slip.id}]`;
                 previousDueAmountInputBox.value = slip.due_amount > 0 ? slip.due_amount : 0;
                 previousDueAmountInputBox.classList.add('border-0', 'w-fit'
-                    , 'focus:ring-0')
+                    , 'focus:ring-0','bg-gray-200')
                 previousDueAmountInputBox.readOnly = true;
                 previousDueAmountTD.appendChild(previousDueAmountInputBox);
                 tr.appendChild(previousDueAmountTD);
@@ -867,7 +926,7 @@ Fees Collection
                 // create current Due Amount column
                 const dueAmountTD = document.createElement('td');
                 dueAmountTD.classList.add("px-1", "py-2"
-                    , 'overflow-hidden')
+                    , 'overflow-hidden','bg-gray-200')
                 dueAmountTD.style.maxWidth = "80px";
                 const dueAmountInputBox = document.createElement('input');
                 dueAmountInputBox.style.width = "100%"
@@ -875,7 +934,7 @@ Fees Collection
                 dueAmountInputBox.name = `input_due_amount[${slip.id}]`;
                 dueAmountInputBox.value = slip.due_amount > 0 ? slip.due_amount : slip.payable;
                 dueAmountInputBox.classList.add('border-0', 'w-fit'
-                    , 'focus:ring-0')
+                    , 'focus:ring-0','bg-gray-200')
                 dueAmountInputBox.readOnly = true;
                 dueAmountTD.appendChild(dueAmountInputBox);
                 tr.appendChild(dueAmountTD);
@@ -891,7 +950,7 @@ Fees Collection
                 currentPayInputBox.name = `input_current_pay[${slip.id}]`;
                 // currentPayInputBox.value = 0;
                 currentPayInputBox.placeholder = 0;
-                currentPayInputBox.classList.add('w-fit', 'rounded-lg')
+                currentPayInputBox.classList.add('w-fit', 'rounded-lg','bg-gray-200', 'border-0')
                 // currentPayInputBox.readOnly = true;
                 currentPayAmountTD.appendChild(currentPayInputBox);
                 tr.appendChild(currentPayAmountTD);
@@ -1027,7 +1086,8 @@ Fees Collection
 
                     // make readonly waver amount after distributing the collect_amount
                     payslipWaiverInputBox.readOnly = true;
-                    payslipWaiverInputBox.classList.add("bg-gray-200")
+                    payslipWaiverInputBox.classList.remove('w-fit', 'rounded-lg', 'bg-gray-50', 'border-0')
+                    payslipWaiverInputBox.classList.add('w-fit', 'rounded-lg','bg-gray-200', 'border-0', 'cursor-not-allowed')
                 }
 
                 // collect amount

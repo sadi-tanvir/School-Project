@@ -549,7 +549,7 @@
                 <ul id="dropdown-student-Accounts" class="hidden py-2 space-y-1 border-s ms-7 border-dashed px-3">
                     <li>
                         <a href="/dashboard/studentAccounts/paySlipCollection/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">
-                            Pay Slip Collection</a>
+                            Fees Collection</a>
                     </li>
                     <li>
                         <a href="/dashboard/studentAccounts/printUnpaidPaySlip/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Print

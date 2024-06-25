@@ -99,10 +99,7 @@
                     <label for="group" class="block mb-2 text-sm font-medium whitespace-noWrap">Group:</label>
                     <select id="group" name="group"
                         class="col-span-3 bg-white border-0  text-gray-900 text-sm rounded-lg  block w-full p-3.5">
-                        <option disabled selected>Select </option>
-                        {{-- @foreach ($groups as $group)
-                            <option value="{{ $group->group_name }}">{{ $group->group_name }}</option>
-                        @endforeach --}}
+                        <option disabled selected>Select</option>
                     </select>
                 </div>
             </div>

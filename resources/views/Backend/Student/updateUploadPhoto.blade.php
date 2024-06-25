@@ -367,8 +367,8 @@
                                         @method('POST')
                                         <input type="hidden" name="student_id" value="{{ $student->id }}" />
                                         <input type="hidden" name="class" value="{{ $student->Class_name }}" />
-                                        <input type="hidden" name="section" value="{{ $section->section_name }}" />
-                                        <input type="hidden" name="group" value="{{ $group->group_name }}" />
+                                        <input type="hidden" name="section" value="{{  $student->section }}" />
+                                        <input type="hidden" name="group" value="{{  $student->group }}" />
                                         <input type="hidden" name="year" value="{{ $academic_year }}" />
                                         <input type="hidden" name="category" value="{{ $category->category_name }}" />
                                         <input

@@ -291,16 +291,6 @@ class ProgressReportController extends Controller
             }
 
 
-            foreach ($signatures as $sign) {
-                foreach ($setSignature as $setSign) {
-                    if ($setSign->signature_name === $sign->sign) {
-                        $signatureName = $setSign->signature_name;
-                        $signImage = $sign->image;
-                        break;
-                    }
-                }
-            }
-
             // dd($signImage);
             return view('/Backend/Report(exam&result)/downloadProgressReport', compact('existingRecords', 'shortCode', 'students', 'class', 'group', 'section', 'exam_name', 'merit_status', 'year', 'highestMarks', 'grades', 'exam_name', 'sequentialWiseExam', 'sorted_exam_process_data', 'gradePoints', 'schoolInfo', 'signatureName', 'signImage','signPosition'));
 

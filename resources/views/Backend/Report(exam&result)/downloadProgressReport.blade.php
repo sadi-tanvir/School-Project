@@ -54,21 +54,23 @@
         th {
             border: 1px solid #000000;
             text-align: center;
-            padding: 6px 20px;
+            padding: 2px 10px;
         }
 
         tr th {
             border: 1px solid #000000;
             text-align: center;
-            padding: 6px 20px;
-            background-color: #1e3a8a;
-            color: #fff;
+            padding: 2px 10px;
+            background-color: #5c85d6;
+            color: black;
+            
         }
 
         .content td,
         .content th {
             border-top: 1px solid transparent;
             padding: 2px 10px 2px 15px;
+            color: black;
         }
 
         .page-container {
@@ -83,7 +85,7 @@
     </style>
 </head>
 
-<body class="bg-blue-100">
+<body class="bg-blue-100 text-sm">
     <!-- @php
 
         foreach ($sorted_exam_process_data as $index => $data) {
@@ -97,17 +99,19 @@
     @endphp -->
 
     @foreach ($students as $key => $studentData)
-        <div class="mt-10 page-container" id="page-{{ $loop->index }}">
+        <div class="mt-5 page-container" id="page-{{ $loop->index }}">
 
             <div id="content-container" class=" mx-auto w-[1150px]  bg-white px-[120px] border-[7px] border-blue-500">
                 <img id="background-image" src="{{asset($schoolInfo->logo)}}" alt="School Logo" />
-                <div class="pb- grid w-full grid-cols-7 items-start justify-between pt-28">
+                <div class="grid w-full grid-cols-7 items-start justify-between pt-20">
+                @foreach ($studentData as $studentInfo)
                     <div class="col-span-2">
-                        <img src="{{asset($schoolInfo->logo)}}" class="h-28 w-auto" alt="School Logo" />
+                        <img src="{{asset($studentInfo->image)}}" class="h-28 w-auto" alt="student pic" />
                     </div>
+                    @endforeach
                     <div class="col-span-3 text-center">
                         <h3 class="text-3xl font-semibold">{{$schoolInfo->school_name}}</h3>
-                        <p class="text- pt-6">
+                        <p class="text- pt-3">
                             {{$schoolInfo->address}}
                             <br />
                             <span class="font-semibold">Contact No:</span>
@@ -120,44 +124,48 @@
                             {{$schoolInfo->website}}
                             <br />
                         </p>
+                        <div class="flex justify-center">
+                <img src="{{asset($schoolInfo->logo)}}" class="h-24 w-auto" alt="School Logo" />
+                </div>
                     </div>
                     <div class="col-span-2 flex w-full justify-end text-start text-sm">
                         <div class="ms-14 grid grow grid-cols-3">
-                            <div class="col-span-1 border-l border-t border-black p-1 ps-4">Grade</div>
-                            <div class="col-span-1 border-e border-s border-t border-black p-1 ps-4">Range</div>
-                            <div class="col-span-1 border-e border-t border-black p-1 ps-4">GPA</div>
+                            <div class="col-span-1 border-l border-t border-black px-1 ps-4">Grade</div>
+                            <div class="col-span-1 border-e border-s border-t border-black px-1 ps-4">Range</div>
+                            <div class="col-span-1 border-e border-t border-black px-1 ps-4">GPA</div>
 
-                            <div class="col-span-1 border-b border-l border-t border-black p-1 ps-4">A+</div>
-                            <div class="col-span-1 border-x border-y border-black p-1 ps-4">80-100</div>
-                            <div class="col-span-1 border-y border-r border-black p-1 ps-4">5</div>
+                            <div class="col-span-1 border-b border-l border-t border-black px-1 ps-4">A+</div>
+                            <div class="col-span-1 border-x border-y border-black px-1 ps-4">80-100</div>
+                            <div class="col-span-1 border-y border-r border-black px-1 ps-4">5</div>
 
-                            <div class="col-span-1 border-b border-l border-black p-1 ps-4">A</div>
-                            <div class="col-span-1 border-x border-b border-black p-1 ps-4">70-79</div>
-                            <div class="col-span-1 border-b border-e border-black p-1 ps-4">4</div>
+                            <div class="col-span-1 border-b border-l border-black px-1 ps-4">A</div>
+                            <div class="col-span-1 border-x border-b border-black px-1 ps-4">70-79</div>
+                            <div class="col-span-1 border-b border-e border-black px-1 ps-4">4</div>
 
-                            <div class="col-span-1 border-b border-l border-black p-1 ps-4">A-</div>
-                            <div class="col-span-1 border-x border-b border-black p-1 ps-4">60-69</div>
-                            <div class="col-span-1 border-b border-r border-black p-1 ps-4">3.5</div>
+                            <div class="col-span-1 border-b border-l border-black px-1 ps-4">A-</div>
+                            <div class="col-span-1 border-x border-b border-black px-1 ps-4">60-69</div>
+                            <div class="col-span-1 border-b border-r border-black px-1 ps-4">3.5</div>
 
-                            <div class="col-span-1 border-b border-l border-black p-1 ps-4">B</div>
-                            <div class="col-span-1 border-x border-b border-black p-1 ps-4">50-59</div>
-                            <div class="col-span-1 border-b border-r border-black p-1 ps-4">3</div>
+                            <div class="col-span-1 border-b border-l border-black px-1 ps-4">B</div>
+                            <div class="col-span-1 border-x border-b border-black px-1 ps-4">50-59</div>
+                            <div class="col-span-1 border-b border-r border-black px-1 ps-4">3</div>
 
-                            <div class="col-span-1 border-b border-l border-black p-1 ps-4">C</div>
-                            <div class="col-span-1 border-x border-b border-black p-1 ps-4">45-49</div>
-                            <div class="col-span-1 border-b border-r border-black p-1 ps-4">2</div>
+                            <div class="col-span-1 border-b border-l border-black px-1 ps-4">C</div>
+                            <div class="col-span-1 border-x border-b border-black px-1 ps-4">45-49</div>
+                            <div class="col-span-1 border-b border-r border-black px-1 ps-4">2</div>
 
-                            <div class="col-span-1 border-b border-l border-black p-1 ps-4">D</div>
-                            <div class="col-span-1 border-x border-b border-black p-1 ps-4">40-44</div>
-                            <div class="col-span-1 border-b border-r border-black p-1 ps-4">1</div>
+                            <div class="col-span-1 border-b border-l border-black px-1 ps-4">D</div>
+                            <div class="col-span-1 border-x border-b border-black px-1 ps-4">40-44</div>
+                            <div class="col-span-1 border-b border-r border-black px-1 ps-4">1</div>
 
-                            <div class="col-span-1 border-b border-l border-black p-1 ps-4">F</div>
-                            <div class="col-span-1 border-x border-b border-black p-1 ps-4">0-39</div>
-                            <div class="col-span-1 border-b border-r border-black p-1 ps-4">0</div>
+                            <div class="col-span-1 border-b border-l border-black px-1 ps-4">F</div>
+                            <div class="col-span-1 border-x border-b border-black px-1 ps-4">0-39</div>
+                            <div class="col-span-1 border-b border-r border-black px-1 ps-4">0</div>
                         </div>
                     </div>
                 </div>
-                <p class="font-semi-bold py-3 text-center text-2xl font-bold">PROGRESS REPORT</p>
+               
+                <p class="font-semi-bold text-center text-xl font-bold">PROGRESS REPORT</p>
                 {{-- student info --}}
                 @foreach ($studentData as $studentInfo)
                     <div class="grid grid-cols-2">
@@ -191,10 +199,10 @@
                         </div>
                     </div>
                 @endforeach
-                <table class="mt-6">
+                <table class="mt-5">
                     <tbody>
                         <tr>
-                            <th rowspan="2">SL</th>
+                            <th rowspan="2"  >SL</th>
                             <th rowspan="2">Name Of Subjects</th>
                             <th rowspan="2">Full Marks</th>
                             <th rowspan="2">Highest Marks</th>
@@ -314,21 +322,21 @@
 
                 <div class="my-10 grid grid-cols-8 text-center">
                     <div class="col-span-3 grid grid-cols-2">
-                        <div class="col-span-1 border-b border-l border-r border-t border-black p-1">Result Status</div>
+                        <div class="col-span-1 border-b border-l border-r border-t border-black px-1">Result Status</div>
                         @if ($grade === "F")
-                            <div class="col-span-1 border-b border-r border-t border-black p-1 text-red-700">Fail</div>
+                            <div class="col-span-1 border-b border-r border-t border-black px-1 text-red-700">Fail</div>
                         @else
-                            <div class="col-span-1 border-b border-r border-t border-black p-1 text-green-700">Passed</div>
+                            <div class="col-span-1 border-b border-r border-t border-black px-1 text-green-700">Passed</div>
                         @endif
 
 
                         @if ($merit_status === "section_wise")
 
-                            <div class="col-span-1 border-b border-l border-r border-black p-1">Section Position</div>
+                            <div class="col-span-1 border-b border-l border-r border-black px-1">Section Position</div>
                             @foreach ($studentData as $positionSTD)
                                 @foreach ($sorted_exam_process_data as $positionData)
                                     @if($positionData->student_id === $positionSTD->student_id)
-                                        <div class="col-span-1 border-b border-r border-black p-1">
+                                        <div class="col-span-1 border-b border-r border-black px-1">
                                             {{$positionData->position}}
                                         </div>
                                     @endif
@@ -338,11 +346,11 @@
 
                         @endif
                         @if ($merit_status === "class_wise")
-                            <div class="col-span-1 border-b border-l border-r border-black p-1">Class Position</div>
+                            <div class="col-span-1 border-b border-l border-r border-black px-1">Class Position</div>
                             @foreach ($studentData as $positionSTD)
                                 @foreach ($sorted_exam_process_data as $positionData)
                                     @if($positionData->student_id === $positionSTD->student_id)
-                                        <div class="col-span-1 border-b border-r border-black p-1">
+                                        <div class="col-span-1 border-b border-r border-black px-1">
                                             {{$positionData->position}}
                                         </div>
                                     @endif
@@ -351,42 +359,42 @@
                         @endif
 
 
-                        <div class="col-span-1 border-b border-l border-r border-black p-1">GPA (Without 4th)</div>
-                        <div class="col-span-1 border-b border-r border-black p-1">{{$GPA}}</div>
+                        <div class="col-span-1 border-b border-l border-r border-black px-1">GPA (Without 4th)</div>
+                        <div class="col-span-1 border-b border-r border-black px-1">{{$GPA}}</div>
 
-                        <div class="col-span-1 border-b border-l border-r border-black p-1">Failed Subject (s)</div>
-                        <div class="col-span-1 border-b border-r border-black p-1">{{$fail}}</div>
+                        <div class="col-span-1 border-b border-l border-r border-black px-1">Failed Subject (s)</div>
+                        <div class="col-span-1 border-b border-r border-black px-1">{{$fail}}</div>
 
-                        <div class="col-span-1 border-b border-l border-r border-black p-1">Total Present</div>
-                        <div class="col-span-1 border-b border-r border-black p-1">-</div>
+                        <div class="col-span-1 border-b border-l border-r border-black px-1">Total Present</div>
+                        <div class="col-span-1 border-b border-r border-black px-1">-</div>
 
-                        <div class="col-span-1 border-b border-l border-r border-black p-1">Total Absent</div>
-                        <div class="col-span-1 border-b border-r border-black p-1">-</div>
+                        <div class="col-span-1 border-b border-l border-r border-black px-1">Total Absent</div>
+                        <div class="col-span-1 border-b border-r border-black px-1">-</div>
 
-                        <div class="col-span-1 border-b border-l border-r border-black p-1">Total Leave</div>
-                        <div class="col-span-1 border-b border-r border-black p-1">-</div>
+                        <div class="col-span-1 border-b border-l border-r border-black px-1">Total Leave</div>
+                        <div class="col-span-1 border-b border-r border-black px-1">-</div>
                     </div>
-                    <div class="col-span-3 grid grid-cols-2 md:ml-10">
-                        <div class="col-span-1 border-b border-l border-r border-t border-black p-1 font-bold">
+                    <div class="col-span-3 grid grid-cols-2 ml-10">
+                        <div class="col-span-1 border-b border-l border-r border-t border-black px-1 font-bold">
                             Moral & Behavior Evaluation
                         </div>
-                        <div class="col-span-1 border-b border-r border-t border-black p-1 font-bold">
+                        <div class="col-span-1 border-b border-r border-t border-black px-1 font-bold">
                             Co-Curricular Activities
                         </div>
 
-                        <div class="col-span-1 border-b border-l border-r border-black p-1">Excellent</div>
-                        <div class="col-span-1 border-b border-r border-black p-1">Sports</div>
+                        <div class="col-span-1 border-b border-l border-r border-black px-1">Excellent</div>
+                        <div class="col-span-1 border-b border-r border-black px-1">Sports</div>
 
-                        <div class="col-span-1 border-b border-l border-r border-black p-1">Good</div>
-                        <div class="col-span-1 border-b border-r border-black p-1">Cultural Function</div>
+                        <div class="col-span-1 border-b border-l border-r border-black px-1">Good</div>
+                        <div class="col-span-1 border-b border-r border-black px-1">Cultural Function</div>
 
-                        <div class="col-span-1 border-b border-l border-r border-black p-1">Average</div>
-                        <div class="col-span-1 border-b border-r border-black p-1">Scout/BNCC</div>
+                        <div class="col-span-1 border-b border-l border-r border-black px-1">Average</div>
+                        <div class="col-span-1 border-b border-r border-black px-1">Scout/BNCC</div>
 
-                        <div class="col-span-1 border-b border-l border-r border-black p-1">Poor</div>
-                        <div class="col-span-1 border-b border-r border-black p-1">Math Olympiad</div>
+                        <div class="col-span-1 border-b border-l border-r border-black px-1">Poor</div>
+                        <div class="col-span-1 border-b border-r border-black px-1">Math Olympiad</div>
 
-                        <div class="col-span-2 border-b border-l border-r border-black p-1 text-justify">
+                        <div class="col-span-2 border-b border-l border-r border-black px-1 text-justify">
                             @php
                                 $comments = "";
                                 foreach ($gradePoints as $gradesData) {
@@ -402,7 +410,8 @@
                             {{$comments}}
                         </div>
                     </div>
-                    <div class="col-span-2 ps-6">
+                    <div class="col-span-2 px-2">
+                        <div class="flex justify-end">
                         @php
                             $results = [
                                 "ID" => $studentData[0]->student_id,
@@ -411,25 +420,96 @@
                                 "GPA" => $GPA,
                             ];
                             $resultJson = json_encode($results);
-                            echo QrCode::size(100)->generate($resultJson);
+                            echo QrCode::size(150)->generate($resultJson);
                         @endphp
+                        </div>
                     </div>
                 </div>
 
 
-                <div class=" flex justify-end  py-10">
-                    <div class="w-[200px]">
-                        <img class="w-1/2" src="{{asset($signImage)}}" alt="">
-                        <div class=" border-t border-black  text-center">{{$signatureName}}</div>
+                @if ($signPosition === "left")
+                <div class="mt-6 flex justify-between p-8">
+
+                <div class="col-span-1 px-10 ">
+                        
+                                <img class="w-20" src="{{asset($signImage)}}" alt="Signature">
+                            
+                            <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{$signatureName}}</div>
+                        
+
+                         </div>
+                        <div class="col-span-1 pr-10   pt-7">
+                        
+                            <div class="border-t border-dashed border-t-black px-5 pt-1.5">Class Teacher</div>
+                        </div>
+                       
+                     
+                        <div class="col-span-1 px-10  pt-7">
+                       
+                            <div class="border-t border-dashed border-t-black px-5 pt-1.5">Gaurdian</div>
+                        </div>
+
+                      
                     </div>
-                </div>
+                @endif
+
+
+                @if ($signPosition === "right")
+                    <div class="mt-6 flex justify-between p-8">
+
+                        <div class="col-span-1 pr-10  pt-7">
+                         
+                            <div class="border-t border-dashed border-t-black px-5 pt-1.5">Class Teacher</div>
+                        </div>
+                        <div class="col-span-1 px-10  pt-7">
+                            
+                            <div class="border-t border-dashed border-t-black px-5 pt-1.5">Gaurdian</div>
+                        </div>
+                    <div class="col-span-1 px-10  ">
+                        
+                                <img class="w-20" src="{{asset($signImage)}}" alt="Signature">
+                           
+                            <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{$signatureName}}</div>
+                        
+
+                         </div>
+                           
+                    </div>
+                @endif
+                @if ($signPosition === "center")
+                <div class="mt-6 flex justify-between p-8">
+
+                        <div class="col-span-1 pr-10   pt-7">
+                        
+                            <div class="border-t border-dashed border-t-black px-5 pt-1.5">Class Teacher</div>
+                        </div>
+                       
+                        <div class="col-span-1 px-10 ">
+                        
+                                <img class="w-20" src="{{asset($signImage)}}" alt="Signature">
+                            
+                            <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{$signatureName}}</div>
+                        
+
+                         </div>
+                           
+                    
+
+                        <div class="col-span-1 px-10  pt-7">
+                       
+                            <div class="border-t border-dashed border-t-black px-5 pt-1.5">Gaurdian</div>
+                        </div>
+
+                      
+                    </div>
+                @endif
 
 
             </div>
         </div>
     @endforeach
 
-    <div class="mt-10 flex justify-center">
+    <!-- <div class="mt-10 flex justify-center">
         <div class="mr-10">
             <a href="/dashboard/progressReport/{{ $school_code }}">
                 <button type="button"
@@ -438,13 +518,8 @@
                 </button>
             </a>
         </div>
-        <!-- <div>
-            <button id="download-pdfs" type="button"
-                class="text-white bg-rose-700 hover:bg-rose-800 focus:ring-4 focus:outline-none focus:ring-rose-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Download
-                PDFs</button>
-        </div> -->
 
-    </div>
+    </div> -->
 </body>
 <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>

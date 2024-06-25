@@ -150,6 +150,8 @@ class GeneratePayslipController extends Controller
                 'student_id' => $student->student_id,
                 'student_name' => $student->name,
                 'class' => $student->Class_name,
+                'group' => $student->group,
+                'category' => $student->category,
                 'class_position' => $classPosition->position,
                 'section' => $student->section,
                 'student_roll' => $student->student_roll,
@@ -168,6 +170,7 @@ class GeneratePayslipController extends Controller
 
     public function StoreGeneratePaySlip(Request $request, $school_code)
     {
+        dd($request->all());
         $month = $request->input('month');
         $year = $request->input('year');
         $last_pay_date = $request->input('last_pay_date');
@@ -175,6 +178,7 @@ class GeneratePayslipController extends Controller
         $class_positions = $request->input('input_class_position', []);
         $input_sections = $request->input('input_section', []);
         $input_category = $request->input('input_category', []);
+        dd($input_category);
         // $group = $request->input('group');
         $groups = $request->input('input_group', []);
         $pay_slip_type = $request->input('pay_slip_type');
@@ -203,8 +207,8 @@ class GeneratePayslipController extends Controller
                         'year' => $year,
                         'class' => $class,
                         'group' => $groups[$student_id],
-                        'category' => $input_category[$student_id],
-                        'section' => $input_sections[$student_id],
+                        'category' => $input_category[$student_id] ?? null,
+                        'section' => $input_sections[$student_id]  ?? null,
                         'pay_slip_type' => $pay_slip_type,
                     ],
                     [

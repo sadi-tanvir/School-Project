@@ -389,6 +389,7 @@ Generate Payslip
 
 
         function updateTableContent(data) {
+            console.log(data);
             // create header row
             // SL Column
             // Create a new checkbox input element

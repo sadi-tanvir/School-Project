@@ -12,11 +12,11 @@ class SetSignatureController extends Controller
 {
     public function SetSignature(Request $request, $schoolCode)
     {
-
+        $previouslySelectedReport=null;
         $reportName = null;
         $signatures = AddSignature::where('school_code', $schoolCode)->where('action', 'approved')->get();
         $reports = AddReportName::where('school_code', $schoolCode)->where('action', 'approved')->get();
-        return view('Backend.BasicInfo.ExamSetting.setSignature', compact('signatures', 'reports', 'reportName'));
+        return view('Backend.BasicInfo.ExamSetting.setSignature', compact('signatures', 'reports', 'reportName','previouslySelectedReport'));
 
     }
 
@@ -27,7 +27,10 @@ class SetSignatureController extends Controller
         $signatures = AddSignature::where('school_code', $school_code)->where('action', 'approved')->get();
         $reports = AddReportName::where('school_code', $school_code)->where('action', 'approved')->get();
         $reportName = $request->report_name;
-        return view('Backend.BasicInfo.ExamSetting.setSignature', compact('signatures', 'reports', 'reportName'));
+
+        $previouslySelectedReport=SetSignature::where('school_code', $school_code)->where('action', 'approved')->where('report_name',$reportName)->where('status','active')->first();
+        // dd( $previouslySelectedReport);
+        return view('Backend.BasicInfo.ExamSetting.setSignature', compact('signatures', 'reports', 'reportName','previouslySelectedReport'));
     }
     public function processForm(Request $request, $schoolCode)
     {

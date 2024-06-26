@@ -549,7 +549,8 @@
                 <ul id="dropdown-student-Accounts" class="hidden py-2 space-y-1 border-s ms-7 border-dashed px-3">
                     <li>
                         <a href="/dashboard/studentAccounts/paySlipCollection/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">
-                            Fees Collection</a>
+                           {{$adminData? 'Pay Slip Collection' :  'Fees Collection'}}
+                        </a>
                     </li>
                     <li>
                         <a href="/dashboard/studentAccounts/printUnpaidPaySlip/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Print
@@ -572,33 +573,36 @@
                             Multiple Payslip</a>
                     </li>
                     <!-- others  -->
-                    <li class="dropdown">
-                        <button type="button" class="flex items-center w-full py-2 px-4 pl-7 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-slate-100/20" aria-controls="dropdown-student-others" data-collapse-toggle="dropdown-student-others">
-                            <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap text-white ">Others
-                            </span>
-                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                <path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
-                            </svg>
-                        </button>
-                        <ul id="dropdown-student-others" class="hidden py-2 space-y-2 pl-5">
-                            <li>
-                                <a href="{{ route('feeCollection', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Form
-                                    Fee</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('donation', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Donation
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('addFineFail', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Fine/Fail/Absent
-                                    Fess</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('othersFee', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Others
-                                    Fee</a>
-                            </li>
-                        </ul>
-                    </li>
+                    @if ($adminData)
+                        <li class="dropdown">
+                            <button type="button" class="flex items-center w-full py-2 px-4 pl-7 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-slate-100/20" aria-controls="dropdown-student-others" data-collapse-toggle="dropdown-student-others">
+                                <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap text-white ">Others
+                                </span>
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                    <path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                                </svg>
+                            </button>
+                            <ul id="dropdown-student-others" class="hidden py-2 space-y-2 pl-5">
+                                <li>
+                                    <a href="{{ route('feeCollection', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Form
+                                        Fee</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('donation', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Donation
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('addFineFail', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Fine/Fail/Absent
+                                        Fess</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('othersFee', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Others
+                                        Fee</a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endif
+
                     <!-- reports student fees  -->
                     <li class="dropdown">
                         <button type="button" class="flex items-center w-full py-2 px-4 pl-7 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-slate-100/20" aria-controls="dropdown-student-fees-reports" data-collapse-toggle="dropdown-student-fees-reports">
@@ -608,68 +612,55 @@
                                 <path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
                             </svg>
                         </button>
-                        <ul id="dropdown-student-fees-reports" class="hidden py-2 space-y-2 pl-5">
+                        <ul id="dropdown-student-fees-reports" class="hidden py-2 space-y-2 pl-5 ml-5">
                             <li>
-                                <a href="{{ route('DailyCollectionReport', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Daily
-                                    Collection reports</a>
+                                <a href="{{ route('DailyCollectionReport', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Daily Collection reports</a>
                             </li>
                             <li>
-                                <a href="{{ route('geneTransferInquiri', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Gene.
-                                    Transfer Inquiry </a>
+                                <a href="{{ route('DuepaySummary', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Deu/Pay Summary</a>
                             </li>
                             <li>
-                                <a href="{{ route('DuepaySummary', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Deu/Pay
-                                    Summary</a>
+                                <a href="{{ route('headwiseSummary', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Head wise Summary</a>
                             </li>
                             <li>
-                                <a href="{{ route('headwiseSummary', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Head
-                                    wise Summary</a>
+                                <a href="{{ route('paidInvoice', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Paid Invoice</a>
                             </li>
-                            <li>
-                                <a href="{{ route('othTransInquiry', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Oth.
-                                    Trans Inquiry</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('transferToAccounts', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Transfer
-                                    to Accounts</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('paidInvoice', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Paid
-                                    Invoice</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('ListOfdueOrPay', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List
-                                    Of Due/Pay</a>
-                            </li>
+                            @if ($adminData)
+                                <li>
+                                    <a href="{{ route('geneTransferInquiri', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Gene. Transfer Inquiry </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('othTransInquiry', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Oth. Trans Inquiry</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('transferToAccounts', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Transfer to Accounts</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('ListOfdueOrPay', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List Of Due/Pay</a>
+                                </li>
 
-                            <li>
-                                <a href="{{ route('listOfHeadWise', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List
-                                    of Head wise </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('listOfSpecialDiscount', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List
-                                    Of Special Discount</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('listOfMonthWiseFees', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List
-                                    Of Month wise Fees</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('listOfFineOrFailOrAbsent', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List
-                                    Of Fine / Fail/Absent</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('listOfDonation', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List
-                                    Of Donation</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('listOfFormFees', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List
-                                    Of Form Fees</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('monthlyPaidDetails', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Monthly
-                                    Paid Details</a>
-                            </li>
+                                <li>
+                                    <a href="{{ route('listOfHeadWise', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List of Head wise </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('listOfSpecialDiscount', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List Of Special Discount</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('listOfMonthWiseFees', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List Of Month wise Fees</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('listOfFineOrFailOrAbsent', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List Of Fine / Fail/Absent</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('listOfDonation', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List Of Donation</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('listOfFormFees', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List Of Form Fees</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('monthlyPaidDetails', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Monthly Paid Details</a>
+                                </li>
+                            @endif
                         </ul>
                     </li>
                 </ul>

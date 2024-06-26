@@ -40,50 +40,64 @@
     <script src="https://cdn.jsdelivr.net/npm/jspdf-html2canvas@latest/dist/jspdf-html2canvas.min.js"></script>
 
     <div class="w-full bg-slate-200 min-h-screen">
-        <div class="w-[60%] h-fit bg-white mx-auto px-5 py-12">
+        <div class="w-[60%] h-fit bg-white mx-auto px-16 py-20">
             {{-- assessment scale section --}}
-            <div>
-                <h1 class="text-center text-blue-500 font-bold">{{ $schoolInfo->school_name }}</h1>
-                <h1 class="text-center text-slate-500 font-bold">Contact No: {{ $schoolInfo->school_phone }}</h1>
-                <h1 class="text-center text-slate-500 font-bold">Email: {{ $schoolInfo->school_email }}</h1>
-                <h1 class="text-center text-slate-500 font-bold">Website
+            <div  class="flex items-start justify-between">
+            <div class="">
+                <h1 class="text- text-blue-600 font-bold text-4xl">{{ $schoolInfo->school_name }}</h1>
+                <h1 class="text-  text-sm pt-3 font-semibold">Contact No: {{ $schoolInfo->school_phone }}</h1>
+                <h1 class="text-  text-sm font-semibold">Email: {{ $schoolInfo->school_email }}</h1>
+                <h1 class="text-  text-sm font-semibold">Website
                     <a href="#" class="text-blue-600">{{ $schoolInfo->website }}</a>
                 </h1>
-                <h1 class="text-center font-bold text-red-500">Print date: {{ $date->format('Y-m-d H:i:s') }}</h1>
+                </div>
+                <h1 class="text-end font-semibold mt-5">Print date: {{ $date->format('Y-m-d H:i:s') }}</h1>
             </div>
 
 
             {{-- Individual Waiver --}}
             <div class="space-y-2 mt-10">
-                <div class="w-full flex justify-between items-center">
+                {{-- <div class="w-full flex justify-between items-center mb-3.5">
                     <div>
-                        <h1 class="uppercase text-gray-500">Name:
+                        <h1 class="uppercase ">Name:
                             <span class="font-bold">{{ $individualWaiverData[0]->name }}</span>
                         </h1>
                     </div>
                     <div>
-                        <h1 class="uppercase font-semibold text-gray-500">Student Id:
+                        <h1 class="uppercase font-semibold ">Student Id:
                             <span class="font-bold">{{ $individualWaiverData[0]->student_id }}</span>
                         </h1>
                     </div>
                     <div>
-                        <h1 class="uppercase font-semibold text-gray-500">DISCOUNT:
+                        <h1 class="uppercase font-semibold ">DISCOUNT:
                             <span class="font-bold">{{ $individualWaiverData[0]->waiver_type_name }}</span>
                         </h1>
                     </div>
-                </div>
+                </div> --}}
                 <div class="mt-10">
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                    <div class="relative overflow-x-auto border-2 border-blue-600  rounded-lg shadow">
+                        <table class="w-full text-sm text-left rtl:text-right ">
                             <thead class="text-xs text-white uppercase bg-blue-600">
                                 <tr class="text-center">
-                                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                                    <th scope="col" class="px-6 py-3 ">
                                         SL
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Fee Type
+                                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                                        Class
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 ">
+                                        ID
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-blue-500">
+                                        Name
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Waiver Type
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                                        Fee Type
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 ">
                                         Amount
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-blue-500">
@@ -98,6 +112,18 @@
                                         {{ $key + 1 }}
                                     </td>
                                     <td class="px-6 py-4">
+                                        {{ $waiver->Class_name }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $waiver->student_id }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $waiver->name }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $waiver->waiver_type_name }}
+                                    </td>
+                                    <td class="px-6 py-4">
                                         {{ $waiver->fee_type }}
                                     </td>
                                     <td class="px-6 py-4">
@@ -109,12 +135,12 @@
                                 </tr>
                                 @endforeach
                                 <tr class="odd:bg-white even:bg-gray-50 border-b text-center">
-                                    <td class="px-6 py-4">
-                                        {{-- {{ $key + 1 }} --}}
-                                    </td>
-                                    <td class="px-6 py-4 font-bold text-lg">
-                                        Total =
-                                    </td>
+                                    <td class="px-6 py-4"></td>
+                                    <td class="px-6 py-4"></td>
+                                    <td class="px-6 py-4"></td>
+                                    <td class="px-6 py-4"></td>
+                                    <td class="px-6 py-4"></td>
+                                    <td class="px-6 py-4"></td>
                                     <td class="px-6 py-4 font-bold text-lg">
                                         {{ $totalFeeAmount }}
                                     </td>

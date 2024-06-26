@@ -47,13 +47,15 @@ class StudentProfileController extends Controller
         $id = $request->input('id');
 
         if ($id) {
-            $student = Student::where('school_code', $school_code)->where('student_id', $id)->get();
+            $student = Student::where('school_code', $school_code)->where('student_id', $id)->exists();
             $payslips = GeneratePayslip::where('school_code', $school_code)->where('student_id', $id)->get();
             $totalAmount = $payslips->sum('amount');
             $totalReceived = $payslips->sum('paid_amount');
             $totalWaiver = $payslips->sum('waiver');
             $totalDue = $payslips->sum('payable');
+//dd( $student);
             if ($student) {
+                $student = Student::where('school_code', $school_code)->where('student_id', $id)->get();
                 return view('Backend.Student.students(report).studentProfile', compact('student', 'payslips', 'totalAmount', 'totalReceived', 'totalWaiver', 'totalDue'));
             } else {
                 return redirect()->back()->with('error', 'Student not found!');

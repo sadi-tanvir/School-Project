@@ -92,7 +92,7 @@ class AddAdmitCardController extends Controller
     public function update_add_admit_card(Request $request, $schoolCode)
     {
         $data = $request->all();
-    
+        if (isset($data['selected_subjects']) && is_array($data['selected_subjects'])) {
         foreach ($data['selected_subjects'] as $selectedSubject) {
             $decodedData = json_decode($selectedSubject, true);
             $subject_name = $decodedData['subject'];
@@ -150,6 +150,13 @@ class AddAdmitCardController extends Controller
             'class_exam_name' => $request->class_exam_name,
             'year' => $request->year
         ])->with('success', 'Admit Crad added successfully!');
+    }
+    return redirect()->route('add.admit.card', $schoolCode)->with([
+        'class_name' => $request->class_name,
+        'group_name' => $request->group_name,
+        'class_exam_name' => $request->class_exam_name,
+        'year' => $request->year
+    ])->with('error', 'No data added!');
     }
     
 }

@@ -18,10 +18,10 @@ Admit Setup
                 <label for="session" class="block mb-2 text-sm font-medium text-gray-900 ">Class :</label>
             </div>
             <div class="">
-                <select id="class" name="class_name"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                <select id="class_name" name="class_name"
+                    class="className bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                     @if ($selectClassData === null)
-                        <option disabled selected>Choose a class</option>
+                        <option disabled selected>Select</option>
                     @elseif($selectClassData)
                         <option value="{{ $selectClassData }}" selected>{{ $selectClassData }}</option>
                     @endif
@@ -35,10 +35,10 @@ Admit Setup
                 <label for="session" class="block mb-2 text-sm font-medium text-gray-900 ">Group :</label>
             </div>
             <div class="">
-                <select id="group" name="group_name"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                <select id="group_name" name="group_name"
+                    class="groupName bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                     @if ($selectGroupData === null)
-                        <option disabled selected>Choose a group</option>
+                        <option disabled selected>Select</option>
                     @elseif($selectGroupData)
                         <option value="{{ $selectGroupData }}" selected>{{ $selectGroupData }}</option>
                     @endif
@@ -57,7 +57,7 @@ Admit Setup
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
 
                     @if ($selectClassExamName === null)
-                        <option disabled selected>Choose a exam</option>
+                        <option disabled selected>Select</option>
                     @elseif($selectClassExamName)
                         <option value="{{ $selectClassExamName }}" selected>{{ $selectClassExamName }}</option>
                     @endif
@@ -77,7 +77,7 @@ Admit Setup
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
 
                     @if ($selectYear === null)
-                        <option disabled selected>Select Year</option>
+                        <option disabled selected>Select</option>
                     @elseif($selectYear)
                         <option value="{{ $selectYear }}" selected>{{ $selectYear }}</option>
                     @endif
@@ -324,7 +324,7 @@ Admit Setup
     </script>
     <script>
         $(document).ready(function () {
-            $('#class').change(function () {
+            $('.className').change(function () {
                 var class_name = $(this).val();
                 $.ajax({
                     url: "{{ route('add.get-groups', $school_code) }}",
@@ -334,10 +334,10 @@ Admit Setup
                         _token: '{{ csrf_token() }}'
                     },
                     success: function (result) {
-                        $('#group').empty();
-                        $('#group').append('<option disabled selected value="">Select</option>');
+                        $('.groupName').empty();
+                        $('.groupName').append('<option disabled selected value="">Select</option>');
                         $.each(result, function (key, value) {
-                            $('#group').append('<option value="' + value.group_name + '">' + value.group_name + '</option>');
+                            $('.groupName').append('<option value="' + value.group_name + '">' + value.group_name + '</option>');
                         });
                     }
                 });

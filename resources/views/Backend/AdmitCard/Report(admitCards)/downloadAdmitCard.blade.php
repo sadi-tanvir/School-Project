@@ -158,13 +158,15 @@
                     </div>
                     <div>
                         @if ($admit != null)
-                                    @foreach ($admit as $item)
+                                   
                                                 <div class="flex justify-between">
                                                     <div>
                                                         <p class="text-lg font-bold  w-full px-3 py-2 ">Instruction</p>
+                                                        @foreach ($admit as $item)
                                                         <p class="mx-2.5">
                                                             <li>{{ $item->instruction }}</li>
                                                         </p>
+                                                        @endforeach
                                                     </div>
                                                     <div>
                                                         @php
@@ -178,7 +180,7 @@
                                                         @endphp
                                                     </div>
                                                 </div>
-                                    @endforeach
+                                    
                         @endif
                     </div>
                 </div>

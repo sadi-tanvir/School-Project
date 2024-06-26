@@ -185,11 +185,11 @@ Exam Progress Report
     </span>
 </div>
 <div>
-<h3 class="text-xl text-red-500 text-center "> প্রগ্রেস রিপোর্ট সঠিকভাবে পাওয়ার জন্য আগে মার্ক ইনপুট করে নিন তারপর এক্সাম প্রসেস করুন । </h3>
+<h3 class="text-xl text-red-500 text-center pb-5"> প্রগ্রেস রিপোর্ট সঠিকভাবে পাওয়ার জন্য আগে মার্ক ইনপুট করে নিন তারপর এক্সাম প্রসেস করুন । </h3>
 </div>
 
 
-<div class=" ">
+<div class=" md:px-40">
     <div class="border-2 rounded-md ">
         <div class="p-6">
             <form action="{{route('exam_progressStudent', $school_code)}}" method="GET">
@@ -303,8 +303,8 @@ Exam Progress Report
                         <input type="text" value="{{ $school_code }}" id="schoolCode">
                     </div>
                     <div class="row form-group">
-                        <div class="offset-md-8 col-md-2">
-                            <button type="submit" style="width: 100%;"
+                        <div class="offset-md-8 col-md-2 flex justify-center">
+                            <button type="submit" style="width: 25%;"
 
                                 class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3.5 me-2 mb-2  "
 

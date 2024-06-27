@@ -782,6 +782,7 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('reportFeesSettings/PrintindividualPaySlip/{schoolCode}', [IndividualPaySlipController::class, 'PrintIndividualPaySlip'])->name('individualPaySlipReport.print');
     // Report (Fees Setting) => Individual Waiver
     Route::get('/reportFeesSettings/individualWaiver/{schoolCode}', [IndividualWaiverController::class, 'IndividualWaiverView'])->name('individualWaiverReport.view');
+    Route::get('/individualWaiver/getStudentInfo/{schoolCode}', [IndividualWaiverController::class, 'GetStudentInformation']);
     Route::get('/individualWaiver/getData/{schoolCode}', [IndividualWaiverController::class, 'GetDataIndividualWaiver'])->name('individualWaiverReport.getData');
 
 

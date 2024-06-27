@@ -695,6 +695,7 @@ Add Student
 
     </form>
 
+  
 </div>
 @endsection
 

@@ -1,14 +1,71 @@
-@extends('Backend.app')
-@section('title')
-Student BasicInfo
-@endsection
+<!-- Error Message -->
+@if ($errorMessage)
+<style>
+    /* animation */
+    .svg-top-rotate {
+        animation: move-from-top 1s ease-out;
+    }
 
-@section('Dashboard')
-@include('Message.message')
+    .svg-bottom {
+        animation: move-from-bottom 1s ease-out;
+    }
 
-<div class="gradient-bg relative overflow-hidden rounded-md px-6 py-4 font-semibold text-white">
-    <h2 class="">Download Student</h2>
-    <span class="absolute -bottom-2 right-3 rotate-3">
+    .svg-right {
+        animation: move-from-right 1s ease-out;
+    }
+
+    @keyframes move-from-top {
+        0% {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes move-from-bottom {
+        0% {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes move-from-left {
+        0% {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+
+        100% {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes move-from-right {
+        0% {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        100% {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+</style>
+<div id="toast-warning"
+    class="relative mb-3 flex w-full items-center overflow-hidden rounded-lg border-2 border-red-800 bg-red-500 p-4 text-white"
+    role="alert">
+    <span class="svg-bottom absolute -bottom-2 right-9 rotate-3">
         <svg fill="#ffffff" width="44px" height="44px" viewBox="0 0 256 256" id="Flat"
             xmlns="http://www.w3.org/2000/svg">
             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -20,7 +77,7 @@ Student BasicInfo
             </g>
         </svg>
     </span>
-    <span class="absolute -top-4 right-12 rotate-3 opacity-45">
+    <span class="svg-top-rotate right-18 absolute -top-4 rotate-3 opacity-45">
         <svg width="64px" height="64px" viewBox="0 0 48 48" id="Layer_1" version="1.1" xml:space="preserve"
             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#ffffff"
             stroke="#ffffff" transform="rotate(45)">
@@ -41,7 +98,8 @@ Student BasicInfo
             </g>
         </svg>
     </span>
-    <span class="absolute -top-2 right-3 rotate-3">
+
+    <span class="svg-right absolute -top-2 right-6 rotate-3">
         <svg fill="#ffffff" width="24px" height="24px" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -52,154 +110,23 @@ Student BasicInfo
             </g>
         </svg>
     </span>
-</div>
-
-<div class="relative overflow-x-auto border-x-2 border-b-2 pt-6 sm:rounded-lg">
-
-
-
-</div>
-
-<form class="border-t-2 px-6" action="{{ route('download.student.data', $school_code) }}" method="POST">
-    @csrf
-
-    <div class="mb-6 mt-6 grid gap-2 md:grid-cols-8">
-        <div>
-            <select id="class" name="class_name"
-                class="block h-full w-full rounded-md border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500">
-                <option selected>Choose a class</option>
-                @foreach ($classes as $data)
-                    <option value="{{ $data->class_name }}">{{ $data->class_name }}</option>
-                @endforeach
-            </select>
-        </div>
-
-        <div>
-            <select id="group" name="group"
-                class="block h-full w-full rounded-md border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500">
-                <option selected>Choose a Group</option>
-                @foreach ($groups as $group)
-                    <option value="{{ $group->group_name }}">{{ $group->group_name }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div>
-            <select id="section" name="section"
-                class="block h-full w-full rounded-md border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500">
-                <option selected>Choose a section</option>
-                @foreach ($sections as $section)
-                    <option value="{{ $section->section_name }}">{{ $section->section_name }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div>
-            <select id="gender" name="gender"
-                class="block h-full w-full rounded-md border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500">
-                <option selected disabled>Selected Gender</option>
-                <option value="Male">Male</option>
-                <option value="female">Female</option>
-            </select>
-        </div>
-        <div>
-            <select id="section" name="year"
-                class="block h-full w-full rounded-md border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500">
-                @foreach ($years as $year)
-                    <option value="{{ $year->academic_year_name }}">
-                        {{ $year->academic_year_name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-        <div class="w-full">
-            <button type="submit"
-                class="mb-2 me-2 flex h-full w-full items-center justify-center gap-3 rounded-md bg-blue-700 px-6 py-3.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300      ">
-                <span>Download</span>
-                <span>
-                    <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                        <g id="SVGRepo_iconCarrier">
-                            <path
-                                d="M16.6725 16.6412L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
-                                stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </g>
-                    </svg>
-                </span>
-            </button>
-        </div>
+    <div class="inline-flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-orange-100 text-orange-500">
+        <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+            viewBox="0 0 20 20">
+            <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z" />
+        </svg>
+        <span class="sr-only">Warning icon</span>
     </div>
-</form>
-
-
-
-
-
-
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#class').change(function () {
-            var class_name = $(this).val();
-            $.ajax({
-                url: '{{ route('add.student.get-groups', $school_code) }}',
-                method: 'post',
-                data: {
-                    class: class_name,
-                    _token: '{{ csrf_token() }}',
-                },
-                success: function (result) {
-                    $('#group').empty();
-                    $('#group').append('<option disabled selected value="">Select</option>');
-                    $.each(result, function (key, value) {
-                        $('#group').append(
-                            '<option value="' + value.group_name + '">' + value.group_name + '</option>',
-                        );
-                    });
-                },
-            });
-        });
-        //section
-        $('#class').change(function () {
-            var class_name = $(this).val();
-            $.ajax({
-                url: '{{ route('add.student.get-sections', $school_code) }}',
-                method: 'post',
-                data: {
-                    class: class_name,
-                    _token: '{{ csrf_token() }}',
-                },
-                success: function (result) {
-                    $('#section').empty();
-                    $('#section').append('<option disabled selected value="">Select</option>');
-                    $.each(result, function (key, value) {
-                        $('#section').append(
-                            '<option value="' + value.section_name + '">' + value.section_name + '</option>',
-                        );
-                    });
-                },
-            });
-        });
-    });
-    //shift
-    $('#class').change(function () {
-        var class_name = $(this).val();
-        $.ajax({
-            url: '{{ route('add.student.get-shifts', $school_code) }}',
-            method: 'post',
-            data: {
-                class: class_name,
-                _token: '{{ csrf_token() }}',
-            },
-            success: function (result) {
-                $('#shift').empty();
-                $('#shift').append('<option disabled selected value="">Select</option>');
-                $.each(result, function (key, value) {
-                    $('#shift').append(
-                        '<option value="' + value.shift_name + '">' + value.shift_name + '</option>',
-                    );
-                });
-            },
-        });
-    });
-</script>
-@endsection
+    <div class="ms-3 text-sm font-normal">{{ $errorMessage }}</div>
+    {{-- <button type="button"
+        class="-mx-1.5 -my-1.5 ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-white p-1.5 text-red-700 hover:bg-gray-100 hover:text-gray-900 focus:ring-2 focus:ring-gray-300"
+        data-dismiss-target="#toast-warning" aria-label="Close">
+        <span class="sr-only">Close</span>
+        <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+        </svg>
+    </button> --}}
+</div>
+@endif

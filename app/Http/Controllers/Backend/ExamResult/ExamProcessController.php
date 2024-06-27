@@ -100,6 +100,7 @@ class ExamProcessController extends Controller
         // Loop through each student ID and save or update the record
         foreach ($student_ids as $id) {
             // Check if the record already exists
+            // dd($student_ids);
             $existingRecord = ExamProcess::where('student_id', $id)
                 ->where('exam_name', $exam_name)
                 ->where('year', $year)
@@ -181,6 +182,8 @@ class ExamProcessController extends Controller
                     $GPA = $totalGPA / $count;
                 }
                 $markGPA = number_format($GPA, 2);
+
+               
                 ExamProcess::create([
                     'class' => $class,
                     'group' => $group,

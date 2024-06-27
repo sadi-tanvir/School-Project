@@ -28,7 +28,7 @@ class SetSignatureController extends Controller
         $reports = AddReportName::where('school_code', $school_code)->where('action', 'approved')->get();
         $reportName = $request->report_name;
 
-        $previouslySelectedReport=SetSignature::where('school_code', $school_code)->where('action', 'approved')->where('report_name',$reportName)->where('status','active')->first();
+        $previouslySelectedReport=SetSignature::where('school_code', $school_code)->where('action', 'approved')->where('report_name',$reportName)->where('status','active')->get();
         // dd( $previouslySelectedReport);
         return view('Backend.BasicInfo.ExamSetting.setSignature', compact('signatures', 'reports', 'reportName','previouslySelectedReport'));
     }

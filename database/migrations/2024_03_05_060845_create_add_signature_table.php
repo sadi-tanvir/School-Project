@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('add_signature', function (Blueprint $table) {
             $table->id();
             $table->string('sign');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->enum('action', ['pending', 'approved', 'delete', 'edit'])->default('pending');
             $table->string('school_code');
             $table->timestamps();

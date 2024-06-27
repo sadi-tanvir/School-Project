@@ -195,7 +195,7 @@ Exam Progress Report
             <form action="{{route('exam_progressStudent', $school_code)}}" method="GET">
                 @csrf
                 <div class="row form-group">
-                    <div class="flex justify-between items-center mb-5">
+                    <!-- <div class="flex justify-between items-center mb-5">
                         <label for="class" class="text-gray-700 text-sm w-[150px] mr-2 font-bold">Select Report:</label>
                         <select name="report"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
@@ -206,7 +206,7 @@ Exam Progress Report
                             @endforeach
 
                         </select>
-                    </div>
+                    </div> -->
                     <div class="flex justify-between items-center mb-5">
                         <label for="class" class="text-gray-700 text-sm w-[150px] mr-2 font-bold">Class:</label>
                         <select id="class" name="class"

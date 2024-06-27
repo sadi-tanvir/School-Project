@@ -40,24 +40,26 @@
     <script src="https://cdn.jsdelivr.net/npm/jspdf-html2canvas@latest/dist/jspdf-html2canvas.min.js"></script>
 
     <div class="w-full bg-slate-200 min-h-screen">
-        <div class="w-[60%] h-fit bg-white mx-auto px-5 py-12">
+        <div class="w-[60%] h-fit bg-white mx-auto px-16 py-20">
             {{-- assessment scale section --}}
-            <div>
-                <h1 class="text-center text-blue-500 font-bold">{{ $schoolInfo->school_name }}</h1>
-                <h1 class="text-center text-slate-500 font-bold">Contact No: {{ $schoolInfo->school_phone }}</h1>
-                <h1 class="text-center text-slate-500 font-bold">Email: {{ $schoolInfo->school_email }}</h1>
-                <h1 class="text-center text-slate-500 font-bold">Website
+            <div class="flex items-start justify-between">
+                <div class="">
+                <h1 class="text- text-blue-600 font-bold text-4xl">{{ $schoolInfo->school_name }}</h1>
+                <h1 class="text-  text-sm pt-3 font-semibold">Contact No: {{ $schoolInfo->school_phone }}</h1>
+                <h1 class="text-  text-sm font-semibold">Email: {{ $schoolInfo->school_email }}</h1>
+                <h1 class="text-  text-sm font-semibold">Website
                     <a href="#" class="text-blue-600">{{ $schoolInfo->website }}</a>
                 </h1>
-                <h1 class="text-center font-bold text-red-500">Print date: {{ $date->format('Y-m-d H:i:s') }}</h1>
+                </div>
+                <h1 class="text-end font-semibold mt-5">Print date: {{ $date->format('Y-m-d H:i:s') }}</h1>
             </div>
 
 
             {{-- All fee types --}}
             <div class="space-y-1">
                 <div class="mt-10">
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                    <div class="relative overflow-x-auto border-2 border-blue-600 ">
+                        <table class="w-full text-sm text-left rtl:text-right">
                             <thead class="text-xs text-white uppercase bg-blue-600">
                                 <tr class="text-center">
                                     <th scope="col" class="px-6 py-3 bg-blue-500">

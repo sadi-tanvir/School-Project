@@ -62,7 +62,8 @@
             text-align: center;
             padding: 2px 10px;
             background-color: #5c85d6;
-            color: black;
+            background-color: #5c85d6 !important;
+            color: black !important;
             
         }
 
@@ -111,12 +112,12 @@
                     @endforeach
                     <div class="col-span-3 text-center">
                         <h3 class="text-3xl font-semibold">{{$schoolInfo->school_name}}</h3>
-                        <p class="text- pt-3">
+                        <p class="">
                             {{$schoolInfo->address}}
                             <br />
                             <span class="font-semibold">Contact No:</span>
                             {{$schoolInfo->mobile_number}},
-
+                            <br>
                             <span class="font-semibold">Email:</span>
                             {{$schoolInfo->school_email}}
                             <br />
@@ -130,9 +131,9 @@
                     </div>
                     <div class="col-span-2 flex w-full justify-end text-start text-sm">
                         <div class="ms-14 grid grow grid-cols-3">
-                            <div class="col-span-1 border-l border-t border-black px-1 ps-4">Grade</div>
-                            <div class="col-span-1 border-e border-s border-t border-black px-1 ps-4">Range</div>
-                            <div class="col-span-1 border-e border-t border-black px-1 ps-4">GPA</div>
+                            <div class="col-span-1 border-l border-t border-black px-1 ps-4 bg-yellow-100">Grade</div>
+                            <div class="col-span-1 border-e border-s border-t border-black px-1 ps-4 bg-yellow-100">Range</div>
+                            <div class="col-span-1 border-e border-t border-black px-1 ps-4 bg-yellow-100">GPA</div>
 
                             <div class="col-span-1 border-b border-l border-t border-black px-1 ps-4">A+</div>
                             <div class="col-span-1 border-x border-y border-black px-1 ps-4">80-100</div>
@@ -165,7 +166,7 @@
                     </div>
                 </div>
                
-                <p class="font-semi-bold text-center text-xl font-bold">PROGRESS REPORT</p>
+                <p class="font-semi-bold text-center text-xl font-bold"><u>PROGRESS REPORT</u></p>
                 {{-- student info --}}
                 @foreach ($studentData as $studentInfo)
                     <div class="grid grid-cols-2">
@@ -207,7 +208,7 @@
                             <th rowspan="2">Full Marks</th>
                             <th rowspan="2">Highest Marks</th>
                             <th colspan="{{$shortCode->count()}}">Obtaining Marks</th>
-                            <th rowspan="2">Total Mark</th>
+                            <th rowspan="2" class="text-red-500" >Total Mar54k</th>
                             <th rowspan="2">Letter Grade</th>
                             <th rowspan="2">Grade Point</th>
                         </tr>
@@ -292,10 +293,10 @@
 
 
                         <tr>
-                            <td colspan="2">Total Exam Marks</td>
-                            <td colspan="">{{$totalFullMarks}}</td>
-                            <td colspan="{{$count + 1}}">Obtained Marks And GPA</td>
-                            <td colspan="">{{$totalMarks}}</td>
+                            <td colspan="2" class="font-bold">Total Exam Marks</td>
+                            <td colspan="" class="font-bold">{{$totalFullMarks}}</td>
+                            <td colspan="{{$count + 1}}" class="font-bold">Obtained Marks And GPA</td>
+                            <td colspan="" class="font-bold">{{$totalMarks}}</td>
 
                             @php
 
@@ -313,14 +314,14 @@
                                 }
                                 $position = ($GPA == 0) ? 0 : 1;
                             @endphp
-                            <td colspan="">{{$grade}}</td>
-                            <td colspan="">{{$GPA}}</td>
+                            <td colspan="" class="font-bold">{{$grade}}</td>
+                            <td colspan="" class="font-bold">{{$GPA}}</td>
                         </tr>
 
                     </tbody>
                 </table>
 
-                <div class="my-10 grid grid-cols-8 text-center">
+                <div class="my-5 grid grid-cols-10 text-center">
                     <div class="col-span-3 grid grid-cols-2">
                         <div class="col-span-1 border-b border-l border-r border-t border-black px-1">Result Status</div>
                         @if ($grade === "F")
@@ -374,8 +375,8 @@
                         <div class="col-span-1 border-b border-l border-r border-black px-1">Total Leave</div>
                         <div class="col-span-1 border-b border-r border-black px-1">-</div>
                     </div>
-                    <div class="col-span-3 grid grid-cols-2 ml-10">
-                        <div class="col-span-1 border-b border-l border-r border-t border-black px-1 font-bold">
+                    <div class="col-span-5 grid grid-cols-2 ml-5">
+                        <div class="col-span-1 border-b border-l border-r border-t border-black  font-bold">
                             Moral & Behavior Evaluation
                         </div>
                         <div class="col-span-1 border-b border-r border-t border-black px-1 font-bold">
@@ -427,125 +428,79 @@
                 </div>
 
 
-                @if ($signPosition === "left")
-                <div class="mt-6 flex justify-between p-8">
+                @php
+    $leftSignatures = [];
+    $centerSignatures = [];
+    $rightSignatures = [];
+@endphp
 
-                <div class="col-span-1 px-10 ">
-                        
-                                <img class="w-20" src="{{asset($signImage)}}" alt="Signature">
-                            
-                            <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{$signatureName}}</div>
-                        
+@foreach($setSignature as $sign)
+    @foreach($signatures as $position)
+        @if($position->sign == $sign->signature_name)
+            @if($sign->positions == 'left')
+                @php
+                    $leftSignatures[] = $position;
+                @endphp
+            @elseif($sign->positions == 'center')
+                @php
+                    $centerSignatures[] = $position;
+                @endphp
+            @elseif($sign->positions == 'right')
+                @php
+                    $rightSignatures[] = $position;
+                @endphp
+            @endif
+        @endif
+    @endforeach
+@endforeach
 
-                         </div>
-                        <div class="col-span-1 pr-10   pt-7">
-                        
-                            <div class="border-t border-dashed border-t-black px-5 pt-1.5">Class Teacher</div>
-                        </div>
-                       
-                     
-                        <div class="col-span-1 px-10  pt-7">
-                       
-                            <div class="border-t border-dashed border-t-black px-5 pt-1.5">Gaurdian</div>
-                        </div>
+<div class="flex justify-between p-8">
+    <div class="">
+        @foreach($leftSignatures as $left)
+        @if($left->image!=null)
+            <img class="w-20 h-10 pb-1" src="{{ asset($left->image) }}" alt="Signature">
+            <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $left->sign }}</div>
+           
+        @else
+            <div class="w-20 h-10 pb-1" ></div>
+            <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $left->sign }}</div>
+            @endif
+        @endforeach
+    </div>
+    <div class="">
+        @foreach($centerSignatures as $center)
+        @if($center->image!=null)
+            <img class="w-20 h-10 pb-1" src="{{ asset($center->image) }}" alt="Signature">
+            <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $center->sign }}</div>
+            @else
+          
+        <div class="w-20 h-10 pb-1" ></div>
+        <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $center->sign }}</div>
+        @endif
+        @endforeach
+    </div>
+    <div class="">
+        @foreach($rightSignatures as $right)
+        @if($right->image!=null)
+            <img class="w-20 h-10 pb-1" src="{{ asset($right->image) }}" alt="Signature">
+            <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $right->sign }}</div>
+            @else
+            
+        <div class="w-20 h-10 pb-1" ></div>
+            <div class="border-t border-dashed border-t-black px-5 pt-1.5 ">{{ $right->sign }}</div>
+            @endif
+        @endforeach
+    </div>
+</div>
 
-                      
-                    </div>
-                @endif
-
-
-                @if ($signPosition === "right")
-                    <div class="mt-6 flex justify-between p-8">
-
-                        <div class="col-span-1 pr-10  pt-7">
-                         
-                            <div class="border-t border-dashed border-t-black px-5 pt-1.5">Class Teacher</div>
-                        </div>
-                        <div class="col-span-1 px-10  pt-7">
-                            
-                            <div class="border-t border-dashed border-t-black px-5 pt-1.5">Gaurdian</div>
-                        </div>
-                    <div class="col-span-1 px-10  ">
-                        
-                                <img class="w-20" src="{{asset($signImage)}}" alt="Signature">
-                           
-                            <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{$signatureName}}</div>
-                        
-
-                         </div>
-                           
-                    </div>
-                @endif
-                @if ($signPosition === "center")
-                <div class="mt-6 flex justify-between p-8">
-
-                        <div class="col-span-1 pr-10   pt-7">
-                        
-                            <div class="border-t border-dashed border-t-black px-5 pt-1.5">Class Teacher</div>
-                        </div>
-                       
-                        <div class="col-span-1 px-10 ">
-                        
-                                <img class="w-20" src="{{asset($signImage)}}" alt="Signature">
-                            
-                            <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{$signatureName}}</div>
-                        
-
-                         </div>
-                           
-                    
-
-                        <div class="col-span-1 px-10  pt-7">
-                       
-                            <div class="border-t border-dashed border-t-black px-5 pt-1.5">Gaurdian</div>
-                        </div>
-
-                      
-                    </div>
-                @endif
 
 
             </div>
         </div>
     @endforeach
 
-    <!-- <div class="mt-10 flex justify-center">
-        <div class="mr-10">
-            <a href="/dashboard/progressReport/{{ $school_code }}">
-                <button type="button"
-                    class="w-full rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:w-auto">
-                    Back
-                </button>
-            </a>
-        </div>
-
-    </div> -->
+ 
 </body>
-<!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script>
-    document.getElementById('download-pdfs').addEventListener('click', async function () {
-        const { jsPDF } = window.jspdf;
-        const pages = document.querySelectorAll('.page-container');
 
-        const pdf = new jsPDF('p', 'mm', 'a4');
-
-        for (let i = 0; i < pages.length; i++) {
-            const page = pages[i];
-            await html2canvas(page).then(canvas => {
-                const imgData = canvas.toDataURL('image/png');
-                const imgProps = pdf.getImageProperties(imgData);
-                const pdfWidth = pdf.internal.pageSize.getWidth();
-                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-                if (i > 0) {
-                    pdf.addPage();
-                }
-                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-            });
-        }
-
-        pdf.save('student_reports.pdf');
-    });
-</script> -->
 
 </html>

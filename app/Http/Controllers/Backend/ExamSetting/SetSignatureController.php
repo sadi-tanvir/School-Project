@@ -52,10 +52,13 @@ class SetSignatureController extends Controller
             $isExist = SetSignature::where('school_code', $schoolCode)
                 ->where('report_name', $reportName)
                 ->where('signature_name', $signatureName)
-                ->first();
+                ->exists();
 
             if ($isExist) {
-                $isExist->update([
+                SetSignature::where('school_code', $schoolCode)
+                ->where('report_name', $reportName)
+                ->where('signature_name', $signatureName)
+                ->update([
                     'positions' => $position,
                     'status' => $status
                 ]);

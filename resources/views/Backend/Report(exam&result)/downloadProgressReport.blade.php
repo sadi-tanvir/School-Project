@@ -62,7 +62,8 @@
             text-align: center;
             padding: 2px 10px;
             background-color: #5c85d6;
-            color: black;
+            background-color: #5c85d6 !important;
+            color: black !important;
             
         }
 
@@ -111,12 +112,12 @@
                     @endforeach
                     <div class="col-span-3 text-center">
                         <h3 class="text-3xl font-semibold">{{$schoolInfo->school_name}}</h3>
-                        <p class="text- pt-3">
+                        <p class="">
                             {{$schoolInfo->address}}
                             <br />
                             <span class="font-semibold">Contact No:</span>
                             {{$schoolInfo->mobile_number}},
-
+                            <br>
                             <span class="font-semibold">Email:</span>
                             {{$schoolInfo->school_email}}
                             <br />
@@ -130,9 +131,9 @@
                     </div>
                     <div class="col-span-2 flex w-full justify-end text-start text-sm">
                         <div class="ms-14 grid grow grid-cols-3">
-                            <div class="col-span-1 border-l border-t border-black px-1 ps-4">Grade</div>
-                            <div class="col-span-1 border-e border-s border-t border-black px-1 ps-4">Range</div>
-                            <div class="col-span-1 border-e border-t border-black px-1 ps-4">GPA</div>
+                            <div class="col-span-1 border-l border-t border-black px-1 ps-4 bg-yellow-100">Grade</div>
+                            <div class="col-span-1 border-e border-s border-t border-black px-1 ps-4 bg-yellow-100">Range</div>
+                            <div class="col-span-1 border-e border-t border-black px-1 ps-4 bg-yellow-100">GPA</div>
 
                             <div class="col-span-1 border-b border-l border-t border-black px-1 ps-4">A+</div>
                             <div class="col-span-1 border-x border-y border-black px-1 ps-4">80-100</div>
@@ -165,7 +166,7 @@
                     </div>
                 </div>
                
-                <p class="font-semi-bold text-center text-xl font-bold">PROGRESS REPORT</p>
+                <p class="font-semi-bold text-center text-xl font-bold"><u>PROGRESS REPORT</u></p>
                 {{-- student info --}}
                 @foreach ($studentData as $studentInfo)
                     <div class="grid grid-cols-2">
@@ -207,7 +208,7 @@
                             <th rowspan="2">Full Marks</th>
                             <th rowspan="2">Highest Marks</th>
                             <th colspan="{{$shortCode->count()}}">Obtaining Marks</th>
-                            <th rowspan="2">Total Mark</th>
+                            <th rowspan="2" class="text-red-500" >Total Mar54k</th>
                             <th rowspan="2">Letter Grade</th>
                             <th rowspan="2">Grade Point</th>
                         </tr>
@@ -292,10 +293,10 @@
 
 
                         <tr>
-                            <td colspan="2">Total Exam Marks</td>
-                            <td colspan="">{{$totalFullMarks}}</td>
-                            <td colspan="{{$count + 1}}">Obtained Marks And GPA</td>
-                            <td colspan="">{{$totalMarks}}</td>
+                            <td colspan="2" class="font-bold">Total Exam Marks</td>
+                            <td colspan="" class="font-bold">{{$totalFullMarks}}</td>
+                            <td colspan="{{$count + 1}}" class="font-bold">Obtained Marks And GPA</td>
+                            <td colspan="" class="font-bold">{{$totalMarks}}</td>
 
                             @php
 
@@ -313,14 +314,14 @@
                                 }
                                 $position = ($GPA == 0) ? 0 : 1;
                             @endphp
-                            <td colspan="">{{$grade}}</td>
-                            <td colspan="">{{$GPA}}</td>
+                            <td colspan="" class="font-bold">{{$grade}}</td>
+                            <td colspan="" class="font-bold">{{$GPA}}</td>
                         </tr>
 
                     </tbody>
                 </table>
 
-                <div class="my-10 grid grid-cols-8 text-center">
+                <div class="my-5 grid grid-cols-10 text-center">
                     <div class="col-span-3 grid grid-cols-2">
                         <div class="col-span-1 border-b border-l border-r border-t border-black px-1">Result Status</div>
                         @if ($grade === "F")
@@ -374,8 +375,8 @@
                         <div class="col-span-1 border-b border-l border-r border-black px-1">Total Leave</div>
                         <div class="col-span-1 border-b border-r border-black px-1">-</div>
                     </div>
-                    <div class="col-span-3 grid grid-cols-2 ml-10">
-                        <div class="col-span-1 border-b border-l border-r border-t border-black px-1 font-bold">
+                    <div class="col-span-5 grid grid-cols-2 ml-5">
+                        <div class="col-span-1 border-b border-l border-r border-t border-black  font-bold">
                             Moral & Behavior Evaluation
                         </div>
                         <div class="col-span-1 border-b border-r border-t border-black px-1 font-bold">

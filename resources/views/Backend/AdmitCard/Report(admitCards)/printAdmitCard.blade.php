@@ -56,21 +56,7 @@ Student Admit Card
     <div class="rounded-md border-2 border-gray-300 bg-gray-200 p-6">
         <form action="{{ route('downloadAdmitCard', $school_code) }}" method="POST">
             @csrf
-            <div class="mb-5">
-                <div class="flex justify-between">
-                    <label for="classess" class="block mb-2 text-sm font-medium text-gray-900 ">Choose Report for
-                        signature </label>
-                </div>
-                <select name="report_name"
-                    class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  ">
-
-                    <option disabled selected>Choose Report Name </option>
-                    @foreach ($reports as $report)
-                        <option>{{ $report->report_name }}</option>
-                    @endforeach
-
-                </select>
-            </div>
+            
             <div class="mb-5">
                 <div class="flex justify-between">
                     <label for="classess" class="block mb-2 text-sm font-medium text-gray-900 ">Class

@@ -184,38 +184,70 @@
                         @endif
                     </div>
                 </div>
+                @php
+    $leftSignatures = [];
+    $centerSignatures = [];
+    $rightSignatures = [];
+@endphp
 
-                @if ($signPosition === "left")
-                    <div class="mt-6 flex items-center justify-between p-8">
-                        <div>
-                            <div class="">
-                                <img class="w-20" src="{{asset($signImage)}}" alt="Signature">
-                            </div>
-                            <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{$signatureName}}</div>
-                        </div>
-                        <div class="">
-                            <div class="border-t border-dashed border-t-black px-5 pt-1.5">Class Teacher</div>
-                        </div>
+@foreach($setSignature as $sign)
+    @foreach($signatures as $position)
+        @if($position->sign == $sign->signature_name)
+            @if($sign->positions == 'left')
+                @php
+                    $leftSignatures[] = $position;
+                @endphp
+            @elseif($sign->positions == 'center')
+                @php
+                    $centerSignatures[] = $position;
+                @endphp
+            @elseif($sign->positions == 'right')
+                @php
+                    $rightSignatures[] = $position;
+                @endphp
+            @endif
+        @endif
+    @endforeach
+@endforeach
 
-                    </div>
-                @endif
-
-                @if ($signPosition === "right")
-                    <div class="mt-6 flex items-center justify-between p-8">
-
-                        <div class="">
-                            <div class="border-t border-dashed border-t-black px-5 pt-1.5">Class Teacher</div>
-                        </div>
-
-                        <div>
-                            <div class="">
-                                <img class="w-20" src="{{asset($signImage)}}" alt="Signature">
-                            </div>
-                            <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{$signatureName}}</div>
-                        </div>
-
-                    </div>
-                @endif
+<div class="flex justify-between p-8">
+    <div class="">
+        @foreach($leftSignatures as $left)
+        @if($left->image!=null)
+            <img class="w-20 h-10 pb-1" src="{{ asset($left->image) }}" alt="Signature">
+            <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $left->sign }}</div>
+           
+        @else
+            <div class="w-20 h-10 pb-1" ></div>
+            <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $left->sign }}</div>
+            @endif
+        @endforeach
+    </div>
+    <div class="">
+        @foreach($centerSignatures as $center)
+        @if($center->image!=null)
+            <img class="w-20 h-10 pb-1" src="{{ asset($center->image) }}" alt="Signature">
+            <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $center->sign }}</div>
+            @else
+          
+        <div class="w-20 h-10 pb-1" ></div>
+        <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $center->sign }}</div>
+        @endif
+        @endforeach
+    </div>
+    <div class="">
+        @foreach($rightSignatures as $right)
+        @if($right->image!=null)
+            <img class="w-20 h-10 pb-1" src="{{ asset($right->image) }}" alt="Signature">
+            <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $right->sign }}</div>
+            @else
+            
+        <div class="w-20 h-10 pb-1" ></div>
+            <div class="border-t border-dashed border-t-black px-5 pt-1.5 ">{{ $right->sign }}</div>
+            @endif
+        @endforeach
+    </div>
+</div>
 
             </div>
         </div>

@@ -40,22 +40,20 @@ class SetSignatureController extends Controller
         $statuses = $request->input('status');
 
 
-        // Deactivate all signatures for the given school and report
-        SetSignature::where('school_code', $schoolCode)
-            ->where('report_name', $reportName)
-            ->update(['status' => 'in active']);
-
-        // Loop through each signature to update or create
+        // dd($statuses);
+       
         foreach ($signatureNames as $key => $signatureName) {
             $status = isset($statuses[$key]) ? 'active' : 'in active';
             $position = isset($positions[$key]) ? $positions[$key] : null;
             $isExist = SetSignature::where('school_code', $schoolCode)
                 ->where('report_name', $reportName)
                 ->where('signature_name', $signatureName)
-                ->first();
+                ->exists();
 
             if ($isExist) {
-                $isExist->update([
+                SetSignature::where('school_code', $schoolCode)
+                ->where('report_name', $reportName)
+                ->where('signature_name', $signatureName)->update([
                     'positions' => $position,
                     'status' => $status
                 ]);

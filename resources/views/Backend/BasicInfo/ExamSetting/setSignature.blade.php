@@ -74,23 +74,21 @@ Signature
                                     <select name="positions[{{ $key }}]"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                         @if($previouslySelectedReport)
+                                        <option disabled selected>Select</option>
                                         @foreach ($previouslySelectedReport as $key => $SelectedReport)
                                         @if($SelectedReport && $SelectedReport->status == 'active' && $SelectedReport->signature_name===$signature->sign) 
                                         <option value="{{$SelectedReport->positions}}" selected>{{$SelectedReport->positions}}</option>
+                                        @endif
+                                        @endforeach
+                                        
                                         <option value="left">Left</option>
                                         <option value="center">Center</option>
                                         <option value="right">Right</option>
-                                       
-                                        
-                                        @endif
-
-                                        @endforeach
                                         @else
                                         <option disabled selected>Select</option>
                                         <option value="left">Left</option>
                                         <option value="center">Center</option>
                                         <option value="right">Right</option>
-                                       
                                         @endif
                                       
                                     </select>
@@ -98,10 +96,10 @@ Signature
                                 <td>
                                 <div class="">
                         <input id="laravel-checkbox-{{ $key }}" type="checkbox" value="active"
-                            name="status[{{ $key }}]" 
+                            name="status[]" 
                             @foreach ($previouslySelectedReport as $key => $SelectedReport)
-                            @if($SelectedReport && $SelectedReport->status == 'active' && $SelectedReport->signature_name===$signature->sign) checked @endif @endforeach
-                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                            @if($SelectedReport && $SelectedReport->status == 'active' && $SelectedReport->signature_name===$signature->sign) checked @endif 
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2" @endforeach>
                     </div>
                                 </td>
                             </tr>

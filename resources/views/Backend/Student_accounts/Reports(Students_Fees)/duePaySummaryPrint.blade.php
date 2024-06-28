@@ -120,6 +120,9 @@
                                     <th scope="col" class="px-6 py-3">
                                         STUDENT ID
                                     </th>
+                                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                                        Name
+                                    </th>
                                     <th scope="col" class="px-6 py-3">
                                         Class
                                     </th>
@@ -151,6 +154,9 @@
                                         {{ $payslip->student_id}}
                                     </td>
                                     <td class="px-6 py-4">
+                                        {{ $payslip->name}}
+                                    </td>
+                                    <td class="px-6 py-4">
                                         {{ $payslip->class }}
                                     </td>
                                     <td class="px-6 py-4">
@@ -174,6 +180,8 @@
                                 @endforeach
                                 @endif
                                 <tr class="odd:bg-white even:bg-gray-50 border-b text-center">
+                                    <td scope="row" class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                    </td>
                                     <td scope="row" class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap">
                                     </td>
                                     <td scope="row" class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap">

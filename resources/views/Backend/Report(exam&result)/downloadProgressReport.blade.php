@@ -13,10 +13,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
     <style>
-        @page {
+        /* @page {
             size: A4;
             margin: 0;
-        }
+        } */
 
         body {
             margin: 0;
@@ -28,7 +28,7 @@
             position: relative;
             margin: 0 auto;
             max-width: 1500px;
-            padding: 0 120px;
+            padding: 0 60px;
         }
 
         #background-image {
@@ -64,7 +64,7 @@
             background-color: #5c85d6;
             background-color: #5c85d6 !important;
             color: black !important;
-            
+
         }
 
         .content td,
@@ -102,16 +102,19 @@
     @foreach ($students as $key => $studentData)
         <div class="mt-5 page-container" id="page-{{ $loop->index }}">
 
-            <div id="content-container" class=" mx-auto w-[1150px]  bg-white px-[120px] border-[7px] border-blue-500">
+            <div id="content-container"
+                class=" mx-auto w-[992px] relative h-[1290px] bg-white  border-[7px] border-blue-500">
                 <img id="background-image" src="{{asset($schoolInfo->logo)}}" alt="School Logo" />
                 <div class="grid w-full grid-cols-7 items-start justify-between pt-20">
-                @foreach ($studentData as $studentInfo)
-                    <div class="col-span-2">
-                        <img src="{{asset($studentInfo->image)}}" class="h-28 w-auto" alt="student pic" />
+                    <div  class="col-span-2">
+                        @foreach ($studentData as $studentInfo)
+                            <div>
+                                <img src="{{asset($studentInfo->image)}}" class="h-28 w-auto" alt="student pic" />
+                            </div>
+                        @endforeach
                     </div>
-                    @endforeach
-                    <div class="col-span-3 text-center">
-                        <h3 class="text-3xl font-semibold">{{$schoolInfo->school_name}}</h3>
+                    <div class="col-span-3 text-center ">
+                        <h3 class="text-2xl font-semibold ">{{$schoolInfo->school_name}}</h3>
                         <p class="">
                             {{$schoolInfo->address}}
                             <br />
@@ -126,46 +129,50 @@
                             <br />
                         </p>
                         <div class="flex justify-center">
-                <img src="{{asset($schoolInfo->logo)}}" class="h-24 w-auto" alt="School Logo" />
-                </div>
+                            <img src="{{asset($schoolInfo->logo)}}" class="h-24 w-auto" alt="School Logo" />
+                        </div>
                     </div>
-                    <div class="col-span-2 flex w-full justify-end text-start text-sm">
+                    <div class="col-span-2 flex w-full justify-end text-start text-sm whitespace-nowrap">
                         <div class="ms-14 grid grow grid-cols-3">
-                            <div class="col-span-1 border-l border-t border-black px-1 ps-4 bg-yellow-100">Grade</div>
-                            <div class="col-span-1 border-e border-s border-t border-black px-1 ps-4 bg-yellow-100">Range</div>
-                            <div class="col-span-1 border-e border-t border-black px-1 ps-4 bg-yellow-100">GPA</div>
+                            <div class="col-span-1 border-l border-t border-black text-center bg-yellow-100">Grade</div>
+                            <div class="col-span-1 border-e border-s border-t border-black text-center bg-yellow-100">Range
+                            </div>
+                            <div class="col-span-1 border-e border-t border-black text-center bg-yellow-100">GPA</div>
 
-                            <div class="col-span-1 border-b border-l border-t border-black px-1 ps-4">A+</div>
-                            <div class="col-span-1 border-x border-y border-black px-1 ps-4">80-100</div>
-                            <div class="col-span-1 border-y border-r border-black px-1 ps-4">5</div>
 
-                            <div class="col-span-1 border-b border-l border-black px-1 ps-4">A</div>
-                            <div class="col-span-1 border-x border-b border-black px-1 ps-4">70-79</div>
-                            <div class="col-span-1 border-b border-e border-black px-1 ps-4">4</div>
 
-                            <div class="col-span-1 border-b border-l border-black px-1 ps-4">A-</div>
-                            <div class="col-span-1 border-x border-b border-black px-1 ps-4">60-69</div>
-                            <div class="col-span-1 border-b border-r border-black px-1 ps-4">3.5</div>
 
-                            <div class="col-span-1 border-b border-l border-black px-1 ps-4">B</div>
-                            <div class="col-span-1 border-x border-b border-black px-1 ps-4">50-59</div>
-                            <div class="col-span-1 border-b border-r border-black px-1 ps-4">3</div>
+                            <div class="col-span-1 border-b border-l border-t border-black text-center">A+</div>
+                            <div class="col-span-1 border-x border-y border-black text-center">80-100</div>
+                            <div class="col-span-1 border-y border-r border-black text-center">5</div>
 
-                            <div class="col-span-1 border-b border-l border-black px-1 ps-4">C</div>
-                            <div class="col-span-1 border-x border-b border-black px-1 ps-4">45-49</div>
-                            <div class="col-span-1 border-b border-r border-black px-1 ps-4">2</div>
+                            <div class="col-span-1 border-b border-l border-black text-center">A</div>
+                            <div class="col-span-1 border-x border-b border-black text-center">70-79</div>
+                            <div class="col-span-1 border-b border-e border-black text-center">4</div>
 
-                            <div class="col-span-1 border-b border-l border-black px-1 ps-4">D</div>
-                            <div class="col-span-1 border-x border-b border-black px-1 ps-4">40-44</div>
-                            <div class="col-span-1 border-b border-r border-black px-1 ps-4">1</div>
+                            <div class="col-span-1 border-b border-l border-black text-center">A-</div>
+                            <div class="col-span-1 border-x border-b border-black text-center">60-69</div>
+                            <div class="col-span-1 border-b border-r border-black text-center">3.5</div>
 
-                            <div class="col-span-1 border-b border-l border-black px-1 ps-4">F</div>
-                            <div class="col-span-1 border-x border-b border-black px-1 ps-4">0-39</div>
-                            <div class="col-span-1 border-b border-r border-black px-1 ps-4">0</div>
+                            <div class="col-span-1 border-b border-l border-black text-center">B</div>
+                            <div class="col-span-1 border-x border-b border-black text-center">50-59</div>
+                            <div class="col-span-1 border-b border-r border-black text-center">3</div>
+
+                            <div class="col-span-1 border-b border-l border-black text-center">C</div>
+                            <div class="col-span-1 border-x border-b border-black text-center">45-49</div>
+                            <div class="col-span-1 border-b border-r border-black text-center">2</div>
+
+                            <div class="col-span-1 border-b border-l border-black text-center">D</div>
+                            <div class="col-span-1 border-x border-b border-black text-center">40-44</div>
+                            <div class="col-span-1 border-b border-r border-black text-center">1</div>
+
+                            <div class="col-span-1 border-b border-l border-black text-center">F</div>
+                            <div class="col-span-1 border-x border-b border-black text-center">0-39</div>
+                            <div class="col-span-1 border-b border-r border-black text-center">0</div>
                         </div>
                     </div>
                 </div>
-               
+
                 <p class="font-semi-bold text-center text-xl font-bold"><u>PROGRESS REPORT</u></p>
                 {{-- student info --}}
                 @foreach ($studentData as $studentInfo)
@@ -203,12 +210,12 @@
                 <table class="mt-5">
                     <tbody>
                         <tr>
-                            <th rowspan="2"  >SL</th>
+                            <th rowspan="2">SL</th>
                             <th rowspan="2">Name Of Subjects</th>
                             <th rowspan="2">Full Marks</th>
                             <th rowspan="2">Highest Marks</th>
                             <th colspan="{{$shortCode->count()}}">Obtaining Marks</th>
-                            <th rowspan="2" class="text-red-500" >Total Mar54k</th>
+                            <th rowspan="2" class="text-red-500">Total Mar54k</th>
                             <th rowspan="2">Letter Grade</th>
                             <th rowspan="2">Grade Point</th>
                         </tr>
@@ -224,8 +231,8 @@
                             $fail = 0;
                             $Grade = [];
                             $gpa = [];
-                             $GPA=0;
-                             $grade=0;
+                            $GPA = 0;
+                            $grade = 0;
                             $studentId = "";
                             $gradePoint = "";
                             $studentRoll = "";
@@ -413,93 +420,92 @@
                     </div>
                     <div class="col-span-2 px-2">
                         <div class="flex justify-end">
-                        @php
-                            $results = [
-                                "ID" => $studentData[0]->student_id,
-                                "Name" => $studentData[0]->name,
-                                "Total Mark" => $totalMarks,
-                                "GPA" => $GPA,
-                            ];
-                            $resultJson = json_encode($results);
-                            echo QrCode::size(150)->generate($resultJson);
-                        @endphp
+                            @php
+                                $results = [
+                                    "ID" => $studentData[0]->student_id,
+                                    "Name" => $studentData[0]->name,
+                                    "Total Mark" => $totalMarks,
+                                    "GPA" => $GPA,
+                                ];
+                                $resultJson = json_encode($results);
+                                echo QrCode::size(150)->generate($resultJson);
+                            @endphp
                         </div>
                     </div>
                 </div>
 
 
                 @php
-    $leftSignatures = [];
-    $centerSignatures = [];
-    $rightSignatures = [];
-@endphp
-
-@foreach($setSignature as $sign)
-    @foreach($signatures as $position)
-        @if($position->sign == $sign->signature_name)
-            @if($sign->positions == 'left')
-                @php
-                    $leftSignatures[] = $position;
+                    $leftSignatures = [];
+                    $centerSignatures = [];
+                    $rightSignatures = [];
                 @endphp
-            @elseif($sign->positions == 'center')
-                @php
-                    $centerSignatures[] = $position;
-                @endphp
-            @elseif($sign->positions == 'right')
-                @php
-                    $rightSignatures[] = $position;
-                @endphp
-            @endif
-        @endif
-    @endforeach
-@endforeach
 
-<div class="flex justify-between p-8">
-    <div class="">
-        @foreach($leftSignatures as $left)
-        @if($left->image!=null)
-            <img class="w-20 h-10 pb-1" src="{{ asset($left->image) }}" alt="Signature">
-            <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $left->sign }}</div>
-           
-        @else
-            <div class="w-20 h-10 pb-1" ></div>
-            <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $left->sign }}</div>
-            @endif
-        @endforeach
-    </div>
-    <div class="">
-        @foreach($centerSignatures as $center)
-        @if($center->image!=null)
-            <img class="w-20 h-10 pb-1" src="{{ asset($center->image) }}" alt="Signature">
-            <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $center->sign }}</div>
-            @else
-          
-        <div class="w-20 h-10 pb-1" ></div>
-        <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $center->sign }}</div>
-        @endif
-        @endforeach
-    </div>
-    <div class="">
-        @foreach($rightSignatures as $right)
-        @if($right->image!=null)
-            <img class="w-20 h-10 pb-1" src="{{ asset($right->image) }}" alt="Signature">
-            <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $right->sign }}</div>
-            @else
-            
-        <div class="w-20 h-10 pb-1" ></div>
-            <div class="border-t border-dashed border-t-black px-5 pt-1.5 ">{{ $right->sign }}</div>
-            @endif
-        @endforeach
-    </div>
-</div>
+                @foreach($setSignature as $sign)
+                    @foreach($signatures as $position)
+                        @if($position->sign == $sign->signature_name)
+                            @if($sign->positions == 'left')
+                                @php
+                                    $leftSignatures[] = $position;
+                                @endphp
+                            @elseif($sign->positions == 'center')
+                                @php
+                                    $centerSignatures[] = $position;
+                                @endphp
+                            @elseif($sign->positions == 'right')
+                                @php
+                                    $rightSignatures[] = $position;
+                                @endphp
+                            @endif
+                        @endif
+                    @endforeach
+                @endforeach
+                <div class="absolute bottom-0 left-0 w-full">
+                    <div class="flex justify-between p-8  px-[120px]">
+                        <div class="">
 
+                            @foreach($leftSignatures as $left)
+                                @if($left->image != null)
+                                    <img class="w-20 h-10 pb-1" src="{{ asset($left->image) }}" alt="Signature">
+                                    <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $left->sign }}</div>
 
+                                @else
+                                    <div class="w-20 h-10 pb-1"></div>
+                                    <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $left->sign }}</div>
+                                @endif
+                            @endforeach
+                        </div>
+                        <div class="">
+                            @foreach($centerSignatures as $center)
+                                @if($center->image != null)
+                                    <img class="w-20 h-10 pb-1" src="{{ asset($center->image) }}" alt="Signature">
+                                    <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $center->sign }}</div>
+                                @else
 
+                                    <div class="w-20 h-10 pb-1"></div>
+                                    <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $center->sign }}</div>
+                                @endif
+                            @endforeach
+                        </div>
+                        <div class="">
+                            @foreach($rightSignatures as $right)
+                                @if($right->image != null)
+                                    <img class="w-20 h-10 pb-1" src="{{ asset($right->image) }}" alt="Signature">
+                                    <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $right->sign }}</div>
+                                @else
+
+                                    <div class="w-20 h-10 pb-1"></div>
+                                    <div class="border-t border-dashed border-t-black px-5 pt-1.5 ">{{ $right->sign }}</div>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     @endforeach
 
- 
+
 </body>
 
 

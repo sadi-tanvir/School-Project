@@ -152,14 +152,9 @@ Individual Waiver
 
 
 <script>
-    var mainData = {!! json_encode($students_id) !!};
-            var schoolCode = @json($school_code);
-            /* console.log(mainData);
-            let data = Object.values(mainData);
-            let data2 = Object.keys(mainData);
-            console.log(data2); */
-            const classId = document.getElementById('class');
-            const waiver_type = document.getElementById('waiver_type');
+    var schoolCode = @json($school_code);
+    const classId = document.getElementById('class');
+    const waiver_type = document.getElementById('waiver_type');
 
 
             // get student information using class, group, and section

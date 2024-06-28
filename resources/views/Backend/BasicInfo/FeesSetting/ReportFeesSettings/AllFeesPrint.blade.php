@@ -5,18 +5,17 @@ All Fees Print
 
 
 @section('Dashboard')
-<div class="mb-2">
-    <h1>All Fees Print</h1>
-</div>
+
+@include('Shared.ContentHeader', ['title' => 'All Fees Print'])
 
 {{-- alert message --}}
 @include('Shared.alert')
 
-<div class="w-full border mx-auto p-5 space-y-10">
+<div class="w-full space-y-10">
     <div class="space-y-1">
         <div class="">
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <div class="relative overflow-x-auto sm:rounded-lg">
+                <div class="relative overflow-x-auto border-2 border-blue-600 sm:rounded-lg">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                         <thead class="text-xs text-white uppercase bg-blue-600">
                             <tr class="text-center">

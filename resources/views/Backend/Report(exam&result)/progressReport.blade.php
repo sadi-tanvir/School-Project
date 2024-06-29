@@ -189,16 +189,16 @@ Exam Progress Report
 </div>
 
 
-<div class=" md:px-40">
-    <div class="border-2 rounded-md ">
+<div class="flex justify-center">
+    <div class="border-2 rounded-md md:w-[600px]  ">
         <div class="p-6">
             <form action="{{route('exam_progressStudent', $school_code)}}" method="GET">
                 @csrf
                 <div class="row form-group">
-                    <div class="flex justify-between items-center mb-5">
-                        <label for="class" class="text-gray-700 text-sm w-[150px] mr-2">Select Report:</label>
+                    <!-- <div class="flex justify-between items-center mb-5">
+                        <label for="class" class="text-gray-700 text-sm w-[150px] mr-2 font-bold">Select Report:</label>
                         <select name="report"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
 
                             <option disabled selected>Select</option>
                             @foreach ($reports as $data)
@@ -206,11 +206,11 @@ Exam Progress Report
                             @endforeach
 
                         </select>
-                    </div>
+                    </div> -->
                     <div class="flex justify-between items-center mb-5">
-                        <label for="class" class="text-gray-700 text-sm w-[150px] mr-2">Class:</label>
+                        <label for="class" class="text-gray-700 text-sm w-[150px] mr-2 font-bold">Class:</label>
                         <select id="class" name="class"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5   dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
 
                             <option disabled selected>Select</option>
                             @foreach ($classData as $data)
@@ -220,9 +220,9 @@ Exam Progress Report
                         </select>
                     </div>
                     <div class="flex justify-between items-center mb-5">
-                        <label for="class" class="text-gray-700 text-sm w-[150px] mr-2">Group:</label>
+                        <label for="class" class="text-gray-700 text-sm w-[150px] mr-2 font-bold">Group:</label>
                         <select id="group" name="group"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5     ">
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5      ">
 
                             <option disabled selected value="">Select</option>
 
@@ -234,9 +234,9 @@ Exam Progress Report
                     </div>
                     <div class="flex justify-between items-center mb-5">
 
-                        <label for="class" class="text-gray-700 text-sm w-[150px] mr-2">Section:</label>
+                        <label for="class" class="text-gray-700 text-sm w-[150px] mr-2 font-bold">Section:</label>
                         <select id="section" name="section"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5     ">
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5     ">
 
                             <option disabled selected value="">Select</option>
 
@@ -249,9 +249,9 @@ Exam Progress Report
 
                     <div class="flex justify-between items-center mb-5">
 
-                        <label for="student" class="text-gray-700 text-sm w-[150px] mr-2">Student Id:</label>
+                        <label for="student" class="text-gray-700 text-sm w-[150px] mr-2 font-bold">Student Id:</label>
                         <select id="student" name="student_id"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5     ">
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5      ">
 
                             <option selected value="">Select</option>
 
@@ -259,9 +259,9 @@ Exam Progress Report
                     </div>
                     <div class="flex justify-between items-center mb-5">
 
-                        <label for="class" class="text-gray-700 text-sm w-[150px] mr-2">Exam Name:</label>
+                        <label for="class" class="text-gray-700 text-sm w-[150px] mr-2 font-bold">Exam Name:</label>
                         <select name="exam_name"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5     ">
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5     ">
 
                             <option disabled selected value="">Select</option>
 
@@ -273,9 +273,9 @@ Exam Progress Report
                     </div>
                     <div class="flex justify-between items-center mb-5">
 
-                        <label for="class" class="text-gray-700 text-sm w-[150px] mr-2">Merit Status:</label>
+                        <label for="class" class="text-gray-700 text-sm w-[150px] mr-2 font-bold">Merit Status:</label>
                         <select name="merit_status"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5     ">
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5      ">
 
                             <option disabled selected value="">Select</option>
 
@@ -286,9 +286,9 @@ Exam Progress Report
                     </div>
                     <div class="flex justify-between items-center mb-5">
 
-                        <label for="class" class="text-gray-700 text-sm w-[150px] mr-2">Year:</label>
+                        <label for="class" class="text-gray-700 text-sm w-[150px] mr-2 font-bold">Year:</label>
                         <select name="year"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5     ">
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5     ">
 
 
 
@@ -303,10 +303,10 @@ Exam Progress Report
                         <input type="text" value="{{ $school_code }}" id="schoolCode">
                     </div>
                     <div class="row form-group">
-                        <div class="offset-md-8 col-md-2 flex justify-center">
+                        <div class="offset-md-8 col-md-2 flex justify-end">
                             <button type="submit" style="width: 25%;"
 
-                                class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3.5 me-2 mb-2  "
+                                class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  "
 
                                 id="feesCollectSaved">Print</button>
                         </div>
@@ -318,7 +318,8 @@ Exam Progress Report
             </form>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <script>
         //group

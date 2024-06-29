@@ -263,16 +263,22 @@
                                 @method('PUT')
                                 <div>
                                     <label for="session" class="mb-2 block text-sm font-medium text-gray-900">
-                                        Report Name : :
+                                        Report Name : 
                                     </label>
-                                    <input
-                                        type="text"
-                                        name="report_name"
-                                        id="session"
-                                        class="block w-full rounded-md border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-                                        placeholder="Enter Report Name"
-                                        required
-                                    />
+                                    <select
+                                            name="report_name"
+                                            id="status"
+                                            class="focus:ring-primary-500 focus:border-primary-500 block w-full rounded-md border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900"
+                                        >
+                                            <option disabled selected >Select</option>
+                                            <option value="Admit Card">Admit Card</option>
+                                            <option value="Progress Report">Progress Report</option>
+                                            <option value="ID Card">ID Card</option>
+                                            <option value="Transfer Certificate">Transfer Certificate</option>
+                                            <option value="Testimonial">Testimonial</option>
+
+                                    </select>
+                                 
                                 </div>
 
                                 <div class="flex justify-between">

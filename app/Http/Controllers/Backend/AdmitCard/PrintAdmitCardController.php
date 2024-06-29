@@ -94,22 +94,11 @@ class PrintAdmitCardController extends Controller
             return redirect()->route('printAdmitCard', $schoolCode)->with('error', 'Student data not found.');
         }
 
-        $signatureName = "";
-        $signImage = "";
-        $signPosition = "";
+  
         $signatures = AddSignature::where('school_code', $schoolCode)->where('action', 'approved')->get();
-        $setSignature = SetSignature::where('school_code', $schoolCode)->where('status', 'active')->where('report_name', $report_name)->get();
+        $setSignature = SetSignature::where('school_code', $schoolCode)->where('status', 'active')->where('report_name', 'Admit Card')->get();
 
-        foreach ($signatures as $sign) {
-            foreach ($setSignature as $setSign) {
-                if ($setSign->signature_name === $sign->sign) {
-                    $signatureName = $setSign->signature_name;
-                    $signImage = $sign->image;
-                    $signPosition = $setSign->positions;
-                    break;
-                }
-            }
-        }
+     
         // dd($signPosition);
         $school_info = SchoolInfo::where('school_code', $schoolCode)->first();
         $date = Date('d-m-Y');
@@ -117,10 +106,10 @@ class PrintAdmitCardController extends Controller
         if ($print_type == "1") {
             $admit = AdmitInstruction::where('school_code', $schoolCode)->get();
             $subject = AddAdmitCard::where('school_code', $schoolCode)->where("action", "approved")->where('class_name', $class)->where('group_name', $group)->where('class_exam_name', $exam_name)->where('year', $year)->get();
-            return view('Backend/AdmitCard/Report(admitCards)/downloadAdmitCard', compact('Datas', 'exam_name', 'year', 'admit', 'schoolCode', 'subject', 'school_info', 'date', 'signatureName', 'signImage', 'signPosition'));
+            return view('Backend/AdmitCard/Report(admitCards)/downloadAdmitCard', compact('Datas', 'exam_name', 'year', 'admit', 'schoolCode', 'subject', 'school_info', 'date', 'signatures', 'setSignature'));
         }
 
-        return view('Backend/AdmitCard/Report(admitCards)/downloadAdmitCard', compact('Datas', 'exam_name', 'year', 'admit', 'schoolCode', 'subject', 'school_info', 'date', 'signatureName', 'signImage', 'signPosition'));
+        return view('Backend/AdmitCard/Report(admitCards)/downloadAdmitCard', compact('Datas', 'exam_name', 'year', 'admit', 'schoolCode', 'subject', 'school_info', 'date', 'signatures', 'setSignature'));
 
     }
     public function downloadPDF(Request $request, $schoolCode)

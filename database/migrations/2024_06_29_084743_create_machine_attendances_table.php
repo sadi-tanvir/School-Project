@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('add_signature', function (Blueprint $table) {
+        Schema::create('machine_attendances', function (Blueprint $table) {
             $table->id();
-            $table->string('sign');
-            $table->string('image')->nullable();
-            $table->enum('action', ['pending', 'approved', 'delete', 'edit'])->default('pending');
-            $table->string('school_code');
+            $table->string('student_id');
+            $table->dateTime('in_time');
+            $table->dateTime('out_time');
+            $table->string('machine_no');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('add_signature');
+        Schema::dropIfExists('machine_attendances');
     }
 };

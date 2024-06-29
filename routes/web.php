@@ -191,6 +191,8 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/addSchoolInfo/{schoolCode}', [NEDUBDController::class, 'addSchoolInfo']);
     Route::post('/create-schoolInfo', [NEDUBDController::class, 'createSchoolInfo'])->name('schoolInfo.add');
 
+
+ 
     //Online Application
 
     Route::get('/list-of-application/{schoolCode}', [ListOfApplicantController::class, 'ListOfApplicantView'])->name('list.online.application');

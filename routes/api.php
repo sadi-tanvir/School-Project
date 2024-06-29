@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\Machine_Attendence\MachineAttendenceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,8 +20,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/welcome', function () {
-    return response()->json([
-        'message' => 'Welcome to the API',
-    ]);
-});
+//Machine attendence
+Route::post('/create-attendance', [MachineAttendenceController::class, 'store']);
+Route::get('attendances', [MachineAttendenceController::class, 'index']);
+Route::get('attendances/{id}', [MachineAttendenceController::class, 'show']);
+Route::post('attendances', [MachineAttendenceController::class, 'store']);
+Route::put('attendances/{id}', [MachineAttendenceController::class, 'update']);
+Route::delete('attendances/{id}', [MachineAttendenceController::class, 'destroy']);

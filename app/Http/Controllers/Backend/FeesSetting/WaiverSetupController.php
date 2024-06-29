@@ -58,33 +58,17 @@ class WaiverSetupController extends Controller
         $class = $request->input('class');
         $group = $request->input('group');
         $section = $request->input('section');
-        $students = [];
 
-        $searchTerm = $request->input('search_types');
-
-        $query = Student::query();
-
-        if ($searchTerm) {
-            $students = $query->where("school_code", $school_code)
-                ->where('action', 'approved')
-                ->where('Class_name', 'like', '%' . $searchTerm . '%')
-                ->orWhere('group', 'like', '%' . $searchTerm . '%')
-                ->orWhere('section', 'like', '%' . $searchTerm . '%')
-                ->get();
-        } else {
-            $students = Student::where("school_code", $school_code)
-                ->where('action', 'approved')
-                ->where('Class_name', $class)
-                ->when($group !== "Select", function ($query) use ($group) {
-                    return $query->where('group', $group);
-                })
-                ->when($section !== "Select", function ($query) use ($section) {
-                    return $query->where('section', $section);
-                })
-                ->get();
-        }
-
-
+        $students = Student::where("school_code", $school_code)
+            ->where('action', 'approved')
+            ->where('Class_name', $class)
+            ->when($group !== "Select", function ($query) use ($group) {
+                return $query->where('group', $group);
+            })
+            ->when($section !== "Select", function ($query) use ($section) {
+                return $query->where('section', $section);
+            })
+            ->get();
 
         return redirect()->route('waiverSetup.view', $school_code)->with([
             'students' => $students,
@@ -152,6 +136,8 @@ class WaiverSetupController extends Controller
 
     public function WaiverStudentListSetup(Request $request, $school_code)
     {
+        // dd($request->all());
+
         $waiver_amounts = $request->input('waiver_amount', []);
         $waiver_type_name = $request->input('waiver_type_name');
         $waiver_expire_date = $request->input('waiver_expire_date');
@@ -161,6 +147,7 @@ class WaiverSetupController extends Controller
 
         foreach ($allStudentId as $studentId => $value) {
             if (isset($selectedStudentsId[$studentId])) {
+                // dd($studentId);
                 foreach ($selectedFeesId as $FeeId => $value) {
                     $feeInfo = AddFees::where('school_code', $school_code)
                         ->where('action', 'approved')

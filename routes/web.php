@@ -447,6 +447,8 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     // sayem - student attendence
 
     Route::get('/addStudentAttendence/{schoolCode}', [AttendenceController::class, "add_student_attence"])->name('addStudentAttendence');
+    Route::get('/attendanceStudent/{schoolCode}', [AttendenceController::class, "attendanceStudent"])->name('attendanceStudent');
+    Route::post('/storeAttendance/{schoolCode}', [AttendenceController::class, "storeAttendance"])->name('storeAttendance');
     Route::get('/studentLeaveForm/{schoolCode}', [AttendenceController::class, "student_leave_form"])->name('studentLeaveForm');
     Route::get('/addLeaveType/{schoolCode}', [AttendenceController::class, "add_leave_type"])->name('addLeaveType');
 

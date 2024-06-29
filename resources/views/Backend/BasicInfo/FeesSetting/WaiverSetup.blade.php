@@ -84,8 +84,6 @@ Waiver Setup
 
 <div class="w-full border-2 border-gray-300 bg-gray-200 mx-auto p-6 rounded-md space-y-10">
     {{-- top section --}}
-
-
     <div class="grid grid-cols-2 items-center gap-5">
         <form class="grid grid-cols-3 gap-5" id="waiver_setup_form"
             action="{{ route('GetStudent.data', $school_code) }}" method="GET">
@@ -178,8 +176,8 @@ Waiver Setup
                     <div class="text-center rounded-lg">
                         <h1 class="py-3 text-lg">Student wise waiver setup list</h1>
                     </div>
-                    <div class="relative overflow-x-auto max-h-96  border-2 border-blue-500 rounded-xl shadow-lg">
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
+                    <div class="relative overflow-x-auto">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 border">
                             <thead class="text-xs text-white  bg-blue-600 ">
                                 <tr class="text-center">
                                     <th scope="col" class="px-6 py-3">
@@ -228,16 +226,11 @@ Waiver Setup
 
                 {{-- stutdent table --}}
                 <div>
-                    <div class="flex justify-end items-center gap-5 mb-3">
-                        <form id="searchForm" class="mb-0 grow" method="GET"
-                            action="{{ route('GetStudent.data', $school_code) }}">
-                            <input type="text" value="{{ request('search_types') }}" name="search_types"
-                                id="search_types"
-                                class="bg-white border-0  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2"
-                                placeholder="Search..." />
-                        </form>
+                    <div class="text-center rounded-lg">
+                        <h1 class="py-3 text-lg">Class wise pay slip setup list </h1>
+                        <input type="text" name="search_student" id="search_student" placeholder="search_student">
                     </div>
-                    <div class="relative overflow-x-auto max-h-96 border-2 border-blue-500 rounded-xl shadow-lg">
+                    <div class="relative overflow-x-auto border-2 border-blue-500 rounded-xl">
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                             <thead class="text-xs text-white  bg-blue-600 ">
                                 <tr class="text-center">
@@ -259,34 +252,7 @@ Waiver Setup
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @if ($sessionStudents)
-                                @foreach ($sessionStudents as $key => $student)
-                                <tr class="border-b border-gray-300 last:border-gray-200 text-center">
-                                    <th scope="row" class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                                        <div class="mx-auto">
-                                            <input id="" type="checkbox" value="selected"
-                                                name="student_select[{{ $student->id }}]"
-                                                class="w-4 h-4 ml-3 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 ">
-                                        </div>
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        {{ $key + 1 }}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{ $student->name }}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{ $student->student_id }}
-                                        <input type="text" class="hidden" value="{{ $student->id }}"
-                                            name="student_id[{{ $student->id }}]">
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{ $student->student_roll }}
-                                    </td>
-                                </tr>
-                                @endforeach
-                                @endif
+                            <tbody id="table_body">
                             </tbody>
                         </table>
                     </div>
@@ -320,6 +286,88 @@ Waiver Setup
 
 
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const search_student = document.getElementById('search_student');
+        const table_body = document.getElementById('table_body');
+        let sessionStudents = @json($sessionStudents);
+        let filteredStudents = sessionStudents;
+
+        // update table content
+        if(filteredStudents){
+            updateTableContent(filteredStudents)
+        }
+
+        // search implementation
+        search_student.addEventListener('change', (event) => {
+            let search_value = event.target.value;
+            filteredStudents = sessionStudents.filter((student) => {
+                if(search_value === ''){
+                    return sessionStudents;
+                }else if(student.student_id.includes(search_value)){
+                    return student;
+                }else if(student.name.toLowerCase().includes(event.target.value.toLowerCase())){
+                    return student;
+                }
+            })
+            updateTableContent(filteredStudents);
+        })
+
+        function updateTableContent(data) {
+            // create dynamic row
+            table_body.innerHTML = "";
+            data.forEach((student, index) => {
+                const tr = document.createElement('tr');
+                tr.classList.add('odd:bg-white', 'odd:dark:bg-gray-900', 'even:bg-gray-50'
+                    , 'even:dark:bg-gray-800', 'border-b', 'dark:border-gray-700');
+
+                // Create a new checkbox input element
+                const checkboxCell = document.createElement('td');
+                checkboxCell.classList.add("px-6", "py-4")
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.name = `student_select[${student.id}]`
+                checkbox.classList.add('w-4', 'h-4', 'text-blue-600', 'bg-gray-100', 'border-gray-300'
+                    , 'rounded', 'focus:ring-blue-500')
+                checkboxCell.appendChild(checkbox)
+                tr.appendChild(checkboxCell);
+
+                // create serial index column
+                const serial_col = document.createElement('td');
+                serial_col.classList.add('px-6', 'py-4');
+                serial_col.textContent = index + 1;
+                tr.appendChild(serial_col);
+
+                // name column
+                const name_col = document.createElement('td');
+                name_col.classList.add("px-6", "py-4")
+                name_col.textContent = student.name
+                tr.appendChild(name_col);
+
+                // student_id column
+                const student_id_col = document.createElement('td');
+                student_id_col.classList.add("px-6", "py-4")
+                student_id_col.textContent = student.student_id
+                tr.appendChild(student_id_col);
+
+                // student_roll column
+                const student_roll_col = document.createElement('td');
+                student_roll_col.classList.add("px-6", "py-4")
+                student_roll_col.textContent = student.student_roll
+                tr.appendChild(student_roll_col);
+
+                // hidden input
+                const student_id_inputBox = document.createElement('input');
+                student_id_inputBox.type = 'text'
+                student_id_inputBox.name = `student_id[${student.id}]`;
+                student_id_inputBox.classList.add('hidden')
+                // td.appendChild(student_id_inputBox);
+                tr.appendChild(student_id_inputBox);
+
+                table_body.appendChild(tr);
+            })
+        }
+    })
+
     // for waiver table
     document.addEventListener("DOMContentLoaded", function() {
         const headerCheckbox = document.getElementById('waiver_header_checkbox');
@@ -368,22 +416,4 @@ Waiver Setup
     // function GetData() {
     //     submitFormAll();
     // }
-
-        function handleFormSubmit() {
-            var searchTerm = document.getElementById('search_types').value;
-            document.getElementById('searchForm').submit();
-        }
-
-        var typingTimer;
-
-        document.addEventListener('DOMContentLoaded', function() {
-            var searchInput = document.getElementById('search_types');
-            console.log(searchInput.value);
-            if (searchInput) {
-                searchInput.addEventListener('input', function() {
-                    clearTimeout(typingTimer);
-                    typingTimer = setTimeout(handleFormSubmit, 1200);
-                });
-            }
-        });
 </script>

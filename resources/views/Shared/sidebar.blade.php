@@ -193,7 +193,7 @@
                     </li>
                     <li>
                         <a href="{{ route('uploadExelFile', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Upload
-                            Exel File</a>
+                            Excel File</a>
                     </li>
                     <li class="hidden">
                         <a href="{{ route('uploadPhoto', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Upload
@@ -564,10 +564,10 @@
                         <a href="/dashboard/studentAccounts/generatePayslip/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Generate
                             Payslip</a>
                     </li>
-                    <li>
-                        <a href="/dashboard/studentAccounts/editGeneratedPayslip/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Edit
-                            Generated Payslip</a>
-                    </li>
+                    <!--<li>-->
+                    <!--    <a href="/dashboard/studentAccounts/editGeneratedPayslip/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Edit-->
+                    <!--        Generated Payslip</a>-->
+                    <!--</li>-->
                     <li>
                         <a href="/dashboard/studentAccounts/generateMultiplePayslip/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Generate
                             Multiple Payslip</a>
@@ -602,7 +602,6 @@
                             </ul>
                         </li>
                     @endif
-
                     <!-- reports student fees  -->
                     <li class="dropdown">
                         <button type="button" class="flex items-center w-full py-2 px-4 pl-7 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-slate-100/20" aria-controls="dropdown-student-fees-reports" data-collapse-toggle="dropdown-student-fees-reports">
@@ -669,19 +668,19 @@
 
             <!-- Generel Accounts  -->
             <li class="dropdown">
-                <button type="button" class="flex items-center w-full py-2 px-4 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-slate-100/20" aria-controls="dropdown-general-accounts" data-collapse-toggle="dropdown-general-accounts">
+                <button type="button" class="flex items-center w-full py-2 px-4 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-slate-100/20" aria-controls="dropdown-student-Attendence" data-collapse-toggle="dropdown-student-Attendence">
                     <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ffffff">
                         <path d="M9 1V3H15V1H17V3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9ZM20 11H4V19H20V11ZM8 13V15H6V13H8ZM13 13V15H11V13H13ZM18 13V15H16V13H18ZM7 5H4V9H20V5H17V7H15V5H9V7H7V5Z">
                         </path>
                     </svg>
-                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap text-white ">General
+                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap text-white ">Generel
                         Accounts</span>
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                         <path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
                     </svg>
 
                 </button>
-                <ul id="dropdown-general-accounts" class="hidden py-2 space-y-1 border-s ms-7 border-dashed px-3">
+                <ul id="dropdown-student-Attendence" class="hidden py-2 space-y-1 border-s ms-7 border-dashed px-3">
                     <li>
                         <a href="/dashboard/generalAccounts/cashPaymentVoucher/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Cash
                             Payment Voucher</a>
@@ -797,48 +796,6 @@
 
                 </button>
                 <ul id="dropdown-assessment" class="hidden py-2 space-y-1 border-s ms-7 border-dashed px-3">
-                    {{-- Basic Setting --}}
-                    <li class="dropdown ml-6">
-                        <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group " aria-controls="dropdown-basic_setting" data-collapse-toggle="dropdown-basic_setting">
-
-                            <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap text-white ">Basic
-                                Setting</span>
-                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                <path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
-                            </svg>
-                        </button>
-                        <ul id="dropdown-basic_setting" class="hidden py-2 space-y-1 border-s ms-7 border-dashed px-3">
-                            <li>
-                                <a href="/dashboard/assessment/basicSetting/paradarsitaSuchok/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">
-                                    Paradarsita Suchok</a>
-                            </li>
-                            <li>
-                                <a href="/dashboard/assessment/basicSetting/paradarsitaSuchokExcel/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Paradarsita
-                                    Suchok Excel</a>
-                            </li>
-                            <li>
-                                <a href="/dashboard/assessment/basicSetting/paradarsitaSuchokMatra/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Paradarsita
-                                    Suchok Matra</a>
-                            </li>
-                            <li>
-                                <a href="/dashboard/assessment/basicSetting/paradarsitaSuchokMatra_2/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Paradarsita
-                                    Suchok Matra</a>
-                            </li>
-                            <li>
-                                <a href="/dashboard/assessment/basicSetting/addNoipunnoName/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Add
-                                    Noipunno Name</a>
-                            </li>
-                            <li>
-                                <a href="/dashboard/assessment/basicSetting/setupAssParadarsitaNoipunno/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Setup
-                                    Ass. Paradarsita Noipunno</a>
-                            </li>
-                            <li>
-                                <a href="/dashboard/assessment/basicSetting/paradarsitaSuchokExam/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Paradarsita
-                                    Suchok Exam</a>
-                            </li>
-                        </ul>
-
-                    </li>
                     <li>
                         <a href="/dashboard/assessment/assessmentInput/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Assessment
                             Input</a>
@@ -1057,7 +1014,7 @@
                             </li>
                             <li>
                                 <a href="/dashboard/addShift/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Add
-                                    shift</a>
+                                    Shift</a>
                             </li>
                             <li>
                                 <a href="/dashboard/addGroup/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Add
@@ -1089,15 +1046,15 @@
                             </li>
                             <li>
                                 <a href="/dashboard/addClassWiseGroup/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Add
-                                    Class wise Group</a>
+                                    Class Wise Group</a>
                             </li>
                             <li>
                                 <a href="/dashboard/addClassWiseSection/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Add
-                                    Class wise Section</a>
+                                    Class Wise Section</a>
                             </li>
                             <li>
                                 <a href="/dashboard/addClassWiseShift/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Add
-                                    Class wise Shift</a>
+                                    Class Wise Shift</a>
                             </li>
                             <li>
                                 <a href="/dashboard/addPeriod/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Add

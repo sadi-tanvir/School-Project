@@ -64,6 +64,7 @@ use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\IncomeS
 use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\JournalBookController;
 use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\TrialBalanceController;
 use App\Http\Controllers\Backend\GeneralAccounts\VoucherPostingController;
+use App\Http\Controllers\Backend\NEDUB\SettingController;
 use App\Http\Controllers\Backend\NEDUBD\NEDUBDController;
 use App\Http\Controllers\Backend\NEDUBD\SchoolAdminController;
 use App\Http\Controllers\Backend\OnlineApplication\ListOfApplicantController;
@@ -192,6 +193,9 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::post('/create-schoolInfo', [NEDUBDController::class, 'createSchoolInfo'])->name('schoolInfo.add');
 
 
+    // settings 
+    Route::get('/settings/{schoolCode}',[SettingController::class,'viewSetting'])->name('view.settings');
+    Route::put('/change-profile-picture/{role}/{id}/{schoolCode}',[SettingController::class,'changePhoto'])->name('change.profile.picture');
  
     //Online Application
 

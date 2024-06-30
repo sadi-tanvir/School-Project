@@ -6,23 +6,35 @@ Dashboard
 @section('Dashboard')
 @include('/Message/message')
 <div
-    class="relative mb-3 overflow-hidden rounded-md bg-gradient-to-tr from-[#1E3A8A] to-[#0054af] px-10 py-16 text-white">
-    <h2 class="text-4xl">
-        <span class="font-light">Hello!</span>
+    class=" flex justify-between items-center rounded-md bg-gradient-to-tr from-[#1E3A8A] to-[#0054af] px-10 py-16 text-white mb-5">
+    <div>
+        <h2 class="text-4xl">
+            <span class="font-light">Hello!</span>
+            @if ($adminData)
+                <span class="font-semibold">{{ $adminData->first_name }} {{ $adminData->last_name }}</span>
+            @endif
+            @if ($schoolAdminData)
+                <span class="font-semibold">{{ $schoolAdminData->name }}</span>
+            @endif
+            @if ($studentData)
+                <span class="font-semibold">{{ $studentData->name }}</span>
+            @endif
+        </h2>
+        <p class="mt-1 font-light opacity-90">Welcome! Have a wonderful day!</p>
+
+    </div>
+    <div>
         @if ($adminData)
-            <span class="font-semibold">{{ $adminData->first_name }} {{ $adminData->last_name }}</span>
+            <img class=" w-40 h-40 border-2 rounded-full" src="{{ asset($adminData->image) }}" alt="" />
         @endif
         @if ($schoolAdminData)
-            <span class="font-semibold">{{ $schoolAdminData->name }}</span>
+            <img class="w-40 h-40 border-2 rounded-full" src="{{ asset($schoolAdminData->image) }}" alt="" />
         @endif
         @if ($studentData)
-            <span class="font-semibold">{{ $studentData->name }}</span>
+            <img class=" w-40 h-40 border-2 rounded-full" src="{{ asset($studentData->image) }}" alt="" />
         @endif
-    </h2>
-    <p class="mt-1 font-light opacity-90">Welcome! Have a wonderful day!</p>
+    </div>
 
-
-    <img class="absolute right-0 h-72 -rotate-45" src="{{ asset('assets/images/dashboard-welcome-bg.svg') }}" alt="" />
 </div>
 <div class="row-span-3 grid grid-cols-4 gap-3">
     <div class="col-span-3">

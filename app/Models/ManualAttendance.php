@@ -16,6 +16,7 @@ class ManualAttendance extends Model
         'section',
         'year',
         'period',
+        'subject',
         'date',
         'student_id',
         'name',

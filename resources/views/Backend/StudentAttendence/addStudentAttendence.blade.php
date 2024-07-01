@@ -11,13 +11,17 @@ Student Attendence
 @include('Shared.ContentHeader', ['title' => 'Student Attendence'])
 
 <div class="relative overflow-x-auto md:my-10 py-6 border-2  rounded-lg">
-    <div class="flex justify-start gap-3 border-b-2 border-blue-500">
-        <p
-            class="ms-5 flex items-center justify-center gap-3 rounded-t-lg bg-blue-700 px-7 py-2.5 pb-3 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300">
-            Subject</p>
-        <p
-            class="me-2 flex items-center justify-center gap-3 rounded-t-lg px-7 py-2.5 pb-3 text-sm font-medium text-black hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300">
-            Period</p>
+<div class="flex justify-start gap-3 border-b-2 border-blue-500">
+        <p id="period-button"
+            class="toggle-button ms-5 flex items-center justify-center gap-3 rounded-t-lg bg-blue-700 px-7 py-2.5 pb-3 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300"
+            data-toggle="period">
+            Period
+        </p>
+        <p id="subject-button"
+            class="toggle-button me-2 flex items-center justify-center gap-3 rounded-t-lg px-7 py-2.5 pb-3 text-sm font-medium text-black hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300"
+            data-toggle="subject">
+           Subject
+        </p>
     </div>
 
     <div class="p-6">
@@ -64,7 +68,7 @@ Student Attendence
                         @endforeach
                     </select>
                 </div>
-                <div>
+                <div id="dynamic-field-container">
                     <label for="period" class="block mb-2 text-sm font-medium">Period</label>
                     <select id="period" name="period"
                         class="bg-gray-200 border-0 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 ">
@@ -140,10 +144,12 @@ Student Attendence
                 @csrf
                 <tbody>
                     @if ($data != null)
+                    
                         <input type="text" class="py-4 hidden" name="class" value="{{$selectclass}}">
                         <input type="text" class="py-4 hidden" name="group" value="{{ $selectgroup}}">
                         <input type="text" class="py-4 hidden" name="year" value="{{ $selectyear}}">
                         <input type="text" class="py-4 hidden" name="period" value="{{ $selectperiod}}">
+                        <input type="text" class="py-4 hidden" name="subject" value="{{ $selectsubject}}">
                         <input type="text" class="py-4 hidden" name="date" value="{{ $selectdate}}">
                         <input type="text" class="py-4 hidden" name="section" value="{{ $selectsection }}">
                         @foreach ($data as $key => $studentData)
@@ -164,59 +170,87 @@ Student Attendence
                                 <input type="text" class="py-4 hidden" name="name[{{ $key }}]" value="{{ $studentData->name }}">
                                 <input type="text" class="py-4 hidden" name="student_roll[{{ $key }}]"
                                     value="{{ $studentData->student_roll }}">
-                                <td>
-                                    <div class="flex justify-center">
-                                        <div class="flex items-center me-4 md:pr-5">
-                                        @if ($studentData->student_status === 'Present')
-                                                <input type="radio" value="Present" name="attendance[{{ $key }}]"
-                                                    class="attendance-absent w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                                    checked>
-                                            @else
-                                                <input type="radio" value="Present" name="attendance[{{ $key }}]"
-                                                    class="attendance-absent w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                                    >
-                                            @endif
-                                            <label class="ms-2 text-sm font-medium text-gray-900">Present</label>
-                                        </div>
-                                        <div class="flex items-center me-4 md:pr-5">
-                                            @if ($studentData->student_status === 'Absent')
-                                                <input type="radio" value="Absent" name="attendance[{{ $key }}]"
-                                                    class="attendance-absent w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                                    checked>
-                                            @else
-                                                <input type="radio" value="Absent" name="attendance[{{ $key }}]"
-                                                    class="attendance-absent w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                                    >
-                                            @endif
-
-                                            <label class="ms-2 text-sm font-medium text-gray-900">Absent</label>
-                                        </div>
-                                        <div class="flex items-center me-4 md:pr-5">
-
-                                            @if ($studentData->student_status === 'Late')
-                                                <input type="radio" value="Late" name="attendance[{{ $key }}]"
-                                                    class="attendance-absent w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                                    checked>
-                                            @else
-                                                <input type="radio" value="Late" name="attendance[{{ $key }}]"
-                                                    class="attendance-absent w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                                   >
-                                            @endif
-                                            <label class="ms-2 text-sm font-medium text-gray-900">Late</label>
-                                        </div>
-                                        <div class="flex items-center md:pr-5">
-                                        @if ($studentData->student_status === 'Leave')
-                                                <input type="radio" value="Leave" name="attendance[{{ $key }}]"
-                                                    class="attendance-absent w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                                    checked>
-                                            @else
-                                                <input type="radio" value="Leave" name="attendance[{{ $key }}]"
-                                                    class="attendance-absent w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                                                   >
-                                            @endif
-                                            <label class="ms-2 text-sm font-medium text-gray-900">Leave</label>
-                                        </div>
+                                    <td>
+                                    @if (!$attendData)
+                                 <div class="flex justify-center">
+                                      <div class="flex items-center me-4 md:pr-5">
+                                     <input type="radio" value="Present" name="attendance[{{ $key }}]"
+                                          class="attendance-present w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                         <label class="ms-2 text-sm font-medium text-gray-900">Present</label>
                                     </div>
+                                    <div class="flex items-center me-4 md:pr-5">
+                                         <input type="radio" value="Absent" name="attendance[{{ $key }}]"
+                                             class="attendance-absent w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                        <label class="ms-2 text-sm font-medium text-gray-900">Absent</label>
+                                    </div>
+                                    <div class="flex items-center me-4 md:pr-5">
+                                        <input type="radio" value="Late" name="attendance[{{ $key }}]"
+                                              class="attendance-late w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                         <label class="ms-2 text-sm font-medium text-gray-900">Late</label>
+                                     </div>
+                                     <div class="flex items-center md:pr-5">
+                                      <input type="radio" value="Leave" name="attendance[{{ $key }}]"
+                                          class="attendance-leave w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                      <label class="ms-2 text-sm font-medium text-gray-900">Leave</label>
+                                     </div>
+                                 </div>
+                                @else
+                                        
+                                         <div class="flex justify-center">
+                                         @foreach ($attendData as $Data)
+            @if ($Data->student_id == $studentData->student_id)
+                <div class="flex items-center me-4 md:pr-5">
+                    <input type="radio" value="Present" name="attendance[{{ $key }}]"
+                        class="attendance-present w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+                        @if ($Data->student_status === 'Present') checked @endif>
+                    <label class="ms-2 text-sm font-medium text-gray-900">Present</label>
+                </div>
+                <div class="flex items-center me-4 md:pr-5">
+                    <input type="radio" value="Absent" name="attendance[{{ $key }}]"
+                        class="attendance-absent w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+                        @if ($Data->student_status === 'Absent') checked @endif>
+                    <label class="ms-2 text-sm font-medium text-gray-900">Absent</label>
+                </div>
+                <div class="flex items-center me-4 md:pr-5">
+                    <input type="radio" value="Late" name="attendance[{{ $key }}]"
+                        class="attendance-late w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+                        @if ($Data->student_status === 'Late') checked @endif>
+                    <label class="ms-2 text-sm font-medium text-gray-900">Late</label>
+                </div>
+                <div class="flex items-center md:pr-5">
+                    <input type="radio" value="Leave" name="attendance[{{ $key }}]"
+                        class="attendance-leave w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+                        @if ($Data->student_status === 'Leave') checked @endif>
+                    <label class="ms-2 text-sm font-medium text-gray-900">Leave</label>
+                </div>
+                @break
+            @endif
+        @endforeach
+        @if (!isset($Data) || $Data->student_id != $studentData->student_id)
+            <div class="flex items-center me-4 md:pr-5">
+                <input type="radio" value="Present" name="attendance[{{ $key }}]"
+                    class="attendance-present w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                <label class="ms-2 text-sm font-medium text-gray-900">Present</label>
+            </div>
+            <div class="flex items-center me-4 md:pr-5">
+                <input type="radio" value="Absent" name="attendance[{{ $key }}]"
+                    class="attendance-absent w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                <label class="ms-2 text-sm font-medium text-gray-900">Absent</label>
+            </div>
+            <div class="flex items-center me-4 md:pr-5">
+                <input type="radio" value="Late" name="attendance[{{ $key }}]"
+                    class="attendance-late w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                <label class="ms-2 text-sm font-medium text-gray-900">Late</label>
+            </div>
+            <div class="flex items-center md:pr-5">
+                <input type="radio" value="Leave" name="attendance[{{ $key }}]"
+                    class="attendance-leave w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                <label class="ms-2 text-sm font-medium text-gray-900">Leave</label>
+            </div>
+        @endif
+                                    </div>
+                       
+                                 @endif
                                 </td>
                                 <td>
                                     <input id="link-checkbox" type="checkbox" value="active"
@@ -285,6 +319,7 @@ Student Attendence
         dateInput.value = today;
     });
 </script>
+
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     $(document).ready(function () {
@@ -321,6 +356,25 @@ Student Attendence
                     $('#section').append('<option disabled selected value="">Select</option>');
                     $.each(result, function (key, value) {
                         $('#section').append('<option value="' + value.section_name + '">' + value.section_name + '</option>');
+                    });
+                }
+            });
+        });
+        //Subject
+        $('#class').change(function () {
+            var class_name = $(this).val();
+            $.ajax({
+                url: "{{ route('add.get-subjects', $school_code) }}",
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function (result) {
+                    $('#subject').empty();
+                    $('#subject').append('<option disabled selected value="">Select</option>');
+                    $.each(result, function (key, value) {
+                        $('#subject').append('<option value="' + value.subject_name + '">' + value.subject_name + '</option>');
                     });
                 }
             });
@@ -375,4 +429,48 @@ Student Attendence
     });
 </script>
 
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const periodButton = document.getElementById('period-button');
+        const subjectButton = document.getElementById('subject-button');
+        const dynamicFieldContainer = document.getElementById('dynamic-field-container');
+
+        const periodField = `
+            <label for="period" class="block mb-2 text-sm font-medium">Period</label>
+            <select id="period" name="period"
+                class="bg-gray-200 border-0 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 ">
+                <option selected>Select Period</option>
+                @foreach ($periods as $period)
+                    <option>{{ $period->class_period }}</option>
+                @endforeach
+            </select>
+        `;
+
+        const subjectField = `
+            <label for="subject" class="block mb-2 text-sm font-medium">Subject</label>
+            <select id="subject" name="subject"
+                class="bg-gray-200 border-0 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 ">
+                <option selected>Select Subject</option>
+                @foreach ($subjects as $subject)
+                    <option>{{ $subject->subject_name }}</option>
+                @endforeach
+            </select>
+        `;
+
+        periodButton.addEventListener('click', function() {
+            periodButton.classList.add('bg-blue-700', 'text-white');
+            subjectButton.classList.remove('bg-blue-700', 'text-white');
+            subjectButton.classList.add('text-black');
+            dynamicFieldContainer.innerHTML = periodField;
+        });
+
+        subjectButton.addEventListener('click', function() {
+            subjectButton.classList.add('bg-blue-700', 'text-white');
+            periodButton.classList.remove('bg-blue-700', 'text-white');
+            periodButton.classList.add('text-black');
+            dynamicFieldContainer.innerHTML = subjectField;
+        });
+    });
+</script>
 @endsection

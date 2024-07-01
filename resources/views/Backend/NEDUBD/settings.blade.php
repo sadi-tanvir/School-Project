@@ -96,7 +96,7 @@ Add Admin
                 <label  class="block mb-2 text-sm font-medium text-gray-900 ">First name
 
                 </label>
-                <input type="text" id="first_name" name="first_name"
+                <input type="text" id="first_name" name="first_name" value="{{$adminData->first_name}}"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5    "
                     placeholder="Enter first name" />
             </div>
@@ -104,7 +104,7 @@ Add Admin
                 <label  class="block mb-2 text-sm font-medium text-gray-900 ">Last Name
 
                 </label>
-                <input type="text" id="last_name" name="last_name"
+                <input type="text" id="last_name" name="last_name" value="{{$adminData->last_name}}"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5    "
                     placeholder="Enter last name" />
             </div>
@@ -143,7 +143,7 @@ Add Admin
                 <label class="block mb-2 text-sm font-medium text-gray-900 ">Name
 
                 </label>
-                <input type="text" id="name" name="name"
+                <input type="text" id="name" name="name"value="{{$schoolAdminData->name}}"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5    "
                     placeholder="Enter your name" />
             </div>
@@ -180,7 +180,7 @@ Add Admin
                 <label class="block mb-2 text-sm font-medium text-gray-900 ">Name
 
                 </label>
-                <input type="text" id="name" name="name"
+                <input type="text" id="name" name="name"value="{{$studentData->name}}"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5    "
                     placeholder="Enter your name" />
             </div>

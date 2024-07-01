@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('group');
             $table->string('section');
             $table->string('year');
-            $table->string('period');
+            $table->string('period')->nullable();
+            $table->string('subject')->nullable();
             $table->string('date');
             $table->string('student_id');
             $table->string('name');

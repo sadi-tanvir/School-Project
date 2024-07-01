@@ -451,7 +451,7 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
 
 
     // sayem - student attendence
-
+    Route::post('/add-students/get-subjects/{schoolCode}', [AttendenceController::class, 'getSubject'])->name('add.get-subjects');
     Route::get('/addStudentAttendence/{schoolCode}', [AttendenceController::class, "add_student_attence"])->name('addStudentAttendence');
     Route::get('/attendanceStudent/{schoolCode}', [AttendenceController::class, "attendanceStudent"])->name('attendanceStudent');
     Route::post('/storeAttendance/{schoolCode}', [AttendenceController::class, "storeAttendance"])->name('storeAttendance');

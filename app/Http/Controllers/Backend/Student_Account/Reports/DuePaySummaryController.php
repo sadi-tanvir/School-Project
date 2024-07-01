@@ -75,6 +75,7 @@ class DuePaySummaryController extends Controller
 
     public function GetAllPaidUnpaidInformation(Request $request, $school_code)
     {
+        // dd($request->all());
         $date = now();
         $sortType = $request->session()->get('sessionSortType', $request->input('sortType', 'class_position'));
         $sortOrder = $request->session()->get('sessionSortOrder', $request->input('sortType', 'asc'));
@@ -89,13 +90,13 @@ class DuePaySummaryController extends Controller
                 return $query->where('class', $class);
             })
             ->when($group !== "Select", function ($query) use ($group) {
-                return $query->where('group', $group);
+                return $query->where('generate_payslips.group', $group);
             })
             ->when($section !== "Select", function ($query) use ($section) {
-                return $query->where('section', $section);
+                return $query->where('generate_payslips.section', $section);
             })
             ->when($student_id !== null, function ($query) use ($student_id) {
-                return $query->where('student_id', $student_id);
+                return $query->where('generate_payslips.student_id', $student_id);
             })
             ->join('students', function ($join) use ($school_code) {
                 $join->on('generate_payslips.student_id', '=', 'students.student_id')

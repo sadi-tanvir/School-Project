@@ -16,12 +16,9 @@
         </a>
       </div>
 
-      <!-- <div>
-      
-
-      
-        Hello There
-      </div> -->
+      <div class="pl-20 text-white text-xl font-bold">
+        <a href="/dashboard/home/{{$school_code}}">Home</a>
+      </div>
       <div class="h-6 grow ms-10 ">
       <form action="/dashboard/search/{{$school_code}}" method="GET" class="w-full">
       <div class="relative w-1/3 ms-auto -me-3">

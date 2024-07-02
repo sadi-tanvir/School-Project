@@ -64,9 +64,13 @@ use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\IncomeS
 use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\JournalBookController;
 use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\TrialBalanceController;
 use App\Http\Controllers\Backend\GeneralAccounts\VoucherPostingController;
+
+use App\Http\Controllers\Backend\Home\HomeController;
+
 use App\Http\Controllers\Backend\MachineAttendance\StudentMachineIntegrateController;
 use App\Http\Controllers\Backend\MachineAttendance\StudentMachinUserListController;
 use App\Http\Controllers\Backend\MachineAttendance\StudentTimeSettingController;
+
 use App\Http\Controllers\Backend\NEDUB\SettingController;
 use App\Http\Controllers\Backend\NEDUBD\NEDUBDController;
 use App\Http\Controllers\Backend\NEDUBD\SchoolAdminController;
@@ -195,6 +199,8 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/addSchoolInfo/{schoolCode}', [NEDUBDController::class, 'addSchoolInfo']);
     Route::post('/create-schoolInfo', [NEDUBDController::class, 'createSchoolInfo'])->name('schoolInfo.add');
 
+   //Home 
+    Route::get('/home/{schoolCode}', [HomeController::class, 'home']);
 
     // settings 
     Route::get('/settings/{schoolCode}',[SettingController::class,'viewSetting'])->name('view.settings');

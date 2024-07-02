@@ -76,7 +76,8 @@ Add Admin
             @method('PUT')
             <div class="mt-12 pt-0.5 ">
                 <label class="block mb-2 text-sm font-medium text-gray-900" for="user_avatar">Upload Picture </label>
-                <input name="image" class="hidden" id="user_avatar" type="file" onchange="previewImage(this)">
+                <input name="previous_image" value="{{$adminData->image}}" class="hidden" type="text">
+                <input name="image" value="{{$adminData->image}}" class="hidden" id="user_avatar" type="file" onchange="previewImage(this)">
                 <div id="imagePreview" class="upload-box border-2 border-dashed rounded-md mt-2"
                     onclick="triggerFileInput()"><span>Upload Image</span> <svg class="ms-3" width="80px" height="34px"
                         viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -122,7 +123,8 @@ Add Admin
             @method('PUT')
             <div class="mt-12 pt-0.5 ">
                 <label class="block mb-2 text-sm font-medium text-gray-900" for="user_avatar">Upload Picture </label>
-                <input name="image" class="hidden" id="user_avatar" type="file" onchange="previewImage(this)">
+                <input name="previous_image" value="{{$schoolAdminData->image}}" class="hidden" type="text">
+                <input name="image"  class="hidden" id="user_avatar" type="file" onchange="previewImage(this)">
                 <div id="imagePreview" class="upload-box border-2 border-dashed rounded-md mt-2"
                     onclick="triggerFileInput()"><span>Upload Image</span> <svg class="ms-3" width="80px" height="34px"
                         viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -160,7 +162,8 @@ Add Admin
             @method('PUT')
             <div class="mt-12 pt-0.5 ">
                 <label class="block mb-2 text-sm font-medium text-gray-900" for="user_avatar">Upload Picture </label>
-                <input name="image" class="hidden" id="user_avatar" type="file" onchange="previewImage(this)">
+                <input name="previous_image" value="{{$studentData->image}}" class="hidden" type="text">
+                <input name="image"  class="hidden" id="user_avatar" type="file" onchange="previewImage(this)">
                 <div id="imagePreview" class="upload-box border-2 border-dashed rounded-md mt-2"
                     onclick="triggerFileInput()"><span>Upload Image</span> <svg class="ms-3" width="80px" height="34px"
                         viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

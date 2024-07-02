@@ -7,17 +7,7 @@
     <title>@yield('title')</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- tailwind css -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- font awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script src="https://kit.fontawesome.com/d703802588.js" crossorigin="anonymous"></script>
-
-    <!-- flowbite -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-
+    @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
 <style>
     /* You can add custom styles here */

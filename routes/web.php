@@ -65,6 +65,7 @@ use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\Journal
 use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\TrialBalanceController;
 use App\Http\Controllers\Backend\GeneralAccounts\VoucherPostingController;
 use App\Http\Controllers\Backend\MachineAttendance\StudentMachineIntegrateController;
+use App\Http\Controllers\Backend\MachineAttendance\StudentMachinUserListController;
 use App\Http\Controllers\Backend\MachineAttendance\StudentTimeSettingController;
 use App\Http\Controllers\Backend\NEDUB\SettingController;
 use App\Http\Controllers\Backend\NEDUBD\NEDUBDController;
@@ -854,4 +855,8 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
 
     // machine Id Integrate 
     Route::get('/std-machine-integrate/{schoolCode}',[StudentMachineIntegrateController::class,'viewMachineIntegrade'])->name('std.machine.integrate');
+    
+
+    // Std machine user list 
+    Route::get('/std-machine-user-list/{schoolCode}',[StudentMachinUserListController::class,'viewStdMachineUserList'])->name('std.machine.user.list');
 });

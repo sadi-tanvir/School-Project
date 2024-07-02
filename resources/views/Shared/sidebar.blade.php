@@ -1284,7 +1284,7 @@
                         <a href="{{route('std.machine.integrate',$school_code)}}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">STD Machine Integrate</a>
                     </li>
                     <li>
-                        <a href="/dashboard/tebular-format1" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">STD Machine User List</a>
+                        <a href="{{route('std.machine.user.list',$school_code)}}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">STD Machine User List</a>
                     </li>
                 </ul>
             </li>

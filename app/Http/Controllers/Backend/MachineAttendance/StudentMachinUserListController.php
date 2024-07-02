@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class StudentMachinUserListController extends Controller
 {
-    //
+    public function viewStdMachineUserList()
+    {
+        return view('Backend.MachineAttendence.stdMachineUserList');
+    }
 }

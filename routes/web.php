@@ -64,6 +64,8 @@ use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\IncomeS
 use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\JournalBookController;
 use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\TrialBalanceController;
 use App\Http\Controllers\Backend\GeneralAccounts\VoucherPostingController;
+use App\Http\Controllers\Backend\MachineAttendance\StudentMachineIntegrateController;
+use App\Http\Controllers\Backend\MachineAttendance\StudentTimeSettingController;
 use App\Http\Controllers\Backend\NEDUB\SettingController;
 use App\Http\Controllers\Backend\NEDUBD\NEDUBDController;
 use App\Http\Controllers\Backend\NEDUBD\SchoolAdminController;
@@ -844,4 +846,12 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     // NEDUBD Add School Admin
     Route::get('/addSchoolAdmin/{schoolCode}', [SchoolAdminController::class, "addSchoolAdmin"]);
     Route::post('/createSchoolAdmin', [SchoolAdminController::class, "createSchoolAdmin"])->name('schoolAdmin.create');
+
+
+    //Machine Attendance
+    // time settings 
+    Route::get('/std-time-setting/{schoolCode}',[StudentTimeSettingController::class,'viewTimeSetting'])->name('std.time.setting');
+
+    // machine Id Integrate 
+    Route::get('/std-machine-integrate/{schoolCode}',[StudentMachineIntegrateController::class,'viewMachineIntegrade'])->name('std.machine.integrate');
 });

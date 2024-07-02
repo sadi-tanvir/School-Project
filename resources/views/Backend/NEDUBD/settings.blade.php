@@ -76,7 +76,8 @@ Add Admin
             @method('PUT')
             <div class="mt-12 pt-0.5 ">
                 <label class="block mb-2 text-sm font-medium text-gray-900" for="user_avatar">Upload Picture </label>
-                <input name="image" class="hidden" id="user_avatar" type="file" onchange="previewImage(this)">
+                <input name="previous_image" value="{{$adminData->image}}" class="hidden" type="text">
+                <input name="image" value="{{$adminData->image}}" class="hidden" id="user_avatar" type="file" onchange="previewImage(this)">
                 <div id="imagePreview" class="upload-box border-2 border-dashed rounded-md mt-2"
                     onclick="triggerFileInput()"><span>Upload Image</span> <svg class="ms-3" width="80px" height="34px"
                         viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -96,7 +97,7 @@ Add Admin
                 <label  class="block mb-2 text-sm font-medium text-gray-900 ">First name
 
                 </label>
-                <input type="text" id="first_name" name="first_name"
+                <input type="text" id="first_name" name="first_name" value="{{$adminData->first_name}}"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5    "
                     placeholder="Enter first name" />
             </div>
@@ -104,7 +105,7 @@ Add Admin
                 <label  class="block mb-2 text-sm font-medium text-gray-900 ">Last Name
 
                 </label>
-                <input type="text" id="last_name" name="last_name"
+                <input type="text" id="last_name" name="last_name" value="{{$adminData->last_name}}"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5    "
                     placeholder="Enter last name" />
             </div>
@@ -122,7 +123,8 @@ Add Admin
             @method('PUT')
             <div class="mt-12 pt-0.5 ">
                 <label class="block mb-2 text-sm font-medium text-gray-900" for="user_avatar">Upload Picture </label>
-                <input name="image" class="hidden" id="user_avatar" type="file" onchange="previewImage(this)">
+                <input name="previous_image" value="{{$schoolAdminData->image}}" class="hidden" type="text">
+                <input name="image"  class="hidden" id="user_avatar" type="file" onchange="previewImage(this)">
                 <div id="imagePreview" class="upload-box border-2 border-dashed rounded-md mt-2"
                     onclick="triggerFileInput()"><span>Upload Image</span> <svg class="ms-3" width="80px" height="34px"
                         viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -143,7 +145,7 @@ Add Admin
                 <label class="block mb-2 text-sm font-medium text-gray-900 ">Name
 
                 </label>
-                <input type="text" id="name" name="name"
+                <input type="text" id="name" name="name"value="{{$schoolAdminData->name}}"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5    "
                     placeholder="Enter your name" />
             </div>
@@ -160,7 +162,8 @@ Add Admin
             @method('PUT')
             <div class="mt-12 pt-0.5 ">
                 <label class="block mb-2 text-sm font-medium text-gray-900" for="user_avatar">Upload Picture </label>
-                <input name="image" class="hidden" id="user_avatar" type="file" onchange="previewImage(this)">
+                <input name="previous_image" value="{{$studentData->image}}" class="hidden" type="text">
+                <input name="image"  class="hidden" id="user_avatar" type="file" onchange="previewImage(this)">
                 <div id="imagePreview" class="upload-box border-2 border-dashed rounded-md mt-2"
                     onclick="triggerFileInput()"><span>Upload Image</span> <svg class="ms-3" width="80px" height="34px"
                         viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -180,7 +183,7 @@ Add Admin
                 <label class="block mb-2 text-sm font-medium text-gray-900 ">Name
 
                 </label>
-                <input type="text" id="name" name="name"
+                <input type="text" id="name" name="name"value="{{$studentData->name}}"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5    "
                     placeholder="Enter your name" />
             </div>

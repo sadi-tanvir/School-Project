@@ -140,9 +140,13 @@ Student Attendence
                     </th>
                 </tr>
             </thead>
+
             <form action="{{route('storeAttendance', $school_code)}}" method="POST">
                 @csrf
                 <tbody>
+                @php
+                            $presentCount = 0;
+                        @endphp
                     @if ($data != null)
                     
                         <input type="text" class="py-4 hidden" name="class" value="{{$selectclass}}">
@@ -152,6 +156,7 @@ Student Attendence
                         <input type="text" class="py-4 hidden" name="subject" value="{{ $selectsubject}}">
                         <input type="text" class="py-4 hidden" name="date" value="{{ $selectdate}}">
                         <input type="text" class="py-4 hidden" name="section" value="{{ $selectsection }}">
+                       
                         @foreach ($data as $key => $studentData)
                             <tr class="even:bg-gray-100 odd:bg-white">
                                 <td>
@@ -159,6 +164,7 @@ Student Attendence
                                         class="student-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                                  checked >
                                 </td>
+                                
                                 <td class="py-4">{{ $key + 1 }}</td>
                                 <input class="hidden" value="{{$key}}" name="key[]" type="text">
                                 <td class="py-4">{{ $studentData->student_id }}</td>
@@ -175,7 +181,8 @@ Student Attendence
                                  <div class="flex justify-center">
                                       <div class="flex items-center me-4 md:pr-5">
                                      <input type="radio" value="Present" name="attendance[{{ $key }}]"
-                                          class="attendance-present w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                          class="attendance-present w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+                                          data-student-id="{{ $studentData->student_id }}" data-status="Present">
                                          <label class="ms-2 text-sm font-medium text-gray-900">Present</label>
                                     </div>
                                     <div class="flex items-center me-4 md:pr-5">
@@ -201,8 +208,13 @@ Student Attendence
             @if ($Data->student_id == $studentData->student_id)
                 <div class="flex items-center me-4 md:pr-5">
                     <input type="radio" value="Present" name="attendance[{{ $key }}]"
-                        class="attendance-present w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
-                        @if ($Data->student_status === 'Present') checked @endif>
+                        class="attendance-present w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2" data-student-id="{{ $studentData->student_id }}" data-status="Present"
+                        @if ($Data->student_status === 'Present')  
+                        @php
+                                        $isPresent = true;
+                                        $presentCount++;
+                                    @endphp
+                         checked @endif>
                     <label class="ms-2 text-sm font-medium text-gray-900">Present</label>
                 </div>
                 <div class="flex items-center me-4 md:pr-5">
@@ -229,7 +241,7 @@ Student Attendence
         @if (!isset($Data) || $Data->student_id != $studentData->student_id)
             <div class="flex items-center me-4 md:pr-5">
                 <input type="radio" value="Present" name="attendance[{{ $key }}]"
-                    class="attendance-present w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                    class="attendance-present w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2" data-student-id="{{ $studentData->student_id }}" data-status="Present">
                 <label class="ms-2 text-sm font-medium text-gray-900">Present</label>
             </div>
             <div class="flex items-center me-4 md:pr-5">
@@ -279,7 +291,7 @@ Student Attendence
                 <label for="total" class="block mb-2 text-sm font-medium whitespace-nowrap">Total Student</label>
                 <input
                     class="bg-gray-200 border-0 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 "
-                    type="text" placeholder="1923892">
+                    type="text" id="presentCount" placeholder="{{$presentCount}}">
             </div>
         </div>
         <div class="flex justify-end mt-5">
@@ -470,6 +482,34 @@ Student Attendence
             periodButton.classList.remove('bg-blue-700', 'text-white');
             periodButton.classList.add('text-black');
             dynamicFieldContainer.innerHTML = subjectField;
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const presentCountElement = document.getElementById('presentCount');
+        let presentCount = {{ $presentCount }};
+        
+        document.querySelectorAll('input[type=radio]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const studentId = this.getAttribute('data-student-id');
+                const status = this.getAttribute('data-status');
+                
+                if (status === 'Present') {
+                    // Increment the present count
+                    presentCount++;
+                } else {
+                    // Find the currently checked radio button for this student and check its status
+                    const currentStatus = document.querySelector(`input[name="attendance[${studentId}]"]:checked`).getAttribute('data-status');
+                    if (currentStatus === 'Present') {
+                        // Decrement the present count
+                        presentCount--;
+                    }
+                }
+                
+                presentCountElement.textContent = presentCount;
+            });
         });
     });
 </script>

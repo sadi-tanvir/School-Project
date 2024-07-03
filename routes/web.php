@@ -64,6 +64,13 @@ use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\IncomeS
 use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\JournalBookController;
 use App\Http\Controllers\Backend\GeneralAccounts\Reports_GeneralAccounts\TrialBalanceController;
 use App\Http\Controllers\Backend\GeneralAccounts\VoucherPostingController;
+
+use App\Http\Controllers\Backend\Home\HomeController;
+
+use App\Http\Controllers\Backend\MachineAttendance\StudentMachineIntegrateController;
+use App\Http\Controllers\Backend\MachineAttendance\StudentMachinUserListController;
+use App\Http\Controllers\Backend\MachineAttendance\StudentTimeSettingController;
+
 use App\Http\Controllers\Backend\NEDUB\SettingController;
 use App\Http\Controllers\Backend\NEDUBD\NEDUBDController;
 use App\Http\Controllers\Backend\NEDUBD\SchoolAdminController;
@@ -192,6 +199,8 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/addSchoolInfo/{schoolCode}', [NEDUBDController::class, 'addSchoolInfo']);
     Route::post('/create-schoolInfo', [NEDUBDController::class, 'createSchoolInfo'])->name('schoolInfo.add');
 
+   //Home 
+    Route::get('/home/{schoolCode}', [HomeController::class, 'home']);
 
     // settings
     Route::get('/settings/{schoolCode}',[SettingController::class,'viewSetting'])->name('view.settings');
@@ -455,7 +464,7 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
 
 
     // sayem - student attendence
-
+    Route::post('/add-students/get-subjects/{schoolCode}', [AttendenceController::class, 'getSubject'])->name('add.get-subjects');
     Route::get('/addStudentAttendence/{schoolCode}', [AttendenceController::class, "add_student_attence"])->name('addStudentAttendence');
     Route::get('/attendanceStudent/{schoolCode}', [AttendenceController::class, "attendanceStudent"])->name('attendanceStudent');
     Route::post('/storeAttendance/{schoolCode}', [AttendenceController::class, "storeAttendance"])->name('storeAttendance');
@@ -848,4 +857,16 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     // NEDUBD Add School Admin
     Route::get('/addSchoolAdmin/{schoolCode}', [SchoolAdminController::class, "addSchoolAdmin"]);
     Route::post('/createSchoolAdmin', [SchoolAdminController::class, "createSchoolAdmin"])->name('schoolAdmin.create');
+
+
+    //Machine Attendance
+    // time settings 
+    Route::get('/std-time-setting/{schoolCode}',[StudentTimeSettingController::class,'viewTimeSetting'])->name('std.time.setting');
+
+    // machine Id Integrate 
+    Route::get('/std-machine-integrate/{schoolCode}',[StudentMachineIntegrateController::class,'viewMachineIntegrade'])->name('std.machine.integrate');
+    
+
+    // Std machine user list 
+    Route::get('/std-machine-user-list/{schoolCode}',[StudentMachinUserListController::class,'viewStdMachineUserList'])->name('std.machine.user.list');
 });

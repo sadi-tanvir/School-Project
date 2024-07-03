@@ -7,30 +7,12 @@
     <title>@yield('title')</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- tailwind css -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- font awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script src="https://kit.fontawesome.com/d703802588.js" crossorigin="anonymous"></script>
-
-    <!-- flowbite -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-
+    @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
 <style>
-    /* You can add custom styles here */
-    /* .gradient-bg {
-        background: linear-gradient(90deg, #1E3A8A 0%, #007BFF 50%,  #007BFF 100%);
-    } */
     .gradient-bg {
         background: linear-gradient(145deg, #1E3A8A 0%, #0054af 50%, #0054af 100%);
     }
-
-    /* .gradient-bg {
-        background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.04),rgba(0,0,0,0.03),rgba(0,0,0,0.09),rgba(0,0,0,0.09),rgba(0,0,0,0.06),rgba(0,0,0,0.04),transparent,rgba(0,0,0,0.05),rgba(0,0,0,0.06),rgba(0,0,0,0.02),rgba(0,0,0,0.09),rgba(0,0,0,0.03),rgba(0,0,0,0.07) 4px),linear-gradient(0deg, rgb(24, 9, 88),rgb(20, 15, 94));
-    } */
 </style>
 
 <body class="">

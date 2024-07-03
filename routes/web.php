@@ -199,7 +199,7 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/addSchoolInfo/{schoolCode}', [NEDUBDController::class, 'addSchoolInfo']);
     Route::post('/create-schoolInfo', [NEDUBDController::class, 'createSchoolInfo'])->name('schoolInfo.add');
 
-   //Home 
+   //Home
     Route::get('/home/{schoolCode}', [HomeController::class, 'home']);
 
     // settings
@@ -410,6 +410,7 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/listOfMonthWiseFees/{schoolCode}', [ListOfMonthWiseFeesController::class, 'listOfMonthWiseFees'])->name('listOfMonthWiseFees');
     Route::get('/listOfMonthWiseFees/getClassWiseGroupsAndSection/{schoolCode}', [ListOfMonthWiseFeesController::class, 'GetClassWiseGroupsAndSection']);
     Route::get('/listOfMonthWiseFees/getMothWiseFeesInfo/{schoolCode}', [ListOfMonthWiseFeesController::class, 'getMothWiseFeesInfo'])->name("listOfMonthWiseFees.display");
+    Route::get('/listOfMonthWiseFees/getMothWiseFeesDetailsInfo/{student_id}/{payment_status}/{schoolCode}', [ListOfMonthWiseFeesController::class, 'GetAllPaidUnpaidDetailsInformation'])->name("listOfMonthWiseFees.details.display");
 
     Route::get('/listOfSpecialDiscount/{schoolCode}', [ListOfSepecialDiscountController::class, 'listOfSpecialDiscount'])->name('listOfSpecialDiscount');
     Route::get('/listOfFineOrFailOrAbsent/{schoolCode}', [ListOfFineOrFailOrAbsentController::class, 'listOfFineOrFailOrAbsent'])->name('listOfFineOrFailOrAbsent');
@@ -860,13 +861,13 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
 
 
     //Machine Attendance
-    // time settings 
+    // time settings
     Route::get('/std-time-setting/{schoolCode}',[StudentTimeSettingController::class,'viewTimeSetting'])->name('std.time.setting');
 
-    // machine Id Integrate 
+    // machine Id Integrate
     Route::get('/std-machine-integrate/{schoolCode}',[StudentMachineIntegrateController::class,'viewMachineIntegrade'])->name('std.machine.integrate');
-    
 
-    // Std machine user list 
+
+    // Std machine user list
     Route::get('/std-machine-user-list/{schoolCode}',[StudentMachinUserListController::class,'viewStdMachineUserList'])->name('std.machine.user.list');
 });

@@ -72,8 +72,9 @@ class ListOfMonthWiseFeesController extends Controller
         $year = $request->input("year");
         $payment_status = $request->input("status", 'paid');
         $date = now();
-        $query = GeneratePayslip::query();
-        $query2 = $query->where('generate_payslips.school_code', $school_code)
+
+        // get fees wise student information
+        $payslips = GeneratePayslip::where('generate_payslips.school_code', $school_code)
             ->when($class !== "Select", function ($query) use ($class) {
                 return $query->where('class', $class);
             })
@@ -91,26 +92,62 @@ class ListOfMonthWiseFeesController extends Controller
             })
             ->when($year !== "Select", function ($query) use ($year) {
                 return $query->where('generate_payslips.year', $year);
-            })->join('students', function ($join) use ($school_code) {
+            })
+            ->where('generate_payslips.payment_status', $payment_status)
+            ->join('students', function ($join) use ($school_code) {
                 $join->on('generate_payslips.student_id', '=', 'students.student_id')
                     ->where('students.school_code', '=', $school_code);
-            })
-            ->where('generate_payslips.payment_status', $payment_status);
+            })->select(
+                'generate_payslips.student_id',
+                'students.student_roll',
+                'students.name',
+                'generate_payslips.class',
+                'generate_payslips.payment_status',
+            )->groupBy(
+                'generate_payslips.student_id',
+                'students.student_roll',
+                'students.name',
+                'generate_payslips.class',
+                'generate_payslips.payment_status',
+            )->get();
 
-        $payslips = $query2->select(
-            'generate_payslips.student_id',
-            'students.student_roll',
-            'students.name',
-            'generate_payslips.class',
-            'generate_payslips.payment_status',
-            'generate_payslips.month',
-            'generate_payslips.year',
-            DB::raw('SUM(generate_payslips.amount) as amount'),
-            DB::raw('SUM(generate_payslips.paid_amount) as paid_amount'),
-            DB::raw('SUM(generate_payslips.waiver) as waiver'),
-            DB::raw('SUM(generate_payslips.payable) as payable')
-        )
-            ->groupBy(
+        // month wise amount information
+        $payslipsMonthInfo = GeneratePayslip::where('generate_payslips.school_code', $school_code)
+            ->when($class !== "Select", function ($query) use ($class) {
+                return $query->where('class', $class);
+            })
+            ->when($group !== "Select", function ($query) use ($group) {
+                return $query->where('generate_payslips.group', $group);
+            })
+            ->when($section !== "Select", function ($query) use ($section) {
+                return $query->where('generate_payslips.section', $section);
+            })
+            ->when($student_id !== null, function ($query) use ($student_id) {
+                return $query->where('generate_payslips.student_id', $student_id);
+            })
+            ->when($payslip_type !== "Select", function ($query) use ($payslip_type) {
+                return $query->where('generate_payslips.pay_slip_type', $payslip_type);
+            })
+            ->when($year !== "Select", function ($query) use ($year) {
+                return $query->where('generate_payslips.year', $year);
+            })
+            ->where('generate_payslips.payment_status', $payment_status)
+            ->join('students', function ($join) use ($school_code) {
+                $join->on('generate_payslips.student_id', '=', 'students.student_id')
+                    ->where('students.school_code', '=', $school_code);
+            })->select(
+                'generate_payslips.student_id',
+                'students.student_roll',
+                'students.name',
+                'generate_payslips.class',
+                'generate_payslips.payment_status',
+                'generate_payslips.month',
+                'generate_payslips.year',
+                DB::raw('SUM(generate_payslips.amount) as amount'),
+                DB::raw('SUM(generate_payslips.paid_amount) as paid_amount'),
+                DB::raw('SUM(generate_payslips.waiver) as waiver'),
+                DB::raw('SUM(generate_payslips.payable) as payable')
+            )->groupBy(
                 'generate_payslips.student_id',
                 'students.student_roll',
                 'students.name',
@@ -120,18 +157,45 @@ class ListOfMonthWiseFeesController extends Controller
                 'generate_payslips.year',
             )->get();
 
-        // dd($payslips);
-
+        // organize month wise fees info for each student
         $studentAndMonthWiseData = [];
-
-        foreach ($payslips as $key => $payslip) {
-            $studentAndMonthWiseData[$payslip->student_id][$payslip->month] = $payslip;
+        foreach ($payslipsMonthInfo as $key => $payslipMonth) {
+            $studentAndMonthWiseData[$payslipMonth->student_id][$payslipMonth->month] = $payslipMonth;
+            $studentAndMonthWiseData[$payslipMonth->student_id]['all_month_paid_amount'] = $payslipsMonthInfo->where('student_id', $payslipMonth->student_id)->sum('paid_amount');
+            $studentAndMonthWiseData[$payslipMonth->student_id]['all_month_unpaid_amount'] = $payslipsMonthInfo->where('student_id', $payslipMonth->student_id)->sum('payable');
         }
+
+        // the sum of all due or paid amounts according to the given result
+        $institute_due_amount = $payslipsMonthInfo->sum('payable');
+        $institute_paid_amount = $payslipsMonthInfo->sum('paid_amount');
+
 
         if (count($payslips) == 0) {
             return redirect()->back()->with('error', 'No data found');
         } else {
-            return view("Backend.Student_accounts.Reports(Students_Fees).ListOfMonthWiseFeesPrint", compact('date', 'payslips', 'studentAndMonthWiseData', 'payment_status'));
+            return view("Backend.Student_accounts.Reports(Students_Fees).ListOfMonthWiseFeesPrint", compact('date', 'payslips', 'studentAndMonthWiseData', 'payment_status', 'institute_due_amount', 'institute_paid_amount'));
         }
+    }
+
+
+    public function GetAllPaidUnpaidDetailsInformation(Request $request, $student_id, $payment_status, $school_code)
+    {
+        $date = now();
+
+        $payslips = GeneratePayslip::where('school_code', $school_code)
+            ->where('student_id', $student_id)
+            ->where('payment_status', $payment_status)
+            ->get();
+
+        $studentInfo = Student::where('school_code', $school_code)
+            ->where('student_id', $student_id)
+            ->select('name', 'Class_name', 'mobile_no', 'student_roll')
+            ->first();
+
+        $totalAmount = $payslips->sum('amount');
+        $totalReceived = $payslips->sum('paid_amount');
+        $totalWaiver = $payslips->sum('waiver');
+        $totalDue = $payslips->sum('payable');
+        return view("Backend.Student_accounts.Reports(Students_Fees).ListOfMonthWiseFeesDetailsPrint", compact('date', 'payslips', 'totalAmount', 'totalReceived', 'totalWaiver', 'totalDue', 'studentInfo'));
     }
 }

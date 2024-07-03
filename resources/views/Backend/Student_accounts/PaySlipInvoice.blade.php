@@ -32,7 +32,7 @@ Payslip Invoice
     $index = 0;
 @endphp
 
-<div class="w-full h-fit bg-neutral-200 mx-auto p-5">
+<div class="w-full bg-neutral-200 mx-auto p-5">
     <a id="deletePayslip" href="{{ route('paySlipCollection.view', $school_code) }}" class="text-white bg-gradient-to-br from-red-600 to-red-500 hover:bg-gradient-to-bl focus:ring-red-300 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-auto">Back</a>
     <button type="button" onclick="window.print()" class="text-white bg-gradient-to-br from-blue-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-blue-300 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center mx-auto">Print</button>
 

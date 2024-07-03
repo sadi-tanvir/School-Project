@@ -278,7 +278,7 @@
                     </li>
                 </ul>
             </li>
-            
+
 
             <!-- student attendance -->
             <li class="dropdown">
@@ -297,7 +297,7 @@
                     <li>
                         <a href="/dashboard/addStudentAttendence/{{$school_code}}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Add STD Attendance</a>
                     </li>
-                    
+
                     {{-- Reports (Student Attendance) --}}
                     <li class="dropdown">
                         <button type="button" class="flex items-center w-full py-2 px-4 pl-7 text-base text-gray-900 transition duration-75 rounded-lg group " aria-controls="dropdown-report-attendence" data-collapse-toggle="dropdown-report-attendence">
@@ -313,7 +313,7 @@
                                 <a href="/dashboard/generalAccounts/Reports_GeneralAccounts/accountsVoucher/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">
                                     Attendance Report</a>
                             </li>
-                           
+
                         </ul>
 
                     </li>
@@ -668,6 +668,9 @@
                             <li>
                                 <a href="{{ route('paidInvoice', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Paid Invoice</a>
                             </li>
+                            <li>
+                                <a href="{{ route('listOfMonthWiseFees', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List Of Month wise Fees</a>
+                            </li>
                             @if ($adminData)
                                 <li>
                                     <a href="{{ route('geneTransferInquiri', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Gene. Transfer Inquiry </a>
@@ -687,9 +690,6 @@
                                 </li>
                                 <li>
                                     <a href="{{ route('listOfSpecialDiscount', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List Of Special Discount</a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('listOfMonthWiseFees', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List Of Month wise Fees</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('listOfFineOrFailOrAbsent', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List Of Fine / Fail/Absent</a>

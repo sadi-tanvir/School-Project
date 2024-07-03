@@ -202,10 +202,10 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
    //Home 
     Route::get('/home/{schoolCode}', [HomeController::class, 'home']);
 
-    // settings 
+    // settings
     Route::get('/settings/{schoolCode}',[SettingController::class,'viewSetting'])->name('view.settings');
     Route::put('/change-profile-picture/{role}/{id}/{schoolCode}',[SettingController::class,'changePhoto'])->name('change.profile.picture');
- 
+
     //Online Application
 
     Route::get('/list-of-application/{schoolCode}', [ListOfApplicantController::class, 'ListOfApplicantView'])->name('list.online.application');
@@ -406,7 +406,11 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/othTransInquiry/{schoolCode}', [OuthTransInquiryController::class, 'othTransInquiry'])->name('othTransInquiry');
     Route::get('/ListOfdueOrPay/{schoolCode}', [ListOfDueOrPayController::class, 'ListOfdueOrPay'])->name('ListOfdueOrPay');
     Route::get('/listOfHeadWise/{schoolCode}', [ListOfHeadWiseController::class, 'listOfHeadWise'])->name('listOfHeadWise');
+    // list of Month Wise Fees
     Route::get('/listOfMonthWiseFees/{schoolCode}', [ListOfMonthWiseFeesController::class, 'listOfMonthWiseFees'])->name('listOfMonthWiseFees');
+    Route::get('/listOfMonthWiseFees/getClassWiseGroupsAndSection/{schoolCode}', [ListOfMonthWiseFeesController::class, 'GetClassWiseGroupsAndSection']);
+    Route::get('/listOfMonthWiseFees/getMothWiseFeesInfo/{schoolCode}', [ListOfMonthWiseFeesController::class, 'getMothWiseFeesInfo'])->name("listOfMonthWiseFees.display");
+
     Route::get('/listOfSpecialDiscount/{schoolCode}', [ListOfSepecialDiscountController::class, 'listOfSpecialDiscount'])->name('listOfSpecialDiscount');
     Route::get('/listOfFineOrFailOrAbsent/{schoolCode}', [ListOfFineOrFailOrAbsentController::class, 'listOfFineOrFailOrAbsent'])->name('listOfFineOrFailOrAbsent');
     Route::get('/listOfDonation/{schoolCode}', [ListOfDonationController::class, 'listOfDonation'])->name('listOfDonation');

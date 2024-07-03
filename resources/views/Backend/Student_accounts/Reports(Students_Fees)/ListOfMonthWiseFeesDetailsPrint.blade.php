@@ -28,7 +28,6 @@
     /* .gradient-bg {
         background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.04),rgba(0,0,0,0.03),rgba(0,0,0,0.09),rgba(0,0,0,0.09),rgba(0,0,0,0.06),rgba(0,0,0,0.04),transparent,rgba(0,0,0,0.05),rgba(0,0,0,0.06),rgba(0,0,0,0.02),rgba(0,0,0,0.09),rgba(0,0,0,0.03),rgba(0,0,0,0.07) 4px),linear-gradient(0deg, rgb(24, 9, 88),rgb(20, 15, 94));
     } */
-
 </style>
 
 <body class="">
@@ -41,7 +40,8 @@
 
     <div class="w-full bg-slate-200 min-h-screen">
         <div class="w-[80%] h-fit bg-white mx-auto px-5 py-12">
-            <button type="button" onclick="history.back()" class="text-white bg-red-700 hover:bg-red-600 focus:ring-0  font-medium rounded-lg text-sm px-10 py-2.5 me-2 mb-2 focus:outline-none uppercase">
+            <button type="button" onclick="history.back()"
+                class="text-white bg-red-700 hover:bg-red-600 focus:ring-0  font-medium rounded-lg text-sm px-10 py-2.5 me-2 mb-2 focus:outline-none uppercase">
                 Back
             </button>
             {{-- assessment scale section --}}
@@ -61,12 +61,16 @@
                 <div class="mt-10">
                     <div class="w-full flex justify-between items-center mb-5">
                         <div class="flex  flex-col justify-start items-start">
-                            <h1 class="text-center text-lg font-semibold text-gray-500">Name: <span class="font-bold">{{ $studentInfo->name }}</span></h1>
-                            <h1 class="text-center text-lg font-semibold text-gray-500">Mobile: <span class="font-bold">{{ $studentInfo->mobile_no }}</span></h1>
+                            <h1 class="text-center text-lg font-semibold text-gray-500">Name: <span
+                                    class="font-bold">{{ $studentInfo->name }}</span></h1>
+                            <h1 class="text-center text-lg font-semibold text-gray-500">Mobile: <span
+                                    class="font-bold">{{ $studentInfo->mobile_no }}</span></h1>
                         </div>
                         <div class="flex  flex-col justify-start items-start">
-                            <h1 class="text-center text-lg font-semibold text-gray-500">Class: <span class="font-bold">{{ $studentInfo->Class_name }}</span></h1>
-                            <h1 class="text-center text-lg font-semibold text-gray-500">Roll: <span class="font-bold">{{ $studentInfo->student_roll }}</span></h1>
+                            <h1 class="text-center text-lg font-semibold text-gray-500">Class: <span
+                                    class="font-bold">{{ $studentInfo->Class_name }}</span></h1>
+                            <h1 class="text-center text-lg font-semibold text-gray-500">Roll: <span
+                                    class="font-bold">{{ $studentInfo->student_roll }}</span></h1>
                         </div>
                     </div>
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -104,37 +108,37 @@
                             </thead>
                             <tbody>
                                 @if ($payslips)
-                                @foreach ($payslips as $key => $payslip)
-                                <tr class="odd:bg-white even:bg-gray-50 text-center">
-                                    <td class="px-6 py-4">
-                                        {{$key + 1}}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{ $payslip->student_id}}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{ $payslip->pay_slip_type }}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{ $payslip->month }}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{ $payslip->amount }}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{ $payslip->paid_amount ?? 0 }}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{ $payslip->waiver }}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{ $payslip->due_amount ?? $payslip->payable }}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{ $payslip->payment_status === 'unpaid' ? 'DUE' : 'PAID'}}
-                                    </td>
-                                </tr>
-                                @endforeach
+                                    @foreach ($payslips as $key => $payslip)
+                                        <tr class="odd:bg-white even:bg-gray-50 text-center">
+                                            <td class="px-6 py-4">
+                                                {{ $key + 1 }}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{ $payslip->student_id }}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{ $payslip->pay_slip_type }}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{ $payslip->month }}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{ $payslip->amount }}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{ $payslip->paid_amount ?? 0 }}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{ $payslip->waiver }}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{ $payslip->due_amount ?? $payslip->payable }}
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                {{ $payslip->payment_status === 'unpaid' ? 'DUE' : 'PAID' }}
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 @endif
                                 <tr class="odd:bg-white even:bg-gray-50 border-b text-center">
                                     @for ($i = 0; $i < 10; $i++)

@@ -852,6 +852,10 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     //Machine Attendance
     // time settings 
     Route::get('/std-time-setting/{schoolCode}',[StudentTimeSettingController::class,'viewTimeSetting'])->name('std.time.setting');
+    Route::post('/get-stu-time-set/{schoolCode}',[StudentTimeSettingController::class,'getTimeSetupData'])->name('std.get.time.setting.data');
+    Route::post('/post-student-time-setup/{schoolCode}',[StudentTimeSettingController::class,'postStudentTimeSetup'])->name('post.student.time.set.up');
+    Route::get('/view-student-time-config/{schoolCode}',[StudentTimeSettingController::class,'viewStudentTimeSetupConfig'])->name('view.student.time.config');
+    Route::post('/get-time-config-data/{schoolCode}',[StudentTimeSettingController::class,'viewConfigTable'])->name('view.get.time.config.table');
 
     // machine Id Integrate 
     Route::get('/std-machine-integrate/{schoolCode}',[StudentMachineIntegrateController::class,'viewMachineIntegrade'])->name('std.machine.integrate');

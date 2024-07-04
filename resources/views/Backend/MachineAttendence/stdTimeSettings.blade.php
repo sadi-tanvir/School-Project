@@ -30,6 +30,33 @@ STD Time Settings
         border-left: none;
         border-bottom: 2px solid #D1D5DB;
     }
+
+    .relative {
+        position: relative;
+    }
+
+    .cursor-pointer {
+        cursor: pointer;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .absolute {
+        position: absolute;
+    }
+
+    #time-tooltip-start,
+    #time-tooltip-end,
+    #time-tooltip-delay {
+        bottom: 100%;
+        /* Position above the icon */
+        right: 8px;
+        margin-bottom: 5px;
+        z-index: 1000;
+        white-space: nowrap;
+    }
 </style>
 <div class="gradient-bg py-4 px-6 text-white font-semibold mb-4 rounded-md relative overflow-hidden">
     <h2 class="">Student Time Set</h2>
@@ -79,35 +106,67 @@ STD Time Settings
     </span>
 </div>
 
-<form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+<form method="POST" action="{{route('std.get.time.setting.data', $school_code)}}"
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+    @csrf
     <div>
-        <label for="">Period:</label>
+        <label class="mb-2" for="">Period:</label>
         <select name="period"
-            class="px-2 py-1  ml-5 w-[200px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg form-control">
+            class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 mt-2 ">
             <option disabled selected>Select Period</option>
-            <option value="first_period">first_period</option>
-            <option value="first_period">first_period</option>
-            <option value="first_period">first_period</option>
-            <option value="first_period">first_period</option>
+
+            @foreach ($periods as $period)
+                <option value="{{$period->class_period}}">{{$period->class_period}}</option>
+            @endforeach
         </select>
     </div>
     <div>
-        <label for="">Start Time:</label>
-        <input type="time" name="start_time"
-            class="w-[200px] px-2 py-1  ml-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg form-control"
-            style="text-align:center;" value="0">
+        <label for="time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Start time:</label>
+        <div class="relative">
+            <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd"
+                        d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z"
+                        clip-rule="evenodd" />
+                </svg>
+            </div>
+            <input type="time" id="time" name="start_time"
+                class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                value="00:00" required />
+        </div>
     </div>
     <div>
-        <label for="">End Time:</label>
-        <input type="time" name="end_time"
-            class="w-[200px] px-2 py-1  ml-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg form-control"
-            style="text-align:center;" value="0">
+        <label for="time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">End time:</label>
+        <div class="relative">
+            <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd"
+                        d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z"
+                        clip-rule="evenodd" />
+                </svg>
+            </div>
+            <input type="time" id="time" name="end_time"
+                class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                value="00:00" required />
+        </div>
     </div>
     <div>
-        <label for="">Delay:</label>
-        <input type="time" name="delay_time"
-            class="w-[200px] px-2 py-1  ml-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg form-control"
-            style="text-align:center;" value="0">
+        <label for="time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Delay time:</label>
+        <div class="relative">
+            <div class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd"
+                        d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z"
+                        clip-rule="evenodd" />
+                </svg>
+            </div>
+            <input type="time" id="time" name="delay_time"
+                class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                value="00:00" required />
+        </div>
     </div>
     <div>
         <button type="submit"
@@ -116,39 +175,125 @@ STD Time Settings
     </div>
 </form>
 
+<form action="{{route('post.student.time.set.up', $school_code)}}" method="POST">
+    @csrf
+    <div class="mt-10">
+        <p class="text-lg font-semibold text-center bg-blue-500 text-white p-3">STUDENT ATTENDANCE TIME SETUP</p>
+        <table class="w-full text-sm text-left rtl:text-right text-black border border-white">
+            <thead class="text-xs text-white uppercase bg-blue-600 border-b border-blue-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                        SL
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Class Name
+                    </th>
+                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                        Status
+                        <input type="checkbox" id="all-select">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if ($SelectedPeriod !== null)
+                    @foreach ($classes as $key => $class)
+                        <tr>
+                            <th scope="row" class="px-6 py-4 font-medium text-black border-b whitespace-nowrap">
+                                {{$key + 1}}
+                            </th>
+                            <td class="px-6 py-4 border-b">
+                                {{$class->class_name}}
+                                <input class="hidden" name="classNames[]" value="{{$class->class_name}}" type="text">
+                            </td>
+                            <td class="px-6 py-4 border-b">
+                                <input type="checkbox" class="status-checkbox" name="status[{{$class->id}}]">
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+            </tbody>
+        </table>
 
-<div class="mt-10">
-    <p class="text-lg font-semibold text-center bg-blue-500 text-white p-3">STUDENT ATTENDANCE TIME SETUP</p>
-    <table class="w-full text-sm text-left rtl:text-right text-black border border-white ">
-        <thead class="text-xs text-white uppercase bg-blue-600 border-b border-blue-400  ">
-            <tr>
-                <th scope="col" class="px-6 py-3 bg-blue-500">
-                    SL
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Class Name
-                </th>
-                <th scope="col" class="px-6 py-3 bg-blue-500">
-                   Status
-                </th>
-            </tr>
-        </thead>
+        <div>
+            <input class="hidden" name="start_time" value="{{$start_time}}" type="text">
+            <input class="hidden" name="end_time" value="{{$end_time}}" type="text">
+            <input class="hidden" name="delay_time" value="{{$delay_time}}" type="text">
+            <input class="hidden" name="period" value="{{$period}}" type="text">
+        </div>
+
+        <div class="flex justify-center">
+            <a href="{{route('view.student.time.config',$school_code)}}"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mt-5">Student
+                time config view</a>
+
+            <button type="submit"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mt-5">Save</button>
+        </div>
+
+    </div>
+
+</form>
 
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const timeFields = [
+            { iconId: 'clock-icon-start', inputId: 'time-input', tooltipId: 'time-tooltip-start' },
+            { iconId: 'clock-icon-end', inputId: 'end-time-input', tooltipId: 'time-tooltip-end' },
+            { iconId: 'clock-icon-delay', inputId: 'delay-time-input', tooltipId: 'time-tooltip-delay' }
+        ];
 
-        <tbody>
-            <th scope="row" class="px-6 py-4 font-medium  text-black whitespace-nowrap ">
+        timeFields.forEach(field => {
+            const clockIcon = document.getElementById(field.iconId);
+            const timeInput = document.getElementById(field.inputId);
+            const tooltip = document.getElementById(field.tooltipId);
 
-            </th>
-            <td class="px-6 py-4">
+            // Show tooltip on hover
+            clockIcon.addEventListener('mouseover', function () {
+                const time = timeInput.value;
+                tooltip.textContent = `Current time: ${time}`;
+                tooltip.classList.remove('hidden');
+            });
 
-            </td>
-            <td class="px-6 py-4">
+            // Hide tooltip when not hovering
+            clockIcon.addEventListener('mouseout', function () {
+                tooltip.classList.add('hidden');
+            });
 
-            </td>
-            
-        </tbody>
-    </table>
-</div>
+            // Open time input when clicking the clock icon
+            clockIcon.addEventListener('click', function () {
+                timeInput.focus();
+                timeInput.click(); // This may not work in all browsers, as click simulation on inputs can be blocked
+            });
+        });
+    });
+
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const allSelectCheckbox = document.getElementById('all-select');
+        const statusCheckboxes = document.querySelectorAll('.status-checkbox');
+
+        // Event listener for the "Select All" checkbox
+        allSelectCheckbox.addEventListener('change', function () {
+            const isChecked = this.checked;
+            statusCheckboxes.forEach(checkbox => {
+                checkbox.checked = isChecked;
+            });
+        });
+
+        // Event listeners for individual status checkboxes
+        statusCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                if (!this.checked) {
+                    allSelectCheckbox.checked = false;
+                } else if (Array.from(statusCheckboxes).every(cb => cb.checked)) {
+                    allSelectCheckbox.checked = true;
+                }
+            });
+        });
+    });
+
+</script>
 
 @endsection

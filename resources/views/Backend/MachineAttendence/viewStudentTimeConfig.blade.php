@@ -1,6 +1,6 @@
 @extends('Backend.app')
 @section('title')
-STD Machine Integrate
+STD Time Config
 @endsection
 @section('Dashboard')
 @include('/Message/message')
@@ -30,9 +30,36 @@ STD Machine Integrate
         border-left: none;
         border-bottom: 2px solid #D1D5DB;
     }
+
+    .relative {
+        position: relative;
+    }
+
+    .cursor-pointer {
+        cursor: pointer;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .absolute {
+        position: absolute;
+    }
+
+    #time-tooltip-start,
+    #time-tooltip-end,
+    #time-tooltip-delay {
+        bottom: 100%;
+        /* Position above the icon */
+        right: 8px;
+        margin-bottom: 5px;
+        z-index: 1000;
+        white-space: nowrap;
+    }
 </style>
 <div class="gradient-bg py-4 px-6 text-white font-semibold mb-4 rounded-md relative overflow-hidden">
-    <h2 class="">STUDENT MACHINE USER LIST</h2>
+    <h2 class="">Student Time Config view</h2>
     <span class="absolute right-3 -bottom-2 rotate-3">
         <svg fill="#ffffff" width="44px" height="44px" viewBox="0 0 256 256" id="Flat"
             xmlns="http://www.w3.org/2000/svg">
@@ -79,59 +106,68 @@ STD Machine Integrate
     </span>
 </div>
 
-
-
-
-<div class="mt-10">
-    
-    <table class="w-full text-sm text-left rtl:text-right text-black border border-white ">
-        <thead class="text-xs text-white uppercase bg-blue-600 border-b border-blue-400  ">
+<form action="{{route('view.get.time.config.table', $school_code)}}" method="POST" class="flex items-center my-5">
+    @csrf
+    <div>
+        <label class="mb-2" for="">Period:</label>
+        <select name="period"
+            class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-3 mt-2 ">
+            <option disabled selected>Select Period</option>
+            @foreach ($periods as $period)
+                <option value="{{$period->class_period}}">{{$period->class_period}}</option>
+            @endforeach
+        </select>
+    </div>
+    <div class="ml-5 mt-5">
+        <button type="submit"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  sm:w-auto px-5 py-2.5 text-center ">Search</button>
+    </div>
+</form>
+<div>
+    <p class="text-lg text-center bg-blue-200 p-3">STUDENT TIME CONFIG REPORT</p>
+    <table class="w-full text-sm text-left rtl:text-right text-black border border-white">
+        <thead class="text-xs text-white uppercase bg-blue-600 border-b border-blue-400">
             <tr>
                 <th scope="col" class="px-6 py-3 bg-blue-500">
                     SL
                 </th>
-                <th scope="col" class="px-6 py-3 bg-blue-500">
-                    Student ID 
+                <th scope="col" class="px-6 py-3">
+                    Class Name
                 </th>
                 <th scope="col" class="px-6 py-3 bg-blue-500">
-                    Machine User ID 
+                    Start Time
                 </th>
                 <th scope="col" class="px-6 py-3 bg-blue-500">
-                    Student Name
+                    Delay Time
                 </th>
                 <th scope="col" class="px-6 py-3 bg-blue-500">
-                    Roll
-                </th>
-                <th scope="col" class="px-6 py-3 bg-blue-500">
-                    Class
-                </th>
-                <th scope="col" class="px-6 py-3 bg-blue-500">
-                    Section
-                </th>
-                <th scope="col" class="px-6 py-3 bg-blue-500">
-                    Status
-                </th>
-                <th scope="col" class="px-6 py-3 bg-blue-500">
-                    Action
+                    End Time
                 </th>
             </tr>
         </thead>
-
-
-
         <tbody>
-            <th scope="row" class="px-6 py-4 font-medium  text-black whitespace-nowrap ">
-
-            </th>
-            <td class="px-6 py-4">
-
-            </td>
-            <td class="px-6 py-4">
-
-            </td>
-
+            @if ($StudentTimeConfigs !== null)
+                        @foreach ($StudentTimeConfigs as $key => $data)
+                            <tr>
+                                <th scope="row" class="px-6 py-4 font-medium text-black border-b whitespace-nowrap">
+                                    {{$key + 1}}
+                                </th>
+                                <td class="px-6 py-4 border-b">
+                                    {{$data->class_name}}
+                                </td>
+                                <td class="px-6 py-4 border-b">
+                                    {{$data->start_time}}
+                                </td>
+                                <td class="px-6 py-4 border-b">
+                                    {{$data->delay_time}}
+                                </td>
+                                <td class="px-6 py-4 border-b">
+                                    {{$data->end_time}}
+                                </td>
+                            </tr>
+                        @endforeach
+            @endif
         </tbody>
     </table>
-</div> 
+</div>
 @endsection
-    

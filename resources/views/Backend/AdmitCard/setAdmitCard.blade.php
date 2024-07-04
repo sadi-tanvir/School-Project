@@ -190,8 +190,7 @@ Admit Setup
                     </td>
                     <td class="px-6 py-4">
                         <input type="time" name="time"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg form-control"
-                            style="text-align:center;" value="0">
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg form-control" style="text-align:center;" value="0">
                     </td>
                     <td class="px-6 py-4 ">
                         <input id="subject_name" type="checkbox" value="{{ $data->subject_name }}" name="subject_name"

@@ -134,10 +134,9 @@ class AttendenceController extends Controller
             ->where('date', $selectdate)
             ->where('student_id', $request->student_id[$id])
             ->where('student_roll', $request->student_roll[$id]);
-
         if ($attendanceQuery->exists()) {
             $attendanceQuery->update([
-                'student_status' => $request->attendance[$id],
+                'student_status' => $request->attendance[$id] ?? null ,
                 'sms' => $request->sms[$id] ?? null  // Handling case where 'sms' might not be present
             ]);
             
@@ -154,7 +153,7 @@ class AttendenceController extends Controller
             $attendance->subject = $selectsubject;
             $attendance->date = $selectdate;
             $attendance->status = $request->status[$id] ?? null;  // Handling case where 'status' might not be present
-            $attendance->student_status = $request->attendance[$id];
+            $attendance->student_status = $request->attendance[$id] ?? null ;
             $attendance->sms = $request->sms[$id] ?? null;
             $attendance->action = 'approved';
             $attendance->school_code = $school_code;

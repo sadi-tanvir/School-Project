@@ -88,13 +88,13 @@
             </div>
 
             <div class="grid grid-cols-4 place-items-start  gap-5">
-                <label for="section" class="block mb-2 text-sm font-medium whitespace-noWrap ">Pay Slip :
+                <label for="payslip_type" class="block mb-2 text-sm font-medium whitespace-noWrap ">Pay Slip :
                 </label>
-                <select id="section" name="payslip_type"
+                <select id="payslip_type" name="payslip_type"
                     class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5 col-span-3">
                     <option selected>Select</option>
                     @foreach ($payslips as $payslip)
-                        <option value={{ $payslip->pay_slip_type_name }}>{{ $payslip->pay_slip_type_name }}</option>
+                        <option value="{{ $payslip->pay_slip_type_name }}">{{ $payslip->pay_slip_type_name }}</option>
                     @endforeach
                 </select>
             </div>

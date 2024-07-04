@@ -68,9 +68,10 @@ class ListOfMonthWiseFeesController extends Controller
         $group = $request->input("group");
         $section = $request->input("section");
         $student_id = $request->input("student_roll");
-        $payslip_type = $group = $request->input("payslip_type");
+        $payslip_type = $request->input("payslip_type");
         $year = $request->input("year");
         $payment_status = $request->input("status", 'paid');
+        // dd($payslip_type);
         $date = now();
 
         // get fees wise student information
@@ -84,16 +85,15 @@ class ListOfMonthWiseFeesController extends Controller
             ->when($section !== "Select", function ($query) use ($section) {
                 return $query->where('generate_payslips.section', $section);
             })
-            ->when($student_id !== null, function ($query) use ($student_id) {
-                return $query->where('generate_payslips.student_id', $student_id);
-            })
             ->when($payslip_type !== "Select", function ($query) use ($payslip_type) {
                 return $query->where('generate_payslips.pay_slip_type', $payslip_type);
+            })
+            ->when($student_id !== null, function ($query) use ($student_id) {
+                return $query->where('generate_payslips.student_id', $student_id);
             })
             ->when($year !== "Select", function ($query) use ($year) {
                 return $query->where('generate_payslips.year', $year);
             })
-            ->where('generate_payslips.payment_status', $payment_status)
             ->join('students', function ($join) use ($school_code) {
                 $join->on('generate_payslips.student_id', '=', 'students.student_id')
                     ->where('students.school_code', '=', $school_code);
@@ -102,14 +102,20 @@ class ListOfMonthWiseFeesController extends Controller
                 'students.student_roll',
                 'students.name',
                 'generate_payslips.class',
+                'generate_payslips.class_position',
                 'generate_payslips.payment_status',
             )->groupBy(
                 'generate_payslips.student_id',
                 'students.student_roll',
                 'students.name',
                 'generate_payslips.class',
+                'generate_payslips.class_position',
                 'generate_payslips.payment_status',
-            )->get();
+            )
+            ->where('generate_payslips.payment_status', $payment_status)
+            ->orderBy('generate_payslips.class_position', 'asc')
+            ->get();
+
 
         // month wise amount information
         $payslipsMonthInfo = GeneratePayslip::where('generate_payslips.school_code', $school_code)
@@ -135,7 +141,8 @@ class ListOfMonthWiseFeesController extends Controller
             ->join('students', function ($join) use ($school_code) {
                 $join->on('generate_payslips.student_id', '=', 'students.student_id')
                     ->where('students.school_code', '=', $school_code);
-            })->select(
+            })
+            ->select(
                 'generate_payslips.student_id',
                 'students.student_roll',
                 'students.name',

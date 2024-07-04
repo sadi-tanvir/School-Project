@@ -112,7 +112,7 @@ Fees Collection
 
         {{-- error message --}}
         <h1 id="fees_not_fount" class="text-red-400 text-center font-bold py-8 hidden">
-            @include('Shared.generalErrorMessage', ['errorMessage' => 'No Records Found for the Provided Student ID.'])
+            @include('Shared.generalErrorMessage', ['errorMessage' => 'No due amount found for this student'])
         </h1>
 
 

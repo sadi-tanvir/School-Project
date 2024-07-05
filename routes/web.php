@@ -164,6 +164,7 @@ use App\Http\Controllers\Backend\Student\StudentReports\listOfMigrateStudentList
 use App\Http\Controllers\Backend\Student\StudentReports\religionWiseStudentSummaryController;
 use App\Http\Controllers\Backend\Student\StudentReports\studentIdCardController;
 use App\Http\Controllers\Backend\Student\StudentReports\StudentProfileController;
+use App\Http\Controllers\Backend\Student\StudentReports\SiblingsReportController;
 use App\Http\Controllers\Backend\Student\StudentReports\testimonialController;
 use App\Http\Controllers\Backend\Student\StudentReports\trasnferCertificateController;
 use App\Http\Controllers\Backend\Student\StudentReports\trasnferCertificateListController;
@@ -326,6 +327,7 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/studentProfile/{schoolCode}', [StudentProfileController::class, 'student_profileInfo']);
     Route::post('/studentid/{schoolCode}', [StudentProfileController::class, 'studentid'])->name('studentid');
     Route::get('/student_ProfileReport/{schoolCode}', [StudentProfileController::class, 'student_ProfileReport'])->name('student_ProfileReport');
+    Route::get('/siblings/{schoolCode}', [SiblingsReportController::class, 'siblings'])->name('siblings');
     Route::get('/studentShortList/{schoolCode}', [addShortListController::class, 'studentShortList']);
     Route::post('/viewStudentShortList', [addShortListController::class, 'viewStudentShortList'])->name('viewStudentShortList');
     Route::get('/testimonial/{schoolCode}', [testimonialController::class, 'testimonial']);

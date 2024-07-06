@@ -327,7 +327,13 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/studentProfile/{schoolCode}', [StudentProfileController::class, 'student_profileInfo']);
     Route::post('/studentid/{schoolCode}', [StudentProfileController::class, 'studentid'])->name('studentid');
     Route::get('/student_ProfileReport/{schoolCode}', [StudentProfileController::class, 'student_ProfileReport'])->name('student_ProfileReport');
+    //sibling report
     Route::get('/siblings/{schoolCode}', [SiblingsReportController::class, 'siblings'])->name('siblings');
+    Route::get('/fatherMatch/{schoolCode}', [SiblingsReportController::class, 'fatherMatch'])->name('fatherMatch');
+    Route::get('/motherMatch/{schoolCode}', [SiblingsReportController::class, 'motherMatch'])->name('motherMatch');
+    Route::get('/findStudent/{schoolCode}', [SiblingsReportController::class, 'findStudent'])->name('findStudent');
+    Route::get('/studentMatch/{schoolCode}', [SiblingsReportController::class, 'studentMatch'])->name('studentMatch');
+
     Route::get('/studentShortList/{schoolCode}', [addShortListController::class, 'studentShortList']);
     Route::post('/viewStudentShortList', [addShortListController::class, 'viewStudentShortList'])->name('viewStudentShortList');
     Route::get('/testimonial/{schoolCode}', [testimonialController::class, 'testimonial']);

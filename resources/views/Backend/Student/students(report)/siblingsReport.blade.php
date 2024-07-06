@@ -90,11 +90,11 @@
                         </li>
                     </ul>
                     <div id="father" class="tab-content mt-6">
-                        <form method="" action="" class="space-y-6">
+                        <form  action="{{route('fatherMatch',$school_code)}}" class="space-y-6" method="Get">
                             @csrf
                             <div>
                                 <label for="father_name" class="block text-sm font-medium text-gray-700">Father's Name</label>
-                                <input type="text" id="father_name" name="father_name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                                <input type="text" id="father_name" name="father_name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" >
                             </div>
                             <div>
                                 <label for="father_mobile" class="block text-sm font-medium text-gray-700">Father's Mobile</label>
@@ -104,7 +104,7 @@
                         </form>
                     </div>
                     <div id="mother" class="tab-content mt-6 hidden">
-                        <form method="" action="" class="space-y-6">
+                        <form  action="{{route('motherMatch',$school_code)}}" class="space-y-6" method="Get">
                             @csrf
                             <div>
                                 <label for="mother_name" class="block text-sm font-medium text-gray-700">Mother's Name</label>
@@ -118,7 +118,7 @@
                         </form>
                     </div>
                     <div id="studentId" class="tab-content mt-6 hidden">
-                        <form method="" action="" class="space-y-6">
+                        <form  action="{{route('findStudent',$school_code)}}" class="space-y-6" method="Get">
                             @csrf
                             <div>
                                 <label for="id" class="block text-sm font-medium text-gray-700">Student ID</label>
@@ -129,22 +129,39 @@
                         </form>
                     </div>
                     <div id="matchInfo" class="tab-content mt-6 hidden">
-                        <form method="" action="" class="space-y-6">
+                        <form action="{{ route('studentMatch', $school_code) }}" class="space-y-6" method="GET">
                             @csrf
-                           <div class="grid grid-cols-2">
-                            <div class="pr-5">
-                                <label for="info" class="block text-sm font-medium text-gray-700">Student ID</label>
-                                <input type="text" id="info" name="id" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                            <div id="fixed-fields" class="grid grid-cols-2 gap-5">
+                                <div>
+                                    <label for="stu1_id" class="block text-sm font-medium text-gray-700">Student ID</label>
+                                    <input type="text" id="stu1_id" name="stu_ids[]" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                                </div>
+                                <div>
+                                    <label for="stu2_id" class="block text-sm font-medium text-gray-700">Student ID</label>
+                                    <input type="text" id="stu2_id" name="stu_ids[]" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                                </div>
                             </div>
-                            <div>
-                                <label for="info" class="block text-sm font-medium text-gray-700">Student ID</label>
-                                <input type="text" id="info" name="id" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                            <div id="dynamic-fields" class="grid grid-cols-2 gap-5 mt-4">
+                                <!-- Additional fields will be added here -->
                             </div>
-                           </div>
-                          
+                            <button type="button" id="add-field" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Add Student ID</button>
                             <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Search</button>
                         </form>
                     </div>
+                    
+                    <script>
+                        document.getElementById('add-field').addEventListener('click', function() {
+                            var container = document.getElementById('dynamic-fields');
+                            var newField = document.createElement('div');
+                            newField.innerHTML = `
+                                <div>
+                                    <label for="info" class="block text-sm font-medium text-gray-700">Student ID</label>
+                                    <input type="text" name="stu_ids[]" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+                                </div>`;
+                            container.appendChild(newField);
+                        });
+                    </script>
+                    
                 </div>
             </div>
         </div>

@@ -161,7 +161,6 @@
                 </div>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-4">
-
                 @foreach ($columns as $column)
                     <div class="">
                         <input id="{{ $column }}"

@@ -873,6 +873,11 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     // machine Id Integrate
     Route::get('/std-machine-integrate/{schoolCode}',[StudentMachineIntegrateController::class,'viewMachineIntegrade'])->name('std.machine.integrate');
 
+    Route::post('/std-machine/get-groups/{schoolCode}', [StudentMachineIntegrateController::class, 'getGroups'])->name('std-machine.get-groups');
+    Route::post('/std-machine/get-sections/{schoolCode}', [StudentMachineIntegrateController::class, 'getSections'])->name('std-machine.get-sections');
+    Route::get('/student-machine-integrate/{schoolCode}',[StudentMachineIntegrateController::class,'getData'])->name('student.machine.integrate.get.data');
+    Route::post('/save-student-machine-integrate/{schoolCode}',[StudentMachineIntegrateController::class , 'SaveStudentMachineIntegrate'])->name('save.student.machine.integrate');
+
 
     // Std machine user list
     Route::get('/std-machine-user-list/{schoolCode}',[StudentMachinUserListController::class,'viewStdMachineUserList'])->name('std.machine.user.list');

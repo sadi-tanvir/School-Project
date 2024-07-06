@@ -79,105 +79,220 @@ STD Machine Integrate
     </span>
 </div>
 
-<form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+<form action="{{route('student.machine.integrate.get.data', $school_code)}}"
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
     <div>
         <label for="">Class:</label>
-        <select name="class"
+        <select name="class" id="class"
             class="px-2 py-1  ml-5 w-[200px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg form-control">
-            <option disabled selected>Select Class</option>
-            <option value="one">one</option>
-            <option value="two">two</option>
-            <option value="three">three</option>
-            <option value="four">four</option>
+            @if($class !== null)
+                <option selected value="{{$class}}">{{$class}}</option>
+                @foreach ($classes as $class)
+                    <option value="{{$class->class_name}}">{{$class->class_name}}</option>
+                @endforeach
+            @else
+                <option disabled selected>Select Class</option>
+                @foreach ($classes as $class)
+                    <option value="{{$class->class_name}}">{{$class->class_name}}</option>
+                @endforeach
+            @endif
+
         </select>
     </div>
     <div>
         <label for="">Group:</label>
-        <select name="group"
+        <select name="group" id="group"
             class="px-2 py-1  ml-5 w-[200px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg form-control">
-            <option disabled selected>Select Group</option>
-            <option value="one">one</option>
-            <option value="two">two</option>
-            <option value="three">three</option>
-            <option value="four">four</option>
+            @if($class !== null)
+                <option selected value="{{$group}}">{{$group}}</option>
+                @foreach ($groupData as $data)
+                    <option value="{{$data->group_name}}">{{$data->group_name}}</option>
+                @endforeach
+            @else
+                <option disabled selected>Select Group</option>
+                @foreach ($groupData as $data)
+                    <option value="{{$data->group_name}}">{{$data->group_name}}</option>
+                @endforeach
+            @endif
         </select>
     </div>
     <div>
         <label for="">Section:</label>
-        <select name="section"
+        <select name="section" id="section"
             class="px-2 py-1  ml-5 w-[200px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg form-control">
-            <option disabled selected>Select Group</option>
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-            <option value="D">D</option>
+            @if($class !== null)
+                <option selected value="{{$section}}">{{$section}}</option>
+                @foreach ($sectionData as $data)
+
+                    <option value="{{$data->section_name}}">{{$data->section_name}}</option>
+                @endforeach
+            @else
+                <option disabled selected>Select Section</option>
+                @foreach ($sectionData as $data)
+                    <option value="{{$data->section_name}}">{{$data->section_name}}</option>
+                @endforeach
+            @endif
         </select>
     </div>
     <div>
         <button type="submit"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Find</button>
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  ml-5 mt-3">Find</button>
     </div>
 </form>
 
 
-<div class="mt-10">
-    <p class="text-lg font-semibold text-center bg-blue-500 text-white p-3">STUDENT ATTENDANCE TIME SETUP</p>
-    <table class="w-full text-sm text-left rtl:text-right text-black border border-white ">
-        <thead class="text-xs text-white uppercase bg-blue-600 border-b border-blue-400  ">
-            <tr>
-                <th scope="col" class="px-6 py-3 bg-blue-500">
-                    SL
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Same Student ID
-                </th>
-                <th scope="col" class="px-6 py-3 bg-blue-500">
-                    Student ID 
-                </th>
-                <th scope="col" class="px-6 py-3 bg-blue-500">
-                    Machine User ID 
-                </th>
-                <th scope="col" class="px-6 py-3 bg-blue-500">
-                    Student Name
-                </th>
-                <th scope="col" class="px-6 py-3 bg-blue-500">
-                    Roll
-                </th>
-                <th scope="col" class="px-6 py-3 bg-blue-500">
-                    Class
-                </th>
-                <th scope="col" class="px-6 py-3 bg-blue-500">
-                    Section
-                </th>
-            </tr>
-        </thead>
+<form action="{{route('save.student.machine.integrate', $school_code)}}" method="POST">
+    @csrf
+    <div class="mt-10">
+        <p class="text-lg font-semibold text-center bg-blue-500 text-white p-3">STUDENT ATTENDANCE TIME SETUP</p>
+        <table class="w-full text-sm text-left rtl:text-right text-black border border-white">
+            <thead class="text-xs text-white uppercase bg-blue-600 border-b border-blue-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                        SL
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Same Student ID
+                        <input type="checkbox" id="selectAll">
+                    </th>
+                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                        Student ID
+                    </th>
+                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                        Machine User ID
+                    </th>
+                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                        Student Name
+                    </th>
+                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                        Roll
+                    </th>
+                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                        Class
+                    </th>
+                    <th scope="col" class="px-6 py-3 bg-blue-500">
+                        Section
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if ($students !== null)
+                    @foreach ($students as $key => $student)
+                        <tr>
+                            <th scope="row" class="px-6 py-4 border-b font-medium text-black whitespace-nowrap">
+                                {{$key + 1}}
+                            </th>
+                            <td class="px-6 py-4 border-b">
+                                <input type="checkbox" class="student-checkbox" data-student-id="{{$student->student_id}}"
+                                    name="same_student_id[{{$student->student_id}}]">
+                            </td>
+                            <td class="px-6 py-4 border-b">
+                                {{$student->student_id}}
+                                <input name="student_id[]" value="{{$student->student_id}}" class="hidden" type="text">
+                            </td>
+                            <td class="px-6 py-4 border-b">
+                                <input name="machine_user_id[]" class="text-sm rounded-lg" type="text">
+                            </td>
+                            <td class="px-6 py-4 border-b">
+                                {{$student->name}}
+                                <input name="student_name[]" value="{{$student->name}}" class="hidden" type="text">
+                            </td>
+                            <td class="px-6 py-4 border-b">
+                                {{$student->student_roll}}
+                                <input name="student_roll[]" value="{{$student->student_roll}}" class="hidden" type="text">
+                            </td>
+                            <td class="px-6 py-4 border-b">
+                                {{$student->Class_name}}
+                                <input name="class" value="{{$student->Class_name}}" class="hidden" type="text">
+                            </td>
+                            <td class="px-6 py-4 border-b">
+                                {{$student->section}} 
+                                <input name="section" value="{{$student->section}}" class="hidden" type="text">
+                                <input name="group" value="{{$student->section}}" class="hidden" type="text">
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+            </tbody>
+        </table>
+    </div>
+    <div class="flex justify-end">
+        <h4 class="text-lg font-semibold">Total Student : </h4>
 
+        <input value="{{ $counts }}" class="p-2 w-1/2 rounded-lg ml-5" type="text">
+    </div>
+    <div>
+        <button type="submit"
+            class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Save</button>
+        <button
+            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Reset</button>
+    </div>
+</form>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const selectAllCheckbox = document.getElementById('selectAll');
+        const studentCheckboxes = document.querySelectorAll('.student-checkbox');
 
+        selectAllCheckbox.addEventListener('change', function () {
+            studentCheckboxes.forEach(checkbox => {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+        });
 
-        <tbody>
-            <th scope="row" class="px-6 py-4 font-medium  text-black whitespace-nowrap ">
+        studentCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                const studentId = this.dataset.studentId;
+                const checkboxesWithSameId = document.querySelectorAll(`.student-checkbox[data-student-id='${studentId}']`);
 
-            </th>
-            <td class="px-6 py-4">
+                checkboxesWithSameId.forEach(cb => {
+                    cb.checked = this.checked;
+                });
+            });
+        });
+    });
+</script>
 
-            </td>
-            <td class="px-6 py-4">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#class').change(function () {
+            var class_name = $(this).val();
+            $.ajax({
+                url: "{{ route('std-machine.get-groups', $school_code) }}",
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function (result) {
+                    $('#group').empty();
+                    $('#group').append('<option disabled selected value="">Select</option>');
+                    $.each(result, function (key, value) {
+                        $('#group').append('<option value="' + value.group_name + '">' + value.group_name + '</option>');
+                    });
+                }
+            });
+        });
+        //section
+        $('#class').change(function () {
+            var class_name = $(this).val();
+            $.ajax({
+                url: "{{ route('std-machine.get-sections', $school_code) }}",
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function (result) {
+                    $('#section').empty();
+                    $('#section').append('<option disabled selected value="">Select</option>');
+                    $.each(result, function (key, value) {
+                        $('#section').append('<option value="' + value.section_name + '">' + value.section_name + '</option>');
+                    });
+                }
+            });
+        });
 
-            </td>
-
-        </tbody>
-    </table>
-</div>
-
-<div class="flex justify-end">
-    <h4 class="text-lg font-semibold">Total Student : </h4>
-
-    <input class="p-2 w-1/2 rounded-lg ml-5" type="text">
-
-</div>   
-<div>
-    <button class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Save</button>
-    <button class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Reset</button>
-</div> 
-
+    });
+</script>
 @endsection

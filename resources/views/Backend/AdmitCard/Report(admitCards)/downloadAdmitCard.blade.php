@@ -115,7 +115,7 @@
                                 </div>
                                 <div class="grid grid-cols-2 gap-10">
                                     <p class="font-bold">Year</p>
-                                    <p class="space-x-2">FF
+                                    <p class="space-x-2">
                                         <span>:</span>
                                         <span>{{ $year }}</span>
                                     </p>
@@ -151,6 +151,7 @@
                                                 <th cope="col" class="pb-3">SL</th>
                                                 <th cope="col" class="pb-3">Subject</th>
                                                 <th cope="col" class="pb-3">Exam Date</th>
+                                                <th cope="col" class="pb-3">Exam Day</th>
                                                 <th cope="col" class="pb-3">Start Time</th>
                                                 <th cope="col" class="pb-3">End Timess</th>
 
@@ -169,6 +170,9 @@
                                                     </td>
                                                     <td class="px-6 pb-3 border-r-2">
                                                         {{ $info->exam_date }}
+                                                    </td>
+                                                    <td class="px-6 pb-3 border-r-2">
+                                                        {{ \Carbon\Carbon::parse($info->exam_date)->format('l') }}
                                                     </td>
                                                     <td class="px-6 pb-3 border-r-2">
                                                         {{ $info->start_time }}
@@ -200,6 +204,10 @@
                                             $results = [
                                                 'ID' => $Data->student_id,
                                                 'Name' => $Data->name,
+                                                'Roll' => $Data->student_roll,
+                                                'Class' => $Data->Class_name,
+                                                'Section' => $Data->section,
+                                                'Group' => $Data->group,
                                             ];
                                             $resultJson = json_encode($results);
                                             echo QrCode::size(100)->generate($resultJson);

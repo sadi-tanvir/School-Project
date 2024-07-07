@@ -73,12 +73,14 @@
     </div>
     <div class="relative overflow-x-auto rounded-md border-2 border-gray-300 bg-gray-200 p-6 sm:rounded-md">
         <div class="mb-6 grid gap-6 md:grid-cols-4">
-            <button
+            <a href="{{ route('listInstruction', $school_code) }}">
+                <button
                 type="button"
                 class="mb-2 me-2 rounded-md bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 md:mr-20"
             >
-                <a href="{{ route('listInstruction', $school_code) }}">List of Instruction</a>
+               List of Instruction
             </button>
+        </a>
         </div>
         <div class="">
             <form

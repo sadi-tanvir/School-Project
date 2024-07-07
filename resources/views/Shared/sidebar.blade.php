@@ -241,6 +241,10 @@
                                 <a href="/dashboard/studentProfile/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">
                                     Student Profile </a>
                             </li>
+                            <li>
+                                <a href="/dashboard/siblings/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">
+                                    Siblings Report </a>
+                            </li>
                             <li class="hidden">
                                 <a href="/dashboard/religionWiseStudentSummary/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">
                                     Religion Wise Student Summary</a>

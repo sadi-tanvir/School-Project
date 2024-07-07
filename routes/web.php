@@ -164,6 +164,7 @@ use App\Http\Controllers\Backend\Student\StudentReports\listOfMigrateStudentList
 use App\Http\Controllers\Backend\Student\StudentReports\religionWiseStudentSummaryController;
 use App\Http\Controllers\Backend\Student\StudentReports\studentIdCardController;
 use App\Http\Controllers\Backend\Student\StudentReports\StudentProfileController;
+use App\Http\Controllers\Backend\Student\StudentReports\SiblingsReportController;
 use App\Http\Controllers\Backend\Student\StudentReports\testimonialController;
 use App\Http\Controllers\Backend\Student\StudentReports\trasnferCertificateController;
 use App\Http\Controllers\Backend\Student\StudentReports\trasnferCertificateListController;
@@ -326,6 +327,13 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/studentProfile/{schoolCode}', [StudentProfileController::class, 'student_profileInfo']);
     Route::post('/studentid/{schoolCode}', [StudentProfileController::class, 'studentid'])->name('studentid');
     Route::get('/student_ProfileReport/{schoolCode}', [StudentProfileController::class, 'student_ProfileReport'])->name('student_ProfileReport');
+    //sibling report
+    Route::get('/siblings/{schoolCode}', [SiblingsReportController::class, 'siblings'])->name('siblings');
+    Route::get('/fatherMatch/{schoolCode}', [SiblingsReportController::class, 'fatherMatch'])->name('fatherMatch');
+    Route::get('/motherMatch/{schoolCode}', [SiblingsReportController::class, 'motherMatch'])->name('motherMatch');
+    Route::get('/findStudent/{schoolCode}', [SiblingsReportController::class, 'findStudent'])->name('findStudent');
+    Route::get('/studentMatch/{schoolCode}', [SiblingsReportController::class, 'studentMatch'])->name('studentMatch');
+
     Route::get('/studentShortList/{schoolCode}', [addShortListController::class, 'studentShortList']);
     Route::post('/viewStudentShortList', [addShortListController::class, 'viewStudentShortList'])->name('viewStudentShortList');
     Route::get('/testimonial/{schoolCode}', [testimonialController::class, 'testimonial']);
@@ -870,6 +878,11 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
 
     // machine Id Integrate
     Route::get('/std-machine-integrate/{schoolCode}',[StudentMachineIntegrateController::class,'viewMachineIntegrade'])->name('std.machine.integrate');
+
+    Route::post('/std-machine/get-groups/{schoolCode}', [StudentMachineIntegrateController::class, 'getGroups'])->name('std-machine.get-groups');
+    Route::post('/std-machine/get-sections/{schoolCode}', [StudentMachineIntegrateController::class, 'getSections'])->name('std-machine.get-sections');
+    Route::get('/student-machine-integrate/{schoolCode}',[StudentMachineIntegrateController::class,'getData'])->name('student.machine.integrate.get.data');
+    Route::post('/save-student-machine-integrate/{schoolCode}',[StudentMachineIntegrateController::class , 'SaveStudentMachineIntegrate'])->name('save.student.machine.integrate');
 
 
     // Std machine user list

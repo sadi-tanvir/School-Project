@@ -23,8 +23,8 @@ return new class extends Migration
             $table->string('student_id');
             $table->string('name');
             $table->string('student_roll');
-            $table->string('student_status');
-            $table->string('sms');
+            $table->string('student_status')->nullable();
+            $table->string('sms')->nullable();
             $table->enum('status', ['active', 'in active'])->default('active');
             $table->enum('action', ['pending', 'approved', 'delete', 'edit'])->default('pending');
             $table->string('school_code');

@@ -8,6 +8,7 @@ use App\Models\AddCategory;
 use App\Models\AddClass;
 use App\Models\AddGroup;
 use App\Models\AddSection;
+use App\Models\SchoolInfo;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -68,13 +69,15 @@ class addShortListController extends Controller
         if (!isset($students)) {
             $students = [];
         }
+        $school_info = SchoolInfo::where('school_code', $school_code)->first();
+        $date = Date('d-m-Y');
         $columns = ['name', 'birth_date', 'student_id', 'student_role', 'Class_name', 'group', 'section', 'shift', 'category', 'year', 'religious', 'mobile_no', 'father_name', 'father_birth_date', 'mother_name', 'mother_nid', 'addmission_date', 'blood_group'];
         $classes = AddClass::where('school_code', $school_code)->where('action', 'approved')->get();
         $sections = AddSection::where('school_code', $school_code)->where('action', 'approved')->get();
         $groups = AddGroup::where('school_code', $school_code)->where('action', 'approved')->get();
         $categories = AddCategory::where('school_code', $school_code)->where('action', 'approved')->get();
         $years = AddAcademicYear::where('school_code', $school_code)->where('action', 'approved')->get();
-        return view('Backend.Student.students(report).studentShortList', compact('students', 'col', 'classes', 'sections', 'groups', 'categories', 'years', 'columns'));
+        return view('Backend.Student.students(report).studentShortList', compact('school_info','date','students', 'col', 'classes', 'sections', 'groups', 'categories', 'years', 'columns'));
     }
 
     public function downloadShortList(Request $request)

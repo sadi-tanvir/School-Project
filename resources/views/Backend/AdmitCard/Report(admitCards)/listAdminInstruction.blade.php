@@ -10,10 +10,11 @@ Instruction List
     </div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-10 md:my-10">
         <div class="grid gap-6 mb-6 md:grid-cols-4 ">
+            <a href="{{route('addAdmitinstruction',$school_code)}}">
             <button type="button"
-                class=" md:mr-20 text-white bg-blue-700 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  focus:outline-none "><a href="{{url('/dashboard/AddAdmitInstruction')}}">Add New</a>
+                class=" md:mr-20 text-white bg-blue-700 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  focus:outline-none ">Add New
                 </button>
-
+            </a>
            
         </div>
         <table class="w-full text-sm text-left rtl:text-right text-black ">

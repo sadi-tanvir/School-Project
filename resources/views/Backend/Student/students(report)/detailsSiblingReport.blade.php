@@ -55,6 +55,7 @@
                             <th class="px-2 py-2"> Section</th>
                             <th cope="col" class="px-2 py-2 bg-blue-500">Father Name</th>
                             <th class="px-2 py-2">Mother Name</th>
+                            <th class="px-2 py-2">Image</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -67,7 +68,10 @@
                                 <td class="px-6 py-4 border-r-2">{{ $info->group }}</td>
                                 <td class="px-6 py-4 border-r-2">{{ $info->section }}</td>
                                 <td class="px-6 py-4 border-r-2">{{ $info->father_name }}</td>
-                                <td class="px-6 py-4">{{ $info->mother_name }}</td>
+                                <td class="px-6 py-4 border-r-2">{{ $info->mother_name }}</td>
+                                <td class="px-6 py-4 border-r-2">
+                                    <img id="background-image" src="{{asset($info->image)}}" alt=""
+                                    class="h-[100px] w-[100px]" /></td>
 
                             </tr>
                         @endforeach
@@ -81,9 +85,11 @@
 
     </div>
     <div class="flex justify-center px-20">
+        <a href="{{route('siblings',$school_code)}}">
         <button class="flex w-full items-center gap-3 rounded-md bg-blue-700 px-8 py-3.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:w-auto mr-10">
-            <a href="{{route('siblings',$school_code)}}">Back</a>
+           Back
         </button>
+    </a>
 
 
         <button id="btn" type="button"

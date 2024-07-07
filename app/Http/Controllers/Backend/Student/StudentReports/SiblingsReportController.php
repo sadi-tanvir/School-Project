@@ -57,30 +57,42 @@ class SiblingsReportController extends Controller
         return redirect()->back()->with('error', 'No data found');
     }
 
-    public function studentMatch(Request $request, $school_code)
-    {
-        $stu_ids = $request->input('stu_ids'); // Array of student IDs
-        $father_mobile = ''; // Father's mobile number
-    
-        // Fetch students with the given IDs and school code
-        $students = Student::whereIn('student_id', $stu_ids)
-                            ->where('school_code', $school_code)
-                            ->get();
   
-        // Check if all provided students have the same father's mobile number
-        $allMatch = $students->every(function ($student) use ($father_mobile) {
-            return $student->father_mobile === $father_mobile;
-        });
-        dd($allMatch);
+
+    public function studentMatch(Request $request, $school_code)
+{
+    $stu_ids = $request->input('stu_ids'); 
+  
+    // Fetch students with the given IDs and school code
+    $students = Student::whereIn('student_id', $stu_ids)
+                        ->where('school_code', $school_code)
+                        ->get();
     
-        if ($allMatch) {
-            // All students have the same father's mobile number
-            return redirect()->back()->with('success', 'Father\'s mobile number matches all provided students.');
-        } else {
-            // Not all students have the same father's mobile number
-            return redirect()->back()->with('error', 'No data found');
-        }
-       
+    // If no students are found, return an error
+    if ($students->isEmpty()) {
+        return redirect()->back()->with('error', 'No students found');
     }
+
+    // Set the father's mobile number to the first student's father's mobile number
+    $father_mobile = $students->first()->father_mobile;
+ 
+    // Check if all provided students have the same father's mobile number
+    $allMatch = $students->every(function ($student) use ($father_mobile) {
+        return $student->father_mobile === $father_mobile;
+    });
+  
+    if ($allMatch) {
+        $school_info = SchoolInfo::where('school_code', $school_code)->first();
+        $date = Date('d-m-Y');
+        $data = Student::whereIn('student_id', $stu_ids)
+        ->where('school_code', $school_code)
+        ->get();
+        return view('Backend.Student.students(report).detailsSiblingReport', compact('data','school_info','date'));
+    } else {
+       
+        return redirect()->back()->with('error', 'No data match.');
+    }
+}
+
 
 }

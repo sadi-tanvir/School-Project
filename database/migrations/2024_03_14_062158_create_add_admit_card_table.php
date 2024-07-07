@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('class_exam_name');
             $table->string('subject_name');
             $table->string('exam_date');
-            $table->string('exam_time');
+            $table->string('start_time');
+            $table->string('end_time');
             $table->enum('status', ['active', 'in active'])->default('active');
             $table->enum('action', ['pending', 'approved', 'delete', 'edit'])->default('pending');
             $table->string('school_code');

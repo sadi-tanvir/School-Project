@@ -91,6 +91,7 @@ class AddAdmitCardController extends Controller
     }
     public function update_add_admit_card(Request $request, $schoolCode)
     {
+        //dd($request);
         $data = $request->all();
         if (isset($data['selected_subjects']) && is_array($data['selected_subjects'])) {
         foreach ($data['selected_subjects'] as $selectedSubject) {
@@ -101,7 +102,8 @@ class AddAdmitCardController extends Controller
             $year = $decodedData['year'];
             $class_exam_name = $decodedData['class_exam_name'];
             $date = $decodedData['date'];
-            $time = $decodedData['time'];
+            $starttime = $decodedData['starttime'];
+            $endtime = $decodedData['endtime'];
     
             // Check if the record already exists
             $existingData = AddAdmitCard::where('action', 'approved')
@@ -124,7 +126,8 @@ class AddAdmitCardController extends Controller
                     ->where('class_exam_name', $class_exam_name)
                     ->update([
                         'exam_date' => $date,
-                        'exam_time' => $time,
+                        'start_time' => $starttime,
+                        'end_time' => $endtime,
                     ]);
             } else {
                 // If data doesn't exist, create a new record
@@ -135,7 +138,8 @@ class AddAdmitCardController extends Controller
                 $admitCard->class_exam_name = $class_exam_name;
                 $admitCard->subject_name = $subject_name;
                 $admitCard->exam_date = $date;
-                $admitCard->exam_time = $time;
+                $admitCard->start_time = $starttime;
+                $admitCard->end_time = $endtime;
                 $admitCard->status = 'active';
                 $admitCard->action = 'approved';
                 $admitCard->school_code = $schoolCode;

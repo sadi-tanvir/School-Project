@@ -55,7 +55,7 @@
                             <th class="px-2 py-2"> Section</th>
                             <th cope="col" class="px-2 py-2 bg-blue-500">Father Name</th>
                             <th class="px-2 py-2">Mother Name</th>
-                            <th class="px-2 py-2">Image</th>
+                            <th cope="col" class="px-2 py-2 bg-blue-500">Image</th>
                         </tr>
                     </thead>
                     <tbody>

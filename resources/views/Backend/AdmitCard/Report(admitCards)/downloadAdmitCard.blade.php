@@ -30,225 +30,255 @@
 
 <body>
     @foreach ($Datas as $Data)
-        <div id="page" class="relative mx-auto mt-20 max-w-[1100px] border-4 border-[#1E3A8A]">
-            <img id="background-image" src="{{asset($school_info->logo)}}" alt="" />
-            <div class="">
-                <div class="flex w-full items-start justify-between border px-8 pt-10">
-                    <div>
-                        <img src="{{ asset($Data->image) }}" class="h-auto w-28" alt="" />
-                    </div>
-                    <div class="col-span-3 text-center">
-                        <h3 class="text-3xl font-bold">{{$school_info->school_name}}</h3>
-                        <p class="text-sm">{{$school_info->address}} <br>
+        <div id="page" class="p-10">
+            <div class="relative mx-auto mt-20 max-w-[1100px] border-4 border-[#1E3A8A]">
 
-                            Contact No: {{$school_info->mobile_number}}<br>
 
-                            Email: {{$school_info->school_email}}<br>
-
-                            Website: {{$school_info->website}}<br>
-
-                            Print date:{{$date}}</p>
-                        <p class="text-purple-500 font-bold font-semi-bold text-center">Admit Card</p>
-
-                    </div>
-                    <div class="mt-3">
-                        <img src="{{asset($school_info->logo)}}" class="h-auto max-h-36 w-28" alt="" />
-                    </div>
-                </div>
-                <div class="flex w-full justify-between md:px-32 py-8">
-                    <div class="text-left">
-                        <div class="grid grid-cols-2 gap-10">
-                            <p class="font-bold">Student Name</p>
-                            <p class="space-x-2">
-                                <span>:</span>
-                                <span>{{ $Data->name }}</span>
-                            </p>
-                        </div>
-                        <div class="grid grid-cols-2 gap-10">
-                            <p class="font-bold">Class</p>
-                            <p class="space-x-2">
-                                <span>:</span>
-                                <span>{{ $Data->Class_name }}</span>
-                            </p>
-                        </div>
-                        <div class="grid grid-cols-2 gap-10">
-                            <p class="font-bold">Roll</p>
-                            <p class="space-x-2">
-                                <span>:</span>
-                                <span>{{ $Data->student_roll }}</span>
-                            </p>
-                        </div>
-                        <div class="grid grid-cols-2 gap-10">
-                            <p class="font-bold">Group</p>
-                            <p class="space-x-2">
-                                <span>:</span>
-                                <span>{{ $Data->group }}</span>
-                            </p>
-                        </div>
-                        <div class="grid grid-cols-2 gap-10">
-                            <p class="font-bold">Section</p>
-                            <p class="space-x-2">
-                                <span>:</span>
-                                <span>{{ $Data->section }}</span>
-                            </p>
-                        </div>
-                    </div>
-                    <!-- <div></div> -->
-                    <div>
+                <img id="background-image" src="{{ asset($school_info->logo) }}" alt="" />
+                <div class="">
+                    <div class="flex w-full items-start justify-between border px-8 pt-10">
                         <div>
-                            <div class="grid grid-cols-2 gap-10">
-                                <p class="font-bold">Student ID</p>
+                            <img src="{{ asset($school_info->logo) }}" class="h-auto w-28" alt="" />
+                        </div>
+                        <div class="col-span-3 text-center">
+                            <h3 class="text-3xl font-bold">{{ $school_info->school_name }}</h3>
+                            <p class="text-sm">{{ $school_info->address }} <br>
+
+                                Contact No: {{ $school_info->mobile_number }}<br>
+
+                                Email: {{ $school_info->school_email }}<br>
+
+                                Website: {{ $school_info->website }}<br>
+
+                                Print date:{{ $date }}</p>
+                            <p class="text-purple-500 font-bold font-semi-bold text-center pb-1">Admit Card</p>
+
+                        </div>
+                        <div class="mt-3">
+                            <img src="{{ asset($Data->image) }}" class="h-auto max-h-36 w-28" alt="" />
+                        </div>
+                    </div>
+                    <div class="flex w-full justify-between md:px-20 py-8">
+                        <div class="text-left">
+                            <div class="grid grid-cols-2 gap-10 text-black">
+                                <p class="font-bold">Student Name</p>
                                 <p class="space-x-2">
                                     <span>:</span>
-                                    <span>{{ $Data->student_id }}</span>
+                                    <span>{{ $Data->name }}</span>
                                 </p>
                             </div>
                             <div class="grid grid-cols-2 gap-10">
-                                <p class="font-bold">Exam Name</p>
+                                <p class="font-bold">Class</p>
                                 <p class="space-x-2">
                                     <span>:</span>
-                                    <span>{{ $exam_name }}</span>
+                                    <span>{{ $Data->Class_name }}</span>
                                 </p>
                             </div>
                             <div class="grid grid-cols-2 gap-10">
-                                <p class="font-bold">Year</p>
+                                <p class="font-bold">Roll</p>
                                 <p class="space-x-2">
                                     <span>:</span>
-                                    <span>{{ $year }}</span>
+                                    <span>{{ $Data->student_roll }}</span>
                                 </p>
                             </div>
                             <div class="grid grid-cols-2 gap-10">
-                                <p class="font-bold">Father Name</p>
+                                <p class="font-bold">Group</p>
                                 <p class="space-x-2">
                                     <span>:</span>
-                                    <span>{{ $Data->father_name }}</span>
+                                    <span>{{ $Data->group }}</span>
                                 </p>
                             </div>
                             <div class="grid grid-cols-2 gap-10">
-                                <p class="font-bold">Mobile No</p>
+                                <p class="font-bold">Section</p>
                                 <p class="space-x-2">
                                     <span>:</span>
-                                    <span>{{ $Data->father_mobile }}</span>
+                                    <span>{{ $Data->section }}</span>
                                 </p>
                             </div>
+                        </div>
+                        <!-- <div></div> -->
+                        <div>
+                            <div>
+                                <div class="grid grid-cols-2 gap-10">
+                                    <p class="font-bold">Student ID</p>
+                                    <p class="space-x-2">
+                                        <span>:</span>
+                                        <span>{{ $Data->student_id }}</span>
+                                    </p>
+                                </div>
+                                <div class="grid grid-cols-2 gap-10">
+                                    <p class="font-bold">Exam Name</p>
+                                    <p class="space-x-2">
+                                        <span>:</span>
+                                        <span>{{ $exam_name }}</span>
+                                    </p>
+                                </div>
+                                <div class="grid grid-cols-2 gap-10">
+                                    <p class="font-bold">Year</p>
+                                    <p class="space-x-2">FF
+                                        <span>:</span>
+                                        <span>{{ $year }}</span>
+                                    </p>
+                                </div>
+                                <div class="grid grid-cols-2 gap-10">
+                                    <p class="font-bold">Father Name</p>
+                                    <p class="space-x-2">
+                                        <span>:</span>
+                                        <span>{{ $Data->father_name }}</span>
+                                    </p>
+                                </div>
+                                <div class="grid grid-cols-2 gap-10">
+                                    <p class="font-bold">Mobile No</p>
+                                    <p class="space-x-2">
+                                        <span>:</span>
+                                        <span>{{ $Data->father_mobile }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class=" px-20 space-y-3">
+                        <div>
+                            @if ($subject != null)
+                                <div class="text-center">
+                                    <h3 class="font-bold text-white text-sm w-full bg-[#1E3A8A] pb-3">
+                                        Exam Routine
+                                    </h3>
+                                    <table class="w-full text-sm text-center rtl:text-right text-black">
+                                        <thead class=" text-black  bg-blue-300 border-b border-black">
+                                            <tr>
+                                                <th cope="col" class="pb-3">SL</th>
+                                                <th cope="col" class="pb-3">Subject</th>
+                                                <th cope="col" class="pb-3">Exam Date</th>
+                                                <th cope="col" class="pb-3">Start Time</th>
+                                                <th cope="col" class="pb-3">End Timess</th>
+
+                                            </tr>
+                                        </thead>
+
+
+                                        <tbody>
+                                            @foreach ($subject as $key => $info)
+                                                <tr class=" border-x-2 border-y-2">
+                                                    <td class="px-6 pb-3 border-r-2">
+                                                        {{ $key + 1 }}
+                                                    </td>
+                                                    <td class="px-6 pb-3 border-r-2">
+                                                        {{ $info->subject_name }}
+                                                    </td>
+                                                    <td class="px-6 pb-3 border-r-2">
+                                                        {{ $info->exam_date }}
+                                                    </td>
+                                                    <td class="px-6 pb-3 border-r-2">
+                                                        {{ $info->start_time }}
+                                                    </td>
+                                                    <td class="px-6 pb-3 border-r-2">
+                                                        {{ $info->end_time }}
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @endif
+                        </div>
+                        <div>
+                            @if ($admit != null)
+                                <div class="flex justify-between ">
+                                    <div>
+                                        <p class="text-lg font-bold text-white w-2/4  bg-[#1E3A8A] text-center  pb-4">
+                                            Instruction</p>
+                                        @foreach ($admit as $item)
+                                            <p class="mx-2.5 ">
+                                                <li>{{ $item->instruction }}</li>
+                                            </p>
+                                        @endforeach
+                                    </div>
+                                    <div>
+                                        @php
+                                            $results = [
+                                                'ID' => $Data->student_id,
+                                                'Name' => $Data->name,
+                                            ];
+                                            $resultJson = json_encode($results);
+                                            echo QrCode::size(100)->generate($resultJson);
+                                        @endphp
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    @php
+                        $leftSignatures = [];
+                        $centerSignatures = [];
+                        $rightSignatures = [];
+                    @endphp
+
+                    @foreach ($setSignature as $sign)
+                        @foreach ($signatures as $position)
+                            @if ($position->sign == $sign->signature_name)
+                                @if ($sign->positions == 'left')
+                                    @php
+                                        $leftSignatures[] = $position;
+                                    @endphp
+                                @elseif($sign->positions == 'center')
+                                    @php
+                                        $centerSignatures[] = $position;
+                                    @endphp
+                                @elseif($sign->positions == 'right')
+                                    @php
+                                        $rightSignatures[] = $position;
+                                    @endphp
+                                @endif
+                            @endif
+                        @endforeach
+                    @endforeach
+
+                    <div class="flex justify-between p-8">
+                        <div class="">
+                            @foreach ($leftSignatures as $left)
+                                @if ($left->image != null)
+                                    <img class="w-20 h-10 pb-1" src="{{ asset($left->image) }}" alt="Signature">
+                                    <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $left->sign }}
+                                    </div>
+                                @else
+                                    <div class="w-20 h-10 pb-1"></div>
+                                    <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $left->sign }}
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                        <div class="">
+                            @foreach ($centerSignatures as $center)
+                                @if ($center->image != null)
+                                    <img class="w-20 h-10 pb-1" src="{{ asset($center->image) }}" alt="Signature">
+                                    <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $center->sign }}
+                                    </div>
+                                @else
+                                    <div class="w-20 h-10 pb-1"></div>
+                                    <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $center->sign }}
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                        <div class="">
+                            @foreach ($rightSignatures as $right)
+                                @if ($right->image != null)
+                                    <img class="w-20 h-10 pb-1" src="{{ asset($right->image) }}" alt="Signature">
+                                    <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $right->sign }}
+                                    </div>
+                                @else
+                                    <div class="w-20 h-10 pb-1"></div>
+                                    <div class="border-t border-dashed border-t-black px-5 pt-1.5 ">
+                                        {{ $right->sign }}
+                                    </div>
+                                @endif
+                            @endforeach
                         </div>
                     </div>
 
                 </div>
-                <div class=" px-32 space-y-3">
-                    <div>
-                        @if ($subject != null)
-                            <div class="">
-                                <h3 class="font- text-white text-sm w-full bg-[#1E3A8A] px-3 py-2">
-                                    Exam Routine
-                                </h3>
-                                @foreach ($subject as $info)
-                                    <div class="">
-                                        <div class="grid grid-cols-3 gap-5 border">
-                                            <h3 class="font-semibold px-2.5 py-0.5"> {{$info->subject_name}} </h3>
-                                            <h3 class="px-2.5 py-0.5">: {{$info->exam_date}}</h3>
-                                            <h3 class="px-2.5 py-0.5">- {{$info->exam_time}}</h3>
-                                        </div>
-
-                                    </div>
-
-                                @endforeach
-                            </div>
-                        @endif
-                    </div>
-                    <div>
-                        @if ($admit != null)
-                                   
-                                                <div class="flex justify-between">
-                                                    <div>
-                                                        <p class="text-lg font-bold  w-full px-3 py-2 ">Instruction</p>
-                                                        @foreach ($admit as $item)
-                                                        <p class="mx-2.5">
-                                                            <li>{{ $item->instruction }}</li>
-                                                        </p>
-                                                        @endforeach
-                                                    </div>
-                                                    <div>
-                                                        @php
-                                                            $results = [
-                                                                "ID" => $Data->student_id,
-                                                                "Name" => $Data->name,
-
-                                                            ];
-                                                            $resultJson = json_encode($results);
-                                                            echo QrCode::size(100)->generate($resultJson);
-                                                        @endphp
-                                                    </div>
-                                                </div>
-                                    
-                        @endif
-                    </div>
-                </div>
-                @php
-    $leftSignatures = [];
-    $centerSignatures = [];
-    $rightSignatures = [];
-@endphp
-
-@foreach($setSignature as $sign)
-    @foreach($signatures as $position)
-        @if($position->sign == $sign->signature_name)
-            @if($sign->positions == 'left')
-                @php
-                    $leftSignatures[] = $position;
-                @endphp
-            @elseif($sign->positions == 'center')
-                @php
-                    $centerSignatures[] = $position;
-                @endphp
-            @elseif($sign->positions == 'right')
-                @php
-                    $rightSignatures[] = $position;
-                @endphp
-            @endif
-        @endif
-    @endforeach
-@endforeach
-
-<div class="flex justify-between p-8">
-    <div class="">
-        @foreach($leftSignatures as $left)
-        @if($left->image!=null)
-            <img class="w-20 h-10 pb-1" src="{{ asset($left->image) }}" alt="Signature">
-            <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $left->sign }}</div>
-           
-        @else
-            <div class="w-20 h-10 pb-1" ></div>
-            <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $left->sign }}</div>
-            @endif
-        @endforeach
-    </div>
-    <div class="">
-        @foreach($centerSignatures as $center)
-        @if($center->image!=null)
-            <img class="w-20 h-10 pb-1" src="{{ asset($center->image) }}" alt="Signature">
-            <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $center->sign }}</div>
-            @else
-          
-        <div class="w-20 h-10 pb-1" ></div>
-        <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $center->sign }}</div>
-        @endif
-        @endforeach
-    </div>
-    <div class="">
-        @foreach($rightSignatures as $right)
-        @if($right->image!=null)
-            <img class="w-20 h-10 pb-1" src="{{ asset($right->image) }}" alt="Signature">
-            <div class="border-t border-dashed border-t-black px-5 pt-1.5">{{ $right->sign }}</div>
-            @else
-            
-        <div class="w-20 h-10 pb-1" ></div>
-            <div class="border-t border-dashed border-t-black px-5 pt-1.5 ">{{ $right->sign }}</div>
-            @endif
-        @endforeach
-    </div>
-</div>
-
             </div>
         </div>
     @endforeach
@@ -288,7 +318,8 @@
             <button id="btn" type="button"
                 class="flex w-full items-center gap-3 rounded-md bg-rose-700 px-8 py-3.5 text-center text-sm font-medium text-white hover:bg-rose-800 focus:outline-none focus:ring-4 focus:ring-rose-300 sm:w-auto">
                 <span>
-                    <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                         <g id="SVGRepo_iconCarrier">
@@ -310,7 +341,7 @@
     let btn = document.getElementById('btn');
     let page = document.getElementById('page');
 
-    btn.addEventListener('click', function () {
+    btn.addEventListener('click', function() {
         html2PDF(page, {
             jsPDF: {
                 format: 'a4',

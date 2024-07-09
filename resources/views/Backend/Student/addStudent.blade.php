@@ -67,7 +67,7 @@ Add Student
 
                 <label for="nedubd_student_id" class="block mb-2 text-sm font-medium text-gray-900 ">NEDUBD Student
                     ID</label>
-                <input type="text" readOnly value="{{$studentId}}" name="nedubd_student_id" id="nedubd_student_id"
+                <input autocomplete="off" type="text" readOnly value="{{$studentId}}" name="nedubd_student_id" id="nedubd_student_id"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  "
                     placeholder="" />
             </div>
@@ -75,13 +75,13 @@ Add Student
 
                 <label for="student_id" class="block mb-2 text-sm font-medium text-gray-900 ">Institute Student
                     ID</label>
-                <input type="text" name="student_id" id="student_id"
+                <input autocomplete="off" type="text" name="student_id" id="student_id"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  "
                     placeholder="student_id" />
             </div>
             <div>
                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Name</label>
-                <input type="text" name="name" id="name"
+                <input autocomplete="off" type="text" name="name" id="name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  "
                     placeholder="Enter The  Name" />
             </div>
@@ -98,7 +98,7 @@ Add Student
                                 d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                         </svg>
                     </div>
-                    <input datepicker datepicker-autohide type="text" name="birth_date"
+                    <input autocomplete="off" datepicker datepicker-autohide type="text" name="birth_date"
                         class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-3.5   "
                         placeholder="Select date" />
 
@@ -108,7 +108,7 @@ Add Student
             <div>
                 <label for="website" class="block mb-2 text-sm font-medium text-gray-900 ">student
                     Roll</label>
-                <input type="text" name="student_roll" id="website"
+                <input autocomplete="off" type="text" name="student_roll" id="website"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  "
                     placeholder="student_roll" />
             </div>
@@ -307,7 +307,7 @@ Add Student
                         Picture</label>
 
                 </div>
-                <input name="image"
+                <input autocomplete="off" name="image"
                     class="block w-full text-sm text-white border-0 rounded-lg cursor-pointer bg-gray-50 focus:outline-none  "
                     aria-describedby="user_avatar_help" id="user_avatar" type="file" />
 
@@ -324,7 +324,7 @@ Add Student
                                 d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                         </svg>
                     </div>
-                    <input datepicker datepicker-autohide type="text" name="admission_date"
+                    <input autocomplete="off" datepicker datepicker-autohide type="text" name="admission_date"
                         class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-3.5   "
                         placeholder="Select date" />
                 </div>
@@ -336,7 +336,7 @@ Add Student
 
                 </div>
                 <div class="relative max-w-sm">
-                    <input type="text" name="mobile_no"
+                    <input autocomplete="off" type="text" name="mobile_no"
                         class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-3.5  "
                         placeholder="Mobile no" />
                 </div>
@@ -349,7 +349,7 @@ Add Student
             <div>
                 <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 ">Father's
                     name</label>
-                <input type="text" name="father_name" id="first_name"
+                <input autocomplete="off" type="text" name="father_name" id="first_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  "
                     placeholder="Enter The  Name" />
             </div>
@@ -358,7 +358,7 @@ Add Student
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">Father's
                     Mobile
                 </label>
-                <input type="text" name="father_mobile" id="last_name"
+                <input autocomplete="off" type="text" name="father_mobile" id="last_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  "
                     placeholder="Enter The Mobile No" />
             </div>
@@ -366,7 +366,7 @@ Add Student
                 <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 ">Father's
                     Occupation
                 </label>
-                <input type="text" name="father_occupation" id="first_name"
+                <input autocomplete="off" type="text" name="father_occupation" id="first_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  "
                     placeholder="Enter The Occupation" />
             </div>
@@ -374,7 +374,7 @@ Add Student
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">Father's
                     Yearly Income
                 </label>
-                <input type="text" name="father_income" id="last_name"
+                <input autocomplete="off" type="text" name="father_income" id="last_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  "
                     placeholder="Enter The Income" />
             </div>
@@ -382,7 +382,7 @@ Add Student
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">Father's
                     NID
                 </label>
-                <input type="text" name="father_nid" id="last_name"
+                <input autocomplete="off" type="text" name="father_nid" id="last_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  "
                     placeholder="Enter The NID" />
             </div>
@@ -398,7 +398,7 @@ Add Student
                                 d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                         </svg>
                     </div>
-                    <input datepicker datepicker-autohide type="text" name="father_birth_date"
+                    <input autocomplete="off" datepicker datepicker-autohide type="text" name="father_birth_date"
                         class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-3.5   "
                         placeholder="Select date" />
                 </div>
@@ -407,7 +407,7 @@ Add Student
             <div>
                 <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 ">Mother's
                     Name</label>
-                <input type="text" name="mother_name" id="first_name"
+                <input autocomplete="off" type="text" name="mother_name" id="first_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  "
                     placeholder="Enter The  Name" />
             </div>
@@ -415,7 +415,7 @@ Add Student
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">Mother's
                     Number
                 </label>
-                <input type="text" name="mother_number" id="last_name"
+                <input autocomplete="off" type="text" name="mother_number" id="last_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  "
                     placeholder="Enter The Number" />
             </div>
@@ -423,7 +423,7 @@ Add Student
                 <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 ">Mother's
                     occupation
                 </label>
-                <input type="text" name="mother_occupation" id="first_name"
+                <input autocomplete="off" type="text" name="mother_occupation" id="first_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  "
                     placeholder="Enter The occupation" />
             </div>
@@ -431,7 +431,7 @@ Add Student
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">Mother's
                     NID
                 </label>
-                <input type="text" name="mother_nid" id="last_name"
+                <input autocomplete="off" type="text" name="mother_nid" id="last_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  "
                     placeholder="Enter The NID" />
             </div>
@@ -447,7 +447,7 @@ Add Student
                                 d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                         </svg>
                     </div>
-                    <input datepicker datepicker-autohide type="text" name="mother_birth_date"
+                    <input autocomplete="off" datepicker datepicker-autohide type="text" name="mother_birth_date"
                         class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-3.5   "
                         placeholder="Select date">
                 </div>
@@ -456,7 +456,7 @@ Add Student
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">Mother's
                     Income
                 </label>
-                <input type="text" name="mother_income" id="last_name"
+                <input autocomplete="off" type="text" name="mother_income" id="last_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  "
                     placeholder="Enter The Mother's Income" />
             </div>
@@ -468,7 +468,7 @@ Add Student
             <div>
                 <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 ">Present
                     Village</label>
-                <input type="text" name="present_village" id="first_name"
+                <input autocomplete="off" type="text" name="present_village" id="first_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  "
                     placeholder="Enter The Village Name" />
             </div>
@@ -476,7 +476,7 @@ Add Student
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">Present
                     Post Office
                 </label>
-                <input type="text" name="present_post_office" id="last_name"
+                <input autocomplete="off" type="text" name="present_post_office" id="last_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  "
                     placeholder="Enter The Post Office" />
             </div>
@@ -484,7 +484,7 @@ Add Student
                 <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 ">Present
                     Country
                 </label>
-                <input type="text" name="present_country" id="first_name"
+                <input autocomplete="off" type="text" name="present_country" id="first_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  "
                     placeholder="Enter The Country Name" />
             </div>
@@ -492,14 +492,14 @@ Add Student
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">Present
                     Zip Code/Post_code
                 </label>
-                <input type="text" name="present_zip_code" id="last_name"
+                <input autocomplete="off" type="text" name="present_zip_code" id="last_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  "
                     placeholder="Enter The Present Zip Code/Post_code" />
             </div>
             <div>
                 <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 ">present
                     District</label>
-                <input type="text" name="present_district" id="first_name"
+                <input autocomplete="off" type="text" name="present_district" id="first_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  "
                     placeholder="Enter The District Name" />
             </div>
@@ -507,7 +507,7 @@ Add Student
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">present
                     Police Station
                 </label>
-                <input type="text" name="present_police_station" id="last_name"
+                <input autocomplete="off" type="text" name="present_police_station" id="last_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  "
                     placeholder="Enter The Police Station Name" />
             </div>
@@ -521,7 +521,7 @@ Add Student
             <div>
                 <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 ">Parmanent
                     Village</label>
-                <input type="text" name="parmanent_village" id="first_name"
+                <input autocomplete="off" type="text" name="parmanent_village" id="first_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  "
                     placeholder="Enter The Village Name" />
             </div>
@@ -529,7 +529,7 @@ Add Student
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">Parmanent
                     Post Office
                 </label>
-                <input type="text" name="parmanent_post_office" id="last_name"
+                <input autocomplete="off" type="text" name="parmanent_post_office" id="last_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  "
                     placeholder="Enter The Post Office" />
             </div>
@@ -537,7 +537,7 @@ Add Student
                 <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 ">Parmanent
                     Country
                 </label>
-                <input type="text" name="parmanent_country" id="first_name"
+                <input autocomplete="off" type="text" name="parmanent_country" id="first_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5  "
                     placeholder="Enter The Country Name" />
             </div>
@@ -545,14 +545,14 @@ Add Student
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">parmanent
                     Zip Code/Post_code
                 </label>
-                <input type="text" name="parmanent_zip_code" id="last_name"
+                <input autocomplete="off" type="text" name="parmanent_zip_code" id="last_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5    "
                     placeholder="Enter The Present Zip Code/Post_code" />
             </div>
             <div>
                 <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 ">parmanent
                     District</label>
-                <input type="text" name="parmanent_district" id="first_name"
+                <input autocomplete="off" type="text" name="parmanent_district" id="first_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5    "
                     placeholder="Enter The District Name" />
             </div>
@@ -560,7 +560,7 @@ Add Student
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">parmanent
                     Police Station
                 </label>
-                <input type="text" name="parmanent_police_station" id="last_name"
+                <input autocomplete="off" type="text" name="parmanent_police_station" id="last_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5    "
                     placeholder="Enter The Police Station Name" />
             </div>
@@ -577,7 +577,7 @@ Add Student
                     Name
 
                 </label>
-                <input type="text" name="guardian_name" id="last_name"
+                <input autocomplete="off" type="text" name="guardian_name" id="last_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5    "
                     placeholder="Enter The Police Station Name" />
             </div>
@@ -585,7 +585,7 @@ Add Student
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">Guardian
                     Address
                 </label>
-                <input type="text" name="guardian_address" id="last_name"
+                <input autocomplete="off" type="text" name="guardian_address" id="last_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5    "
                     placeholder="Enter The Police Station Name" />
             </div>
@@ -601,7 +601,7 @@ Add Student
                     School Name
 
                 </label>
-                <input type="text" name="last_school_name" id="last_name"
+                <input autocomplete="off" type="text" name="last_school_name" id="last_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5    "
                     placeholder="Enter The Last School Name" />
             </div>
@@ -610,7 +610,7 @@ Add Student
                     Name
 
                 </label>
-                <input type="text" name="last_class_name" id="last_name"
+                <input autocomplete="off" type="text" name="last_class_name" id="last_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5    "
                     placeholder="Enter The Last Class Name" />
             </div>
@@ -619,14 +619,14 @@ Add Student
                     Result
 
                 </label>
-                <input type="text" name="last_result" id="last_name"
+                <input autocomplete="off" type="text" name="last_result" id="last_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5    "
                     placeholder="Enter The Last Result" />
             </div>
             <div>
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">Last
                     Passing year
-                    <input type="text" name="last_passing_year" id="last_name"
+                    <input autocomplete="off" type="text" name="last_passing_year" id="last_name"
                         class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5 "
                         placeholder="Enter The Last Passing year" />
             </div>
@@ -642,14 +642,14 @@ Add Student
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">Email
 
                 </label>
-                <input type="email" id="email" name="email"
+                <input autocomplete="off" type="email" id="email" name="email"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5    "
                     placeholder="Enter your email" />
             </div>
             <div>
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">Password
                 </label>
-                <input type="password" name="password" id="floating_password"
+                <input autocomplete="off" type="password" name="password" id="floating_password"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5    "
                     placeholder="Enter your password" />
             </div>
@@ -659,21 +659,21 @@ Add Student
             <div class="hidden">
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">Role
                 </label>
-                <input type="text" value="student" name="role" id="last_name"
+                <input autocomplete="off" type="text" value="student" name="role" id="last_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5    "
                     placeholder="Enter The Police Station Name" />
             </div>
             <div class="hidden">
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">Action
                 </label>
-                <input type="text" value="approved" name="action" id="last_name"
+                <input autocomplete="off" type="text" value="approved" name="action" id="last_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5    "
                     placeholder="Enter The Police Station Name" />
             </div>
             <div class="hidden">
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">School Code
                 </label>
-                <input type="text" value="{{ $school_code }}" name="school_code" id="last_name"
+                <input autocomplete="off" type="text" value="{{ $school_code }}" name="school_code" id="last_name"
                     class="bg-white border-0 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3.5    "
                     placeholder="Enter The Police Station Name" />
             </div>
@@ -681,7 +681,7 @@ Add Student
 
         <div class="flex justify-center items-center gap-20">
             <div class="flex items-center gap-2">
-                <input checked id="add_related_fees" name="add_related_fees" type="checkbox" value="true"
+                <input autocomplete="off" checked id="add_related_fees" name="add_related_fees" type="checkbox" value="true"
                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 ">
                 <label for="add_related_fees" class="ml-1 text-lg font-medium text-gray-900 ">Add Fees</label>
             </div>

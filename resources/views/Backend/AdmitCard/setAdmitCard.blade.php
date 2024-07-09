@@ -157,13 +157,17 @@ Admit Setup
                 Date
             </th>
             <th scope="col" class="px-6 py-3">
-                Time
+                Start Time
             </th>
             <th scope="col" class="px-6 py-3 bg-blue-500">
+                End Time
+            </th>
+            <th scope="col" class="px-6 py-3">
                 STATUS
             </th>
         </tr>
     </thead>
+    
     <tbody>
         @if ($classWiseSubjectData !== null)
             @foreach ($classWiseSubjectData as $key => $data)
@@ -189,7 +193,11 @@ Admit Setup
                         </div>
                     </td>
                     <td class="px-6 py-4">
-                        <input type="time" name="time"
+                        <input type="time" name="starttime"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg form-control" style="text-align:center;" value="0">
+                    </td>
+                    <td class="px-6 py-4">
+                        <input type="time" name="endtime"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg form-control" style="text-align:center;" value="0">
                     </td>
                     <td class="px-6 py-4 ">
@@ -237,25 +245,19 @@ Admit Setup
             if (checkbox.checked) {
                 // Get the corresponding date and time inputs
                 var dateInput = checkbox.closest('tr').querySelector('input[name="date"]');
-                var timeInput = checkbox.closest('tr').querySelector('input[name="time"]');
+                var startTimeInput = checkbox.closest('tr').querySelector('input[name="starttime"]');
+                var endTimeInput = checkbox.closest('tr').querySelector('input[name="endtime"]');
 
-                // Parse date and time strings into JavaScript Date objects
-                var date = new Date(dateInput.value);
-                var time = new Date('1970-01-01T' + timeInput.value);
-
-                // Convert date and time to local time zone
-                var localDate = date.toLocaleDateString();
-                var localTime = time.toLocaleTimeString();
-
-                // Store the converted date and time in an object
+                // Store the selected subject data
                 var selectedSubject = {
                     subject: checkbox.value,
-                    date: localDate,
-                    time: localTime,
+                    date: dateInput.value,
+                    starttime: startTimeInput.value,
+                    endtime: endTimeInput.value,
                     class_name: className,
                     group_name: groupName,
                     class_exam_name: classExamName,
-                    year: academicYearName,
+                    year: academicYearName
                 };
 
                 // Push the selected subject data to the array
@@ -297,6 +299,7 @@ Admit Setup
         form.submit();
     }
 </script>
+
 
 
 

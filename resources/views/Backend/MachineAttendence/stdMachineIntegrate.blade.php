@@ -206,7 +206,7 @@ STD Machine Integrate
                                 <input name="class" value="{{$student->Class_name}}" class="hidden" type="text">
                             </td>
                             <td class="px-6 py-4 border-b">
-                                {{$student->section}} 
+                                {{$student->section}}
                                 <input name="section" value="{{$student->section}}" class="hidden" type="text">
                                 <input name="group" value="{{$student->section}}" class="hidden" type="text">
                             </td>

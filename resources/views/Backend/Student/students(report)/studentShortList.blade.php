@@ -193,24 +193,24 @@
                   
                         <div class="pb-5">
                             <div class="flex justify-center">
-                            <img id="background-image" src="{{asset($school_info->logo)}}" alt="" class="h-[100px] w-[100px]" />
+                            <img id="background-image" src="{{asset($school_info->logo)}}" alt="" class="h-[250px] w-[250px]" />
                             </div>
                             <div class="flex justify-center">
-                            <h3 class="text-3xl font-bold">{{ $school_info->school_name }}</h3>
+                            <h3 class="text-5xl font-bold mb-3">{{ $school_info->school_name }}</h3>
                             </div>
                             <div class="flex justify-center">
-                            <p class="text-sm">{{ $school_info->address }} <br>
+                            <p class="text-2xl">{{ $school_info->address }} <br>
                             </div>
-                                <div class="flex justify-center">
+                                <div class="flex justify-center text-2xl">
                                 Contact No: {{ $school_info->mobile_number }}<br>
                             </div> 
-                                <div class="flex justify-center">
+                                <div class="flex justify-center text-2xl">
                                 Email: {{ $school_info->school_email }}<br>
                             </div> 
-                                <div class="flex justify-center">
+                                <div class="flex justify-center text-2xl">
                                 Website: {{ $school_info->website }}<br>
                             </div> 
-                                <div class="flex justify-center">
+                                <div class="flex justify-center text-2xl">
                                 Print date:{{ $date }}</p>
                             </div> 
                         </div>
@@ -219,7 +219,7 @@
                         <thead class=" text-white uppercase bg-blue-600 border-b border-blue-400">
                             <tr>
                                 @foreach ($col as $column)
-                                    <th scope="col" class="px-2 py-3 bg-blue-500">{{ $column }}</th>
+                                    <th scope="col" class="px-1 py-4 text-xl bg-blue-500">{{ $column }}</th>
                                 @endforeach
                             </tr>
                         </thead>
@@ -227,7 +227,7 @@
                             @foreach ($students as $student)
                                 <tr class=" border-x-2 border-y-2">
                                     @foreach ($col as $column)
-                                        <td class="px-6 py-4">{{ $student->$column }}</td>
+                                        <td class="px-4 py-2 text-xl font-semibold">{{ $student->$column }}</td>
                                     @endforeach
                                 </tr>
                             @endforeach
@@ -250,18 +250,25 @@
             });
         });
 
-        let btn = document.getElementById('btn');
-        let page = document.getElementById('page');
+        function downloadPDF() {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        pdf.setFontSize(15);  // Set the font size to 15
 
-        btn.addEventListener('click', function() {
-            html2PDF(page, {
-                jsPDF: {
-                    format: 'a4',
-                },
-                imageType: 'image/jpeg',
-                output: './pdf/generate.pdf'
-            });
+        const page = document.getElementById('page');
+        const table = document.getElementById('student-table');
+
+        html2canvas(page, { scale: 2 }).then(canvas => {
+            const imgData = canvas.toDataURL('image/jpeg', 1.0);
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+            pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+            pdf.save('students_list.pdf');
         });
+    }
+
+    document.getElementById('btn').addEventListener('click', downloadPDF);
     </script>
 
     <script>

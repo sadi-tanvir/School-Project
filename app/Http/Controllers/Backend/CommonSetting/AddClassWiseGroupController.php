@@ -49,34 +49,39 @@ class AddClassWiseGroupController extends Controller
         // Validate form data
         $request->validate([
             'class_name' => 'required|string',
-            'group_name' => 'required|string'
+            'group_name' => 'required|array'
         ]);
-
-        // $school_code = '100';
-
-        // Check if the combination of class name and group name already exists for this school
-        $existingRecord = AddClassWiseGroup::where('school_code', $schoolCode)
-            ->where('class_name', $request->class_name)
-            ->where('group_name', $request->group_name)
-            ->exists();
-
-        // If a record with the same combination already exists, return with an error message
-        if ($existingRecord) {
-            return redirect()->back()->with('error', 'A record with the same class name and group name already exists for this school.');
+    
+        $classWiseGroupData = [];
+    
+        foreach ($request->group_name as $groupName) {
+            // Check if the combination of class name and group name already exists for this school
+            $existingRecord = AddClassWiseGroup::where('school_code', $schoolCode)
+                ->where('class_name', $request->class_name)
+                ->where('group_name', $groupName)
+                ->exists();
+    
+            if (!$existingRecord) {
+                // Create a new record for the selected group and class combination
+                $newRecord = new AddClassWiseGroup();
+                $newRecord->school_code = $schoolCode;
+                $newRecord->class_name = $request->class_name;
+                $newRecord->group_name = $groupName;
+                $newRecord->status = 'active';
+                $newRecord->action = 'approved';
+                $newRecord->save();
+            }
+    
+            // Add data to display
+            $classWiseGroupData[] = [
+                'class_name' => $request->class_name,
+                'group_name' => $groupName
+            ];
         }
-
-        // Create a new record for the selected group and class combination
-        $newRecord = new AddClassWiseGroup();
-        $newRecord->school_code = $schoolCode;
-        $newRecord->class_name = $request->class_name;
-        $newRecord->group_name = $request->group_name;
-        $newRecord->status = 'active';
-        $newRecord->action = 'approved';
-        $newRecord->save();
-
-        // return redirect()->back()->with('success', 'Class wise group added successfully!');
-        return redirect()->route('add.class.wise.group', $schoolCode)->with('success', 'Class wise group added successfully!')->with('class_name', $request->class_name);
+    
+        return redirect()->route('add.class.wise.group', $schoolCode)->with('success', 'Class wise group added successfully!')->with('classWiseGroupData', $classWiseGroupData);
     }
+    
 
 
     public function delete_add_class_wise_group($id)

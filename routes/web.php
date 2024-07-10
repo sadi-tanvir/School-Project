@@ -200,12 +200,12 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/addSchoolInfo/{schoolCode}', [NEDUBDController::class, 'addSchoolInfo']);
     Route::post('/create-schoolInfo', [NEDUBDController::class, 'createSchoolInfo'])->name('schoolInfo.add');
 
-   //Home
+    //Home
     Route::get('/home/{schoolCode}', [HomeController::class, 'home']);
 
     // settings
-    Route::get('/settings/{schoolCode}',[SettingController::class,'viewSetting'])->name('view.settings');
-    Route::put('/change-profile-picture/{role}/{id}/{schoolCode}',[SettingController::class,'changePhoto'])->name('change.profile.picture');
+    Route::get('/settings/{schoolCode}', [SettingController::class, 'viewSetting'])->name('view.settings');
+    Route::put('/change-profile-picture/{role}/{id}/{schoolCode}', [SettingController::class, 'changePhoto'])->name('change.profile.picture');
 
     //Online Application
 
@@ -419,8 +419,11 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/listOfMonthWiseFees/getClassWiseGroupsAndSection/{schoolCode}', [ListOfMonthWiseFeesController::class, 'GetClassWiseGroupsAndSection']);
     Route::get('/listOfMonthWiseFees/getMothWiseFeesInfo/{schoolCode}', [ListOfMonthWiseFeesController::class, 'getMothWiseFeesInfo'])->name("listOfMonthWiseFees.display");
     Route::get('/listOfMonthWiseFees/getMothWiseFeesDetailsInfo/{student_id}/{payment_status}/{schoolCode}', [ListOfMonthWiseFeesController::class, 'GetAllPaidUnpaidDetailsInformation'])->name("listOfMonthWiseFees.details.display");
-
+    // list of special Discount
     Route::get('/listOfSpecialDiscount/{schoolCode}', [ListOfSepecialDiscountController::class, 'listOfSpecialDiscount'])->name('listOfSpecialDiscount');
+    Route::get('/listOfSpecialDiscount/getStudentInfo/{schoolCode}', [ListOfSepecialDiscountController::class, 'GetStudentInformation']);
+    Route::get('/listOfSpecialDiscount/getData/{schoolCode}', [ListOfSepecialDiscountController::class, 'GetDataListOfWaiverData'])->name('listOfSpecialDiscount.getData');
+
     Route::get('/listOfFineOrFailOrAbsent/{schoolCode}', [ListOfFineOrFailOrAbsentController::class, 'listOfFineOrFailOrAbsent'])->name('listOfFineOrFailOrAbsent');
     Route::get('/listOfDonation/{schoolCode}', [ListOfDonationController::class, 'listOfDonation'])->name('listOfDonation');
     Route::get('/listOfFormFees/{schoolCode}', [ListOfFormFeesController::class, 'listOfFormFees'])->name('listOfFormFees');
@@ -870,21 +873,21 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
 
     //Machine Attendance
     // time settings
-    Route::get('/std-time-setting/{schoolCode}',[StudentTimeSettingController::class,'viewTimeSetting'])->name('std.time.setting');
-    Route::post('/get-stu-time-set/{schoolCode}',[StudentTimeSettingController::class,'getTimeSetupData'])->name('std.get.time.setting.data');
-    Route::post('/post-student-time-setup/{schoolCode}',[StudentTimeSettingController::class,'postStudentTimeSetup'])->name('post.student.time.set.up');
-    Route::get('/view-student-time-config/{schoolCode}',[StudentTimeSettingController::class,'viewStudentTimeSetupConfig'])->name('view.student.time.config');
-    Route::post('/get-time-config-data/{schoolCode}',[StudentTimeSettingController::class,'viewConfigTable'])->name('view.get.time.config.table');
+    Route::get('/std-time-setting/{schoolCode}', [StudentTimeSettingController::class, 'viewTimeSetting'])->name('std.time.setting');
+    Route::post('/get-stu-time-set/{schoolCode}', [StudentTimeSettingController::class, 'getTimeSetupData'])->name('std.get.time.setting.data');
+    Route::post('/post-student-time-setup/{schoolCode}', [StudentTimeSettingController::class, 'postStudentTimeSetup'])->name('post.student.time.set.up');
+    Route::get('/view-student-time-config/{schoolCode}', [StudentTimeSettingController::class, 'viewStudentTimeSetupConfig'])->name('view.student.time.config');
+    Route::post('/get-time-config-data/{schoolCode}', [StudentTimeSettingController::class, 'viewConfigTable'])->name('view.get.time.config.table');
 
     // machine Id Integrate
-    Route::get('/std-machine-integrate/{schoolCode}',[StudentMachineIntegrateController::class,'viewMachineIntegrade'])->name('std.machine.integrate');
+    Route::get('/std-machine-integrate/{schoolCode}', [StudentMachineIntegrateController::class, 'viewMachineIntegrade'])->name('std.machine.integrate');
 
     Route::post('/std-machine/get-groups/{schoolCode}', [StudentMachineIntegrateController::class, 'getGroups'])->name('std-machine.get-groups');
     Route::post('/std-machine/get-sections/{schoolCode}', [StudentMachineIntegrateController::class, 'getSections'])->name('std-machine.get-sections');
-    Route::get('/student-machine-integrate/{schoolCode}',[StudentMachineIntegrateController::class,'getData'])->name('student.machine.integrate.get.data');
-    Route::post('/save-student-machine-integrate/{schoolCode}',[StudentMachineIntegrateController::class , 'SaveStudentMachineIntegrate'])->name('save.student.machine.integrate');
+    Route::get('/student-machine-integrate/{schoolCode}', [StudentMachineIntegrateController::class, 'getData'])->name('student.machine.integrate.get.data');
+    Route::post('/save-student-machine-integrate/{schoolCode}', [StudentMachineIntegrateController::class, 'SaveStudentMachineIntegrate'])->name('save.student.machine.integrate');
 
 
     // Std machine user list
-    Route::get('/std-machine-user-list/{schoolCode}',[StudentMachinUserListController::class,'viewStdMachineUserList'])->name('std.machine.user.list');
+    Route::get('/std-machine-user-list/{schoolCode}', [StudentMachinUserListController::class, 'viewStdMachineUserList'])->name('std.machine.user.list');
 });

@@ -43,28 +43,29 @@ class AddClassWiseGroupController extends Controller
 
         return view('Backend/BasicInfo/CommonSetting/addClassWiseGroup', compact('classData', 'groupData', 'classWiseGroupData', 'selectedClassName'));
     }
-
     public function store_add_class_wise_group(Request $request, $schoolCode)
     {
-        // Validate form data
+        //dd($request);
+       // Validate form data
         $request->validate([
             'class_name' => 'required|string',
             'group_name' => 'required|string'
         ]);
-
-        // $school_code = '100';
-
+   
         // Check if the combination of class name and group name already exists for this school
         $existingRecord = AddClassWiseGroup::where('school_code', $schoolCode)
             ->where('class_name', $request->class_name)
             ->where('group_name', $request->group_name)
-            ->exists();
-
-        // If a record with the same combination already exists, return with an error message
+            ->first();
+    
+        // If a record with the same combination already exists, return with the existing data
         if ($existingRecord) {
-            return redirect()->back()->with('error', 'A record with the same class name and group name already exists for this school.');
+            return redirect()->route('add.class.wise.group', $schoolCode)
+                ->with('error', 'Class wise group already exists.')
+                ->with('class_name', $request->class_name)
+                ->with('group_name', $request->group_name);
         }
-
+    
         // Create a new record for the selected group and class combination
         $newRecord = new AddClassWiseGroup();
         $newRecord->school_code = $schoolCode;
@@ -73,10 +74,14 @@ class AddClassWiseGroupController extends Controller
         $newRecord->status = 'active';
         $newRecord->action = 'approved';
         $newRecord->save();
-
-        // return redirect()->back()->with('success', 'Class wise group added successfully!');
-        return redirect()->route('add.class.wise.group', $schoolCode)->with('success', 'Class wise group added successfully!')->with('class_name', $request->class_name);
+    
+        // Return with a success message
+        return redirect()->route('add.class.wise.group', $schoolCode)
+            ->with('success', 'Class wise group added successfully!')
+            ->with('class_name', $request->class_name)
+            ->with('group_name', $request->group_name);
     }
+    
 
 
     public function delete_add_class_wise_group($id)

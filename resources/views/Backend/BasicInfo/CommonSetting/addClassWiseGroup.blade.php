@@ -207,7 +207,7 @@ GroupData
                     @if($selectedClassName=== null)
                     <option disabled selected>Choose a class</option>
                     @elseif($selectedClassName )
-                    <option disabled selected>{{$selectedClassName}}</option>
+                    <option  selected value="{{$selectedClassName}}">{{$selectedClassName}}</option>
                     @endif
 
                     @foreach($classData as $data)
@@ -218,11 +218,12 @@ GroupData
             <div class="mt-6">
                 <div class="grid gap-6 mb-6 py-5 md:grid-cols-3 items-center ps-4 border border-gray-200 rounded-md">
                     @foreach($groupData as $data)
-                    <div>
-                        <input id="group_{{ $data->group_name }}" type="checkbox" value="{{ $data->group_name }}" name="group_name"  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500   focus:ring-2  "><label class="pl-2">{{ $data->group_name }}</label></label>
-                    </div>
+                      <div>
+                    <input id="group_{{ $data->group_name }}" type="checkbox" value="{{ $data->group_name }}" name="group_name" class="group-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2  text-sm font-medium  ">{{ $data->group_name }}</label>
+                </div>
                     @endforeach
                 </div>
+                
             </div>
             <div class="hidden">
                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 ">School Code 

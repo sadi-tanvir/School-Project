@@ -190,7 +190,7 @@ Exam Progress Report
 
 
 <div class="flex justify-center">
-    <div class="border-2 rounded-md md:w-[600px]  ">
+    <div class="border-2 rounded-md md:w-[600px]">
         <div class="p-6">
             <form action="{{route('exam_progressStudent', $school_code)}}" method="GET">
                 @csrf

@@ -675,6 +675,9 @@
                             <li>
                                 <a href="{{ route('listOfMonthWiseFees', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List Of Month wise Fees</a>
                             </li>
+                            <li>
+                                <a href="{{ route('listOfSpecialDiscount', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List Of Special Discount</a>
+                            </li>
                             @if ($adminData)
                                 <li>
                                     <a href="{{ route('geneTransferInquiri', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Gene. Transfer Inquiry </a>
@@ -691,9 +694,6 @@
 
                                 <li>
                                     <a href="{{ route('listOfHeadWise', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List of Head wise </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('listOfSpecialDiscount', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List Of Special Discount</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('listOfFineOrFailOrAbsent', $school_code) }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">List Of Fine / Fail/Absent</a>

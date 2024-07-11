@@ -30,54 +30,59 @@ class addShortListController extends Controller
 
     public function viewStudentShortList(Request $request)
     {
-        // dd($request);
-        // if (!$request->class) {
-        //     return redirect()->back()->with('error', 'please Select a class name');
-        // }
-        // if (!$request->group) {
-        //     return redirect()->back()->with('error', 'please Select a group name');
-        // }
-        // if (!$request->section) {
-        //     return redirect()->back()->with('error', 'please Select a section name');
-        // }
-        // if (!$request->category) {
-        //     return redirect()->back()->with('error', 'please Select a category name');
-        // }
-        // if (!$request->academic_year) {
-        //     return redirect()->back()->with('error', 'please Select a academic year');
-        // }
-
         $class = $request->class;
         $group = $request->group;
         $section = $request->section;
         $category = $request->category;
         $academic_year = $request->academic_year;
+        $gender = $request->gender;
+
         $school_code = $request->school_code;
         $col = $request->columns;
-        $students = [];
-        if ($class && $group && $section && $category && $academic_year) {
-            $students = Student::where('school_code', $school_code)->where('action', 'approved')->where('class_name', $class)->where('group', $group)->where('section', $section)->where('category', $category)->where('year', $academic_year)->get();
-
-        } else if ($class) {
-            $students = Student::where('action', 'approved')
-                ->where('school_code', $school_code)
-                ->where('class_name', $class)
-                ->get();
+    
+        // Base query
+        $studentQuery = Student::where('school_code', $school_code)->where('action', 'approved');
+    
+        if ($class) {
+            $studentQuery->where('Class_name', $class);
         }
-
-
+    
+        if ($group) {
+            $studentQuery->where('group', $group);
+        }
+    
+        if ($section) {
+            $studentQuery->where('section', $section);
+        }
+    
+        if ($category) {
+            $studentQuery->where('category', $category);
+        }
+    
+        if ($academic_year) {
+            $studentQuery->where('year', $academic_year);
+        }
+        if ($gender) {
+            $studentQuery->where('gender', $gender);
+        }
+    
+        $students = $studentQuery->get();
+    
         if (!isset($students)) {
             $students = [];
         }
+    
         $school_info = SchoolInfo::where('school_code', $school_code)->first();
-        $date = Date('d-m-Y');
-        $columns = ['name', 'birth_date', 'student_id', 'student_role', 'Class_name', 'group', 'section', 'shift', 'category', 'year', 'religious', 'mobile_no', 'father_name', 'father_birth_date', 'mother_name', 'mother_nid', 'addmission_date', 'blood_group'];
+        $date = date('d-m-Y');
+        $columns = ['name', 'birth_date', 'student_id', 'student_role', 'class_name', 'group', 'section', 'shift', 'category', 'year', 'religious', 'mobile_no', 'father_name', 'father_birth_date', 'mother_name', 'mother_nid', 'admission_date', 'blood_group'];
         $classes = AddClass::where('school_code', $school_code)->where('action', 'approved')->get();
         $sections = AddSection::where('school_code', $school_code)->where('action', 'approved')->get();
         $groups = AddGroup::where('school_code', $school_code)->where('action', 'approved')->get();
         $categories = AddCategory::where('school_code', $school_code)->where('action', 'approved')->get();
         $years = AddAcademicYear::where('school_code', $school_code)->where('action', 'approved')->get();
-        return view('Backend.Student.students(report).studentShortList', compact('school_info','date','students', 'col', 'classes', 'sections', 'groups', 'categories', 'years', 'columns'));
+    
+        // Return view with compacted data
+        return view('Backend.Student.students(report).studentShortList', compact('school_info', 'date', 'students', 'col', 'classes', 'sections', 'groups', 'categories', 'years', 'columns'));
     }
 
     public function downloadShortList(Request $request)

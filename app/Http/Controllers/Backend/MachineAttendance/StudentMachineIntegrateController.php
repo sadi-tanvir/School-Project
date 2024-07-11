@@ -49,20 +49,41 @@ class StudentMachineIntegrateController extends Controller
         $group = $request->group;
         $section = $request->section;
         $counts = 0;
-        
-            $studentsQuery = Student::where('school_code', $school_code)->where('action', 'approved');
-            if (!empty($class)) {
-                $studentsQuery = $studentsQuery->where('Class_name', $class);
-            }
 
-            if (!empty($group)) {
-                $studentsQuery = $studentsQuery->where('group', $group);
-            }
-            if (!empty($section)) {
-                $studentsQuery = $studentsQuery->where('section', $section);
-            }
-            $students = $studentsQuery->get();
-            $counts = $students->count();
+        $students = null;
+        $machineIntegrateData = null;
+
+        $machineQuery = StudentMachineIntegrate::where('school_code', $school_code);
+        if (!empty($class)) {
+            $machineQuery = $machineQuery->where('class', $class);
+        }
+
+        
+        if (!empty($group)) {
+            $machineQuery = $machineQuery->where('group', $group);
+        }
+        if (!empty($section)) {
+            $machineQuery = $machineQuery->where('section', $section);
+        }
+
+        $machineIntegrateData = $machineQuery->get();
+
+
+
+
+        $studentsQuery = Student::where('school_code', $school_code)->where('action', 'approved');
+        if (!empty($class)) {
+            $studentsQuery = $studentsQuery->where('Class_name', $class);
+        }
+
+        if (!empty($group)) {
+            $studentsQuery = $studentsQuery->where('group', $group);
+        }
+        if (!empty($section)) {
+            $studentsQuery = $studentsQuery->where('section', $section);
+        }
+        $students = $studentsQuery->get();
+        $counts = $students->count();
         $classes = AddClass::where('school_code', $school_code)->where('action', 'approved')->get();
         $groupData = AddGroup::where('action', 'approved')->where('school_code', $school_code)->get();
         $sectionData = AddSection::where('action', 'approved')->where('school_code', $school_code)->get();

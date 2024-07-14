@@ -83,7 +83,11 @@ class MarkInputController extends Controller
     public function subject(Request $request, $school_code)
     {
         $class = $request->class;
-        $subjects = AddClassWiseSubject::where('class_name', $class)->where('school_code', $school_code)->get();
+        $subjects = AddClassWiseSubject::where('class_name', $class)
+            ->where('school_code', $school_code)
+            ->distinct()
+            ->get();
+
         return response()->json($subjects);
     }
 
@@ -257,7 +261,7 @@ class MarkInputController extends Controller
 
     public function downloadExcel(Request $request)
     {
-       
+
         $selectedClassName = $request->input('class_name');
         $selectedGroupName = $request->input('group');
         $selectedSectionName = $request->input('section');
@@ -270,7 +274,7 @@ class MarkInputController extends Controller
         $totalMarks = $request->input('total_mark');
         $passMarks = $request->input('pass_mark');
         $school_code = $request->input('school_code');
-    
+
         if (
             $shortCodes === null || empty($shortCodes) ||
             $totalMarks === null || empty($totalMarks) ||
@@ -385,7 +389,7 @@ class MarkInputController extends Controller
         }
 
 
-       
+
         $grades = GradeSetup::where('school_code', $school_code)->where('action', 'approved')->where('class_name', $selectedClassName)->where('academic_year_name', $selectedYear)->where('class_exam_name', $selectedExamName)->get();
 
         $markInputData = ExamMarkInput::where('school_code', $school_code)->where('action', 'approved')->where('class_name', $selectedClassName)->where('group', $selectedGroupName)->where('section', $selectedSectionName)->where('subject', $selectedSubjectName)->where('year', $selectedYear)->exists();
@@ -406,8 +410,8 @@ class MarkInputController extends Controller
                     $existingMarkInput->student_roll = $data[3];
                     $existingMarkInput->full_marks = $data[4];
                     $shortcodeMarks = [];
-                    $totalMarks=0;
-                    $tmarks=0;
+                    $totalMarks = 0;
+                    $tmarks = 0;
                     $shortCodeData = SetClassExamMark::where('class_name', $selectedClassName)
                         ->where('school_code', $school_code)
                         ->where('subject_name', $selectedSubjectName)
@@ -415,53 +419,53 @@ class MarkInputController extends Controller
                         ->where('academic_year_name', $selectedYear)
                         ->get();
 
-                        if ($shortCodeData) {
-                            // dd($shortCodeData);
-                            foreach ($shortCodeData as $index => $code) {
-                                // dd($index);
-                                if (isset($data[6 + $index])) {
-                                    $shortcodeMark = $data[6 + $index];
-                                    $passMark = $code->pass_mark;
-                                    $FullMark = $code->total_mark;
-                                    $acceptance = $code->acceptance;
-                                    $totalMarks += $shortcodeMark * $acceptance;
-                                    $tmarks += $shortcodeMark;
-                                    $shortcodeMarks[$code->short_code] = $shortcodeMark;
-                                }
+                    if ($shortCodeData) {
+                        // dd($shortCodeData);
+                        foreach ($shortCodeData as $index => $code) {
+                            // dd($index);
+                            if (isset($data[6 + $index])) {
+                                $shortcodeMark = $data[6 + $index];
+                                $passMark = $code->pass_mark;
+                                $FullMark = $code->total_mark;
+                                $acceptance = $code->acceptance;
+                                $totalMarks += $shortcodeMark * $acceptance;
+                                $tmarks += $shortcodeMark;
+                                $shortcodeMarks[$code->short_code] = $shortcodeMark;
                             }
-        
-                            foreach ($shortCodeData as $index => $code) {
-                                if (isset($data[6 + $index])) {
-                                    $shortcodeMark = $data[6 + $index];
-                                    $passMark = $code->pass_mark;
-                                    $FullMark = $code->total_mark;
-                                    // dd($shortcodeMark);
-                                    if ($shortcodeMark < $passMark) {
-                                        $existingMarkInput->grade = "F";
-                                        $existingMarkInput->gpa = 0;
-                                        break;
-                                    } else if ($shortcodeMark > $FullMark) {
-                                        $existingMarkInput->grade = "F";
-                                        $existingMarkInput->gpa = 0;
-                                        break;
-                                    } else {
-                                        $grade = '';
-                                        $gpa = null;
-                                        foreach ($grades as $gradeSetup) {
-                                            // dd($totalMarks);
-                                            if ($totalMarks >= $gradeSetup->mark_point_1st && $totalMarks <= $gradeSetup->mark_point_2nd) {
-                                                $existingMarkInput->grade = $gradeSetup->latter_grade;
-                                                $existingMarkInput->gpa = $gradeSetup->grade_point;
-                                                break;
-                                            }
+                        }
+
+                        foreach ($shortCodeData as $index => $code) {
+                            if (isset($data[6 + $index])) {
+                                $shortcodeMark = $data[6 + $index];
+                                $passMark = $code->pass_mark;
+                                $FullMark = $code->total_mark;
+                                // dd($shortcodeMark);
+                                if ($shortcodeMark < $passMark) {
+                                    $existingMarkInput->grade = "F";
+                                    $existingMarkInput->gpa = 0;
+                                    break;
+                                } else if ($shortcodeMark > $FullMark) {
+                                    $existingMarkInput->grade = "F";
+                                    $existingMarkInput->gpa = 0;
+                                    break;
+                                } else {
+                                    $grade = '';
+                                    $gpa = null;
+                                    foreach ($grades as $gradeSetup) {
+                                        // dd($totalMarks);
+                                        if ($totalMarks >= $gradeSetup->mark_point_1st && $totalMarks <= $gradeSetup->mark_point_2nd) {
+                                            $existingMarkInput->grade = $gradeSetup->latter_grade;
+                                            $existingMarkInput->gpa = $gradeSetup->grade_point;
+                                            break;
                                         }
                                     }
                                 }
                             }
-        
-                        } else {
-                            return back()->with('error', 'Shortcode data not found for the specified criteria.');
                         }
+
+                    } else {
+                        return back()->with('error', 'Shortcode data not found for the specified criteria.');
+                    }
                     $existingMarkInput->total_marks = $tmarks;
                     $existingMarkInput->save();
                 }
@@ -482,11 +486,11 @@ class MarkInputController extends Controller
                 $markInput->student_id = $data[2];
                 $markInput->student_roll = $data[3];
                 $markInput->full_marks = $data[4];
-                
+
                 $markInput->status = "present";
                 $shortcodeMarks = [];
                 $totalMarks = 0;
-                $tmarks=0;
+                $tmarks = 0;
 
                 $shortCodeData = SetClassExamMark::where('class_name', $selectedClassName)
                     ->where('school_code', $school_code)

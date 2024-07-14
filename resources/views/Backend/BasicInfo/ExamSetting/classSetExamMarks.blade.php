@@ -299,7 +299,6 @@
         @endif
     </div>
 </div>
-            
             <div class="flex justify-center mb-5">
                 <div class="text-rose-600">
                     <h3 class="text-lg font-semibold">সাজেশন:</h3>
@@ -315,6 +314,8 @@
 
 
             <div>
+
+            
                 <div class="flex justify-center text-lg font-semibold pb-3">
                     <h3>
                         Exam Wise Mark Setting

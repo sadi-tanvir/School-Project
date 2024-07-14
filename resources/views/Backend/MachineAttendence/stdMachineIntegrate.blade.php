@@ -141,93 +141,97 @@ STD Machine Integrate
 </form>
 
 
-<form action="{{route('save.student.machine.integrate', $school_code)}}" method="POST">
+<form action="{{ route('save.student.machine.integrate', $school_code) }}" method="POST">
     @csrf
     <div class="mt-10">
         <p class="text-lg font-semibold text-center bg-blue-500 text-white p-3">STUDENT ATTENDANCE TIME SETUP</p>
         <table class="w-full text-sm text-left rtl:text-right text-black border border-white">
             <thead class="text-xs text-white uppercase bg-blue-600 border-b border-blue-400">
                 <tr>
-                    <th scope="col" class="px-6 py-3 bg-blue-500">
-                        SL
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Same Student ID
-                        <input type="checkbox" id="selectAll">
-                    </th>
-                    <th scope="col" class="px-6 py-3 bg-blue-500">
-                        Student ID
-                    </th>
-                    <th scope="col" class="px-6 py-3 bg-blue-500">
-                        Machine User ID
-                    </th>
-                    <th scope="col" class="px-6 py-3 bg-blue-500">
-                        Student Name
-                    </th>
-                    <th scope="col" class="px-6 py-3 bg-blue-500">
-                        Roll
-                    </th>
-                    <th scope="col" class="px-6 py-3 bg-blue-500">
-                        Class
-                    </th>
-                    <th scope="col" class="px-6 py-3 bg-blue-500">
-                        Section
-                    </th>
+                    <th scope="col" class="px-6 py-3 bg-blue-500">SL</th>
+                    <th scope="col" class="px-6 py-3">Same Student ID <input type="checkbox" id="selectAll"></th>
+                    <th scope="col" class="px-6 py-3 bg-blue-500">Student ID</th>
+                    <th scope="col" class="px-6 py-3 bg-blue-500">Machine User ID</th>
+                    <th scope="col" class="px-6 py-3 bg-blue-500">Student Name</th>
+                    <th scope="col" class="px-6 py-3 bg-blue-500">Roll</th>
+                    <th scope="col" class="px-6 py-3 bg-blue-500">Class</th>
+                    <th scope="col" class="px-6 py-3 bg-blue-500">Section</th>
                 </tr>
             </thead>
             <tbody>
-                @if ($students !== null)
-                    @foreach ($students as $key => $student)
+                @if ($machineIntegrateData && $machineIntegrateData !== null)
+                    @foreach ($machineIntegrateData as $key => $machineData)
                         <tr>
-                            <th scope="row" class="px-6 py-4 border-b font-medium text-black whitespace-nowrap">
-                                {{$key + 1}}
-                            </th>
+                            <th scope="row" class="px-6 py-4 border-b font-medium text-black whitespace-nowrap">{{ $key + 1 }}</th>
                             <td class="px-6 py-4 border-b">
-                                <input type="checkbox" class="student-checkbox" data-student-id="{{$student->student_id}}"
-                                    name="same_student_id[{{$student->student_id}}]">
+                                <input type="checkbox" class="student-checkbox" data-student-id="{{ $machineData->student_id }}" name="same_student_id[{{ $machineData->student_id }}]">
+                            </td>
+                            <td class="px-6 py-4 border-b">{{ $machineData->student_id }}
+                                <input name="student_id[]" value="{{ $machineData->student_id }}" class="hidden" type="text">
                             </td>
                             <td class="px-6 py-4 border-b">
-                                {{$student->student_id}}
-                                <input name="student_id[]" value="{{$student->student_id}}" class="hidden" type="text">
+                                <input name="machine_user_id[]" value="{{ $machineData->machine_user_id }}" class="text-sm rounded-lg" type="text">
                             </td>
-                            <td class="px-6 py-4 border-b">
-                                <input name="machine_user_id[]" class="text-sm rounded-lg" type="text">
+                            <td class="px-6 py-4 border-b">{{ $machineData->student_name }}
+                                <input name="student_name[]" value="{{ $machineData->student_name }}" class="hidden" type="text">
                             </td>
-                            <td class="px-6 py-4 border-b">
-                                {{$student->name}}
-                                <input name="student_name[]" value="{{$student->name}}" class="hidden" type="text">
+                            <td class="px-6 py-4 border-b">{{ $machineData->student_roll }}
+                                <input name="student_roll[]" value="{{ $machineData->student_roll }}" class="hidden" type="text">
                             </td>
-                            <td class="px-6 py-4 border-b">
-                                {{$student->student_roll}}
-                                <input name="student_roll[]" value="{{$student->student_roll}}" class="hidden" type="text">
+                            <td class="px-6 py-4 border-b">{{ $machineData->class }}
+                                <input name="class" value="{{ $machineData->class }}" class="hidden" type="text">
                             </td>
-                            <td class="px-6 py-4 border-b">
-                                {{$student->Class_name}}
-                                <input name="class" value="{{$student->Class_name}}" class="hidden" type="text">
-                            </td>
-                            <td class="px-6 py-4 border-b">
-                                {{$student->section}}
-                                <input name="section" value="{{$student->section}}" class="hidden" type="text">
-                                <input name="group" value="{{$student->section}}" class="hidden" type="text">
+                            <td class="px-6 py-4 border-b">{{ $machineData->section }}
+                                <input name="section" value="{{ $machineData->section }}" class="hidden" type="text">
+                                <input name="group" value="{{ $machineData->group }}" class="hidden" type="text">
                             </td>
                         </tr>
                     @endforeach
+                @else
+                @if ($students && $students!==null)
+                    @foreach ($students as $key => $student)
+                            <tr>
+                                <th scope="row" class="px-6 py-4 border-b font-medium text-black whitespace-nowrap">{{ $key + 1 }}</th>
+                                <td class="px-6 py-4 border-b">
+                                    <input type="checkbox" class="student-checkbox" data-student-id="{{ $student->student_id }}" name="same_student_id[{{ $student->student_id }}]">
+                                </td>
+                                <td class="px-6 py-4 border-b">{{ $student->student_id }}
+                                    <input name="student_id[]" value="{{ $student->student_id }}" class="hidden" type="text">
+                                </td>
+                                <td class="px-6 py-4 border-b">
+                                    <input name="machine_user_id[]" class="text-sm rounded-lg" type="text">
+                                </td>
+                                <td class="px-6 py-4 border-b">{{ $student->name }}
+                                    <input name="student_name[]" value="{{ $student->name }}" class="hidden" type="text">
+                                </td>
+                                <td class="px-6 py-4 border-b">{{ $student->student_roll }}
+                                    <input name="student_roll[]" value="{{ $student->student_roll }}" class="hidden" type="text">
+                                </td>
+                                <td class="px-6 py-4 border-b">{{ $student->Class_name }}
+                                    <input name="class" value="{{ $student->Class_name }}" class="hidden" type="text">
+                                </td>
+                                <td class="px-6 py-4 border-b">{{ $student->section }}
+                                    <input name="section" value="{{ $student->section }}" class="hidden" type="text">
+                                    <input name="group" value="{{ $student->group }}" class="hidden" type="text">
+                                </td>
+                            </tr>
+                    @endforeach
+                @endif
+                   
                 @endif
             </tbody>
         </table>
     </div>
     <div class="flex justify-end">
         <h4 class="text-lg font-semibold">Total Student : </h4>
-
         <input value="{{ $counts }}" class="p-2 w-1/2 rounded-lg ml-5" type="text">
     </div>
     <div>
-        <button type="submit"
-            class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Save</button>
-        <button
-            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Reset</button>
+        <button type="submit" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Save</button>
+        <button class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Reset</button>
     </div>
 </form>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const selectAllCheckbox = document.getElementById('selectAll');

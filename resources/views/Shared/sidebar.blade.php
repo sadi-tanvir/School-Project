@@ -845,12 +845,30 @@
                 </button>
                 <ul id="dropdown-assessment" class="hidden py-2 space-y-1 border-s ms-7 border-dashed px-3">
                     <li>
-                        <a href="/dashboard/assessment/assessmentInput/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Assessment
+                        <a href="/dashboard/assessment/assessmentInput/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-3 group  hover:bg-slate-100/20">Assessment
                             Input</a>
                     </li>
+                    {{-- Basic Settings --}}
+                    <li class="dropdown">
+                        <button type="button" class="flex items-center w-full py-2 text-base text-gray-900 transition duration-75 rounded-lg group " aria-controls="dropdown-assessment_basic_setting" data-collapse-toggle="dropdown-assessment_basic_setting">
+
+                            <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap text-white ">Basic Settings</span>
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                            </svg>
+                        </button>
+                        <ul id="dropdown-assessment_basic_setting" class="hidden py-2 space-y-1 border-s ms-7 border-dashed px-3">
+                            <li>
+                                <a href="{{route("paradarsitaSuchok.view", $school_code)}}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Paradarsita Suchok</a>
+                            </li>
+                            <li>
+                                <a href="{{route("paradarsitaSuchokExcel.view", $school_code)}}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Paradarsita Suchok Excel</a>
+                            </li>
+                        </ul>
+                    </li>
                     {{-- Assessment Reports --}}
-                    <li class="dropdown ml-6">
-                        <button type="button" class="flex items-center w-full py-2 px-4 text-base text-gray-900 transition duration-75 rounded-lg group " aria-controls="dropdown-assessment_reports" data-collapse-toggle="dropdown-assessment_reports">
+                    <li class="dropdown">
+                        <button type="button" class="flex items-center w-full py-2 text-base text-gray-900 transition duration-75 rounded-lg group " aria-controls="dropdown-assessment_reports" data-collapse-toggle="dropdown-assessment_reports">
 
                             <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap text-white ">Assessment
                                 Reports</span>

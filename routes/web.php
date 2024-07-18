@@ -459,8 +459,16 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     // Assessment
     Route::get("/assessment/assessmentInput/{schoolCode}", [AssessmentInputController::class, "AssessmentInputView"])->name("assessmentInput.view");
     // Assessment => Basic Setting
+    // Assessment => Basic Setting => Paradarshita Suchok
     Route::get("/assessment/basicSetting/paradarsitaSuchok/{schoolCode}", [ParadarsitaSuchokController::class, "ParadarsitaSuchokView"])->name("paradarsitaSuchok.view");
+    Route::get("/assessment/basicSetting/paradarsitaSuchok/getSubjects/{schoolCode}", [ParadarsitaSuchokController::class, "GetSubjects"]);
+    Route::post("/assessment/basicSetting/paradarsitaSuchok/storeData/{schoolCode}", [ParadarsitaSuchokController::class, "StoreParadarsitaSuchok"])->name('paradarsita_suchoks.store');
+    // Assessment => Basic Setting => Paradarshita Suchok Excel upload
     Route::get("/assessment/basicSetting/paradarsitaSuchokExcel/{schoolCode}", [ParadarsitaSuchokExcelController::class, "ParadarsitaSuchokExcelView"])->name("paradarsitaSuchokExcel.view");
+    Route::get("/assessment/basicSetting/paradarsitaSuchokExcel/getSubjects/{schoolCode}", [ParadarsitaSuchokExcelController::class, "GetSubjects"]);
+    Route::get("/assessment/basicSetting/paradarsitaSuchokExcel/downloadBlankExcel/{schoolCode}", [ParadarsitaSuchokExcelController::class, "DownloadBlankExcel"])->name("paradarsitaSuchokExcel.download");
+    Route::post("/assessment/basicSetting/paradarsitaSuchokExcel/uploadExcelFile/{schoolCode}", [ParadarsitaSuchokExcelController::class, "UploadExcelFile"])->name("paradarsitaSuchokExcel.upload");
+
     Route::get("/assessment/basicSetting/paradarsitaSuchokMatra/{schoolCode}", [ParadarsitaSuchokMatraController::class, "ParadarsitaSuchokMatraView"])->name("paradarsitaSuchokMatra.view");
     Route::get("/assessment/basicSetting/paradarsitaSuchokMatra_2/{schoolCode}", [ParadarsitaSuchokMatra_2_Controller::class, "ParadarsitaSuchokMatra_2_View"])->name("paradarsitaSuchokMatra_2.view");
     Route::get("/assessment/basicSetting/addNoipunnoName/{schoolCode}", [AddNoipunnoNameController::class, "AddNoipunnoNameView"])->name("addNoipunnoName.view");

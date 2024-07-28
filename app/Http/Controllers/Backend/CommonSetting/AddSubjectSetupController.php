@@ -30,6 +30,7 @@ class AddSubjectSetupController extends Controller
                 ->where('school_code', $schoolCode)
                 ->where('class_name', $selectedClassName)
                 ->where('group_name', $selectedGroupName)
+                ->orderBy('subject_serial')
                 ->get();
         } elseif ($request->session()->get('class_name')) {
             //  dd($request);
@@ -40,6 +41,7 @@ class AddSubjectSetupController extends Controller
                 ->where('school_code', $schoolCode)
                 ->where('class_name', $selectedClassName)
                 ->where('group_name', $selectedGroupName)
+                ->orderBy('subject_serial')
                 ->get();
             // dd($classWiseSubjectData);
         } else {

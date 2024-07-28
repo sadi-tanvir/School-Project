@@ -1133,6 +1133,9 @@
                                 <a href="/dashboard/addSubjectSetup/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Add
                                     Class Subject Setting</a>
                             </li>
+                            <li>
+                                <a href="{{route('view.subject.setup',$school_code)}}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Subject Config view</a>
+                            </li>
 
                             <li>
                                 <a href="/dashboard/addGradePoint/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Add

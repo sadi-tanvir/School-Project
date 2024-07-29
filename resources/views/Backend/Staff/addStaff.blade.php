@@ -4,10 +4,10 @@ Add HR/STAFF
 @endsection
 @section('Dashboard')
 @include('/Message/message')
+
 @include("Shared.ContentHeader", ["title" => "Add New Staff"])
+
 <div class="mx-10 mt-10">
-
-
     <form action="{{route('stuff.create', $school_code)}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="font-bold">

@@ -42,13 +42,28 @@ class MarkInputController extends Controller
         $selectedClassName = null;
         $selectedGroupName = null;
         $selectedSubjectName = null;
-        $classData = AddClass::where('action', 'approved')->where('school_code', $school_code)->get();
-        $groupData = AddGroup::where('action', 'approved')->where('school_code', $school_code)->get();
-        $sectionData = AddSection::where('action', 'approved')->where('school_code', $school_code)->get();
-        $shiftData = AddShift::where('action', 'approved')->where('school_code', $school_code)->get();
-        $subjectData = AddSubject::where('action', 'approved')->where('school_code', $school_code)->get();
-        $classExamData = AddClassExam::where('action', 'approved')->where('school_code', $school_code)->get();
-        $academicYearData = AddAcademicYear::where('action', 'approved')->where('school_code', $school_code)->get();
+        $classData = AddClass::where('action', 'approved')
+            ->where('school_code', $school_code)
+            ->get();
+        $groupData = AddGroup::where('action', 'approved')
+            ->where('school_code', $school_code)
+            ->get();
+        $sectionData = AddSection::where('action', 'approved')
+            ->where('school_code', $school_code)
+            ->get();
+        $shiftData = AddShift::where('action', 'approved')
+            ->where('school_code', $school_code)
+            ->get();
+        $subjectData = AddSubject::where('action', 'approved')
+            ->where('school_code', $school_code)
+            ->get();
+        $classExamData = AddClassExam::where('action', 'approved')
+            ->where('school_code', $school_code)
+            ->orderBy('position')
+            ->get();
+        $academicYearData = AddAcademicYear::where('action', 'approved')
+            ->where('school_code', $school_code)
+            ->get();
         $gradeSetupData = null;
         return view('/Backend/ExamResult/exam_marks', compact('classData', 'groupData', 'sectionData', 'shiftData', 'subjectData', 'classExamData', 'academicYearData', 'student', 'gradeSetupData', 'markInputData', 'markInputs', 'selectedSubjectName', 'selectedGroupName', 'selectedClassName', 'selectedSectionName', 'selectedShiftName', 'selectedExamName', 'selectedYear'));
     }
@@ -77,14 +92,20 @@ class MarkInputController extends Controller
     public function classExam(Request $request, $school_code)
     {
         $class = $request->class;
-        $exams = SetShortCode::where('class_name', $class)->where('school_code', $school_code)->get();
-        return response()->json($exams);
+        $exams = SetShortCode::where('class_name', $class)
+            ->where('school_code', $school_code)
+            ->get()
+            ->groupBy('class_exam_name');
+    
+        $uniqueExams = $exams->keys(); // Get unique exam names
+        return response()->json($uniqueExams);
     }
     public function subject(Request $request, $school_code)
     {
         $class = $request->class;
         $subjects = AddClassWiseSubject::where('class_name', $class)
             ->where('school_code', $school_code)
+            ->orderBy('subject_serial')
             ->distinct()
             ->get();
 

@@ -94,18 +94,14 @@ Exam Marks
                     </div>
                     <!-- Exam -->
                     <div class="col-span-1">
-                        <div class="">
-                            <label for="class" class="text-gray-700">Exam:</label>
-
-                            <select id="exam" name="exam"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:border-gray-600    dark:focus:ring-blue-500 dark:focus:border-blue-500">
-
-                                <option disabled selected>Select</option>
-                                @foreach ($classExamData as $data)
-                                    <option value="{{ $data->class_exam_name }}">{{ $data->class_exam_name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        <label for="class" class="text-gray-700">Exam:</label>
+                        <select id="exam" name="exam"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <option disabled selected>Select</option>
+                            @foreach ($classExamData as $data)
+                                <option value="{{ $data->class_exam_name }}">{{ $data->class_exam_name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <!-- Year -->
                     <div class="col-span-1">
@@ -676,12 +672,13 @@ Exam Marks
                 success: function (result) {
                     $('#exam').empty();
                     $('#exam').append('<option disabled selected value="">Select</option>');
-                    $.each(result, function (key, value) {
-                        $('#exam').append('<option value="' + value.class_exam_name + '">' + value.class_exam_name + '</option>');
+                    $.each(result, function (index, examName) {
+                        $('#exam').append('<option value="' + examName + '">' + examName + '</option>');
                     });
                 }
             });
         });
+
 
         // Similar code for getting sections, shifts, and other dynamic options
     });

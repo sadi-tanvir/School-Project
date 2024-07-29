@@ -36,6 +36,7 @@ use App\Http\Controllers\Backend\CommonSetting\InstituteInfoController;
 use App\Http\Controllers\Backend\Dashboard\DashboardController;
 use App\Http\Controllers\Backend\ExamResult\MarkInputController;
 use App\Http\Controllers\Backend\ExamSetting\FourthSubjectController;
+use App\Http\Controllers\Backend\ExamSetting\SubjectSetupViewController;
 use App\Http\Controllers\Backend\FeesSetting\AddFeeTypeController;
 use App\Http\Controllers\Backend\FeesSetting\AddPaySlipTypeController;
 use App\Http\Controllers\Backend\FeesSetting\FeesSetupController;
@@ -709,6 +710,10 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/addGradePoint/{schoolCode}', [AddGradePointController::class, 'add_grade_point'])->name('add.grade.point');
     Route::put('/addGradePoint/{schoolCode}', [AddGradePointController::class, 'store_add_grade_point'])->name('store.grade.point');
     Route::delete('/delete_grade_point/{id}', [AddGradePointController::class, 'delete_add_grade_point'])->name('delete.grade.point');
+
+    //subject setup view
+    Route::get('/view-subject-setup/{schoolCode}',[SubjectSetupViewController::class,'viewSubjectSetup'])->name('view.subject.setup');
+    Route::post('/get-subject-config-data/{schoolCode}',[SubjectSetupViewController::class,'getSubjectConfigData'])->name('get.subject.config.view');
 
     // Grade Setup
     Route::get('/setGradeSetup/{schoolCode}', [GradeSetupController::class, 'grade_setup'])->name('set.grade.setup');

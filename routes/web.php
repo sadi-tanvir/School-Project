@@ -77,6 +77,7 @@ use App\Http\Controllers\Backend\NEDUBD\NEDUBDController;
 use App\Http\Controllers\Backend\NEDUBD\SchoolAdminController;
 use App\Http\Controllers\Backend\OnlineApplication\ListOfApplicantController;
 use App\Http\Controllers\Backend\Staff\StaffController;
+use App\Http\Controllers\Backend\Staff\BasicSettings\StaffDesignationController;
 use App\Http\Controllers\Backend\Student\addShortListController;
 use App\Http\Controllers\Backend\Student\classSectionSTdTotalController;
 use App\Http\Controllers\Backend\Student\DownloadStudentController;
@@ -435,6 +436,11 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
 
 
 
+    // HR/Staff Menu => Basic Settings
+    Route::get('/staff/basicSettings/designation/{schoolCode}', [StaffDesignationController::class, 'StaffDesignation'])->name('staffDesignation.display');
+    Route::post('/staff/basicSettings/createDesignation/{schoolCode}', [StaffDesignationController::class, 'CreateStaffDesignation'])->name('staffDesignation.create');
+    Route::delete('/staff/basicSettings/deleteDesignation/{schoolCode}/{id}', [StaffDesignationController::class, 'StaffDesignationDelete'])->name('staffDesignation.delete');
+    Route::put('/staff/basicSettings/updateDesignation/{schoolCode}/{id}', [StaffDesignationController::class, 'StaffDesignationUpdate'])->name('staffDesignation.update');
     // HR/Staff Menu
     Route::get('/staff/{schoolCode}', [StaffController::class, 'staffForm'])->name('stuff.form');
     Route::post('/staff/createStaff/{schoolCode}', [StaffController::class, 'createStaff'])->name('stuff.create');

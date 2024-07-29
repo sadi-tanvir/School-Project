@@ -362,7 +362,7 @@ Exam Progress Report
                 });
             });
 
-            //student 
+            //student
             $('#class').change(function () {
                 var class_name = $(this).val();
                 $.ajax({

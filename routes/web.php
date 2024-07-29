@@ -75,6 +75,7 @@ use App\Http\Controllers\Backend\NEDUB\SettingController;
 use App\Http\Controllers\Backend\NEDUBD\NEDUBDController;
 use App\Http\Controllers\Backend\NEDUBD\SchoolAdminController;
 use App\Http\Controllers\Backend\OnlineApplication\ListOfApplicantController;
+use App\Http\Controllers\Backend\Staff\StaffController;
 use App\Http\Controllers\Backend\Student\addShortListController;
 use App\Http\Controllers\Backend\Student\classSectionSTdTotalController;
 use App\Http\Controllers\Backend\Student\DownloadStudentController;
@@ -428,6 +429,14 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::get('/listOfDonation/{schoolCode}', [ListOfDonationController::class, 'listOfDonation'])->name('listOfDonation');
     Route::get('/listOfFormFees/{schoolCode}', [ListOfFormFeesController::class, 'listOfFormFees'])->name('listOfFormFees');
     Route::get('/monthlyPaidDetails/{schoolCode}', [MonthlyPaidDetailsController::class, 'monthlyPaidDetails'])->name('monthlyPaidDetails');
+
+
+
+
+
+    // HR/Staff Menu
+    Route::get('/staff/{schoolCode}', [StaffController::class, 'staffForm'])->name('stuff.form');
+    Route::post('/staff/createStaff/{schoolCode}', [StaffController::class, 'createStaff'])->name('stuff.create');
 
 
 

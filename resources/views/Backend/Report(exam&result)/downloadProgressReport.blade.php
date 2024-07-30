@@ -215,7 +215,7 @@
                             <th rowspan="2">Full Marks</th>
                             <th rowspan="2">Highest Marks</th>
                             <th colspan="{{$shortCode->count()}}">Obtaining Marks</th>
-                            <th rowspan="2" class="text-red-500">Total Mar54k</th>
+                            <th rowspan="2" class="text-red-500">Total Mark</th>
                             <th rowspan="2">Letter Grade</th>
                             <th rowspan="2">Grade Point</th>
                         </tr>

@@ -497,15 +497,15 @@
                                 <a href="/dashboard/grandFinal/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Update
                                     Grand Final</a>
                             </li>
-                            <li class="hidden">
+                            <li class="">
                                 <a href="/dashboard/tebular-format1/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Student
                                     Tabulation [Format-1]</a>
                             </li>
-                            <li class="hidden">
+                            <li class="">
                                 <a href="/dashboard/tebular-format2/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Upload
                                     Tabulation [Format-2]</a>
                             </li>
-                            <li class="hidden">
+                            <li class="">
                                 <a href="/dashboard/tebular-format3/{{ $school_code }}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Upload
                                     Tabulation [Format-3]</a>
                             </li>

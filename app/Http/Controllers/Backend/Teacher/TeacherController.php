@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
-   public function addTeacher()
+   public function teachers()
    {
       $teacherId= $this->generateTeacherId();
       return view("Backend.Teacher.addTeacher", compact("teacherId"));
@@ -87,7 +87,7 @@ class TeacherController extends Controller
 
         $imagePath = $request->file('image')->move('images/teacher', $request->input('teacher_id') . '_' . uniqid() . '.' . $request->file('image')->extension());
 
-       
+
             $teacherImage = 'images/teacher/' . basename($imagePath);
 
             $isExist = Teacher::where('teacher_id', $request->input('teacher_id'))
@@ -118,60 +118,60 @@ class TeacherController extends Controller
             $teacher->mother_name = $request->input('mother_name');
             $teacher->mother_number = $request->input('mother_number');
             $teacher->birth_date = $request->input('birth_date');
-            $teacher->nationality = $request->input('nationality'); 
-            $teacher->blood = $request->input('blood'); 
-            $teacher->nid = $request->input('nid'); 
-            $teacher->marital_status = $request->input('marital_status'); 
-            $teacher->age = $request->input('age'); 
-            $teacher->religious = $request->input('religious'); 
-            $teacher->joining_date = $request->input('joining_date'); 
-            $teacher->present_village = $request->input('present_village'); 
-            $teacher->present_post_office = $request->input('present_post_office'); 
-            $teacher->present_zip_code = $request->input('present_zip_code'); 
-            $teacher->present_district = $request->input('present_district'); 
-            $teacher->present_police_station = $request->input('present_police_station'); 
-            $teacher->parmanent_village = $request->input('parmanent_village'); 
-            $teacher->parmanent_post_office = $request->input('parmanent_post_office'); 
-            $teacher->parmanent_zip_code = $request->input('parmanent_zip_code'); 
-            $teacher->parmanent_district = $request->input('parmanent_district'); 
-            $teacher->parmanent_police_station = $request->input('parmanent_police_station'); 
-            $teacher->ssc = $request->input('ssc'); 
-            $teacher->school_name = $request->input('school_name'); 
-            $teacher->ssc_department = $request->input('ssc_department'); 
-            $teacher->ssc_roll = $request->input('ssc_roll'); 
-            $teacher->ssc_reg = $request->input('ssc_reg'); 
-            $teacher->ssc_gpa = $request->input('ssc_gpa'); 
-            $teacher->ssc_year = $request->input('ssc_year'); 
-            $teacher->hsc = $request->input('hsc'); 
-            $teacher->college_name = $request->input('college_name'); 
-            $teacher->college_department = $request->input('college_department'); 
-            $teacher->college_roll = $request->input('college_roll'); 
-            $teacher->college_reg = $request->input('college_reg'); 
-            $teacher->college_gpa = $request->input('college_gpa'); 
-            $teacher->college_passing_year = $request->input('college_passing_year'); 
-            $teacher->honors = $request->input('honors'); 
-            $teacher->versity_name = $request->input('versity_name'); 
-            $teacher->versity_department = $request->input('versity_department'); 
-            $teacher->versity_roll = $request->input('versity_roll'); 
-            $teacher->versity_reg = $request->input('versity_reg'); 
-            $teacher->versity_gpa = $request->input('versity_gpa'); 
-            $teacher->versity_passing_year = $request->input('versity_passing_year'); 
-            $teacher->qua_name = $request->input('qua_name'); 
-            $teacher->qua_industry_name = $request->input('qua_industry_name'); 
-            $teacher->qua_description = $request->input('qua_description'); 
-            $teacher->qua_2_name = $request->input('qua_2_name'); 
-            $teacher->qua_2_industry_name = $request->input('qua_2_industry_name'); 
-            $teacher->qua_2_description = $request->input('qua_2_description'); 
-            $teacher->post_name = $request->input('post_name'); 
-            $teacher->industrial_name = $request->input('industrial_name'); 
-            $teacher->start_date = $request->input('start_date'); 
-            $teacher->end_date = $request->input('end_date'); 
-            $teacher->school_code = $request->input('school_code'); 
-            $teacher->role = $request->input('role'); 
+            $teacher->nationality = $request->input('nationality');
+            $teacher->blood = $request->input('blood');
+            $teacher->nid = $request->input('nid');
+            $teacher->marital_status = $request->input('marital_status');
+            $teacher->age = $request->input('age');
+            $teacher->religious = $request->input('religious');
+            $teacher->joining_date = $request->input('joining_date');
+            $teacher->present_village = $request->input('present_village');
+            $teacher->present_post_office = $request->input('present_post_office');
+            $teacher->present_zip_code = $request->input('present_zip_code');
+            $teacher->present_district = $request->input('present_district');
+            $teacher->present_police_station = $request->input('present_police_station');
+            $teacher->parmanent_village = $request->input('parmanent_village');
+            $teacher->parmanent_post_office = $request->input('parmanent_post_office');
+            $teacher->parmanent_zip_code = $request->input('parmanent_zip_code');
+            $teacher->parmanent_district = $request->input('parmanent_district');
+            $teacher->parmanent_police_station = $request->input('parmanent_police_station');
+            $teacher->ssc = $request->input('ssc');
+            $teacher->school_name = $request->input('school_name');
+            $teacher->ssc_department = $request->input('ssc_department');
+            $teacher->ssc_roll = $request->input('ssc_roll');
+            $teacher->ssc_reg = $request->input('ssc_reg');
+            $teacher->ssc_gpa = $request->input('ssc_gpa');
+            $teacher->ssc_year = $request->input('ssc_year');
+            $teacher->hsc = $request->input('hsc');
+            $teacher->college_name = $request->input('college_name');
+            $teacher->college_department = $request->input('college_department');
+            $teacher->college_roll = $request->input('college_roll');
+            $teacher->college_reg = $request->input('college_reg');
+            $teacher->college_gpa = $request->input('college_gpa');
+            $teacher->college_passing_year = $request->input('college_passing_year');
+            $teacher->honors = $request->input('honors');
+            $teacher->versity_name = $request->input('versity_name');
+            $teacher->versity_department = $request->input('versity_department');
+            $teacher->versity_roll = $request->input('versity_roll');
+            $teacher->versity_reg = $request->input('versity_reg');
+            $teacher->versity_gpa = $request->input('versity_gpa');
+            $teacher->versity_passing_year = $request->input('versity_passing_year');
+            $teacher->qua_name = $request->input('qua_name');
+            $teacher->qua_industry_name = $request->input('qua_industry_name');
+            $teacher->qua_description = $request->input('qua_description');
+            $teacher->qua_2_name = $request->input('qua_2_name');
+            $teacher->qua_2_industry_name = $request->input('qua_2_industry_name');
+            $teacher->qua_2_description = $request->input('qua_2_description');
+            $teacher->post_name = $request->input('post_name');
+            $teacher->industrial_name = $request->input('industrial_name');
+            $teacher->start_date = $request->input('start_date');
+            $teacher->end_date = $request->input('end_date');
+            $teacher->school_code = $request->input('school_code');
+            $teacher->role = $request->input('role');
             $teacher->action = $request->input('action');
-         
+
             $teacher->save();
-            
+
             return redirect('/dashboard/add-teacher')->with('success', 'Teacher Sucessfully  created.');
       }
 

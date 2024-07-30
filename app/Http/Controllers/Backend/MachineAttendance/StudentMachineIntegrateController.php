@@ -20,12 +20,13 @@ class StudentMachineIntegrateController extends Controller
         $group = null;
         $section = null;
         $students = null;
+        $machineIntegrateData=null;
         $counts = 0;
         $classes = AddClass::where('school_code', $school_code)->where('action', 'approved')->get();
         $groupData = AddGroup::where('action', 'approved')->where('school_code', $school_code)->get();
         $sectionData = AddSection::where('action', 'approved')->where('school_code', $school_code)->get();
 
-        return view('Backend.MachineAttendence.stdMachineIntegrate', compact('classes', 'groupData', 'sectionData', 'class', 'group', 'section', 'students', 'counts'));
+        return view('Backend.MachineAttendence.stdMachineIntegrate', compact('classes', 'groupData', 'sectionData', 'class', 'group', 'section', 'students', 'counts','machineIntegrateData'));
     }
 
     public function getGroups(Request $request, $school_code)
@@ -43,32 +44,63 @@ class StudentMachineIntegrateController extends Controller
     }
 
     public function getData(Request $request, $school_code)
-    {
-        // dd($request);
-        $class = $request->class;
-        $group = $request->group;
-        $section = $request->section;
-        $counts = 0;
-        
-            $studentsQuery = Student::where('school_code', $school_code)->where('action', 'approved');
-            if (!empty($class)) {
-                $studentsQuery = $studentsQuery->where('Class_name', $class);
-            }
+{
+    // dd($request);
+    $class = $request->class;
+    $group = $request->group;
+    $section = $request->section;
+    $counts = 0;
 
-            if (!empty($group)) {
-                $studentsQuery = $studentsQuery->where('group', $group);
-            }
-            if (!empty($section)) {
-                $studentsQuery = $studentsQuery->where('section', $section);
-            }
-            $students = $studentsQuery->get();
-            $counts = $students->count();
-        $classes = AddClass::where('school_code', $school_code)->where('action', 'approved')->get();
-        $groupData = AddGroup::where('action', 'approved')->where('school_code', $school_code)->get();
-        $sectionData = AddSection::where('action', 'approved')->where('school_code', $school_code)->get();
+    $students = null;
+    $machineIntegrateData = null;
 
-        return view('Backend.MachineAttendence.stdMachineIntegrate', compact('classes', 'groupData', 'sectionData', 'students', 'class', 'group', 'section', 'counts', ))->with('success', 'Machine Integrate successfully');
+    // Query for machine integration data
+    $machineQuery = StudentMachineIntegrate::where('school_code', $school_code);
+    if (!empty($class)) {
+        $machineQuery->where('class', $class);
     }
+
+    if (!empty($group)) {
+        $machineQuery->where('group', $group);
+    }
+
+    if (!empty($section)) {
+        $machineQuery->where('section', $section);
+    }
+
+    $machineIntegrateData = $machineQuery->get();
+
+    // Query for student data
+    $studentsQuery = Student::where('school_code', $school_code)->where('action', 'approved');
+    if (!empty($class)) {
+        $studentsQuery->where('Class_name', $class);
+    }
+
+    if (!empty($group)) {
+        $studentsQuery->where('group', $group);
+    }
+
+    if (!empty($section)) {
+        $studentsQuery->where('section', $section);
+    }
+
+    $students = $studentsQuery->get();
+    if($students){
+
+        $counts = $students->count();
+    }else{
+        $counts = $machineIntegrateData->count();
+    }
+
+    // Query for classes, groups, and sections
+    $classes = AddClass::where('school_code', $school_code)->where('action', 'approved')->get();
+    $groupData = AddGroup::where('action', 'approved')->where('school_code', $school_code)->get();
+    $sectionData = AddSection::where('action', 'approved')->where('school_code', $school_code)->get();
+
+    return view('Backend.MachineAttendence.stdMachineIntegrate', compact(
+        'classes', 'groupData', 'sectionData', 'students', 'class', 'group', 'section', 'counts', 'machineIntegrateData'
+    ))->with('success', 'Machine Integrate successfully');
+}
 
     public function SaveStudentMachineIntegrate(Request $request, $school_code)
     {

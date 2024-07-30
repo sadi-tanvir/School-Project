@@ -41,7 +41,11 @@ class SetExamMarksController extends Controller
         $school_code=$request->input('school_code');
 
 
-        $searchClassses=AddClassWiseSubject::where("school_code",$school_code)->where("action","approved")->where('class_name',$className)->get();
+        $searchClassses=AddClassWiseSubject::where("school_code",$school_code)
+        ->where("action","approved")
+        ->where('class_name',$className)
+        ->orderBy('subject_serial')
+        ->get();
 
         // dd($searchClassses);
 

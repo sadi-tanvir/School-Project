@@ -249,11 +249,11 @@ Suject Setup
 
                     @foreach ($subjectData as $data)
                         <div>
-                            <!-- <input id="subject_name" type="checkbox" value="{{ $data->subject_name }}" name="subject_name[]" class="shift-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500   focus:ring-2  "> -->
-                            <input id="subject_name" type="checkbox" value="{{ $data->subject_name }}" name="subject_name[]"
-                                class="group-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500   focus:ring-2  ">
-                            <label for="subject_name"
-                                class="w-full py-4 ms-2 text-sm font-medium text-gray-900 ">{{ $data->subject_name }}</label>
+                            <input id="subject_name_{{ $loop->index }}" type="checkbox" value="{{ $data->subject_name }}"
+                                name="subject_name[]"
+                                class="group-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                            <label for="subject_name_{{ $loop->index }}"
+                                class="w-full py-4 ms-2 text-sm font-medium text-gray-900">{{ $data->subject_name }}</label>
                         </div>
                     @endforeach
 
@@ -306,7 +306,6 @@ Suject Setup
                 @if ($classWiseSubjectData !== null)
                     @foreach ($classWiseSubjectData as $key => $data)
                         <tr id="row-{{ $data->id }}" class="border-b space-x-2 text-sm"
-
                             data-serial="{{ $data->subject_serial }}">
                             <th scope="row" class="px-6 py-4 font-medium  text-black whitespace-nowrap ">
                                 {{ $key + 1 }}

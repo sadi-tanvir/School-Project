@@ -488,7 +488,7 @@ Fees Collection
             const defaultOption = document.createElement('option');
             defaultOption.value = "Select";
             defaultOption.textContent = "Select";
-            defaultOption.slected = true;
+            defaultOption.selected = true;
             groupId.appendChild(defaultOption);
             groups.forEach(group => {
                 const groupOption = document.createElement('option');
@@ -505,7 +505,7 @@ Fees Collection
             const defaultOption = document.createElement('option');
             defaultOption.value = "Select";
             defaultOption.textContent = "Select";
-            defaultOption.slected = true;
+            defaultOption.selected = true;
             sectionId.appendChild(defaultOption);
             sections.forEach(section => {
                 const sectionOption = document.createElement('option');

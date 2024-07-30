@@ -12,14 +12,14 @@ class ReportsExamsReportsController extends Controller
     {
         return view('/Backend/Report(exam&result)/failList');
     }
-    public function format1($school_code)
-    {
-        return view('/Backend/Report(exam&result)/format1');
-    }
-    public function format2($school_code)
-    {
-        return view('/Backend/Report(exam&result)/format2');
-    }
+    // public function format1($school_code)
+    // {
+    //     return view('/Backend/Report(exam&result)/format1');
+    // }
+    // public function format2($school_code)
+    // {
+    //     return view('/Backend/Report(exam&result)/format2');
+    // }
     public function format3($school_code)
     {
         return view('/Backend/Report(exam&result)/format3');

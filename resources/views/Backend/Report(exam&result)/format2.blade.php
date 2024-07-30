@@ -15,15 +15,17 @@
         <h1 class="text-2xl font-bold my-5 mx-5 text-center">Student Tabulation Format 2 </h1>
     </div>
     <div class=" mb-3">
-        <form action="" class="p-5 shadowStyle rounded-[8px] border border-slate-300 w-2/5 mx-auto space-y-3">
+        <form action="{{ route('tabulation2', $school_code) }}" method="POST" class="p-5 shadowStyle rounded-[8px] border border-slate-300 w-2/5 mx-auto space-y-3">
+            @csrf
             <div class="grid grid-cols-3 place-items-start  gap-5">
                 <label for="class" class="block mb-2 text-sm font-medium whitespace-noWrap ">Class
                     :</label>
                 <select id="class" name="class"
                     class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5 col-span-2">
                     <option disabled selected>Select Class</option>
-                    <option value="">Active</option>
-                    <option value="">In-Active</option>
+                    @foreach ($classes as $class)
+                        <option>{{ $class->class_name }}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="grid grid-cols-3 place-items-start  gap-5">
@@ -32,8 +34,9 @@
                 <select id="group" name="group"
                     class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5 col-span-2">
                     <option disabled selected>Select Group</option>
-                    <option value="">Active</option>
-                    <option value="">In-Active</option>
+                    @foreach ($groups as $group)
+                        <option>{{ $group->group_name }}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="grid grid-cols-3 place-items-start  gap-5">
@@ -42,15 +45,18 @@
                 <select id="section" name="section"
                     class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5 col-span-2">
                     <option disabled selected>Select section</option>
-                    <option value="">Active</option>
-                    <option value="">In-Active</option>
+                    @foreach ($sections as $section)
+                        <option>{{ $section->section_name }}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="grid grid-cols-3 place-items-start  gap-5">
-                <label for="roll" class="block mb-2 text-sm font-medium whitespace-noWrap ">Student Roll
+                <label for="roll" class="block mb-2 text-sm font-medium whitespace-noWrap ">Student ID
                     :</label>
-                <input id="roll" placeholder="Enter Student Roll"
-                    class="bg-gray-50 placeholder:text-black text-gray-900 text-sm rounded-lg  block w-full p-2.5 col-span-2" type="text">
+                    <select id="student_id" name="id"
+                    class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5 col-span-2">
+                    <option disabled selected>Choose Student ID</option>
+                </select>
             </div>
             <div class="grid grid-cols-3 place-items-start  gap-5">
                 <label for="exam_name" class="block mb-2 text-sm font-medium whitespace-noWrap ">Exam Name
@@ -58,8 +64,26 @@
                 <select id="exam_name" name="exam_name"
                     class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5 col-span-2">
                     <option disabled selected>Select Exam Name</option>
-                    <option value="">Active</option>
-                    <option value="">In-Active</option>
+                    @foreach ($examName as $exam)
+                        <option>{{ $exam->class_exam_name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="grid grid-cols-3 place-items-start  gap-5">
+                <label for="year" class="block mb-2 text-sm font-medium whitespace-noWrap ">Year
+                    :</label>
+                @php
+                    $currentYear = date('Y'); // Get the current year
+                @endphp
+                <select id="year" name="year"
+                    class="bg-gray-50  text-gray-900 text-sm rounded-lg  block w-full p-2.5 col-span-2">
+                    <option disabled selected>Select</option>
+                    @foreach ($years as $year)
+                        <option value="{{ $year->academic_year_name }}"
+                            {{ $year->academic_year_name == $currentYear ? 'selected' : '' }}>
+                            {{ $year->academic_year_name }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
     
@@ -71,3 +95,109 @@
         </form>
     </div>
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#class').change(function() {
+            var class_name = $(this).val();
+            $.ajax({
+                url: "{{ route('print.get-groups', $school_code) }}",
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(result) {
+                    $('#group').empty();
+                    $('#group').append(
+                        '<option disabled selected value="">Select</option>');
+                    $.each(result, function(key, value) {
+                        $('#group').append('<option value="' + value.group_name +
+                            '">' + value.group_name + '</option>');
+                    });
+                }
+            });
+        });
+        //section
+        $('#class').change(function() {
+            var class_name = $(this).val();
+            $.ajax({
+                url: "{{ route('print.get-sections', $school_code) }}",
+                method: 'post',
+                data: {
+                    class: class_name,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(result) {
+                    $('#section').empty();
+                    $('#section').append(
+                        '<option disabled selected value="">Select</option>');
+                    $.each(result, function(key, value) {
+                        $('#section').append('<option value="' + value
+                            .section_name + '">' + value.section_name +
+                            '</option>');
+                    });
+                }
+            });
+        });
+
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        // Variables to store the selected values
+        var className, groupName, sectionName;
+
+        // Event listeners to capture the selected values
+        $('#class').change(function() {
+            className = $(this).val();
+            fetchStudentIds();
+        });
+
+        $('#group').change(function() {
+            groupName = $(this).val();
+            fetchStudentIds();
+        });
+
+        $('#section').change(function() {
+            sectionName = $(this).val();
+            fetchStudentIds();
+        });
+
+        function fetchStudentIds() {
+            var schoolCode = "{{ $school_code }}";
+
+            if (className && groupName && sectionName) {
+                $.ajax({
+                    url: "/dashboard/get-student-ids/" + schoolCode,
+                    type: "get",
+                    data: {
+                        class: className,
+                        group: groupName,
+                        section: sectionName
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(data) {
+                        $('#student_id').empty();
+                        $('#student_id').append(
+                            '<option disabled selected>Choose Student ID</option>');
+                        $.each(data, function(index, value) {
+                            $('#student_id').append('<option value="' + value + '">' +
+                                value + '</option>');
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error fetching student IDs:", status, error);
+                    }
+                });
+            } else {
+                $('#student_id').empty();
+                $('#student_id').append('<option disabled selected>Choose Student ID</option>');
+            }
+        }
+    });
+</script>

@@ -152,6 +152,8 @@ use App\Http\Controllers\Backend\Message\ExcelMSGController;
 use App\Http\Controllers\Backend\Message\AddMsgController;
 
 use App\Http\Controllers\Backend\ReportsExamsReports\ReportsExamsReportsController;
+use App\Http\Controllers\Backend\ReportsExamsReports\TebulationsFormat1Controller;
+use App\Http\Controllers\Backend\ReportsExamsReports\TebulationsFormat2Controller;
 use App\Http\Controllers\Backend\ReportsExamsReports\ProgressReportController;
 use App\Http\Controllers\Backend\AdmitCard\SetAdmitCardController;
 use App\Http\Controllers\Backend\AdmitCard\PrintAdmitCardController;
@@ -556,8 +558,14 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
 
 
     Route::get('/exam-failList/{schoolCode}', [ReportsExamsReportsController::class, 'failList1']);
-    Route::get('/tebular-format1/{schoolCode}', [ReportsExamsReportsController::class, 'format1']);
-    Route::get('/tebular-format2/{schoolCode}', [ReportsExamsReportsController::class, 'format2']);
+    //tebulation format 1
+    Route::get('/tebular-format1/{schoolCode}', [TebulationsFormat1Controller::class, 'format1']);
+    Route::post('/format1/{schoolCode}', [TebulationsFormat1Controller::class, 'tabulation1'])->name('tabulation1');
+
+    //tebulation format 2
+    Route::get('/tebular-format2/{schoolCode}', [TebulationsFormat2Controller::class, 'format2']);
+    Route::post('/format2/{schoolCode}', [TebulationsFormat2Controller::class, 'tabulation2'])->name('tabulation2');
+
     Route::get('/tebular-format3/{schoolCode}', [ReportsExamsReportsController::class, 'format3']);
     Route::get('/gradeInfo/{schoolCode}', [ReportsExamsReportsController::class, 'gradeInfo']);
     Route::get('/grandFinal/{schoolCode}', [ReportsExamsReportsController::class, 'grandFinal']);
@@ -709,6 +717,7 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     // Add Grade Point
     Route::get('/addGradePoint/{schoolCode}', [AddGradePointController::class, 'add_grade_point'])->name('add.grade.point');
     Route::put('/addGradePoint/{schoolCode}', [AddGradePointController::class, 'store_add_grade_point'])->name('store.grade.point');
+    Route::put('/editgradePoint/{schoolCode}', [AddGradePointController::class, 'edit_grade_point'])->name('edit_grade_point');
     Route::delete('/delete_grade_point/{id}', [AddGradePointController::class, 'delete_add_grade_point'])->name('delete.grade.point');
 
     //subject setup view

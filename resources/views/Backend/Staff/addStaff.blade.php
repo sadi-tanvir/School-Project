@@ -8,7 +8,7 @@ Add HR/STAFF
 @include("Shared.ContentHeader", ["title" => "Add New Staff"])
 
 <div class="mx-10 mt-10">
-    <form action="{{route('stuff.create', $school_code)}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('staff.create', $school_code)}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="font-bold">
             <h3>Basic Information</h3>
@@ -90,10 +90,10 @@ Add HR/STAFF
                 </label>
                 <select id="designation" type="text" name="designation"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
-                    <option selected>Choose a designation</option>
-                    <option>x</option>
-                    <option>y</option>
-                    <option>z</option>
+                    <option selected>Select</option>
+                    @foreach ($staffDesignations as $designation)
+                        <option class="capitalize" value="{{$designation->designation}}">{{$designation->designation}}</option>
+                    @endforeach
                 </select>
             </div>
             <div>

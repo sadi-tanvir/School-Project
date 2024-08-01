@@ -78,6 +78,7 @@ use App\Http\Controllers\Backend\NEDUBD\SchoolAdminController;
 use App\Http\Controllers\Backend\OnlineApplication\ListOfApplicantController;
 use App\Http\Controllers\Backend\Staff\StaffController;
 use App\Http\Controllers\Backend\Staff\BasicSettings\StaffDesignationController;
+use App\Http\Controllers\Backend\Staff\BasicSettings\StaffDepartmentController;
 use App\Http\Controllers\Backend\Student\addShortListController;
 use App\Http\Controllers\Backend\Student\classSectionSTdTotalController;
 use App\Http\Controllers\Backend\Student\DownloadStudentController;
@@ -439,13 +440,19 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
 
 
     // HR/Staff Menu => Basic Settings
+    // designation
     Route::get('/staff/basicSettings/designation/{schoolCode}', [StaffDesignationController::class, 'StaffDesignation'])->name('staffDesignation.display');
     Route::post('/staff/basicSettings/createDesignation/{schoolCode}', [StaffDesignationController::class, 'CreateStaffDesignation'])->name('staffDesignation.create');
     Route::delete('/staff/basicSettings/deleteDesignation/{schoolCode}/{id}', [StaffDesignationController::class, 'StaffDesignationDelete'])->name('staffDesignation.delete');
     Route::put('/staff/basicSettings/updateDesignation/{schoolCode}/{id}', [StaffDesignationController::class, 'StaffDesignationUpdate'])->name('staffDesignation.update');
+    // department
+    Route::get('/staff/basicSettings/Department/{schoolCode}', [StaffDepartmentController::class, 'StaffDepartment'])->name('staffDepartment.display');
+    Route::post('/staff/basicSettings/createDepartment/{schoolCode}', [StaffDepartmentController::class, 'CreateStaffDepartment'])->name('staffDepartment.create');
+    Route::delete('/staff/basicSettings/deleteDepartment/{schoolCode}/{id}', [StaffDepartmentController::class, 'StaffDepartmentDelete'])->name('staffDepartment.delete');
+    Route::put('/staff/basicSettings/updateDepartment/{schoolCode}/{id}', [StaffDepartmentController::class, 'StaffDepartmentUpdate'])->name('staffDepartment.update');
     // HR/Staff Menu
-    Route::get('/staff/{schoolCode}', [StaffController::class, 'staffForm'])->name('stuff.form');
-    Route::post('/staff/createStaff/{schoolCode}', [StaffController::class, 'createStaff'])->name('stuff.create');
+    Route::get('/staff/{schoolCode}', [StaffController::class, 'staffForm'])->name('staff.form');
+    Route::post('/staff/createStaff/{schoolCode}', [StaffController::class, 'createStaff'])->name('staff.create');
 
 
 
@@ -721,8 +728,8 @@ Route::prefix('dashboard')->middleware(['session.expired'])->group(function () {
     Route::delete('/delete_grade_point/{id}', [AddGradePointController::class, 'delete_add_grade_point'])->name('delete.grade.point');
 
     //subject setup view
-    Route::get('/view-subject-setup/{schoolCode}',[SubjectSetupViewController::class,'viewSubjectSetup'])->name('view.subject.setup');
-    Route::post('/get-subject-config-data/{schoolCode}',[SubjectSetupViewController::class,'getSubjectConfigData'])->name('get.subject.config.view');
+    Route::get('/view-subject-setup/{schoolCode}', [SubjectSetupViewController::class, 'viewSubjectSetup'])->name('view.subject.setup');
+    Route::post('/get-subject-config-data/{schoolCode}', [SubjectSetupViewController::class, 'getSubjectConfigData'])->name('get.subject.config.view');
 
     // Grade Setup
     Route::get('/setGradeSetup/{schoolCode}', [GradeSetupController::class, 'grade_setup'])->name('set.grade.setup');

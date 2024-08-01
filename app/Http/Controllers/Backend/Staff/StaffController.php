@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Staff;
 
 use App\Http\Controllers\Controller;
 use App\Models\Staff;
+use App\Models\StaffDesignation;
 use Illuminate\Http\Request;
 
 class StaffController extends Controller
@@ -11,7 +12,8 @@ class StaffController extends Controller
     public function staffForm()
     {
         $staffId = $this->generateStaffId();
-        return view("Backend.Staff.addStaff", compact("staffId"));
+        $staffDesignations = StaffDesignation::get();
+        return view("Backend.Staff.addStaff", compact("staffId", "staffDesignations"));
     }
 
     public function createStaff(Request $request)

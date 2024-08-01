@@ -932,13 +932,13 @@
                         </button>
                         <ul id="dropdown-hr-menu-basicSetting" class="hidden py-2 space-y-2 pl-5">
                             <li>
-                                <a href="{{route("staffDesignation.display", $school_code)}}"
+                                <a href="{{route("staffDepartment.display", $school_code)}}"
                                     class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">
-                                    Add Staff Depertment
+                                    Add Staff department
                                 </a>
                             </li>
                             <li>
-                                <a href="#"
+                                <a href="{{route("staffDesignation.display", $school_code)}}"
                                     class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">
                                     Add Staff Designation
                                 </a>
@@ -946,7 +946,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="{{route("stuff.form", $school_code)}}"
+                        <a href="{{route("staff.form", $school_code)}}"
                             class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Add
                             HR/Staff</a>
                     </li>
@@ -1522,7 +1522,9 @@
                                     Class Subject Setting</a>
                             </li>
                             <li>
-                                <a href="{{route('view.subject.setup',$school_code)}}" class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Subject Config view</a>
+                                <a href="{{route('view.subject.setup', $school_code)}}"
+                                    class="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-5 group  hover:bg-slate-100/20">Subject
+                                    Config view</a>
                             </li>
 
                             <li>

@@ -130,9 +130,8 @@
                     </p>
                     <p for="last_name" class="col-span-1 mb-2 w-[200px] block text-lg font-medium text-gray-900">:</p>
 
-
-                    <div class="col-span-2">
-                        <select id="countries" name="exam_name"
+                    <div class="col-span-2"> 
+                        <select id="countries" name="exam_name" 
                             class="block w-full rounded-md border-0 bg-white p-3.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500">
                             <option selected>Choose Exam Name</option>
                             @foreach ($examName as $exam)
@@ -152,7 +151,7 @@
                     @endphp
 
                     <div class="col-span-2">
-                        <select id="countries" name="year"
+                        <select id="countries" name="year" 
                             class="block w-full rounded-md border-0 bg-white p-3.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500">
                             @foreach ($years as $year)
                                 <option value="{{ $year->academic_year_name }}"
@@ -166,7 +165,6 @@
 
                 </div>
                 <div class="grid grid-cols-4 mb-5  mx-10">
-
                     <label for="last_name" class="col-span-1 mb-2 block w-[200px] text-lg font-medium text-gray-900">Print
                         Type:</label>
                     <label for="last_name"
@@ -174,14 +172,13 @@
 
 
                     <div class="col-span-2">
-                        <select id="countries" name="print_type"
-                            class="block w-full rounded-md border-0 bg-white p-3.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500">
-                            <option selected>Choose Print Types</option>
+                        <select id="countries" name="print_type" 
+                            class="block w-full rounded-md border-0 bg-white p-3.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500" >
+                            <option selected disabled >Choose Print Types</option>
                             <option value="1">With Subject</option>
                             <option value="2">Without Subject</option>
                         </select>
                     </div>
-
                 </div>
 
                 <div class="flex justify-end">

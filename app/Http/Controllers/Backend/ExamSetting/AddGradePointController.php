@@ -79,4 +79,33 @@ class AddGradePointController extends Controller
         $gradePoint->delete();
         return redirect()->back()->with('success', 'group deleted successfully!');
     }
+
+    public function edit_grade_point(Request $request,$schoolCode){
+        //dd($request);
+        $id=$request->id;
+        $gradePoint = AddGradePoint::findOrFail($id);
+        if ($gradePoint) {
+            // Update the existing record
+            $gradePoint->update([
+                'grade_point' => $request->grade_point,
+                'mark_point_1st' => $request->mark_point_1st,
+                'mark_point_2nd' => $request->mark_point_2nd,
+                'letter_grade' => $request->letter_grade,
+                'note' => $request->note,
+                'status' => $request->status,
+            ]);
+        }
+
+        // $gradePoint = new AddGradePoint();
+        // $gradePoint->mark_point_1st = $request->mark_point_1st;
+        // $gradePoint->mark_point_2nd = $request->mark_point_2nd;
+        // $gradePoint->grade_point = $request->grade_point;
+        // $gradePoint->letter_grade = $request->letter_grade;
+        // $gradePoint->note = $request->note;
+        // $gradePoint->status = $request->status;
+        // $gradePoint->action = 'approved';
+        // $gradePoint->school_code = $schoolCode;
+
+        return redirect()->back()->with('success', 'group edit successfully!');
+    }
 }

@@ -144,6 +144,13 @@ class AddSubjectSetupController extends Controller
     public function updateSubjectSetup(Request $request, $schoolCode)
     {
         // dd($request);
+        if($request->id==null){
+            return redirect()->route('add.subject.setup', $schoolCode)->with([
+                'error' => 'Subject not selected!',
+                'class_name' => $request->class_name,
+                'group_name' => $request->group_name
+            ]);
+        }
         foreach ($request->id as $id) {
             $resulf = AddClassWiseSubject::where('id', $id)
                 ->update([

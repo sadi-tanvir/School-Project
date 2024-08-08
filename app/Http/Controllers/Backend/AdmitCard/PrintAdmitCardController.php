@@ -54,7 +54,7 @@ class PrintAdmitCardController extends Controller
 
     public function downloadAdmit(Request $request, $schoolCode)
     {
-        //dd($request);
+        
         $admit = null;
         $subject = null;
         $class = $request->class;
@@ -68,7 +68,7 @@ class PrintAdmitCardController extends Controller
 
 
         // Check if any required parameter is null
-        if ($class === null || $group === null || $section_name === null || $id === null || $exam_name === null || $year === null || $print_type === null) {
+        if ($class === null || $group === null || $section_name === null || $exam_name === null || $year === null || $print_type === null) {
             return redirect()->route('printAdmitCard', $schoolCode)->with([
                 'error' => 'Please select all required parameters!',
                 'class' => $class,
@@ -82,23 +82,31 @@ class PrintAdmitCardController extends Controller
         }
 
         // Check if student data exists based on the provided parameters
-        $Datas = Student::where('school_code', $schoolCode)
+        if($id==null){
+            $Datas = Student::where('school_code', $schoolCode)
             ->where('class_name', $class)
             ->where('group', $group)
-            ->where('student_id', $id)
             ->where('section', $section_name)
             ->get();
+        }
+
+       else{
+        $Datas = Student::where('school_code', $schoolCode)
+        ->where('class_name', $class)
+        ->where('group', $group)
+        ->where('student_id', $id)
+        ->where('section', $section_name)
+        ->get();
+       }
 
         // If no data found, redirect back with an error message
         if ($Datas->isEmpty()) {
             return redirect()->route('printAdmitCard', $schoolCode)->with('error', 'Student data not found.');
         }
 
-  
         $signatures = AddSignature::where('school_code', $schoolCode)->where('action', 'approved')->get();
         $setSignature = SetSignature::where('school_code', $schoolCode)->where('status', 'active')->where('report_name', 'Admit Card')->get();
 
-     
         // dd($signPosition);
         $school_info = SchoolInfo::where('school_code', $schoolCode)->first();
         $date = Date('d-m-Y');

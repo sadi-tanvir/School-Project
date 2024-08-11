@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->string('password', 20)->nullable();
             $table->string('fbid')->nullable();
             $table->string('department', 150)->nullable();
-            $table->string('designation', 30)->nullable();
+            $table->string('designation', 30);
             $table->string('gender', 100)->nullable();
             $table->string('subject', 30)->nullable();
             $table->string('index', 30)->nullable();

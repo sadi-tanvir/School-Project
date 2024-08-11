@@ -3,7 +3,7 @@
 Add HR/STAFF
 @endsection
 @section('Dashboard')
-@include('/Message/message')
+@include('Message.message')
 
 @include("Shared.ContentHeader", ["title" => "Add New Staff"])
 
@@ -21,7 +21,8 @@ Add HR/STAFF
                     placeholder="Teacher's id" />
             </div>
             <div>
-                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Name</label>
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Name <span
+                        class="text-red-500">*</span></label>
                 <input type="text" name="name" id="name"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     "
                     placeholder="Enter The Name" />
@@ -79,20 +80,22 @@ Add HR/STAFF
                 </label>
                 <select id="department" type="text" name="department"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
-                    <option selected>Choose a department</option>
-                    <option>x</option>
-                    <option>y</option>
-                    <option>z</option>
+                    <option selected>Select</option>
+                    @foreach ($staffDepartments as $department)
+                        <option class="capitalize" value="{{$department->department}}">{{$department->department}}</option>
+                    @endforeach
                 </select>
             </div>
             <div>
                 <label for="designation" class="block mb-2 text-sm font-medium text-gray-900 ">Designation
+                    <span class="text-red-500">*</span>
                 </label>
                 <select id="designation" type="text" name="designation"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
                     <option selected>Select</option>
                     @foreach ($staffDesignations as $designation)
-                        <option class="capitalize" value="{{$designation->designation}}">{{$designation->designation}}</option>
+                        <option class="capitalize" value="{{$designation->designation}}">{{$designation->designation}}
+                        </option>
                     @endforeach
                 </select>
             </div>
@@ -104,7 +107,6 @@ Add HR/STAFF
                     <option selected>Choose a gender</option>
                     <option>male</option>
                     <option>female</option>
-                    <option>z</option>
                 </select>
             </div>
 
@@ -221,6 +223,10 @@ Add HR/STAFF
                     <option>A-</option>
                     <option>B+</option>
                     <option>B-</option>
+                    <option>AB+</option>
+                    <option>AB-</option>
+                    <option>O+</option>
+                    <option>O-</option>
                 </select>
             </div>
 
@@ -233,12 +239,20 @@ Add HR/STAFF
                     placeholder="Enter The nid No" />
             </div>
             <div>
-                <label for="marital_status" class="block mb-2 text-sm font-medium text-gray-900 ">Marital
-                    Status
+                <label for="marital_status" class="block mb-2 text-sm font-medium text-gray-900 ">
                 </label>
                 <input type="text" name="marital_status" id="marital_status"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     "
                     placeholder="Enter The marital status" />
+
+                <label for="marital_status" class="block mb-2 text-sm font-medium text-gray-900 ">Marital Status</label>
+                <select id="marital_status" type="text" name="marital_status"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     ">
+                    <option selected disabled>Choose</option>
+                    <option>Single</option>
+                    <option>Married</option>
+                    <option>Divorced</option>
+                </select>
             </div>
             <div>
                 <label for="age" class="block mb-2 text-sm font-medium text-gray-900 ">Age
@@ -329,7 +343,7 @@ Add HR/STAFF
         </div>
         <div class="font-bold">
             <h3>Parmanent Address( if same as present address
-                <input id="link-checkbox" type="checkbox"
+                <input name="permanent_same_present"  type="checkbox" value="true"
                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  focus:ring-2 ">
                 )
             </h3>
@@ -649,13 +663,6 @@ Add HR/STAFF
                 <input type="text" name="end_date" id="end_date"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     "
                     placeholder="Enter The Police End Date" />
-            </div>
-            <div class="hidden">
-                <label for="school_code" class="block mb-2 text-sm font-medium text-gray-900 ">End Date
-                </label>
-                <input type="text" value="100" name="school_code" id="school_code"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     "
-                    placeholder="Enter  End Date" />
             </div>
             <div class="hidden">
                 <label for="role" class="block mb-2 text-sm font-medium text-gray-900 ">End Date

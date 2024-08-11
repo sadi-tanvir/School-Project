@@ -8,17 +8,19 @@ use App\Models\StaffDepartment;
 use App\Models\StaffDesignation;
 use Illuminate\Http\Request;
 
-class StaffController extends Controller
+class StaffUpdateController extends Controller
 {
-    public function staffForm($schoolCode)
+    public function staffUpdateForm(Request $request, $id, $schoolCode)
     {
-        $staffId = $this->generateStaffId($schoolCode);
+        $staff = Staff::where("school_code", $schoolCode)->where("id", $id)->first();
         $staffDesignations = StaffDesignation::where("school_code", $schoolCode)->get();
         $staffDepartments = StaffDepartment::where("school_code", $schoolCode)->get();
-        return view("Backend.Staff.addStaff", compact("staffId", "staffDesignations", "staffDepartments"));
+        return view("Backend.Staff.updateStaff", compact("staff", "staffDesignations", "staffDepartments"));
     }
 
-    public function createStaff(Request $request, $schoolCode)
+
+
+    public function staffUpdate(Request $request, $id, $schoolCode)
     {
         if ($request->hasFile('image')) {
             $request->validate([
@@ -52,7 +54,7 @@ class StaffController extends Controller
         }
         ;
 
-        $staff = new Staff();
+        $staff = Staff::where("school_code", $schoolCode)->where("id", $id)->first();
         $staff->staff_id = $request->input('staff_id');
         $staff->name = $name;
         $staff->mobile = $request->input('mobile');
@@ -126,19 +128,6 @@ class StaffController extends Controller
         $staff->action = $request->input('action');
         $staff->save();
 
-        return redirect()->back()->with('success', 'staff added successfully!');
-    }
-
-    private function generateStaffId($schoolCode)
-    {
-        $lastStaff = Staff::where("school_code", $schoolCode)->latest()->first();
-        if ($lastStaff) {
-            $lastId = intval(substr($lastStaff->staff_id, -4));
-            $newId = $lastId + 1;
-        } else {
-            $newId = 1;
-        }
-
-        return 'STAFF' . date('Y') . str_pad($newId, 4, '0', STR_PAD_LEFT);
+        return redirect()->back()->with('success', 'staff updated successfully!');
     }
 }

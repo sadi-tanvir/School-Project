@@ -8,9 +8,20 @@ use Illuminate\Http\Request;
 
 class StaffReportController extends Controller
 {
-    public function staffReport()
+    public function staffReport($schoolCode)
     {
-        $staffs = Staff::get();
+        $staffs = Staff::where("school_code", $schoolCode)->get();
         return view("Backend.Staff.staffReport", compact("staffs"));
+    }
+
+
+    public function staffDelete(Request $request, $id, $schoolCode)
+    {
+        $staff = Staff::where("school_code", $schoolCode)->where("id", $id)->delete();
+        if ($staff) {
+            return redirect()->back()->with('success', 'staff deleted successfully!');
+        } else {
+            return redirect()->back()->with('error', 'Failed To Delete Staff!');
+        }
     }
 }

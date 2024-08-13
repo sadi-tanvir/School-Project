@@ -7,6 +7,7 @@ use App\Models\Staff;
 use App\Models\StaffDepartment;
 use App\Models\StaffDesignation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class StaffUpdateController extends Controller
 {
@@ -22,22 +23,22 @@ class StaffUpdateController extends Controller
 
     public function staffUpdate(Request $request, $id, $schoolCode)
     {
+        $preImage = $request->input("pre-image");
         if ($request->hasFile('image')) {
             $request->validate([
                 'image' => 'file|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
 
-            $imagePath = $request->file('image')->move('images/staff', $request->input('staff_id') . '_' . uniqid() . '.' . $request->file('image')->extension());
+            if (!is_null($preImage)) {
+                $preImagePath = public_path($preImage);
 
-
-            $staffImage = 'images/staff/' . basename($imagePath);
-
-            $isExist = Staff::where("school_code", $schoolCode)->where('staff_id', $request->input('staff_id'))
-                ->exists();
-
-            if ($isExist) {
-                return back()->with('error', 'Failed. This staff already exists');
+                if (file_exists($preImagePath)) {
+                    unlink($preImagePath);
+                }
             }
+
+            $imagePath = $request->file('image')->move('images/staff', $request->input('staff_id') . '_' . uniqid() . '.' . $request->file('image')->extension());
+            $staffImage = 'images/staff/' . basename($imagePath);
         }
 
         $name = $request->input('name');
@@ -52,13 +53,12 @@ class StaffUpdateController extends Controller
         if (!$name || !$designation) {
             return redirect()->back()->with('error', 'Select All Mandatory Fields!');
         }
-        ;
 
         $staff = Staff::where("school_code", $schoolCode)->where("id", $id)->first();
         $staff->staff_id = $request->input('staff_id');
         $staff->name = $name;
         $staff->mobile = $request->input('mobile');
-        $staff->image = $staffImage ?? null;
+        $staff->image = $staffImage ?? $preImage;
         $staff->emg_mobile = $request->input('emg_mobile');
         $staff->email = $request->input('email');
         $staff->password = $request->input('password');

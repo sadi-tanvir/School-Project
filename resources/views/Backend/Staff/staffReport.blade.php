@@ -15,6 +15,9 @@ HR/STAFF Report
                             <th scope="col" class="px-6 py-3 bg-blue-500">
                                 SL
                             </th>
+                            <th scope="col" class="px-6 py-3 bg-blue-500">
+                                Index
+                            </th>
                             <th scope="col" class="px-6 py-3">
                                 Name
                             </th>
@@ -26,6 +29,9 @@ HR/STAFF Report
                             </th>
                             <th scope="col" class="px-6 py-3 bg-blue-500">
                                 Designation
+                            </th>
+                            <th scope="col" class="px-6 py-3 bg-blue-500">
+                                Image
                             </th>
                             <th scope="col" class="px-6 py-3 bg-blue-500">
                                 Action
@@ -40,6 +46,9 @@ HR/STAFF Report
                                         {{$key + 1}}
                                     </td>
                                     <td class="px-6 py-4">
+                                        {{$staff->index ?? "N/A"}}
+                                    </td>
+                                    <td class="px-6 py-4">
                                         {{ $staff->name}}
                                     </td>
                                     <td class="px-6 py-4">
@@ -50,6 +59,9 @@ HR/STAFF Report
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ $staff->designation ?? "N/A" }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <img src="{{ asset($staff->image) }}" alt="Sign Image" class="w-[80px] h-[80px] rounded-full" />
                                     </td>
                                     <td class="px-6 py-4 flex justify-center items-center space-x-5">
                                         {{-- Delete Staff --}}

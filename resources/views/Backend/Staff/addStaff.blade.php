@@ -150,7 +150,7 @@ Add HR/STAFF
         <div class="font-bold">
             <h3>Parents Information</h3>
         </div>
-        <div class="grid gap-6 mb-6 md:grid-cols-4 p-5 border border-4">
+        <div class="grid gap-6 mb-6 md:grid-cols-4 p-5 border-4">
             <div>
                 <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 ">Father's
                     name</label>
@@ -184,7 +184,7 @@ Add HR/STAFF
             </div>
 
         </div>
-        <div class="grid gap-6 mb-6 md:grid-cols-4 p-5 border border-4">
+        <div class="grid gap-6 mb-6 md:grid-cols-4 p-5 border-4">
             <div>
                 <label for="company" class="block mb-2 text-sm font-medium text-gray-900 ">Birth
                     Date</label>
@@ -299,7 +299,7 @@ Add HR/STAFF
         <div class="font-bold">
             <h3>Present Address</h3>
         </div>
-        <div class="grid gap-6 mb-6 md:grid-cols-4 p-5 border border-4">
+        <div class="grid gap-6 mb-6 md:grid-cols-4 p-5 border-4">
             <div>
                 <label for="present_village" class="block mb-2 text-sm font-medium text-gray-900 ">Present
                     Village</label>
@@ -348,7 +348,7 @@ Add HR/STAFF
                 )
             </h3>
         </div>
-        <div class="grid gap-6 mb-6 md:grid-cols-4 p-5 border border-4">
+        <div class="grid gap-6 mb-6 md:grid-cols-4 p-5 border-4">
             <div>
                 <label for="parmanent_village" class="block mb-2 text-sm font-medium text-gray-900 ">Parmanent
                     Village</label>
@@ -396,7 +396,7 @@ Add HR/STAFF
                 Education Qualification
             </h3>
         </div>
-        <div class="grid gap-4 mb-6 md:grid-cols-7 p-5 border border-4">
+        <div class="grid gap-4 mb-6 md:grid-cols-7 p-5 border-4">
             <div>
                 <label for="ssc" class="block mb-2 text-sm font-medium text-gray-900 ">SSC
                 </label>
@@ -433,10 +433,7 @@ Add HR/STAFF
                     placeholder="Enter The Roll No" />
             </div>
             <div>
-                <label for="ssc_reg" class="block mb-2 text-sm font-medium text-gray-900 ">Registration
-                    No
-
-                </label>
+                <label for="ssc_reg" class="block mb-2 text-sm font-medium text-gray-900 ">Registration No</label>
                 <input type="text" name="ssc_reg" id="ssc_reg"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     "
                     placeholder="Enter The Registration No" />
@@ -584,7 +581,7 @@ Add HR/STAFF
                 ICT or Other Qualification
             </h3>
         </div>
-        <div class="grid gap-6 mb-6 md:grid-cols-3 p-5 border border-4">
+        <div class="grid gap-6 mb-6 md:grid-cols-3 p-5 border-4">
             <div>
                 <label for="qua_name" class="block mb-2 text-sm font-medium text-gray-900 ">Name
 
@@ -635,7 +632,7 @@ Add HR/STAFF
                 Educational Experience(if any)
             </h3>
         </div>
-        <div class="grid gap-6 mb-6 md:grid-cols-4 p-5 border border-4 ">
+        <div class="grid gap-6 mb-6 md:grid-cols-4 p-5 border-4 ">
             <div>
                 <label for="post_name" class="block mb-2 text-sm font-medium text-gray-900 ">Post Name
                 </label>

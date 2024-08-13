@@ -8,7 +8,7 @@ Update HR/STAFF
 @include("Shared.ContentHeader", ["title" => "Update HR/STAFF"])
 
 <div class="mx-10 mt-10">
-    <form method="POST" action="{{route("staff.update", ["id" => $staff->id, "schoolCode" => $school_code])}}" class="">
+    <form method="POST" action="{{route("staff.update", ["id" => $staff->id, "schoolCode" => $school_code])}}" class=""  enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="font-bold">
@@ -42,6 +42,7 @@ Update HR/STAFF
                 <input name="image"
                     class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none  "
                     aria-describedby="user_avatar_help" id="image" type="file">
+                <input type="text" value="{{$staff->image}}" name="pre-image" class="hidden">
             </div>
 
 
